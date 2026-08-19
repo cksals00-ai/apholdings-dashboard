@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A.P Holdings — 운용 대시보드</title>
+<style>
+  :root{
+    --bg:#0f1216; --surface:#171b21; --surface2:#1e242c; --line:#2a313b;
+    --ink:#e8ecf1; --ink2:#9aa5b1; --ink3:#6b7683;
+    --good:#4ade80; --warn:#fbbf24; --bad:#f87171; --accent:#7dd3fc;
+    --good-dim:rgba(74,222,128,.12); --warn-dim:rgba(251,191,36,.12); --bad-dim:rgba(248,113,113,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Segoe UI",sans-serif;line-height:1.5;padding-bottom:60px}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+  header{padding:28px 0 12px}
+  header h1{font-size:20px;letter-spacing:.02em}
+  header .sub{color:var(--ink2);font-size:12.5px;margin-top:4px}
+  .badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;border:1px solid var(--line);color:var(--ink2);margin-left:6px;vertical-align:1px}
+  .badge.ok{color:var(--good);border-color:rgba(74,222,128,.35)}
+  .tabs{display:flex;gap:8px;margin:18px 0 20px}
+  .tab{flex:1;text-align:center;padding:10px;border-radius:10px;background:var(--surface);border:1px solid var(--line);color:var(--ink2);cursor:pointer;font-size:14px}
+  .tab.on{background:var(--surface2);color:var(--ink);border-color:#3b4550;font-weight:600}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+  .tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .tile .k{font-size:11.5px;color:var(--ink3);letter-spacing:.03em}
+  .tile .v{font-size:21px;font-weight:700;margin-top:3px}
+  .tile .d{font-size:11.5px;color:var(--ink2);margin-top:2px}
+  .v.up{color:var(--good)} .v.dn{color:var(--bad)} .v.wa{color:var(--warn)}
+  h2{font-size:14px;color:var(--ink2);margin:26px 0 10px;letter-spacing:.04em;text-transform:uppercase}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:10px}
+  .pos-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px}
+  .pos-name{font-size:15.5px;font-weight:700}
+  .pos-name small{color:var(--ink3);font-weight:400;font-size:11.5px;margin-left:6px}
+  .pos-pnl{font-size:15px;font-weight:700}
+  .pos-meta{font-size:12px;color:var(--ink2);margin-top:3px}
+  .track{position:relative;height:26px;margin:14px 0 4px}
+  .track .bar{position:absolute;top:11px;left:0;right:0;height:4px;border-radius:2px;background:var(--surface2)}
+  .track .rangefill{position:absolute;top:11px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--bad),var(--warn) 45%,var(--good))}
+  .track .dot{position:absolute;top:5px;width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid var(--bg);transform:translateX(-50%)}
+  .track .lab{position:absolute;top:-14px;font-size:10.5px;color:var(--ink3);transform:translateX(-50%);white-space:nowrap}
+  .track .lab.stop{color:var(--bad)} .track .lab.tgt{color:var(--good)}
+  .pos-note{font-size:12.5px;color:var(--ink2);margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+  .sector{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:2px;background:var(--bg)}
+  .sector div{height:100%}
+  .sector-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:12px;color:var(--ink2)}
+  .sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{color:var(--ink3);font-weight:500;text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);font-size:11.5px}
+  td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .st{font-size:11px;padding:1px 7px;border-radius:9px;white-space:nowrap}
+  .st.good{background:var(--good-dim);color:var(--good)} .st.warn{background:var(--warn-dim);color:var(--warn)}
+  .st.bad{background:var(--bad-dim);color:var(--bad)} .st.mut{background:var(--surface2);color:var(--ink2)}
+  .ev{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+  .ev:last-child{border-bottom:none}
+  .ev .t{color:var(--ink3);white-space:nowrap;font-size:11.5px;min-width:86px}
+  .ev .txt{color:var(--ink2)}
+  .ev .txt b{color:var(--ink)}
+  .cal{display:flex;gap:8px;flex-wrap:wrap}
+  .cal .d-item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;flex:1;min-width:140px}
+  .cal .dd{font-size:16px;font-weight:700;color:var(--warn)}
+  .cal .dn{font-size:12px;color:var(--ink2);margin-top:2px}
+  .foot{margin-top:34px;font-size:11.5px;color:var(--ink3);border-top:1px solid var(--line);padding-top:14px}
+  .hidden{display:none}
+  .empty{color:var(--ink2);font-size:13px;padding:8px 0}
+  .alpha-row{display:flex;gap:6px;align-items:flex-end;height:90px;margin:8px 0 2px}
+  .alpha-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:var(--ink3)}
+  .alpha-col .b{width:70%;border-radius:3px 3px 0 0;min-height:2px}
+  .unknown{font-size:12.5px;color:var(--ink2)}
+  .unknown li{margin:6px 0 6px 18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>A.P Holdings <span class="badge ok">운용 중</span><span class="badge">D-116 감시</span></h1>
+    <div class="sub">규칙 기반 스윙 · 자기자본 500만 검증 트랙 · 갱신 <b id="upd">2026-08-19 07:58 KST</b> · 모든 수익률은 수수료·세금 차감 순수익</div>
+  </header>
+
+  <div class="tabs">
+    <div class="tab on" data-t="paper" onclick="tab('paper')">모의계좌 (주 원장)</div>
+    <div class="tab" data-t="real" onclick="tab('real')">실전계좌</div>
+  </div>
+
+  <!-- ================= PAPER ================= -->
+  <div id="paper">
+    <div class="tiles">
+      <div class="tile"><div class="k">누적 손익 (자기자본 500만)</div><div class="v up">+58,600원</div><div class="d">+1.17% · 개시 8/12</div></div>
+      <div class="tile"><div class="k">전일 알파 (vs 코스피)</div><div class="v up">+3.40%p</div><div class="d">코스피 -2.65% / 우리 +0.75%</div></div>
+      <div class="tile"><div class="k">총 노출</div><div class="v">80.2%</div><div class="d">한도 240% · 4종목 분산</div></div>
+      <div class="tile"><div class="k">검증 표본 (8/28 판정)</div><div class="v wa">1 / 10</div><div class="d">승 1 · 패 0 · HOLD 유력</div></div>
+    </div>
+
+    <h2>포지션 — 손절 ↔ 현재 ↔ 목표</h2>
+    <div id="positions"></div>
+
+    <h2>섹터 배분 (자기자본 대비)</h2>
+    <div class="card">
+      <div class="sector" id="secbar"></div>
+      <div class="sector-legend" id="seclegend"></div>
+      <div class="pos-note">단일 섹터 한도 40% (D-090) — 금통위 D-8 전 금융 축소 완료 (42.9% → 21.3%)</div>
+    </div>
+
+    <h2>상대 성과 (일별 알파, %p)</h2>
+    <div class="card">
+      <div class="alpha-row" id="alphabars"></div>
+      <div style="font-size:11.5px;color:var(--ink3)">5거래일 누적: 코스피 +8.11% vs 우리 +1.17% = <b style="color:var(--ink2)">알파 -6.94%p</b> (판단은 10거래일 표본 후 · D-088)</div>
+    </div>
+
+    <h2>주문 이력 (최근)</h2>
+    <div class="card"><table>
+      <tr><th>지시서</th><th>내용</th><th>상태</th></tr>
+      <tr><td>014-A<br><span style="color:var(--ink3);font-size:11px">8/18 13:38</span></td><td>신한지주 10주 시장가 매도 — 섹터 한도 축소(D-090). <b>검증 트랙 표본 1호</b> (+0.6% 순익 추정, 정산 대기)</td><td><span class="st good">체결</span></td></tr>
+      <tr><td>014-B</td><td>셀트리온 5주 시장가 매수 @194,800 — 역발상매수권 · RAM 스캔 1위</td><td><span class="st good">체결</span></td></tr>
+      <tr><td>014-C</td><td>아모레퍼시픽 7주 시장가 매수 @131,700 — 역발상매수권 · 소비재 분산</td><td><span class="st good">체결</span></td></tr>
+      <tr><td>013</td><td>8/17 발행 — 광복절 대체공휴일 휴장을 미인지한 오발행 (D-113). 손실 0원, 개장일 게이트 신설</td><td><span class="st mut">무효</span></td></tr>
+      <tr><td>011·012</td><td>신한 축소 재발행분 — 드라이브 지연 실체화로 cron이 파일을 못 봄 (D-115, 원인 규명·조치 완료)</td><td><span class="st bad">만료</span></td></tr>
+      <tr><td>015</td><td>8/19 판정: 247종목 분석 → 11종목 통과 → 6단계 선별 후 <b>0종목</b> (이수화학 9/10도 극단 변동성 배제)</td><td><span class="st mut">미발행</span></td></tr>
+    </table></div>
+
+    <h2>이벤트 로그</h2>
+    <div class="card" id="events"></div>
+
+    <h2>아직 모르는 것 (정직성 원칙 · D-077)</h2>
+    <div class="card unknown"><ul>
+      <li>신한 10주 매도 <b>정확한 체결가·수수료</b> — KIS 정산 확정 대기 (현재 +0.6%는 추정치)</li>
+      <li>어제 첫 플러스 알파가 <b>구성의 힘인지 하루 운인지</b> — 표본 5일, 판단은 10거래일 후</li>
+      <li>아모레 게이트 6/10 하락이 <b>급락일 노이즈인지 추세 이탈인지</b> — 내일 아침 2연속 판정 (D-116)</li>
+    </ul></div>
+  </div>
+
+  <!-- ================= REAL ================= -->
+  <div id="real" class="hidden">
+    <div class="tiles">
+      <div class="tile"><div class="k">상태</div><div class="v wa">미개시</div><div class="d">시드 입금 대기 (D-055)</div></div>
+      <div class="tile"><div class="k">개시 예정 자기자본</div><div class="v">500만</div><div class="d">융자 병행은 8/28 검증 후</div></div>
+    </div>
+    <div class="card">
+      <div class="empty">실전 계좌는 입금 전입니다. API 조회는 정상(잔고 0원)이며, 입금 시점에 Phase 1이 공식 개시됩니다.<br><br>
+      <b>실전 전환 관문</b></div>
+      <table>
+        <tr><td>시드 500만 입금</td><td class="num"><span class="st warn">대기</span></td></tr>
+        <tr><td>자동화 무사고 3거래일 연속</td><td class="num"><span class="st warn">진행 중 (D-115 조치 후 재카운트)</span></td></tr>
+        <tr><td>실체결 표본 10건</td><td class="num"><span class="st warn">1 / 10</span></td></tr>
+        <tr><td>손절 규율 실증 (평균손실 -4.5% 이내)</td><td class="num"><span class="st mut">표본 대기</span></td></tr>
+        <tr><td>KIS 조건주문(스탑) 등록 체계</td><td class="num"><span class="st mut">실전 전환 시</span></td></tr>
+      </table>
+      <div class="pos-note">원칙: 실전 계좌 주문은 자동화에서 <b>영구 제외</b> — 지시서 준비까지 자동, 실행 버튼은 대표.</div>
+    </div>
+  </div>
+
+  <h2>일정 (D-day)</h2>
+  <div class="cal">
+    <div class="d-item"><div class="dd">D-8</div><div class="dn">한국은행 금통위 (8/27)<br>금융 축소 완료 ✓</div></div>
+    <div class="d-item"><div class="dd">D-9</div><div class="dn">융자 GO/HOLD/STOP 판정 (8/28)<br>표본 1/10 → HOLD 유력</div></div>
+    <div class="d-item"><div class="dd">매일</div><div class="dn">사이클 07:40 · 09:05 · 13:00 · 15:40 · 23:00<br>집행: 맥북 cron 10분</div></div>
+  </div>
+
+  <div class="foot">
+    A.P Holdings 기획실 · 원장: KIS 모의계좌 (잔고 델타 역산 · D-081) · 결정 로그 D-001~D-116<br>
+    이 페이지는 정적 스냅샷입니다 — 실시간 시세가 아닙니다.
+  </div>
+</div>
+
+<script>
+const POS = [
+  {n:"신한지주", c:"055550", sec:"금융", qty:10, avg:105000, cur:106500, stop:100000, tgt:117000, gate:"8/10",
+   note:"20주 → 10주 축소 완료 (섹터 한도·금통위 D-8 대비). 잔여 10주는 게이트 8/10로 유지."},
+  {n:"HMM", c:"011200", sec:"해운", qty:46, avg:21550, cur:22650, stop:20470, tgt:23700, gate:"8/10",
+   note:"보유 중 최고 수익 (+5.1%). 1차 목표 23,700까지 +4.6% — 도달 시 규칙대로 부분 익절 검토."},
+  {n:"셀트리온", c:"068270", sec:"바이오", qty:5, avg:194800, cur:195500, stop:185060, tgt:214280, gate:"7/10",
+   note:"8/18 신규 진입. 급락일 게이트 소폭 하락(양봉·거래량) — 진입 근거인 역발상매수권은 유지."},
+  {n:"아모레퍼시픽", c:"090430", sec:"화장품", qty:7, avg:131700, cur:132200, stop:125115, tgt:144870, gate:"6/10", warn:true,
+   note:"⚠️ 게이트 6/10 = 청산 검토선. 급락일 노이즈로 판정, 유지. 2거래일 연속 6/10 이하면 청산 상신 (D-116) — 판정일 8/20 아침."}
+];
+const SECTORS = [["금융",21.3,"#7dd3fc"],["해운",20.8,"#a5b4fc"],["바이오",19.6,"#f0abfc"],["화장품",18.5,"#fcd34d"],["현금",19.8,"#3b4550"]];
+const ALPHA = [["8/11",-1.18],["8/12",-4.36],["8/13",-3.68],["8/14",-1.91],["8/18",3.40]];
+const EVENTS = [
+  ["8/19 07:40","규칙","<b>신규 0건</b> — 9/10 이수화학까지 극단 변동성 필터로 배제. 필터의 가치는 안 산 날에 쌓인다."],
+  ["8/18 15:40","성과","<b>첫 강한 플러스 알파 +3.40%p</b> — 코스피 -2.65% 급락일에 +0.75% 방어. 분산의 효용 실증."],
+  ["8/18 13:38","체결","ORDER-014 전량 체결 — 4종목 체제 달성. 신한 10주 매도 = <b>검증 트랙 표본 1호</b>."],
+  ["8/18 13:05","조치","미집행 3연속 원인 확정(D-115): 드라이브 지연 실체화 → 오프라인 액세스 설정 + 발행 40분 후 확인 알림 의무화."],
+  ["8/17 13:00","사고","휴장일(광복절 대체공휴일) 지시서 오발행 — 손실 0원. <b>개장일 게이트</b> 신설 (D-113)."],
+  ["8/17 07:55","규칙","주말 재검증이 삼바(7/10+극단변동성)를 걸러냄 — 셀트리온·아모레로 교체 (D-112). 판단에는 유통기한이 있다."],
+  ["8/14 15:40","성과","누적 첫 플러스 전환 +20,923원 (+0.42%)."],
+  ["8/11 12:14","사고","auto_trader 중복 집행 (D-076, -12,753원) → 3중 안전장치 도입. 자동화 성숙도는 사고 발견 시간으로 잰다."]
+];
+function fmt(x){return x.toLocaleString("ko-KR")}
+document.getElementById("positions").innerHTML = POS.map(p=>{
+  const pnl=(p.cur/p.avg-1)*100, up=pnl>=0;
+  const lo=p.stop*0.995, hi=p.tgt*1.005, pct=v=>((v-lo)/(hi-lo)*100).toFixed(1)+"%";
+  return `<div class="card">
+    <div class="pos-head"><div class="pos-name">${p.n}<small>${p.c} · ${p.sec} · ${p.qty}주 · 게이트 ${p.gate}${p.warn?' <span class="st warn">D-116 감시</span>':''}</small></div>
+    <div class="pos-pnl" style="color:var(--${up?'good':'bad'})">${up?'+':''}${pnl.toFixed(2)}%</div></div>
+    <div class="pos-meta">평단 ${fmt(p.avg)} → 현재 ${fmt(p.cur)} · 손절까지 ${((p.stop/p.cur-1)*100).toFixed(1)}% · 목표까지 +${((p.tgt/p.cur-1)*100).toFixed(1)}%</div>
+    <div class="track">
+      <span class="lab stop" style="left:${pct(p.stop)}">손절 ${fmt(p.stop)}</span>
+      <span class="lab tgt" style="left:${pct(p.tgt)}">목표 ${fmt(p.tgt)}</span>
+      <div class="bar"></div><div class="rangefill" style="left:${pct(p.stop)};right:${(100-parseFloat(pct(p.tgt))).toFixed(1)}%"></div>
+      <div class="dot" style="left:${pct(p.cur)}" title="현재 ${fmt(p.cur)}"></div>
+    </div>
+    <div class="pos-note">${p.note}</div></div>`;
+}).join("");
+document.getElementById("secbar").innerHTML = SECTORS.map(s=>`<div style="width:${s[1]}%;background:${s[2]}" title="${s[0]} ${s[1]}%"></div>`).join("");
+document.getElementById("seclegend").innerHTML = SECTORS.map(s=>`<span><span class="sw" style="background:${s[2]}"></span>${s[0]} ${s[1]}%</span>`).join("");
+const mx=Math.max(...ALPHA.map(a=>Math.abs(a[1])));
+document.getElementById("alphabars").innerHTML = ALPHA.map(a=>{
+  const h=Math.max(4,Math.abs(a[1])/mx*62), up=a[1]>=0;
+  return `<div class="alpha-col" title="${a[0]} 알파 ${a[1]>0?'+':''}${a[1]}%p">
+    <span style="color:var(--${up?'good':'bad'})">${a[1]>0?'+':''}${a[1].toFixed(1)}</span>
+    <div class="b" style="height:${h}px;background:var(--${up?'good':'bad'});opacity:.85"></div><span>${a[0]}</span></div>`;
+}).join("");
+document.getElementById("events").innerHTML = EVENTS.map(e=>{
+  const cls={"사고":"bad","조치":"warn","규칙":"mut","성과":"good","체결":"good"}[e[1]]||"mut";
+  return `<div class="ev"><span class="t">${e[0]}</span><span class="st ${cls}" style="height:fit-content">${e[1]}</span><span class="txt">${e[2]}</span></div>`;
+}).join("");
+function tab(t){
+  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.t===t));
+  document.getElementById("paper").classList.toggle("hidden",t!=="paper");
+  document.getElementById("real").classList.toggle("hidden",t!=="real");
+}
+</script>
+</body>
+</html>
