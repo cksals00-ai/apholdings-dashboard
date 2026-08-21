@@ -784,3 +784,8 @@ To https://github.com/cksals00-ai/apholdings-dashboard.git
    66e1c97..462c163  main -> main
 2026-08-21 13:30:02 pushed
 Cloning into '/Users/chanminpark/apops'...
+[main 4fefc99] update 2026-08-21 13:47
+ 3 files changed, 120 insertions(+), 700 deletions(-)
+To https://github.com/cksals00-ai/apholdings-dashboard.git
+   462c163..4fefc99  main -> main
+2026-08-21 13:47:53 pushed apdash
