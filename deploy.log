@@ -724,3 +724,8 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 2026-08-21 09:30:01 pushed
+[main 4a8b33d] site update 2026-08-21 09:49
+ 3 files changed, 930 insertions(+), 129 deletions(-)
+To https://github.com/cksals00-ai/apholdings-dashboard.git
+   84d8390..4a8b33d  main -> main
+2026-08-21 09:49:18 pushed
