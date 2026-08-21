@@ -764,3 +764,12 @@ To https://github.com/cksals00-ai/apholdings-dashboard.git
 To https://github.com/cksals00-ai/apholdings-dashboard.git
    818f572..fab4dab  main -> main
 2026-08-21 12:30:02 pushed
+[main 2524008] site update 2026-08-21 12:46
+ 5 files changed, 250 insertions(+)
+ create mode 100644 hangeulcubs_privacy.html
+ create mode 100644 moonshot_privacy.html
+ create mode 100644 privacy.html
+ create mode 100644 theotherhours_privacy.html
+To https://github.com/cksals00-ai/apholdings-dashboard.git
+   fab4dab..2524008  main -> main
+2026-08-21 12:46:22 pushed
