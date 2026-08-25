@@ -831,3 +831,10 @@ To https://github.com/cksals00-ai/apholdings-dashboard.git
 To https://github.com/cksals00-ai/apholdings-dashboard.git
    9b45fdb..48ea463  main -> main
 2026-08-21 17:06:57 pushed apdash
+[main 184f921] update 2026-08-25 10:30
+ 2 files changed, 175 insertions(+)
+ create mode 100644 gen_prices_v2.py
+ create mode 100755 update_prices.sh
+To https://github.com/cksals00-ai/apholdings-dashboard.git
+   96e1259..184f921  main -> main
+2026-08-25 10:30:03 pushed apdash
