@@ -52,7 +52,7 @@ if [ -z "$FAIL" ]; then
     sleep 30
     BODY=$(curl -s --max-time 20 "$URL" | head -c 200)
     LIVE_ASOF=$(echo "$BODY" | sed -n 's/.*"asof":"\([0-9-]*\)".*/\1/p')
-    log "검증 $i회차 — live asof=$LIVE_ASOF (기대 $ASOF)"
+    log "검증 ${i}회차 — live asof=$LIVE_ASOF (기대 $ASOF)"
     [ "$LIVE_ASOF" = "$ASOF" ] && break
   done
   [ "$LIVE_ASOF" != "$ASOF" ] && FAIL="게시 미반영 (live=$LIVE_ASOF, 기대=$ASOF)"
