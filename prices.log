@@ -12,3 +12,4 @@ Traceback (most recent call last):
 ModuleNotFoundError: No module named 'FinanceDataReader'
 [2026-08-26 16:00:01] 보고 기록: /Users/chanminpark/Library/CloudStorage/GoogleDrive-cksals00@gmail.com/내 드라이브/AP_HOLDINGS_QUEUE/reports/PRICES-20260826-1600.md
 [2026-08-26 16:00:01] !! 실패: 생성 실패
+[2026-08-27 16:00:00] === prices 갱신 시작 ===
