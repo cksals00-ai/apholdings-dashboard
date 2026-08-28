@@ -2135,3 +2135,5 @@ hint: the same ref. If you want to integrate the remote changes, use
 hint: 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 2026-08-28 11:00:01 PUSH FAIL apdash
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
