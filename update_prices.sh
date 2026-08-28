@@ -41,7 +41,7 @@ if [ -z "$FAIL" ]; then
   if git diff --cached --quiet; then
     log "변경 없음 — 커밋 생략"
   else
-    git commit -m "prices: $ASOF (spark $SPARK)" && git push || FAIL="푸시 실패"
+    git commit -m "prices: $ASOF (spark $SPARK)" && (git pull --rebase --autostash >/dev/null 2>&1; git push) || FAIL="푸시 실패"
   fi
 fi
 
