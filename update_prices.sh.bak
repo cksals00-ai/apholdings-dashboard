@@ -19,16 +19,16 @@ cd "$REPO" || { FAIL="레포 없음: $REPO"; }
 
 # 1) 생성
 if [ -z "$FAIL" ]; then
-  /usr/local/bin/python3 "$REPO/gen_prices_v2.py" "$REPO" || FAIL="생성 실패"
+  python3 "$REPO/gen_prices_v2.py" "$REPO" || FAIL="생성 실패"
 fi
 
 # 2) 스파크 포함 여부 검사 — 빠지면 게시하지 않는다
 if [ -z "$FAIL" ]; then
-  SPARK=$(/usr/local/bin/python3 -c "
+  SPARK=$(python3 -c "
 import json;d=json.load(open('$REPO/data/prices.json'))
 print(sum('s' in s for s in d['stocks']))
 " 2>/dev/null || echo 0)
-  ASOF=$(/usr/local/bin/python3 -c "
+  ASOF=$(python3 -c "
 import json;print(json.load(open('$REPO/data/prices.json'))['asof'])
 " 2>/dev/null || echo "?")
   log "생성 완료 — asof=$ASOF spark=$SPARK"
