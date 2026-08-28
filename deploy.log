@@ -2137,3 +2137,13 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 2026-08-28 11:00:01 PUSH FAIL apdash
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 5ece50d] update 2026-08-28 12:00
+ 2 files changed, 3 insertions(+)
+To https://github.com/cksals00-ai/apholdings-dashboard.git
+   3de96bf..5ece50d  main -> main
+2026-08-28 12:00:03 pushed apdash
+From https://github.com/cksals00-ai/ap-ops-7k2m9x
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
