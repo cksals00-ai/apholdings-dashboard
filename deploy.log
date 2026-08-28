@@ -2187,3 +2187,22 @@ From https://github.com/cksals00-ai/ap-ops-7k2m9x
 Already up to date.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main b6f1404] update 2026-08-28 14:19
+ 4 files changed, 209 insertions(+)
+ create mode 100644 .DS_Store
+ create mode 100644 apps.html
+ create mode 100644 goyo/privacy.html
+To https://github.com/cksals00-ai/apholdings-dashboard.git
+   6a1504d..b6f1404  main -> main
+2026-08-28 14:19:15 pushed apdash
+From https://github.com/cksals00-ai/ap-ops-7k2m9x
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+[main 57bf63c] update 2026-08-28 14:19
+ 3 files changed, 731 insertions(+)
+ create mode 100644 data.js
+ create mode 100644 index.html
+ create mode 100644 moonshot.js
+To https://github.com/cksals00-ai/ap-ops-7k2m9x.git
+   a7ca56a..57bf63c  main -> main
+2026-08-28 14:19:17 pushed apops

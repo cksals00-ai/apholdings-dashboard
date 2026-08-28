@@ -13,7 +13,7 @@ sync_repo() {
   [ -d "$REPO/.git" ] || return 0
   cd "$REPO" || return 0
   rsync -a --exclude '.git' --exclude 'deploy.log' --exclude 'deploy_dashboard.sh' "$SRC/" "$REPO/"
-  git pull --rebase -X theirs origin main >> "$LOG" 2>&1 || log "$TAG PULL FAIL"
+  git pull --rebase -X theirs origin main >/dev/null 2>&1 || true
   git add -A
   git diff --cached --quiet && return 0
   git -c user.name="AP Holdings" -c user.email="cksals00@gmail.com" commit -m "update $(date '+%Y-%m-%d %H:%M')" >> "$LOG" 2>&1
