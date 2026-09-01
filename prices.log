@@ -47,3 +47,16 @@ ModuleNotFoundError: No module named 'FinanceDataReader'
 [main 2be7ba2] prices: 2026-08-28 (spark 398)
  1 file changed, 1 insertion(+), 1 deletion(-)
 [2026-09-01 16:00:00] === prices 갱신 시작 ===
+스냅샷 2505종목
+주의: 기준일 확인 실패 — today 사용
+실측 기준일: 2026-09-01
+  스파크 100/400
+  스파크 200/400
+  스파크 300/400
+  스파크 400/400
+스파크 388종목
+저장: /Users/chanminpark/apdash/data/prices.json (286,592 bytes)
+검산 통과 — asof 2026-09-01 / 2505종목 / 스파크 388종목
+[2026-09-01 16:04:14] 생성 완료 — asof=2026-09-01 spark=388
+[main 4807780] prices: 2026-09-01 (spark 388)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
