@@ -46,3 +46,4 @@ ModuleNotFoundError: No module named 'FinanceDataReader'
 [2026-08-31 16:00:14] 생성 완료 — asof=2026-08-28 spark=398
 [main 2be7ba2] prices: 2026-08-28 (spark 398)
  1 file changed, 1 insertion(+), 1 deletion(-)
+[2026-09-01 16:00:00] === prices 갱신 시작 ===
