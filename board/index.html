@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#131019">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="A.P 보드">
+<title>A.P 포트폴리오</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<style>html{color-scheme:light dark}body{margin:0}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{
+    --bg:#F7F5F2; --surface:#FFFFFF; --line:#E4E0DA;
+    --ink:#1A1722; --ink2:#4E4857; --ink3:#867F92;
+    --rift:#6B46E5; --riftSoft:#EFEAFF;
+    --gold:#B5822A; --goldSoft:#FBF1DC;
+    --jade:#217A55; --jadeSoft:#E1F1E9;
+    --alert:#B23B32; --alertSoft:#FBE7E5;
+    --inkSoft:#ECE9E4;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#131019; --surface:#1C1826; --line:#2E2839;
+      --ink:#F3F0F8; --ink2:#BDB5CC; --ink3:#8C84A0;
+      --rift:#A98BFF; --riftSoft:#241C3D;
+      --gold:#E5B863; --goldSoft:#332813;
+      --jade:#5FD3A0; --jadeSoft:#123527;
+      --alert:#F08A80; --alertSoft:#3A1B18;
+      --inkSoft:#2A2535;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#131019; --surface:#1C1826; --line:#2E2839;
+    --ink:#F3F0F8; --ink2:#BDB5CC; --ink3:#8C84A0;
+    --rift:#A98BFF; --riftSoft:#241C3D;
+    --gold:#E5B863; --goldSoft:#332813;
+    --jade:#5FD3A0; --jadeSoft:#123527;
+    --alert:#F08A80; --alertSoft:#3A1B18;
+    --inkSoft:#2A2535;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);margin:0;padding:0 18px 64px;line-height:1.55;
+       font-family:'Gothic A1',-apple-system,'Apple SD Gothic Neo',sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto}
+  header{padding:30px 0 18px;border-bottom:2px solid var(--ink);display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 18px}
+  h1{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:clamp(30px,7vw,40px);margin:0;line-height:1.05}
+  .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);letter-spacing:.06em;margin-left:auto;text-align:right;line-height:1.7}
+  .today{margin:18px 0 6px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 15px}
+  .today-h{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:6px}
+  .today ul{margin:0;padding:0;list-style:none}
+  .today li{font-size:14px;padding:3px 0}
+  .today .t{font-family:'IBM Plex Mono',monospace;color:var(--rift);margin-right:10px;font-size:12.5px}
+  .grid{display:grid;grid-template-columns:1fr;gap:6px 22px}
+  @media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+  section{margin-top:26px}
+  h2{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:18px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+  .count{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink3);font-weight:400}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .rows{display:flex;flex-direction:column;gap:8px}
+  .row{display:grid;grid-template-columns:4px 1fr;background:var(--surface);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .body{padding:11px 13px 12px}
+  .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .name{font-weight:700;font-size:15px}
+  .chip{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;padding:3px 8px;border-radius:99px;white-space:nowrap}
+  .note{font-size:13px;color:var(--ink2);margin-top:5px}
+  .next{font-size:12.5px;margin-top:8px;padding-top:7px;border-top:1px dashed var(--line);display:flex;gap:6px;align-items:baseline}
+  .next b{color:var(--ink3);font-weight:700;font-size:11px}
+  .owner{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink3)}
+  .stripe-jade{background:var(--jade)} .stripe-rift{background:var(--rift)} .stripe-alert{background:var(--alert)} .stripe-gold{background:var(--gold)} .stripe-ink{background:var(--ink3)}
+  .dot-jade{background:var(--jade)} .dot-rift{background:var(--rift)} .dot-alert{background:var(--alert)} .dot-gold{background:var(--gold)} .dot-ink{background:var(--ink3)}
+  .chip-jade{background:var(--jadeSoft);color:var(--jade)} .chip-rift{background:var(--riftSoft);color:var(--rift)}
+  .chip-alert{background:var(--alertSoft);color:var(--alert)} .chip-gold{background:var(--goldSoft);color:var(--gold)} .chip-ink{background:var(--inkSoft);color:var(--ink2)}
+  footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink3);line-height:1.8}
+</style>
+<div class="wrap" id="app"><header><h1>A.P 포트폴리오</h1><div class="meta" id="meta">불러오는 중…</div></header></div>
+<script>
+const GROUPS=[["good","잘 되는 것","jade"],["wobbly","삐그덕이지만 꼭 할 것","rift"],["stuck","안 되는 것","alert"],["todo","해야 할 것","gold"],["missed","빠져 있던 것","ink"]];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+fetch("state.json?ts="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(st=>{
+  let h=`<header><h1>A.P 포트폴리오</h1><div class="meta">갱신 ${esc(st.updated)}<br>${esc(st.updated_by||"")} · 힉스필드 ${esc(st.credits_higgsfield)}C</div></header>`;
+  if(st.today&&st.today.length) h+=`<div class="today"><div class="today-h">오늘</div><ul>${st.today.map(t=>`<li><span class='t'>${esc(t.time)}</span>${esc(t.title)}</li>`).join("")}</ul></div>`;
+  h+='<div class="grid">';
+  for(const [g,label,c] of GROUPS){
+    const items=st.items.filter(i=>i.group===g); if(!items.length) continue;
+    h+=`<section><h2><span class="dot dot-${c}"></span>${label}<span class="count">${items.length}</span></h2><div class="rows">`;
+    for(const it of items){
+      h+=`<div class="row"><div class="stripe stripe-${c}"></div><div class="body"><div class="top"><span class="name">${esc(it.title)}</span><span class="chip chip-${c}">${esc(it.state)}</span></div>`;
+      if(it.note) h+=`<div class="note">${esc(it.note)}</div>`;
+      h+=`<div class="next"><b>다음</b> ${esc(it.next)}<span class="owner">${esc(it.owner)}</span></div></div></div>`;
+    }
+    h+='</div></section>';
+  }
+  h+='</div><footer>매일 아침 07:00 KST 자동 갱신 — 애플 메일·캘린더·홀딩스 세션 기록·클레어 상시기억을 읽어 다시 그립니다.<br>밖에서 한 일은 클레어에게 한 줄만 말하면 다음 아침에 반영됩니다.</footer>';
+  document.getElementById("app").innerHTML=h;
+}).catch(e=>{document.getElementById("meta").textContent="state.json을 못 읽었어요 — "+e;});
+</script>
+</body>
+</html>

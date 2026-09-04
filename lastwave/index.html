@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LAST WAVE — A.P Holdings</title>
+<meta name="description" content="균열이 열린 서울에서 다섯 중 한 명으로 살아남는 웨이브 서바이벌 액션. 아레나 11룸 · 1인칭 100스테이지. 스토리·캐릭터·디자인 박승규(11).">
+<style>
+  :root{--ink:#0B0A14;--panel:#141226;--paper:#F2EFE6;--muted:#9A94B4;--violet:#8C6CFF;--gold:#F1C15A;--blue:#4D93FF;--line:#262040}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Segoe UI",Roboto,sans-serif;line-height:1.6}
+  a{color:var(--violet);text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .hero{position:relative;padding:56px 0 30px;display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
+  .hero img{width:100%;border-radius:18px;display:block;box-shadow:0 30px 80px rgba(140,108,255,.25)}
+  .eyebrow{color:var(--violet);font-weight:700;letter-spacing:.14em;font-size:12px}
+  h1{font-size:56px;margin:8px 0 6px;letter-spacing:-.02em;line-height:1}
+  .lead{font-size:17px;color:#d9d4f0;margin:14px 0}
+  .credit{font-size:13px;color:var(--muted)}
+  .btn{display:inline-block;background:var(--violet);color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;margin-top:14px}
+  .btn.ghost{background:transparent;border:1px solid var(--violet);color:#d9d4f0;margin-left:8px}
+  nav{font-size:14px;color:var(--muted);padding-top:24px} nav a{color:var(--muted)}
+  section{padding:40px 0;border-top:1px solid var(--line)}
+  h2{font-size:24px;margin:0 0 8px} .sub{color:var(--muted);margin:0 0 20px;font-size:14px}
+  .grid{display:grid;gap:16px} .g2{grid-template-columns:1fr 1fr} .g3{grid-template-columns:repeat(3,1fr)} .g5{grid-template-columns:repeat(5,1fr)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+  .card h3{margin:0 0 6px;font-size:16px} .card p{margin:0;font-size:14px;color:#cfc9e6}
+  .shot{border-radius:14px;width:100%;display:block;border:1px solid var(--line)}
+  .hero-card{text-align:center} .hero-card .n{font-weight:800;margin-top:8px} .hero-card .r{font-size:12px;color:var(--muted)} .hero-card .s{font-size:13px;margin-top:6px;color:#cfc9e6}
+  video{width:100%;border-radius:16px;border:1px solid var(--line);background:#000;display:block}
+  .steps{counter-reset:s} .steps .card{position:relative;padding-left:56px} .steps .card:before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:16px;width:26px;height:26px;border-radius:50%;background:var(--violet);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px}
+  .tag{display:inline-block;font-size:11px;border:1px solid var(--gold);color:var(--gold);padding:3px 8px;border-radius:999px;margin-right:6px}
+  footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:13px}
+  @media (max-width:820px){.hero{grid-template-columns:1fr}.g2,.g3,.g5{grid-template-columns:1fr 1fr}h1{font-size:44px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav style="display:flex;align-items:center;gap:12px"><img src="../img/ap_mark.png" alt="A.P Holdings" style="height:28px;width:auto;opacity:.9"><a href="../apps.html">← A.P Holdings Apps</a></nav>
+  <div class="hero">
+    <div>
+      <div class="eyebrow">A.P HOLDINGS · GAME · IN DEVELOPMENT</div>
+      <h1>LAST WAVE</h1>
+      <p class="lead">평범했던 하늘에 균열이 열리고, 서울에 워커가 쏟아진다.<br>다섯 중 한 명을 고르면 나머지 넷은 균열에 휩쓸린다. 혼자서, 끝까지 살아남아라.</p>
+      <p class="credit">STORY · CHARACTERS · DESIGN — <b>박승규 (SEUNGGYU PARK, 11)</b> · BUILD — DAD &amp; CLAIRE · iPhone (SpriteKit)</p>
+      <a class="btn" href="#opening">오프닝 보기</a><a class="btn ghost" href="#modes">플레이 방식</a>
+    </div>
+    <img src="img/key_art.jpg" alt="LAST WAVE 키아트 — 리드 디자이너 박승규 그림" onerror="this.style.display='none'">
+  </div>
+
+  <section id="opening">
+    <h2>오프닝</h2>
+    <p class="sub">픽셀의 평범한 아침 → 대학 정문에서 친구 넷 → 횡단보도, 하늘의 굉음 → 균열 → 워커가 쏟아진다. 29초. (영상은 게임 안에서 재생됩니다)</p>
+    <video controls playsinline poster="img/kf4.jpg" preload="none"><source src="opening.mp4" type="video/mp4">브라우저가 영상을 지원하지 않습니다.</video>
+    <div class="grid g2" style="margin-top:16px">
+      <img class="shot" src="img/kf4.jpg" alt="횡단보도 — 다섯이 걸어오다 굉음에 올려다본다" onerror="this.style.display='none'">
+      <img class="shot" src="img/kf6.jpg" alt="균열에서 워커가 쏟아진다" onerror="this.style.display='none'">
+    </div>
+  </section>
+
+  <section>
+    <h2>다섯 명 — 한 명만 남는다</h2>
+    <p class="sub">정식 주인공은 PIXEL. 선택하지 않은 넷은 오프닝 직후 말없이 균열에 사라진다 (리드 디자이너의 원안).</p>
+    <div class="grid g5">
+      <div class="card hero-card"><div class="tag">MAIN</div><div class="n">PIXEL · 픽셀</div><div class="r">정체불명의 가면</div><div class="s">푸른 파도 · 회복 · 순간이동 · <b>낙뢰</b>(일반 워커 즉사)</div></div>
+      <div class="card hero-card"><div class="n">ALFRED · 알프레드</div><div class="r">어깨의 두 용</div><div class="s">모든 기술이 용에서 나온다 · 두 용이 적을 물어 하늘로 끌고 가 내리꽂는다</div></div>
+      <div class="card hero-card"><div class="n">LINE · 라인</div><div class="r">거대한 대검, 직육면체 머리</div><div class="s">검 소환 · 끌어당김 · <b>대검 15자루</b> 연속 낙하</div></div>
+      <div class="card hero-card"><div class="n">BLUE NEWBIE · 블루뉴비</div><div class="r">회복 전문</div><div class="s">회복 링크 · 보호막 · 완전 회복 + 무적</div></div>
+      <div class="card hero-card"><div class="n">ROOKIE · 루키</div><div class="r">평범한 생존자</div><div class="s">대시 · 강타 · 가드 · <b>각성</b>(공격 +50% 속도 +30%)</div></div>
+    </div>
+    <img class="shot" style="margin-top:16px" src="img/heroes.jpg" alt="캐릭터 애니메이션 프레임" onerror="this.style.display='none'">
+  </section>
+
+  <section id="modes">
+    <h2>두 가지 플레이 방식</h2>
+    <div class="grid g2">
+      <div class="card"><h3>ARENA — 3/4 시점 서울 11룸</h3><p>강남대로 → 지하철 입구 → 한강 다리 → 명동 → 홍대 → 광화문 → 서울역 → 승강장 → 북촌 → 롯데타워 → 균열. 옆으로 이어진 하나의 세계를 조이스틱으로 걷고, 사거리 안이면 자동 공격. <b>50웨이브</b>, 10웨이브마다 보스 THE MARKED · VOID TITAN이 점점 강해져 돌아온다.</p><img class="shot" style="margin-top:12px" src="img/arena.jpg" alt="아레나 모드" onerror="this.style.display='none'"></div>
+      <div class="card"><h3>FIRST PERSON — 잃어버린 서울</h3><p>내 눈높이로 보는 서울. 강남에서 시작해 송파·여의도·마포·남산·명동·종로·북촌·동부·지하, 그리고 균열 내부까지 <b>10챕터 · 100스테이지</b>. 드래그로 둘러보고 워커를 탭해서 친다. 챕터마다 픽셀의 이야기가 이어진다.</p><img class="shot" style="margin-top:12px" src="img/pov.jpg" alt="1인칭 모드" onerror="this.style.display='none'"></div>
+    </div>
+    <img class="shot" style="margin-top:16px" src="img/places.jpg" alt="1인칭 모드 장소들 — 명동, 홍대, 광화문, 서울역, 승강장, 북촌, 롯데타워, 균열 내부" onerror="this.style.display='none'">
+  </section>
+
+  <section>
+    <h2>재미의 장치</h2>
+    <div class="grid g3">
+      <div class="card"><h3>기(氣) 게이지 궁극기</h3><p>워커를 때리면 기가 차고, 100%가 되면 X. 발동 순간 카메라 줌인 + 네임카드, 캐릭터마다 다른 볼거리.</p></div>
+      <div class="card"><h3>콤보 · PERFECT</h3><p>연속 처치 콤보(5마다 기 보너스), 무피해 웨이브는 PERFECT.</p></div>
+      <div class="card"><h3>엘리트 워커 · 기 구슬</h3><p>붉게 빛나는 강화 워커. 잡으면 기 구슬이 튀어나와 날아온다.</p></div>
+      <div class="card"><h3>보스</h3><p>THE MARKED — 픽셀과 같은 문양의 가면, 돌진은 시선을 돌려 피한다. VOID TITAN — 파편 낙하·보이드 임팩트, 3페이즈.</p></div>
+      <div class="card"><h3>난이도</h3><p>쉬움 · 보통 · 어려움 · 악몽 — 워커 체력·피해·무리 크기·기 충전 속도가 바뀐다. 선택 화면에서 고르고 기기에 저장.</p></div>
+      <div class="card"><h3>크레딧 · 퀘스트</h3><p>플레이로 크레딧을 벌어 캐릭터와 스킬을 열거나, 퀘스트 40개(WAVE 15 → LINE, 보스 3 → ALFRED …)로 공짜로 연다. 리드 디자이너가 정한 가격표.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>만드는 방법</h2>
+    <p class="sub">아빠와 아들의 토요일 프로젝트. 원안(스토리·캐릭터·적·보스·수치·상점)은 리드 디자이너가, 아트는 그의 그림을 참조로 생성·컷아웃, 코드는 SpriteKit.</p>
+    <div class="grid g3 steps">
+      <div class="card"><h3>원안</h3><p>캐릭터 5 · 워커 7종 · 보스 2 · 스킬 키트 · 오프닝 대본 — 전부 승규의 손글씨와 그림에서 시작.</p></div>
+      <div class="card"><h3>아트</h3><p>캐릭터 그림 → 짧은 영상 → 프레임 컷아웃(대기·공격·걷기). 배경·이펙트 시트도 같은 방식.</p></div>
+      <div class="card"><h3>게임</h3><p>SpriteKit · iPhone 가로 전용 · 계정·광고·네트워크 없음.</p></div>
+    </div>
+    <img class="shot" style="margin-top:16px;max-width:520px" src="img/board.jpg" alt="오프닝 스토리보드" onerror="this.style.display='none'">
+  </section>
+
+  <footer>A.P Holdings · LAST WAVE는 개발 중인 게임이며 출시 일정은 미정입니다. 문의 <a href="mailto:cksals00@gmail.com">cksals00@gmail.com</a></footer>
+</div>
+</body>
+</html>
