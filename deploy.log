@@ -3857,3 +3857,17 @@ To https://github.com/cksals00-ai/apholdings-dashboard.git
 To https://github.com/cksals00-ai/apholdings-dashboard.git
    843bed1..a2d3006  main -> main
 2026-09-04 10:30:03 pushed apdash
+[main 309d22e] update 2026-09-04 10:52
+ 12 files changed, 577 insertions(+), 279 deletions(-)
+ create mode 100644 board/icon-180.png
+ create mode 100644 board/index.html
+ create mode 100644 board/manifest.webmanifest
+ create mode 100644 board/state.json
+ create mode 100644 img/ap_mark.png
+ create mode 100644 kscan/review-barcodes.html
+ create mode 100644 lastwave/img/heroes.jpg
+ create mode 100644 lastwave/index.html
+ create mode 100644 lia.html
+To https://github.com/cksals00-ai/apholdings-dashboard.git
+   a2d3006..309d22e  main -> main
+2026-09-04 10:52:31 pushed apdash
