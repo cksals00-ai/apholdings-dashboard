@@ -116,3 +116,12 @@ ModuleNotFoundError: No module named 'FinanceDataReader'
 [main cde6248] prices: 2026-08-27 (spark 396)
  1 file changed, 1 insertion(+), 1 deletion(-)
 [2026-09-08 16:00:00] === prices 갱신 시작 ===
+Traceback (most recent call last):
+  File "/Users/chanminpark/apdash/gen_prices_v2.py", line 21, in <module>
+    krx = listing()
+          ^^^^^^^^^
+  File "/Users/chanminpark/apdash/gen_prices_v2.py", line 19, in listing
+    raise RuntimeError("StockListing 실패")
+RuntimeError: StockListing 실패
+[2026-09-08 16:00:13] 보고 기록: /Users/chanminpark/Library/CloudStorage/GoogleDrive-cksals00@gmail.com/내 드라이브/AP_HOLDINGS_QUEUE/reports/PRICES-20260908-1600.md
+[2026-09-08 16:00:13] !! 실패: 생성 실패
