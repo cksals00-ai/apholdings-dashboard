@@ -136,3 +136,16 @@ RuntimeError: StockListing 실패
 [2026-09-09 16:00:11] 보고 기록: /Users/chanminpark/Library/CloudStorage/GoogleDrive-cksals00@gmail.com/내 드라이브/AP_HOLDINGS_QUEUE/reports/PRICES-20260909-1600.md
 [2026-09-09 16:00:11] !! 실패: 생성 실패
 [2026-09-11 16:00:00] === prices 갱신 시작 ===
+스냅샷 2505종목
+주의: 기준일 확인 실패 — today 사용
+실측 기준일: 2026-09-11
+  스파크 100/400
+  스파크 200/400
+  스파크 300/400
+  스파크 400/400
+스파크 400종목
+저장: /Users/chanminpark/apdash/data/prices.json (288,920 bytes)
+검산 통과 — asof 2026-09-11 / 2505종목 / 스파크 400종목
+[2026-09-11 16:00:18] 생성 완료 — asof=2026-09-11 spark=400
+[main da63ae1] prices: 2026-09-11 (spark 400)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
