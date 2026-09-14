@@ -149,3 +149,4 @@ RuntimeError: StockListing 실패
 [2026-09-11 16:00:18] 생성 완료 — asof=2026-09-11 spark=400
 [main da63ae1] prices: 2026-09-11 (spark 400)
  1 file changed, 1 insertion(+), 1 deletion(-)
+[2026-09-14 16:00:00] === prices 갱신 시작 ===
