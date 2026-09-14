@@ -155,3 +155,11 @@ RuntimeError: StockListing 실패
 실측 기준일: 2026-09-14
   스파크 100/400
   스파크 200/400
+  스파크 300/400
+  스파크 400/400
+스파크 388종목
+저장: /Users/chanminpark/apdash/data/prices.json (286,678 bytes)
+검산 통과 — asof 2026-09-14 / 2504종목 / 스파크 388종목
+[2026-09-14 16:44:02] 생성 완료 — asof=2026-09-14 spark=388
+[main 49ba950] prices: 2026-09-14 (spark 388)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
