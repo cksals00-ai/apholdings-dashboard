@@ -191,3 +191,16 @@ RuntimeError: StockListing 실패
 [main 3b28426] prices: 2026-09-16 (spark 387)
  1 file changed, 1 insertion(+), 1 deletion(-)
 [2026-09-17 16:00:00] === prices 갱신 시작 ===
+스냅샷 2503종목
+주의: 기준일 확인 실패 — today 사용
+실측 기준일: 2026-09-17
+  스파크 100/400
+  스파크 200/400
+  스파크 300/400
+  스파크 400/400
+스파크 400종목
+저장: /Users/chanminpark/apdash/data/prices.json (288,673 bytes)
+검산 통과 — asof 2026-09-17 / 2503종목 / 스파크 400종목
+[2026-09-17 16:00:20] 생성 완료 — asof=2026-09-17 spark=400
+[main 77efa43] prices: 2026-09-17 (spark 400)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
