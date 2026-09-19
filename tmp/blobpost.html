@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>blobpost</title></head><body><script>
+(async()=>{
+  const p=new URLSearchParams(location.search); const files=(p.get('f')||'').split(',').filter(Boolean);
+  const out=[];
+  for(const f of files){ try{ const r=await fetch(f); const b=await r.blob(); out.push({name:f.split('/').pop(), blob:b}); }catch(e){ out.push({name:f, error:String(e)}); } }
+  parent.postMessage({type:'blobpost', files:out}, '*');
+})();
+</script></body></html>
