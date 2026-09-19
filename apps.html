@@ -26,7 +26,7 @@
 <div class="hero">
  <div class="eyebrow">Apps</div>
  <h1>계정 없이, 광고 없이.</h1>
- <p class="lead">출시 7 · 배포 중 1 · 출시 예정 1. 설명은 App Store 등록 문구 그대로.</p>
+ <p class="lead">출시 7 · 출시 예정 2. 설명은 App Store 등록 문구 그대로.</p>
 </div>
 </div>
 <section class="scene gray"><div class="wrap">
@@ -49,7 +49,7 @@ const APPS = [
  {name:"Dawn Grace", cat:"라이프스타일", price:"무료", status:"live", color:"#3D5A80", mono:"DG", kr:"새벽예배의 리듬을 담은 묵상·기도 앱", en:"Dawn-prayer liturgy timer, scripture & prayer companion", link:"https://apps.apple.com/kr/app/id6803325336"},
  {name:"The Other Hours", cat:"스포츠 · 라이프스타일", price:"무료", status:"live", color:"#C97B2B", mono:"OH", kr:"농구하는 아이를 둔 부모를 위한 훈련·성장 가이드 — 팀 훈련 밖의 시간이 선수를 만든다", en:"Training & growth guide for parents of young basketball players", link:"https://apps.apple.com/kr/app/id6803709958"},
  {name:"퀴즈아레나 (QuizArena)", cat:"게임 · 퀴즈", price:"무료", status:"review", color:"#8E44D9", mono:"QA", kr:"먼저 누른 사람만 답한다 · 6인 퀴즈 배틀", en:"Six-player live buzzer quiz battle", link:""},
- {name:"K-Scan", cat:"쇼핑 · 여행", price:"무료", status:"rollout", color:"#B0522F", mono:"KS", kr:"베트남 여행자를 위한 한국 제품 스캐너 — 바코드로 제품·성분 정보", en:"Barcode scanner for Vietnamese travelers", link:""}
+ {name:"K-Scan", cat:"쇼핑 · 여행", price:"무료", status:"soon", color:"#B0522F", mono:"KS", kr:"베트남 여행자를 위한 한국 제품 스캐너 — 바코드로 제품·성분 정보", en:"Barcode scanner for Vietnamese travelers", link:""}
 ];
 const label={live:"출시",review:"출시 예정",soon:"출시 예정",rollout:"배포 중"};
 document.getElementById('apps').innerHTML = APPS.map(a=>`<div class="app"><div class="top"><div class="icon" style="background:${a.color}">${a.mono}</div><div><div class="name">${a.name}</div><div class="cat">${a.cat}</div></div><span class="badge ${a.status}">${label[a.status]}</span></div><div class="kr">${a.kr}</div><div class="en">${a.en}</div><div class="foot"><span>${a.price}</span>${a.link&&a.status==='live'?`<a href="${a.link}" target="_blank" rel="noopener">App Store ›</a>`:''}</div></div>`).join('');
