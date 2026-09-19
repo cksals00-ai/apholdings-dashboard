@@ -37,6 +37,18 @@
  .note b{display:block;font-size:17px;margin-bottom:8px}
  .note p{margin:0;font-size:15px;color:#424245;line-height:1.5}
  section.alt{background:var(--bg2)}
+ .feat{display:grid;gap:14px;grid-template-columns:repeat(4,minmax(0,1fr));text-align:left}
+ @media(max-width:1080px){.feat{grid-template-columns:repeat(2,minmax(0,1fr))}}
+ @media(max-width:640px){.feat{grid-template-columns:1fr}}
+ .fcol{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px}
+ section.alt .fcol{background:#fff}
+ .fcol h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray2);margin:0 0 14px}
+ .fcol .row{padding:12px 0;border-top:1px solid var(--line)}
+ .fcol .row:first-of-type{border-top:0;padding-top:0}
+ .fcol .row b{display:block;font-size:16px;letter-spacing:-.02em;margin-bottom:4px}
+ .fcol .row > span{display:block;font-size:13.5px;color:var(--gray);line-height:1.45}
+ .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.02em;border-radius:999px;padding:3px 9px;margin-left:6px;vertical-align:2px}
+ .tag.now{background:#e3f6ea;color:#1f9d55} .tag.next{background:#fff3df;color:#b7791f}
  .end .cta{justify-content:center}
  @media(max-width:760px){.st{grid-template-columns:1fr;padding:22px}.st:nth-child(even) .fig{order:0}}
 </style>
@@ -227,6 +239,44 @@
  </div>
 </div></section>
 
+<section><div class="wrap">
+ <h2>세이프리스트가<br>할 수 있는 것.</h2>
+ <p class="sub">문은 여럿이고 엔진은 하나입니다. 어디서 물어도 같은 규칙으로 판정합니다.</p>
+ <div class="feat">
+
+  <div class="fcol">
+   <h3>앱 안에서</h3>
+   <div class="row"><b>바코드로 확인<span class="tag now">지금</span></b><span>포장의 바코드를 비추면 신고된 성분이 바로 나옵니다. 바코드 3만 5천 개.</span></div>
+   <div class="row"><b>성분표로 확인<span class="tag now">지금</span></b><span>원재료명을 넣으면 판정합니다. 알레르기 표시란을 먼저 읽고, 없으면 읽지 못했다고 말합니다.</span></div>
+   <div class="row"><b>먹을 수 있는 간식<span class="tag now">지금</span></b><span>피하는 항목에 걸리지 않는 제품만 모아, 골라 두고 한 장으로 봅니다.</span></div>
+   <div class="row"><b>기록과 병원 리포트<span class="tag now">지금</span></b><span>먹은 것과 그날의 몸을 남기고, 진료 때 한 장으로 정리해 갑니다.</span></div>
+  </div>
+
+  <div class="fcol">
+   <h3>시리와 단축어</h3>
+   <div class="row"><b>「시리야, 제품 확인」<span class="tag next">다음 업데이트</span></b><span>앱을 열지 않고 이름이나 바코드로 묻습니다. 답은 그 자리에서 읽어 줍니다.</span></div>
+   <div class="row"><b>「시리야, 성분표 확인」<span class="tag next">다음 업데이트</span></b><span>옮겨 적은 원재료명을 그대로 넘겨 판정합니다.</span></div>
+   <div class="row"><b>「시리야, 간식 찾기」<span class="tag next">다음 업데이트</span></b><span>피하는 항목에 걸리지 않는 간식을 골라 줍니다.</span></div>
+   <div class="row"><b>이름 없이 찾기<span class="tag next">다음 업데이트</span></b><span>「초코파이 찾아줘」처럼 앱 이름을 부르지 않아도 시리가 세이프리스트를 후보로 봅니다.</span></div>
+  </div>
+
+  <div class="fcol">
+   <h3>카메라를 비추면</h3>
+   <div class="row"><b>시각 지능 검색<span class="tag next">다음 업데이트</span></b><span>과자 진열대를 비추면 시스템 카메라 화면에 <strong>우리 아이가 먹을 수 있는 것</strong>이 바로 뜹니다. 눌러서 앱으로 들어가면 근거까지 봅니다.</span></div>
+   <div class="row"><b>할 수 있는 선<span class="tag next">다음 업데이트</span></b><span>카메라가 알려 주는 건 「과자」·「음료」 같은 갈래까지입니다. 제품 이름은 오지 않아요. 그래서 비춘 그 제품의 판정이 아니라, <strong>먹을 수 있는 후보</strong>를 내놓습니다.</span></div>
+  </div>
+
+  <div class="fcol">
+   <h3>AI 안에서</h3>
+   <div class="row"><b>제품 확인<span class="tag now">지금</span></b><span>이름이나 바코드로 찾아 피하는 성분이 들어 있는지 판정합니다.</span></div>
+   <div class="row"><b>성분표 확인<span class="tag now">지금</span></b><span>포장에 적힌 글을 그대로 넘기면 됩니다.</span></div>
+   <div class="row"><b>성분 설명<span class="tag now">지금</span></b><span>그 성분이 포장에서 어떤 말로 나타나는지, 무엇은 걸리지 않는지.</span></div>
+   <div class="row"><b>대체품 찾기<span class="tag now">지금</span></b><span>걸리지 않는 제품을 제조사가 겹치지 않게 골라 줍니다.</span></div>
+  </div>
+
+ </div>
+</div></section>
+
 <section class="alt"><div class="wrap">
  <h2>ChatGPT와 제미나이는요?</h2>
  <p class="sub">엔진은 하나입니다. 문이 아직 다 열리지 않았을 뿐입니다.</p>
@@ -237,7 +287,7 @@
   </div>
   <div class="ask">
    <strong class="lbl">제미나이 · 시리</strong>
-   <span><strong>앱 쪽에 준비해 두었습니다.</strong> 아이폰의 시리가 제미나이로 움직이면서, 앱에 닿는 길이 커넥터가 아니라 앱 자체가 됐습니다. 세이프리스트 앱에 그 길을 넣어 두었고, 다음 업데이트와 함께 열립니다. 「시리야, 이거 우리 애 먹어도 돼?」</span>
+   <span><strong>앱 쪽에 준비해 두었습니다.</strong> 아이폰의 시리가 제미나이로 움직이면서, 앱에 닿는 길이 커넥터가 아니라 앱 자체가 됐습니다. 애플이 정한 자리 두 곳 — <strong>앱 안 검색</strong>과 <strong>시각 지능</strong> — 에 세이프리스트를 넣어 두었고, 다음 업데이트와 함께 열립니다.</span>
   </div>
  </div>
  <div class="note" style="margin-top:18px">
