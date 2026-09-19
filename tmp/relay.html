@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><title>relay</title><pre id="s">loading…</pre>
+<script>
+(async()=>{
+  const q=new URLSearchParams(location.search); const f=q.get('f')||'paywall_640.jpg';
+  const s=document.getElementById('s');
+  try{
+    const r=await fetch(f,{cache:'no-store'}); const b=await r.blob();
+    const b64=await new Promise((ok,no)=>{const fr=new FileReader();fr.onload=()=>ok(fr.result.split(',')[1]);fr.onerror=no;fr.readAsDataURL(b);});
+    s.textContent='ready '+f+' '+b.size+' bytes, b64 '+b64.length;
+    window.__b64=b64; window.__name=f;
+    const send=()=>{ if(window.opener){ window.opener.postMessage({type:'iapshot',name:f,mime:b.type,b64},'*'); s.textContent+='\nsent'; } else s.textContent+='\nno opener'; };
+    send(); window.addEventListener('message',e=>{ if(e.data==='again') send(); });
+  }catch(e){ s.textContent='error '+e; }
+})();
+</script>
