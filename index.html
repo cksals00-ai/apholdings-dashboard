@@ -79,7 +79,8 @@
  td b{color:var(--ink2)}
  @media (max-width:640px){th,td{padding:12px 10px;font-size:13px}}
  /* grid tiles */
- .grid{background:#f5f5f7;padding:12px 12px 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;max-width:1160px;margin:0 auto}
+ .gridband{background:#f5f5f7;padding:12px 0}
+ .grid{padding:0 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;max-width:1160px;margin:0 auto}
  .g{background:#fff;color:var(--ink2);border-radius:22px;padding:44px 34px;min-height:300px;display:flex;flex-direction:column;justify-content:flex-start}
  .g.dark{background:#000;color:#f5f5f7}
  .g .k{font-size:12px;letter-spacing:.08em;font-weight:600;color:var(--gray2);margin-bottom:10px}
@@ -92,12 +93,13 @@
  .g.dark ul{color:#d2d2d7}
  .g .news{font-size:15px;color:#424245} .g .news div{padding:10px 0;border-bottom:1px solid #e8e8ed} .g .news div:last-child{border:0} .g .news small{display:block;color:var(--gray2);font-size:12px}
  /* footer */
- footer{background:#f5f5f7;color:var(--gray2);font-size:12px;padding:30px 20px 50px}
+ 
  footer .in{max-width:var(--max);margin:0 auto;border-top:1px solid #d2d2d7;padding-top:18px;line-height:1.7}
  footer a{color:#424245}
 </style>
 <link rel="stylesheet" href="nav.css">
 <link rel="stylesheet" href="fit.css">
+<link rel="stylesheet" href="foot.css">
 </head>
 <body>
 
@@ -165,7 +167,7 @@
  <div class="media"><video autoplay muted loop playsinline preload="metadata" poster="media/craft_frame.jpg" src="media/craft.mp4"></video></div>
 </section>
 
-<section class="nums" id="data">
+<section class="nums" id="nums">
  <h2>핵심 지표.</h2>
  <p class="s">한국관광 데이터랩 · 매월 갱신</p>
  <div class="numgrid">
@@ -191,7 +193,7 @@
  <div class="line">1인 약 $1,008. 2,000만 명이면 약 200억 달러.<small>국내소비 약 +2.5%p 규모(현대경제연구원 추정). 수익은 소개 수수료, 소비는 한국에.</small></div>
 </section>
 
-<section class="data">
+<section class="data" id="data">
  <div class="in">
   <h2>데이터 활용 체계.</h2>
   <p class="s">공개 데이터 기반 의사결정. 근거는 여기에.</p>
@@ -206,7 +208,7 @@
  </div>
 </section>
 
-<section class="grid">
+<section class="gridband"><div class="grid">
  <div class="g"><div class="k">약속</div><h3>광고 0. 계정 0. 수집 0.</h3><div class="zeros"><div><b>0</b><span>광고</span></div><div><b>0</b><span>계정</span></div><div><b>0</b><span>데이터 수집</span></div></div><p>기록은 기기에만. 진단·투자 조언 없음. 모르는 것은 모른다고.</p></div>
  <div class="g dark"><div class="k" style="color:#a1a1a6">A.P = AI People</div><h3>사람이 포기하던 자리에 AI.</h3><p>AI가 사람을 대신하는 자리가 아니라, 사람이 멈춘 자리. 25만 개 제품, 2,455개 종목 — 한계에서 멈춘 일에만 AI. 판단은 사람.</p><a class="more" href="about.html">회사 이야기</a></div>
  <div class="g"><div class="k">함께</div><h3>협력.</h3><ul><li>한국관광공사 · 지자체 — 관광 데이터 활용 서비스, 관광벤처, 지역 실증</li><li>국가유산청 · 공예진흥원 — 전통공예 글로벌 홍보 실증</li><li>창업진흥원 · 기술보증기금 — 세이프리스트 안심 커머스</li><li>콘텐츠진흥원 · 퍼블리셔 — 게임 2종 글로벌</li></ul><p style="margin-top:14px"><a class="more" href="mailto:cksals00@gmail.com?subject=[A.P Holdings] 협력 문의">메일로 문의</a></p></div>
@@ -216,11 +218,18 @@
   <div>IRON GRADE 1.0 출시<small>벤치마크 WOD 채점기 · <a href="https://apps.apple.com/kr/app/id6808070870" target="_blank" rel="noopener">App Store</a></small></div>
   <div>리아, TikTok 시작<small>한국 전래동화 3편 · 영어 내레이션</small></div>
  </div><p style="margin-top:14px"><a class="more" href="apps.html">앱 전체</a></p></div>
-</section>
+</div></section>
 
-<footer><div class="in">
- A.P Holdings · <a href="mailto:cksals00@gmail.com">cksals00@gmail.com</a> · 처리방침: <a href="privacy.html">문샷·나의 첫투자</a> · <a href="hangeulcubs_privacy.html">Hangeul Cubs</a> · <a href="safelist/privacy.html">세이프리스트</a> · <a href="irongrade/privacy.html">IRON GRADE</a> · <a href="quizarena_privacy.html">퀴즈아레나</a><br>
- 스토어 개발사 표기는 개인 개발자 계정 「Chanmin Park」. 앱 소개는 투자 권유·의료 조언이 아님. 관광 통계: 한국관광공사 · 한국관광 데이터랩. 영상은 AI 생성.
+<footer class="sitefoot"><div class="in">
+ <div class="cols">
+  <div><b>사업</b><a href="business/safelist.html">세이프리스트</a><a href="business/games.html">게임</a><a href="business/inbound.html">인바운드</a><a href="lia.html">리아</a><a href="business/craft.html">전통공예</a></div>
+  <div><b>앱</b><a href="https://apps.apple.com/kr/app/id6805684034" target="_blank" rel="noopener">세이프리스트</a><a href="https://apps.apple.com/kr/app/id6803749436" target="_blank" rel="noopener">Hangeul Cubs</a><a href="https://apps.apple.com/kr/app/id6803810106" target="_blank" rel="noopener">K-Concert Trip</a><a href="https://apps.apple.com/kr/app/id6808070870" target="_blank" rel="noopener">IRON GRADE</a><a href="apps.html">앱 전체</a></div>
+  <div><b>리아</b><a href="lia.html">소개</a><a href="shop.html">리아 셀렉트</a><a href="https://www.instagram.com/lia_park55/" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a></div>
+  <div><b>회사</b><a href="about.html">A.P Holdings</a><a href="index.html#flow">인바운드 밸류체인</a><a href="index.html#data">데이터 활용 체계</a><a href="business/safelist.html#docs">사업계획서</a><a href="mailto:cksals00@gmail.com">문의</a></div>
+  <div><b>정책</b><a href="safelist/privacy.html">세이프리스트 처리방침</a><a href="hangeulcubs_privacy.html">Hangeul Cubs 처리방침</a><a href="privacy.html">문샷·나의 첫투자 처리방침</a><a href="quizarena_privacy.html">퀴즈아레나 처리방침</a><a href="irongrade/privacy.html">IRON GRADE 처리방침</a></div>
+ </div>
+ <div class="fine">A.P Holdings · <a href="mailto:cksals00@gmail.com">cksals00@gmail.com</a> · 처리방침: <a href="privacy.html">문샷·나의 첫투자</a> · <a href="hangeulcubs_privacy.html">Hangeul Cubs</a> · <a href="safelist/privacy.html">세이프리스트</a> · <a href="irongrade/privacy.html">IRON GRADE</a> · <a href="quizarena_privacy.html">퀴즈아레나</a><br> 스토어 개발사 표기는 개인 개발자 계정 「Chanmin Park」. 앱 소개는 투자 권유·의료 조언이 아님. 관광 통계: 한국관광공사 · 한국관광 데이터랩. 영상은 AI 생성.</div>
+ <div class="copy"><span>© 2026 A.P Holdings. All rights reserved.</span><span>Seoul, Korea</span></div>
 </div></footer>
 </body>
 </html>
