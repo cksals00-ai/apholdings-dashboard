@@ -15,3 +15,8 @@
 .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 .picks{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 @media (max-width:600px){.grid{grid-template-columns:1fr!important}.picks .t{padding:12px}.picks small{display:none}}
+.case{container-type:inline-size} .case .n{white-space:nowrap;font-size:min(48px,17cqw)} .case .n.sm{font-size:min(36px,11cqw)}
+.apps{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media (max-width:900px){.apps{grid-template-columns:repeat(2,minmax(0,1fr))!important} .apps>:nth-child(odd):last-child{grid-column:1/-1}}
+@media (max-width:600px){.apps{grid-template-columns:1fr!important}}
+.three.four .case .n{font-size:min(36px,11cqw)}
