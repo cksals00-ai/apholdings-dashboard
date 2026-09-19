@@ -4,61 +4,138 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>리아 — A.P Holdings</title>
-<meta name="description" content="리아(Lia) — A.P Holdings의 AI 크리에이터. 전래동화와 서울의 하루, 영어 15초. Instagram · TikTok.">
+<meta name="description" content="리아(Lia) — A.P Holdings 1호 AI 배우. 서울에 사는 크리에이터, 영어 15초로 한국을 세계에. Instagram · TikTok · 리아 셀렉트.">
 <link rel="stylesheet" href="business/_style.css">
+<link rel="stylesheet" href="nav.css">
 <style>:root{--accent:var(--rose)}
- .liaHero{max-width:1120px;margin:36px auto 0;aspect-ratio:16/9;border-radius:22px;background:radial-gradient(80% 80% at 30% 20%,#3a0d2a,#000 70%);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#fff}
- .liaHero b{display:block;font-size:clamp(28px,5vw,56px);font-weight:700;letter-spacing:-.03em;line-height:1.1} .liaHero span{display:block;color:#a1a1a6;font-size:clamp(14px,1.8vw,18px);margin-top:12px}
- .social{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+ .hero{text-align:left}
+ .heroGrid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:center}
+ .heroGrid .lead{margin-left:0}
+ .heroImg{border-radius:26px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.14);background:#f5f5f7}
+ .heroImg img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%}
+ .social{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+ .traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:1120px;margin:0 auto;text-align:left}
+ .tr{background:#1d1d1f;border-radius:20px;padding:22px} .tr i{display:block;font-style:normal;font-size:12px;letter-spacing:.1em;color:#ff375f;font-weight:700;margin-bottom:8px} .tr b{display:block;font-size:19px;color:#fff;margin-bottom:6px;letter-spacing:-.02em} .tr span{font-size:14px;color:#a1a1a6;line-height:1.45}
+ .faces{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;max-width:1120px;margin:26px auto 0}
+ .faces img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px}
+ .moods{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1120px;margin:22px auto 0}
+ .moods figure{margin:0;position:relative;border-radius:20px;overflow:hidden}
+ .moods img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+ .moods figcaption{position:absolute;left:16px;bottom:14px;color:#fff;font-size:14px;font-weight:600;letter-spacing:-.01em;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+ .sel{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(20px,4vw,48px);align-items:center;text-align:left}
+ .sel img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:24px}
+ .sel h3{font-size:clamp(26px,3.6vw,40px);letter-spacing:-.03em;line-height:1.1;margin:0 0 12px}
+ .sel p{color:#6e6e73;font-size:16px;line-height:1.5;max-width:46ch}
+ .four{grid-template-columns:repeat(4,1fr)} @media (max-width:760px){.four{grid-template-columns:1fr 1fr}}
+ .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:900px;margin:26px auto 0}
+ .reels video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:20px;background:#000}
+ .reels figure{margin:0} .reels figcaption{font-size:13px;color:#86868b;margin-top:8px}
+ @media (max-width:760px){.heroGrid,.sel{grid-template-columns:1fr}.faces{grid-template-columns:repeat(3,1fr)}.moods{grid-template-columns:1fr}.hero{text-align:center}.social{justify-content:center}}
 </style>
 </head>
 <body>
+<nav class="gnav"><div class="in"><a class="logo" href="index.html"><img src="img/ap_mark.png" alt="">A.P Holdings</a><ul><li><a href="business/safelist.html">세이프리스트</a></li><li><a href="business/games.html">게임</a></li><li><a href="business/inbound.html">인바운드</a></li><li><a class="on" href="lia.html">리아</a></li><li><a href="business/craft.html">전통공예</a></li><li><a href="apps.html">앱</a></li><li><a href="about.html">회사</a></li></ul></div></nav>
 <div class="wrap">
-<header>
- <a class="brand" href="index.html"><img src="img/ap_mark.png" alt="">A.P Holdings</a>
- <nav><a href="business/safelist.html">세이프리스트</a><a href="business/games.html">게임</a><a href="business/inbound.html">인바운드</a><a class="on" href="lia.html">리아</a><a href="business/craft.html">전통공예</a><a href="apps.html">앱</a><a href="about.html">회사</a><a href="board/">보드</a></nav>
-</header>
 <div class="hero">
- <div class="eyebrow">Lia · AI Ambassador</div>
- <h1>한국을 15초로.</h1>
- <p class="lead">서울에 사는 AI 크리에이터. 책상 앞 굳은 몸, 해외 친구들이 진짜 궁금한 한국, 그리고 이 15초가 만들어지는 법. A.P Holdings 앱의 첫 사용자.</p>
- <div class="social"><a class="btn solid" href="https://www.instagram.com/lia_park55/" target="_blank" rel="noopener">Instagram @lia_park55</a><a class="btn" href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a></div>
- <div class="liaHero"><div><b>Lia · A.P Holdings</b><span>Korean folktales &amp; desk-body fixes, in 15s.<br>Illustrations and narration created with AI tools.</span></div></div>
+ <div class="heroGrid">
+  <div>
+   <div class="eyebrow">Lia · A.P Holdings 1호 AI 배우</div>
+   <h1>한국을 15초로.</h1>
+   <p class="lead">서울에 사는 AI 크리에이터. 해외 친구들이 진짜 궁금한 한국을 영어로. 촬영 없이, 쉬지 않고, 나이 들지 않는 A.P Holdings의 얼굴.</p>
+   <div class="social"><a class="btn solid" href="https://www.instagram.com/lia_park55/" target="_blank" rel="noopener">Instagram @lia_park55</a><a class="btn" href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a><a class="btn" href="shop.html">리아 셀렉트 ›</a></div>
+  </div>
+  <div class="heroImg"><img src="media/lia/lia_hero_v.jpg" alt="Lia"></div>
+ </div>
 </div>
 </div>
 
 <section class="scene dark"><div class="wrap">
- <div class="k">세 가지 이야기</div>
- <h2>15초, 영어 자막, 첫 1.5초는 문제 장면부터.</h2>
- <div class="three">
-  <div class="case"><div class="n" style="color:#ff375f">DESK</div><b>책상 앞 몸</b><p>목·어깨·손목·허리·눈. 하루 종일 앉은 몸을 30초 안에 푸는 동작 하나.</p></div>
-  <div class="case"><div class="n" style="color:#ff375f">KOREA</div><b>해외가 궁금한 한국</b><p>편의점, 심야 카페, 굿즈 줄서기, 지하철 앱, 병원비. 관광책에 없는 진짜 질문.</p></div>
-  <div class="case"><div class="n" style="color:#ff375f">TALES</div><b>TIGER TALES · 전래동화</b><p>견우와 직녀 · 해와 달 · 선녀와 나무꾼. 한글컵스 호랑이 4남매가 영어로. TikTok 시작.</p></div>
+ <div class="k">페르소나</div>
+ <h2>서울의 20대 직장인.<br>해외 친구가 많은 사람.</h2>
+ <p class="s">책상 앞에서 하루를 보내고, 퇴근 뒤 편의점과 심야 카페를 다니고, 주말엔 옛이야기를 읽어 주는 사람. 아는 것을 자랑하지 않고 궁금한 것을 대신 물어본다.</p>
+ <div class="traits">
+  <div class="tr"><i>DESK BODY</i><b>몸을 푸는 사람</b><span>목·어깨·손목·허리·눈. 하루 종일 앉은 몸을 30초 안에 푸는 동작 하나. 첫 1.5초는 설명이 아니라 문제 장면.</span></div>
+  <div class="tr"><i>KOREA, EXPLAINED</i><b>한국을 설명하는 사람</b><span>편의점, 심야 카페, 굿즈 줄서기, 지하철 앱, 병원비. 관광책에 없는 진짜 질문에 영어로.</span></div>
+  <div class="tr"><i>TIGER TALES</i><b>옛이야기를 읽어 주는 사람</b><span>견우와 직녀 · 해와 달 · 선녀와 나무꾼. Hangeul Cubs 호랑이 4남매와 함께 영어 내레이션으로.</span></div>
+  <div class="tr"><i>FIRST USER</i><b>먼저 써 보는 사람</b><span>A.P Holdings 앱의 첫 사용자. 좋은 점도 아쉬운 점도 그대로 — 광고가 아니라 사용 후기.</span></div>
+ </div>
+ <div class="faces">
+  <img src="media/lia/rimg_suncream.jpg" alt=""><img src="media/lia/rimg_cushion.jpg" alt=""><img src="media/lia/rimg_tint.jpg" alt=""><img src="media/lia/rimg_essence.jpg" alt=""><img src="media/lia/rimg_mask.jpg" alt=""><img src="media/lia/rimg_cleanser.jpg" alt="">
  </div>
 </div></section>
 
 <section class="scene gray"><div class="wrap">
- <div class="k">역할</div>
- <h2>관심을 만드는 첫 구간.</h2>
- <p class="s">인바운드 밸류체인 01. 언어 순서는 한국관광 데이터랩 국적별 입국 순서 — 영어 → 중국어 → 일본어.</p>
+ <div class="k">채널</div>
+ <h2>Instagram. TikTok.</h2>
+ <p class="s">인스타그램 릴 15~20초, 영어 자막. 틱톡은 30~45초 전래동화. 매주 정해진 요일에 정해진 시리즈.</p>
  <div class="pipe">
-  <div class="p"><i>앱</i><b>첫 사용자</b><span>홀딩스 앱을 먼저 써 보고 좋은 점·아쉬운 점 그대로</span></div>
-  <div class="p"><i>공예</i><b>장인 콘텐츠 채널</b><span>전통공예 제작 과정을 같은 다국어 파이프라인으로</span></div>
-  <div class="p"><i>여행</i><b>파트너 링크</b><span>Klook·Agoda — 게시물마다 partner link 표기</span></div>
+  <div class="p"><i>월</i><b>Desk Body</b><span>몸 푸는 동작 하나</span></div>
+  <div class="p"><i>수</i><b>App Moment</b><span>홀딩스 앱 사용 장면 — 세이프리스트 · Hangeul Cubs · K-Concert Trip · IRON GRADE</span></div>
+  <div class="p"><i>금</i><b>Korea, Explained</b><span>해외가 궁금한 한국 하나</span></div>
+  <div class="p"><i>주말</i><b>Tiger Tales</b><span>한국 전래동화 · TikTok</span></div>
+ </div>
+ <div class="moods">
+  <figure><img src="media/lia/mv2_02_street.jpg" alt=""><figcaption>Korea, Explained — 서울의 밤</figcaption></figure>
+  <figure><img src="media/lia/mv2_05_tiger.jpg" alt=""><figcaption>Tiger Tales — 호랑이 이야기</figcaption></figure>
+  <figure><img src="media/lia/mv2_01_archive.jpg" alt=""><figcaption>Made with AI — 제작 뒷면</figcaption></figure>
  </div>
 </div></section>
 
 <section class="scene"><div class="wrap">
- <div class="k">원칙</div>
- <h2>AI라고 밝힌다.</h2>
- <p class="s">모든 게시물에 “Illustrations and narration created with AI tools.” 팔로워 구매 없음. DM 돌리기 없음. 없는 수치 없음. 파트너 링크는 표기.</p>
+ <div class="k">홍보하는 것</div>
+ <h2>한 배우가 모든 브랜드를.</h2>
+ <div class="three four">
+  <div class="case"><div class="n" style="color:#ff375f">APPS</div><b>홀딩스 앱 전부</b><p>성분 스캐너부터 한글 학습, 공연 원정, 운동 채점기까지. 출시되는 순서대로 리아가 먼저 쓴다.</p></div>
+  <div class="case"><div class="n" style="color:#ff375f">TRAVEL</div><b>한국 여행</b><p>공연장 근처 숙소·이동·투어. 해외 K팝 팬이 한국에 오는 길을 리아가 안내.</p></div>
+  <div class="case"><div class="n" style="color:#ff375f">K-BEAUTY</div><b>써 보고 고른 것</b><p>선케어·쿠션·틴트·마스크. 리아가 직접 써 본 K-뷰티만 리아 셀렉트에. <a href="shop.html">리아 셀렉트 ›</a></p></div>
+  <div class="case"><div class="n" style="color:#ff375f">CRAFT</div><b>장인의 작품</b><p>무형문화재 장인의 제작 과정을 리아의 다국어 채널로 세계에. 전통공예 프로젝트의 홍보 창구.</p></div>
+ </div>
+</div></section>
+
+<section class="scene gray"><div class="wrap">
+ <div class="k">리아 셀렉트</div>
+ <div class="sel">
+  <img src="media/lia/lia_hero_sq.jpg" alt="Lia Select">
+  <div>
+   <h3>써 보고, 고른 것만.</h3>
+   <p>리아가 쓰고, 찍고, 아쉬운 점까지 말한 K-뷰티. 선케어 · 에센스 · 쿠션 · 마스크 · 틴트 · 클렌저. 영상에서 보고, 셀렉트에서 고르고, 파트너 링크로.</p>
+   <div class="cta"><a class="btn solid" href="shop.html">리아 셀렉트 보기</a></div>
+  </div>
+ </div>
+ <div class="reels">
+  <figure><video muted loop playsinline controls preload="none" poster="media/lia/review_ep1_suncream_poster.jpg" src="media/lia/review_ep1_suncream.mp4"></video><figcaption>EP1 · Sunscreen</figcaption></figure>
+  <figure><video muted loop playsinline controls preload="none" poster="media/lia/review_ep2_mask_poster.jpg" src="media/lia/review_ep2_mask.mp4"></video><figcaption>EP2 · Mask</figcaption></figure>
+  <figure><video muted loop playsinline controls preload="none" poster="media/lia/review_ep3_tint_poster.jpg" src="media/lia/review_ep3_tint.mp4"></video><figcaption>EP3 · Lip tint</figcaption></figure>
+ </div>
+</div></section>
+
+<section class="scene dark"><div class="wrap">
+ <div class="k">파급력</div>
+ <h2>촬영 없이 매일.<br>언어 무제한.</h2>
+ <div class="pipe">
+  <div class="p"><i>24h</i><b>쉬지 않는 배우</b><span>촬영 일정·스튜디오·이동 없음. 대본이 있으면 오늘 게시.</span></div>
+  <div class="p"><i>∞</i><b>언어</b><span>영어 → 중국어 → 일본어. 한국관광 데이터랩 국적별 입국 순서대로 같은 얼굴, 다른 언어.</span></div>
+  <div class="p"><i>1</i><b>일관된 얼굴</b><span>앱·게임·공예·여행 — 다섯 사업을 한 사람이. 브랜드가 늘어도 앰배서더는 하나.</span></div>
+  <div class="p"><i>0</i><b>모델 비용</b><span>계약도 위약도 스캔들도 없음. 나이 들지 않는다.</span></div>
+ </div>
+ <div class="insight">인바운드 밸류체인 01 — 「한국에 가고 싶다」가 시작되는 구간.</div>
+</div></section>
+
+<section class="scene gray"><div class="wrap">
+ <div class="k">잠재력</div>
+ <h2>배우에서 IP로.</h2>
+ <div class="three">
+  <div class="case"><div class="n" style="color:#ff375f">01</div><b>다국어 리아</b><p>같은 페르소나의 중국어·일본어 버전. 국적별 입국 순서로 확장.</p></div>
+  <div class="case"><div class="n" style="color:#ff375f">02</div><b>브랜드 콜라보</b><p>관광·공예·K-뷰티 브랜드의 해외 소개를 리아의 목소리로. 외국인 시청자가 이미 있는 채널.</p></div>
+  <div class="case"><div class="n" style="color:#ff375f">03</div><b>게임·앱 속으로</b><p>LAST WAVE 카메오, 세이프리스트 AI 커넥터의 안내 목소리. 채널 밖에서도 같은 얼굴.</p></div>
+ </div>
 </div></section>
 
 <section class="closing">
- <h2>Lia · A.P Holdings.</h2>
- <p>AI-generated persona operated by A.P Holdings.</p>
- <div class="cta"><a class="btn solid" href="https://www.instagram.com/lia_park55/" target="_blank" rel="noopener">Instagram</a><a class="btn" href="index.html">홈</a></div>
+ <h2>Lia.</h2>
+ <p>A.P Holdings 1호 AI 배우. 서울에서, 영어로, 15초.</p>
+ <div class="cta"><a class="btn solid" href="https://www.instagram.com/lia_park55/" target="_blank" rel="noopener">Instagram</a><a class="btn" href="shop.html">리아 셀렉트</a><a class="btn" href="index.html">홈</a></div>
 </section>
-<div class="wrap"><footer>A.P Holdings · 문의 <a href="mailto:cksals00@gmail.com">cksals00@gmail.com</a></footer></div>
+<div class="wrap"><footer>A.P Holdings · Lia is an AI-generated persona operated by A.P Holdings. Illustrations and narration created with AI tools. · <a href="mailto:cksals00@gmail.com">cksals00@gmail.com</a></footer></div>
 </body>
 </html>
