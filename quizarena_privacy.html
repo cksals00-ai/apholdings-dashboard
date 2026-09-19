@@ -37,9 +37,10 @@
   <tr><td>프로필</td><td>닉네임, 선택한 캐릭터·꾸미기 항목, 레벨·경험치·골드·크레딧, 등급 점수(RP)</td><td>플레이할 때</td><td>게임 진행, 순위표 표시</td></tr>
   <tr><td>게임 기록</td><td>참여한 판, 문항별 답과 응답 시간, 점수·순위, 오답 노트</td><td>플레이할 때</td><td>정산, 순위, 복습 기능, 부정행위 탐지</td></tr>
   <tr><td>이용자 제작 콘텐츠</td><td>이용자가 출제한 문제(OX 진술 등), 신고 내용</td><td>출제·신고할 때</td><td>문제은행 운영, 심사</td></tr>
+  <tr><td>구독 결제 기록</td><td>Apple이 발급한 거래 ID·원거래 ID, 상품 ID, 구입일·만료일, 환불 여부, 샌드박스/운영 구분</td><td>아레나 패스를 구입·복원할 때</td><td>구독 유효기간 확인, 혜택 지급, 환불 처리</td></tr>
   <tr><td>만 14세 미만 여부</td><td>만 14세 미만 표시 및 법정대리인 동의 여부</td><td>가입할 때</td><td>국내법(개인정보 보호법) 준수</td></tr>
 </table>
-<p>실명, 생년월일, 전화번호, 주소, 결제 정보, 위치 정보, 사진·연락처, 기기 광고 식별자(IDFA)는 수집하지 않습니다.</p>
+<p>실명, 생년월일, 전화번호, 주소, 위치 정보, 사진·연락처, 기기 광고 식별자(IDFA)는 수집하지 않습니다. <strong>카드 번호 등 결제 수단 정보는 Apple이 처리하며 회사는 받지 않습니다</strong> — 회사가 받는 것은 구독이 유효한지 확인하는 데 필요한 거래 기록뿐입니다.</p>
 
 <h2>2. 저장 위치와 보관 기간</h2>
 <p>계정 데이터는 회사가 이용하는 클라우드 서비스(Supabase)에 저장됩니다. 계정을 삭제하면 프로필과 게임 기록은 즉시 삭제되며, 이용자가 출제하여 문제은행에 채택된 문제는 출제자 정보를 지운 뒤 익명으로 남을 수 있습니다. 게스트 기록은 기기 안에만 있으며 앱을 지우면 함께 사라집니다.</p>
@@ -49,6 +50,7 @@
 <ul>
   <li><strong>Supabase</strong> — 계정·게임 데이터 저장 및 서버 기능(위탁)</li>
   <li><strong>Apple, Google, 카카오, 네이버</strong> — 로그인 인증(이용자가 선택한 방식만)</li>
+  <li><strong>Apple</strong> — 앱 내 구입(아레나 패스) 결제 처리 및 영수증 검증. 결제 수단 정보는 Apple이 보유합니다.</li>
 </ul>
 <p>순위표와 대전 화면에는 다른 이용자의 <strong>닉네임과 캐릭터, 점수</strong>가 표시됩니다. 이메일 등 그 밖의 정보는 다른 이용자에게 보이지 않습니다.</p>
 
@@ -91,15 +93,16 @@
   <li><strong>Profile</strong> — nickname, chosen character and cosmetics, level/XP/gold/credits, rating points (RP). Used for gameplay and leaderboards.</li>
   <li><strong>Gameplay records</strong> — matches played, per-question answers and response times, scores and ranks, wrong-answer notes. Used for settlement, rankings, review features, and cheat detection.</li>
   <li><strong>User-generated content</strong> — questions you author (e.g., true/false statements) and reports you file. Used to run and moderate the question bank.</li>
+  <li><strong>Subscription records</strong> — the transaction and original transaction IDs issued by Apple, product ID, purchase and expiry dates, refund status, and environment (sandbox or production). Used to verify that an Arena Pass subscription is active and to grant its benefits.</li>
   <li><strong>Under-14 flag</strong> — whether you are under 14 and whether a guardian consented, as required by Korean law.</li>
 </ul>
-<p>We do not collect real names, birth dates, phone numbers, addresses, payment details, location, photos or contacts, or the advertising identifier (IDFA).</p>
+<p>We do not collect real names, birth dates, phone numbers, addresses, location, photos or contacts, or the advertising identifier (IDFA). <strong>Payment details such as card numbers are handled by Apple and never reach us</strong> — we receive only the transaction records needed to confirm that a subscription is active.</p>
 
 <h2>2. Storage and retention</h2>
 <p>Account data is stored with our cloud provider, Supabase. Deleting your account removes your profile and gameplay records immediately; questions you authored that were accepted into the bank may remain anonymously with author information removed. Guest data lives only on the device and disappears when the app is deleted.</p>
 
 <h2>3. Sharing</h2>
-<p>We never sell personal data or share it for advertising. Processors: <strong>Supabase</strong> (data storage and server functions) and <strong>Apple, Google, Kakao, Naver</strong> (sign-in, only the provider you choose). Other players see your nickname, character, and score on leaderboards and in matches — nothing else.</p>
+<p>We never sell personal data or share it for advertising. Processors: <strong>Supabase</strong> (data storage and server functions), <strong>Apple, Google, Kakao, Naver</strong> (sign-in, only the provider you choose), and <strong>Apple</strong> (in-app purchase of the Arena Pass and receipt verification; Apple holds your payment details). Other players see your nickname, character, and score on leaderboards and in matches — nothing else.</p>
 
 <h2>4. Notifications</h2>
 <p>The evening reminder is a local notification scheduled on your device, only if you allow it. We send no server push notifications.</p>
