@@ -1,0 +1,17 @@
+/* count-aware grids: N items = N columns on desktop; below, rows stay filled (no orphan cells) */
+.pipe,.three,.nums,.steps,.traits,.zeros,.vs,.rev,.years,.phones,.heroes,.enemies,.maps,.shots,.numgrid,.stats,.moods,.reels{grid-template-columns:none!important;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+.now{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr))!important}
+@media (max-width:900px){
+ .pipe:has(> :nth-child(5)),.steps:has(> :nth-child(5)),.enemies,.maps{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .pipe:has(> :nth-child(5)) > :nth-child(3n+2):last-child,.steps:has(> :nth-child(5)) > :nth-child(3n+2):last-child{grid-column:span 2}
+ .pipe .p i,.pipe .p b{font-size:15px} .pipe .p span{font-size:12px}
+}
+@media (max-width:600px){
+ .pipe,.three,.nums,.steps,.traits,.zeros,.vs,.rev,.years,.phones,.heroes,.enemies,.maps,.shots,.numgrid,.stats,.moods,.now{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .pipe>:nth-child(odd):last-child,.three>:nth-child(odd):last-child,.nums>:nth-child(odd):last-child,.steps>:nth-child(odd):last-child,.traits>:nth-child(odd):last-child,.zeros>:nth-child(odd):last-child,.rev>:nth-child(odd):last-child,.years>:nth-child(odd):last-child,.heroes>:nth-child(odd):last-child,.maps>:nth-child(odd):last-child,.numgrid>:nth-child(odd):last-child,.stats>:nth-child(odd):last-child,.moods>:nth-child(odd):last-child{grid-column:1/-1}
+ .pipe .p i,.pipe .p b{font-size:16px}
+}
+.pipe .p b,.pipe .p span,.case b,.tr b,.tr span,.now .n span,.nums .n span,.numgrid b,.numgrid span,.step b{word-break:keep-all;overflow-wrap:anywhere}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.picks{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media (max-width:600px){.grid{grid-template-columns:1fr!important}.picks .t{padding:12px}.picks small{display:none}}
