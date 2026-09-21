@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>클로드에 라이트리스트 붙이기 — A.P Holdings</title>
+<meta name="description" content="주소 한 줄이면 클로드가 열량을 읽습니다. 100g 당과 1인분을 늘 같이 보여 주는 칼로리 커넥터. 식약처 공개 자료 31만 7천 건.">
+<link rel="stylesheet" href="_style.css">
+<style>
+ :root{--accent:var(--clay)}
+ h1,h2,h3,p,li{word-break:keep-all}
+ .urlbox{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:26px auto 0;max-width:680px}
+ .urlbox code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(13px,2.3vw,19px);background:#000;color:#ffb37a;padding:14px 20px;border-radius:14px;letter-spacing:-.01em}
+ .urlbox button{border:0;background:var(--ink);color:#fff;font:inherit;font-weight:600;font-size:15px;padding:14px 20px;border-radius:14px;cursor:pointer}
+ .urlbox button.done{background:var(--clay)}
+ .howto{display:grid;gap:18px;margin-top:8px}
+ .st{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;background:var(--bg2);border-radius:26px;padding:30px}
+ .st:nth-child(even) .fig{order:2}
+ .st .txt i{display:block;font-style:normal;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--accent);margin-bottom:10px}
+ .st .txt b{display:block;font-size:clamp(21px,2.8vw,27px);letter-spacing:-.03em;line-height:1.2;margin-bottom:10px}
+ .st .txt p{margin:0;font-size:16px;color:#424245;line-height:1.5}
+ .st .txt p+p{margin-top:8px}
+ .st .txt small{display:block;margin-top:12px;font-size:13.5px;color:var(--gray2);line-height:1.45}
+ .fig{background:#fff;border-radius:18px;padding:10px;box-shadow:0 14px 40px rgba(0,0,0,.07)}
+ .fig svg{display:block;width:100%;height:auto;border-radius:10px}
+ .asks{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));text-align:left}
+ .ask{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}
+ .ask .lbl{display:block;font-size:17px;letter-spacing:-.02em;color:var(--ink);margin-bottom:8px}
+ .ask q{display:block;font-size:16.5px;letter-spacing:-.01em;color:var(--ink);line-height:1.4;quotes:"\300C" "\300D"}
+ .ask span{display:block;margin-top:10px;font-size:13.5px;color:var(--gray)}
+ .rules{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));text-align:left}
+ .rule{background:#000;color:#f5f5f7;border-radius:22px;padding:26px 24px}
+ .rule b{display:block;font-size:19px;letter-spacing:-.02em;margin-bottom:8px}
+ .rule p{margin:0;font-size:14.5px;color:#a1a1a6;line-height:1.5}
+ .rule.on b{color:#ffb37a}
+ .note{background:var(--bg2);border-radius:22px;padding:26px 24px;text-align:left;max-width:780px;margin:0 auto}
+ .note b{display:block;font-size:17px;margin-bottom:8px}
+ .note p{margin:0;font-size:15px;color:#424245;line-height:1.5}
+ section.alt{background:var(--bg2)}
+ .lie{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr));text-align:left;margin-bottom:18px}
+ @media(max-width:640px){.lie{grid-template-columns:1fr}}
+ .lie div{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}
+ section.alt .lie div{background:#fff}
+ .lie b{display:block;font-size:17px;letter-spacing:-.02em;margin-bottom:6px}
+ .lie .big{font-size:clamp(26px,4vw,34px);letter-spacing:-.03em;line-height:1.15;margin:6px 0 4px;color:var(--clay)}
+ .lie span{display:block;font-size:14px;color:var(--gray);line-height:1.5}
+ .ans{background:#000;color:#f5f5f7;border-radius:22px;padding:26px 24px;text-align:left;max-width:780px;margin:0 auto;font-size:14.5px;line-height:1.7}
+ .ans .v{display:block;color:#ffb37a;font-weight:700;font-size:17px;margin-bottom:12px;letter-spacing:-.02em}
+ .ans .r{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#d2d2d7;letter-spacing:-.02em;white-space:nowrap;overflow-x:auto}
+ .ans .why{display:block;margin-top:14px;padding-top:14px;border-top:1px solid #333;color:#a1a1a6}
+ .honest{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));text-align:left}
+ .hn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}
+ section.alt .hn{background:#fff}
+ .hn b{display:block;font-size:16px;letter-spacing:-.02em;margin-bottom:6px}
+ .hn span{display:block;font-size:14px;color:var(--gray);line-height:1.5}
+ .pair{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr));text-align:left}
+ @media(max-width:760px){.pair{grid-template-columns:1fr}}
+ .pc{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 24px}
+ section.alt .pc{background:#fff}
+ .pc h3{margin:0 0 4px;font-size:20px;letter-spacing:-.02em}
+ .pc .q{display:block;font-size:14px;color:var(--gray2);margin-bottom:14px}
+ .pc .row{padding:10px 0;border-top:1px solid var(--line);font-size:14.5px;color:#424245;line-height:1.5}
+ .pc .row:first-of-type{border-top:0}
+ .end .cta{justify-content:center}
+ @media(max-width:760px){.st{grid-template-columns:1fr;padding:22px}.st:nth-child(even) .fig{order:0}}
+</style>
+<link rel="stylesheet" href="../nav.css">
+<link rel="stylesheet" href="../fit.css">
+<link rel="stylesheet" href="../foot.css">
+</head>
+<body>
+<nav class="gnav"><div class="in"><a class="logo" href="../index.html"><img src="../img/ap_mark.png" alt="">A.P Holdings</a><ul><li><a href="safelist.html">세이프리스트</a></li><li><a class="on" href="lightlist-connect.html">라이트리스트</a></li><li><a href="games.html">게임</a></li><li><a href="inbound.html">인바운드</a></li><li><a href="../lia.html">리아</a></li><li><a href="craft.html">전통공예</a></li><li><a href="../apps.html">앱</a></li><li><a href="../about.html">회사</a></li></ul></div></nav>
+
+<div class="wrap">
+<div class="hero">
+ <div class="eyebrow">LightList Connector</div>
+ <h1>주소 한 줄.<br>클로드가 열량을 읽습니다.</h1>
+ <p class="lead">먹고 싶은 것을 그냥 말하면, 뭐가 덜 무거운지 숫자로 알려 줍니다.<br>설치도, 앱 가입도, 로그인도 없습니다.</p>
+ <div class="urlbox">
+  <code id="u">https://lightlist-mcp.onrender.com/mcp</code>
+  <button id="c" type="button">주소 복사</button>
+ </div>
+</div>
+</div>
+
+<section class="alt"><div class="wrap">
+ <h2>100g 당 칼로리만 보면<br>거짓말이 됩니다.</h2>
+ <p class="sub">다이어트 앱이 대부분 100g 당 숫자를 보여 줍니다. 그게 이런 일을 만듭니다.</p>
+ <div class="lie">
+  <div>
+   <b>샐러드</b>
+   <span class="big">100g 50kcal</span>
+   <span>그런데 한 번에 400g 을 먹습니다 → <strong>200kcal</strong></span>
+  </div>
+  <div>
+   <b>치킨</b>
+   <span class="big">100g 250kcal</span>
+   <span>그런데 한 번에 150g 을 먹습니다 → <strong>375kcal</strong></span>
+  </div>
+ </div>
+ <div class="note">
+  <b>100g 으로는 5배 차이인데, 실제로 먹는 열량은 2배가 안 됩니다.</b>
+  <p>그래서 라이트리스트는 <strong>100g 당과 1인분을 늘 같이</strong> 냅니다. 하나만 보여 주면 둘 다 거짓말이 됩니다.</p>
+ </div>
+</div></section>
+
+<section><div class="wrap">
+ <h2>답은 이렇게 옵니다.</h2>
+ <p class="sub">「짜장면이랑 짬뽕이랑 탕수육 중에 뭐가 제일 가벼워?」 라고 물으면.</p>
+ <div class="ans">
+  <span class="v">판정: 짬뽕이 가장 가볍습니다 (100g 당 기준)</span>
+  <span class="r">· 짬뽕 &nbsp;&nbsp;— 100g당 &nbsp;73kcal · 1인분 800g → 584kcal · 5건 중앙값</span>
+  <span class="r">· 짜장면 — 100g당 111kcal · 1인분 575g → 638kcal · 4건 중앙값</span>
+  <span class="r">· 탕수육 — 100g당 160kcal · 1인분 132g → 211kcal · 5건 중앙값</span>
+  <span class="why">1인분 기준이 서로 3배 넘게 차이 납니다 — 짬뽕 800g, 탕수육 132g.<br>탕수육은 한 끼가 아니라 곁들임으로 잡힌 값이라 같은 끼니로 비교할 수 없어, 100g 당으로 판정했습니다.</span>
+ </div>
+ <p class="sub" style="margin:22px auto 0;text-align:center;max-width:720px">마지막 두 줄이 이 커넥터의 값어치입니다.<br>숫자만 내놓는 건 누구나 합니다.</p>
+</div></section>
+
+<section class="alt"><div class="wrap">
+ <h2>네 걸음.</h2>
+ <p class="sub">클로드 데스크톱·웹 모두 같습니다. 2분이면 끝납니다.</p>
+
+ <div class="howto">
+
+  <div class="st">
+   <div class="fig">
+    <svg viewBox="0 0 520 330" role="img" aria-label="클로드 설정 화면. 왼쪽 목록에서 커넥터가 선택된 모습" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">
+     <rect width="520" height="330" rx="12" fill="#f5f5f7"/>
+     <rect x="16" y="16" width="160" height="298" rx="10" fill="#fff"/>
+     <text x="34" y="46" font-size="14" font-weight="700" fill="#1d1d1f">설정</text>
+     <text x="34" y="82" font-size="13" fill="#86868b">계정</text>
+     <text x="34" y="110" font-size="13" fill="#86868b">일반</text>
+     <rect x="24" y="126" width="144" height="30" rx="8" fill="#fdece1"/>
+     <text x="34" y="146" font-size="13" font-weight="700" fill="#c2410c">커넥터</text>
+     <text x="34" y="180" font-size="13" fill="#86868b">기능</text>
+     <text x="34" y="208" font-size="13" fill="#86868b">프로필</text>
+     <rect x="192" y="16" width="312" height="298" rx="10" fill="#fff"/>
+     <text x="212" y="48" font-size="15" font-weight="700" fill="#1d1d1f">커넥터</text>
+     <text x="212" y="70" font-size="11.5" fill="#86868b">클로드가 쓸 수 있는 도구를 더합니다</text>
+     <rect x="212" y="88" width="272" height="44" rx="10" fill="#f5f5f7"/>
+     <text x="228" y="115" font-size="12.5" fill="#86868b">세이프리스트</text>
+     <rect x="212" y="146" width="272" height="44" rx="10" fill="#fff" stroke="#e8e8ed"/>
+     <text x="228" y="173" font-size="12.5" fill="#86868b">커스텀 커넥터 추가</text>
+     <circle cx="464" cy="168" r="11" fill="#1d1d1f"/>
+     <path d="M459 168h10M464 163v10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+   </div>
+   <div class="txt">
+    <i>STEP 01</i>
+    <b>설정에서 커넥터를 엽니다.</b>
+    <p>클로드 왼쪽 아래 이름을 누르고 <strong>설정</strong>으로 들어갑니다. 목록에서 <strong>커넥터</strong>를 고릅니다.</p>
+    <small>데스크톱 앱과 웹 모두 같은 자리에 있습니다.</small>
+   </div>
+  </div>
+
+  <div class="st">
+   <div class="fig">
+    <svg viewBox="0 0 520 330" role="img" aria-label="커스텀 커넥터 추가 창에 라이트리스트 주소를 붙여넣은 모습" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">
+     <rect width="520" height="330" rx="12" fill="#f5f5f7"/>
+     <rect x="50" y="34" width="420" height="262" rx="16" fill="#fff" stroke="#e8e8ed"/>
+     <text x="76" y="70" font-size="15" font-weight="700" fill="#1d1d1f">커스텀 커넥터 추가</text>
+     <text x="76" y="94" font-size="11.5" fill="#86868b">MCP 서버 주소를 넣어 주세요</text>
+     <text x="76" y="128" font-size="11.5" font-weight="700" fill="#1d1d1f">이름</text>
+     <rect x="76" y="138" width="368" height="34" rx="9" fill="#f5f5f7"/>
+     <text x="90" y="160" font-size="12.5" fill="#1d1d1f">라이트리스트</text>
+     <text x="76" y="196" font-size="11.5" font-weight="700" fill="#1d1d1f">주소</text>
+     <rect x="76" y="206" width="368" height="36" rx="9" fill="#000"/>
+     <text x="90" y="229" font-family="ui-monospace,Menlo,monospace" font-size="11.5" fill="#ffb37a">https://lightlist-mcp.onrender.com/mcp</text>
+     <rect x="352" y="256" width="92" height="30" rx="15" fill="#c2410c"/>
+     <text x="398" y="276" font-size="12.5" font-weight="700" fill="#fff" text-anchor="middle">추가</text>
+    </svg>
+   </div>
+   <div class="txt">
+    <i>STEP 02</i>
+    <b>주소를 붙여넣고<br>추가를 누릅니다.</b>
+    <p>오른쪽 위 <strong>+</strong> 를 눌러 <strong>커스텀 커넥터 추가</strong>를 고릅니다. 주소 칸에 위의 주소를 그대로 붙여넣습니다.</p>
+    <small>맨 뒤의 <code>/mcp</code> 까지 있어야 합니다. 로그인 정보는 묻지 않습니다.</small>
+   </div>
+  </div>
+
+  <div class="st">
+   <div class="fig">
+    <svg viewBox="0 0 520 330" role="img" aria-label="라이트리스트 커넥터의 읽기 전용 도구 네 개가 항상 허용으로 등록된 모습" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">
+     <rect width="520" height="330" rx="12" fill="#f5f5f7"/>
+     <rect x="26" y="18" width="468" height="294" rx="16" fill="#fff"/>
+     <rect x="48" y="40" width="26" height="26" rx="7" fill="#1d1d1f"/>
+     <text x="84" y="58" font-size="14" font-weight="700" fill="#1d1d1f">라이트리스트</text>
+     <text x="48" y="88" font-size="11" font-family="ui-monospace,Menlo,monospace" fill="#86868b">lightlist-mcp.onrender.com/mcp</text>
+     <text x="48" y="122" font-size="12.5" font-weight="700" fill="#1d1d1f">읽기 전용 도구</text>
+     <circle cx="150" cy="118" r="9" fill="#f5f5f7"/><text x="150" y="122" font-size="10.5" font-weight="700" fill="#6e6e73" text-anchor="middle">4</text>
+     <rect x="330" y="105" width="140" height="28" rx="14" fill="#fdece1"/>
+     <path d="M346 119l5 5 9-10" stroke="#c2410c" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+     <text x="370" y="123" font-size="12" font-weight="700" fill="#c2410c">항상 허용</text>
+     <g stroke="#e8e8ed"><path d="M48 150h422M48 190h422M48 230h422M48 270h422"/></g>
+     <text x="48" y="174" font-size="13" fill="#1d1d1f">칼로리 비교</text>
+     <text x="48" y="214" font-size="13" fill="#1d1d1f">음식 한 개 보기</text>
+     <text x="48" y="254" font-size="13" fill="#1d1d1f">더 가벼운 것 찾기</text>
+     <text x="48" y="294" font-size="13" fill="#1d1d1f">이름으로 찾기</text>
+     <g><circle cx="452" cy="169" r="11" fill="#fdece1"/><path d="M447 169l4 4 7-8" stroke="#c2410c" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="452" cy="209" r="11" fill="#fdece1"/><path d="M447 209l4 4 7-8" stroke="#c2410c" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="452" cy="249" r="11" fill="#fdece1"/><path d="M447 249l4 4 7-8" stroke="#c2410c" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="452" cy="289" r="11" fill="#fdece1"/><path d="M447 289l4 4 7-8" stroke="#c2410c" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+    </svg>
+   </div>
+   <div class="txt">
+    <i>STEP 03</i>
+    <b>도구 네 개가<br>읽기 전용으로 붙습니다.</b>
+    <p>칼로리 비교 · 음식 한 개 보기 · 더 가벼운 것 찾기 · 이름으로 찾기. 네 개 모두 <strong>읽기 전용</strong>이라 무엇도 바꾸거나 보내지 않습니다.</p>
+    <p><strong>항상 허용</strong>으로 두면 물을 때마다 확인창이 뜨지 않습니다.</p>
+   </div>
+  </div>
+
+  <div class="st">
+   <div class="fig">
+    <svg viewBox="0 0 520 330" role="img" aria-label="대화창에 물으면 판정과 100g 당·1인분 숫자가 함께 돌아오는 모습" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">
+     <rect width="520" height="330" rx="12" fill="#f5f5f7"/>
+     <rect x="150" y="20" width="350" height="46" rx="14" fill="#1d1d1f"/>
+     <text x="170" y="40" font-size="12" fill="#f5f5f7">오늘 뭐 시켜 먹지?</text>
+     <text x="170" y="57" font-size="12" fill="#a1a1a6">덜 무거운 걸로.</text>
+     <rect x="20" y="82" width="480" height="164" rx="16" fill="#fff"/>
+     <circle cx="44" cy="110" r="7" fill="#c2410c"/>
+     <text x="60" y="115" font-size="14" font-weight="700" fill="#1d1d1f">짬뽕이 가장 가볍습니다.</text>
+     <text x="40" y="146" font-size="12" fill="#6e6e73">짬뽕 · 100g당 73kcal · 1인분 800g → 584kcal</text>
+     <text x="40" y="170" font-size="12" fill="#6e6e73">짜장면 · 100g당 111kcal · 1인분 575g → 638kcal</text>
+     <text x="40" y="194" font-size="12" fill="#6e6e73">탕수육 · 100g당 160kcal · 1인분 132g → 211kcal</text>
+     <rect x="40" y="208" width="380" height="22" rx="7" fill="#fdece1"/>
+     <text x="52" y="223" font-size="11" fill="#c2410c">탕수육 1인분은 곁들임으로 잡힌 값 · 100g 당으로 판정</text>
+     <rect x="20" y="264" width="480" height="46" rx="16" fill="#fff" stroke="#e8e8ed"/>
+     <text x="42" y="292" font-size="12" fill="#c7c7cc">무엇이든 물어보세요</text>
+     <circle cx="468" cy="287" r="15" fill="#c2410c"/>
+     <path d="M462 287h11M468 282l5 5-5 5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+   </div>
+   <div class="txt">
+    <i>STEP 04</i>
+    <b>그냥 물어보면 됩니다.</b>
+    <p>메뉴를 정하지 않았어도 괜찮습니다. 「오늘 뭐 시켜 먹지」 한 줄이면 후보를 떠올려 비교해 줍니다.</p>
+    <small>100g 당과 1인분이 늘 함께 옵니다. 어느 쪽으로 판정했는지도 적혀 옵니다.</small>
+   </div>
+  </div>
+
+ </div>
+</div></section>
+
+<section><div class="wrap">
+ <h2>이렇게 물어보세요.</h2>
+ <p class="sub">붙이고 나서 바로 써 볼 수 있는 네 가지입니다.</p>
+ <div class="asks">
+  <div class="ask">
+   <q>오늘 뭐 시켜 먹지? 덜 무거운 걸로.</q>
+   <span>메뉴를 안 정했어도 됩니다. 그럴듯한 후보를 떠올려 한 번에 비교해 줍니다.</span>
+  </div>
+  <div class="ask">
+   <q>짜장면이랑 짬뽕이랑 탕수육 중에 뭐가 제일 가벼워?</q>
+   <span>100g 당과 1인분을 함께 내고, 어느 쪽으로 판정했는지 이유까지 적습니다.</span>
+  </div>
+  <div class="ask">
+   <q>저녁에 삼겹살 먹으려다 참았어. 대신 뭐 먹을까?</q>
+   <span>같은 분류에서, <strong>먹는 양이 비슷하면서</strong> 더 가벼운 것을 찾습니다. 김 한 장을 권하지 않습니다.</span>
+  </div>
+  <div class="ask">
+   <q>떡볶이 1인분 몇 칼로리야?</q>
+   <span>탄수·단백·지방·당·나트륨까지 100g 당으로 함께 옵니다.</span>
+  </div>
+ </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+ <h2>자료가 거짓말하지<br>못하게 한 것들.</h2>
+ <p class="sub">식약처 공개 자료 31만 7천 건. 그대로 쓰면 답이 우스워지는 곳이 여럿입니다.</p>
+ <div class="honest">
+  <div class="hn">
+   <b>같은 이름 여러 건 → 중앙값</b>
+   <span>「짬뽕」만 서로 다른 5건이 있습니다. 평균은 이상치 한 줄에 끌려가고, 중앙값은 안 끌려갑니다. <strong>몇 건을 합쳤는지 답에 적습니다.</strong></span>
+  </div>
+  <div class="hn">
+   <b>1인분을 모르면 모른다고</b>
+   <span>원본에는 1인분 칸이 기준량을 그대로 되풀이하는 줄이 많습니다(둘 다 100g). 그건 아는 게 아니라 모르는 겁니다.</span>
+  </div>
+  <div class="hn">
+   <b>업소용 단위는 1인분이 아닙니다</b>
+   <span>「후라이드 치킨 1인분 1,000g」은 식당 납품 단위입니다. 1인분 열량이 1,500kcal 을 넘으면 1인분으로 치지 않습니다.</span>
+  </div>
+  <div class="hn">
+   <b>곁들임을 승자로 만들지 않습니다</b>
+   <span>탕수육 132g 과 짬뽕 800g 을 나란히 놓고 「탕수육이 가볍다」고 하면 숫자는 맞아도 답은 틀립니다. 1인분이 3배 넘게 벌어지면 100g 당으로 판정합니다.</span>
+  </div>
+ </div>
+</div></section>
+
+<section><div class="wrap">
+ <h2>붙이기 전에<br>알고 계셔야 할 것.</h2>
+ <p class="sub">이 커넥터가 지키는 세 가지입니다.</p>
+ <div class="rules">
+  <div class="rule on">
+   <b>「살이 안 찐다」고 말하지 않습니다.</b>
+   <p>열량만 말합니다. 다이어트에 좋다거나 건강하다는 말은 하지 않습니다. 그건 이 자료로 알 수 있는 것이 아닙니다.</p>
+  </div>
+  <div class="rule">
+   <b>100g 당과 1인분을 늘 같이.</b>
+   <p>하나만 보여 주면 둘 다 거짓말이 됩니다. 어느 쪽으로 판정했는지, 왜 그쪽을 골랐는지까지 함께 옵니다.</p>
+  </div>
+  <div class="rule">
+   <b>자료 기준일을 답마다 적습니다.</b>
+   <p>옛 자료로 답하면 그 답은 의미가 없습니다. 모든 답 끝에 「식약처 공개 자료 기준 · 자료 기준 ○년 ○월 · 가게·조리법에 따라 달라집니다」가 붙습니다.</p>
+  </div>
+ </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+ <h2>세이프리스트와<br>나란히 씁니다.</h2>
+ <p class="sub">묻는 것이 다르고, 답하지 않는 것도 다릅니다.</p>
+ <div class="pair">
+  <div class="pc">
+   <h3>세이프리스트</h3>
+   <span class="q">우리 애가 먹어도 되나</span>
+   <div class="row">답은 🔴 걸림 / ⚪ 안 보임 두 가지</div>
+   <div class="row"><strong>「안전하다」고 말하지 않습니다</strong></div>
+   <div class="row">식약처 품목제조보고 · 25만 8천 건</div>
+   <div class="row" style="padding-top:14px"><a class="btn" href="safelist-connect.html">붙이는 방법</a></div>
+  </div>
+  <div class="pc">
+   <h3>라이트리스트</h3>
+   <span class="q">먹고 싶은 것 중에 뭘 시킬까</span>
+   <div class="row">판정을 먼저, 100g 당 + 1인분을 함께</div>
+   <div class="row"><strong>「살이 안 찐다」고 말하지 않습니다</strong></div>
+   <div class="row">식약처 전국통합식품영양성분 · 31만 7천 건</div>
+   <div class="row" style="padding-top:14px"><a class="btn" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">지금 이 페이지</a></div>
+  </div>
+ </div>
+ <div class="note" style="margin-top:18px">
+  <b>둘 다 AI 안에서 우리 판정이 나오게 하는 장치입니다.</b>
+  <p>쓰는 사람은 앱을 켜지 않습니다. 클로드에게 물어보면 우리 답을 받습니다. 판정 규칙도, 책임 문구도 한 곳에서 관리하니 어느 문으로 들어와도 답이 같습니다.</p>
+ </div>
+</div></section>
+
+<section class="end"><div class="wrap" style="text-align:center">
+ <h2>지금 붙여 보세요.</h2>
+ <p class="sub" style="margin-left:auto;margin-right:auto">주소 한 줄이면 됩니다. 설치도, 가입도, 로그인도 없습니다.</p>
+ <div class="urlbox">
+  <code id="u2">https://lightlist-mcp.onrender.com/mcp</code>
+  <button id="c2" type="button">주소 복사</button>
+ </div>
+ <div class="cta" style="margin-top:26px"><a class="btn" href="safelist-connect.html">세이프리스트도 붙이기</a><a class="btn" href="../apps.html">앱 전체 보기</a></div>
+</div></section>
+
+<script>
+(function(){
+ function wire(bid,uid){
+  var b=document.getElementById(bid),u=document.getElementById(uid);
+  if(!b||!u)return;
+  b.addEventListener('click',function(){
+   var t=u.textContent.trim();
+   function ok(){b.textContent='복사했습니다';b.className='done';setTimeout(function(){b.textContent='주소 복사';b.className='';},1800);}
+   function sel(){var r=document.createRange();r.selectNodeContents(u);var s=getSelection();s.removeAllRanges();s.addRange(r);ok();}
+   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,sel);}else{sel();}
+  });
+ }
+ wire('c','u');wire('c2','u2');
+})();
+</script>
+<footer class="sitefoot"><div class="in">
+ <div class="cols">
+  <div><b>사업</b><a href="../business/safelist.html">세이프리스트</a><a href="../business/lightlist-connect.html">라이트리스트</a><a href="../business/games.html">게임</a><a href="../business/inbound.html">인바운드</a><a href="../lia.html">리아</a><a href="../business/craft.html">전통공예</a></div>
+  <div><b>앱</b><a href="https://apps.apple.com/kr/app/id6805684034" target="_blank" rel="noopener">세이프리스트</a><a href="https://apps.apple.com/kr/app/id6803749436" target="_blank" rel="noopener">Hangeul Cubs</a><a href="https://apps.apple.com/kr/app/id6803810106" target="_blank" rel="noopener">K-Concert Trip</a><a href="https://apps.apple.com/kr/app/id6808070870" target="_blank" rel="noopener">IRON GRADE</a><a href="../apps.html">앱 전체</a></div>
+  <div><b>리아</b><a href="../lia.html">소개</a><a href="../shop.html">리아 셀렉트</a><a href="https://www.instagram.com/lia_park55/" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@lia_park55" target="_blank" rel="noopener">TikTok</a></div>
+  <div><b>회사</b><a href="../about.html">A.P Holdings</a><a href="../index.html#flow">인바운드 밸류체인</a><a href="../index.html#data">데이터 활용 체계</a><a href="../business/safelist.html#docs">사업계획서</a><a href="mailto:cksals00@gmail.com">문의</a></div>
+  <div><b>정책</b><a href="../safelist/privacy.html">세이프리스트 처리방침</a><a href="../hangeulcubs_privacy.html">Hangeul Cubs 처리방침</a><a href="../privacy.html">문샷·나의 첫투자 처리방침</a><a href="../quizarena_privacy.html">퀴즈아레나 처리방침</a><a href="../irongrade/privacy.html">IRON GRADE 처리방침</a></div>
+ </div>
+ <div class="fine">A.P Holdings · 라이트리스트는 식약처 공개 자료를 옮겨 보여 주는 도구입니다.<br>진단·치료·체중 조절을 위한 의료 서비스가 아니며, 가게와 조리법에 따라 실제 열량은 달라집니다.</div>
+ <div class="copy"><span>© 2026 A.P Holdings. All rights reserved.</span><span>Seoul, Korea</span></div>
+</div></footer>
+</body>
+</html>
