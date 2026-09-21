@@ -14,12 +14,13 @@
  .stage{position:relative;overflow:hidden;background:#1a1410;min-height:min(78svh,620px);display:grid;place-items:center;text-align:center}
  .stage video,.stage .fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
  .stage .fallback{background:radial-gradient(120% 90% at 50% 20%,#4a2f1e 0%,#1a1410 70%)}
- .stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,8,5,.34) 0%,rgba(12,8,5,.72) 62%,rgba(12,8,5,.9) 100%)}
+ .stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,8,5,.15) 0%,rgba(12,8,5,.5) 55%,rgba(12,8,5,.82) 100%)}
  .stage .in{position:relative;z-index:2;padding:72px 22px 60px;max-width:760px}
  .stage .eyebrow{font-size:12px;letter-spacing:.14em;font-weight:700;color:#ffb37a;margin-bottom:18px}
  .stage h1{margin:0;color:#fff;font-size:clamp(32px,7vw,58px);letter-spacing:-.045em;line-height:1.12}
  .stage h1 em{font-style:normal;color:#ffb37a}
- .stage p{margin:18px auto 0;max-width:30ch;color:#e6ddd6;font-size:clamp(16px,2.4vw,19px);line-height:1.55}
+ .stage p em{font-style:normal;color:#ffc79a;font-weight:600}
+ .stage p{margin:18px auto 0;max-width:34ch;color:#e6ddd6;font-size:clamp(16px,2.4vw,19px);line-height:1.55}
 
  .urlbox{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:30px auto 0}
  .urlbox code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(12.5px,2.2vw,16px);background:rgba(0,0,0,.55);border:1px solid rgba(255,179,122,.32);color:#ffb37a;padding:13px 18px;border-radius:13px}
@@ -73,8 +74,8 @@
  </video>
  <div class="in">
   <div class="eyebrow">LIGHTLIST</div>
-  <h1><em>73kcal</em>에<br>속지 마세요</h1>
-  <p>짬뽕은 100g당 73kcal입니다.<br>한 그릇은 584kcal입니다.</p>
+  <h1>먹기 전에<br>물어보세요</h1>
+  <p>클로드에 주소 한 줄을 붙이면,<br>음식 열량을 <em>100g당과 한 그릇 기준</em>으로 같이 알려 줍니다.</p>
   <div class="urlbox">
    <code id="u">https://lightlist-mcp.onrender.com/mcp</code>
    <button id="c" type="button">주소 복사</button>
@@ -83,11 +84,12 @@
 </div>
 
 <section class="alt"><div class="wrap">
- <h2 class="up">100g당 숫자는<br>얼마나 먹는지 모릅니다.</h2>
+ <h2 class="up">「100g당 73kcal」은<br>한 그릇을 먹는다는 걸 모릅니다.</h2>
+ <p class="sub up">다이어트 앱이 보여 주는 건 앞의 숫자입니다.<br>정작 알아야 할 건 뒤의 숫자고요.</p>
  <div class="flip up" id="flip">
-  <div class="row"><div class="k">짬뽕 100g<small>다이어트 앱이 보여 주는 숫자</small></div><div class="v"><span data-to="73">0</span><u>kcal</u></div></div>
-  <div class="row"><div class="k">한 그릇<small>식약처 자료의 1인분 중량</small></div><div class="v"><span data-to="800">0</span><u>g</u></div></div>
-  <div class="row real"><div class="k">그래서 실제로는<small>100g당 73kcal × 8</small></div><div class="v"><span data-to="584">0</span><u>kcal</u></div></div>
+  <div class="row"><div class="k">짬뽕 100g당<small>앱에 적힌 숫자</small></div><div class="v"><span data-to="73">0</span><u>kcal</u></div></div>
+  <div class="row"><div class="k">그런데 한 그릇은<small>식약처 자료의 1인분 중량</small></div><div class="v"><span data-to="800">0</span><u>g</u></div></div>
+  <div class="row real"><div class="k">그래서 실제로 먹는 열량<small>73 × 8</small></div><div class="v"><span data-to="584">0</span><u>kcal</u></div></div>
  </div>
 </div></section>
 
