@@ -58,3 +58,12 @@ The Mac sync script now pulls first, stops on divergence and refuses a public so
 - Sanitized downloadable one-pager after separate content approval; full deck remains request-only.
 - External pilots, active users, transactions, revenue, repeat and outcome metrics require evidence before publication.
 - Custom product/commerce/admin subdomains are architecture targets; this change does not create or move those applications.
+
+## September 22 visual refinement
+
+- KO uses the Noto Sans KR webfont (400/500/600/700) and concise noun/keyword copy; original English content source remains unchanged.
+- Generated brand visual and six-second silent film: Higgsfield; source/model/job IDs and durable optimized-media URLs are in `brand-media.json`. These are abstract brand concepts, not real AP product evidence or data dashboards.
+- Optimized poster: 16,716 bytes WebP. Film: 229,041 bytes H.264 MP4, 720p, no audio, fast-start.
+- Poster is available without JavaScript. Desktop film starts only near the viewport; mobile, data-saver and reduced-motion users see the poster with optional playback. Pause control, offscreen pause and background-tab pause are included.
+- Scroll reveal is progressive enhancement and disabled for reduced motion. Corporate pages retain static content, SEO and navigation.
+- `/site-source/responsive-review.html` is an unlinked, non-indexed QA view with real CSS-width frames. It contains only already public pages.

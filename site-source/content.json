@@ -1,5 +1,5 @@
 {
-  "version": "2.0",
+  "version": "2.0.1",
   "date": "2026-09-22",
   "origin": "https://www.apholdings.kr",
   "contact": "cksals00@gmail.com",
@@ -83,5 +83,6 @@
     "Hangeul Cubs",
     "LAST WAVE"
   ],
-  "public_data": "Conceptual workflow only. No numeric demo, customer or employer dataset."
+  "public_data": "Conceptual workflow only. No numeric demo, customer or employer dataset.",
+  "design_revision": "Noto Sans KR / keyword KO / Higgsfield motion"
 }
