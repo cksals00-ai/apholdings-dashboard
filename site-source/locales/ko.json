@@ -613,7 +613,7 @@
       "tag": "A store designed for choosing.",
       "status": "concept",
       "role": "Experience + Decision / Transaction + Fulfillment",
-      "desc": "발견 · 체험 · 이해 · 선택.\nSafe · Light · 전문가 지식 · 오프라인 경험 · 온라인 주문.",
+      "desc": "물건을 파는 매장이 아니라, 물건을 고르는 매장.\n매장에서 보고 · 만지고 · 비교해서 고르고, 주문은 온라인으로 집까지.",
       "note": "Concept & System Design. 매장 운영·전문상담의 현재 제공과 구분.",
       "flow": [
         "Choice Profile",
@@ -624,6 +624,182 @@
         "Customer Choice",
         "Online Order",
         "Outcome"
+      ],
+      "image": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/4285351f-831d-4d77-9380-dcba09ebccce.webp",
+      "video": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/c849c123-c931-472d-a4ba-59bed043158c.mp4",
+      "sections": [
+        {
+          "id": "why",
+          "label": "01 · 왜 필요한가",
+          "title": "온라인은 못 만져보고, 매장은 고를 근거가 없습니다.",
+          "desc": "AP SELECT는 두 쪽의 약점을 합치지 않고 장점만 합칩니다. 매장은 경험하고 결정하는 곳, 온라인은 결제하고 배송하는 곳.",
+          "blocks": [
+            {
+              "type": "grid2",
+              "items": [
+                {
+                  "type": "proof",
+                  "h3": "온라인 쇼핑",
+                  "ol": [
+                    "실물을 볼 수 없다",
+                    "정보가 너무 많다",
+                    "광고·리뷰·추천의 속내를 모른다",
+                    "「나한테 맞나?」에 답이 없다"
+                  ]
+                },
+                {
+                  "type": "proof",
+                  "h3": "오프라인 매장",
+                  "ol": [
+                    "진열할 수 있는 상품이 적다",
+                    "재고와 공간이 부담이다",
+                    "직원마다 말이 다르다",
+                    "마진 좋은 걸 권할 수 있다"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "quote",
+              "text": "AP SELECT는 상품이 더 많아서 이기는 매장이 아닙니다. 더 잘 고르게 해서 이기는 매장입니다."
+            }
+          ]
+        },
+        {
+          "id": "how",
+          "label": "02 · 매장에서 이렇게 됩니다",
+          "title": "고르는 데 필요한 것만, 순서대로.",
+          "soft": true,
+          "blocks": [
+            {
+              "type": "milestones",
+              "items": [
+                [
+                  "1 · 묻기",
+                  "「어떤 기준으로 고르고 싶으세요?」",
+                  "예산 · 용도 · 피하는 성분 · 취향. 첫 질문이 「뭐 찾으세요?」가 아닙니다."
+                ],
+                [
+                  "2 · 거르기",
+                  "시스템과 전문가가 후보를 좁힙니다",
+                  "AP Safe가 피할 것을 걸러내고, AP Light가 내 기준으로 비교하고, 전문가가 왜 그런지 확인합니다."
+                ],
+                [
+                  "3 · 써보기",
+                  "남은 서너 개를 직접 봅니다",
+                  "보고, 만지고, 발라보고, 냄새 맡고, 비교합니다. 매장이 있는 이유입니다."
+                ],
+                [
+                  "4 · 주문",
+                  "QR 한 번, 집으로",
+                  "계산대 줄도, 들고 갈 짐도 없습니다. 온라인 주문 · 배송 · 재구매."
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "결정은 항상 고객이 합니다. 협찬 상품은 표시하고, 광고비가 Safe·Light 판단을 바꾸지 못합니다."
+            }
+          ]
+        },
+        {
+          "id": "franchise",
+          "label": "03 · 프랜차이즈",
+          "title": "가맹점에 재고가 아니라 시스템을 줍니다.",
+          "desc": "보통의 프랜차이즈는 물건과 간판을 줍니다. AP SELECT 본사는 고르는 시스템을 줍니다 — 상품 DB · Safe · Light · 전문가 네트워크 · 주문·배송 연결 · 교육. 가맹점은 공간과 경험을 맡습니다.",
+          "blocks": [
+            {
+              "type": "grid2",
+              "items": [
+                {
+                  "type": "proof",
+                  "h3": "본사가 주는 것",
+                  "ol": [
+                    "브랜드 · 상품 지식 DB",
+                    "AP Safe · AP Light 판정 시스템",
+                    "전문가 네트워크와 검토 기록",
+                    "온라인 주문 · CRM · 배송 연결",
+                    "직원 교육 · 매장 SOP · 데이터 인사이트"
+                  ]
+                },
+                {
+                  "type": "proof",
+                  "h3": "가맹점이 하는 것",
+                  "ol": [
+                    "공간과 진열",
+                    "지역 고객 유치",
+                    "체험 안내와 상담",
+                    "SOP 준수",
+                    "재고 부담 없음 — 체험용 샘플만"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "milestones",
+              "items": [
+                [
+                  "MINI",
+                  "10~15평",
+                  "한 카테고리 집중. 숍인숍 · 가맹 1순위."
+                ],
+                [
+                  "SELECT",
+                  "30~50평",
+                  "뷰티 · 웰니스 · 리빙 · K-Product 표준형."
+                ],
+                [
+                  "LAB",
+                  "플래그십",
+                  "Safe · Light · 전문가 + LIA + K-Craft + 외국인 방문객 체험."
+                ],
+                [
+                  "순서",
+                  "직영 → 가맹",
+                  "팝업과 직영으로 수익 구조와 SOP를 증명한 뒤에만 가맹을 엽니다."
+                ]
+              ]
+            },
+            {
+              "type": "quote",
+              "text": "가맹점 경쟁력은 재고가 아니라 AP의 고르는 시스템입니다. 떠나면 잃는 것은 계약이 아니라 시스템입니다."
+            },
+            {
+              "type": "tags",
+              "items": [
+                "거래 수수료",
+                "가맹비 · 로열티 · 시스템 이용료",
+                "브랜드 진열 · 런칭 · 콘텐츠",
+                "전문가 상담",
+                "배송 조정 마진"
+              ]
+            },
+            {
+              "type": "note",
+              "text": "Concept & System Design 단계입니다. 매장 운영 · 가맹 모집 · 전문가 계약은 아직 없으며, 검증된 뒤에만 공개합니다."
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "mailto:cksals00@gmail.com?subject=%5BAP%20Holdings%5D%20AP%20SELECT%20%ED%98%91%EB%A0%A5%20%EB%AC%B8%EC%9D%98",
+                  "AP SELECT 협력 문의",
+                  "primary"
+                ],
+                [
+                  "/ko/products/lia/",
+                  "LIA가 발견을 만듭니다",
+                  "link"
+                ],
+                [
+                  "/ko/products/craft/",
+                  "K-Craft 갤러리 존",
+                  "link"
+                ]
+              ]
+            }
+          ]
+        }
       ]
     },
     {
