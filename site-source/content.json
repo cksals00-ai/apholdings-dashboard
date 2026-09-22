@@ -1,0 +1,87 @@
+{
+  "version": "2.0",
+  "date": "2026-09-22",
+  "origin": "https://www.apholdings.kr",
+  "contact": "cksals00@gmail.com",
+  "locales": {
+    "ko": {
+      "label": "한국어",
+      "status": "published",
+      "source": "KO user brief + canonical Notion",
+      "content_version": "2.0",
+      "translation_version": "2.0",
+      "last_reviewed": "2026-09-22",
+      "reviewer": "User-provided canonical source; implementation checked by Codex",
+      "human_localization_qa": false
+    },
+    "en": {
+      "label": "English",
+      "status": "published",
+      "source": "EN canonical reference + latest user brief",
+      "content_version": "2.0",
+      "translation_version": "2.0",
+      "last_reviewed": "2026-09-22",
+      "reviewer": "User-provided canonical source; implementation checked by Codex",
+      "human_localization_qa": false
+    },
+    "vi": {
+      "label": "Tiếng Việt",
+      "status": "awaiting_human_qa",
+      "notice": "Nội dung tiếng Việt đang được chuẩn bị và chờ rà soát. Vui lòng xem bản tiếng Anh hoặc tiếng Hàn.",
+      "content_version": "2.0",
+      "translation_version": null,
+      "last_reviewed": null,
+      "reviewer": null,
+      "human_localization_qa": false
+    },
+    "ja": {
+      "label": "日本語",
+      "status": "awaiting_human_qa",
+      "notice": "日本語版は準備・確認中です。英語版または韓国語版をご覧ください。",
+      "content_version": "2.0",
+      "translation_version": null,
+      "last_reviewed": null,
+      "reviewer": null,
+      "human_localization_qa": false
+    },
+    "zh-cn": {
+      "label": "简体中文",
+      "status": "awaiting_human_qa",
+      "notice": "简体中文版正在准备和审核中。请先查看英文版或韩文版。",
+      "content_version": "2.0",
+      "translation_version": null,
+      "last_reviewed": null,
+      "reviewer": null,
+      "human_localization_qa": false
+    },
+    "fr": {
+      "label": "Français",
+      "status": "awaiting_human_qa",
+      "notice": "La version française est en cours de préparation et de révision. Veuillez consulter la version anglaise ou coréenne.",
+      "content_version": "2.0",
+      "translation_version": null,
+      "last_reviewed": null,
+      "reviewer": null,
+      "human_localization_qa": false
+    }
+  },
+  "future_locales": [
+    "zh-tw",
+    "zh-hk",
+    "th"
+  ],
+  "product_names": [
+    "AP Safe",
+    "AP Light",
+    "AP Revenue",
+    "AP Travel",
+    "AP SELECT",
+    "Global K-Commerce",
+    "AP K-Craft",
+    "LIA",
+    "RGRG",
+    "Hangeul Cubs",
+    "LAST WAVE"
+  ],
+  "public_data": "Conceptual workflow only. No numeric demo, customer or employer dataset."
+}

@@ -1,0 +1,376 @@
+{
+  "copy": {
+    "nav": [
+      "소개",
+      "포트폴리오",
+      "원칙",
+      "IR / INVESTORS",
+      "문의"
+    ],
+    "skip": "본문으로 이동",
+    "menu": "메뉴",
+    "language": "언어",
+    "hero": "복잡한 선택과 판단, 어려운 거래와 아이디어를 데이터·전문성·프로세스·기술로 실제 작동하는 시스템으로 만듭니다.",
+    "explore": "우리가 만드는 것",
+    "aboutCta": "AP Holdings 소개",
+    "portIntro": "서로 다른 세 영역. 하나의 만드는 방식.",
+    "portDesc": "판단에서 거래로, 아이디어에서 제품으로. 복잡성을 반복 가능한 시스템으로 바꿉니다.",
+    "whyTitle": "정보와 행동 사이의 복잡성을 줄입니다.",
+    "why": "정보가 많다고 판단이 쉬워지는 것은 아닙니다. 선택지가 늘어난다고 더 잘 고를 수 있는 것도 아닙니다. AP는 정보와 행동 사이에 남은 복잡성을 구조화합니다.",
+    "howTitle": "판단은 사람이. 시스템은 그 판단을 더 명확하게.",
+    "how": [
+      "필요한 정보를 연결합니다.",
+      "분야의 지식을 판단 과정에 연결합니다.",
+      "일회성 노하우를 반복 가능한 흐름으로 만듭니다.",
+      "사용과 결과를 통해 개선할 수 있도록 만듭니다."
+    ],
+    "globalIntro": "Every AP product is Global-by-Design.",
+    "global": "AP의 제품은 처음부터 여러 시장·언어·통화·정책을 수용하도록 설계합니다. 핵심 제품 로직과 국가별 설정·연결 기능을 분리하는 것이 회사의 공통 원칙입니다.",
+    "globalNote": "설계 원칙과 확장 방향입니다. 모든 제품이 이미 여러 국가에서 운영된다는 의미는 아닙니다.",
+    "core": [
+      "재사용하는 제품의 핵심",
+      "시장별 언어·통화·시간대·정책",
+      "결제·물류·채널·전문가 연결"
+    ],
+    "marketTitle": "새 나라를 위한 새 제품 대신, Versioned Market Pack.",
+    "market": "새로운 시장의 조건을 버전으로 관리하는 설정·콘텐츠·파트너 묶음으로 연결합니다. 시장별 검토와 파일럿을 거쳐 확장합니다.",
+    "marketReview": "시장 검토 → 전문가·정책 검토 → 테스트 → 파일럿 → 활성화 → 재검토",
+    "decisionDesc": "맥락을 정리하고 선택의 상충관계를 설명하며, 중요한 판단의 주도권을 사람에게 둡니다.",
+    "learnMore": "자세히 보기",
+    "inDev": "개발 중",
+    "concept": "컨셉·시스템 설계",
+    "working": "Working Proof · 제품화 후보",
+    "existing": "기존 앱 · 미디어 확장 기획",
+    "audience": "운영 중인 콘텐츠 실험",
+    "selectKo": "물건을 파는 매장이 아니라, 물건을 고르는 매장.",
+    "expertTitle": "Expert Collaboration",
+    "expert": "전문가는 단순한 판매원이 아닙니다. 외부 지식 파트너로서 선택 기준, 근거의 수준, 전문영역의 경계와 SOP를 함께 검토하는 구조를 설계합니다.",
+    "expertBoundary": "일반적인 제품 선택 지원과 자격을 갖춘 전문가의 실제 상담은 구분합니다. 의사·약사 등 전문가의 이름을 판매 신뢰 장식으로 사용하지 않으며, 계약이 확인되지 않은 자문 관계를 주장하지 않습니다.",
+    "expertPrinciples": [
+      "Criteria",
+      "Evidence Standard",
+      "Professional Boundary",
+      "SOP"
+    ],
+    "gameIntro": "상상은 열어 두고, 책임은 명확하게.",
+    "gameDesc": "경쟁으로 배우고, 놀이로 익히고, 창작을 제품으로 만듭니다. 핵심 세 프로젝트에 집중하며 실제 이용과 결과로 확장 여부를 판단합니다.",
+    "rgrgTitle": "하나의 Core. 여러 언어와 배움.",
+    "rgrg": "학습자의 지역, 설명 언어, 목표 언어·과목과 Quiz Pack을 분리합니다. 언어·자격증·교육·문화·기업교육을 같은 Core에서 확장하는 Global Learning Game / Platform입니다.",
+    "pairs": "언어 조합 예시 · 출시 완료 목록이 아닙니다.",
+    "creatorTitle": "Young Creator + AP Production",
+    "creator": "창작자는 세계·캐릭터·스토리·스킬·보스·이벤트·재미를 기획합니다. AP는 기술적 실현, QA, 밸런스, 안전, 개인정보, 수익화 관리와 출시를 담당합니다.",
+    "assetsTitle": "만든 뒤, AP에 남는 것.",
+    "assets": "사용 과정에서 데이터·프로세스·전문지식·소프트웨어·IP·고객관계를 축적하는 것이 장기 방향입니다. 사용과 결과에서 배우고, 다음 시스템을 더 나아지게 만듭니다.",
+    "origin": "산업이 달라도 정보와 실제 행동 사이에는 복잡성이 남습니다. AP Holdings는 그 복잡성을 반복 가능한 시스템으로 전환하기 위해 만들어졌습니다.",
+    "founderTitle": "경험은 역량으로. 자산은 독립적으로.",
+    "founder": "Commercial Operations, Global Sales, Tourism & International Business, Data Analysis, Product Building, Decision Workflow Design의 경험을 제품을 만드는 역량으로 연결합니다.",
+    "firewall": "AP의 코드·계정·도메인·문서·제품 IP는 독립적으로 관리합니다. 현 고용주의 비공개 데이터·고객정보·운영정보·IP는 AP의 자산이 아닙니다.",
+    "mission": "복잡성을 쓸 수 있는 형태로.",
+    "vision": "사용·학습·결과를 통해 가치가 커지는 시스템을 만듭니다.",
+    "labDesc": "창업자가 만들어 온 독립 앱과 작은 실험. 핵심 3개 포트폴리오와 구분되는 제작·학습의 기록입니다.",
+    "labMore": "독립 프로젝트 전체",
+    "evidence": "7+ products/apps built or released",
+    "evidenceNote": "창업자 제공 제작·출시 이력과 기존 앱 링크를 바탕으로 한 Execution Evidence입니다. PMF나 대규모 Traction을 의미하지 않습니다.",
+    "contactTitle": "Build with AP.",
+    "contact": "제품·기술, 전문가 자문, 브랜드·커머스, 글로벌 유통, 교육·콘텐츠, 공예·작가, 파일럿 협력을 논의합니다.",
+    "contactCta": "협력 문의",
+    "emailNote": "현재 운영 중인 문의 주소",
+    "privacy": "개인정보 처리방침",
+    "top": "맨 위로",
+    "irTitle": "복잡성을 시스템으로. 실행을 근거로.",
+    "irIntro": "AP Holdings의 투자 관점, 제작 역량과 검증 계획을 소개합니다. 현재의 제품화 근거와 앞으로 확인할 사업 성과를 구분합니다.",
+    "investThesis": "산업마다 반복되는 정보와 행동 사이의 복잡성을 줄이고, 사용에서 얻는 학습을 재사용 가능한 제품·프로세스·IP로 축적합니다. 세 포트폴리오는 이 공통 원칙을 서로 다른 문제에 적용합니다.",
+    "proofTitle": "AP Revenue · Decision Intelligence Working Proof",
+    "proof": "독립적으로 개발한 Decision Intelligence Working Proof / Productization Candidate입니다. 복잡한 Commercial Data를 설명 가능한 우선순위, 사람의 행동과 결과로 연결하는 가능성을 검증합니다.",
+    "proofNote": "제품화 후보이며 외부 파일럿·매출·성과 검증을 의미하지 않습니다.",
+    "demoTitle": "Working Proof의 흐름",
+    "demoSteps": [
+      "우선순위를 검토합니다.",
+      "사람이 실행 여부를 결정합니다.",
+      "결과를 기록하고 배웁니다."
+    ],
+    "demoNote": "개념을 설명하는 흐름도입니다. 실제 운영 대시보드나 고객·고용주 데이터를 표시하지 않습니다.",
+    "liaEvidence": "Early owned-distribution experiment. Instagram/TikTok 콘텐츠와 외국인 Audience의 반응을 학습하는 단계입니다.",
+    "futureTitle": "다음 검증은 외부의 실제 결과입니다.",
+    "future": "External Pilots / Active Users / Transactions / Revenue / Repeat / Outcome. 확인된 수치만 공유하며, 상세 근거는 투자자 검토 과정에서 제공합니다.",
+    "milestonesTitle": "검증 단계가 확장의 기준입니다.",
+    "milestones": [
+      [
+        "01 · FOUNDATION",
+        "독립 제품 기반",
+        "Working Proof, 기존 앱 자산, 공개 기준과 시장별 설계 원칙 정립."
+      ],
+      [
+        "02 · VALIDATION",
+        "외부 검증",
+        "외부 파일럿·사용성 테스트·전문가 검토·Audience 의도를 검증할 계획입니다."
+      ],
+      [
+        "03 · SYSTEMIZATION",
+        "반복 가능성 검증",
+        "행동·거래·반품·재구매·Outcome을 연결하고 제품·운영 방식을 개선합니다."
+      ],
+      [
+        "04 · SCALE",
+        "근거를 갖춘 확장",
+        "Market Pack과 현지 파트너·정책·경제성 검증을 거친 제품만 확장합니다."
+      ]
+    ],
+    "milestoneNote": "계획과 다음 검증 단계이며, 완료된 실적이나 확정 일정이 아닙니다.",
+    "roadmapTitle": "Built in Korea. Designed for the world.",
+    "roadmap": "베트남의 LIA Audience와 커머스 수요를 우선 검증하고, 일본·대만 등 다음 시장은 제품 적합성과 현지 준비 수준에 따라 검토합니다. 프랑스 공예 거래 등은 연구 방향이며, 전 제품을 모든 시장에 동시에 출시하지 않습니다.",
+    "materialsTitle": "Investor materials",
+    "publicTitle": "PUBLIC",
+    "publicDesc": "회사 개요 · 투자 관점 · Global-by-Design · 포트폴리오 · 창업자 역량 · 로드맵. 현재 공개 자료는 이 웹페이지입니다.",
+    "shareTitle": "INVESTOR SHARE",
+    "shareDesc": "Full Investor Deck · Investment Memo · Verified Traction Appendix. 요청 접수 후 별도로 공유합니다.",
+    "ndaTitle": "NDA / DATA ROOM",
+    "ndaDesc": "재무모델 · 지분구조 · 계약 · 법무 · 상세 IP 및 비공개 지표는 접근 권한을 확인한 별도 경로로 관리합니다.",
+    "request": "투자자 자료 요청",
+    "requestNote": "이메일 앱에서 요청 내용을 확인해 보내 주세요. 이 페이지에서 자료가 자동 다운로드되거나 전송되지 않습니다.",
+    "version": "Public IR v2.0 · 2026-09-22 · AP Holdings",
+    "history": "기존 제품 자산",
+    "legacySafe": "기존 Safelist 앱은 제품 제작 이력입니다. AP Safe의 확장된 제품 개념과 현재 출시 앱의 제공 기능을 구분합니다.",
+    "copy": "주소 복사",
+    "copied": "복사했습니다",
+    "copyFail": "주소를 선택해 직접 복사해 주세요.",
+    "connector": "기존 커넥터 연결",
+    "connectorNote": "기존 연결 주소를 보존했습니다. 사용 가능한 기능은 커넥터의 현재 상태에 따라 다릅니다.",
+    "connectHelp": "연결할 클라이언트의 원격 커넥터 설정에 아래 주소를 입력하세요. 지원 여부와 인증 요구사항은 해당 클라이언트에서 확인할 수 있습니다.",
+    "assetNote": "기존 프로젝트 이미지 · 개발 중인 제품의 구성과 출시 일정은 변경될 수 있습니다.",
+    "rgrgAssetNote": "기존 캐릭터 자산을 새 RGRG 브랜드 아래에 보존했습니다.",
+    "termsBoundary": "제품·거래·전문서비스의 제공 범위는 실제 출시 상태와 해당 시장의 정책에 따릅니다.",
+    "curationNote": "기존 콘텐츠용 제품 이미지입니다. 판매 가능 여부·가격·배송 조건은 해당 판매 채널에서 확인합니다."
+  },
+  "products": [
+    {
+      "id": "safe",
+      "name": "AP Safe",
+      "tag": "Know what to avoid.",
+      "status": "inDev",
+      "role": "Product Decision Guardrail",
+      "desc": "사용자가 명시한 조건과 제품정보를 연결해 충돌·주의조건을 확인하는 제품 선택 지원 시스템입니다.",
+      "note": "제품정보에 기반한 의사결정 지원입니다. 의료진단이나 절대적인 안전보증이 아닙니다.",
+      "flow": [
+        "User-explicit Conditions",
+        "Product Information",
+        "Conflict / Caution",
+        "Human Decision"
+      ],
+      "link": "https://apps.apple.com/kr/app/id6805684034",
+      "linkLabel": "기존 Safelist 앱"
+    },
+    {
+      "id": "light",
+      "name": "AP Light",
+      "tag": "Understand what fits you.",
+      "status": "inDev",
+      "role": "Explainable Choice Intelligence",
+      "desc": "사용자가 중요하게 생각하는 기준으로 후보를 비교하고 Trade-off를 설명합니다. 더 잘 맞는 선택을 이해하도록 돕습니다.",
+      "note": "선호도와 근거를 설명하는 선택 지원입니다. 전문가의 판단이나 의료상담을 대체하지 않습니다.",
+      "flow": [
+        "User Criteria",
+        "Candidates",
+        "Explainable Trade-offs",
+        "Human Choice"
+      ]
+    },
+    {
+      "id": "revenue",
+      "name": "AP Revenue",
+      "tag": "From revenue data to revenue decisions.",
+      "status": "working",
+      "role": "Decision Intelligence Working Proof",
+      "desc": "복잡한 Commercial Data를 설명 가능한 Priority → Human Action → Outcome으로 연결하는 독립 개발 제품화 후보입니다.",
+      "note": "Independently developed Decision Intelligence Working Proof / Productization Candidate.",
+      "flow": [
+        "Commercial Data",
+        "Context",
+        "Priority",
+        "Human Action",
+        "Outcome"
+      ]
+    },
+    {
+      "id": "travel",
+      "name": "AP Travel",
+      "tag": "Find the market opportunity.",
+      "status": "inDev",
+      "role": "Global Travel Decision Intelligence",
+      "desc": "항공·관광·수요·환율·공급·캘린더 신호를 시장의 맥락과 기회로 연결합니다. Origin × Destination × Segment × Window를 기준으로 여러 시장의 의사결정을 지원하도록 설계합니다.",
+      "note": "특정 국가의 인바운드만을 위한 제품이 아닙니다. 실제 시장별 기능과 데이터 범위는 검증을 거쳐 정합니다.",
+      "flow": [
+        "Market Signals",
+        "Context",
+        "Opportunity",
+        "Human Decision",
+        "Campaign",
+        "Outcome"
+      ]
+    },
+    {
+      "id": "select",
+      "name": "AP SELECT",
+      "tag": "A store designed for choosing.",
+      "status": "concept",
+      "role": "Experience + Decision / Transaction + Fulfillment",
+      "desc": "보고, 써 보고, 이해하고, 고르는 매장. AP Safe·AP Light·전문가 지식·실제 경험을 연결하고, 고객의 선택은 온라인 주문과 배송으로 이어집니다.",
+      "note": "Concept & System Design. 매장 운영이나 전문상담의 현재 제공을 약속하는 표현이 아닙니다.",
+      "flow": [
+        "Choice Profile",
+        "Safe",
+        "Light",
+        "Expert",
+        "Physical Experience",
+        "Customer Choice",
+        "Online Order",
+        "Outcome"
+      ]
+    },
+    {
+      "id": "commerce",
+      "name": "Global K-Commerce",
+      "tag": "Korea discovered here. Delivered globally.",
+      "status": "inDev",
+      "role": "Discovery → Transaction → Repurchase",
+      "desc": "LIA와 콘텐츠가 해외 Audience의 제품 발견을 만들고, AP Commerce와 Marketplace가 구매·배송·재구매로 연결되는 구조를 설계합니다.",
+      "note": "초기에는 Marketplace와 Partner 인프라를 활용하며 Audience·Curation·Content·Attribution·Outcome Data를 축적합니다. 국가·플랫폼별 판매 가능 여부는 출시 후 확인할 수 있습니다.",
+      "flow": [
+        "LIA / Content",
+        "Foreign Audience",
+        "Product Discovery",
+        "AP Commerce / Marketplace",
+        "Purchase",
+        "Fulfillment",
+        "Repurchase"
+      ]
+    },
+    {
+      "id": "craft",
+      "name": "AP K-Craft",
+      "tag": "Korean craft, ready for the world.",
+      "status": "inDev",
+      "role": "Global Craft Transaction Infrastructure",
+      "desc": "명인·작가와 작품에서 출처 기록, 수출 검토, 포장·물류·인도·상태 확인까지 복잡한 글로벌 공예 거래를 구조화합니다.",
+      "note": "AP는 전문 파트너의 검토와 서비스를 연결·조정하는 구조를 설계합니다. 공식 감정·보험·관세 서비스를 직접 제공한다고 주장하지 않습니다.",
+      "flow": [
+        "Master",
+        "Work",
+        "Digital Passport",
+        "Provenance",
+        "Export Review",
+        "Customs",
+        "Insurance",
+        "Packaging",
+        "Logistics",
+        "Delivery",
+        "Condition",
+        "Claim",
+        "Outcome"
+      ],
+      "image": "/media/craft_frame.jpg"
+    },
+    {
+      "id": "lia",
+      "name": "LIA",
+      "tag": "Meet LIA. Discover Korea.",
+      "status": "audience",
+      "role": "Global Korea Discovery IP",
+      "desc": "한국의 문화·장소·제품을 세계에 소개하는 디지털 캐릭터 IP. 현재 Instagram/TikTok Audience Engine을 운영하며, 장기적으로 AP Commerce의 Global Distribution Layer를 지향합니다.",
+      "note": "Early owned-distribution experiment. LIA는 AP가 운영하는 AI 생성 디지털 페르소나입니다.",
+      "flow": [
+        "Creator",
+        "Korea Discovery Creator",
+        "Commerce Influencer",
+        "Korea Promotion IP"
+      ],
+      "image": "/media/lia/lia_hero_sq.jpg"
+    },
+    {
+      "id": "rgrg",
+      "name": "RGRG",
+      "tag": "Learning through competition.",
+      "status": "inDev",
+      "role": "Global Learning Game / Platform",
+      "desc": "경쟁·목표·캐릭터 성장으로 배우는 RGRG (오~알지). 학습자의 언어와 목표 과목을 분리해 여러 언어 조합과 교육 콘텐츠로 확장합니다.",
+      "note": "기존 프로젝트를 이어 개발 중입니다. 언어·자격증·교육·문화·기업교육 Quiz Pack은 확장 방향입니다.",
+      "flow": [
+        "RGRG CORE",
+        "Learner Locale",
+        "Instruction Language",
+        "Target Language / Subject",
+        "Quiz Pack"
+      ],
+      "image": "/media/games/qa_char_book.jpg"
+    },
+    {
+      "id": "cubs",
+      "name": "Hangeul Cubs",
+      "tag": "Learning through play.",
+      "status": "existing",
+      "role": "Global Korean-learning Media Engine",
+      "desc": "기존 한국어 학습 앱을 Shorts·YouTube·한국 문화·여행으로 확장하는 미디어 엔진. 학습 콘텐츠와 설명 언어를 분리해 글로벌 학습자를 만납니다.",
+      "note": "기존 앱 링크와 제품 화면을 보존했습니다. Shorts·YouTube 등으로의 확장은 계획 단계입니다.",
+      "flow": [
+        "APP",
+        "SHORTS",
+        "YOUTUBE",
+        "CULTURE",
+        "TRAVEL"
+      ],
+      "image": "/media/cubs/screens.jpg",
+      "link": "https://apps.apple.com/kr/app/id6803749436",
+      "linkLabel": "App Store"
+    },
+    {
+      "id": "lastwave",
+      "name": "LAST WAVE",
+      "tag": "Creating through play.",
+      "status": "inDev",
+      "role": "Creator-led Game & IP",
+      "desc": "Imagined by a young creator. Built for the world. 어린 창작자의 상상을 제품으로 만들며 AP가 제작·품질·안전·운영의 책임을 맡습니다.",
+      "note": "개발 중인 프로젝트입니다. 어린 창작자의 불필요한 개인정보는 공개하지 않습니다.",
+      "flow": [
+        "Imagine",
+        "Build",
+        "Test",
+        "Creator Feedback",
+        "Governance",
+        "Release"
+      ],
+      "image": "/media/games/lw_keyart.jpg"
+    }
+  ],
+  "lab": [
+    [
+      "Dawn Grace",
+      "묵상·기도를 위한 독립 앱",
+      "6803325336",
+      "/privacy.html"
+    ],
+    [
+      "IRON GRADE",
+      "벤치마크 운동 기록과 채점",
+      "6808070870",
+      "/irongrade/privacy.html"
+    ],
+    [
+      "The Other Hours",
+      "유소년 농구 부모를 위한 성장·훈련 가이드",
+      "6803709958",
+      "/theotherhours_privacy.html"
+    ],
+    [
+      "나의 첫투자",
+      "첫 금융 학습과 모의투자 실험",
+      "6803763681",
+      "/privacy.html"
+    ],
+    [
+      "K-Concert Trip",
+      "해외 팬을 위한 공연 원정 가이드",
+      "6803810106",
+      "/kfan_privacy.html"
+    ]
+  ]
+}

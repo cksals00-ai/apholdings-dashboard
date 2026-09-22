@@ -1,0 +1,376 @@
+{
+  "copy": {
+    "nav": [
+      "About",
+      "Portfolio",
+      "Philosophy",
+      "IR / INVESTORS",
+      "Contact"
+    ],
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "language": "Language",
+    "hero": "We build practical systems that help people and businesses make clearer choices, execute complex transactions and turn ideas into products.",
+    "explore": "Explore what we build",
+    "aboutCta": "About AP Holdings",
+    "portIntro": "Three portfolios. One way of building.",
+    "portDesc": "From judgment to transactions, from ideas to products. We turn complexity into repeatable systems.",
+    "whyTitle": "Complex problems deserve better systems.",
+    "why": "More information does not always lead to better decisions. More options do not always make choosing easier. AP structures the complexity that remains between information and action.",
+    "howTitle": "Human judgment. Clearer systems.",
+    "how": [
+      "Connect the information that matters.",
+      "Bring domain knowledge into the process.",
+      "Turn one-off know-how into repeatable workflows.",
+      "Build systems that can improve through use and outcomes."
+    ],
+    "globalIntro": "Every AP product is Global-by-Design.",
+    "global": "Our products are designed from the start for multiple markets, languages, currencies and policies. Separating core product logic from market configuration and local integrations is a company-wide principle.",
+    "globalNote": "This is our design principle and expansion direction, not a claim that every product already operates in multiple countries.",
+    "core": [
+      "Reusable product logic",
+      "Locale, currency, timezone and policy",
+      "Payment, logistics, channels and experts"
+    ],
+    "marketTitle": "A reusable core. A versioned Market Pack.",
+    "market": "A versioned bundle of configuration, content and partners connects the core to a new market. Local review and pilots come before expansion.",
+    "marketReview": "Market research → expert and policy review → testing → pilot → activation → review",
+    "decisionDesc": "We organize context, explain trade-offs and keep people in control of important decisions.",
+    "learnMore": "Explore product",
+    "inDev": "In development",
+    "concept": "Concept & system design",
+    "working": "Working Proof · Productization candidate",
+    "existing": "Existing app · media expansion planned",
+    "audience": "Active content experiment",
+    "selectKo": "See it. Try it. Understand it. Choose it.",
+    "expertTitle": "Expert Collaboration",
+    "expert": "Experts are external knowledge partners, not simply sales staff. We design collaboration around criteria, evidence standards, professional boundaries and standard operating procedures.",
+    "expertBoundary": "General product decision support is distinct from a licensed professional consultation. We do not use regulated professionals’ names as sales endorsements or imply advisory relationships without confirmed agreements.",
+    "expertPrinciples": [
+      "Criteria",
+      "Evidence Standard",
+      "Professional Boundary",
+      "SOP"
+    ],
+    "gameIntro": "Open imagination. Clear responsibility.",
+    "gameDesc": "Learn through competition and play. Turn creative ideas into products. We focus on three projects and use real usage and outcomes to guide expansion.",
+    "rgrgTitle": "One core. Many ways to learn.",
+    "rgrg": "Learner locale, instruction language, target language or subject, and Quiz Pack are separate. The same core can support languages, certifications, education, culture and workplace learning: a global learning game and platform.",
+    "pairs": "Illustrative language pairs, not a list of launched packs.",
+    "creatorTitle": "Young Creator + AP Production",
+    "creator": "The young creator imagines worlds, characters, stories, skills, bosses, events and fun. AP handles technical feasibility, QA, balance, safety, privacy, monetization governance and release.",
+    "assetsTitle": "What remains after the work is done.",
+    "assets": "Our long-term direction is to accumulate data, processes, expert knowledge, software, IP and customer relationships through use. Outcomes inform the next improvement.",
+    "origin": "Across industries, complexity often remains between information and action. AP Holdings was created to turn that complexity into repeatable systems.",
+    "founderTitle": "Experience as capability. Independently built assets.",
+    "founder": "Experience in commercial operations, global sales, tourism and international business, data analysis, product building and decision workflow design informs how we build.",
+    "firewall": "AP code, accounts, domains, documentation and product IP are maintained independently. Employer confidential data, customer information, operational information and IP are not AP assets.",
+    "mission": "Make complexity usable.",
+    "vision": "Build systems that become more valuable through use, learning and outcomes.",
+    "labDesc": "Independent apps and small experiments by the founder. A record of building and learning, separate from the three core portfolios.",
+    "labMore": "Explore independent projects",
+    "evidence": "7+ products/apps built or released",
+    "evidenceNote": "Execution evidence based on founder-provided build/release history and existing app links. This is not a claim of product-market fit or large-scale traction.",
+    "contactTitle": "Build with AP.",
+    "contact": "Let’s discuss product and technology, expert advisory, brand and commerce, global distribution, education and content, craft and artist collaboration, and pilots.",
+    "contactCta": "Contact AP Holdings",
+    "emailNote": "Current contact address",
+    "privacy": "Privacy policies",
+    "top": "Back to top",
+    "irTitle": "Complexity into systems. Execution into evidence.",
+    "irIntro": "Explore our investment thesis, building capability and validation plans. We distinguish current productization evidence from business outcomes still to be verified.",
+    "investThesis": "Reduce the recurring complexity between information and action across industries. Turn learning from use into reusable products, processes and IP. Three portfolios apply the same principle to different problems.",
+    "proofTitle": "AP Revenue · Decision Intelligence Working Proof",
+    "proof": "An independently developed Decision Intelligence Working Proof / Productization Candidate. It tests how complex commercial data can become explainable priorities, human actions and measurable outcomes.",
+    "proofNote": "A productization candidate, not evidence of external pilots, revenue or validated business outcomes.",
+    "demoTitle": "The working-proof workflow",
+    "demoSteps": [
+      "Review an explainable priority.",
+      "A person decides whether to act.",
+      "Record the outcome and learn."
+    ],
+    "demoNote": "A conceptual workflow illustration. No live operational dashboard, customer data or employer data is displayed.",
+    "liaEvidence": "Early owned-distribution experiment. Learning from Instagram/TikTok content and international audience response.",
+    "futureTitle": "The next proof comes from external outcomes.",
+    "future": "External pilots, active users, transactions, revenue, repeat and outcome. Only verified metrics will be shared, with detailed evidence supplied during investor diligence.",
+    "milestonesTitle": "Validation gates before expansion.",
+    "milestones": [
+      [
+        "01 · FOUNDATION",
+        "Independent product foundation",
+        "Working proof, existing app assets, public standards and market-aware design principles."
+      ],
+      [
+        "02 · VALIDATION",
+        "External validation",
+        "Planned external pilots, usability tests, expert review and audience-intent validation."
+      ],
+      [
+        "03 · SYSTEMIZATION",
+        "Repeatability",
+        "Connect actions, transactions, returns, repeat usage and outcomes to improve product and operations."
+      ],
+      [
+        "04 · SCALE",
+        "Evidence-led expansion",
+        "Expand products after Market Pack, local partner, policy and unit-economics validation."
+      ]
+    ],
+    "milestoneNote": "These are planned validation stages, not completed results or committed launch dates.",
+    "roadmapTitle": "Built in Korea. Designed for the world.",
+    "roadmap": "Prioritize validation of LIA’s audience and commerce intent in Vietnam. Assess Japan, Taiwan and other markets against product fit and local readiness. Craft transactions in France are a research direction; we do not launch every product in every market at once.",
+    "materialsTitle": "Investor materials",
+    "publicTitle": "PUBLIC",
+    "publicDesc": "Company overview, investment thesis, Global-by-Design, portfolio, founder capability and roadmap. This webpage is the current public material.",
+    "shareTitle": "INVESTOR SHARE",
+    "shareDesc": "Full investor deck, investment memo and verified traction appendix. Shared separately following a request.",
+    "ndaTitle": "NDA / DATA ROOM",
+    "ndaDesc": "Financial model, cap table, contracts, legal documents, detailed IP and private metrics are managed through a separate controlled-access process.",
+    "request": "Request Investor Materials",
+    "requestNote": "Review and send your request in your email app. Materials are not automatically downloaded or sent from this page.",
+    "version": "Public IR v2.0 · 2026-09-22 · AP Holdings",
+    "history": "Existing product assets",
+    "legacySafe": "The existing Safelist app is evidence of building. Its currently available features are distinct from the broader AP Safe product concept.",
+    "copy": "Copy address",
+    "copied": "Copied",
+    "copyFail": "Select the address and copy it manually.",
+    "connector": "Existing connector access",
+    "connectorNote": "The existing connection address is preserved. Available functions depend on the connector’s current status.",
+    "connectHelp": "Enter the address below in your client’s remote-connector settings. Check that client for compatibility and authentication requirements.",
+    "assetNote": "Existing project artwork. Features and release plans for products in development may change.",
+    "rgrgAssetNote": "Existing character assets preserved under the RGRG brand.",
+    "termsBoundary": "Product, transaction and professional-service availability depends on launch status and applicable market policies.",
+    "curationNote": "Existing product visuals for content. Confirm availability, price and delivery terms with the selling channel."
+  },
+  "products": [
+    {
+      "id": "safe",
+      "name": "AP Safe",
+      "tag": "Know what to avoid.",
+      "status": "inDev",
+      "role": "Product Decision Guardrail",
+      "desc": "Connects user-explicit conditions and product information to identify conflicts and conditions that need attention.",
+      "note": "Product-information decision support. Not medical diagnosis or a guarantee of safety.",
+      "flow": [
+        "User-explicit Conditions",
+        "Product Information",
+        "Conflict / Caution",
+        "Human Decision"
+      ],
+      "link": "https://apps.apple.com/kr/app/id6805684034",
+      "linkLabel": "Existing Safelist app"
+    },
+    {
+      "id": "light",
+      "name": "AP Light",
+      "tag": "Understand what fits you.",
+      "status": "inDev",
+      "role": "Explainable Choice Intelligence",
+      "desc": "Compares candidates against the criteria that matter to the user, explaining trade-offs so people can understand what fits them.",
+      "note": "Choice support that explains preferences and evidence. It does not replace professional judgment or medical consultation.",
+      "flow": [
+        "User Criteria",
+        "Candidates",
+        "Explainable Trade-offs",
+        "Human Choice"
+      ]
+    },
+    {
+      "id": "revenue",
+      "name": "AP Revenue",
+      "tag": "From revenue data to revenue decisions.",
+      "status": "working",
+      "role": "Decision Intelligence Working Proof",
+      "desc": "An independently developed productization candidate connecting complex commercial data to explainable priorities, human action and outcomes.",
+      "note": "Independently developed Decision Intelligence Working Proof / Productization Candidate.",
+      "flow": [
+        "Commercial Data",
+        "Context",
+        "Priority",
+        "Human Action",
+        "Outcome"
+      ]
+    },
+    {
+      "id": "travel",
+      "name": "AP Travel",
+      "tag": "Find the market opportunity.",
+      "status": "inDev",
+      "role": "Global Travel Decision Intelligence",
+      "desc": "Connects aviation, tourism, demand, FX, supply and calendar signals to market context and opportunity. Designed around Origin × Destination × Segment × Window for decisions across markets.",
+      "note": "Not limited to inbound travel to one country. Market-specific capabilities and data coverage will be determined through validation.",
+      "flow": [
+        "Market Signals",
+        "Context",
+        "Opportunity",
+        "Human Decision",
+        "Campaign",
+        "Outcome"
+      ]
+    },
+    {
+      "id": "select",
+      "name": "AP SELECT",
+      "tag": "A store designed for choosing.",
+      "status": "concept",
+      "role": "Experience + Decision / Transaction + Fulfillment",
+      "desc": "A store where people see, try, understand and choose. Connect AP Safe, AP Light, expert knowledge and physical experience, then take the customer’s choice to online ordering and fulfillment.",
+      "note": "Concept & system design. This does not claim an operating store or currently available professional consultation.",
+      "flow": [
+        "Choice Profile",
+        "Safe",
+        "Light",
+        "Expert",
+        "Physical Experience",
+        "Customer Choice",
+        "Online Order",
+        "Outcome"
+      ]
+    },
+    {
+      "id": "commerce",
+      "name": "Global K-Commerce",
+      "tag": "Korea discovered here. Delivered globally.",
+      "status": "inDev",
+      "role": "Discovery → Transaction → Repurchase",
+      "desc": "LIA and content help international audiences discover products. AP Commerce and marketplaces are designed to connect discovery to purchase, fulfillment and repeat purchase.",
+      "note": "Initial plans use marketplace and partner infrastructure while building audience, curation, content, attribution and outcome data. Market and platform availability will be confirmed at launch.",
+      "flow": [
+        "LIA / Content",
+        "Foreign Audience",
+        "Product Discovery",
+        "AP Commerce / Marketplace",
+        "Purchase",
+        "Fulfillment",
+        "Repurchase"
+      ]
+    },
+    {
+      "id": "craft",
+      "name": "AP K-Craft",
+      "tag": "Korean craft, ready for the world.",
+      "status": "inDev",
+      "role": "Global Craft Transaction Infrastructure",
+      "desc": "Structures complex global craft transactions, from master artists and works to provenance records, export review, packaging, logistics, delivery and condition checks.",
+      "note": "AP designs processes that connect and coordinate specialist partners. We do not claim to directly provide official appraisal, insurance or customs services.",
+      "flow": [
+        "Master",
+        "Work",
+        "Digital Passport",
+        "Provenance",
+        "Export Review",
+        "Customs",
+        "Insurance",
+        "Packaging",
+        "Logistics",
+        "Delivery",
+        "Condition",
+        "Claim",
+        "Outcome"
+      ],
+      "image": "/media/craft_frame.jpg"
+    },
+    {
+      "id": "lia",
+      "name": "LIA",
+      "tag": "Meet LIA. Discover Korea.",
+      "status": "audience",
+      "role": "Global Korea Discovery IP",
+      "desc": "A digital-character IP introducing Korea’s culture, places and products to the world. An Instagram/TikTok audience engine today, with a long-term direction toward a global distribution layer for AP Commerce.",
+      "note": "Early owned-distribution experiment. LIA is an AI-generated digital persona operated by AP.",
+      "flow": [
+        "Creator",
+        "Korea Discovery Creator",
+        "Commerce Influencer",
+        "Korea Promotion IP"
+      ],
+      "image": "/media/lia/lia_hero_sq.jpg"
+    },
+    {
+      "id": "rgrg",
+      "name": "RGRG",
+      "tag": "Learning through competition.",
+      "status": "inDev",
+      "role": "Global Learning Game / Platform",
+      "desc": "RGRG is a learning game built around competition, goals and character growth. Learner language and target subject are separate, enabling multiple language pairs and educational content.",
+      "note": "Continuing development of the existing project. Language, certification, education, culture and workplace-learning packs are expansion directions.",
+      "flow": [
+        "RGRG CORE",
+        "Learner Locale",
+        "Instruction Language",
+        "Target Language / Subject",
+        "Quiz Pack"
+      ],
+      "image": "/media/games/qa_char_book.jpg"
+    },
+    {
+      "id": "cubs",
+      "name": "Hangeul Cubs",
+      "tag": "Learning through play.",
+      "status": "existing",
+      "role": "Global Korean-learning Media Engine",
+      "desc": "A media engine extending the existing Korean-learning app into Shorts, YouTube, Korean culture and travel. Learning content and instruction language are separate for global learners.",
+      "note": "Existing app links and product screens are preserved. Expansion into Shorts, YouTube and other media is planned.",
+      "flow": [
+        "APP",
+        "SHORTS",
+        "YOUTUBE",
+        "CULTURE",
+        "TRAVEL"
+      ],
+      "image": "/media/cubs/screens.jpg",
+      "link": "https://apps.apple.com/kr/app/id6803749436",
+      "linkLabel": "App Store"
+    },
+    {
+      "id": "lastwave",
+      "name": "LAST WAVE",
+      "tag": "Creating through play.",
+      "status": "inDev",
+      "role": "Creator-led Game & IP",
+      "desc": "Imagined by a young creator. Built for the world. AP turns a young creator’s imagination into a product, with responsibility for production, quality, safety and operations.",
+      "note": "In development. Unnecessary personal details about the young creator are not disclosed.",
+      "flow": [
+        "Imagine",
+        "Build",
+        "Test",
+        "Creator Feedback",
+        "Governance",
+        "Release"
+      ],
+      "image": "/media/games/lw_keyart.jpg"
+    }
+  ],
+  "lab": [
+    [
+      "Dawn Grace",
+      "An independent reflection and prayer app",
+      "6803325336",
+      "/privacy.html"
+    ],
+    [
+      "IRON GRADE",
+      "Benchmark workout tracking and grading",
+      "6808070870",
+      "/irongrade/privacy.html"
+    ],
+    [
+      "The Other Hours",
+      "A training and growth guide for parents of young basketball players",
+      "6803709958",
+      "/theotherhours_privacy.html"
+    ],
+    [
+      "나의 첫투자",
+      "An introductory financial-learning and simulated-investment experiment",
+      "6803763681",
+      "/privacy.html"
+    ],
+    [
+      "K-Concert Trip",
+      "A concert-trip guide for international fans",
+      "6803810106",
+      "/kfan_privacy.html"
+    ]
+  ]
+}

@@ -12,8 +12,27 @@ sync_repo() {
   [ -d "$SRC" ] || return 0
   [ -d "$REPO/.git" ] || return 0
   cd "$REPO" || return 0
+  # Pull before copying local source: a newer corporate release must not be overwritten.
+  git pull --ff-only origin main >> "$LOG" 2>&1 || {
+    echo "$(date '+%F %T') SYNC STOP: reconcile repository changes first" >> "$LOG"
+    return 1
+  }
+  if [ "$REPO" = "$PUB_REPO" ] && [ -f "$REPO/site-source/content.json" ]; then
+    # Legacy source folders have no version marker. Require an explicit v2 source sync.
+    python3 - "$SRC/site-source/content.json" "$REPO/site-source/content.json" <<'VERSION_CHECK'
+import json, sys
+from pathlib import Path
+source, deployed = map(Path, sys.argv[1:])
+if not source.is_file():
+    raise SystemExit('SYNC STOP: update the local source folder to Website v2 before publishing.')
+def version(path):
+    return tuple(int(x) for x in json.loads(path.read_text())['version'].split('.'))
+if version(source) < version(deployed):
+    raise SystemExit('SYNC STOP: local website source is older than the deployed release.')
+VERSION_CHECK
+    if [ "$?" -ne 0 ]; then return 1; fi
+  fi
   rsync -a --exclude '.git' --exclude 'deploy.log' --exclude 'deploy_dashboard.sh' "$SRC/" "$REPO/"
-  git pull --rebase -X theirs origin main >/dev/null 2>&1 || true
   git add -A
   git diff --cached --quiet && return 0
   git -c user.name="AP Holdings" -c user.email="cksals00@gmail.com" commit -m "update $(date '+%Y-%m-%d %H:%M')" >> "$LOG" 2>&1
@@ -29,3 +48,4 @@ fi
 
 sync_repo "$PUB_SRC" "$PUB_REPO"
 sync_repo "$OPS_SRC" "$OPS_REPO"
+
