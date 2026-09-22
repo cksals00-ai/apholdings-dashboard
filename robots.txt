@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /_backup_20260919/
+Disallow: /site-source/
+Disallow: /scripts/
+Disallow: /board/
+Disallow: /data/
+Disallow: /docs/
+Disallow: /vi/
+Disallow: /ja/
+Disallow: /zh-cn/
+Disallow: /fr/
+Sitemap: https://www.apholdings.kr/sitemap.xml
