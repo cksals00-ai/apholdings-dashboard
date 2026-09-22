@@ -433,8 +433,6 @@
         "Explainable Trade-offs",
         "Human Choice"
       ],
-      "image": "/img/lightlist_hero.jpg",
-      "video": "/media/lightlist_hero.mp4",
       "sections": [
         {
           "id": "proof",
@@ -512,7 +510,7 @@
           "사려는 식품의 열량을 100g당과 한 봉지 기준으로 함께 보여주는 AI 커넥터."
         ],
         "cta": "주소 붙이기",
-        "media": true,
+        "media": false,
         "mediaAlt": "국수 한 그릇 — 연출 영상",
         "mediaNote": "연출 영상 · 실제 화면이 아닙니다. 국수 한 그릇도 100g당과 한 그릇의 열량이 다릅니다.",
         "sections": [
