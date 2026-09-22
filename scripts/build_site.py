@@ -156,7 +156,7 @@ def blocks(items):
   elif t=='media':h+=f'<figure style="margin:0 0 45px"><div class="product-media" style="background:transparent;padding:0"><img src="{b["src"]}" alt="{e(b["alt"])}" width="1600" height="900" loading="lazy" style="width:100%;max-height:none;border-radius:24px"></div>'+(f'<figcaption class="note">{e(b["caption"])}</figcaption>' if b.get('caption') else '')+'</figure>'
   elif t=='split':h+='<div class="split"><div>'+blocks(b['left'])+'</div><div>'+blocks(b['right'])+'</div></div>'
   elif t=='h3':h+=f'<h3>{e(b["text"])}</h3>'
-  elif t=='actions':h+='<div class="actions">'+''.join(button(u,lab,True) if kind=='primary' else button(u,lab) if kind=='button' else link(u,lab) for u,lab,kind in b['items'])+'</div>'
+  elif t=='actions':h+='<div class="actions">'+''.join(button(u,lab,True) if kind=='primary' else button(u,lab) if kind=='button' else link(u,lab) for u,lab,kind in [((mail(x[0][5:]) if x[0].startswith('mail:') else x[0]),x[1],x[2]) for x in b['items']])+'</div>'
  return h
 def sections(items):
  h=''
