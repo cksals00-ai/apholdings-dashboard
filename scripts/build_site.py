@@ -79,7 +79,7 @@ def home_page(l):
  select_text=f'<div class="showcase-copy"><span class="eyebrow">AP SELECT</span><h3>A store designed<br>for choosing.</h3><p>{e(h["select"])}</p>'+('<p class="select-steps">See it. Try it. Understand it. Choose it.</p>' if l=='ko' else '')+f'<div class="actions">{button(ph(l,"select"),detail)}{link(ph(l,"select"),"Expert Collaboration", "quiet-link")}</div></div>'
  select_feature=f'<article class="showcase-select">{select_visual}{select_text}</article>'
  lia_feature=f'<article class="showcase-lia"><a class="showcase-lia-image" href="{ph(l,"lia")}"><img src="/media/lia/lia_hero_sq.jpg" width="800" height="800" loading="lazy" alt="LIA — AI Influencer"></a><div class="showcase-copy"><span class="eyebrow">LIA / AI INFLUENCER</span><h3>Meet LIA.<br>Discover Korea.</h3><p>{e(h["lia"])}</p><p class="lia-channel">{e(h["liaChannel"])}</p>{link(ph(l,"lia"),detail)}</div></article>'
- images={'safe':'/media/safelist_frame.jpg','travel':'/media/inbound_frame.jpg','commerce':'/media/shop/01_dalba.jpg','craft':'/media/craft_frame.jpg','cubs':'/media/cubs/screens.jpg','lastwave':'/media/games/lw_keyart.jpg'}
+ images={'safe':'/media/safelist_frame.jpg','travel':'/media/inbound_frame.jpg','commerce':'/media/shop/01_dalba.jpg','craft':'/media/craft_frame.jpg','cubs':'/media/cubs/screens.jpg','lastwave':'/media/games/lw_pov_lotte.jpg'}
  def compact(pid):
   p=prod(l,pid)
   return f'<a class="compact-project" href="{ph(l,pid)}"><div class="compact-image {pid}"><img src="{images[pid]}" alt="{e(p["name"])}" loading="lazy" width="480" height="300"></div><div class="compact-copy"><h4>{e(p["name"])}</h4><p>{e(h["short"][pid])}</p><span class="compact-arrow" aria-hidden="true">↗</span></div></a>'
@@ -114,7 +114,7 @@ def home_page(l):
  contact_short=f'<section class="contact-section home-contact" id="contact"><div class="wrap"><span class="eyebrow">CONTACT</span><div class="contact-bottom"><div><h2>Build with AP.</h2><p>{e(h["contact"])}</p></div>{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div></section>'
  intro_items=h.get('portfolioIntro') or [tag for _,_,tag,_ in GROUPS]
  three=f'<section class="section" id="businesses"><div class="wrap"><div class="section-head"><span class="eyebrow">OUR BUSINESSES</span><h2>{e(h["portfolio"])}</h2></div><div class="three portfolio-nav">'+''.join(f'<a href="#{gid}"><span class="number">0{i+1}</span><h2>{e(h["groups"][i])}</h2><p>{e(intro_items[i])}</p></a>' for i,(gid,_,_,_) in enumerate(GROUPS))+'</div></div></section>'
- return hero+three+portfolios+featured+why+global_short+about_short+contact_short
+ return hero+three+portfolios+why+global_short+about_short+contact_short
 def ir_page(l):
  hero=f'<section class="page-hero"><div class="wrap"><span class="eyebrow">IR / INVESTORS · PUBLIC IR v2.0</span><h1>{c(l,"irTitle")}</h1><p class="lead">{c(l,"irIntro")}</p><div class="actions">{button("#materials",c(l,"request"),True)}{link(home(l)+"#portfolio",c(l,"explore"))}</div></div></section>'
  navitems=[('thesis','Investment Thesis'),('capability','Founder Capability'),('model','AP Operating Model'),('proof','Working Proof'),('global','Global-by-Design'),('portfolios','Portfolio'),('evidence','Execution Evidence'),('milestones','Milestones'),('roadmap','Global Roadmap'),('materials','Investor Contact')]
@@ -144,6 +144,9 @@ def blocks(items):
   elif t=='quote':h+=f'<p class="quote">{e(b["text"])}</p>'
   elif t=='note':h+=f'<p class="note">{e(b["text"])}</p>'
   elif t=='p':h+=f'<p>{e(b["text"])}</p>'
+  elif t=='media':h+=f'<figure style="margin:0 0 45px"><div class="product-media"><img src="{b["src"]}" alt="{e(b["alt"])}" width="1200" height="675" loading="lazy"></div>'+(f'<figcaption class="note">{e(b["caption"])}</figcaption>' if b.get('caption') else '')+'</figure>'
+  elif t=='split':h+='<div class="split"><div>'+blocks(b['left'])+'</div><div>'+blocks(b['right'])+'</div></div>'
+  elif t=='h3':h+=f'<h3>{e(b["text"])}</h3>'
   elif t=='actions':h+='<div class="actions">'+''.join(button(u,lab,True) if kind=='primary' else button(u,lab) if kind=='button' else link(u,lab) for u,lab,kind in b['items'])+'</div>'
  return h
 def sections(items):
@@ -159,13 +162,13 @@ def product_page(l,p):
  if p.get('image') and pid!='rgrg':
   visual=f'<video autoplay muted loop playsinline preload="metadata" poster="{p["image"]}" src="{p["video"]}" aria-label="{e(p["name"])} — existing concept video"></video>' if p.get('video') else f'<img src="{p["image"]}" alt="{e(p["name"])} — {c(l,"history")}" width="1000" height="600" loading="lazy">'
   body+=f'<figure style="margin:0 0 45px"><div class="product-media">{visual}</div><figcaption class="note">{c(l,"rgrgAssetNote" if pid=="rgrg" else "assetNote")}</figcaption></figure>'
- body+=f'<div class="product-body"><span class="eyebrow">{e(p["role"])}</span><h2>{e(p["tag"])}</h2>{flow(p["flow"])}<p class="note">{e(p["note"])}</p>'
+ body+=f'<div class="product-body"><span class="eyebrow">{e(p["role"])}</span><h2>{e(p["tag"])}</h2>'+('' if p.get('hideGeneric') else f'{flow(p["flow"])}<p class="note">{e(p["note"])}</p>')
  if p.get('link'):body+=f'<div class="actions">{link(p["link"],p["linkLabel"],"button",True)}</div>'
  if pid=='safe':body+=f'<p>{c(l,"legacySafe")}</p><div class="actions">{button("/business/safelist-connect.html",c(l,"connector"))}</div>'
  if pid=='light':body+=f'<div class="actions">{button("/business/lightlist-connect.html",c(l,"connector"))}</div>'
  if pid=='revenue':body+=f'<p>{c(l,"proof")}</p><p class="note">{c(l,"proofNote")}</p><div class="actions">{button(f"/{l}/ir/#proof",c(l,"proofTitle"))}</div>'
- if pid=='select':body+=f'<p>{c(l,"selectKo")}</p><div class="channels" style="border-color:var(--line)"><div><b>OFFLINE</b><span>Experience + Decision</span></div><div><b>ONLINE</b><span>Transaction + Fulfillment</span></div></div>'+expert(l)
- if pid=='rgrg':body+=f'<h2 style="margin-top:40px">{c(l,"rgrgTitle")}</h2><p>{c(l,"rgrg")}</p>{tags(["Vietnamese → Korean","Korean → Vietnamese","Japanese → Korean","French → Korean","Korean → English"])}<p class="note">{c(l,"pairs")}</p>'
+ if pid=='select' and not p.get('hideGeneric'):body+=f'<p>{c(l,"selectKo")}</p><div class="channels" style="border-color:var(--line)"><div><b>OFFLINE</b><span>Experience + Decision</span></div><div><b>ONLINE</b><span>Transaction + Fulfillment</span></div></div>'+expert(l)
+ if pid=='rgrg' and not p.get('hideGeneric'):body+=f'<h2 style="margin-top:40px">{c(l,"rgrgTitle")}</h2><p>{c(l,"rgrg")}</p>{tags(["Vietnamese → Korean","Korean → Vietnamese","Japanese → Korean","French → Korean","Korean → English"])}<p class="note">{c(l,"pairs")}</p>'
  if pid=='lia':body+=f'<p>{c(l,"liaEvidence")}</p><div class="actions">{link("https://www.instagram.com/lia_park55/","Instagram","button",True)}{link("https://www.tiktok.com/@lia_park55","TikTok","button",True)}</div>'
  if pid=='lastwave':body+=f'<h2 style="margin-top:40px">{c(l,"creatorTitle")}</h2><p>{c(l,"creator")}</p>'
  if pid=='lia':
