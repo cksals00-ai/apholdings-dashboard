@@ -143,7 +143,7 @@ def product_page(l,p):
  if pid=='rgrg':
   body+='<figure class="rgrg-detail"><img src="/media/games/qa_shot_01.jpg" alt="RGRG — existing quiz battle interface" width="1396" height="644"><figcaption class="note">'+HOME_COPY[l]['rgrgNote']+'</figcaption></figure>'
  if p.get('image') and pid!='rgrg':
-  visual=f'<video controls playsinline preload="none" poster="{p["image"]}" src="{p["video"]}" aria-label="{e(p["name"])} — existing concept video"></video>' if p.get('video') else f'<img src="{p["image"]}" alt="{e(p["name"])} — {c(l,"history")}" width="1000" height="600" loading="lazy">'
+  visual=f'<video autoplay muted loop playsinline preload="metadata" poster="{p["image"]}" src="{p["video"]}" aria-label="{e(p["name"])} — existing concept video"></video>' if p.get('video') else f'<img src="{p["image"]}" alt="{e(p["name"])} — {c(l,"history")}" width="1000" height="600" loading="lazy">'
   body+=f'<figure style="margin:0 0 45px"><div class="product-media">{visual}</div><figcaption class="note">{c(l,"rgrgAssetNote" if pid=="rgrg" else "assetNote")}</figcaption></figure>'
  body+=f'<div class="product-body"><span class="eyebrow">{e(p["role"])}</span><h2>{e(p["tag"])}</h2>{flow(p["flow"])}<p class="note">{e(p["note"])}</p>'
  if p.get('link'):body+=f'<div class="actions">{link(p["link"],p["linkLabel"],"button",True)}</div>'
