@@ -209,7 +209,7 @@
         {
           "id": "today",
           "label": "04 · 지금",
-          "title": "오늘 App Store와 클로드.\n다음은 Android · ChatGPT · Gemini.",
+          "title": "오늘, App Store와 클로드에서.",
           "soft": true,
           "blocks": [
             {
@@ -226,9 +226,13 @@
                   "button"
                 ]
               ]
+            },
+            {
+              "type": "note",
+              "text": "Android · ChatGPT · Gemini — 추후 출시 예정"
             }
           ],
-          "desc": "무료 · 계정 없음 · 25만+ 한국 식품 DB 내장 · 스캔 즉시 판정 · 달력과 병원 리포트.\nAI 커넥터는 클로드에서 운영 중. ChatGPT · Gemini 커넥터와 Android 앱은 준비 중."
+          "desc": "App Store에서 무료로 받는다. 계정 없이 바로 스캔.\n클로드에는 주소 한 줄이면 붙는다."
         },
         {
           "id": "exits",
@@ -434,9 +438,9 @@
         {
           "id": "today",
           "label": "03 · 지금",
-          "title": "오늘 클로드에서.\n다음은 앱 · ChatGPT · Gemini.",
+          "title": "오늘, 클로드에서.",
           "soft": true,
-          "desc": "식약처 공개 자료 31만 7천 건 · 읽기 전용 도구 4개 · 로그인 없음.\nAI 커넥터는 클로드에서 운영 중. 앱과 ChatGPT · Gemini 커넥터는 준비 중.",
+          "desc": "주소 한 줄이면 클로드에 붙는다.\n열량은 100g당과 한 봉지, 항상 함께.",
           "blocks": [
             {
               "type": "actions",
@@ -452,6 +456,10 @@
                   "button"
                 ]
               ]
+            },
+            {
+              "type": "note",
+              "text": "앱 · ChatGPT · Gemini — 추후 출시 예정"
             }
           ]
         }
@@ -587,8 +595,7 @@
         ],
         "connectNote": "설치도 가입도 없습니다. 식약처 공개 자료 31만 7천 건. 알레르기·회피 성분은 세이프리스트가 봅니다 — 커넥터 설치 절차는 두 서비스가 같습니다."
       },
-      "hideGeneric": true,
-      "image": "/media/decision/light_card.jpg"
+      "hideGeneric": true
     },
     {
       "id": "revenue",
