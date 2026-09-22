@@ -38,7 +38,7 @@ def head(l,title,description,path,index=True,alternate_suffix=''):
  alternates=''.join(f'<link rel="alternate" hreflang="{lang}" href="{ORIGIN}/{lang}/{alternate_suffix}">' for lang in PUBLISHED) if index else ''
  if index:alternates+=f'<link rel="alternate" hreflang="x-default" href="{ORIGIN}/en/{alternate_suffix}">'
  sd={'@context':'https://schema.org','@type':'Organization','name':'AP Holdings','url':ORIGIN,'logo':ORIGIN+'/img/ap_mark.png','description':description,'email':CFG['contact'],'sameAs':['https://www.instagram.com/lia_park55/','https://www.tiktok.com/@lia_park55']}
- return f'''<!doctype html><html lang="{l}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description,quote=True)}"><meta name="robots" content="{'index,follow' if index else 'noindex,follow'}"><link rel="canonical" href="{canonical}">{alternates}<meta property="og:type" content="website"><meta property="og:site_name" content="AP Holdings"><meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:locale" content="{'ko_KR' if l=='ko' else 'en_US'}"><meta name="theme-color" content="#ffffff"><link rel="icon" href="/img/ap_mark.png">{fonts}<link rel="stylesheet" href="/assets/v2/site.css?v=2.3"><script defer src="/assets/v2/site.js?v=2.3"></script><script type="application/ld+json">{json.dumps(sd,ensure_ascii=False).replace('<','\\u003c')}</script></head>'''
+ return f'''<!doctype html><html lang="{l}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description,quote=True)}"><meta name="robots" content="{'index,follow' if index else 'noindex,follow'}"><link rel="canonical" href="{canonical}">{alternates}<meta property="og:type" content="website"><meta property="og:site_name" content="AP Holdings"><meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:locale" content="{'ko_KR' if l=='ko' else 'en_US'}"><meta name="theme-color" content="#ffffff"><link rel="icon" href="/img/ap_mark.png">{fonts}<link rel="stylesheet" href="/assets/v2/site.css?v=2.4"><script defer src="/assets/v2/site.js?v=2.4"></script><script type="application/ld+json">{json.dumps(sd,ensure_ascii=False).replace('<','\\u003c')}</script></head>'''
 def nav(l,suffix=''):
  urls=[home(l)+'#about',home(l)+'#portfolio',home(l)+'#philosophy',f'/{l}/ir/',home(l)+'#contact']
  links=''.join(f'<a href="{u}"'+(' class="ir-link"' if i==3 else '')+'>'+e(label)+'</a>' for i,(u,label) in enumerate(zip(urls,c(l,'nav'))))
@@ -46,7 +46,15 @@ def nav(l,suffix=''):
  return f'<a class="skip" href="#main">{c(l,"skip")}</a><header class="site-header"><div class="wrap header-inner">{logo(l)}<nav class="desktop-nav" aria-label="Main">{links}</nav><details class="language"><summary aria-label="{c(l,"language")}">{l.upper()}</summary><ul>{langs}</ul></details><details class="mobile-menu"><summary>{c(l,"menu")}</summary><nav aria-label="Mobile">{links}</nav></details></div></header>'
 def footer(l):
  pol=''.join(f'<li>{link(url,name,"")}</li>' for name,url in POLICIES)
- return f'<footer class="site-footer"><div class="wrap"><div class="footer-top">{logo(l)}<div class="footer-links">{link(home(l)+"#portfolio",c(l,"nav")[1],"")}{link(f"/{l}/ir/","IR / INVESTORS","")}{link(f"/{l}/lab/","Founder’s Lab","")}{link(home(l)+"#contact",c(l,"nav")[4],"")}</div></div><ul class="footer-policies" aria-label="{c(l,"privacy")}">{pol}</ul><div class="footer-bottom"><span>© 2026 AP Holdings. All rights reserved.</span><span>Built in Korea. Designed for the world.</span>{link('#top',c(l,'top'),'')}</div></div></footer>'
+ ko=l=='ko'
+ col=lambda t,items:'<div><b>'+e(t)+'</b>'+''.join(link(u,n,'') for n,u in items)+'</div>'
+ cols=col('AP Holdings' ,[(('회사 소개' if ko else 'About'),f'/{l}/about/'),('IR / INVESTORS',f'/{l}/ir/'),('Founder’s Lab',f'/{l}/lab/')])
+ cols+=col('Decision Intelligence',[(prod(l,x)['name'],ph(l,x)) for x in ['safe','light','revenue','travel']])
+ cols+=col('Commerce',[(prod(l,x)['name'],ph(l,x)) for x in ['select','commerce','craft','lia']])
+ cols+=col('Play & Learn',[(prod(l,x)['name'],ph(l,x)) for x in ['rgrg','cubs','lastwave']])
+ cols+=col(('커넥터' if ko else 'Connectors'),[(('세이프리스트 · 클로드' if ko else 'Safelist · Claude'),'/business/safelist-connect.html'),(('라이트리스트 · 클로드' if ko else 'Lightlist · Claude'),'/business/lightlist-connect.html')])
+ contact_line=f'<div class="footer-contact"><div><span class="eyebrow">CONTACT</span><h3>Build with AP.</h3><p>{c(l,"contact")}</p></div><div>{link("mailto:"+CFG["contact"],CFG["contact"],"contact-email")}{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div>'
+ return f'<footer class="site-footer"><div class="wrap">{contact_line}<div class="footer-top">{logo(l)}<div class="footer-map">{cols}</div></div><ul class="footer-policies" aria-label="{c(l,"privacy")}">{pol}</ul><div class="footer-bottom"><span>© 2026 AP Holdings. All rights reserved.</span><span>Built in Korea. Designed for the world.</span>{link('#top',c(l,'top'),'')}</div></div></footer>'
 def shell(l,title,desc,path,body,suffix='',index=True):return head(l,title,desc,path,index,suffix)+'<body id="top">'+nav(l,suffix)+'<main id="main">'+body+'</main>'+footer(l)+'</body></html>\n'
 def intro(label,title,desc=''):return f'<div class="section-intro"><div><span class="eyebrow">{e(label)}</span><h2>{e(title)}</h2></div>'+('<p>'+e(desc)+'</p>' if desc else '')+'</div>'
 def contact(l):return f'<section class="contact-section anchor" id="contact"><div class="wrap"><span class="eyebrow">CONTACT</span><h2>{c(l,"contactTitle")}</h2><p>{c(l,"contact")}</p><div class="contact-bottom"><div>{link("mailto:"+CFG["contact"],CFG["contact"],"contact-email")}<p class="note">{c(l,"emailNote")}</p></div>{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div></section>'
@@ -100,7 +108,7 @@ def home_page(l):
   def compact2(pid,img,alt,desc):
    p=prod(l,pid)
    return f'<a class="compact-project" href="{ph(l,pid)}"><div class="compact-image {pid}"><img src="{img}" alt="{e(alt)}" loading="lazy" width="480" height="300"></div><div class="compact-copy"><h4>{e(p["name"])}</h4><p>{e(desc)}</p><span class="compact-arrow" aria-hidden="true">↗</span></div></a>'
-  decision_showcase=f'<article class="showcase-select">{safe_visual}{safe_text}</article><div class="commerce-extras">{light_feature}<div class="compact-grid">'+compact2('revenue','/media/gfx/revenue_goodmorning.jpg','AP Revenue — GOOD MORNING 10월 10일 예약 페이스',d['revenue'])+compact2('travel','/media/inbound_frame.jpg','AP Travel',d['travel'])+'</div></div>'
+  decision_showcase=f'<article class="showcase-select">{safe_visual}{safe_text}</article><div class="commerce-extras">{light_feature}<div class="compact-grid">'+compact2('revenue','/media/gfx/revenue_goodmorning.jpg','AP Revenue — 오늘 손볼 날짜 세 개',d['revenue'])+compact2('travel','/media/inbound_frame.jpg','AP Travel',d['travel'])+'</div></div>'
  else:
   decision_showcase='<div class="engine-product-grid">'+decision_cards+'</div>'
  rgrg=f'<article class="rgrg-feature"><div class="rgrg-stage"><span class="rgrg-star" aria-hidden="true">✦</span><div class="rgrg-title">RGRG <span>오~알지</span></div><img src="/media/games/qa_shot_01.jpg" width="1396" height="644" alt="RGRG — existing quiz battle game interface" loading="lazy"></div><div class="rgrg-copy"><span class="eyebrow">GLOBAL LEARNING GAME</span><h4>{e(h["rgrgTag"])}</h4><p>{e(h["rgrgPacks"])}</p><p class="visual-caption">{e(h["rgrgNote"])}</p>{link(ph(l,"rgrg"),detail)}</div></article>'
@@ -114,7 +122,7 @@ def home_page(l):
  about_short=f'<section class="home-about section" id="about"><div class="wrap"><div class="split"><div><span class="eyebrow">ABOUT AP HOLDINGS</span><h2>{e(h["aboutTitle"])}</h2></div><div><p>{e(h["about"])}</p><div class="actions">{button(f"/{l}/about/",h["aboutMore"])}{button(f"/{l}/ir/","IR / INVESTORS",True)}</div></div></div></div></section>'+lab(l)
  contact_short=f'<section class="contact-section home-contact" id="contact"><div class="wrap"><span class="eyebrow">CONTACT</span><div class="contact-bottom"><div><h2>Build with AP.</h2><p>{e(h["contact"])}</p></div>{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div></section>'
  intro_items=h.get('portfolioIntro') or [tag for _,_,tag,_ in GROUPS]
- three=f'<section class="section" id="businesses"><div class="wrap" style="text-align:center"><span class="eyebrow">THREE BUSINESSES · ONE SYSTEM</span><div class="product-media" style="background:transparent;padding:0;margin:0 auto;max-width:1100px"><img src="/media/gfx/three_businesses.jpg" alt="Decision Intelligence · Commerce · Play &amp; Learn — one AP engine" width="1600" height="900" loading="eager"></div></div></section>'
+ three=f'<section class="section" id="businesses" style="padding-top:28px;padding-bottom:64px"><div class="wrap" style="text-align:center"><span class="eyebrow">THREE BUSINESSES · ONE SYSTEM</span><div class="product-media" style="background:transparent;padding:0;margin:0 auto;max-width:1100px"><img src="/media/gfx/three_businesses.jpg" alt="Decision Intelligence · Commerce · Play &amp; Learn — one AP engine" width="1600" height="747" loading="eager"></div></div></section>'
  return hero+three+portfolios+why+global_short+about_short+contact_short
 def ir_page(l):
  hero=f'<section class="page-hero"><div class="wrap"><span class="eyebrow">IR / INVESTORS · PUBLIC IR v2.0</span><h1>{c(l,"irTitle")}</h1><p class="lead">{c(l,"irIntro")}</p><div class="actions">{button("#materials",c(l,"request"),True)}{link(home(l)+"#portfolio",c(l,"explore"))}</div></div></section>'
@@ -131,7 +139,7 @@ def ir_page(l):
  milestones=section('milestones','08 / MILESTONES',c(l,'milestonesTitle'),'<div class="milestones">'+''.join(f'<article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>' for n,t,d in c(l,'milestones'))+f'</div><p class="note" style="margin-top:30px">{c(l,"milestoneNote")}</p>')
  roadmap=section('roadmap','09 / GLOBAL ROADMAP',c(l,'roadmapTitle'),f'<p class="body">{c(l,"roadmap")}</p><p class="note" style="margin-top:25px">{c(l,"globalNote")}</p>')
  materials=section('materials','10 / INVESTOR CONTACT',c(l,'materialsTitle'),'<div class="materials">'+''.join(f'<article><h3>{c(l,k+"Title")}</h3><p>{c(l,k+"Desc")}</p></article>' for k in ['public','share','nda'])+f'</div><div class="actions">{button(mail("Request Investor Materials — IR v2.0"),c(l,"request"),True)}</div><p class="note" style="margin-top:20px">{c(l,"requestNote")}</p><p class="note" style="margin-top:28px">{c(l,"version")}</p>')
- return hero+sub+thesis+founder+model+proof+'</div>'+global_section(l)+'<div class="wrap">'+portfolios+evidence+milestones+roadmap+materials+'</div>'+contact(l)
+ return hero+sub+thesis+founder+model+proof+'</div>'+global_section(l)+'<div class="wrap">'+portfolios+evidence+milestones+roadmap+materials+'</div>'
 # Optional evidence sections per product/connector, data-driven from locale JSON. Existing v2 classes only.
 def blocks(items):
  h=''
@@ -160,32 +168,34 @@ def product_page(l,p):
  pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (오~알지)" if pid=="rgrg" and l=="ko" else "")}</h1><h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p></div></section><section class="section"><div class="wrap">'
  if pid=='rgrg':
   body+='<figure class="rgrg-detail"><img src="/media/games/qa_shot_01.jpg" alt="RGRG — existing quiz battle interface" width="1396" height="644"><figcaption class="note">'+HOME_COPY[l]['rgrgNote']+'</figcaption></figure>'
- if p.get('image') and pid!='rgrg':
+ if p.get('heroSplit') and p.get('image'):
+  body+=f'<article class="showcase-lia"><a class="showcase-lia-image" href="{p["image"]}"><img src="{p["image"]}" width="800" height="800" loading="lazy" alt="{e(p["name"])}"></a><div class="showcase-copy"><span class="eyebrow">{e(p["role"])}</span><h3>{e(p["tag"])}</h3><p>{e(p["desc"])}</p>'+(f'<div class="actions">'+''.join(button(u,l2) for u,l2 in p.get("heroLinks",[]))+'</div>' if p.get('heroLinks') else '')+'</div></article>'
+ elif p.get('image') and pid!='rgrg':
   visual=f'<video autoplay muted loop playsinline preload="metadata" poster="{p["image"]}" src="{p["video"]}" aria-label="{e(p["name"])} — existing concept video"></video>' if p.get('video') else f'<img src="{p["image"]}" alt="{e(p["name"])} — {c(l,"history")}" width="1000" height="600" loading="lazy">'
   body+=f'<figure style="margin:0 0 45px"><div class="product-media">{visual}</div><figcaption class="note">{c(l,"rgrgAssetNote" if pid=="rgrg" else "assetNote")}</figcaption></figure>'
- body+=('<div class="product-body" hidden>' if p.get('hideGeneric') else f'<div class="product-body"><span class="eyebrow">{e(p["role"])}</span><h2>{e(p["tag"])}</h2>{flow(p["flow"])}<p class="note">{e(p["note"])}</p>')
+ body+=('<div class="product-body" hidden>' if (p.get('hideGeneric') or p.get('heroSplit')) else f'<div class="product-body"><span class="eyebrow">{e(p["role"])}</span><h2>{e(p["tag"])}</h2>{flow(p["flow"])}<p class="note">{e(p["note"])}</p>')
  if p.get('link'):body+=f'<div class="actions">{link(p["link"],p["linkLabel"],"button",True)}</div>'
  if pid=='safe':body+=f'<p>{c(l,"legacySafe")}</p><div class="actions">{button("/business/safelist-connect.html",c(l,"connector"))}</div>'
  if pid=='light':body+=f'<div class="actions">{button("/business/lightlist-connect.html",c(l,"connector"))}</div>'
  if pid=='revenue':body+=f'<p>{c(l,"proof")}</p><p class="note">{c(l,"proofNote")}</p><div class="actions">{button(f"/{l}/ir/#proof",c(l,"proofTitle"))}</div>'
  if pid=='select' and not p.get('hideGeneric'):body+=f'<p>{c(l,"selectKo")}</p><div class="channels" style="border-color:var(--line)"><div><b>OFFLINE</b><span>Experience + Decision</span></div><div><b>ONLINE</b><span>Transaction + Fulfillment</span></div></div>'+expert(l)
  if pid=='rgrg' and not p.get('hideGeneric'):body+=f'<h2 style="margin-top:40px">{c(l,"rgrgTitle")}</h2><p>{c(l,"rgrg")}</p>{tags(["Vietnamese → Korean","Korean → Vietnamese","Japanese → Korean","French → Korean","Korean → English"])}<p class="note">{c(l,"pairs")}</p>'
- if pid=='lia':body+=f'<p>{c(l,"liaEvidence")}</p><div class="actions">{link("https://www.instagram.com/lia_park55/","Instagram","button",True)}{link("https://www.tiktok.com/@lia_park55","TikTok","button",True)}</div>'
- if pid=='lastwave':body+=f'<h2 style="margin-top:40px">{c(l,"creatorTitle")}</h2><p>{c(l,"creator")}</p>'
- if pid=='lia':
+ if pid=='lia' and not p.get('heroSplit'):body+=f'<p>{c(l,"liaEvidence")}</p><div class="actions">{link("https://www.instagram.com/lia_park55/","Instagram","button",True)}{link("https://www.tiktok.com/@lia_park55","TikTok","button",True)}</div>'
+ if pid=='lastwave' and not p.get('hideGeneric'):body+=f'<h2 style="margin-top:40px">{c(l,"creatorTitle")}</h2><p>{c(l,"creator")}</p>'
+ if pid=='lia' and not p.get('hideArchive'):
   body+='<h2 style="margin-top:45px">Content archive</h2><div class="grid-3" style="margin-top:24px">'+''.join(f'<figure style="margin:0"><video controls playsinline preload="none" poster="/media/lia/review_ep{i}_{name}_poster.jpg" src="/media/lia/review_ep{i}_{name}.mp4"></video><figcaption class="note">LIA · {label}</figcaption></figure>' for i,name,label in [(1,'suncream','Sun care'),(2,'mask','Mask'),(3,'tint','Lip tint')])+'</div><p class="note">AI-generated content · '+c(l,'assetNote')+'</p>'
- if pid=='lastwave':
+ if pid=='lastwave' and not p.get('hideGeneric'):
   body+='<h2 style="margin-top:45px">Characters &amp; worlds</h2><div class="grid-3" style="margin-top:24px">'+''.join(f'<figure style="margin:0"><img loading="lazy" src="/media/games/{src}" alt="{label}" width="500" height="500"><figcaption class="note">{label}</figcaption></figure>' for src,label in [('lw_hero_pixel.png','PIXEL'),('lw_hero_alfred.png','ALFRED'),('lw_hero_line.png','LINE'),('lw_hero_bluenewbie.png','BLUE NEWBIE'),('lw_hero_rookie.png','ROOKIE'),('lw_pov_gwanghwamun.jpg','World concept')])+'</div>'
  if pid=='commerce':
   body+='<h2 style="margin-top:45px">Curation archive</h2><p class="note">'+c(l,'curationNote')+'</p><div class="grid-3">'+''.join(f'<figure style="margin:0"><img src="/media/shop/{src}.jpg" alt="{label}" loading="lazy" width="400" height="400"><figcaption class="note">{label}</figcaption></figure>' for src,label in [('01_dalba',"d’Alba"),('02_cosrx','COSRX'),('03_tirtir','TIRTIR'),('04_biodance','Biodance'),('06_romnd','rom&nd'),('07_anua','Anua'),('08_skin1004','SKIN1004'),('09_mediheal','Mediheal'),('10_banilaco','banila co')])+'</div>'
- body+='</div></div></section>'+sections(p.get('sections',[]))+contact(l)
+ body+='</div></div></section>'+sections(p.get('sections',[]))
  return body
 # Generate real, crawlable KO/EN documents; the builder, not client JS, selects copy.
 for l in PUBLISHED:
  out(f'{l}/index.html',shell(l,'AP HOLDINGS — We turn complexity into systems.',c(l,'hero'),home(l),home_page(l)))
  out(f'{l}/ir/index.html',shell(l,'IR / INVESTORS — AP Holdings',c(l,'irIntro'),f'/{l}/ir/',ir_page(l),'ir/'))
- out(f'{l}/about/index.html',shell(l,'About — AP Holdings',c(l,'origin'),f'/{l}/about/',about(l).replace('<h2>','<h1>',1).replace('</h2>','</h1>',1)+contact(l),'about/'))
- out(f'{l}/lab/index.html',shell(l,'Founder’s Lab — AP Holdings',c(l,'labDesc'),f'/{l}/lab/',f'<section class="page-hero"><div class="wrap"><span class="eyebrow">INDEPENDENT PROJECTS / EXPERIMENTS</span><h1>Ideas we build,<br>test and learn from.</h1><p class="lead">{c(l,"labDesc")}</p></div></section>'+lab(l,True)+contact(l),'lab/'))
+ out(f'{l}/about/index.html',shell(l,'About — AP Holdings',c(l,'origin'),f'/{l}/about/',about(l).replace('<h2>','<h1>',1).replace('</h2>','</h1>',1),'about/'))
+ out(f'{l}/lab/index.html',shell(l,'Founder’s Lab — AP Holdings',c(l,'labDesc'),f'/{l}/lab/',f'<section class="page-hero"><div class="wrap"><span class="eyebrow">INDEPENDENT PROJECTS / EXPERIMENTS</span><h1>Ideas we build,<br>test and learn from.</h1><p class="lead">{c(l,"labDesc")}</p></div></section>'+lab(l,True),'lab/'))
  for p in DATA[l]['products']:
   out(f'{l}/products/{p["id"]}/index.html',shell(l,p['name']+' — AP Holdings',p['desc'],ph(l,p['id']),product_page(l,p),f'products/{p["id"]}/'))
 # Keep root as a useful Korean page instead of browser/IP-dependent redirects.
