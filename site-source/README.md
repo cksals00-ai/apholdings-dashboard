@@ -75,3 +75,9 @@ Home order: Hero → Featured Projects (AP SELECT, LIA, AP Revenue) → three po
 Original Safe food-scan, Light food-choice, Travel demand/event and craft visuals are reused in the homepage grids. Their existing videos are restored on the corresponding product pages using explicit controls, preload=none and existing poster files. Travel remains a global cross-market decision product.
 
 AP SELECT uses a new Higgsfield concept image and eight-second silent film, identified as a design-stage AI concept. Media provenance is in `select-media.json`. LIA and Revenue use short, one-time CSS path animations; Revenue’s visual contains no actual metrics or operating data.
+
+### 2.0.3 — Core engine and concrete business explanations
+
+Homepage order: brand → AP engine (data, context, decision/process, action, outcome) → three businesses → principles → global → about/IR/contact. The engine is a shared design model, not a claim that all products run on one deployed service. Decision cards explain inputs and outputs; Revenue remains an independently developed Working Proof. SELECT is under Commerce. Its original full 16:9 video is displayed without cropping and with play/pause controls below the picture. LIA explicitly identifies itself as an AI Influencer on home and product pages. RGRG reuses the existing `media/games/qa_shot_01.jpg` game interface in a blue/yellow stage composition; decorative motion respects reduced-motion preferences. No new operational demo data, metrics, or confidential data introduced. KO and EN updated; other locales remain review-pending.
+
+Validation: static generation, 58-page link/SEO/privacy check, JavaScript syntax check. Native device QA and professionally reviewed additional locales remain pending.
