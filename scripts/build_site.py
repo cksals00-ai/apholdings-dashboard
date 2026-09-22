@@ -108,7 +108,7 @@ def home_page(l):
   def compact2(pid,img,alt,desc):
    p=prod(l,pid)
    return f'<a class="compact-project" href="{ph(l,pid)}"><div class="compact-image {pid}"><img src="{img}" alt="{e(alt)}" loading="lazy" width="480" height="300"></div><div class="compact-copy"><h4>{e(p["name"])}</h4><p>{e(desc)}</p><span class="compact-arrow" aria-hidden="true">↗</span></div></a>'
-  decision_showcase=f'<article class="showcase-select">{safe_visual}{safe_text}</article><div class="commerce-extras">{light_feature}<div class="compact-grid">'+compact2('revenue','/media/gfx/revenue_goodmorning.jpg','AP Revenue — 예약 페이스 그래프, 작년 대비',d['revenue'])+compact2('travel','/media/inbound_frame.jpg','AP Travel',d['travel'])+'</div></div>'
+  decision_showcase=f'<article class="showcase-select">{safe_visual}{safe_text}</article><div class="commerce-extras">{light_feature}<div class="compact-grid">'+compact2('revenue','/media/gfx/revenue_goodmorning.jpg','AP Revenue — 예약 페이스 그래프, 작년 대비',d['revenue'])+compact2('travel','/media/gfx/travel_scene.jpg','AP Travel — 시장 신호 → 기회 → 사람의 결정 → 결과',d['travel'])+'</div></div>'
  else:
   decision_showcase='<div class="engine-product-grid">'+decision_cards+'</div>'
  rgrg=f'<article class="rgrg-feature"><div class="rgrg-stage"><span class="rgrg-star" aria-hidden="true">✦</span><div class="rgrg-title">RGRG <span>오~알지</span></div><img src="/media/games/qa_shot_01.jpg" width="1396" height="644" alt="RGRG — existing quiz battle game interface" loading="lazy"></div><div class="rgrg-copy"><span class="eyebrow">GLOBAL LEARNING GAME</span><h4>{e(h["rgrgTag"])}</h4><p>{e(h["rgrgPacks"])}</p><p class="visual-caption">{e(h["rgrgNote"])}</p>{link(ph(l,"rgrg"),detail)}</div></article>'

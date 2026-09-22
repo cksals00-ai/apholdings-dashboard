@@ -696,8 +696,6 @@
         "Campaign",
         "Outcome"
       ],
-      "image": "/media/inbound_frame.jpg",
-      "video": "/media/inbound.mp4",
       "hideGeneric": true,
       "sections": [
         {
