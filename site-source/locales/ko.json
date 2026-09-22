@@ -193,7 +193,9 @@
         "Priority",
         "Human Action",
         "Outcome"
-      ]
+      ],
+      "link": "https://revenue.apholdings.kr/",
+      "linkLabel": "AP Revenue 바로가기"
     },
     {
       "id": "travel",
