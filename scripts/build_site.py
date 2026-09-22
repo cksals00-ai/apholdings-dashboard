@@ -1,3 +1,4 @@
+import re
 #!/usr/bin/env python3
 """Dependency-free static generation. Existing domain, asset paths and Pages hosting stay intact."""
 from pathlib import Path
@@ -38,14 +39,14 @@ def head(l,title,description,path,index=True,alternate_suffix=''):
  alternates=''.join(f'<link rel="alternate" hreflang="{lang}" href="{ORIGIN}/{lang}/{alternate_suffix}">' for lang in PUBLISHED) if index else ''
  if index:alternates+=f'<link rel="alternate" hreflang="x-default" href="{ORIGIN}/en/{alternate_suffix}">'
  sd={'@context':'https://schema.org','@type':'Organization','name':'AP Holdings','url':ORIGIN,'logo':ORIGIN+'/img/ap_mark.png','description':description,'email':CFG['contact'],'sameAs':['https://www.instagram.com/lia_park55/','https://www.tiktok.com/@lia_park55']}
- return f'''<!doctype html><html lang="{l}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description,quote=True)}"><meta name="robots" content="{'index,follow' if index else 'noindex,follow'}"><link rel="canonical" href="{canonical}">{alternates}<meta property="og:type" content="website"><meta property="og:site_name" content="AP Holdings"><meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:locale" content="{'ko_KR' if l=='ko' else 'en_US'}"><meta name="theme-color" content="#ffffff"><link rel="icon" href="/img/ap_mark.png">{fonts}<link rel="stylesheet" href="/assets/v2/site.css?v=2.5"><script defer src="/assets/v2/site.js?v=2.4"></script><script type="application/ld+json">{json.dumps(sd,ensure_ascii=False).replace('<','\\u003c')}</script></head>'''
+ return f'''<!doctype html><html lang="{l}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description,quote=True)}"><meta name="robots" content="{'index,follow' if index else 'noindex,follow'}"><link rel="canonical" href="{canonical}">{alternates}<meta property="og:type" content="website"><meta property="og:site_name" content="AP Holdings"><meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:locale" content="{'ko_KR' if l=='ko' else 'en_US'}"><meta name="theme-color" content="#ffffff"><link rel="icon" href="/img/ap_mark.png">{fonts}<link rel="stylesheet" href="/assets/v2/site.css?v=2.6"><script defer src="/assets/v2/site.js?v=2.4"></script><script type="application/ld+json">{json.dumps(sd,ensure_ascii=False).replace('<','\\u003c')}</script></head>'''
 def nav(l,suffix=''):
- urls=[home(l)+'#about',home(l)+'#portfolio',home(l)+'#philosophy',f'/{l}/ir/',home(l)+'#contact']
+ urls=[home(l)+'#businesses',home(l)+'#portfolio',f'/{l}/about/',f'/{l}/ir/',home(l)+'#contact']
  links=''.join(f'<a href="{u}"'+(' class="ir-link"' if i==3 else '')+'>'+e(label)+'</a>' for i,(u,label) in enumerate(zip(urls,c(l,'nav'))))
  langs=''.join(f'<li><a href="/{key}/{suffix if key in PUBLISHED else ""}" lang="{key}"'+(' aria-current="page"' if key==l else '')+'>'+e(value['label'])+('' if key in PUBLISHED else '<small>In preparation</small>')+'</a></li>' for key,value in CFG['locales'].items())
  return f'<a class="skip" href="#main">{c(l,"skip")}</a><header class="site-header"><div class="wrap header-inner">{logo(l)}<nav class="desktop-nav" aria-label="Main">{links}</nav><details class="language"><summary aria-label="{c(l,"language")}">{l.upper()}</summary><ul>{langs}</ul></details><details class="mobile-menu"><summary>{c(l,"menu")}</summary><nav aria-label="Mobile">{links}</nav></details></div></header>'
 def footer(l):
- pol=''.join(f'<li>{link(url,name,"")}</li>' for name,url in POLICIES)
+ pol='<li class="pol-label">'+('앱 개인정보 처리방침' if l=='ko' else 'App privacy policies')+'</li>'+''.join(f'<li>{link(url,name,"")}</li>' for name,url in POLICIES)
  ko=l=='ko'
  col=lambda t,items:'<div><b>'+e(t)+'</b>'+''.join(link(u,n,'') for n,u in items)+'</div>'
  cols=col('AP Holdings' ,[(('회사 소개' if ko else 'About'),f'/{l}/about/'),('IR / INVESTORS',f'/{l}/ir/'),('Founder’s Lab',f'/{l}/lab/')])
@@ -53,7 +54,7 @@ def footer(l):
  cols+=col('Commerce',[(prod(l,x)['name'],ph(l,x)) for x in ['select','commerce','craft','lia']])
  cols+=col('Play & Learn',[(prod(l,x)['name'],ph(l,x)) for x in ['rgrg','cubs','lastwave']])
  cols+=col(('커넥터' if ko else 'Connectors'),[(('세이프리스트 · 클로드' if ko else 'Safelist · Claude'),'/business/safelist-connect.html'),(('라이트리스트 · 클로드' if ko else 'Lightlist · Claude'),'/business/lightlist-connect.html')])
- contact_line=f'<div class="footer-contact"><div><span class="eyebrow">CONTACT</span><h3>Build with AP.</h3><p>{c(l,"contact")}</p></div><div>{link("mailto:"+CFG["contact"],CFG["contact"],"contact-email")}{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div>'
+ contact_line=f'<div class="footer-contact" id="contact"><div><span class="eyebrow">CONTACT</span><h3>Build with AP.</h3><p>{c(l,"contact")}</p></div><div>{link("mailto:"+CFG["contact"],CFG["contact"],"contact-email")}{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div>'
  return f'<footer class="site-footer"><div class="wrap">{contact_line}<div class="footer-top">{logo(l)}<div class="footer-map">{cols}</div></div><ul class="footer-policies" aria-label="{c(l,"privacy")}">{pol}</ul><div class="footer-bottom"><span>© 2026 AP Holdings. All rights reserved.</span><span>Built in Korea. Designed for the world.</span>{link('#top',c(l,'top'),'')}</div></div></footer>'
 def shell(l,title,desc,path,body,suffix='',index=True):return head(l,title,desc,path,index,suffix)+'<body id="top">'+nav(l,suffix)+'<main id="main">'+body+'</main>'+footer(l)+'</body></html>\n'
 def intro(label,title,desc=''):return f'<div class="section-intro"><div><span class="eyebrow">{e(label)}</span><h2>{e(title)}</h2></div>'+('<p>'+e(desc)+'</p>' if desc else '')+'</div>'
@@ -111,7 +112,7 @@ def home_page(l):
   decision_showcase=f'<article class="showcase-select">{safe_visual}{safe_text}</article><div class="commerce-extras">{light_feature}<div class="compact-grid">'+compact2('revenue','/media/gfx/revenue_card.jpg','AP Revenue — 07:00 오늘의 판단, 취소 노출',d['revenue'])+compact2('travel','/media/gfx/travel_card.jpg','AP Travel — 일본→서울 · 30대 커플 · 11월 첫째 주',d['travel'])+'</div></div>'
  else:
   decision_showcase='<div class="engine-product-grid">'+decision_cards+'</div>'
- rgrg=f'<article class="rgrg-feature"><div class="rgrg-stage"><span class="rgrg-star" aria-hidden="true">✦</span><div class="rgrg-title">RGRG <span>오~알지</span></div><img src="/media/games/qa_shot_01.jpg" width="1396" height="644" alt="RGRG — existing quiz battle game interface" loading="lazy"></div><div class="rgrg-copy"><span class="eyebrow">GLOBAL LEARNING GAME</span><h4>{e(h["rgrgTag"])}</h4><p>{e(h["rgrgPacks"])}</p><p class="visual-caption">{e(h["rgrgNote"])}</p>{link(ph(l,"rgrg"),detail)}</div></article>'
+ rgrg=f'<article class="rgrg-feature"><div class="rgrg-stage"><span class="rgrg-star" aria-hidden="true">✦</span><div class="rgrg-title">RGRG <span>오~알지</span></div><img src="/media/games/qa_shot_01.jpg" width="1396" height="644" alt="RGRG — existing quiz battle game interface" loading="lazy"></div><div class="rgrg-copy"><span class="eyebrow">GLOBAL LEARNING GAME</span><h4>{e(h["rgrgTag"])}</h4><p>{e(h["rgrgPacks"])}</p><div class="rgrg-stats"><div><b>6인</b><span>실시간 대결</span></div><div><b>10문항</b><span>한 판 3분</span></div><div><b>5</b><span>언어 페어</span></div></div><p class="visual-caption">{e(h["rgrgNote"])}</p>{link(ph(l,"rgrg"),detail)}</div></article>'
  groups=''
  for i,(gid,title,tag,ids) in enumerate(GROUPS):
   contents=decision_showcase if gid=='decision' else select_feature+'<div class="commerce-extras">'+lia_feature+'<div class="compact-grid">'+compact('commerce')+compact('craft')+'</div></div>' if gid=='commerce' else rgrg+'<div class="compact-grid games-grid">'+compact('cubs')+compact('lastwave')+'</div>'
@@ -123,7 +124,7 @@ def home_page(l):
  contact_short=f'<section class="contact-section home-contact" id="contact"><div class="wrap"><span class="eyebrow">CONTACT</span><div class="contact-bottom"><div><h2>Build with AP.</h2><p>{e(h["contact"])}</p></div>{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div></section>'
  intro_items=h.get('portfolioIntro') or [tag for _,_,tag,_ in GROUPS]
  three=f'<section class="section" id="businesses" style="padding-top:28px;padding-bottom:64px"><div class="wrap" style="text-align:center"><span class="eyebrow">THREE BUSINESSES · ONE SYSTEM</span><div class="product-media" style="background:transparent;padding:0;margin:0 auto;max-width:1100px"><img src="/media/gfx/three_businesses.jpg" alt="Decision Intelligence · Commerce · Play &amp; Learn — one AP engine" width="1600" height="573" loading="eager"></div></div></section>'
- return hero+three+portfolios+why+global_short+about_short+contact_short
+ return hero+three+portfolios+why+global_short+about_short
 def ir_page(l):
  hero=f'<section class="page-hero"><div class="wrap"><span class="eyebrow">IR / INVESTORS · PUBLIC IR v2.0</span><h1>{c(l,"irTitle")}</h1><p class="lead">{c(l,"irIntro")}</p><div class="actions">{button("#materials",c(l,"request"),True)}{link(home(l)+"#portfolio",c(l,"explore"))}</div></div></section>'
  navitems=[('thesis','Investment Thesis'),('capability','Founder Capability'),('model','AP Operating Model'),('proof','Working Proof'),('global','Global-by-Design'),('portfolios','Portfolio'),('evidence','Execution Evidence'),('milestones','Milestones'),('roadmap','Global Roadmap'),('materials','Investor Contact')]
@@ -161,8 +162,15 @@ def blocks(items):
 def sections(items):
  h=''
  for sec in items:
-  head_=f'<div class="section-intro"><div><span class="number">{e(sec["label"])}</span><h2>{e(sec["title"])}</h2></div><p>{e(sec["desc"])}</p></div>' if sec.get('desc') else f'<div class="section-head"><span class="number">{e(sec["label"])}</span><h2>{e(sec["title"])}</h2></div>'
-  h+=f'<section class="section{" soft" if sec.get("soft") else ""} anchor" id="{e(sec["id"])}"><div class="wrap">{head_}{blocks(sec["blocks"])}</div></section>'
+  bl=list(sec['blocks']); side=[x for x in bl if x['type'] in ('actions','note')]; rest=[x for x in bl if x['type'] not in ('actions','note')]
+  side_html=blocks([dict(x,items=[[u,lab,('button' if k=='link' else k)] for u,lab,k in x['items']]) if x['type']=='actions' else x for x in side])
+  if sec.get('cta'):
+   head_=f'<div class="cta-block"><span class="number">{e(sec["label"])}</span><h2>{e(sec["title"])}</h2><p>{e(sec.get("desc",""))}</p>{side_html}</div>'
+  elif sec.get('desc'):
+   head_=f'<div class="section-intro"><div><span class="number">{e(sec["label"])}</span><h2>{e(sec["title"])}</h2></div><div class="intro-side"><p>{e(sec["desc"])}</p>{side_html}</div></div>'
+  else:
+   head_=f'<div class="section-head"><span class="number">{e(sec["label"])}</span><h2>{e(sec["title"])}</h2>{side_html}</div>'
+  h+=f'<section class="section{" soft" if sec.get("soft") else ""} anchor" id="{e(sec["id"])}"><div class="wrap">{head_}{blocks(rest)}</div></section>'
  return h
 def product_page(l,p):
  pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (오~알지)" if pid=="rgrg" and l=="ko" else "")}</h1><h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p></div></section><section class="section"><div class="wrap">'
@@ -189,6 +197,7 @@ def product_page(l,p):
  if pid=='commerce':
   body+='<h2 style="margin-top:45px">Curation archive</h2><p class="note">'+c(l,'curationNote')+'</p><div class="grid-3">'+''.join(f'<figure style="margin:0"><img src="/media/shop/{src}.jpg" alt="{label}" loading="lazy" width="400" height="400"><figcaption class="note">{label}</figcaption></figure>' for src,label in [('01_dalba',"d’Alba"),('02_cosrx','COSRX'),('03_tirtir','TIRTIR'),('04_biodance','Biodance'),('06_romnd','rom&nd'),('07_anua','Anua'),('08_skin1004','SKIN1004'),('09_mediheal','Mediheal'),('10_banilaco','banila co')])+'</div>'
  body+='</div></div></section>'+sections(p.get('sections',[]))
+ body=re.sub(r'<section class="section"><div class="wrap"><div class="product-body" hidden>.*?</div></div></section>','',body,flags=re.S)
  return body
 # Generate real, crawlable KO/EN documents; the builder, not client JS, selects copy.
 for l in PUBLISHED:
