@@ -27,16 +27,25 @@
  .urlbox button{border:0;background:#fff;color:#1a1410;font:inherit;font-weight:700;font-size:15px;padding:13px 20px;border-radius:13px;cursor:pointer}
  .urlbox button.done{background:var(--clay);color:#fff}
 
- /* ── 숫자 하나가 바뀌는 장면 ── */
- .flip{max-width:720px;margin:0 auto;display:grid;gap:0}
- .flip .row{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:18px;padding:26px 4px;border-bottom:1px solid var(--line)}
- .flip .row:last-child{border-bottom:0}
- .flip .k{font-size:clamp(15px,2.4vw,18px);color:#424245;letter-spacing:-.01em;text-align:left}
- .flip .k small{display:block;margin-top:5px;font-size:13.5px;color:var(--gray2)}
- .flip .v{font-size:clamp(30px,7vw,54px);letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
- .flip .v u{text-decoration:none;font-size:.44em;letter-spacing:-.02em;color:var(--gray);margin-left:3px}
- .flip .row.real .v{color:var(--clay)}
- .flip .row.real .k{color:var(--ink);font-weight:600}
+ /* ── 뒷면 순서와 봉지 순서가 뒤집히는 장면 ── */
+ .cmp{max-width:840px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:start}
+ @media(max-width:700px){.cmp{grid-template-columns:1fr;gap:10px}.cmp .arrow{transform:rotate(90deg);margin:2px auto}}
+ .col{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 20px;text-align:left}
+ section.alt .col{background:#fff}
+ .col.real{border-color:rgba(194,65,12,.34);box-shadow:0 10px 34px rgba(194,65,12,.09)}
+ .ttl{font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:14px}
+ .ttl span{display:block;font-weight:400;font-size:13px;color:var(--gray2);margin-top:2px}
+ .it{display:flex;align-items:baseline;gap:9px;padding:11px 0;border-bottom:1px solid var(--line)}
+ .it i{font-style:normal;font-size:12px;font-weight:700;color:var(--gray2);width:13px;flex:none}
+ .it b{font-weight:500;font-size:16px;letter-spacing:-.02em;flex:1}
+ .it u{text-decoration:none;font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+ .it s{text-decoration:none;font-size:12.5px;color:var(--gray2);width:34px;text-align:right;flex:none}
+ .it.low u{color:var(--gray2)}
+ .it.hi b,.it.hi u,.it.hi i{color:var(--clay)}
+ .it.hi u{font-size:22px}
+ .cap{margin:13px 0 0;font-size:14px;color:var(--gray);line-height:1.5}
+ .col.real .cap{color:var(--ink)}
+ .arrow{align-self:center;font-size:22px;color:var(--clay);line-height:1}
 
  /* ── 답변 한 조각 ── */
  .said{max-width:720px;margin:0 auto;text-align:left}
@@ -74,8 +83,8 @@
  </video>
  <div class="in">
   <div class="eyebrow">LIGHTLIST</div>
-  <h1>먹기 전에<br>물어보세요</h1>
-  <p>클로드에 주소 한 줄을 붙이면,<br>음식 열량을 <em>100g당과 한 그릇 기준</em>으로 같이 알려 줍니다.</p>
+  <h1>안 사는 게 아니라,<br>덜 무거운 걸 고릅니다</h1>
+  <p>새우깡 한 봉지 <em>465kcal</em>.<br>같은 과자 칸에 <em>70kcal</em>짜리가 있습니다.</p>
   <div class="urlbox">
    <code id="u">https://lightlist-mcp.onrender.com/mcp</code>
    <button id="c" type="button">주소 복사</button>
@@ -84,24 +93,39 @@
 </div>
 
 <section class="alt"><div class="wrap">
- <h2 class="up">「100g당 73kcal」은<br>한 그릇을 먹는다는 걸 모릅니다.</h2>
- <p class="sub up">다이어트 앱이 보여 주는 건 앞의 숫자입니다.<br>정작 알아야 할 건 뒤의 숫자고요.</p>
- <div class="flip up" id="flip">
-  <div class="row"><div class="k">짬뽕 100g당<small>앱에 적힌 숫자</small></div><div class="v"><span data-to="73">0</span><u>kcal</u></div></div>
-  <div class="row"><div class="k">그런데 한 그릇은<small>식약처 자료의 1인분 중량</small></div><div class="v"><span data-to="800">0</span><u>g</u></div></div>
-  <div class="row real"><div class="k">그래서 실제로 먹는 열량<small>73 × 8</small></div><div class="v"><span data-to="584">0</span><u>kcal</u></div></div>
+ <h2 class="up">뒷면 숫자로는<br>고를 수가 없습니다.</h2>
+ <p class="sub up">포장 뒷면은 전부 <b>100g당</b>인데, 봉지는 46g·66g·90g으로 제각각이니까요.<br>그래서 실제로 먹는 양으로 세면 <b>순서가 뒤집힙니다.</b></p>
+
+ <div class="cmp up" id="cmp">
+  <div class="col">
+   <div class="ttl">포장 뒷면 <span>100g당</span></div>
+   <div class="it"><i>1</i><b>포카칩</b><u>570</u></div>
+   <div class="it"><i>2</i><b>홈런볼</b><u>543</u></div>
+   <div class="it low"><i>3</i><b>새우깡</b><u>517</u></div>
+   <p class="cap">새우깡이 제일 가벼워 보입니다.</p>
+  </div>
+  <div class="arrow" aria-hidden="true">→</div>
+  <div class="col real">
+   <div class="ttl">한 봉지 <span>실제로 먹는 양</span></div>
+   <div class="it hi"><i>1</i><b>새우깡</b><u>465</u><s>90g</s></div>
+   <div class="it"><i>2</i><b>포카칩</b><u>376</u><s>66g</s></div>
+   <div class="it"><i>3</i><b>홈런볼</b><u>250</u><s>46g</s></div>
+   <p class="cap">실제로는 <b>제일 무겁습니다.</b></p>
+  </div>
  </div>
 </div></section>
 
 <section><div class="wrap">
- <h2 class="up">그래서 둘을 같이 말합니다.</h2>
+ <h2 class="up">그래서 대신 뭘 사야 하는지까지<br>말해 줍니다.</h2>
  <div class="said up">
-  <p class="q">오늘 짜장면이랑 짬뽕 중에 뭐가 나아?</p>
+  <p class="q">새우깡 사려는데 더 가벼운 거 있어?</p>
   <div class="card">
-   <span class="verdict">판정: 짬뽕이 가볍습니다 (1인분 기준)</span>
-   <div class="l"><i>짬뽕</i><b>584kcal <span>100g당 73 · 1인분 800g</span></b></div>
-   <div class="l"><i>짜장면</i><b>638kcal <span>100g당 111 · 1인분 575g</span></b></div>
-   <span class="tail">100g당으로만 보면 짬뽕이 훨씬 가벼워 보이지만, 한 그릇이 800g이라 차이는 54kcal뿐입니다.<br>식약처 공개 자료 기준 · 가게·조리법에 따라 달라집니다</span>
+   <span class="verdict">새우깡 대신 · 과자류·빵류 또는 떡류</span>
+   <div class="l"><i>새우깡 <span>㈜농심</span></i><b>465kcal <span>90g</span></b></div>
+   <div class="l"><i>깔라만시코코젤리 <span>㈜한미식품</span></i><b>70kcal <span>75g</span></b></div>
+   <div class="l"><i>데르뜨감귤 <span>매일유업㈜</span></i><b>70kcal <span>90g</span></b></div>
+   <div class="l"><i>말랑말랑사과한컵 <span>㈜건영제과</span></i><b>70kcal <span>75g</span></b></div>
+   <span class="tail">가장 가벼운 건 깔라만시코코젤리, 한 끼에 395kcal 덜 먹습니다.<br>식약처에 신고된 상품 30만 개에서 골랐습니다 · 가게·조리법에 따라 달라집니다</span>
   </div>
  </div>
 </div></section>
@@ -133,33 +157,15 @@
  var hv=document.getElementById('hv');
  if(hv){hv.addEventListener('error',function(){hv.style.display='none';},true);}
 
- var slow=matchMedia('(prefers-reduced-motion: reduce)').matches;
  var io=new IntersectionObserver(function(es){
   es.forEach(function(e){
    if(!e.isIntersecting)return;
    e.target.classList.add('seen');
    io.unobserve(e.target);
-   if(e.target.id==='flip')count(e.target);
   });
  },{threshold:.3});
  document.querySelectorAll('.up').forEach(function(el){io.observe(el);});
 
- // 숫자가 스스로 올라간다 — 73 다음에 584 가 오는 순간이 이 페이지의 전부다.
- function count(root){
-  root.querySelectorAll('[data-to]').forEach(function(el,i){
-   var to=+el.dataset.to;
-   if(slow){el.textContent=to.toLocaleString('ko-KR');return;}
-   var dur=900,delay=i*260,t0=null;
-   setTimeout(function(){
-    requestAnimationFrame(function step(ts){
-     if(!t0)t0=ts;
-     var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);
-     el.textContent=Math.round(to*e).toLocaleString('ko-KR');
-     if(p<1)requestAnimationFrame(step);
-    });
-   },delay);
-  });
- }
 })();
 </script>
 <footer class="sitefoot"><div class="in">
