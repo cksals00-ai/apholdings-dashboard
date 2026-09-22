@@ -108,7 +108,7 @@ def home_page(l):
   def compact2(pid,img,alt,desc):
    p=prod(l,pid)
    return f'<a class="compact-project" href="{ph(l,pid)}"><div class="compact-image {pid}"><img src="{img}" alt="{e(alt)}" loading="lazy" width="480" height="300"></div><div class="compact-copy"><h4>{e(p["name"])}</h4><p>{e(desc)}</p><span class="compact-arrow" aria-hidden="true">↗</span></div></a>'
-  decision_showcase=f'<article class="showcase-select">{safe_visual}{safe_text}</article><div class="commerce-extras">{light_feature}<div class="compact-grid">'+compact2('revenue','/media/gfx/revenue_goodmorning.jpg','AP Revenue — 오늘 손볼 날짜 세 개',d['revenue'])+compact2('travel','/media/inbound_frame.jpg','AP Travel',d['travel'])+'</div></div>'
+  decision_showcase=f'<article class="showcase-select">{safe_visual}{safe_text}</article><div class="commerce-extras">{light_feature}<div class="compact-grid">'+compact2('revenue','/media/gfx/revenue_goodmorning.jpg','AP Revenue — 예약 페이스 그래프, 작년 대비',d['revenue'])+compact2('travel','/media/inbound_frame.jpg','AP Travel',d['travel'])+'</div></div>'
  else:
   decision_showcase='<div class="engine-product-grid">'+decision_cards+'</div>'
  rgrg=f'<article class="rgrg-feature"><div class="rgrg-stage"><span class="rgrg-star" aria-hidden="true">✦</span><div class="rgrg-title">RGRG <span>오~알지</span></div><img src="/media/games/qa_shot_01.jpg" width="1396" height="644" alt="RGRG — existing quiz battle game interface" loading="lazy"></div><div class="rgrg-copy"><span class="eyebrow">GLOBAL LEARNING GAME</span><h4>{e(h["rgrgTag"])}</h4><p>{e(h["rgrgPacks"])}</p><p class="visual-caption">{e(h["rgrgNote"])}</p>{link(ph(l,"rgrg"),detail)}</div></article>'
@@ -153,7 +153,7 @@ def blocks(items):
   elif t=='quote':h+=f'<p class="quote">{e(b["text"])}</p>'
   elif t=='note':h+=f'<p class="note">{e(b["text"])}</p>'
   elif t=='p':h+=f'<p>{e(b["text"])}</p>'
-  elif t=='media':h+=f'<figure style="margin:0 0 45px"><div class="product-media"><img src="{b["src"]}" alt="{e(b["alt"])}" width="1200" height="675" loading="lazy"></div>'+(f'<figcaption class="note">{e(b["caption"])}</figcaption>' if b.get('caption') else '')+'</figure>'
+  elif t=='media':h+=f'<figure style="margin:0 0 45px"><div class="product-media" style="background:transparent;padding:0"><img src="{b["src"]}" alt="{e(b["alt"])}" width="1600" height="900" loading="lazy" style="width:100%;max-height:none;border-radius:24px"></div>'+(f'<figcaption class="note">{e(b["caption"])}</figcaption>' if b.get('caption') else '')+'</figure>'
   elif t=='split':h+='<div class="split"><div>'+blocks(b['left'])+'</div><div>'+blocks(b['right'])+'</div></div>'
   elif t=='h3':h+=f'<h3>{e(b["text"])}</h3>'
   elif t=='actions':h+='<div class="actions">'+''.join(button(u,lab,True) if kind=='primary' else button(u,lab) if kind=='button' else link(u,lab) for u,lab,kind in b['items'])+'</div>'

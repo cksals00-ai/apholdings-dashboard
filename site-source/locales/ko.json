@@ -81,7 +81,7 @@
     "irIntro": "AP Holdings는 2026년 8월 설립된 1인 창업 회사입니다. 출시한 앱 7개, 운영 중인 AI 커넥터 2개, 파일럿 준비가 끝난 호텔 매출 판단 엔진 1개.\n아래는 지금 있는 것과 다음에 증명할 것을 구분한 공개 자료입니다.",
     "investThesis": "사람들은 정보가 없어서가 아니라, 정보와 행동 사이에서 결정을 못 해 멈춥니다. 과자 하나를 고를 때도, 호텔 객실 가격을 정할 때도 같습니다.\nAP는 그 지점에 데이터 · 전문가 기준 · 절차 · 소프트웨어를 넣어 반복 가능한 판단 시스템으로 만듭니다. 한 번 만든 판단 구조는 다음 제품에서 다시 씁니다.",
     "proofTitle": "AP Revenue — 지금 작동하는 것",
-    "proof": "호텔 예약·취소 데이터를 넣으면, 오늘 아침 손봐야 할 투숙일을 위험도 순으로 뽑고 근거를 붙입니다. 담당자가 승인·수정·거절하고, 그 결과를 7·14·30일 뒤에 다시 잽니다.\n코드 1,254줄 · 자동 테스트 21건 통과 · Supabase 배포 팩 준비. 합성 데이터로 개발했고, 외부 파일럿은 아직 없습니다.",
+    "proof": "호텔 예약·취소 데이터를 넣으면, 예약이 느려진 투숙일을 매일 아침 위험도 순으로 뽑고 근거를 붙입니다. 담당자가 승인·수정·거절하고, 그 결과를 7·14·30일 뒤에 다시 잽니다.\n코드 1,254줄 · 자동 테스트 21건 통과 · Supabase 배포 팩 준비. 합성 데이터로 개발했고, 외부 파일럿은 아직 없습니다.",
     "proofNote": "제품화 후보. 외부 파일럿 · 매출 · 성과는 검증되면 그때 공개합니다.",
     "demoTitle": "아침에 담당자가 보는 것",
     "demoSteps": [
@@ -183,15 +183,13 @@
           "desc": "AI는 모르는 것도 그럴듯하게 말합니다. 아이 먹을 것엔 그게 제일 위험합니다.\n세이프리스트가 원본 자료를 확인해 AI에게 사실만 건넵니다.",
           "blocks": [
             {
-              "type": "proof",
-              "quote": "오예스 우리 애 먹어도 돼? 우유랑 밀 피해.",
-              "flow": [
-                "밀이 들어 있어요",
-                "해태제과식품(주)",
-                "신고된 성분 · 알류(가금류), 밀, 카카오",
-                "근거 · 식약처 품목제조보고 원재료"
-              ],
-              "note": "진단이 아니에요 · 공개 DB 기준 · 최종 판단은 보호자"
+              "type": "media",
+              "src": "/media/gfx/safe_why.jpg",
+              "alt": "AI만 있을 때는 추측, 세이프리스트가 있을 때는 식약처 원본 근거의 사실"
+            },
+            {
+              "type": "note",
+              "text": "진단이 아니다 · 공개 DB 기준 · 최종 판단은 보호자"
             }
           ]
         },
@@ -211,7 +209,7 @@
         {
           "id": "today",
           "label": "04 · 지금",
-          "title": "오늘, App Store와 클로드에서.",
+          "title": "오늘 App Store와 클로드. 다음은 Android · ChatGPT · Gemini.",
           "soft": true,
           "blocks": [
             {
@@ -230,7 +228,7 @@
               ]
             }
           ],
-          "desc": "무료 · 계정 없음 · 25만+ 한국 식품 DB 내장 · 스캔 즉시 판정 · 달력과 병원 리포트.\nAI 커넥터는 클로드에서 운영 중."
+          "desc": "무료 · 계정 없음 · 25만+ 한국 식품 DB 내장 · 스캔 즉시 판정 · 달력과 병원 리포트.\nAI 커넥터는 클로드에서 운영 중. ChatGPT · Gemini 커넥터와 Android 앱은 준비 중."
         },
         {
           "id": "exits",
@@ -403,62 +401,55 @@
       ],
       "sections": [
         {
-          "id": "proof",
-          "label": "WORKING PROOF",
-          "title": "지금 작동하는 것 — 라이트리스트.",
-          "soft": true,
-          "desc": "AP Light의 첫 기준은 열량입니다. 사려는 식품의 열량을 100g당과 한 봉지 기준으로 함께 보여줍니다. 식약처 공개 자료 31만 7천 건, 읽기 전용 도구 4개, 로그인 없음.",
+          "id": "scene",
+          "label": "01 · 한 장면",
+          "title": "새우깡 사려는데, 더 가벼운 거 있어?",
+          "desc": "말 한마디. 화면 없음.\n어느 AI든 어림짐작 대신 라이트리스트에 먼저 묻습니다.",
           "blocks": [
             {
-              "type": "grid2",
-              "items": [
-                {
-                  "type": "proof",
-                  "h3": "포장 뒷면 · 100g당",
-                  "ol": [
-                    "포카칩 — 570kcal",
-                    "홈런볼 — 543kcal",
-                    "새우깡 — 517kcal"
-                  ],
-                  "note": "새우깡이 제일 가벼워 보입니다."
-                },
-                {
-                  "type": "proof",
-                  "h3": "한 봉지 · 실제로 먹는 양",
-                  "ol": [
-                    "새우깡 — 465kcal · 90g",
-                    "포카칩 — 376kcal · 66g",
-                    "홈런볼 — 250kcal · 46g"
-                  ],
-                  "note": "실제로는 제일 무겁습니다. 하나만 보면 둘 다 거짓말이 됩니다 — 그래서 둘을 함께 보여줍니다."
-                }
-              ]
-            },
+              "type": "media",
+              "src": "/media/gfx/light_scene.jpg",
+              "alt": "말 한마디 → AI → 라이트리스트가 100g당과 한 봉지를 함께 재고 → 덜 무거운 후보"
+            }
+          ]
+        },
+        {
+          "id": "why",
+          "label": "02 · 왜 라이트리스트인가",
+          "title": "뒷면 숫자로는 고를 수 없다.",
+          "soft": true,
+          "desc": "포장 뒷면은 전부 100g당. 봉지는 46g·66g·90g으로 제각각.\n실제로 먹는 양으로 세면 순서가 뒤집힙니다. 그래서 둘을 항상 함께 보여줍니다.",
+          "blocks": [
             {
-              "type": "tags",
-              "items": [
-                "lookup_food · 음식 하나의 열량",
-                "compare_foods · 후보 비교",
-                "find_lighter · 덜 무거운 대안",
-                "search_foods · 이름 찾기"
-              ]
+              "type": "media",
+              "src": "/media/gfx/light_flip.jpg",
+              "alt": "100g당으로는 새우깡이 제일 가벼워 보이지만 한 봉지로는 제일 무겁다"
             },
             {
               "type": "note",
-              "text": "열량만 말합니다. 「살이 안 찐다」·「다이어트에 좋다」고 말하지 않습니다. 식약처 공개 자료 기준 · 가게·조리법에 따라 달라집니다."
-            },
+              "text": "열량만 말한다. 「살이 안 찐다」·「다이어트에 좋다」고 말하지 않는다. 식약처 공개 자료 기준 · 가게·조리법에 따라 달라진다."
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "03 · 지금",
+          "title": "오늘 클로드에서. 다음은 앱 · ChatGPT · Gemini.",
+          "soft": true,
+          "desc": "식약처 공개 자료 31만 7천 건 · 읽기 전용 도구 4개 · 로그인 없음.\nAI 커넥터는 클로드에서 운영 중. 앱과 ChatGPT · Gemini 커넥터는 준비 중.",
+          "blocks": [
             {
               "type": "actions",
               "items": [
                 [
                   "/business/lightlist-connect.html",
-                  "라이트리스트 커넥터 붙이기",
+                  "클로드에 붙이기",
                   "primary"
                 ],
                 [
                   "/ko/products/safe/",
-                  "알레르기·회피 성분은 AP Safe",
-                  "link"
+                  "알레르기 · 회피 성분은 AP Safe",
+                  "button"
                 ]
               ]
             }
@@ -595,15 +586,17 @@
           "search_foods · 이름 찾기"
         ],
         "connectNote": "설치도 가입도 없습니다. 식약처 공개 자료 31만 7천 건. 알레르기·회피 성분은 세이프리스트가 봅니다 — 커넥터 설치 절차는 두 서비스가 같습니다."
-      }
+      },
+      "hideGeneric": true,
+      "image": "/media/decision/light_card.jpg"
     },
     {
       "id": "revenue",
       "name": "AP Revenue",
-      "tag": "From revenue data to revenue decisions.",
+      "tag": "예약 데이터를 오늘 결정할 일로.",
       "status": "working",
-      "role": "Decision Intelligence Working Proof",
-      "desc": "Commercial Data → Priority → Human Action → Outcome.\n독립 개발 · 제품화 후보.",
+      "role": "Revenue Decision Engine",
+      "desc": "호텔 매출 차트가 아니라, 예약 데이터를 「오늘 결정할 일」로 바꾸는 엔진.",
       "note": "Independently developed Decision Intelligence Working Proof / Productization Candidate.",
       "flow": [
         "Commercial Data",
@@ -613,15 +606,87 @@
         "Outcome"
       ],
       "link": "https://revenue.apholdings.kr/",
-      "linkLabel": "AP Revenue 바로가기"
+      "linkLabel": "AP Revenue 바로가기",
+      "hideGeneric": true,
+      "sections": [
+        {
+          "id": "scene",
+          "label": "01 · 한 장면",
+          "title": "신호를 잡고, 아침에 알리고, 사람이 정한다.",
+          "desc": "예약·취소 데이터를 연결하면 매일 아침 「오늘의 판단」이 뜹니다.\n우선순위 · 근거 · 관측 금액 · 권장 행동까지 한 줄로. 판단은 담당자가 저장합니다.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/revenue_goodmorning.jpg",
+              "alt": "감지 → 알림 → 담당자 결정 → 7·14·30일 뒤 검증"
+            }
+          ]
+        },
+        {
+          "id": "scope",
+          "label": "02 · 무엇을 잡나",
+          "title": "할 수 있는 것과 없는 것을 나눈다.",
+          "soft": true,
+          "desc": "예약·취소 데이터만으로 지금 잡는 것과, 데이터를 더 연결해야 잡는 것을 화면에서 구분합니다.\n노출 금액은 예상 ROI가 아니라 실제 관측값.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/revenue_scope.jpg",
+              "alt": "지금 잡는 것 — 취소 노출 · 세그먼트 집중 · 채널 편중 · 데이터 오류 / 다음 — 픽업 · 점유율 · 가격 검토안"
+            }
+          ]
+        },
+        {
+          "id": "value",
+          "label": "03 · 고객사가 얻는 것",
+          "title": "엑셀 비교 대신, 근거가 남는 결정.",
+          "desc": "여러 사업장에 같은 운영 기준. 놓치기 쉬운 취소·채널 이상을 조기에.\n「왜 이런 결정을 했는가」가 남고, 실행 전후 성과로 기준이 좋아집니다.",
+          "blocks": [
+            {
+              "type": "tags",
+              "items": [
+                "엑셀 비교 시간 감소",
+                "사업장 간 동일 기준",
+                "취소 · 채널 이상 조기 발견",
+                "결정 근거 보존",
+                "실행 전후 성과 추적"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "04 · 지금",
+          "title": "오늘, revenue.apholdings.kr에서.",
+          "soft": true,
+          "desc": "합성 데이터 전용 · 실제 고객 정보 사용 안 함 · 테스트 11건 통과 · 프로덕션 배포.\n첫 화면은 「오늘의 판단」. 취소율 검토 기준과 긴급 기준은 고객사별 입력.",
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://revenue.apholdings.kr/",
+                  "AP Revenue 바로가기",
+                  "primary"
+                ],
+                [
+                  "/ko/products/travel/",
+                  "시장 기회는 AP Travel",
+                  "button"
+                ]
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "travel",
       "name": "AP Travel",
-      "tag": "Find the market opportunity.",
+      "tag": "어느 시장에, 언제, 누구에게.",
       "status": "inDev",
       "role": "Global Travel Decision Intelligence",
-      "desc": "항공 · 관광 · 수요 · 환율 · 공급 · 캘린더.\nOrigin × Destination × Segment × Window.",
+      "desc": "항공 · 관광 · 수요 · 환율 · 공급 · 캘린더 신호를 모아 Origin × Destination × Segment × Window 기회를 짚는다.",
       "note": "글로벌 시장 간 기회 탐색. 특정 국가 인바운드에 한정되지 않는 설계. 시장별 데이터·기능 검증 예정.",
       "flow": [
         "Market Signals",
@@ -632,7 +697,42 @@
         "Outcome"
       ],
       "image": "/media/inbound_frame.jpg",
-      "video": "/media/inbound.mp4"
+      "video": "/media/inbound.mp4",
+      "hideGeneric": true,
+      "sections": [
+        {
+          "id": "scene",
+          "label": "01 · 한 장면",
+          "title": "신호를 모으고, 기회를 짚고, 사람이 정한다.",
+          "desc": "시장별 신호가 맞물리는 칸만 근거와 함께 올립니다.\n캠페인의 예산 · 채널 · 메시지는 담당자의 몫. 결과는 다음 판단의 기준이 됩니다.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/travel_scene.jpg",
+              "alt": "시장 신호 → 기회(일본→서울 · 30대 커플 · 11월 첫째 주) → 담당자 결정 → 결과"
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "02 · 지금",
+          "title": "설계 단계. 시장별 데이터부터 검증한다.",
+          "soft": true,
+          "desc": "특정 국가 인바운드에 묶이지 않는 설계. AP Revenue와 같은 엔진 구조 — 신호 · 우선순위 · 사람의 결정 · 결과 기록.\n시장별 데이터와 기능은 순서대로 검증합니다.",
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "/ko/products/revenue/",
+                  "같은 구조로 작동 중인 AP Revenue",
+                  "primary"
+                ]
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "select",
