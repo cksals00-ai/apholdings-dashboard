@@ -80,7 +80,7 @@
       ],
       "light": [
         "후보 비교",
-        "예산·선호·중요 기준",
+        "사용자가 정한 기준 — 첫 구현은 열량",
         "후보별 장단점과 선택 근거"
       ],
       "revenue": [
@@ -99,7 +99,11 @@
     "safeNote": "의료진단·절대적 안전보증 제외",
     "rgrgTag": "언어와 지식, 퀴즈로 겨루는 학습.",
     "rgrgPacks": "다국어 · 언어 · 자격증 · 교육 Quiz Pack",
-    "rgrgNote": "기존 게임 화면 · 글로벌 Quiz Pack 확장 설계"
+    "rgrgNote": "기존 게임 화면 · 글로벌 Quiz Pack 확장 설계",
+    "proofLabels": {
+      "safe": "운영 중 · 세이프리스트 앱 · AI 커넥터",
+      "light": "운영 중 · 라이트리스트 AI 커넥터"
+    }
   },
   "en": {
     "hero": "Complex choices, transactions and ideas. Built into working systems.",

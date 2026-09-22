@@ -87,7 +87,8 @@ def home_page(l):
  for pid in ['safe','light','revenue','travel']:
   p=prod(l,pid);example=h['examples'][pid]
   visual=f'<img src="{images[pid]}" alt="{e(p["name"])} — product concept" width="800" height="450" loading="lazy">' if pid in images else '<div class="revenue-example"><span>AP REVENUE</span><strong>'+('어디에 집중할 것인가?' if l=='ko' else 'Where to focus next?')+'</strong><div>'+('고객 · 시장 · 채널' if l=='ko' else 'Accounts · Markets · Channels')+'</div></div>'
-  note=f'<p class="proof-label">{e(h["proof"])}</p>' if pid=='revenue' else f'<p class="visual-caption">{e(h["safeNote"])}</p>' if pid=='safe' else ''
+  pl=h.get('proofLabels',{}).get(pid)
+  note=(f'<p class="visual-caption">{e(h["safeNote"])}</p>' if pid=='safe' else '')+(f'<p class="proof-label">{e(pl)}</p>' if pl else f'<p class="proof-label">{e(h["proof"])}</p>' if pid=='revenue' else '')
   decision_cards+=f'<article class="engine-product"><a class="engine-product-visual" href="{ph(l,pid)}">{visual}</a><div class="engine-product-copy"><span class="eyebrow">{e(example[0])}</span><h4>{e(p["name"])}</h4><p>{e(h["short"][pid])}</p><dl><div><dt>{e(h["input"])}</dt><dd>{e(example[1])}</dd></div><div><dt>{e(h["output"])}</dt><dd>{e(example[2])}</dd></div></dl>{note}<div class="actions">{link(p["link"],p["linkLabel"]+" ↗","button",True) if pid=="revenue" and p.get("link") else ""}{link(ph(l,pid),detail)}</div></div></article>'
  rgrg=f'<article class="rgrg-feature"><div class="rgrg-stage"><span class="rgrg-star" aria-hidden="true">✦</span><div class="rgrg-title">RGRG <span>오~알지</span></div><img src="/media/games/qa_shot_01.jpg" width="1396" height="644" alt="RGRG — existing quiz battle game interface" loading="lazy"></div><div class="rgrg-copy"><span class="eyebrow">GLOBAL LEARNING GAME</span><h4>{e(h["rgrgTag"])}</h4><p>{e(h["rgrgPacks"])}</p><p class="visual-caption">{e(h["rgrgNote"])}</p>{link(ph(l,"rgrg"),detail)}</div></article>'
  groups=''
@@ -116,6 +117,27 @@ def ir_page(l):
  roadmap=section('roadmap','09 / GLOBAL ROADMAP',c(l,'roadmapTitle'),f'<p class="body">{c(l,"roadmap")}</p><p class="note" style="margin-top:25px">{c(l,"globalNote")}</p>')
  materials=section('materials','10 / INVESTOR CONTACT',c(l,'materialsTitle'),'<div class="materials">'+''.join(f'<article><h3>{c(l,k+"Title")}</h3><p>{c(l,k+"Desc")}</p></article>' for k in ['public','share','nda'])+f'</div><div class="actions">{button(mail("Request Investor Materials — IR v2.0"),c(l,"request"),True)}</div><p class="note" style="margin-top:20px">{c(l,"requestNote")}</p><p class="note" style="margin-top:28px">{c(l,"version")}</p>')
  return hero+sub+thesis+founder+model+proof+'</div>'+global_section(l)+'<div class="wrap">'+portfolios+evidence+milestones+roadmap+materials+'</div>'+contact(l)
+# Optional evidence sections per product/connector, data-driven from locale JSON. Existing v2 classes only.
+def blocks(items):
+ h=''
+ for b in items:
+  t=b.get('type')
+  if t=='milestones':h+='<div class="milestones">'+''.join(f'<article><span>{e(a)}</span><h3>{e(bb)}</h3><p>{e(cc)}</p></article>' for a,bb,cc in b['items'])+'</div>'
+  elif t=='proof':h+='<div class="proof">'+(f'<h3>{e(b["h3"])}</h3>' if b.get('h3') else '')+(f'<p class="quote">{e(b["quote"])}</p>' if b.get('quote') else '')+(flow(b['flow']).replace('<ol','<ul').replace('</ol>','</ul>') if b.get('flow') else '')+('<ol>'+''.join('<li>'+e(x)+'</li>' for x in b['ol'])+'</ol>' if b.get('ol') else '')+('<div class="proof-steps">'+''.join(f'<div><b>{e(a)}</b><p>{e(bb)}</p></div>' for a,bb in b['steps'])+'</div>' if b.get('steps') else '')+(f'<p>{e(b["p"])}</p>' if b.get('p') else '')+(f'<p class="note">{e(b["note"])}</p>' if b.get('note') else '')+'</div>'
+  elif t=='grid2':h+='<div class="grid-2">'+blocks(b['items'])+'</div>'
+  elif t=='tags':h+=tags(b['items'])
+  elif t=='flow':h+=flow(b['items']).replace('<ol','<ul').replace('</ol>','</ul>')
+  elif t=='quote':h+=f'<p class="quote">{e(b["text"])}</p>'
+  elif t=='note':h+=f'<p class="note">{e(b["text"])}</p>'
+  elif t=='p':h+=f'<p>{e(b["text"])}</p>'
+  elif t=='actions':h+='<div class="actions">'+''.join(button(u,lab,True) if kind=='primary' else button(u,lab) if kind=='button' else link(u,lab) for u,lab,kind in b['items'])+'</div>'
+ return h
+def sections(items):
+ h=''
+ for sec in items:
+  head_=f'<div class="section-intro"><div><span class="number">{e(sec["label"])}</span><h2>{e(sec["title"])}</h2></div><p>{e(sec["desc"])}</p></div>' if sec.get('desc') else f'<div class="section-head"><span class="number">{e(sec["label"])}</span><h2>{e(sec["title"])}</h2></div>'
+  h+=f'<section class="section{" soft" if sec.get("soft") else ""} anchor" id="{e(sec["id"])}"><div class="wrap">{head_}{blocks(sec["blocks"])}</div></section>'
+ return h
 def product_page(l,p):
  pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (오~알지)" if pid=="rgrg" and l=="ko" else "")}</h1><h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p></div></section><section class="section"><div class="wrap">'
  if pid=='rgrg':
@@ -138,7 +160,7 @@ def product_page(l,p):
   body+='<h2 style="margin-top:45px">Characters &amp; worlds</h2><div class="grid-3" style="margin-top:24px">'+''.join(f'<figure style="margin:0"><img loading="lazy" src="/media/games/{src}" alt="{label}" width="500" height="500"><figcaption class="note">{label}</figcaption></figure>' for src,label in [('lw_hero_pixel.png','PIXEL'),('lw_hero_alfred.png','ALFRED'),('lw_hero_line.png','LINE'),('lw_hero_bluenewbie.png','BLUE NEWBIE'),('lw_hero_rookie.png','ROOKIE'),('lw_pov_gwanghwamun.jpg','World concept')])+'</div>'
  if pid=='commerce':
   body+='<h2 style="margin-top:45px">Curation archive</h2><p class="note">'+c(l,'curationNote')+'</p><div class="grid-3">'+''.join(f'<figure style="margin:0"><img src="/media/shop/{src}.jpg" alt="{label}" loading="lazy" width="400" height="400"><figcaption class="note">{label}</figcaption></figure>' for src,label in [('01_dalba',"d’Alba"),('02_cosrx','COSRX'),('03_tirtir','TIRTIR'),('04_biodance','Biodance'),('06_romnd','rom&nd'),('07_anua','Anua'),('08_skin1004','SKIN1004'),('09_mediheal','Mediheal'),('10_banilaco','banila co')])+'</div>'
- body+='</div></div></section>'+contact(l)
+ body+='</div></div></section>'+sections(p.get('sections',[]))+contact(l)
  return body
 # Generate real, crawlable KO/EN documents; the builder, not client JS, selects copy.
 for l in PUBLISHED:
@@ -158,7 +180,18 @@ for path,target in ALIASES.items():redirect(path,target)
 # Existing remote connector paths stay functional with honest public copy and clipboard fallback.
 for pid,old in [('safe','safelist'),('light','lightlist')]:
  p=prod('ko',pid);url=f'https://{old}-mcp.onrender.com/mcp';path=f'/business/{old}-connect.html'
- content=f'<section class="page-hero"><div class="wrap"><span class="eyebrow">{e(p["name"])} / CONNECTOR</span><h1>{e(p["name"])}</h1><p class="lead">{e(p["desc"])}</p></div></section><section class="section"><div class="wrap"><div class="product-body"><h2>{c("ko","connector")}</h2><p>{c("ko","connectHelp")}</p><p class="note">{e(p["note"])}</p><div class="connector-box"><p>{c("ko","connectorNote")}</p><code id="connector-url">{url}</code><button type="button" data-copy-target="connector-url" data-success="{c("ko","copied")}" data-fallback="{c("ko","copyFail")}">{c("ko","copy")}</button><p role="status" class="copy-feedback" aria-live="polite"></p></div><div class="actions">{button(ph("ko",pid),c("ko","learnMore"))}</div></div></div></section>'
+ box=f'<div class="connector-box"><p>{c("ko","connectorNote")}</p><code id="connector-url">{url}</code><button type="button" data-copy-target="connector-url" data-success="{c("ko","copied")}" data-fallback="{c("ko","copyFail")}">{c("ko","copy")}</button><p role="status" class="copy-feedback" aria-live="polite"></p></div>'
+ cn=p.get('connector')
+ if cn:
+  # Evidence-first connector page: hero → (media) → data-driven sections; the box sits where the JSON says.
+  hero=f'<section class="page-hero"><div class="wrap"><p class="breadcrumb">{link(home("ko")+"#portfolio",c("ko","nav")[1],"")} / {link(ph("ko",pid),p["name"],"")} / 커넥터</p><span class="status">{e(cn["status"])}</span><span class="eyebrow">{e(cn["eyebrow"])}</span><h1>'+'<br>'.join(e(x) for x in cn['title'])+'</h1><p class="lead">'+'<br>'.join(e(x) for x in cn['lead'])+'</p>'+(box if cn.get('boxInHero') else f'<div class="actions">{button("#connect",cn["cta"],True)}{link(ph("ko",pid),c("ko","learnMore"))}</div>')+'</div></section>'
+  media=f'<section class="section"><div class="wrap"><div class="product-media"><video src="{p["video"]}" poster="{p["image"]}" autoplay muted loop playsinline aria-label="{e(cn["mediaAlt"])}"></video></div><p class="note visual-caption">{e(cn["mediaNote"])}</p></div></section>' if cn.get('media') and p.get('video') else ''
+  connect='' if cn.get('boxInHero') else f'<section class="section anchor" id="connect"><div class="wrap"><div class="product-body"><span class="number">{e(cn["connectLabel"])}</span><h2>{e(cn["connectTitle"])}</h2><p>{c("ko","connectHelp")}</p>{box}{tags(cn["tools"])}<p class="note">{e(cn["connectNote"])}</p></div></div></section>'
+  content=hero+media+sections(cn['sections'])+connect
+  desc=' '.join(cn['lead'])
+  out(path.lstrip('/'),shell('ko',cn['pageTitle'],desc,path,content,index=False))
+  continue
+ content=f'<section class="page-hero"><div class="wrap"><span class="eyebrow">{e(p["name"])} / CONNECTOR</span><h1>{e(p["name"])}</h1><p class="lead">{e(p["desc"])}</p></div></section><section class="section"><div class="wrap"><div class="product-body"><h2>{c("ko","connector")}</h2><p>{c("ko","connectHelp")}</p><p class="note">{e(p["note"])}</p>{box}<div class="actions">{button(ph("ko",pid),c("ko","learnMore"))}</div></div></div></section>'
  out(path.lstrip('/'),shell('ko',p['name']+' Connector — AP Holdings',p['desc'],path,content,index=False))
 # New localized public pages require human/professional QA. No placeholder translations are indexed.
 for l,cfg in CFG['locales'].items():
