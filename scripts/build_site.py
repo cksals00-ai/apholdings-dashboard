@@ -88,7 +88,7 @@ def home_page(l):
  select_text=f'<div class="showcase-copy"><span class="eyebrow">AP SELECT</span><h3>A store designed<br>for choosing.</h3><p>{e(h["select"])}</p>'+('<p class="select-steps">See it. Try it. Understand it. Choose it.</p>' if l=='ko' else '')+f'<div class="actions">{button(ph(l,"select"),detail)}{link(ph(l,"select"),"Expert Collaboration", "quiet-link")}</div></div>'
  select_feature=f'<article class="showcase-select">{select_visual}{select_text}</article>'
  lia_feature=f'<article class="showcase-lia"><a class="showcase-lia-image" href="{ph(l,"lia")}"><img src="/media/lia/lia_hero_sq.jpg" width="800" height="800" loading="lazy" alt="LIA — AI Influencer"></a><div class="showcase-copy"><span class="eyebrow">LIA / AI INFLUENCER</span><h3>Meet LIA.<br>Discover Korea.</h3><p>{e(h["lia"])}</p><p class="lia-channel">{e(h["liaChannel"])}</p>{link(ph(l,"lia"),detail)}</div></article>'
- images={'safe':'/media/safelist_frame.jpg','travel':'/media/inbound_frame.jpg','commerce':'/media/shop/01_dalba.jpg','craft':'/media/craft_frame.jpg','cubs':'/media/cubs/screens.jpg','lastwave':'/media/games/lw_pov_lotte.jpg'}
+ images={'safe':'/media/safelist_frame.jpg','travel':'/media/gfx/travel_scene.jpg','commerce':'/media/shop/01_dalba.jpg','craft':'/media/craft_frame.jpg','cubs':'/media/cubs/screens.jpg','lastwave':'/media/games/lw_pov_lotte.jpg'}
  def compact(pid):
   p=prod(l,pid)
   return f'<a class="compact-project" href="{ph(l,pid)}"><div class="compact-image {pid}"><img src="{images[pid]}" alt="{e(p["name"])}" loading="lazy" width="480" height="300"></div><div class="compact-copy"><h4>{e(p["name"])}</h4><p>{e(h["short"][pid])}</p><span class="compact-arrow" aria-hidden="true">↗</span></div></a>'
