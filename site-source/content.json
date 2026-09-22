@@ -1,5 +1,5 @@
 {
-  "version": "2.0.1",
+  "version": "2.0.2",
   "date": "2026-09-22",
   "origin": "https://www.apholdings.kr",
   "contact": "cksals00@gmail.com",
@@ -84,5 +84,5 @@
     "LAST WAVE"
   ],
   "public_data": "Conceptual workflow only. No numeric demo, customer or employer dataset.",
-  "design_revision": "Noto Sans KR / keyword KO / Higgsfield motion"
+  "design_revision": "Show-first homepage / 3 featured projects / restored product imagery"
 }

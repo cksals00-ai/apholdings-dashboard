@@ -67,3 +67,11 @@ The Mac sync script now pulls first, stops on divergence and refuses a public so
 - Poster is available without JavaScript. Desktop film starts only near the viewport; mobile, data-saver and reduced-motion users see the poster with optional playback. Pause control, offscreen pause and background-tab pause are included.
 - Scroll reveal is progressive enhancement and disabled for reduced motion. Corporate pages retain static content, SEO and navigation.
 - `/site-source/responsive-review.html` is an unlinked, non-indexed QA view with real CSS-width frames. It contains only already public pages.
+
+## Show-first homepage refinement
+
+Home order: Hero → Featured Projects (AP SELECT, LIA, AP Revenue) → three portfolio grids → compact Why AP → compact Global-by-Design → About / IR / Founder’s Lab / Contact. Homepage copy is separately managed in `home-copy.json`; full explanations, professional boundaries and technical market-pack content remain in product pages and public IR.
+
+Original Safe food-scan, Light food-choice, Travel demand/event and craft visuals are reused in the homepage grids. Their existing videos are restored on the corresponding product pages using explicit controls, preload=none and existing poster files. Travel remains a global cross-market decision product.
+
+AP SELECT uses a new Higgsfield concept image and eight-second silent film, identified as a design-stage AI concept. Media provenance is in `select-media.json`. LIA and Revenue use short, one-time CSS path animations; Revenue’s visual contains no actual metrics or operating data.
