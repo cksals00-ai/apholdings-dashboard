@@ -158,7 +158,9 @@
         "Human Decision"
       ],
       "link": "https://apps.apple.com/kr/app/id6805684034",
-      "linkLabel": "Existing Safelist app"
+      "linkLabel": "Existing Safelist app",
+      "image": "/media/safelist_frame.jpg",
+      "video": "/media/safelist.mp4"
     },
     {
       "id": "light",
@@ -173,7 +175,9 @@
         "Candidates",
         "Explainable Trade-offs",
         "Human Choice"
-      ]
+      ],
+      "image": "/img/lightlist_hero.jpg",
+      "video": "/media/lightlist_hero.mp4"
     },
     {
       "id": "revenue",
@@ -206,7 +210,9 @@
         "Human Decision",
         "Campaign",
         "Outcome"
-      ]
+      ],
+      "image": "/media/inbound_frame.jpg",
+      "video": "/media/inbound.mp4"
     },
     {
       "id": "select",
@@ -268,7 +274,8 @@
         "Claim",
         "Outcome"
       ],
-      "image": "/media/craft_frame.jpg"
+      "image": "/media/craft_frame.jpg",
+      "video": "/media/craft.mp4"
     },
     {
       "id": "lia",

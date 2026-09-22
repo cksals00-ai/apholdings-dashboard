@@ -50,8 +50,7 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
     if (element.getBoundingClientRect().top > window.innerHeight) { element.classList.add('reveal-ready'); reveal.observe(element); }
   });
 }
-const film = document.getElementById('brand-motion');
-if (film) {
+document.querySelectorAll('.film-stage video[data-src]').forEach((film) => {
   const stage = film.closest('.film-stage');
   const toggle = stage.querySelector('.film-toggle');
   const smallScreen = window.matchMedia('(max-width: 800px)');
@@ -76,4 +75,12 @@ if (film) {
   }
   document.addEventListener('visibilitychange', () => { if (document.hidden) film.pause(); else if (visible && canAutoplay()) play(); });
   motionPreference.addEventListener('change', () => { if (motionPreference.matches) { film.pause(); stage.classList.remove('is-playing'); } });
+});
+
+// Short, one-time explanatory motion: never an endless decorative loop.
+if ('IntersectionObserver' in window && !motionPreference.matches) {
+  const steps = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); observer.unobserve(entry.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.motion-once').forEach((element) => steps.observe(element));
 }
