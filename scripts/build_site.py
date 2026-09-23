@@ -150,7 +150,7 @@ def blocks(items):
   elif t=='split':h+='<div class="split"><div>'+blocks(b['left'])+'</div><div>'+blocks(b['right'])+'</div></div>'
   elif t=='h3':h+=f'<h3>{e(b["text"])}</h3>'
   elif t=='videos':h+='<div class="grid-3" style="margin:0 0 45px">'+''.join(f'<figure style="margin:0"><video controls playsinline preload="none" poster="{v["poster"]}" src="{v["src"]}"></video><figcaption class="note" style="margin-top:10px">{e(v["caption"])}</figcaption></figure>' for v in b['items'])+'</div>'
-  elif t=='gallery':h+=f'<div class="grid-{b.get("cols",3)}" style="margin:0 0 45px">'+''.join(f'<figure style="margin:0"><img src="{v["src"]}" alt="{e(v["caption"])}" loading="lazy" width="800" height="800" style="width:100%;aspect-ratio:{b.get("ratio","1")};object-fit:cover;border-radius:18px"><figcaption class="note" style="margin-top:10px">{e(v["caption"])}</figcaption></figure>' for v in b['items'])+'</div>'
+  elif t=='gallery':h+=f'<div class="grid-{b.get("cols",3)}" style="margin:0 0 45px;display:grid;grid-template-columns:repeat({b.get("cols",3)},1fr);gap:{"14px" if b.get("cols",3)>3 else "26px"}">'+''.join(f'<figure style="margin:0"><img src="{v["src"]}" alt="{e(v["caption"])}" loading="lazy" width="800" height="800" style="width:100%;aspect-ratio:{b.get("ratio","1")};object-fit:cover;border-radius:18px"><figcaption class="note" style="margin-top:10px">{e(v["caption"])}</figcaption></figure>' for v in b['items'])+'</div>'
   elif t=='actions':h+='<div class="actions">'+''.join(button(u,lab,True) if kind=='primary' else button(u,lab) if kind=='button' else link(u,lab) for u,lab,kind in [((mail(x[0][5:]) if x[0].startswith('mail:') else x[0]),x[1],x[2]) for x in b['items']])+'</div>'
  return h
 def sections(items):
@@ -167,7 +167,7 @@ def sections(items):
   h+=f'<section class="section{" soft" if sec.get("soft") else ""} anchor" id="{e(sec["id"])}"><div class="wrap">{head_}{blocks(rest)}</div></section>'
  return h
 def product_page(l,p):
- pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (오~알지)" if pid=="rgrg" and l=="ko" else "")}</h1><h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p></div></section><section class="section"><div class="wrap">'
+ pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (오~알지)" if pid=="rgrg" and l=="ko" else "")}</h1>{"" if p.get("heroSplit") else f'<h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p>'}</div></section><section class="section"><div class="wrap">'
  if pid=='rgrg' and False:
   body+='<figure class="rgrg-detail"><img src="/media/games/qa_shot_01.jpg" alt="RGRG — existing quiz battle interface" width="1396" height="644"><figcaption class="note">'+HOME_COPY[l]['rgrgNote']+'</figcaption></figure>'
  if p.get('heroSplit') and p.get('image'):
