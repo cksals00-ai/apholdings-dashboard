@@ -102,3 +102,20 @@ html[lang="ko"] .hero h1,.brand,.eyebrow,.number{font-family:Arial,'Helvetica Ne
 .section-intro{align-items:end}.section-intro .intro-side{padding-bottom:6px}
 .lab-icon{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--ink);color:#fff;font-size:13px;font-weight:700;letter-spacing:.04em;margin-bottom:16px}
 .lab-cards{gap:24px}.lab-card{background:#fff;border:1px solid var(--line);border-top:1px solid var(--line);border-radius:18px;padding:26px}
+
+/* v2.9 mobile */
+@media(max-width:800px){
+.section-intro{grid-template-columns:1fr;gap:18px;align-items:start;margin-bottom:28px}
+.section-intro h2{font-size:clamp(1.9rem,8vw,2.4rem);white-space:normal}
+.section-intro p{font-size:16px;line-height:1.65;white-space:normal;max-width:none}
+.section-intro .intro-side{padding-bottom:0}.section-intro .actions{margin-top:16px}
+.cta-block h2{font-size:clamp(1.9rem,8vw,2.4rem)}.cta-block p{white-space:normal}
+.page-hero h2{font-size:clamp(1.4rem,5.6vw,1.9rem)}.page-hero .lead{font-size:16px;white-space:normal}
+.product-media{padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:16px;scrollbar-width:none}
+.product-media::-webkit-scrollbar{display:none}
+.product-media img{width:auto!important;min-width:760px;max-width:none;border-radius:16px}
+figure.wide{position:relative}figure.wide::after{content:'← 옆으로 밀어서 보기';position:absolute;left:12px;bottom:10px;font-size:11px;font-weight:600;color:#fff;background:rgba(20,23,22,.7);padding:4px 9px;border-radius:12px;pointer-events:none}
+html[lang=en] figure.wide::after{content:'← swipe to see more'}
+.tags span{font-size:12px}.flow li{font-size:12px}
+.milestones{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}
+}
