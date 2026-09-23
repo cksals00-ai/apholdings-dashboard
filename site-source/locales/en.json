@@ -1650,8 +1650,8 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/games/qa_shot_06.jpg",
-       "alt": "Six on one stage — a riddle, a buzzer, five seconds"
+       "src": "/media/gfx/rgrg_stage_en.jpg",
+       "alt": "Six on one stage — only the first to buzz answers, five seconds"
       }
      ]
     },
@@ -1711,8 +1711,8 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/games/qa_shot_08.jpg",
-       "alt": "Round in progress"
+       "src": "/media/gfx/rgrg_round_en.jpg",
+       "alt": "One round, five minutes — main game · today's mini-game · final bet"
       }
      ]
     },
@@ -1724,8 +1724,8 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/games/qa_shot_12.jpg",
-       "alt": "Question editor — multiple choice · true/false"
+       "src": "/media/gfx/rgrg_create_en.jpg",
+       "alt": "Question editor — multiple choice · true/false · credits"
       }
      ]
     },

@@ -1905,8 +1905,8 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/games/qa_shot_06.jpg",
-       "alt": "여섯 명이 한 무대 — 넌센스 문제, 버저, 5초"
+       "src": "/media/gfx/rgrg_stage.jpg",
+       "alt": "여섯 명이 한 무대 — 먼저 누른 사람만 답한다, 5초"
       }
      ]
     },
@@ -1966,8 +1966,8 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/games/qa_shot_08.jpg",
-       "alt": "라운드 진행 화면"
+       "src": "/media/gfx/rgrg_round.jpg",
+       "alt": "한 판 5분 — 본게임 · 오늘의 미니게임 · 파이널 베팅"
       }
      ]
     },
@@ -1979,8 +1979,8 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/games/qa_shot_12.jpg",
-       "alt": "문제 출제 화면 — 사지선다 · OX"
+       "src": "/media/gfx/rgrg_create.jpg",
+       "alt": "문제 출제 화면 — 사지선다 · OX · 크레딧"
       }
      ]
     },
