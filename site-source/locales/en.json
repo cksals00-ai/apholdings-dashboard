@@ -649,9 +649,9 @@
             },
             {
               "type": "media",
-              "src": "/media/gfx/ap_safe_pilot.jpg",
-              "alt": "AP Safe synthetic example: a review overview showing exclude, needs review and no explicit conflict per product, with the reviewer's next action",
-              "caption": "Screen example built on synthetic data · not a judgment on real products or markets."
+              "src": "/media/gfx/ap_safe_pilot_en.jpg",
+              "alt": "AP Safe synthetic example (redrawn): a review overview showing exclude, needs review and no explicit conflict per product, with the reviewer's next action",
+              "caption": "Screen example on synthetic data (redrawn) · not a judgment on real products or markets."
             },
             {
               "type": "p",
@@ -1058,9 +1058,9 @@
             },
             {
               "type": "media",
-              "src": "/media/gfx/ap_travel_pilot.jpg",
-              "alt": "AP Travel synthetic example: a market overview showing pursue, watch and de-prioritize per market, with next actions",
-              "caption": "Screen example built on synthetic data · not a judgment on real products or markets."
+              "src": "/media/gfx/ap_travel_pilot_en.jpg",
+              "alt": "AP Travel synthetic example (redrawn): a market overview showing pursue, watch and de-prioritize per market, with next actions",
+              "caption": "Screen example on synthetic data (redrawn) · not a judgment on real products or markets."
             },
             {
               "type": "p",
