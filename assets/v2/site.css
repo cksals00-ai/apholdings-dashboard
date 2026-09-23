@@ -97,3 +97,8 @@ html[lang="ko"] .hero h1,.brand,.eyebrow,.number{font-family:Arial,'Helvetica Ne
 .desktop-nav{gap:34px;font-size:13.5px;font-weight:500;letter-spacing:-.01em}.desktop-nav a{color:var(--muted);padding:10px 0;transition:color .15s}.desktop-nav a:hover{color:var(--ink)}.desktop-nav .ir-link{border:0;color:var(--ink);font-weight:600}
 .language{font-size:12.5px;font-weight:600;letter-spacing:.06em}.language summary::after{content:'⌄';margin-left:6px;opacity:.6}
 .brand{font-size:14px;letter-spacing:.06em}
+
+/* v2.8 */
+.section-intro{align-items:end}.section-intro .intro-side{padding-bottom:6px}
+.lab-icon{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--ink);color:#fff;font-size:13px;font-weight:700;letter-spacing:.04em;margin-bottom:16px}
+.lab-cards{gap:24px}.lab-card{background:#fff;border:1px solid var(--line);border-top:1px solid var(--line);border-radius:18px;padding:26px}
