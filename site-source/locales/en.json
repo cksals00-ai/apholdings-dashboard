@@ -816,35 +816,18 @@
        "alt": "PMS · CRS · competitor rates → AP Revenue engine → today's decision queue → manager approval → CRS · channel manager → learning from outcomes"
       },
       {
-       "type": "grid2",
+       "type": "tags",
        "items": [
-        {
-         "type": "proof",
-         "h3": "What each system does",
-         "ol": [
-          "PMS — actual bookings · cancellations · stays · room results",
-          "CRS · channel manager — future rates · inventory · sales restrictions · OTA distribution",
-          "AP Revenue — anomaly detection · opportunity judgment · proposed actions · learning from outcomes",
-          "Manager — accept · edit · hold each recommendation",
-          "BI — historical reporting and visualization (not replaced)"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "Questions AP Revenue answers",
-         "ol": [
-          "Which channel or product are cancellations concentrated in",
-          "Which stay dates are selling slower than target",
-          "Where pricing or inventory policy needs review",
-          "Which of NR · Semi-NR · cut-off · release to apply",
-          "Whether revenue and cancellation rates actually improved after action"
-         ]
-        }
+        "Which channel or product cancellations cluster in",
+        "Which stay dates are selling slowly",
+        "Where to review price and inventory policy",
+        "NR · Semi-NR · cut-off · release — which to apply",
+        "Whether revenue and cancellations improved afterwards"
        ]
       },
       {
        "type": "note",
-       "text": "Product form: a B2B Revenue Decision SaaS that connects a hotel's PMS · CRS data and presents daily revenue opportunities and loss risks.  PMS alone covers booking and cancellation analysis; pricing and inventory judgment follows once the CRS · channel manager · sellable inventory are connected."
+       "text": "PMS alone covers booking and cancellation analysis; pricing and inventory judgment follows once the CRS and channel manager are connected."
       }
      ]
     },
