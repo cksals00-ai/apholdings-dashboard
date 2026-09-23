@@ -126,7 +126,7 @@ def home_page(l):
  about_short=f'<section class="home-about section" id="about"><div class="wrap"><div class="split"><div><span class="eyebrow">ABOUT AP HOLDINGS</span><h2>{e(h["aboutTitle"])}</h2></div><div><p>{e(h["about"])}</p><div class="actions">{button(f"/{l}/about/",h["aboutMore"])}{button(f"/{l}/ir/","IR / INVESTORS",True)}</div></div></div></div></section>'+lab(l)
  contact_short=f'<section class="contact-section home-contact" id="contact"><div class="wrap"><span class="eyebrow">CONTACT</span><div class="contact-bottom"><div><h2>Build with AP.</h2><p>{e(h["contact"])}</p></div>{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div></section>'
  intro_items=h.get('portfolioIntro') or [tag for _,_,tag,_ in GROUPS]
- three=f'<section class="section" id="businesses" style="padding-top:28px;padding-bottom:64px"><div class="wrap" style="text-align:center"><span class="eyebrow">THREE BUSINESSES · ONE SYSTEM</span><div class="product-media" style="background:transparent;padding:0;margin:0 auto;max-width:1100px"><img src="/media/gfx/three_businesses{"_en" if l=="en" else ""}.jpg" alt="Decision Intelligence · Commerce · Play &amp; Learn — one AP engine" width="1600" height="573" loading="eager"></div></div></section>'
+ three=f'<section class="section" id="businesses" style="padding-top:28px;padding-bottom:64px"><div class="wrap" style="text-align:center"><span class="eyebrow">THREE BUSINESSES · ONE SYSTEM</span><div class="product-media" style="background:transparent;padding:0;margin:0 auto;max-width:1100px"><picture><source media="(max-width:800px)" srcset="/media/gfx/three_businesses_m{"_en" if l=="en" else ""}.jpg"><img src="/media/gfx/three_businesses{"_en" if l=="en" else ""}.jpg" alt="Decision Intelligence · Commerce · Play &amp; Learn — one AP engine" width="1600" height="573" loading="eager" style="width:100%;height:auto"></picture></div></div></section>'
  return hero+three+portfolios+why+global_short+about_short
 def ir_page(l):
  hero=f'<section class="page-hero"><div class="wrap"><span class="eyebrow">IR / INVESTORS</span><h1>{e(c(l,"irTitle"))}</h1><p class="lead">{e(c(l,"irIntro"))}</p><div class="actions">{button(mail("Request Investor Materials"),c(l,"request"),True)}{button(home(l)+"#portfolio",c(l,"explore"))}</div></div></section>'
@@ -139,6 +139,7 @@ def mobile_src(src):
  import os
  if not src.endswith('.jpg'):return None
  base=src[:-4]
+ if base.split('/')[-1] in ('lw_collab','yt_ep1'):return src  # photo/thumbnail: legible as-is, no swipe
  if base.endswith('_en'):
   cand=base[:-3]+'_m_en.jpg'
  else:
