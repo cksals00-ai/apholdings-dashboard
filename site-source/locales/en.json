@@ -146,7 +146,7 @@
     "id": "name",
     "label": "01 · The name",
     "title": "First, a name.\nNow, what we do.",
-    "desc": "A.P — Alfred Park. The name of the person who started it. We don't hide who built this.\nA.P — AI People. The name of what we do now. Not a company that handles AI, but a company standing between AI and people.",
+    "desc": "A.P — Alfred Park. The name of the person who started it. We don't hide who built this. A.P — AI People. The name of what we do now. Not a company that handles AI, but a company standing between AI and people.",
     "blocks": [
      {
       "type": "grid2",
@@ -154,18 +154,12 @@
        {
         "type": "proof",
         "h3": "A.P · Alfred Park",
-        "ol": [
-         "The name of the person who started it",
-         "We don't hide who built this"
-        ]
+        "p": "The name of the person who started it. We don't hide who built this."
        },
        {
         "type": "proof",
         "h3": "A.P · AI People",
-        "ol": [
-         "The name of what we do now",
-         "A company standing between AI and people"
-        ]
+        "p": "The name of what we do now. A company standing between AI and people."
        }
       ]
      }
@@ -176,7 +170,7 @@
     "label": "02 · Philosophy",
     "title": "Three things.",
     "soft": true,
-    "desc": "We don't put AI in a person's place.\nWe don't take from users.\nWhat we don't know, we say we don't know.",
+    "desc": "We don't put AI in a person's place. We don't take from users. What we don't know, we say we don't know.",
     "blocks": [
      {
       "type": "milestones",
@@ -209,7 +203,7 @@
     "id": "business",
     "label": "03 · Business",
     "title": "Variations on one sentence.",
-    "desc": "We place AI where a person had come to a stop.\nThe moment of choosing, buying, and learning.",
+    "desc": "We place AI where a person had come to a stop. The moment of choosing, buying, and learning.",
     "blocks": [
      {
       "type": "milestones",
@@ -243,7 +237,7 @@
     "label": "04 · Independence",
     "title": "The experience is used.\nThe assets are not.",
     "soft": true,
-    "desc": "AP's code, accounts, domains, documents and product IP are entirely independent.\nThe employer's data, customer information and operational information do not belong to AP.\nInvestor demos use synthetic, public or permitted data only.",
+    "desc": "AP's code, accounts, domains, documents and product IP are entirely independent. The employer's data, customer information and operational information do not belong to AP. Investor demos use synthetic, public or permitted data only.",
     "blocks": [
      {
       "type": "tags",
@@ -279,7 +273,7 @@
     "id": "thesis",
     "label": "01 · Investment thesis",
     "title": "Not for lack of information.\nThings stop for lack of a decision.",
-    "desc": "Choosing a snack or setting a room rate — it is the same.\nAP puts data, expert criteria, procedure and software at that point\nand turns it into a repeatable decision system. A decision structure built once is reused in the next product.",
+    "desc": "Choosing a snack or setting a room rate — it is the same. AP puts data, expert criteria, procedure and software at that point and turns it into a repeatable decision system. A decision structure built once is reused in the next product.",
     "blocks": [
      {
       "type": "flow",
@@ -298,7 +292,7 @@
     "label": "02 · Market",
     "title": "The year 20 million arrive.\nEach one spends $1,000.",
     "soft": true,
-    "desc": "2.09 million visitors in July 2026, +20.8% year on year. Annual target 20 million.\nSpend per visitor $1,008. At 20 million, tourism receipts of roughly $20 billion.\nK-beauty, K-food and K-content pull that spending in.",
+    "desc": "2.09 million visitors in July 2026, +20.8% year on year. Annual target 20 million. Spend per visitor $1,008. At 20 million, tourism receipts of roughly $20 billion. K-beauty, K-food and K-content pull that spending in.",
     "blocks": [
      {
       "type": "grid2",
@@ -330,7 +324,7 @@
     "id": "model",
     "label": "03 · Three businesses and revenue",
     "title": "Same engine,\nthree revenue structures.",
-    "desc": "Decision intelligence: B2B subscriptions and connectors. Commerce: direct sales, commissions and franchising.\nPlay & Learn: in-app purchases and educational quiz packs. No advertising and no sale of user data.",
+    "desc": "Decision intelligence: B2B subscriptions and connectors. Commerce: direct sales, commissions and franchising. Play & Learn: in-app purchases and educational quiz packs. No advertising and no sale of user data.",
     "blocks": [
      {
       "type": "milestones",
@@ -364,7 +358,7 @@
     "label": "04 · Working today",
     "title": "Built and shipped.",
     "soft": true,
-    "desc": "Evidence of execution, not of large-scale traction.\nOnly verified figures are published; detailed evidence is presented in investor review.",
+    "desc": "Evidence of execution, not of large-scale traction. Only verified figures are published; detailed evidence is presented in investor review.",
     "blocks": [
      {
       "type": "tags",
@@ -439,7 +433,7 @@
     "id": "why",
     "label": "05 · Why AP",
     "title": "Four things\nin one company.",
-    "desc": "One decision engine reused across three businesses, channels already in hand,\ntrust built by taking nothing from users, and a founder who knows the field.",
+    "desc": "One decision engine reused across three businesses, channels already in hand, trust built by taking nothing from users, and a founder who knows the field.",
     "blocks": [
      {
       "type": "milestones",
@@ -506,7 +500,7 @@
     "id": "global",
     "label": "07 · Global",
     "title": "Built in Korea.\nDesigned for the world.",
-    "desc": "The first overseas market is Vietnam — validating LIA viewer response and commerce demand first.\nJapan and Taiwan for product fit, France for craft trade research.\nAdding a country means adding a language and market pack, not rebuilding the product.",
+    "desc": "The first overseas market is Vietnam — validating LIA viewer response and commerce demand first. Japan and Taiwan for product fit, France for craft trade research. Adding a country means adding a language and market pack, not rebuilding the product.",
     "blocks": [
      {
       "type": "tags",
@@ -524,7 +518,7 @@
     "label": "08 · Founder",
     "title": "Fifteen years in the field.\nAn independent company.",
     "soft": true,
-    "desc": "Commercial operations and global sales, tourism and international business, and data analysis at a hotel and resort group.\nThe experience is used; the assets are not — code, accounts, domains, documents and product IP are entirely independent.\nThe employer's data, customer information and operational information do not belong to AP.",
+    "desc": "Commercial operations and global sales, tourism and international business, and data analysis at a hotel and resort group. The experience is used; the assets are not — code, accounts, domains, documents and product IP are entirely independent. The employer's data, customer information and operational information do not belong to AP.",
     "blocks": [
      {
       "type": "tags",
@@ -597,7 +591,7 @@
      "id": "scene",
      "label": "01 · One scene",
      "title": "Siri, a week of snacks\nsafe for my child.",
-     "desc": "One sentence. No screen.\nAny AI asks Safelist first,\nbefore anything is bought.",
+     "desc": "One sentence. No screen. Any AI asks Safelist first, before anything is bought.",
      "blocks": [
       {
        "type": "media",
@@ -611,7 +605,7 @@
      "label": "02 · Why Safelist",
      "title": "AI is probability. Ingredients are fact.",
      "soft": true,
-     "desc": "AI can sound confident about what it doesn't know.\nFor a child's food, that is the real danger.\nSafelist checks the source records\nand hands the AI facts only.",
+     "desc": "AI can sound confident about what it doesn't know. For a child's food, that is the real danger. Safelist checks the source records and hands the AI facts only.",
      "blocks": [
       {
        "type": "media",
@@ -628,7 +622,7 @@
      "id": "data",
      "label": "03 · Where the data lives",
      "title": "My body's data stays on my phone.",
-     "desc": "Child profiles, photos and logs\nnever leave the device.\nThe server receives only the label\nand the avoid list, then discards them.",
+     "desc": "Child profiles, photos and logs never leave the device. The server receives only the label and the avoid list, then discards them.",
      "blocks": [
       {
        "type": "media",
@@ -670,7 +664,7 @@
      "id": "exits",
      "label": "05 · Where to buy",
      "title": "Three exits.",
-     "desc": "One verdict engine. Three places to buy.\nInside the AI · an online safe market · a physical store.",
+     "desc": "One verdict engine. Three places to buy. Inside the AI · an online safe market · a physical store.",
      "blocks": [
       {
        "type": "media",
@@ -716,7 +710,7 @@
      "id": "scene",
      "label": "01 · One scene",
      "title": "Buying Saewookkang —\nanything lighter?",
-     "desc": "One sentence. No screen.\nAny AI asks LightList first\ninstead of guessing.",
+     "desc": "One sentence. No screen. Any AI asks LightList first instead of guessing.",
      "blocks": [
       {
        "type": "media",
@@ -730,7 +724,7 @@
      "label": "02 · The more you choose",
      "title": "The more you choose,\nthe sooner it suggests.",
      "soft": true,
-     "desc": "As lighter picks accumulate,\nthe AI learns your taste and calorie budget.\nIt picks for you, ranks, and tells you first.",
+     "desc": "As lighter picks accumulate, the AI learns your taste and calorie budget. It picks for you, ranks, and tells you first.",
      "blocks": [
       {
        "type": "media",
@@ -798,7 +792,7 @@
      "id": "scene",
      "label": "01 · One scene",
      "title": "Booking data becomes\na decision list each morning.",
-     "desc": "Connect booking and cancellation data,\nand a “Today's decisions” list is generated every morning.\nPriority · evidence · observed amount · recommended action, one line each.\nThe final call is recorded by the manager.",
+     "desc": "Connect booking and cancellation data, and a “Today's decisions” list is generated every morning. Priority · evidence · observed amount · recommended action, one line each. The final call is recorded by the manager.",
      "blocks": [
       {
        "type": "media",
@@ -812,7 +806,7 @@
      "label": "02 · How it connects",
      "title": "Not installed inside the PMS.\nIt sits beside it.",
      "soft": true,
-     "desc": "The PMS holds results; the CRS and channel manager hold future rates and inventory.\nAP Revenue sits beside them: anomaly detection · opportunity judgment · proposed actions · learning from outcomes.\nOnly conditions approved by the manager go back to the CRS.",
+     "desc": "The PMS holds results; the CRS and channel manager hold future rates and inventory. AP Revenue sits beside them: anomaly detection · opportunity judgment · proposed actions · learning from outcomes. Only conditions approved by the manager go back to the CRS.",
      "blocks": [
       {
        "type": "media",
@@ -856,7 +850,7 @@
      "id": "value",
      "label": "03 · What clients get",
      "title": "Instead of comparing spreadsheets,\ndecisions with evidence.",
-     "desc": "The same operating standard across properties.\nEasy-to-miss cancellation and channel anomalies caught early.\n“Why this decision” stays on record,\nand before/after results sharpen the standard.",
+     "desc": "The same operating standard across properties. Easy-to-miss cancellation and channel anomalies caught early. “Why this decision” stays on record, and before/after results sharpen the standard.",
      "blocks": []
     },
     {
@@ -913,7 +907,7 @@
      "id": "scene",
      "label": "01 · One scene",
      "title": "When signals align,\nan opportunity appears.",
-     "desc": "Only markets where exchange rates, air capacity and search volume\npoint the same way are raised, with evidence.\nBudget, channel and message stay with the marketer.",
+     "desc": "Only markets where exchange rates, air capacity and search volume point the same way are raised, with evidence. Budget, channel and message stay with the marketer.",
      "blocks": [
       {
        "type": "media",
@@ -927,7 +921,7 @@
      "label": "02 · What it watches",
      "title": "Six signals.\nOnly when they agree.",
      "soft": true,
-     "desc": "Air seats · exchange rates · search volume · arrivals · holidays · concert schedules.\nOne or two looking good is not enough.\nWhen all six point to the same place, it becomes an opportunity.",
+     "desc": "Air seats · exchange rates · search volume · arrivals · holidays · concert schedules. One or two looking good is not enough. When all six point to the same place, it becomes an opportunity.",
      "blocks": [
       {
        "type": "media",
@@ -940,7 +934,7 @@
      "id": "market",
      "label": "03 · Market size",
      "title": "The year 20 million arrive.\nWho comes, and when, differs.",
-     "desc": "2.09 million visitors in July 2026, +20.8% year on year.\nChina · Japan · Taiwan · United States · Hong Kong, in that order.\nEach country has its own peak season, spend and reason to come.",
+     "desc": "2.09 million visitors in July 2026, +20.8% year on year. China · Japan · Taiwan · United States · Hong Kong, in that order. Each country has its own peak season, spend and reason to come.",
      "blocks": [
       {
        "type": "grid2",
@@ -981,7 +975,7 @@
      "label": "04 · Who uses it",
      "title": "Anyone waiting\nfor guests.",
      "soft": true,
-     "desc": "Hotel and resort marketing, local governments and tourism boards, travel agencies and OTAs,\nconcert and MICE organizers.\nIt answers “which country do we advertise in now” every week.",
+     "desc": "Hotel and resort marketing, local governments and tourism boards, travel agencies and OTAs, concert and MICE organizers. It answers “which country do we advertise in now” every week.",
      "blocks": [
       {
        "type": "grid2",
@@ -1012,7 +1006,7 @@
      "id": "apply",
      "label": "05 · How it connects",
      "title": "The same engine as AP Revenue.\nOnly the data differs.",
-     "desc": "Signals → priority → human decision → outcome on record.\nPublic data (Korea Tourism Data Lab · TourAPI) and partner data feed\na weekly “this week's opportunities” list and campaign briefs.",
+     "desc": "Signals → priority → human decision → outcome on record. Public data (Korea Tourism Data Lab · TourAPI) and partner data feed a weekly “this week's opportunities” list and campaign briefs.",
      "blocks": [
       {
        "type": "flow",
@@ -1093,7 +1087,7 @@
      "id": "consult",
      "label": "01",
      "title": "It asks first.\nWhat do you avoid?",
-     "desc": "Milk or wheat to avoid, a budget,\na preference for fragrance-free — the consultant knows first.\nThen only what fits stays on the shelf.\nWhen something new passes your criteria, you hear first.",
+     "desc": "Milk or wheat to avoid, a budget, a preference for fragrance-free — the consultant knows first. Then only what fits stays on the shelf. When something new passes your criteria, you hear first.",
      "blocks": [
       {
        "type": "media",
@@ -1107,7 +1101,7 @@
      "label": "02",
      "title": "The store is for advice and trial.\nThere is no checkout.",
      "soft": true,
-     "desc": "See, touch and try three or four in person.\nIf you like one, a single QR —\norder online, delivered home.",
+     "desc": "See, touch and try three or four in person. If you like one, a single QR — order online, delivered home.",
      "blocks": [
       {
        "type": "media",
@@ -1120,7 +1114,7 @@
      "id": "franchise",
      "label": "03 · FRANCHISE",
      "title": "We provide a system, not inventory.",
-     "desc": "Headquarters provides the choosing system;\nfranchisees provide space and consultation.\nFranchising opens only after company-run stores prove it.",
+     "desc": "Headquarters provides the choosing system; franchisees provide space and consultation. Franchising opens only after company-run stores prove it.",
      "blocks": [
       {
        "type": "media",
@@ -1189,7 +1183,7 @@
      "id": "map",
      "label": "01 · Two lanes",
      "title": "One discovery.\nTwo ways to buy.",
-     "desc": "LIA shows it and the apps guide you.\nThen AP sells directly, or a partner sells.\nEither way, who bought what stays with AP.",
+     "desc": "LIA shows it and the apps guide you. Then AP sells directly, or a partner sells. Either way, who bought what stays with AP.",
      "blocks": [
       {
        "type": "media",
@@ -1203,7 +1197,7 @@
      "label": "02 · AP direct",
      "title": "Choose, sell,\nand deliver.",
      "soft": true,
-     "desc": "Curation, payment and delivery, handled by AP Commerce.\nOnly what we have used goes on the shelf.",
+     "desc": "Curation, payment and delivery, handled by AP Commerce. Only what we have used goes on the shelf.",
      "blocks": [
       {
        "type": "grid2",
@@ -1270,7 +1264,7 @@
      "id": "partner",
      "label": "03 · With partners",
      "title": "AP chooses,\npartners sell.",
-     "desc": "No inventory, through partner links.\nBooking, payment and delivery by the partner; curation and content by AP.\nEvery partner link is disclosed, and prices stay the same.",
+     "desc": "No inventory, through partner links. Booking, payment and delivery by the partner; curation and content by AP. Every partner link is disclosed, and prices stay the same.",
      "blocks": [
       {
        "type": "grid2",
@@ -1320,7 +1314,7 @@
      "label": "04 · From discovery to repurchase",
      "title": "Buy what you saw.\nBuy again what you bought.",
      "soft": true,
-     "desc": "LIA content → overseas viewers → product discovery → purchase → delivery → repurchase.\nWhich viewers responded to which story and product is the basis for the next curation.",
+     "desc": "LIA content → overseas viewers → product discovery → purchase → delivery → repurchase. Which viewers responded to which story and product is the basis for the next curation.",
      "blocks": [
       {
        "type": "flow",
@@ -1409,7 +1403,7 @@
      "id": "why",
      "label": "01 · The problem",
      "title": "The skill exists.\nNo one to carry it on.",
-     "desc": "Limited outlets and large distribution margins. Creating alone cannot sustain a living.\nFewer of each generation choose a craft that demands years of training.\nThe works exist, but there is no channel or trust mechanism to reach overseas buyers.",
+     "desc": "Limited outlets and large distribution margins. Creating alone cannot sustain a living. Fewer of each generation choose a craft that demands years of training. The works exist, but there is no channel or trust mechanism to reach overseas buyers.",
      "blocks": [
       {
        "type": "milestones",
@@ -1443,7 +1437,7 @@
      "label": "02 · The opportunity",
      "title": "A window opened by Hallyu.",
      "soft": true,
-     "desc": "K-pop, dramas and films lead to demand for traditional craft.\n12.8 million visitors in Jan–Jul 2026, +21.3% year on year.\nDemand for the “real thing”, not mass-produced souvenirs, is steady.",
+     "desc": "K-pop, dramas and films lead to demand for traditional craft. 12.8 million visitors in Jan–Jul 2026, +21.3% year on year. Demand for the “real thing”, not mass-produced souvenirs, is steady.",
      "blocks": [
       {
        "type": "grid2",
@@ -1488,7 +1482,7 @@
      "id": "how",
      "label": "03 · How",
      "title": "尋 · 錄 · 廣 · 賣\nFind, record, promote, sell.",
-     "desc": "Phase 1 is trust before sales.\nFirst the world learns “this master exists.”\nSales open once the response is confirmed.",
+     "desc": "Phase 1 is trust before sales. First the world learns “this master exists.” Sales open once the response is confirmed.",
      "blocks": [
       {
        "type": "milestones",
@@ -1522,7 +1516,7 @@
      "label": "04 · Items and difference",
      "title": "A structure that proves authenticity.",
      "soft": true,
-     "desc": "Celadon and white porcelain, mother-of-pearl lacquerware and woodwork, hanji lamps and fans.\nOnly artisan-made pieces distinct from cheap imports.\nEvery work with signature, making record and provenance.",
+     "desc": "Celadon and white porcelain, mother-of-pearl lacquerware and woodwork, hanji lamps and fans. Only artisan-made pieces distinct from cheap imports. Every work with signature, making record and provenance.",
      "blocks": [
       {
        "type": "grid2",
@@ -1576,7 +1570,7 @@
      "id": "model",
      "label": "05 · All three gain",
      "title": "Artisan, platform, buyer.",
-     "desc": "Artisans gain fair income and the means to train successors,\nthe platform gains transaction fees and an artisan network,\noverseas buyers gain verified originals and a trustworthy origin.",
+     "desc": "Artisans gain fair income and the means to train successors, the platform gains transaction fees and an artisan network, overseas buyers gain verified originals and a trustworthy origin.",
      "blocks": [
       {
        "type": "milestones",
@@ -1672,7 +1666,7 @@
      "id": "persona",
      "label": "01 · Who she is",
      "title": "A twenty-something in Seoul.\nWith friends all over the world.",
-     "desc": "Spends the day at a desk, the evening at convenience stores and late-night cafés,\nand weekends reading old tales aloud.\nDoesn't show off what she knows — asks what you're curious about, on your behalf.",
+     "desc": "Spends the day at a desk, the evening at convenience stores and late-night cafés, and weekends reading old tales aloud. Doesn't show off what she knows — asks what you're curious about, on your behalf.",
      "blocks": [
       {
        "type": "grid2",
@@ -1718,7 +1712,7 @@
      "label": "02 · LIA the actress",
      "title": "LIA in front of the camera.",
      "soft": true,
-     "desc": "Behind the scenes on a drama set, the music video “Ride the Wave”,\na debut greeting and a press conference.\nAn actress with no shoot days, no rest days, and no aging.",
+     "desc": "Behind the scenes on a drama set, the music video “Ride the Wave”, a debut greeting and a press conference. An actress with no shoot days, no rest days, and no aging.",
      "blocks": [
       {
        "type": "gallery",
@@ -1754,7 +1748,7 @@
      "id": "daily",
      "label": "03 · A day with LIA",
      "title": "From the Han River at dawn\nto the rehearsal room at night.",
-     "desc": "A 5:40 a.m. run along the Han River, coffee in a neighborhood alley,\nan evening yoga mat, a bedside reset.\nBeauty, wellness and travel stories, every day.",
+     "desc": "A 5:40 a.m. run along the Han River, coffee in a neighborhood alley, an evening yoga mat, a bedside reset. Beauty, wellness and travel stories, every day.",
      "blocks": [
       {
        "type": "tags",
@@ -1774,7 +1768,7 @@
      "label": "04 · Lia Select",
      "title": "Tried,\nthen chosen.",
      "soft": true,
-     "desc": "K-beauty LIA used, filmed and reviewed, downsides included.\nSun care · essence · cushion · mask · tint · cleanser.\nSee it in the video, choose it on the shelf, buy through the partner link.",
+     "desc": "K-beauty LIA used, filmed and reviewed, downsides included. Sun care · essence · cushion · mask · tint · cleanser. See it in the video, choose it on the shelf, buy through the partner link.",
      "blocks": [
       {
        "type": "videos",
@@ -1847,7 +1841,7 @@
      "id": "channels",
      "label": "05 · Channels",
      "title": "Instagram. TikTok. Blog.",
-     "desc": "Instagram reels of 15–20 seconds with English captions.\nTikTok carries 30–45-second folktales.\nThe blog, in Korean, tells the longer story of the apps and products.",
+     "desc": "Instagram reels of 15–20 seconds with English captions. TikTok carries 30–45-second folktales. The blog, in Korean, tells the longer story of the apps and products.",
      "blocks": [
       {
        "type": "flow",
@@ -1880,7 +1874,7 @@
      "label": "06 · What she introduces",
      "title": "One actress\nfor every brand.",
      "soft": true,
-     "desc": "Apps · travel · K-beauty · craft.\nBrands multiply; the ambassador stays one.",
+     "desc": "Apps · travel · K-beauty · craft. Brands multiply; the ambassador stays one.",
      "blocks": [
       {
        "type": "grid2",
@@ -1925,7 +1919,7 @@
      "id": "funnel",
      "label": "07 · From discovery to purchase",
      "title": "LIA does the discovering,\nAP Commerce does the selling.",
-     "desc": "Discover Korean products through LIA's content,\nand buy them again back home.\nWe watch the share of overseas viewers, saves and shares — not follower counts.",
+     "desc": "Discover Korean products through LIA's content, and buy them again back home. We watch the share of overseas viewers, saves and shares — not follower counts.",
      "blocks": [
       {
        "type": "flow",
@@ -1945,7 +1939,7 @@
      "label": "08 · Why an AI actress",
      "title": "Every day, no shoot.\nAny language.",
      "soft": true,
-     "desc": "With a script, it posts today.\nSame face, different language.",
+     "desc": "With a script, it posts today. Same face, different language.",
      "blocks": [
       {
        "type": "grid2",
@@ -1988,7 +1982,7 @@
      "id": "future",
      "label": "09 · Next",
      "title": "From actress to IP.",
-     "desc": "Multilingual LIA, brand collaborations, cameos in games and apps.\nA digital ambassador working with tourism, regions and cultural events.",
+     "desc": "Multilingual LIA, brand collaborations, cameos in games and apps. A digital ambassador working with tourism, regions and cultural events.",
      "blocks": [
       {
        "type": "flow",
@@ -2053,7 +2047,7 @@
      "id": "buzzer",
      "label": "01 · The stage",
      "title": "Question up — hit the buzzer.",
-     "desc": "Six players on one stage. Only the first to buzz may answer. Five seconds.\nWrong costs points; right earns the time left on the clock.\nFast beats knowledgeable.",
+     "desc": "Six players on one stage. Only the first to buzz may answer. Five seconds. Wrong costs points; right earns the time left on the clock. Fast beats knowledgeable.",
      "blocks": [
       {
        "type": "media",
@@ -2067,7 +2061,7 @@
      "label": "02 · What kind of questions",
      "title": "From riddles\nto Korean history.",
      "soft": true,
-     "desc": "Nine topics. Easy · normal · hard.\nTen questions per round, three minutes.",
+     "desc": "Nine topics. Easy · normal · hard. Ten questions per round, three minutes.",
      "blocks": [
       {
        "type": "grid2",
@@ -2112,7 +2106,7 @@
      "id": "edu",
      "label": "03 · In the classroom",
      "title": "A lesson becomes a match.",
-     "desc": "The teacher sets the questions and the whole class takes the stage.\nPreview and review habits show up as scores,\nand missed questions go straight to the mistake notebook.",
+     "desc": "The teacher sets the questions and the whole class takes the stage. Preview and review habits show up as scores, and missed questions go straight to the mistake notebook.",
      "blocks": [
       {
        "type": "milestones",
@@ -2146,7 +2140,7 @@
      "label": "04 · One round",
      "title": "One round, five minutes.",
      "soft": true,
-     "desc": "Main game · today's mini-game · a bet on the last question.\nThere is a place where third becomes first.",
+     "desc": "Main game · today's mini-game · a bet on the last question. There is a place where third becomes first.",
      "blocks": [
       {
        "type": "media",
@@ -2159,7 +2153,7 @@
      "id": "create",
      "label": "05 · Writing questions",
      "title": "Others compete\non the questions I wrote.",
-     "desc": "Write a question, earn credits.\nMultiple choice or true/false. That is why the questions never run dry.",
+     "desc": "Write a question, earn credits. Multiple choice or true/false. That is why the questions never run dry.",
      "blocks": [
       {
        "type": "media",
@@ -2173,7 +2167,7 @@
      "label": "06 · Quiz packs",
      "title": "Same game, different subject.",
      "soft": true,
-     "desc": "One game. What you swap is the quiz pack.\nNo rebuilding the game for each country.",
+     "desc": "One game. What you swap is the quiz pack. No rebuilding the game for each country.",
      "blocks": [
       {
        "type": "media",
@@ -2242,7 +2236,7 @@
      "id": "siblings",
      "label": "01 · Four siblings",
      "title": "One final consonant each,\nfour siblings share the teaching.",
-     "desc": "Daho covers the basics of batchim, Kkobi ㄴ and ㄹ,\nAari the ㅇ ending, Rami the ㄱ · ㄷ · ㅂ stops.\nOne batchim per episode.",
+     "desc": "Daho covers the basics of batchim, Kkobi ㄴ and ㄹ, Aari the ㅇ ending, Rami the ㄱ · ㄷ · ㅂ stops. One batchim per episode.",
      "blocks": [
       {
        "type": "milestones",
@@ -2276,7 +2270,7 @@
      "label": "02 · Learn · listen · solve",
      "title": "Three screens, one flow.",
      "soft": true,
-     "desc": "The signature: final consonants shown in a separate color.\n반/방 · 발/밥 · 문/물 · 곰/공 — sounds where one batchim changes the meaning.\nEnding with a first sentence you will actually use: “물 주세요.”",
+     "desc": "The signature: final consonants shown in a separate color. 반/방 · 발/밥 · 문/물 · 곰/공 — sounds where one batchim changes the meaning. Ending with a first sentence you will actually use: “물 주세요.”",
      "blocks": [
       {
        "type": "media",
@@ -2299,7 +2293,7 @@
      "id": "arena",
      "label": "03 · Challenge",
      "title": "Compete on what you learned.",
-     "desc": "Lessons are for learning; the challenge is for competing.\nThree rounds, twelve questions, about two minutes — warm-up · today's mini-game · final bet.\nUnlocks after finishing at least one lesson.",
+     "desc": "Lessons are for learning; the challenge is for competing. Three rounds, twelve questions, about two minutes — warm-up · today's mini-game · final bet. Unlocks after finishing at least one lesson.",
      "blocks": [
       {
        "type": "flow",
@@ -2324,7 +2318,7 @@
      "label": "04 · Beyond the app",
      "title": "Hangeul lessons on video\nwith the four siblings.",
      "soft": true,
-     "desc": "From the vowel ㅏ to final consonants, episodes hosted by the four siblings.\nEnglish narration, Korean subtitles.\nMeet Hangeul before opening the app — in production.",
+     "desc": "From the vowel ㅏ to final consonants, episodes hosted by the four siblings. English narration, Korean subtitles. Meet Hangeul before opening the app — in production.",
      "blocks": [
       {
        "type": "media",
@@ -2388,7 +2382,7 @@
      "id": "world",
      "label": "01",
      "title": "From Gangnam into the Rift,\n50 waves.",
-     "desc": "Gangnam → Lotte Tower, Jamsil → inside the Rift.\nVOID TITAN waits at the end.",
+     "desc": "Gangnam → Lotte Tower, Jamsil → inside the Rift. VOID TITAN waits at the end.",
      "blocks": [
       {
        "type": "media",
@@ -2402,7 +2396,7 @@
      "label": "02",
      "title": "A child's imagination\nbecomes a game.",
      "soft": true,
-     "desc": "World, characters, story and fun come from the young creator's crayon drafts.\nEngineering, safety, monetization and release are AP's.\nThe creator's personal information is never disclosed.",
+     "desc": "World, characters, story and fun come from the young creator's crayon drafts. Engineering, safety, monetization and release are AP's. The creator's personal information is never disclosed.",
      "blocks": [
       {
        "type": "media",
@@ -2473,7 +2467,7 @@
      "id": "picks",
      "label": "01 · Lia's Picks",
      "title": "What Korea uses every day.",
-     "desc": "Sun care · essence · cushion · mask · tint · cleanser.\nOne per category.",
+     "desc": "Sun care · essence · cushion · mask · tint · cleanser. One per category.",
      "blocks": [
       {
        "type": "gallery",
@@ -2524,7 +2518,7 @@
      "label": "02 · Lia Reviews",
      "title": "Starting with the moment of use.",
      "soft": true,
-     "desc": "Sunscreen · mask · lip tint.\nFifteen seconds of LIA trying it herself.",
+     "desc": "Sunscreen · mask · lip tint. Fifteen seconds of LIA trying it herself.",
      "blocks": [
       {
        "type": "videos",

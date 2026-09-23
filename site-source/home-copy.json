@@ -31,9 +31,9 @@
   "why": "AP가 답하는 방식.",
   "principles": [
    "「오예스, 우리 애 먹어도 돼?」\n「10월 10일 객실, 지금 손봐야 해?」",
-   "추측하지 않는다. 식약처 원본, 호텔의 예약 기록 —\n이미 있는 기록을 대조한다.",
-   "「밀이 들어 있어요 — 근거: 식약처 품목제조보고」\n답에는 항상 근거가 붙는다.",
-   "사느냐 마느냐, 가격을 바꾸느냐 —\n마지막 결정은 부모가, 담당자가."
+   "추측하지 않는다.\n식약처 원본과 호텔 예약 기록,\n이미 있는 기록을 대조한다.",
+   "「밀이 들어 있어요 — 근거: 식약처 신고」\n답에는 항상 근거가 붙는다.",
+   "사느냐 마느냐, 가격을 바꾸느냐.\n마지막 결정은 부모가, 담당자가."
   ],
   "globalMore": "글로벌 설계 원칙",
   "aboutTitle": "사람이 포기하던 자리에, AI.",
@@ -164,10 +164,10 @@
   },
   "why": "How AP answers.",
   "principles": [
-   "“Can my child eat this Oh Yes?”\n“Room rates for October 10 — do we act now?”",
-   "No guessing. MFDS source records, the hotel's booking history —\nit checks against records that already exist.",
-   "“Contains wheat — source: MFDS product filing”\nEvery answer comes with its evidence.",
-   "Buy or not, change the price or not —\nthe last call belongs to the parent, to the manager."
+   "“Can my child eat this Oh Yes?” “Room rates for October 10 — act now?”",
+   "No guessing. MFDS source records and the hotel's booking history — records that already exist.",
+   "“Contains wheat — source: MFDS filing.” Every answer carries its evidence.",
+   "Buy or not, change the price or not. The last call belongs to the parent, to the manager."
   ],
   "globalMore": "Global design principles",
   "aboutTitle": "Where people had given up, AI.",
