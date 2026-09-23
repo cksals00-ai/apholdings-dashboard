@@ -1159,43 +1159,9 @@
      "desc": "Only what LIA has used and chosen goes on the shelf. Order, and AP handles payment through delivery.",
      "blocks": [
       {
-       "type": "grid2",
-       "items": [
-        {
-         "type": "proof",
-         "h3": "Lia Select — K-beauty",
-         "ol": [
-          "Nine items LIA used, filmed and reviewed, downsides included",
-          "Sun care · essence · cushion · mask · tint · cleanser",
-          "See it in the video → order from the shelf → delivered home"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "AP SELECT — the store that chooses",
-         "ol": [
-          "See, touch and try in store",
-          "Like it? One QR — no checkout",
-          "Order online, delivered home"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "K-Craft — works by master artisans",
-         "ol": [
-          "Originals by heritage holders and masters, shipped abroad",
-          "Signature, making record and provenance included"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "Shopee — in your language, delivered locally",
-         "ol": [
-          "Three skincare items, starting in Singapore and Malaysia",
-          "LIA's video as is, product pages in the local language"
-         ]
-        }
-       ]
+       "type": "media",
+       "src": "/media/gfx/commerce_own_en.jpg",
+       "alt": "Lia Select · AP SELECT · K-Craft · Shopee — from order to your door"
       },
       {
        "type": "actions",
@@ -1216,46 +1182,9 @@
      "desc": "Booking and payment stay on the sites you already use. AP helps only with the choosing. Buying through a link costs the same.",
      "blocks": [
       {
-       "type": "grid2",
-       "items": [
-        {
-         "type": "proof",
-         "h3": "Agoda — stays",
-         "ol": [
-          "Stays picked near the concert venue",
-          "Book on Agoda as usual",
-          "K-Concert Trip · LIA “Korea, Explained”"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "Klook — experiences · transport",
-         "ol": [
-          "eSIM · airport pickup · AREX · tours · hanbok · jjimjilbang",
-          "20 picks around five concert venues"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "Coupang — in Korea",
-         "ol": [
-          "Items featured on the blog and in the apps, on Coupang",
-          "IRON GRADE workout gear · K-Concert Trip travel gear"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "Shopee — repurchase after the trip",
-         "ol": [
-          "Products you scanned in a Korean store with K-Scan",
-          "Bought again on Shopee back home · prices previewed in the app"
-         ]
-        }
-       ]
-      },
-      {
-       "type": "note",
-       "text": "“This post contains partner links. Booking or buying through them costs the same.” — shown on every partner post."
+       "type": "media",
+       "src": "/media/gfx/commerce_partner_en.jpg",
+       "alt": "One concert trip — Agoda before · Klook on arrival · Coupang in Korea · Shopee back home"
       }
      ]
     },
@@ -1433,7 +1362,7 @@
      ]
     }
    ],
-   "hideGeneric": false
+   "hideGeneric": true
   },
   {
    "id": "lia",
@@ -1693,7 +1622,8 @@
       }
      ]
     }
-   ]
+   ],
+   "hideGeneric": true
   },
   {
    "id": "rgrg",

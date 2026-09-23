@@ -1414,43 +1414,9 @@
      "desc": "리아가 직접 써 보고 고른 것만 선반에.\n주문하면 결제부터 배송까지 AP가.",
      "blocks": [
       {
-       "type": "grid2",
-       "items": [
-        {
-         "type": "proof",
-         "h3": "리아 셀렉트 — K-뷰티",
-         "ol": [
-          "리아가 쓰고, 찍고, 아쉬운 점까지 말한 9종",
-          "선케어 · 에센스 · 쿠션 · 마스크 · 틴트 · 클렌저",
-          "영상에서 보고 → 선반에서 주문 → 집으로"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "AP SELECT — 고르는 매장",
-         "ol": [
-          "매장에서 보고, 만지고, 발라 본다",
-          "마음에 들면 QR 한 번 — 계산대 없음",
-          "주문은 온라인, 배송은 집으로"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "K-Craft — 장인의 작품",
-         "ol": [
-          "무형문화재 · 명인의 진품을 해외로",
-          "서명 · 제작 기록 · 출처가 함께 온다"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "쇼피 — 현지어로, 현지 배송",
-         "ol": [
-          "싱가포르 · 말레이시아부터 스킨케어 3종",
-          "리아 영상 그대로, 현지어 상세페이지"
-         ]
-        }
-       ]
+       "type": "media",
+       "src": "/media/gfx/commerce_own.jpg",
+       "alt": "리아 셀렉트 · AP SELECT · K-Craft · 쇼피 — 주문에서 집까지"
       },
       {
        "type": "actions",
@@ -1471,46 +1437,9 @@
      "desc": "예약과 결제는 늘 쓰던 사이트에서 그대로.\nAP는 고르는 것까지만 돕는다.\n링크로 사도 가격은 같다.",
      "blocks": [
       {
-       "type": "grid2",
-       "items": [
-        {
-         "type": "proof",
-         "h3": "Agoda — 숙소",
-         "ol": [
-          "공연장 근처 숙소를 골라 준다",
-          "예약은 아고다에서 그대로",
-          "K-Concert Trip · 리아 「Korea, Explained」"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "Klook — 체험 · 교통",
-         "ol": [
-          "eSIM · 공항 픽업 · AREX · 투어 · 한복 · 찜질방",
-          "공연장 5곳 기준 20개를 골라 두었다"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "Coupang — 국내",
-         "ol": [
-          "블로그 · 앱에서 소개한 물건을 쿠팡에서",
-          "IRON GRADE 운동 소품 · K-Concert Trip 여행 소품"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "Shopee — 귀국 후 재구매",
-         "ol": [
-          "한국 매장에서 K-Scan으로 스캔한 제품을",
-          "돌아가서 쇼피에서 다시 · 시세는 앱에서 미리"
-         ]
-        }
-       ]
-      },
-      {
-       "type": "note",
-       "text": "「이 게시물에는 파트너 링크가 있습니다. 링크로 예약 · 구매해도 가격은 같습니다.」 — 모든 파트너 게시물에 표시."
+       "type": "media",
+       "src": "/media/gfx/commerce_partner.jpg",
+       "alt": "공연 원정 한 번 — 출발 전 Agoda · 도착 Klook · 한국에서 Coupang · 귀국 후 Shopee"
       }
      ]
     },
@@ -1688,7 +1617,7 @@
      ]
     }
    ],
-   "hideGeneric": false
+   "hideGeneric": true
   },
   {
    "id": "lia",
@@ -1948,7 +1877,8 @@
       }
      ]
     }
-   ]
+   ],
+   "hideGeneric": true
   },
   {
    "id": "rgrg",
