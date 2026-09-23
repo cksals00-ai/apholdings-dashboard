@@ -139,7 +139,7 @@ def mobile_src(src):
  import os
  if not src.endswith('.jpg'):return None
  base=src[:-4]
- if base.split('/')[-1] in ('lw_collab','yt_ep1'):return src  # photo/thumbnail: legible as-is, no swipe
+ if base.split('/')[-1] in ('lw_collab','yt_ep1','ap_safe_pilot','ap_travel_pilot'):return src  # 실제 화면 캡처는 자르지 않는다 (개발자 가이드)  # photo/thumbnail: legible as-is, no swipe
  if base.endswith('_en'):
   cand=base[:-3]+'_m_en.jpg'
  else:

@@ -1,2191 +1,2323 @@
 {
- "copy": {
-  "nav": [
-   "Services",
-   "Products",
-   "About",
-   "Investors",
-   "Contact"
-  ],
-  "skip": "Skip to content",
-  "menu": "Menu",
-  "language": "Language",
-  "hero": "We build practical systems that help people and businesses make clearer choices, execute complex transactions and turn ideas into products.",
-  "explore": "Explore what we build",
-  "aboutCta": "About AP Holdings",
-  "portIntro": "Three portfolios. One way of building.",
-  "portDesc": "From judgment to transactions, from ideas to products. We turn complexity into repeatable systems.",
-  "whyTitle": "Complex problems deserve better systems.",
-  "why": "More information does not always lead to better decisions. More options do not always make choosing easier. AP structures the complexity that remains between information and action.",
-  "howTitle": "Human judgment. Clearer systems.",
-  "how": [
-   "Connect the information that matters.",
-   "Bring domain knowledge into the process.",
-   "Turn one-off know-how into repeatable workflows.",
-   "Build systems that can improve through use and outcomes."
-  ],
-  "globalIntro": "Every AP product is Global-by-Design.",
-  "global": "Our products are designed from the start for multiple markets, languages, currencies and policies. Separating core product logic from market configuration and local integrations is a company-wide principle.",
-  "globalNote": "This is our design principle and expansion direction, not a claim that every product already operates in multiple countries.",
-  "core": [
-   "Reusable product logic",
-   "Locale, currency, timezone and policy",
-   "Payment, logistics, channels and experts"
-  ],
-  "marketTitle": "A reusable core. A versioned Market Pack.",
-  "market": "A versioned bundle of configuration, content and partners connects the core to a new market. Local review and pilots come before expansion.",
-  "marketReview": "Market research → expert and policy review → testing → pilot → activation → review",
-  "decisionDesc": "We organize context, explain trade-offs and keep people in control of important decisions.",
-  "learnMore": "Explore product",
-  "inDev": "In development",
-  "concept": "Concept & system design",
-  "working": "Working Proof · Productization candidate",
-  "existing": "In operation",
-  "audience": "AP Holdings AI Influencer No. 1",
-  "selectKo": "See it. Try it. Understand it. Choose it.",
-  "expertTitle": "Expert Collaboration",
-  "expert": "Experts are external knowledge partners, not simply sales staff. We design collaboration around criteria, evidence standards, professional boundaries and standard operating procedures.",
-  "expertBoundary": "General product decision support is distinct from a licensed professional consultation. We do not use regulated professionals’ names as sales endorsements or imply advisory relationships without confirmed agreements.",
-  "expertPrinciples": [
-   "Criteria",
-   "Evidence Standard",
-   "Professional Boundary",
-   "SOP"
-  ],
-  "gameIntro": "Open imagination. Clear responsibility.",
-  "gameDesc": "Learn through competition and play. Turn creative ideas into products. We focus on three projects and use real usage and outcomes to guide expansion.",
-  "rgrgTitle": "One core. Many ways to learn.",
-  "rgrg": "Learner locale, instruction language, target language or subject, and Quiz Pack are separate. The same core can support languages, certifications, education, culture and workplace learning: a global learning game and platform.",
-  "pairs": "Illustrative language pairs, not a list of launched packs.",
-  "creatorTitle": "Young Creator + AP Production",
-  "creator": "The young creator imagines worlds, characters, stories, skills, bosses, events and fun. AP handles technical feasibility, QA, balance, safety, privacy, monetization governance and release.",
-  "assetsTitle": "What remains after the work is done.",
-  "assets": "Our long-term direction is to accumulate data, processes, expert knowledge, software, IP and customer relationships through use. Outcomes inform the next improvement.",
-  "origin": "Not where AI replaces a person, but where a person had stopped.\nJudgment stays human, to the end.",
-  "founderTitle": "Where people had given up,\nAI.",
-  "founder": "Experience in commercial operations, global sales, tourism and international business, data analysis, product building and decision workflow design informs how we build.",
-  "firewall": "AP code, accounts, domains, documentation and product IP are maintained independently. Employer confidential data, customer information, operational information and IP are not AP assets.",
-  "mission": "Make complexity usable.",
-  "vision": "Build systems that become more valuable through use, learning and outcomes.",
-  "labDesc": "Independent apps and small experiments by the founder. A record of building and learning, separate from the three core portfolios.",
-  "labMore": "Explore independent projects",
-  "evidence": "7+ products/apps built or released",
-  "evidenceNote": "Execution evidence based on founder-provided build/release history and existing app links. This is not a claim of product-market fit or large-scale traction.",
-  "contactTitle": "Build with AP.",
-  "contact": "Let’s discuss product and technology, expert advisory, brand and commerce, global distribution, education and content, craft and artist collaboration, and pilots.",
-  "contactCta": "Contact AP Holdings",
-  "emailNote": "Current contact address",
-  "privacy": "Privacy policies",
-  "top": "Back to top",
-  "irTitle": "Three businesses.\nOne decision engine.",
-  "irIntro": "7 apps released · 2 AI connectors in operation · 1 hotel revenue decision engine in live service.\nThe same engine serves the moment of choosing, buying and learning.\nBelow is public material that separates what exists now from what is proven next.",
-  "investThesis": "Reduce the recurring complexity between information and action across industries. Turn learning from use into reusable products, processes and IP. Three portfolios apply the same principle to different problems.",
-  "proofTitle": "AP Revenue · Decision Intelligence Working Proof",
-  "proof": "An independently developed Decision Intelligence Working Proof / Productization Candidate. It tests how complex commercial data can become explainable priorities, human actions and measurable outcomes.",
-  "proofNote": "A productization candidate, not evidence of external pilots, revenue or validated business outcomes.",
-  "demoTitle": "The working-proof workflow",
-  "demoSteps": [
-   "Review an explainable priority.",
-   "A person decides whether to act.",
-   "Record the outcome and learn."
-  ],
-  "demoNote": "A conceptual workflow illustration. No live operational dashboard, customer data or employer data is displayed.",
-  "liaEvidence": "Early owned-distribution experiment. Learning from Instagram/TikTok content and international audience response.",
-  "futureTitle": "The next proof comes from external outcomes.",
-  "future": "External pilots, active users, transactions, revenue, repeat and outcome. Only verified metrics will be shared, with detailed evidence supplied during investor diligence.",
-  "milestonesTitle": "Validation gates before expansion.",
-  "milestones": [
-   [
-    "01 · FOUNDATION",
-    "Independent product foundation",
-    "Working proof, existing app assets, public standards and market-aware design principles."
-   ],
-   [
-    "02 · VALIDATION",
-    "External validation",
-    "Planned external pilots, usability tests, expert review and audience-intent validation."
-   ],
-   [
-    "03 · SYSTEMIZATION",
-    "Repeatability",
-    "Connect actions, transactions, returns, repeat usage and outcomes to improve product and operations."
-   ],
-   [
-    "04 · SCALE",
-    "Evidence-led expansion",
-    "Expand products after Market Pack, local partner, policy and unit-economics validation."
-   ]
-  ],
-  "milestoneNote": "These are planned validation stages, not completed results or committed launch dates.",
-  "roadmapTitle": "Built in Korea. Designed for the world.",
-  "roadmap": "Prioritize validation of LIA’s audience and commerce intent in Vietnam. Assess Japan, Taiwan and other markets against product fit and local readiness. Craft transactions in France are a research direction; we do not launch every product in every market at once.",
-  "materialsTitle": "Investor materials",
-  "publicTitle": "PUBLIC",
-  "publicDesc": "Company overview, investment thesis, Global-by-Design, portfolio, founder capability and roadmap. This webpage is the current public material.",
-  "shareTitle": "INVESTOR SHARE",
-  "shareDesc": "Full investor deck, investment memo and verified traction appendix. Shared separately following a request.",
-  "ndaTitle": "NDA / DATA ROOM",
-  "ndaDesc": "Financial model, cap table, contracts, legal documents, detailed IP and private metrics are managed through a separate controlled-access process.",
-  "request": "Request Investor Materials",
-  "requestNote": "Review and send your request in your email app. Materials are not automatically downloaded or sent from this page.",
-  "version": "Public IR v2.0 · 2026-09-22 · AP Holdings",
-  "history": "Existing product assets",
-  "legacySafe": "The existing Safelist app is evidence of building. Its currently available features are distinct from the broader AP Safe product concept.",
-  "copy": "Copy address",
-  "copied": "Copied",
-  "copyFail": "Select the address and copy it manually.",
-  "connector": "Existing connector access",
-  "connectorNote": "The existing connection address is preserved. Available functions depend on the connector’s current status.",
-  "connectHelp": "Enter the address below in your client’s remote-connector settings. Check that client for compatibility and authentication requirements.",
-  "assetNote": "Existing project artwork. Features and release plans for products in development may change.",
-  "rgrgAssetNote": "Existing character assets preserved under the RGRG brand.",
-  "termsBoundary": "Product, transaction and professional-service availability depends on launch status and applicable market policies.",
-  "curationNote": "Existing product visuals for content. Confirm availability, price and delivery terms with the selling channel.",
-  "aboutSections": [
-   {
-    "id": "name",
-    "label": "01 · The name",
-    "title": "First, a name.\nNow, what we do.",
-    "desc": "A.P — Alfred Park. The name of the person who started it. We don't hide who built this. A.P — AI People. The name of what we do now. Not a company that handles AI, but a company standing between AI and people.",
-    "blocks": [
-     {
-      "type": "grid2",
-      "items": [
-       {
-        "type": "proof",
-        "h3": "A.P · Alfred Park",
-        "p": "The name of the person who started it. We don't hide who built this."
-       },
-       {
-        "type": "proof",
-        "h3": "A.P · AI People",
-        "p": "The name of what we do now. A company standing between AI and people."
-       }
-      ]
-     }
-    ]
-   },
-   {
-    "id": "philosophy",
-    "label": "02 · Philosophy",
-    "title": "Three things.",
-    "soft": true,
-    "desc": "We don't put AI in a person's place. We don't take from users. What we don't know, we say we don't know.",
-    "blocks": [
-     {
-      "type": "milestones",
-      "items": [
-       [
-        "1",
-        "We don't put AI in a person's place",
-        "Not work people couldn't do — work they had stopped doing. 250,000 products, 2,455 stocks — only where a human limit stopped the work. Judgment stays with people."
-       ],
-       [
-        "2",
-        "We don't take from users",
-        "No accounts · no ads · no data collection. Records stay on the device and disappear when the app is deleted."
-       ],
-       [
-        "3",
-        "What we don't know, we say we don't know",
-        "“There was no formula for picking surging stocks in advance” — the conclusion of two years of full-market analysis, published as is. An AI that states its limits instead of pretending certainty."
-       ],
-       [
-        "0 · 0 · 0",
-        "No promises we can't keep",
-        "Zero accounts · zero ads · zero data collection. As the company grows, these three stay."
-       ]
-      ]
-     }
-    ]
-   },
-   {
-    "id": "business",
-    "label": "03 · Business",
-    "title": "Variations on one sentence.",
-    "desc": "We place AI where a person had come to a stop. The moment of choosing, buying, and learning.",
-    "blocks": [
-     {
-      "type": "milestones",
-      "items": [
-       [
-        "Choices with evidence",
-        "AP Safe · AP Light · AP Revenue · AP Travel",
-        "250,000 food ingredient records, 317,000 calorie entries, hotel booking data, market signals. Judgments too big for one person, delivered with evidence."
-       ],
-       [
-        "Commerce",
-        "AP SELECT · LIA · K-Commerce · K-Craft",
-        "A store that chooses, an AI influencer, overseas marketplaces, artisans' works. From discovery to repurchase."
-       ],
-       [
-        "Play & Learn",
-        "RGRG · Hangeul Cubs · LAST WAVE",
-        "Compete by quiz, learn Hangeul with four tiger siblings, and watch a child's imagination become a game."
-       ],
-       [
-        "Founder",
-        "Fifteen years in the field",
-        "Commercial operations, global sales, tourism and international business, and data analysis at a hotel and resort group. He knows what blocks a decision."
-       ]
-      ]
-     }
-    ]
-   },
-   {
-    "id": "independence",
-    "label": "04 · Independence",
-    "title": "The experience is used.\nThe assets are not.",
-    "soft": true,
-    "desc": "AP's code, accounts, domains, documents and product IP are entirely independent. The employer's data, customer information and operational information do not belong to AP. Investor demos use synthetic, public or permitted data only.",
-    "blocks": [
-     {
-      "type": "tags",
-      "items": [
-       "Commercial Operations",
-       "Global Sales",
-       "Tourism & International Business",
-       "Data Analysis",
-       "Product Building",
-       "Decision Workflow Design"
-      ]
-     },
-     {
-      "type": "actions",
-      "items": [
-       [
-        "/ko/ir/",
-        "IR / INVESTORS",
-        "primary"
-       ],
-       [
-        "/ko/lab/",
-        "Founder’s Lab",
-        "button"
-       ]
-      ]
-     }
-    ]
-   }
-  ],
-  "irSections": [
-   {
-    "id": "thesis",
-    "label": "01 · Investment thesis",
-    "title": "Not for lack of information.\nThings stop for lack of a decision.",
-    "desc": "Choosing a snack or setting a room rate — it is the same. AP puts data, expert criteria, procedure and software at that point and turns it into a repeatable decision system. A decision structure built once is reused in the next product.",
-    "blocks": [
-     {
-      "type": "flow",
-      "items": [
-       "Ask",
-       "Check against existing records",
-       "Answer with evidence",
-       "A person decides",
-       "Record the outcome"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "market",
-    "label": "02 · Market",
-    "title": "The year 20 million arrive.\nEach one spends $1,000.",
-    "soft": true,
-    "desc": "2.09 million visitors in July 2026, +20.8% year on year. Annual target 20 million. Spend per visitor $1,008. At 20 million, tourism receipts of roughly $20 billion. K-beauty, K-food and K-content pull that spending in.",
-    "blocks": [
-     {
-      "type": "grid2",
-      "items": [
-       {
-        "type": "proof",
-        "h3": "Inbound",
-        "ol": [
-         "2025: 18.7 million — an all-time high",
-         "2026 target 20 million · 2030 target 30 million",
-         "China · Japan · Taiwan · United States · Hong Kong, in that order"
-        ],
-        "note": "Korea Tourism Organization · Ministry of Culture, Sports and Tourism"
-       },
-       {
-        "type": "proof",
-        "h3": "Where AP goes in",
-        "ol": [
-         "Before the trip — Hangeul · concerts · planning (Cubs · K-Concert Trip · Travel)",
-         "During the trip — stores · scanning · choosing (SELECT · Safe · K-Scan)",
-         "After returning — repurchase (LIA · K-Commerce · K-Craft)"
-        ]
-       }
-      ]
-     }
-    ]
-   },
-   {
-    "id": "model",
-    "label": "03 · Three businesses and revenue",
-    "title": "Same engine,\nthree revenue structures.",
-    "desc": "Decision intelligence: B2B subscriptions and connectors. Commerce: direct sales, commissions and franchising. Play & Learn: in-app purchases and educational quiz packs. No advertising and no sale of user data.",
-    "blocks": [
-     {
-      "type": "milestones",
-      "items": [
-       [
-        "Choices with evidence",
-        "B2B SaaS · connectors",
-        "AP Revenue hotel subscriptions. Safelist and LightList connectors are free to build a user base, leading on to the safe market and Hospital Report Pro."
-       ],
-       [
-        "Commerce",
-        "Direct sales · commissions · franchising",
-        "Direct sales through Lia Select and Shopee, partner commissions from Agoda · Klook · Coupang, and AP SELECT franchise fees, royalties and system fees."
-       ],
-       [
-        "Play & Learn",
-        "IAP · education B2B",
-        "Hangeul Cubs lesson packs, RGRG quiz packs for schools, academies and companies, LAST WAVE skins and passes (no pay-to-win)."
-       ],
-       [
-        "Common",
-        "Data",
-        "Who asked what, chose what and bought what, linked under one ID. The basis for the next product and curation."
-       ]
-      ]
-     }
-    ]
-   },
-   {
-    "id": "proof",
-    "label": "04 · Working today",
-    "title": "Built and shipped.",
-    "soft": true,
-    "desc": "Evidence of execution, not of large-scale traction. Only verified figures are published; detailed evidence is presented in investor review.",
-    "blocks": [
-     {
-      "type": "tags",
-      "items": [
-       "Working Proof — independently built · in operation",
-       "Demo data — FOUNDER-PROVIDED · synthetic · public only"
-      ]
-     },
-     {
-      "type": "grid2",
-      "items": [
-       {
-        "type": "proof",
-        "h3": "Apps · connectors",
-        "ol": [
-         "7 apps on the App Store — Safelist · Hangeul Cubs · K-Concert Trip · IRON GRADE · The Other Hours · Dawn Grace · K-Scan",
-         "2 Claude connectors in operation — Safelist (250,000 products) · LightList (317,000 records)"
-        ]
-       },
-       {
-        "type": "proof",
-        "h3": "AP Revenue",
-        "ol": [
-         "revenue.apholdings.kr in production",
-         "Anomaly detection · prioritization · manager decision · outcome on record",
-         "Synthetic data · 11 tests passing · before external pilot"
-        ]
-       },
-       {
-        "type": "proof",
-        "h3": "LIA",
-        "ol": [
-         "Instagram and TikTok in operation",
-         "Overseas viewers responded before domestic ones",
-         "3 K-beauty reviews · 9 Lia Select items"
-        ]
-       },
-       {
-        "type": "proof",
-        "h3": "Games",
-        "ol": [
-         "RGRG six-player live match build · preparing for release",
-         "LAST WAVE 5 heroes · 6 enemies · 3 Seoul zones",
-         "Hangeul Cubs 42 lessons · EN · VI · FR"
-        ]
-       }
-      ]
-     },
-     {
-      "type": "actions",
-      "items": [
-       [
-        "https://revenue.apholdings.kr/",
-        "Open AP Revenue",
-        "button"
-       ],
-       [
-        "/ko/products/lia/",
-        "LIA",
-        "button"
-       ],
-       [
-        "/ko/lab/",
-        "Founder’s Lab",
-        "button"
-       ]
-      ]
-     }
-    ]
-   },
-   {
-    "id": "why",
-    "label": "05 · Why AP",
-    "title": "Four things\nin one company.",
-    "desc": "One decision engine reused across three businesses, channels already in hand, trust built by taking nothing from users, and a founder who knows the field.",
-    "blocks": [
-     {
-      "type": "milestones",
-      "items": [
-       [
-        "Engine reuse",
-        "A decision structure built once",
-        "The check · evidence · human-decision structure built for Safe is used as is by Light, Revenue and Travel. Marginal cost falls with every product."
-       ],
-       [
-        "Channels in hand",
-        "LIA · blog · apps",
-        "Reach without ad spend. An AI influencer who reaches overseas viewers first, and user touchpoints across seven apps."
-       ],
-       [
-        "Trust",
-        "0 · 0 · 0",
-        "No accounts, ads or data collection. It never says “safe” — it says what was found and what was not."
-       ],
-       [
-        "The field",
-        "Founder, fifteen years",
-        "Commercial, global sales, tourism and data at a hotel and resort group. The hotel revenue engine and the inbound business came from that experience."
-       ]
-      ]
-     }
-    ]
-   },
-   {
-    "id": "milestones",
-    "label": "06 · The next 12 months",
-    "title": "A threshold\nat every stage.",
-    "soft": true,
-    "desc": "From 02 onward is plan. Please read it apart from what is done.",
-    "blocks": [
-     {
-      "type": "milestones",
-      "items": [
-       [
-        "01 · Now",
-        "What is built",
-        "7 apps · 2 connectors · Revenue in live service · LIA's channel · company structure and website"
-       ],
-       [
-        "02 · Next",
+  "copy": {
+    "nav": [
+      "Services",
+      "Products",
+      "About",
+      "Investors",
+      "Contact"
+    ],
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "language": "Language",
+    "hero": "We build practical systems that help people and businesses make clearer choices, execute complex transactions and turn ideas into products.",
+    "explore": "Explore what we build",
+    "aboutCta": "About AP Holdings",
+    "portIntro": "Three portfolios. One way of building.",
+    "portDesc": "From judgment to transactions, from ideas to products. We turn complexity into repeatable systems.",
+    "whyTitle": "Complex problems deserve better systems.",
+    "why": "More information does not always lead to better decisions. More options do not always make choosing easier. AP structures the complexity that remains between information and action.",
+    "howTitle": "Human judgment. Clearer systems.",
+    "how": [
+      "Connect the information that matters.",
+      "Bring domain knowledge into the process.",
+      "Turn one-off know-how into repeatable workflows.",
+      "Build systems that can improve through use and outcomes."
+    ],
+    "globalIntro": "Every AP product is Global-by-Design.",
+    "global": "Our products are designed from the start for multiple markets, languages, currencies and policies. Separating core product logic from market configuration and local integrations is a company-wide principle.",
+    "globalNote": "This is our design principle and expansion direction, not a claim that every product already operates in multiple countries.",
+    "core": [
+      "Reusable product logic",
+      "Locale, currency, timezone and policy",
+      "Payment, logistics, channels and experts"
+    ],
+    "marketTitle": "A reusable core. A versioned Market Pack.",
+    "market": "A versioned bundle of configuration, content and partners connects the core to a new market. Local review and pilots come before expansion.",
+    "marketReview": "Market research → expert and policy review → testing → pilot → activation → review",
+    "decisionDesc": "We organize context, explain trade-offs and keep people in control of important decisions.",
+    "learnMore": "Explore product",
+    "inDev": "In development",
+    "concept": "Concept & system design",
+    "working": "Working Proof · Productization candidate",
+    "existing": "In operation",
+    "audience": "AP Holdings AI Influencer No. 1",
+    "selectKo": "See it. Try it. Understand it. Choose it.",
+    "expertTitle": "Expert Collaboration",
+    "expert": "Experts are external knowledge partners, not simply sales staff. We design collaboration around criteria, evidence standards, professional boundaries and standard operating procedures.",
+    "expertBoundary": "General product decision support is distinct from a licensed professional consultation. We do not use regulated professionals’ names as sales endorsements or imply advisory relationships without confirmed agreements.",
+    "expertPrinciples": [
+      "Criteria",
+      "Evidence Standard",
+      "Professional Boundary",
+      "SOP"
+    ],
+    "gameIntro": "Open imagination. Clear responsibility.",
+    "gameDesc": "Learn through competition and play. Turn creative ideas into products. We focus on three projects and use real usage and outcomes to guide expansion.",
+    "rgrgTitle": "One core. Many ways to learn.",
+    "rgrg": "Learner locale, instruction language, target language or subject, and Quiz Pack are separate. The same core can support languages, certifications, education, culture and workplace learning: a global learning game and platform.",
+    "pairs": "Illustrative language pairs, not a list of launched packs.",
+    "creatorTitle": "Young Creator + AP Production",
+    "creator": "The young creator imagines worlds, characters, stories, skills, bosses, events and fun. AP handles technical feasibility, QA, balance, safety, privacy, monetization governance and release.",
+    "assetsTitle": "What remains after the work is done.",
+    "assets": "Our long-term direction is to accumulate data, processes, expert knowledge, software, IP and customer relationships through use. Outcomes inform the next improvement.",
+    "origin": "Not where AI replaces a person, but where a person had stopped.\nJudgment stays human, to the end.",
+    "founderTitle": "Where people had given up,\nAI.",
+    "founder": "Experience in commercial operations, global sales, tourism and international business, data analysis, product building and decision workflow design informs how we build.",
+    "firewall": "AP code, accounts, domains, documentation and product IP are maintained independently. Employer confidential data, customer information, operational information and IP are not AP assets.",
+    "mission": "Make complexity usable.",
+    "vision": "Build systems that become more valuable through use, learning and outcomes.",
+    "labDesc": "Independent apps and small experiments by the founder. A record of building and learning, separate from the three core portfolios.",
+    "labMore": "Explore independent projects",
+    "evidence": "7+ products/apps built or released",
+    "evidenceNote": "Execution evidence based on founder-provided build/release history and existing app links. This is not a claim of product-market fit or large-scale traction.",
+    "contactTitle": "Build with AP.",
+    "contact": "Let’s discuss product and technology, expert advisory, brand and commerce, global distribution, education and content, craft and artist collaboration, and pilots.",
+    "contactCta": "Contact AP Holdings",
+    "emailNote": "Current contact address",
+    "privacy": "Privacy policies",
+    "top": "Back to top",
+    "irTitle": "Three businesses.\nOne decision engine.",
+    "irIntro": "7 apps released · 2 AI connectors in operation · 1 hotel revenue decision engine in live service.\nThe same engine serves the moment of choosing, buying and learning.\nBelow is public material that separates what exists now from what is proven next.",
+    "investThesis": "Reduce the recurring complexity between information and action across industries. Turn learning from use into reusable products, processes and IP. Three portfolios apply the same principle to different problems.",
+    "proofTitle": "AP Revenue · Decision Intelligence Working Proof",
+    "proof": "An independently developed Decision Intelligence Working Proof / Productization Candidate. It tests how complex commercial data can become explainable priorities, human actions and measurable outcomes.",
+    "proofNote": "A productization candidate, not evidence of external pilots, revenue or validated business outcomes.",
+    "demoTitle": "The working-proof workflow",
+    "demoSteps": [
+      "Review an explainable priority.",
+      "A person decides whether to act.",
+      "Record the outcome and learn."
+    ],
+    "demoNote": "A conceptual workflow illustration. No live operational dashboard, customer data or employer data is displayed.",
+    "liaEvidence": "Early owned-distribution experiment. Learning from Instagram/TikTok content and international audience response.",
+    "futureTitle": "The next proof comes from external outcomes.",
+    "future": "External pilots, active users, transactions, revenue, repeat and outcome. Only verified metrics will be shared, with detailed evidence supplied during investor diligence.",
+    "milestonesTitle": "Validation gates before expansion.",
+    "milestones": [
+      [
+        "01 · FOUNDATION",
+        "Independent product foundation",
+        "Working proof, existing app assets, public standards and market-aware design principles."
+      ],
+      [
+        "02 · VALIDATION",
         "External validation",
-        "1 Revenue pilot · Safe user test · 1 SELECT pop-up · Shopee listing · 1–3 craft transactions"
-       ],
-       [
-        "03 · After that",
+        "Planned external pilots, usability tests, expert review and audience-intent validation."
+      ],
+      [
+        "03 · SYSTEMIZATION",
         "Repeatability",
-        "Decision → action → outcome linked under one ID · per-client policy calibration · first franchise"
-       ],
-       [
-        "04 · Expansion",
-        "Expansion with evidence",
-        "Vietnam first, then Japan and Taiwan. Franchising only after company-run stores prove it. Only validated titles grow"
-       ]
+        "Connect actions, transactions, returns, repeat usage and outcomes to improve product and operations."
+      ],
+      [
+        "04 · SCALE",
+        "Evidence-led expansion",
+        "Expand products after Market Pack, local partner, policy and unit-economics validation."
       ]
-     }
-    ]
-   },
-   {
-    "id": "global",
-    "label": "07 · Global",
-    "title": "Built in Korea.\nDesigned for the world.",
-    "desc": "The first overseas market is Vietnam — validating LIA viewer response and commerce demand first. Japan and Taiwan for product fit, France for craft trade research. Adding a country means adding a language and market pack, not rebuilding the product.",
-    "blocks": [
-     {
-      "type": "tags",
-      "items": [
-       "Vietnam — LIA · K-Scan · Shopee",
-       "Japan · Taiwan — 1st and 3rd in arrivals, product fit",
-       "France — first overseas response to Hangeul Cubs, craft research",
-       "English-speaking — Korea-curious"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "founder",
-    "label": "08 · Founder",
-    "title": "Fifteen years in the field.\nAn independent company.",
-    "soft": true,
-    "desc": "Commercial operations and global sales, tourism and international business, and data analysis at a hotel and resort group. The experience is used; the assets are not — code, accounts, domains, documents and product IP are entirely independent. The employer's data, customer information and operational information do not belong to AP.",
-    "blocks": [
-     {
-      "type": "tags",
-      "items": [
-       "Commercial Operations",
-       "Global Sales",
-       "Tourism & International Business",
-       "Data Analysis",
-       "Product Building",
-       "Decision Workflow Design"
-      ]
-     },
-     {
-      "type": "note",
-      "text": "Investor demos use FOUNDER-PROVIDED, synthetic, public or permitted data only."
-     }
-    ]
-   },
-   {
-    "id": "materials",
-    "label": "09 · Investor materials",
-    "title": "Opened in three tiers.",
-    "cta": true,
-    "desc": "PUBLIC — this page. INVESTOR SHARE — investor deck · investment memo · verified traction appendix.\nNDA / DATA ROOM — financial model · cap table · legal · contracts · detailed IP · non-public metrics.",
-    "blocks": [
-     {
-      "type": "actions",
-      "items": [
-       [
-        "mail:Request Investor Materials",
-        "Request investor materials",
-        "primary"
-       ],
-       [
-        "/ko/about/",
-        "About the company",
-        "button"
-       ]
-      ]
-     },
-     {
-      "type": "note",
-      "text": "Request by email. No automatic downloads. Provided after access is confirmed."
-     }
-    ]
-   }
-  ]
- },
- "products": [
-  {
-   "id": "safe",
-   "name": "AP Safe",
-   "tag": "Know what to avoid.",
-   "status": "inDev",
-   "role": "Whichever AI you ask, the standard is my body.",
-   "desc": "The avoid list saved on my phone filters what the AI shows, and only unflagged items get picked.\nFrom ingredient scanner to AI-assisted safe commerce.",
-   "note": "Decision support based on product information. Not a medical diagnosis or an absolute guarantee of safety.",
-   "flow": [
-    "User-explicit Conditions",
-    "Product Information",
-    "Conflict / Caution",
-    "Human Decision"
-   ],
-   "link": "https://apps.apple.com/kr/app/id6805684034",
-   "linkLabel": "Safelist app",
-   "image": "/media/safelist_frame.jpg",
-   "video": "/media/safelist.mp4",
-   "sections": [
-    {
-     "id": "scene",
-     "label": "01 · One scene",
-     "title": "Siri, a week of snacks\nsafe for my child.",
-     "desc": "Before anything is bought, any AI asks Safelist first. Only unflagged items reach the cart.",
-     "blocks": [
+    ],
+    "milestoneNote": "These are planned validation stages, not completed results or committed launch dates.",
+    "roadmapTitle": "Built in Korea. Designed for the world.",
+    "roadmap": "Prioritize validation of LIA’s audience and commerce intent in Vietnam. Assess Japan, Taiwan and other markets against product fit and local readiness. Craft transactions in France are a research direction; we do not launch every product in every market at once.",
+    "materialsTitle": "Investor materials",
+    "publicTitle": "PUBLIC",
+    "publicDesc": "Company overview, investment thesis, Global-by-Design, portfolio, founder capability and roadmap. This webpage is the current public material.",
+    "shareTitle": "INVESTOR SHARE",
+    "shareDesc": "Full investor deck, investment memo and verified traction appendix. Shared separately following a request.",
+    "ndaTitle": "NDA / DATA ROOM",
+    "ndaDesc": "Financial model, cap table, contracts, legal documents, detailed IP and private metrics are managed through a separate controlled-access process.",
+    "request": "Request Investor Materials",
+    "requestNote": "Review and send your request in your email app. Materials are not automatically downloaded or sent from this page.",
+    "version": "Public IR v2.0 · 2026-09-22 · AP Holdings",
+    "history": "Existing product assets",
+    "legacySafe": "The existing Safelist app is evidence of building. Its currently available features are distinct from the broader AP Safe product concept.",
+    "copy": "Copy address",
+    "copied": "Copied",
+    "copyFail": "Select the address and copy it manually.",
+    "connector": "Existing connector access",
+    "connectorNote": "The existing connection address is preserved. Available functions depend on the connector’s current status.",
+    "connectHelp": "Enter the address below in your client’s remote-connector settings. Check that client for compatibility and authentication requirements.",
+    "assetNote": "Existing project artwork. Features and release plans for products in development may change.",
+    "rgrgAssetNote": "Existing character assets preserved under the RGRG brand.",
+    "termsBoundary": "Product, transaction and professional-service availability depends on launch status and applicable market policies.",
+    "curationNote": "Existing product visuals for content. Confirm availability, price and delivery terms with the selling channel.",
+    "aboutSections": [
       {
-       "type": "media",
-       "src": "/media/gfx/safe_scene_en.jpg",
-       "alt": "One sentence → AI → Safelist verdict → only unflagged items reach the cart"
-      }
-     ]
-    },
-    {
-     "id": "why",
-     "label": "02 · Why Safelist",
-     "title": "AI is probability. Ingredients are fact.",
-     "soft": true,
-     "desc": "AI can sound confident about what it doesn't know. For a child's food, that is the real danger. Safelist checks the source records and hands the AI facts only.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/safe_why_en.jpg",
-       "alt": "AI alone guesses; with Safelist it answers from MFDS source records"
-      },
-      {
-       "type": "note",
-       "text": "Not a diagnosis · Public database · Final call stays with the parent"
-      }
-     ]
-    },
-    {
-     "id": "data",
-     "label": "03 · Where the data lives",
-     "title": "My body's data stays on my phone.",
-     "desc": "Child profiles, photos and logs never leave the device. The server receives only the label and the avoid list, then discards them.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/safe_privacy_en.jpg",
-       "alt": "My data stays on my phone — the server sees only the label and the avoid list, then discards them"
-      }
-     ]
-    },
-    {
-     "id": "today",
-     "label": "04 · Today",
-     "title": "Today, on the App Store and in Claude.",
-     "soft": true,
-     "blocks": [
-      {
-       "type": "actions",
-       "items": [
-        [
-         "https://apps.apple.com/kr/app/id6805684034",
-         "App Store",
-         "primary"
-        ],
-        [
-         "/business/safelist-connect.html",
-         "Connect to Claude",
-         "button"
+        "id": "name",
+        "label": "01 · The name",
+        "title": "First, a name.\nNow, what we do.",
+        "desc": "A.P — Alfred Park. The name of the person who started it. We don't hide who built this. A.P — AI People. The name of what we do now. Not a company that handles AI, but a company standing between AI and people.",
+        "blocks": [
+          {
+            "type": "grid2",
+            "items": [
+              {
+                "type": "proof",
+                "h3": "A.P · Alfred Park",
+                "p": "The name of the person who started it. We don't hide who built this."
+              },
+              {
+                "type": "proof",
+                "h3": "A.P · AI People",
+                "p": "The name of what we do now. A company standing between AI and people."
+              }
+            ]
+          }
         ]
-       ]
       },
       {
-       "type": "note",
-       "text": "Android · ChatGPT · Gemini — coming later"
-      }
-     ],
-     "desc": "Free on the App Store. Scan without an account.\nOne line of address connects it to Claude.",
-     "cta": true
-    },
-    {
-     "id": "exits",
-     "label": "05 · Where to buy",
-     "title": "Three exits.",
-     "desc": "One verdict engine. Three places to buy. Inside the AI · an online safe market · a physical store.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/safe_exits_en.jpg",
-       "alt": "Three exits — inside the AI · online safe market · physical store"
-      },
-      {
-       "type": "actions",
-       "items": [
-        [
-         "/ko/products/select/",
-         "AP SELECT — the store that chooses",
-         "button"
-        ],
-        [
-         "/ko/products/light/",
-         "Calories: AP Light",
-         "button"
+        "id": "philosophy",
+        "label": "02 · Philosophy",
+        "title": "Three things.",
+        "soft": true,
+        "desc": "We don't put AI in a person's place. We don't take from users. What we don't know, we say we don't know.",
+        "blocks": [
+          {
+            "type": "milestones",
+            "items": [
+              [
+                "1",
+                "We don't put AI in a person's place",
+                "Not work people couldn't do — work they had stopped doing. 250,000 products, 2,455 stocks — only where a human limit stopped the work. Judgment stays with people."
+              ],
+              [
+                "2",
+                "We don't take from users",
+                "No accounts · no ads · no data collection. Records stay on the device and disappear when the app is deleted."
+              ],
+              [
+                "3",
+                "What we don't know, we say we don't know",
+                "“There was no formula for picking surging stocks in advance” — the conclusion of two years of full-market analysis, published as is. An AI that states its limits instead of pretending certainty."
+              ],
+              [
+                "0 · 0 · 0",
+                "No promises we can't keep",
+                "Zero accounts · zero ads · zero data collection. As the company grows, these three stay."
+              ]
+            ]
+          }
         ]
-       ]
+      },
+      {
+        "id": "business",
+        "label": "03 · Business",
+        "title": "Variations on one sentence.",
+        "desc": "We place AI where a person had come to a stop. The moment of choosing, buying, and learning.",
+        "blocks": [
+          {
+            "type": "milestones",
+            "items": [
+              [
+                "Choices with evidence",
+                "AP Safe · AP Light · AP Revenue · AP Travel",
+                "250,000 food ingredient records, 317,000 calorie entries, hotel booking data, market signals. Judgments too big for one person, delivered with evidence."
+              ],
+              [
+                "Commerce",
+                "AP SELECT · LIA · K-Commerce · K-Craft",
+                "A store that chooses, an AI influencer, overseas marketplaces, artisans' works. From discovery to repurchase."
+              ],
+              [
+                "Play & Learn",
+                "RGRG · Hangeul Cubs · LAST WAVE",
+                "Compete by quiz, learn Hangeul with four tiger siblings, and watch a child's imagination become a game."
+              ],
+              [
+                "Founder",
+                "Fifteen years in the field",
+                "Commercial operations, global sales, tourism and international business, and data analysis at a hotel and resort group. He knows what blocks a decision."
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "independence",
+        "label": "04 · Independence",
+        "title": "The experience is used.\nThe assets are not.",
+        "soft": true,
+        "desc": "AP's code, accounts, domains, documents and product IP are entirely independent. The employer's data, customer information and operational information do not belong to AP. Investor demos use synthetic, public or permitted data only.",
+        "blocks": [
+          {
+            "type": "tags",
+            "items": [
+              "Commercial Operations",
+              "Global Sales",
+              "Tourism & International Business",
+              "Data Analysis",
+              "Product Building",
+              "Decision Workflow Design"
+            ]
+          },
+          {
+            "type": "actions",
+            "items": [
+              [
+                "/ko/ir/",
+                "IR / INVESTORS",
+                "primary"
+              ],
+              [
+                "/ko/lab/",
+                "Founder’s Lab",
+                "button"
+              ]
+            ]
+          }
+        ]
       }
-     ]
-    }
-   ],
-   "hideGeneric": true
+    ],
+    "irSections": [
+      {
+        "id": "thesis",
+        "label": "01 · Investment thesis",
+        "title": "Not for lack of information.\nThings stop for lack of a decision.",
+        "desc": "Choosing a snack or setting a room rate — it is the same. AP puts data, expert criteria, procedure and software at that point and turns it into a repeatable decision system. A decision structure built once is reused in the next product.",
+        "blocks": [
+          {
+            "type": "flow",
+            "items": [
+              "Ask",
+              "Check against existing records",
+              "Answer with evidence",
+              "A person decides",
+              "Record the outcome"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "market",
+        "label": "02 · Market",
+        "title": "The year 20 million arrive.\nEach one spends $1,000.",
+        "soft": true,
+        "desc": "2.09 million visitors in July 2026, +20.8% year on year. Annual target 20 million. Spend per visitor $1,008. At 20 million, tourism receipts of roughly $20 billion. K-beauty, K-food and K-content pull that spending in.",
+        "blocks": [
+          {
+            "type": "grid2",
+            "items": [
+              {
+                "type": "proof",
+                "h3": "Inbound",
+                "ol": [
+                  "2025: 18.7 million — an all-time high",
+                  "2026 target 20 million · 2030 target 30 million",
+                  "China · Japan · Taiwan · United States · Hong Kong, in that order"
+                ],
+                "note": "Korea Tourism Organization · Ministry of Culture, Sports and Tourism"
+              },
+              {
+                "type": "proof",
+                "h3": "Where AP goes in",
+                "ol": [
+                  "Before the trip — Hangeul · concerts · planning (Cubs · K-Concert Trip · Travel)",
+                  "During the trip — stores · scanning · choosing (SELECT · Safe · K-Scan)",
+                  "After returning — repurchase (LIA · K-Commerce · K-Craft)"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "model",
+        "label": "03 · Three businesses and revenue",
+        "title": "Same engine,\nthree revenue structures.",
+        "desc": "Decision intelligence: B2B subscriptions and connectors. Commerce: direct sales, commissions and franchising. Play & Learn: in-app purchases and educational quiz packs. No advertising and no sale of user data.",
+        "blocks": [
+          {
+            "type": "milestones",
+            "items": [
+              [
+                "Choices with evidence",
+                "B2B SaaS · connectors",
+                "AP Revenue hotel subscriptions. Safelist and LightList connectors are free to build a user base, leading on to the safe market and Hospital Report Pro."
+              ],
+              [
+                "Commerce",
+                "Direct sales · commissions · franchising",
+                "Direct sales through Lia Select and Shopee, partner commissions from Agoda · Klook · Coupang, and AP SELECT franchise fees, royalties and system fees."
+              ],
+              [
+                "Play & Learn",
+                "IAP · education B2B",
+                "Hangeul Cubs lesson packs, RGRG quiz packs for schools, academies and companies, LAST WAVE skins and passes (no pay-to-win)."
+              ],
+              [
+                "Common",
+                "Data",
+                "Who asked what, chose what and bought what, linked under one ID. The basis for the next product and curation."
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "proof",
+        "label": "04 · Working today",
+        "title": "Built and shipped.",
+        "soft": true,
+        "desc": "Evidence of execution, not of large-scale traction. Only verified figures are published; detailed evidence is presented in investor review.",
+        "blocks": [
+          {
+            "type": "tags",
+            "items": [
+              "Working Proof — independently built · in operation",
+              "Demo data — FOUNDER-PROVIDED · synthetic · public only"
+            ]
+          },
+          {
+            "type": "grid2",
+            "items": [
+              {
+                "type": "proof",
+                "h3": "Apps · connectors",
+                "ol": [
+                  "7 apps on the App Store — Safelist · Hangeul Cubs · K-Concert Trip · IRON GRADE · The Other Hours · Dawn Grace · K-Scan",
+                  "2 Claude connectors in operation — Safelist (250,000 products) · LightList (317,000 records)"
+                ]
+              },
+              {
+                "type": "proof",
+                "h3": "AP Revenue",
+                "ol": [
+                  "revenue.apholdings.kr in production",
+                  "Anomaly detection · prioritization · manager decision · outcome on record",
+                  "Synthetic data · 11 tests passing · before external pilot"
+                ]
+              },
+              {
+                "type": "proof",
+                "h3": "LIA",
+                "ol": [
+                  "Instagram and TikTok in operation",
+                  "Overseas viewers responded before domestic ones",
+                  "3 K-beauty reviews · 9 Lia Select items"
+                ]
+              },
+              {
+                "type": "proof",
+                "h3": "Games",
+                "ol": [
+                  "RGRG six-player live match build · preparing for release",
+                  "LAST WAVE 5 heroes · 6 enemies · 3 Seoul zones",
+                  "Hangeul Cubs 42 lessons · EN · VI · FR"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "actions",
+            "items": [
+              [
+                "https://revenue.apholdings.kr/",
+                "Open AP Revenue",
+                "button"
+              ],
+              [
+                "/ko/products/lia/",
+                "LIA",
+                "button"
+              ],
+              [
+                "/ko/lab/",
+                "Founder’s Lab",
+                "button"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "why",
+        "label": "05 · Why AP",
+        "title": "Four things\nin one company.",
+        "desc": "One decision engine reused across three businesses, channels already in hand, trust built by taking nothing from users, and a founder who knows the field.",
+        "blocks": [
+          {
+            "type": "milestones",
+            "items": [
+              [
+                "Engine reuse",
+                "A decision structure built once",
+                "The check · evidence · human-decision structure built for Safe is used as is by Light, Revenue and Travel. Marginal cost falls with every product."
+              ],
+              [
+                "Channels in hand",
+                "LIA · blog · apps",
+                "Reach without ad spend. An AI influencer who reaches overseas viewers first, and user touchpoints across seven apps."
+              ],
+              [
+                "Trust",
+                "0 · 0 · 0",
+                "No accounts, ads or data collection. It never says “safe” — it says what was found and what was not."
+              ],
+              [
+                "The field",
+                "Founder, fifteen years",
+                "Commercial, global sales, tourism and data at a hotel and resort group. The hotel revenue engine and the inbound business came from that experience."
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "milestones",
+        "label": "06 · The next 12 months",
+        "title": "A threshold\nat every stage.",
+        "soft": true,
+        "desc": "From 02 onward is plan. Please read it apart from what is done.",
+        "blocks": [
+          {
+            "type": "milestones",
+            "items": [
+              [
+                "01 · Now",
+                "What is built",
+                "7 apps · 2 connectors · Revenue in live service · LIA's channel · company structure and website"
+              ],
+              [
+                "02 · Next",
+                "External validation",
+                "1 Revenue pilot · Safe user test · 1 SELECT pop-up · Shopee listing · 1–3 craft transactions"
+              ],
+              [
+                "03 · After that",
+                "Repeatability",
+                "Decision → action → outcome linked under one ID · per-client policy calibration · first franchise"
+              ],
+              [
+                "04 · Expansion",
+                "Expansion with evidence",
+                "Vietnam first, then Japan and Taiwan. Franchising only after company-run stores prove it. Only validated titles grow"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "global",
+        "label": "07 · Global",
+        "title": "Built in Korea.\nDesigned for the world.",
+        "desc": "The first overseas market is Vietnam — validating LIA viewer response and commerce demand first. Japan and Taiwan for product fit, France for craft trade research. Adding a country means adding a language and market pack, not rebuilding the product.",
+        "blocks": [
+          {
+            "type": "tags",
+            "items": [
+              "Vietnam — LIA · K-Scan · Shopee",
+              "Japan · Taiwan — 1st and 3rd in arrivals, product fit",
+              "France — first overseas response to Hangeul Cubs, craft research",
+              "English-speaking — Korea-curious"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "founder",
+        "label": "08 · Founder",
+        "title": "Fifteen years in the field.\nAn independent company.",
+        "soft": true,
+        "desc": "Commercial operations and global sales, tourism and international business, and data analysis at a hotel and resort group. The experience is used; the assets are not — code, accounts, domains, documents and product IP are entirely independent. The employer's data, customer information and operational information do not belong to AP.",
+        "blocks": [
+          {
+            "type": "tags",
+            "items": [
+              "Commercial Operations",
+              "Global Sales",
+              "Tourism & International Business",
+              "Data Analysis",
+              "Product Building",
+              "Decision Workflow Design"
+            ]
+          },
+          {
+            "type": "note",
+            "text": "Investor demos use FOUNDER-PROVIDED, synthetic, public or permitted data only."
+          }
+        ]
+      },
+      {
+        "id": "materials",
+        "label": "09 · Investor materials",
+        "title": "Opened in three tiers.",
+        "cta": true,
+        "desc": "PUBLIC — this page. INVESTOR SHARE — investor deck · investment memo · verified traction appendix.\nNDA / DATA ROOM — financial model · cap table · legal · contracts · detailed IP · non-public metrics.",
+        "blocks": [
+          {
+            "type": "actions",
+            "items": [
+              [
+                "mail:Request Investor Materials",
+                "Request investor materials",
+                "primary"
+              ],
+              [
+                "/ko/about/",
+                "About the company",
+                "button"
+              ]
+            ]
+          },
+          {
+            "type": "note",
+            "text": "Request by email. No automatic downloads. Provided after access is confirmed."
+          }
+        ]
+      }
+    ],
+    "pilot": "Working pilot"
   },
-  {
-   "id": "light",
-   "name": "AP Light",
-   "tag": "Understand what fits you.",
-   "status": "inDev",
-   "role": "Explainable Choice Intelligence",
-   "desc": "How many calories in the bag you're about to buy.\nAnd the lighter option on the same shelf.",
-   "note": "Calories only. It never says “you won't gain weight”. Based on MFDS public data.",
-   "flow": [
-    "User Criteria",
-    "Candidates",
-    "Explainable Trade-offs",
-    "Human Choice"
-   ],
-   "sections": [
+  "products": [
     {
-     "id": "scene",
-     "label": "01 · One scene",
-     "title": "Buying Saewookkang —\nanything lighter?",
-     "desc": "Any AI asks LightList first instead of guessing. Calories per 100g and per bag, always together.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/light_scene_en.jpg",
-       "alt": "One sentence → AI → LightList weighs per 100g and per bag together → the lighter pick"
-      }
-     ]
+      "id": "safe",
+      "name": "AP Safe",
+      "tag": "Know what to avoid.",
+      "status": "inDev",
+      "role": "Whichever AI you ask, the standard is my body.",
+      "desc": "The avoid list saved on my phone filters what the AI shows, and only unflagged items get picked.\nFrom ingredient scanner to AI-assisted safe commerce.",
+      "note": "Decision support based on product information. Not a medical diagnosis or an absolute guarantee of safety.",
+      "flow": [
+        "User-explicit Conditions",
+        "Product Information",
+        "Conflict / Caution",
+        "Human Decision"
+      ],
+      "link": "https://apps.apple.com/kr/app/id6805684034",
+      "linkLabel": "Safelist app",
+      "image": "/media/safelist_frame.jpg",
+      "video": "/media/safelist.mp4",
+      "sections": [
+        {
+          "id": "scene",
+          "label": "01 · One scene",
+          "title": "Siri, a week of snacks\nsafe for my child.",
+          "desc": "Before anything is bought, any AI asks Safelist first. Only unflagged items reach the cart.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/safe_scene_en.jpg",
+              "alt": "One sentence → AI → Safelist verdict → only unflagged items reach the cart"
+            }
+          ]
+        },
+        {
+          "id": "why",
+          "label": "02 · Why Safelist",
+          "title": "AI is probability. Ingredients are fact.",
+          "soft": true,
+          "desc": "AI can sound confident about what it doesn't know. For a child's food, that is the real danger. Safelist checks the source records and hands the AI facts only.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/safe_why_en.jpg",
+              "alt": "AI alone guesses; with Safelist it answers from MFDS source records"
+            },
+            {
+              "type": "note",
+              "text": "Not a diagnosis · Public database · Final call stays with the parent"
+            }
+          ]
+        },
+        {
+          "id": "data",
+          "label": "03 · Where the data lives",
+          "title": "My body's data stays on my phone.",
+          "desc": "Child profiles, photos and logs never leave the device. The server receives only the label and the avoid list, then discards them.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/safe_privacy_en.jpg",
+              "alt": "My data stays on my phone — the server sees only the label and the avoid list, then discards them"
+            }
+          ]
+        },
+        {
+          "id": "pilot",
+          "label": "04 · Web pilot",
+          "soft": true,
+          "title": "Before you recommend,\ncheck the conflicts first.",
+          "desc": "Compares product composition against a user's avoid and caution conditions, and applies the same rules to alternative candidates. A workspace tool for organizations — separate from the app and connector.",
+          "blocks": [
+            {
+              "type": "tags",
+              "items": [
+                "Working pilot",
+                "Org accounts · Excel input",
+                "Reviewer records"
+              ]
+            },
+            {
+              "type": "media",
+              "src": "/media/gfx/ap_safe_pilot.jpg",
+              "alt": "AP Safe synthetic example: a review overview showing exclude, needs review and no explicit conflict per product, with the reviewer's next action"
+            },
+            {
+              "type": "note",
+              "text": "Screen example built on synthetic data · not a judgment on real products or markets."
+            },
+            {
+              "type": "p",
+              "text": "Separates conflict conditions that exclude a recommendation from information that needs a further check. Reviewers see the reasoning and record accept, edit or reject, plus observed outcomes."
+            },
+            {
+              "type": "flow",
+              "items": [
+                "Explicit match between avoid/caution conditions and composition",
+                "Held for review when information is missing",
+                "Same conditions applied to alternatives",
+                "Excel input · reasoning · reviewer records"
+              ]
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://revenue.apholdings.kr/safe/",
+                  "Open AP Safe",
+                  "primary"
+                ],
+                [
+                  "https://revenue.apholdings.kr/safe/?demo=1",
+                  "See the synthetic example",
+                  "button"
+                ],
+                [
+                  "https://revenue.apholdings.kr/safe/?demo=1",
+                  "View example full size",
+                  "link"
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "A review tool that compares entered conditions with composition data. Not a medical diagnosis or an absolute safety guarantee."
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "05 · Today",
+          "title": "Today, on the App Store and in Claude.",
+          "soft": true,
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://apps.apple.com/kr/app/id6805684034",
+                  "App Store",
+                  "primary"
+                ],
+                [
+                  "/business/safelist-connect.html",
+                  "Connect to Claude",
+                  "button"
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "Android · ChatGPT · Gemini — coming later"
+            }
+          ],
+          "desc": "Free on the App Store. Scan without an account.\nOne line of address connects it to Claude.",
+          "cta": true
+        },
+        {
+          "id": "exits",
+          "label": "06 · Where to buy",
+          "title": "Three exits.",
+          "desc": "One verdict engine. Three places to buy. Inside the AI · an online safe market · a physical store.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/safe_exits_en.jpg",
+              "alt": "Three exits — inside the AI · online safe market · physical store"
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "/ko/products/select/",
+                  "AP SELECT — the store that chooses",
+                  "button"
+                ],
+                [
+                  "/ko/products/light/",
+                  "Calories: AP Light",
+                  "button"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hideGeneric": true
     },
     {
-     "id": "learn",
-     "label": "02 · The more you choose",
-     "title": "The more you choose,\nthe sooner it suggests.",
-     "soft": true,
-     "desc": "As lighter picks accumulate, the AI learns your taste and calorie budget. It picks for you, ranks, and tells you first.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/light_learn_en.jpg",
-       "alt": "LightList conversations — swap it · what to order · told first · this week's numbers"
-      },
-      {
-       "type": "note",
-       "text": "Calories only · records stay on my phone · never says “you won't gain weight”"
-      }
-     ]
+      "id": "light",
+      "name": "AP Light",
+      "tag": "Understand what fits you.",
+      "status": "inDev",
+      "role": "Explainable Choice Intelligence",
+      "desc": "How many calories in the bag you're about to buy.\nAnd the lighter option on the same shelf.",
+      "note": "Calories only. It never says “you won't gain weight”. Based on MFDS public data.",
+      "flow": [
+        "User Criteria",
+        "Candidates",
+        "Explainable Trade-offs",
+        "Human Choice"
+      ],
+      "sections": [
+        {
+          "id": "scene",
+          "label": "01 · One scene",
+          "title": "Buying Saewookkang —\nanything lighter?",
+          "desc": "Any AI asks LightList first instead of guessing. Calories per 100g and per bag, always together.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/light_scene_en.jpg",
+              "alt": "One sentence → AI → LightList weighs per 100g and per bag together → the lighter pick"
+            }
+          ]
+        },
+        {
+          "id": "learn",
+          "label": "02 · The more you choose",
+          "title": "The more you choose,\nthe sooner it suggests.",
+          "soft": true,
+          "desc": "As lighter picks accumulate, the AI learns your taste and calorie budget. It picks for you, ranks, and tells you first.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/light_learn_en.jpg",
+              "alt": "LightList conversations — swap it · what to order · told first · this week's numbers"
+            },
+            {
+              "type": "note",
+              "text": "Calories only · records stay on my phone · never says “you won't gain weight”"
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "03 · Today",
+          "title": "Today, in Claude.",
+          "soft": true,
+          "desc": "One line of address connects it to Claude.\nCalories per 100g and per bag, always together.",
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "/business/lightlist-connect.html",
+                  "Connect to Claude",
+                  "primary"
+                ],
+                [
+                  "/ko/products/safe/",
+                  "Allergens and avoid lists: AP Safe",
+                  "button"
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "App · ChatGPT · Gemini — coming later"
+            }
+          ],
+          "cta": true
+        }
+      ],
+      "hideGeneric": true,
+      "image": "/media/lightlist_frame.jpg",
+      "video": "/media/lightlist_hero.mp4"
     },
     {
-     "id": "today",
-     "label": "03 · Today",
-     "title": "Today, in Claude.",
-     "soft": true,
-     "desc": "One line of address connects it to Claude.\nCalories per 100g and per bag, always together.",
-     "blocks": [
-      {
-       "type": "actions",
-       "items": [
-        [
-         "/business/lightlist-connect.html",
-         "Connect to Claude",
-         "primary"
-        ],
-        [
-         "/ko/products/safe/",
-         "Allergens and avoid lists: AP Safe",
-         "button"
-        ]
-       ]
-      },
-      {
-       "type": "note",
-       "text": "App · ChatGPT · Gemini — coming later"
-      }
-     ],
-     "cta": true
-    }
-   ],
-   "hideGeneric": true,
-   "image": "/media/lightlist_frame.jpg",
-   "video": "/media/lightlist_hero.mp4"
-  },
-  {
-   "id": "revenue",
-   "name": "AP Revenue",
-   "tag": "Booking data, into today's decisions.",
-   "status": "working",
-   "role": "Revenue Decision Engine",
-   "desc": "Not a hotel revenue chart — an engine that turns booking data into today's decisions.",
-   "note": "Independently developed Decision Intelligence Working Proof / Productization Candidate.",
-   "flow": [
-    "Commercial Data",
-    "Context",
-    "Priority",
-    "Human Action",
-    "Outcome"
-   ],
-   "link": "https://revenue.apholdings.kr/",
-   "linkLabel": "Open AP Revenue",
-   "hideGeneric": true,
-   "sections": [
-    {
-     "id": "scene",
-     "label": "01 · One scene",
-     "title": "Booking data becomes\na decision list each morning.",
-     "desc": "Connect booking and cancellation data, and a “Today's decisions” list is generated every morning. Priority · evidence · observed amount · recommended action, one line each. The final call is recorded by the manager.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/revenue_today_en.jpg",
-       "alt": "AP Revenue workspace — three decisions today, evidence · observed amount · accept/edit/hold"
-      }
-     ]
+      "id": "revenue",
+      "name": "AP Revenue",
+      "tag": "Booking data, into today's decisions.",
+      "status": "working",
+      "role": "Revenue Decision Engine",
+      "desc": "Not a hotel revenue chart — an engine that turns booking data into today's decisions.",
+      "note": "Independently developed Decision Intelligence Working Proof / Productization Candidate.",
+      "flow": [
+        "Commercial Data",
+        "Context",
+        "Priority",
+        "Human Action",
+        "Outcome"
+      ],
+      "link": "https://revenue.apholdings.kr/",
+      "linkLabel": "Open AP Revenue",
+      "hideGeneric": true,
+      "sections": [
+        {
+          "id": "scene",
+          "label": "01 · One scene",
+          "title": "Booking data becomes\na decision list each morning.",
+          "desc": "Connect booking and cancellation data, and a “Today's decisions” list is generated every morning. Priority · evidence · observed amount · recommended action, one line each. The final call is recorded by the manager.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/revenue_today_en.jpg",
+              "alt": "AP Revenue workspace — three decisions today, evidence · observed amount · accept/edit/hold"
+            }
+          ]
+        },
+        {
+          "id": "apply",
+          "label": "02 · How it connects",
+          "title": "Not installed inside the PMS.\nIt sits beside it.",
+          "soft": true,
+          "desc": "The PMS holds results; the CRS and channel manager hold future rates and inventory. AP Revenue sits beside them: anomaly detection · opportunity judgment · proposed actions · learning from outcomes. Only conditions approved by the manager go back to the CRS.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/revenue_apply_en.jpg",
+              "alt": "PMS · CRS · competitor rates → AP Revenue engine → today's decision queue → manager approval → CRS · channel manager → learning from outcomes"
+            },
+            {
+              "type": "tags",
+              "items": [
+                "Which channel or product cancellations cluster in",
+                "Which stay dates are selling slowly",
+                "Where to review price and inventory policy",
+                "NR · Semi-NR · cut-off · release — which to apply",
+                "Whether revenue and cancellations improved afterwards"
+              ]
+            },
+            {
+              "type": "note",
+              "text": "PMS alone covers booking and cancellation analysis; pricing and inventory judgment follows once the CRS and channel manager are connected."
+            }
+          ]
+        },
+        {
+          "id": "value",
+          "label": "03 · What clients get",
+          "title": "Instead of comparing spreadsheets,\ndecisions with evidence.",
+          "desc": "The same operating standard across properties. Easy-to-miss cancellation and channel anomalies caught early. “Why this decision” stays on record, and before/after results sharpen the standard.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/revenue_value_en.jpg",
+              "alt": "Spreadsheet comparison → a decision card with evidence, verified at 7 · 14 · 30 days"
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "04 · Today",
+          "title": "Today, in a live service.",
+          "soft": true,
+          "desc": "Synthetic data only · no real customer information\n11 tests passing · production deployment · invited organizations only.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/revenue_live_en.jpg",
+              "alt": "revenue.apholdings.kr workspace sign-in screen"
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://revenue.apholdings.kr/",
+                  "Open AP Revenue",
+                  "primary"
+                ],
+                [
+                  "mail:AP Revenue pilot inquiry",
+                  "Pilot inquiry",
+                  "button"
+                ]
+              ]
+            }
+          ],
+          "cta": true
+        }
+      ]
     },
     {
-     "id": "apply",
-     "label": "02 · How it connects",
-     "title": "Not installed inside the PMS.\nIt sits beside it.",
-     "soft": true,
-     "desc": "The PMS holds results; the CRS and channel manager hold future rates and inventory. AP Revenue sits beside them: anomaly detection · opportunity judgment · proposed actions · learning from outcomes. Only conditions approved by the manager go back to the CRS.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/revenue_apply_en.jpg",
-       "alt": "PMS · CRS · competitor rates → AP Revenue engine → today's decision queue → manager approval → CRS · channel manager → learning from outcomes"
-      },
-      {
-       "type": "tags",
-       "items": [
-        "Which channel or product cancellations cluster in",
-        "Which stay dates are selling slowly",
-        "Where to review price and inventory policy",
-        "NR · Semi-NR · cut-off · release — which to apply",
-        "Whether revenue and cancellations improved afterwards"
-       ]
-      },
-      {
-       "type": "note",
-       "text": "PMS alone covers booking and cancellation analysis; pricing and inventory judgment follows once the CRS and channel manager are connected."
-      }
-     ]
-    },
-    {
-     "id": "value",
-     "label": "03 · What clients get",
-     "title": "Instead of comparing spreadsheets,\ndecisions with evidence.",
-     "desc": "The same operating standard across properties. Easy-to-miss cancellation and channel anomalies caught early. “Why this decision” stays on record, and before/after results sharpen the standard.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/revenue_value_en.jpg",
-       "alt": "Spreadsheet comparison → a decision card with evidence, verified at 7 · 14 · 30 days"
-      }
-     ]
-    },
-    {
-     "id": "today",
-     "label": "04 · Today",
-     "title": "Today, in a live service.",
-     "soft": true,
-     "desc": "Synthetic data only · no real customer information\n11 tests passing · production deployment · invited organizations only.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/revenue_live_en.jpg",
-       "alt": "revenue.apholdings.kr workspace sign-in screen"
-      },
-      {
-       "type": "actions",
-       "items": [
-        [
-         "https://revenue.apholdings.kr/",
-         "Open AP Revenue",
-         "primary"
-        ],
-        [
-         "mail:AP Revenue pilot inquiry",
-         "Pilot inquiry",
-         "button"
-        ]
-       ]
-      }
-     ],
-     "cta": true
-    }
-   ]
-  },
-  {
-   "id": "travel",
-   "name": "AP Travel",
-   "tag": "Which country, when, and who will come.",
-   "status": "inDev",
-   "role": "Global Travel Decision Intelligence",
-   "desc": "Air seats · exchange rates · search volume · holiday signals, combined to show\nwhere the opportunity is: which country → which city · which guest · which week.",
-   "note": "Cross-market opportunity discovery. Not limited to inbound for any single country. Data and features to be validated per market.",
-   "flow": [
-    "Market Signals",
-    "Context",
-    "Opportunity",
-    "Human Decision",
-    "Campaign",
-    "Outcome"
-   ],
-   "hideGeneric": true,
-   "sections": [
-    {
-     "id": "scene",
-     "label": "01 · One scene",
-     "title": "When signals align,\nan opportunity appears.",
-     "desc": "Only markets where exchange rates, air capacity and search volume point the same way are raised, with evidence. Budget, channel and message stay with the marketer.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/travel_scene_en.jpg",
-       "alt": "Market signals → opportunity (Japan → Seoul · couples in their 30s · Nov 1–9) → manager decides → outcome"
-      }
-     ]
-    },
-    {
-     "id": "signals",
-     "label": "02 · What it watches",
-     "title": "Six signals.\nOnly when they agree.",
-     "soft": true,
-     "desc": "Air seats · exchange rates · search volume · arrivals · holidays · concert schedules. One or two looking good is not enough. When all six point to the same place, it becomes an opportunity.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/travel_signals_en.jpg",
-       "alt": "Six-signal dashboard — air seats · exchange rate · search · arrivals · holidays · concerts, 6/6 aligned"
-      }
-     ]
-    },
-    {
-     "id": "market",
-     "label": "03 · Market size",
-     "title": "The year 20 million arrive.\nWho comes, and when, differs.",
-     "desc": "2.09 million visitors in July 2026, +20.8% year on year. China · Japan · Taiwan · United States · Hong Kong, in that order. Each country has its own peak season, spend and reason to come.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/travel_market_en.jpg",
-       "alt": "Annual arrivals 2019–2030 target · July 2026 arrivals by nationality"
-      },
-      {
-       "type": "note",
-       "text": "Figures are refreshed after each monthly statistics release. Estimates are illustrative, not results."
-      }
-     ]
-    },
-    {
-     "id": "who",
-     "label": "04 · Who uses it",
-     "title": "Anyone waiting\nfor guests.",
-     "soft": true,
-     "desc": "Hotel and resort marketing, local governments and tourism boards, travel agencies and OTAs, concert and MICE organizers. It answers “which country do we advertise in now” every week.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/travel_report_en.jpg",
-       "alt": "The weekly opportunity report hotels, tourism boards and agencies receive"
-      }
-     ]
-    },
-    {
-     "id": "apply",
-     "label": "05 · How it connects",
-     "title": "The same engine as AP Revenue.\nOnly the data differs.",
-     "desc": "Signals → priority → human decision → outcome on record. Public data (Korea Tourism Data Lab · TourAPI) and partner data feed a weekly “this week's opportunities” list and campaign briefs.",
-     "blocks": [
-      {
-       "type": "flow",
-       "items": [
-        "Public · partner data",
-        "Six signals normalized",
-        "Opportunity list (origin → city · guest · week)",
-        "Manager decides",
+      "id": "travel",
+      "name": "AP Travel",
+      "tag": "Which country, when, and who will come.",
+      "status": "pilot",
+      "role": "Global Travel Decision Intelligence",
+      "desc": "Air seats · exchange rates · search volume · holiday signals, combined to show\nwhere the opportunity is: which country → which city · which guest · which week.",
+      "note": "Cross-market opportunity discovery. Not limited to inbound for any single country. Data and features to be validated per market.",
+      "flow": [
+        "Market Signals",
+        "Context",
+        "Opportunity",
+        "Human Decision",
         "Campaign",
-        "Verified by visits and bookings"
-       ]
-      },
-      {
-       "type": "tags",
-       "items": [
-        "Weekly opportunity report",
-        "Campaign brief",
-        "AP Revenue booking data link",
-        "K-Concert Trip — app for overseas K-pop fans visiting Korea, first measurement channel"
-       ]
-      }
-     ]
+        "Outcome"
+      ],
+      "hideGeneric": true,
+      "sections": [
+        {
+          "id": "scene",
+          "label": "01 · One scene",
+          "title": "When signals align,\nan opportunity appears.",
+          "desc": "Only markets where exchange rates, air capacity and search volume point the same way are raised, with evidence. Budget, channel and message stay with the marketer.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/travel_scene_en.jpg",
+              "alt": "Market signals → opportunity (Japan → Seoul · couples in their 30s · Nov 1–9) → manager decides → outcome"
+            }
+          ]
+        },
+        {
+          "id": "signals",
+          "label": "02 · What it watches",
+          "title": "Six signals.\nOnly when they agree.",
+          "soft": true,
+          "desc": "Air seats · exchange rates · search volume · arrivals · holidays · concert schedules. One or two looking good is not enough. When all six point to the same place, it becomes an opportunity.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/travel_signals_en.jpg",
+              "alt": "Six-signal dashboard — air seats · exchange rate · search · arrivals · holidays · concerts, 6/6 aligned"
+            }
+          ]
+        },
+        {
+          "id": "market",
+          "label": "03 · Market size",
+          "title": "The year 20 million arrive.\nWho comes, and when, differs.",
+          "desc": "2.09 million visitors in July 2026, +20.8% year on year. China · Japan · Taiwan · United States · Hong Kong, in that order. Each country has its own peak season, spend and reason to come.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/travel_market_en.jpg",
+              "alt": "Annual arrivals 2019–2030 target · July 2026 arrivals by nationality"
+            },
+            {
+              "type": "note",
+              "text": "Figures are refreshed after each monthly statistics release. Estimates are illustrative, not results."
+            }
+          ]
+        },
+        {
+          "id": "who",
+          "label": "04 · Who uses it",
+          "title": "Anyone waiting\nfor guests.",
+          "soft": true,
+          "desc": "Hotel and resort marketing, local governments and tourism boards, travel agencies and OTAs, concert and MICE organizers. It answers “which country do we advertise in now” every week.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/travel_report_en.jpg",
+              "alt": "The weekly opportunity report hotels, tourism boards and agencies receive"
+            }
+          ]
+        },
+        {
+          "id": "apply",
+          "label": "05 · How it connects",
+          "title": "The same engine as AP Revenue.\nOnly the data differs.",
+          "desc": "Signals → priority → human decision → outcome on record. Public data (Korea Tourism Data Lab · TourAPI) and partner data feed a weekly “this week's opportunities” list and campaign briefs.",
+          "blocks": [
+            {
+              "type": "flow",
+              "items": [
+                "Public · partner data",
+                "Six signals normalized",
+                "Opportunity list (origin → city · guest · week)",
+                "Manager decides",
+                "Campaign",
+                "Verified by visits and bookings"
+              ]
+            },
+            {
+              "type": "tags",
+              "items": [
+                "Weekly opportunity report",
+                "Campaign brief",
+                "AP Revenue booking data link",
+                "K-Concert Trip — app for overseas K-pop fans visiting Korea, first measurement channel"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pilot",
+          "label": "06 · Web pilot",
+          "soft": true,
+          "title": "Which market should\nthe next campaign focus on?",
+          "desc": "Reviews market signals together — travel demand, air supply, bookings — and sorts which markets to pursue and where the evidence still needs work.",
+          "blocks": [
+            {
+              "type": "tags",
+              "items": [
+                "Working pilot",
+                "Org accounts · Excel input",
+                "Per-market decision history"
+              ]
+            },
+            {
+              "type": "media",
+              "src": "/media/gfx/ap_travel_pilot.jpg",
+              "alt": "AP Travel synthetic example: a market overview showing pursue, watch and de-prioritize per market, with next actions"
+            },
+            {
+              "type": "note",
+              "text": "Screen example built on synthetic data · not a judgment on real products or markets."
+            },
+            {
+              "type": "p",
+              "text": "Enter data by origin market, destination and travel period and it sorts them into pursue, watch and de-prioritize. Reviewers see the reasoning and next action, and the team's decisions and observed outcomes accumulate."
+            },
+            {
+              "type": "flow",
+              "items": [
+                "Eight market signals with source and as-of date",
+                "Conflicts between supply constraints, demand and booking direction",
+                "Excel input and per-market decision records",
+                "Before/after comparison when data is refreshed for the same market and period"
+              ]
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://revenue.apholdings.kr/travel/",
+                  "Open AP Travel",
+                  "primary"
+                ],
+                [
+                  "https://revenue.apholdings.kr/travel/?demo=1",
+                  "See the synthetic example",
+                  "button"
+                ],
+                [
+                  "https://revenue.apholdings.kr/travel/?demo=1",
+                  "View example full size",
+                  "link"
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "A rule-based market review tool. Scores are not revenue forecasts or performance guarantees."
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "07 · Today",
+          "title": "Today, in a web pilot.",
+          "cta": true,
+          "desc": "Sign in with an organization account, enter market data and record decisions. The same engine runs on hotel booking data in AP Revenue.",
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://revenue.apholdings.kr/travel/",
+                  "Open AP Travel",
+                  "primary"
+                ],
+                [
+                  "mail:AP Travel pilot inquiry",
+                  "Pilot inquiry",
+                  "button"
+                ],
+                [
+                  "/en/products/revenue/",
+                  "See AP Revenue",
+                  "link"
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "Automatic market-data collection · standard metric definitions · validation against real outcomes — next steps"
+            }
+          ]
+        }
+      ],
+      "image": "/media/inbound_frame.jpg",
+      "video": "/media/inbound.mp4"
     },
     {
-     "id": "today",
-     "label": "06 · Today",
-     "title": "Now in design.",
-     "cta": true,
-     "desc": "Data is verified market by market, starting with the first. Not tied to any single country.\nThe same engine is already running on hotel booking data — AP Revenue.",
-     "blocks": [
-      {
-       "type": "actions",
-       "items": [
+      "id": "select",
+      "name": "AP SELECT",
+      "tag": "A store designed for choosing.",
+      "status": "concept",
+      "role": "A store designed for choosing.",
+      "desc": "Not a store that sells things, but a store that chooses.\nAdvice and trial in store. Purchase online.",
+      "note": "Concept & System Design. Distinct from current store operations or professional consultation.",
+      "flow": [
+        "Choice Profile",
+        "Safe",
+        "Light",
+        "Expert",
+        "Physical Experience",
+        "Customer Choice",
+        "Online Order",
+        "Outcome"
+      ],
+      "image": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/4285351f-831d-4d77-9380-dcba09ebccce.webp",
+      "video": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/c849c123-c931-472d-a4ba-59bed043158c.mp4",
+      "sections": [
+        {
+          "id": "consult",
+          "label": "01",
+          "title": "It asks first.\nWhat do you avoid?",
+          "desc": "Milk or wheat to avoid, a budget, a preference for fragrance-free — the consultant knows first. Then only what fits stays on the shelf. When something new passes your criteria, you hear first.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/select_filter.jpg",
+              "alt": "Knowing your criteria first, keeping three of six that fit"
+            }
+          ]
+        },
+        {
+          "id": "experience",
+          "label": "02",
+          "title": "The store is for advice and trial.\nThere is no checkout.",
+          "soft": true,
+          "desc": "See, touch and try three or four in person. If you like one, a single QR — order online, delivered home.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/select_split.jpg",
+              "alt": "The store for advice and trial; online for orders and delivery"
+            }
+          ]
+        },
+        {
+          "id": "franchise",
+          "label": "03 · FRANCHISE",
+          "title": "We provide a system, not inventory.",
+          "desc": "Headquarters provides the choosing system; franchisees provide space and consultation. Franchising opens only after company-run stores prove it.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/select_franchise_en.jpg",
+              "alt": "Three store formats — MINI · SELECT · LAB — on one headquarters system"
+            },
+            {
+              "type": "tags",
+              "items": [
+                "Transaction fees",
+                "Franchise fee · royalties",
+                "System fees",
+                "Brand placement · content",
+                "Expert consultation"
+              ]
+            },
+            {
+              "type": "note",
+              "text": "Concept & System Design stage. No franchise recruitment or expert contracts yet; disclosed only after validation."
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "mailto:cksals00@gmail.com?subject=%5BAP%20Holdings%5D%20AP%20SELECT%20%ED%98%91%EB%A0%A5%20%EB%AC%B8%EC%9D%98",
+                  "AP SELECT partnership inquiry",
+                  "primary"
+                ],
+                [
+                  "/ko/products/safe/",
+                  "AP Safe",
+                  "link"
+                ],
+                [
+                  "/ko/products/light/",
+                  "AP Light",
+                  "link"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hideGeneric": true
+    },
+    {
+      "id": "commerce",
+      "name": "Global K-Commerce",
+      "tag": "Buy what you saw. Again, back home.",
+      "status": "inDev",
+      "role": "GLOBAL K-COMMERCE",
+      "desc": "Buy what you saw in LIA's video, right there.\nWhat you discovered in Korea, bought again back home.",
+      "note": "Zero inventory · partner links disclosed · prices unchanged",
+      "flow": [
+        "LIA / Content",
+        "Foreign Audience",
+        "Product Discovery",
+        "AP Commerce / Marketplace",
+        "Purchase",
+        "Fulfillment",
+        "Repurchase"
+      ],
+      "hideGeneric": true,
+      "sections": [
+        {
+          "id": "map",
+          "label": "01 · How you buy",
+          "title": "Buy what you saw.\nBuy it again back home.",
+          "desc": "What you liked in LIA's videos and the apps, one link away. Lia Select and K-Craft ship from AP; stays, tours, Coupang and Shopee stay on the sites you already use.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/commerce_map_en.jpg",
+              "alt": "See it in a video → shipped by AP (Lia Select · AP SELECT · K-Craft) / on the sites you already use (Agoda · Klook · Coupang · Shopee)"
+            }
+          ]
+        },
+        {
+          "id": "own",
+          "label": "02 · Shipped by AP",
+          "title": "Only what she used.\nTo your door.",
+          "soft": true,
+          "desc": "Only what LIA has used and chosen goes on the shelf. Order, and AP handles payment through delivery.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/commerce_own_en.jpg",
+              "alt": "Lia Select · AP SELECT · K-Craft · Shopee — from order to your door"
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "/en/products/liaselect/",
+                  "See Lia Select",
+                  "button"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "partner",
+          "label": "03 · On the sites you already use",
+          "title": "Stays, tours and repurchases,\nwhere you already shop.",
+          "desc": "Booking and payment stay on the sites you already use. AP helps only with the choosing. Buying through a link costs the same.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/commerce_partner_en.jpg",
+              "alt": "One concert trip — Agoda before · Klook on arrival · Coupang in Korea · Shopee back home"
+            }
+          ]
+        },
+        {
+          "id": "funnel",
+          "label": "04 · A better fit next time",
+          "title": "What gets watched most\nbecomes the next shelf.",
+          "soft": true,
+          "desc": "Which videos and products drew the most response shapes the next curation. No account, no sign-in.",
+          "blocks": [
+            {
+              "type": "flow",
+              "items": [
+                "See it in a video",
+                "Save",
+                "Buy",
+                "Receive",
+                "Buy again"
+              ]
+            },
+            {
+              "type": "tags",
+              "items": [
+                "Vietnam first, then English-speaking markets",
+                "Sales open when the response repeats",
+                "Zero inventory · partner links disclosed · prices unchanged"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "05 · Today",
+          "title": "Today, at Lia Select.",
+          "cta": true,
+          "desc": "Nine K-beauty items and three review videos. Purchase links in LIA's channel profile. Shopee listing and partner expansion follow in order.",
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "/en/products/liaselect/",
+                  "Lia Select",
+                  "primary"
+                ],
+                [
+                  "/en/products/lia/",
+                  "LIA",
+                  "button"
+                ],
+                [
+                  "mail:Commerce partnership proposal",
+                  "Partner proposal",
+                  "button"
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "Partner links disclosed · zero inventory · no effect on prices"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "craft",
+      "name": "AP K-Craft",
+      "tag": "The artisan's hands, to the world.",
+      "status": "inDev",
+      "role": "TRADITIONAL CRAFT · Connecting masters with the world",
+      "desc": "Works by intangible cultural heritage holders and masters, for overseas buyers.\nFinding artisans, recording the making, multilingual promotion, and selling certified originals only.",
+      "note": "Culture first, livelihood next, items as the means.",
+      "flow": [
+        "Master",
+        "Work",
+        "Digital Passport",
+        "Provenance",
+        "Export Review",
+        "Customs",
+        "Insurance",
+        "Packaging",
+        "Logistics",
+        "Delivery",
+        "Condition",
+        "Claim",
+        "Outcome"
+      ],
+      "image": "/media/craft_frame.jpg",
+      "video": "/media/craft.mp4",
+      "sections": [
+        {
+          "id": "why",
+          "label": "01 · The problem",
+          "title": "The skill exists.\nNo one to carry it on.",
+          "desc": "Limited outlets and large distribution margins. Creating alone cannot sustain a living. Fewer of each generation choose a craft that demands years of training. The works exist, but there is no channel or trust mechanism to reach overseas buyers.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/craft_why_en.jpg",
+              "alt": "Four problems artisans face → four openings created by Hallyu"
+            }
+          ]
+        },
+        {
+          "id": "how",
+          "label": "02 · How",
+          "title": "尋 · 錄 · 廣 · 賣\nFind, record, promote, sell.",
+          "desc": "Phase 1 is trust before sales. First the world learns “this master exists.” Sales open once the response is confirmed.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/craft_how_en.jpg",
+              "alt": "Find · record · promote · sell — what the artisan gets at each step"
+            }
+          ]
+        },
+        {
+          "id": "items",
+          "label": "03 · Items and difference",
+          "title": "A structure that proves authenticity.",
+          "soft": true,
+          "desc": "Celadon and white porcelain, mother-of-pearl lacquerware and woodwork, hanji lamps and fans. Only artisan-made pieces distinct from cheap imports. Every work with signature, making record and provenance.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/craft_proof_en.jpg",
+              "alt": "Work card — artisan credentials · making-process video · signature and provenance · three item groups"
+            }
+          ]
+        },
+        {
+          "id": "model",
+          "label": "04 · All three gain",
+          "title": "Artisan, platform, buyer.",
+          "desc": "Artisans gain fair income and the means to train successors, the platform gains transaction fees and an artisan network, overseas buyers gain verified originals and a trustworthy origin.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/craft_value_en.jpg",
+              "alt": "Artisan · overseas buyer · platform — what each gives and gets"
+            },
+            {
+              "type": "note",
+              "text": "AP does not provide appraisal, insurance or customs itself. It records, connects and coordinates, with specialist partners."
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "05 · Today",
+          "title": "With artisans and workshops.",
+          "cta": true,
+          "desc": "Artisans and workshops, heritage institutions, overseas partners.\nStarting with the first master and the first making record.",
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "mail:K-Craft artisan · workshop partnership inquiry",
+                  "Artisan · workshop inquiry",
+                  "primary"
+                ],
+                [
+                  "/ko/products/lia/",
+                  "See LIA's channel",
+                  "button"
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "Sales are Phase 2. Now: finding, recording, promoting."
+            }
+          ]
+        }
+      ],
+      "hideGeneric": true
+    },
+    {
+      "id": "lia",
+      "name": "LIA",
+      "tag": "Meet LIA.\nDiscover Korea.",
+      "status": "audience",
+      "role": "AP HOLDINGS · AI Influencer No. 1",
+      "desc": "LIA lives in Seoul. She introduces Korea's culture, places and products\nto the world, in English.\nEvery day on Instagram, TikTok and the blog.",
+      "note": "AI-generated persona · AI disclosure on every post",
+      "flow": [
+        "Creator",
+        "Korea Discovery Creator",
+        "Commerce Influencer",
+        "Korea Promotion IP"
+      ],
+      "image": "/media/lia/lia_hero_sq.jpg",
+      "heroSplit": true,
+      "hideArchive": true,
+      "heroLinks": [
         [
-         "/ko/products/revenue/",
-         "See AP Revenue in operation",
-         "primary"
+          "https://www.instagram.com/lia_park55/",
+          "Instagram"
         ],
         [
-         "mail:AP Travel pilot inquiry",
-         "Market data partner inquiry",
-         "button"
+          "https://www.tiktok.com/@lia_park55",
+          "TikTok"
         ]
-       ]
-      },
-      {
-       "type": "note",
-       "text": "Air · tourism · exchange-rate · search data partners — in discussion"
-      }
-     ]
+      ],
+      "sections": [
+        {
+          "id": "week",
+          "label": "01 · When you follow",
+          "title": "Every week,\nthis is what arrives.",
+          "desc": "A 30-second stretch on Monday, an app review on Wednesday, a Korea story on Friday, a folktale on the weekend. English captions. Stories every day.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/lia_feed_en.jpg",
+              "alt": "LIA's Instagram feed — Mon Desk Body · Wed App Moment · Fri Korea, Explained · Weekend Tiger Tales"
+            }
+          ]
+        },
+        {
+          "id": "persona",
+          "label": "02 · Who she is",
+          "title": "A twenty-something in Seoul.\nWith friends all over the world.",
+          "soft": true,
+          "desc": "Spends the day at a desk, the evening at convenience stores and late-night cafés, and weekends reading old tales aloud. Doesn't show off what she knows — asks what you're curious about, on your behalf.",
+          "blocks": [
+            {
+              "type": "tags",
+              "items": [
+                "Korea, Explained — the real questions no guidebook answers",
+                "Tiger Tales — folktales with the four tiger siblings",
+                "Desk Body — 30 seconds to undo a day of sitting",
+                "First User — first-hand reviews of AP apps"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "actor",
+          "label": "03 · On camera",
+          "title": "Every day, no shoot.\nLIA in front of the camera.",
+          "desc": "Behind the scenes on a drama set, the music video “Ride the Wave”, a debut greeting and a press conference. An actress with no rest days and no aging.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/lia_camera_en.jpg",
+              "alt": "LIA on a camera monitor — REC · drama set · music video · Tiger Tales"
+            },
+            {
+              "type": "tags",
+              "items": [
+                "Drama set — three hours of waiting, twelve seconds of filming",
+                "Music video “Ride the Wave”",
+                "Debut greeting",
+                "Press conference",
+                "Rehearsal room, 11 p.m.",
+                "6 a.m. wrap"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "daily",
+          "label": "04 · A day with LIA",
+          "title": "From the Han River at dawn\nto the rehearsal room at night.",
+          "soft": true,
+          "desc": "A 5:40 a.m. run along the Han River, coffee in a neighborhood alley, an evening yoga mat, a bedside reset. Beauty, wellness and travel stories, every day.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/lia_day_en.jpg",
+              "alt": "A day with LIA — 5:40 dawn run · 9:00 working notes · 13:00 neighborhood alley · 19:30 rehearsal room · 22:00 bedside reset"
+            }
+          ]
+        },
+        {
+          "id": "picks",
+          "label": "05 · Lia Select",
+          "title": "Tried,\nthen chosen.",
+          "desc": "K-beauty LIA used, filmed and reviewed, downsides included. Sun care · essence · cushion · mask · tint · cleanser. See it in the video, buy through the profile link.",
+          "blocks": [
+            {
+              "type": "gallery",
+              "cols": 6,
+              "ratio": "1/1",
+              "items": [
+                {
+                  "src": "/media/lia/rimg_suncream.jpg",
+                  "caption": "Sun care"
+                },
+                {
+                  "src": "/media/lia/rimg_essence.jpg",
+                  "caption": "Essence"
+                },
+                {
+                  "src": "/media/lia/rimg_cushion.jpg",
+                  "caption": "Cushion"
+                },
+                {
+                  "src": "/media/lia/rimg_mask.jpg",
+                  "caption": "Mask"
+                },
+                {
+                  "src": "/media/lia/rimg_tint.jpg",
+                  "caption": "Tint"
+                },
+                {
+                  "src": "/media/lia/rimg_cleanser.jpg",
+                  "caption": "Cleanser"
+                }
+              ]
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "/en/products/liaselect/",
+                  "See Lia Select",
+                  "button"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "channels",
+          "label": "06 · Where to watch",
+          "title": "Instagram. TikTok. Blog.",
+          "soft": true,
+          "desc": "Instagram reels of 15–20 seconds with English captions. TikTok carries 30–45-second folktales. The blog, in Korean, tells the longer story of the apps and products.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/lia_channels_en.jpg",
+              "alt": "Three phones — Instagram feed · TikTok Tiger Tales · blog"
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://www.instagram.com/lia_park55/",
+                  "Instagram",
+                  "button"
+                ],
+                [
+                  "https://www.tiktok.com/@lia_park55",
+                  "TikTok",
+                  "button"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shop",
+          "label": "07 · Buy what you saw",
+          "title": "What you saw in the video,\nthrough the profile link.",
+          "desc": "What LIA used is on Lia Select; stays, tours, Coupang and Shopee stay on the sites you already use. Partner links are disclosed and prices are the same.",
+          "blocks": [
+            {
+              "type": "flow",
+              "items": [
+                "See it in a video",
+                "Profile link",
+                "Lia Select · partners",
+                "Delivered home"
+              ]
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "/en/products/commerce/",
+                  "How you buy — AP Commerce",
+                  "button"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "brands",
+          "label": "08 · With brands",
+          "title": "Same face,\nin any language.",
+          "soft": true,
+          "desc": "With a script, it posts today. English first, then Chinese and Japanese. One person presents apps, travel, K-beauty and craft.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/lia_brand_en.jpg",
+              "alt": "The same photo with English, Chinese and Japanese captions — 24h · 1 · EN→中→日 · 0"
+            },
+            {
+              "type": "tags",
+              "items": [
+                "Brand collaborations",
+                "Cameos in games and apps",
+                "Ambassador for tourism, regions and cultural events",
+                "Multilingual LIA"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "09 · Today",
+          "title": "Follow LIA today.",
+          "cta": true,
+          "desc": "An AI-generated persona. AI disclosure on every post. No purchased followers · no invented numbers · partner links disclosed.",
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://www.instagram.com/lia_park55/",
+                  "Instagram",
+                  "primary"
+                ],
+                [
+                  "https://www.tiktok.com/@lia_park55",
+                  "TikTok",
+                  "button"
+                ],
+                [
+                  "mail:LIA collaboration inquiry",
+                  "Brand collaboration inquiry",
+                  "button"
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "AI-generated persona · AI disclosure on every post"
+            }
+          ]
+        }
+      ],
+      "hideGeneric": true
+    },
+    {
+      "id": "rgrg",
+      "name": "RGRG",
+      "tag": "The scholarship quiz show, in your hand.",
+      "status": "inDev",
+      "role": "Six on one stage. One buzzer, first to press.",
+      "desc": "A TV quiz-show studio in your phone.\nFrom riddles to Korean history, languages and certifications — learn by competing.",
+      "note": "Built on an existing project. Quiz Pack expansion planned for languages, certifications, education, culture and corporate training.",
+      "flow": [
+        "RGRG CORE",
+        "Learner Locale",
+        "Instruction Language",
+        "Target Language / Subject",
+        "Quiz Pack"
+      ],
+      "image": "/media/gfx/phone_rgrg_en.jpg",
+      "sections": [
+        {
+          "id": "buzzer",
+          "label": "01 · The stage",
+          "title": "Question up — hit the buzzer.",
+          "desc": "Six players on one stage. Only the first to buzz may answer. Five seconds. Wrong costs points; right earns the time left on the clock. Fast beats knowledgeable.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/rgrg_stage_en.jpg",
+              "alt": "Six on one stage — only the first to buzz answers, five seconds"
+            }
+          ]
+        },
+        {
+          "id": "subjects",
+          "label": "02 · What kind of questions",
+          "title": "From riddles\nto Korean history.",
+          "soft": true,
+          "desc": "Nine topics. Easy · normal · hard. Ten questions per round, three minutes.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/rgrg_subjects_en.jpg",
+              "alt": "Riddles · school · history · certifications — four question cards"
+            }
+          ]
+        },
+        {
+          "id": "edu",
+          "label": "03 · In the classroom",
+          "title": "A lesson becomes a match.",
+          "desc": "The teacher sets the questions and the whole class takes the stage. Preview and review habits show up as scores, and missed questions go straight to the mistake notebook.",
+          "blocks": [
+            {
+              "type": "milestones",
+              "items": [
+                [
+                  "Classroom",
+                  "Whole-class match",
+                  "Teacher-set questions · teams of six · live rankings"
+                ],
+                [
+                  "Academy",
+                  "Quiz packs by chapter",
+                  "Packs swapped to match progress · automatic review of mistakes"
+                ],
+                [
+                  "Home",
+                  "A preview habit",
+                  "Today's mini-game · one three-minute round a day"
+                ],
+                [
+                  "Overseas",
+                  "Learning Korean",
+                  "Language pairs for learners in Vietnam and Japan"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "round",
+          "label": "04 · One round",
+          "title": "One round, five minutes.",
+          "soft": true,
+          "desc": "Main game · today's mini-game · a bet on the last question. There is a place where third becomes first.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/rgrg_round_en.jpg",
+              "alt": "One round, five minutes — main game · today's mini-game · final bet"
+            }
+          ]
+        },
+        {
+          "id": "create",
+          "label": "05 · Writing questions",
+          "title": "Others compete\non the questions I wrote.",
+          "desc": "Write a question, earn credits. Multiple choice or true/false. That is why the questions never run dry.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/rgrg_create_en.jpg",
+              "alt": "Question editor — multiple choice · true/false · credits"
+            }
+          ]
+        },
+        {
+          "id": "packs",
+          "label": "06 · Quiz packs",
+          "title": "Same game, different subject.",
+          "soft": true,
+          "desc": "One game. What you swap is the quiz pack. No rebuilding the game for each country.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/rgrg_packs_en.jpg",
+              "alt": "One game core with quiz packs for languages · certifications · education · culture · corporate training"
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "07 · Today",
+          "title": "iPhone · iPad · Android.",
+          "cta": true,
+          "desc": "Six-player live matching · 1,150+ questions · nine topics · eight characters.\nPreparing for release. Quiz-pack partnerships for schools, academies and companies by inquiry.",
+          "blocks": [
+            {
+              "type": "tags",
+              "items": [
+                "iPhone · iPad",
+                "Android",
+                "Six-player live matching",
+                "1,150+ questions",
+                "Nine topics",
+                "Eight characters",
+                "No pay-to-win"
+              ]
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "mail:RGRG quiz pack partnership inquiry",
+                  "Quiz pack partnership inquiry",
+                  "primary"
+                ],
+                [
+                  "/ko/products/cubs/",
+                  "Hangeul: Hangeul Cubs",
+                  "button"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hideGeneric": true
+    },
+    {
+      "id": "cubs",
+      "name": "Hangeul Cubs",
+      "tag": "Learn Hangeul\nwith four tiger siblings.",
+      "status": "existing",
+      "role": "HANGEUL CUBS · Hangeul learning app",
+      "desc": "For foreigners and children meeting Korean for the first time.\nOne batchim per episode. English · Vietnamese · French.",
+      "note": "Released for iPhone · iPad · no ads · no accounts",
+      "flow": [
+        "APP",
+        "SHORTS",
+        "YOUTUBE",
+        "CULTURE",
+        "TRAVEL"
+      ],
+      "image": "/media/gfx/cubs_free_en.jpg",
+      "sections": [
+        {
+          "id": "siblings",
+          "label": "01 · Four siblings",
+          "title": "One final consonant each,\nfour siblings share the teaching.",
+          "desc": "Daho covers the basics of batchim, Kkobi ㄴ and ㄹ, Aari the ㅇ ending, Rami the ㄱ · ㄷ · ㅂ stops. One batchim per episode.",
+          "blocks": [
+            {
+              "type": "milestones",
+              "items": [
+                [
+                  "DAHO · eldest",
+                  "Daho",
+                  "The basics of batchim. One block underneath — that's all."
+                ],
+                [
+                  "KKOBI · second",
+                  "Kkobi",
+                  "ㄴ and ㄹ. Hear the sounds split at the tip of the tongue."
+                ],
+                [
+                  "AARI · third",
+                  "Aari",
+                  "The ㅇ ending. Ringing like a bell: ng, ng, ng."
+                ],
+                [
+                  "RAMI · youngest",
+                  "Rami",
+                  "ㄱ · ㄷ · ㅂ stops. Short, and cut off clean."
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "screens",
+          "label": "02 · Learn · listen · solve",
+          "title": "Three screens, one flow.",
+          "soft": true,
+          "desc": "The signature: final consonants shown in a separate color. 반/방 · 발/밥 · 문/물 · 곰/공 — sounds where one batchim changes the meaning. Ending with a first sentence you will actually use: “물 주세요.”",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/cubs/screens.jpg",
+              "alt": "Batchim words · minimal-pair listening · first sentence — three app screens"
+            },
+            {
+              "type": "tags",
+              "items": [
+                "42 lessons",
+                "EN · VI · FR hints",
+                "On-device pronunciation",
+                "Fully offline",
+                "No ads · no accounts"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arena",
+          "label": "03 · Challenge",
+          "title": "Compete on what you learned.",
+          "desc": "Lessons are for learning; the challenge is for competing. Three rounds, twelve questions, about two minutes — warm-up · today's mini-game · final bet. Unlocks after finishing at least one lesson.",
+          "blocks": [
+            {
+              "type": "flow",
+              "items": [
+                "R1 Warm-up · 5 questions · 10 seconds",
+                "R2 Today's mini-game · true/false · flash · elimination",
+                "R3 Final bet · stake your points to double them"
+              ]
+            },
+            {
+              "type": "tags",
+              "items": [
+                "Faster means more points",
+                "Flames from two in a row",
+                "Questions only from finished lessons"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "video",
+          "label": "04 · Beyond the app",
+          "title": "Hangeul lessons on video\nwith the four siblings.",
+          "soft": true,
+          "desc": "From the vowel ㅏ to final consonants, episodes hosted by the four siblings. English narration, Korean subtitles. Meet Hangeul before opening the app — in production.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/cubs/yt_ep1.jpg",
+              "alt": "EP1 · vowel ㅏ — YouTube episode poster"
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "05 · Today",
+          "title": "Today, on the App Store.",
+          "cta": true,
+          "desc": "iPhone · iPad. The same lessons on a bigger screen.\nLesson-pack expansion and the YouTube channel are in preparation.",
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://apps.apple.com/kr/app/id6803749436",
+                  "App Store",
+                  "primary"
+                ],
+                [
+                  "/ko/products/rgrg/",
+                  "Compete by quiz in RGRG",
+                  "button"
+                ]
+              ]
+            },
+            {
+              "type": "note",
+              "text": "Android · YouTube channel — coming later"
+            }
+          ]
+        }
+      ],
+      "hideGeneric": true,
+      "link": "https://apps.apple.com/kr/app/id6803749436",
+      "linkLabel": "App Store"
+    },
+    {
+      "id": "lastwave",
+      "name": "LAST WAVE",
+      "tag": "Creating through play.",
+      "status": "inDev",
+      "role": "Creator-led Game & IP",
+      "desc": "A 3D FPS about surviving a Seoul torn open by the Rift. 50 waves.\nA young creator's imagination, built into a game by AP.",
+      "note": "A project in development. The young creator's personal information stays private.",
+      "flow": [
+        "Imagine",
+        "Build",
+        "Test",
+        "Creator Feedback",
+        "Governance",
+        "Release"
+      ],
+      "image": "/media/gfx/phone_lw_en.jpg",
+      "sections": [
+        {
+          "id": "world",
+          "label": "01",
+          "title": "From Gangnam into the Rift,\n50 waves.",
+          "desc": "Gangnam → Lotte Tower, Jamsil → inside the Rift. VOID TITAN waits at the end.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/lw_waves_en.jpg",
+              "alt": "Gangnam · Lotte Tower · inside the Rift — 50 waves"
+            }
+          ]
+        },
+        {
+          "id": "roles",
+          "label": "02",
+          "title": "A child's imagination\nbecomes a game.",
+          "soft": true,
+          "desc": "World, characters, story and fun come from the young creator's crayon drafts. Engineering, safety, monetization and release are AP's. The creator's personal information is never disclosed.",
+          "blocks": [
+            {
+              "type": "media",
+              "src": "/media/gfx/lw_collab.jpg",
+              "alt": "A child's crayon sketch becoming a 3D game character"
+            },
+            {
+              "type": "grid2",
+              "items": [
+                {
+                  "type": "proof",
+                  "h3": "YOUNG CREATOR · imagination",
+                  "ol": [
+                    "World — a Seoul torn open by the Rift",
+                    "Characters — five heroes, six enemies",
+                    "Story · skills · bosses",
+                    "Fun — what makes it exciting"
+                  ]
+                },
+                {
+                  "type": "proof",
+                  "h3": "AP · responsibility",
+                  "ol": [
+                    "Engineering · balance · QA",
+                    "Safety · privacy",
+                    "Monetization — skins and passes, no pay-to-win",
+                    "Release · operations"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "/ko/products/rgrg/",
+                  "RGRG — learning by quiz battle",
+                  "button"
+                ],
+                [
+                  "/ko/products/cubs/",
+                  "Hangeul Cubs",
+                  "button"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hideGeneric": true
+    },
+    {
+      "id": "liaselect",
+      "name": "Lia Select",
+      "tag": "Tried,\nthen chosen.",
+      "status": "audience",
+      "role": "LIA SELECT · K-BEAUTY",
+      "desc": "K-beauty LIA used, filmed and reviewed, downsides included.\nOnly verified Korean cosmetics on this shelf. Short videos, honest reviews, partner links.",
+      "note": "Product images provided by each brand · purchase links in LIA's channel profile.",
+      "flow": [
+        "Discover",
+        "Curated",
+        "Partner link"
+      ],
+      "hideGeneric": true,
+      "sections": [
+        {
+          "id": "picks",
+          "label": "01 · Lia's Picks",
+          "title": "What Korea uses every day.",
+          "desc": "Sun care · essence · cushion · mask · tint · cleanser. One per category.",
+          "blocks": [
+            {
+              "type": "gallery",
+              "cols": 3,
+              "items": [
+                {
+                  "src": "/media/shop/01_dalba.jpg",
+                  "caption": "Sun Care · d'Alba — UV Essence Tone-Up Sun Cream"
+                },
+                {
+                  "src": "/media/shop/02_cosrx.jpg",
+                  "caption": "Essence · COSRX — Advanced Snail 96 Mucin Power Essence"
+                },
+                {
+                  "src": "/media/shop/03_tirtir.jpg",
+                  "caption": "Cushion · TIRTIR — Mask Fit Red Cushion"
+                },
+                {
+                  "src": "/media/shop/04_biodance.jpg",
+                  "caption": "Mask · Biodance — Bio-Collagen Real Deep Mask"
+                },
+                {
+                  "src": "/media/shop/06_romnd.jpg",
+                  "caption": "Lip · rom&nd — Juicy Lasting Tint"
+                },
+                {
+                  "src": "/media/shop/07_anua.jpg",
+                  "caption": "Cleanser · Anua — Heartleaf Pore Control Cleansing Oil"
+                },
+                {
+                  "src": "/media/shop/08_skin1004.jpg",
+                  "caption": "Sun Care · SKIN1004 — Madagascar Centella Air-Fit Sun"
+                },
+                {
+                  "src": "/media/shop/09_mediheal.jpg",
+                  "caption": "Mask · Mediheal — Daily Sheet Mask"
+                },
+                {
+                  "src": "/media/shop/10_banilaco.jpg",
+                  "caption": "Cleanser · banila co — Clean It Zero Cleansing Balm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reviews",
+          "label": "02 · Lia Reviews",
+          "title": "Starting with the moment of use.",
+          "soft": true,
+          "desc": "Sunscreen · mask · lip tint. Fifteen seconds of LIA trying it herself.",
+          "blocks": [
+            {
+              "type": "videos",
+              "items": [
+                {
+                  "src": "/media/lia/review_ep1_suncream.mp4",
+                  "poster": "/media/lia/review_ep1_suncream_poster.jpg",
+                  "caption": "EP1 · Sunscreen"
+                },
+                {
+                  "src": "/media/lia/review_ep2_mask.mp4",
+                  "poster": "/media/lia/review_ep2_mask_poster.jpg",
+                  "caption": "EP2 · Mask"
+                },
+                {
+                  "src": "/media/lia/review_ep3_tint.mp4",
+                  "poster": "/media/lia/review_ep3_tint_poster.jpg",
+                  "caption": "EP3 · Lip tint"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "how",
+          "label": "03 · How it works",
+          "title": "From LIA's shelf\nto your cart.",
+          "desc": "LIA using it in a short video → only what she recommends goes on the shelf → partner link in LIA's profile · local delivery.",
+          "blocks": [
+            {
+              "type": "flow",
+              "items": [
+                "Discover — in the video",
+                "Curated — on the shelf",
+                "Partner link — in the profile"
+              ]
+            },
+            {
+              "type": "tags",
+              "items": [
+                "Zero inventory",
+                "Every partner link disclosed",
+                "No effect on user prices"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "today",
+          "label": "04 · Today",
+          "title": "On LIA's channel.",
+          "cta": true,
+          "desc": "Purchase links in the Instagram profile. Tried, then chosen.",
+          "blocks": [
+            {
+              "type": "actions",
+              "items": [
+                [
+                  "https://www.instagram.com/lia_park55/",
+                  "Instagram",
+                  "primary"
+                ],
+                [
+                  "/ko/products/lia/",
+                  "About LIA",
+                  "button"
+                ],
+                [
+                  "/ko/products/commerce/",
+                  "Global K-Commerce",
+                  "button"
+                ]
+              ]
+            }
+          ]
+        }
+      ]
     }
-   ],
-   "image": "/media/inbound_frame.jpg",
-   "video": "/media/inbound.mp4"
-  },
-  {
-   "id": "select",
-   "name": "AP SELECT",
-   "tag": "A store designed for choosing.",
-   "status": "concept",
-   "role": "A store designed for choosing.",
-   "desc": "Not a store that sells things, but a store that chooses.\nAdvice and trial in store. Purchase online.",
-   "note": "Concept & System Design. Distinct from current store operations or professional consultation.",
-   "flow": [
-    "Choice Profile",
-    "Safe",
-    "Light",
-    "Expert",
-    "Physical Experience",
-    "Customer Choice",
-    "Online Order",
-    "Outcome"
-   ],
-   "image": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/4285351f-831d-4d77-9380-dcba09ebccce.webp",
-   "video": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/c849c123-c931-472d-a4ba-59bed043158c.mp4",
-   "sections": [
-    {
-     "id": "consult",
-     "label": "01",
-     "title": "It asks first.\nWhat do you avoid?",
-     "desc": "Milk or wheat to avoid, a budget, a preference for fragrance-free — the consultant knows first. Then only what fits stays on the shelf. When something new passes your criteria, you hear first.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/select_filter.jpg",
-       "alt": "Knowing your criteria first, keeping three of six that fit"
-      }
-     ]
-    },
-    {
-     "id": "experience",
-     "label": "02",
-     "title": "The store is for advice and trial.\nThere is no checkout.",
-     "soft": true,
-     "desc": "See, touch and try three or four in person. If you like one, a single QR — order online, delivered home.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/select_split.jpg",
-       "alt": "The store for advice and trial; online for orders and delivery"
-      }
-     ]
-    },
-    {
-     "id": "franchise",
-     "label": "03 · FRANCHISE",
-     "title": "We provide a system, not inventory.",
-     "desc": "Headquarters provides the choosing system; franchisees provide space and consultation. Franchising opens only after company-run stores prove it.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/select_franchise_en.jpg",
-       "alt": "Three store formats — MINI · SELECT · LAB — on one headquarters system"
-      },
-      {
-       "type": "tags",
-       "items": [
-        "Transaction fees",
-        "Franchise fee · royalties",
-        "System fees",
-        "Brand placement · content",
-        "Expert consultation"
-       ]
-      },
-      {
-       "type": "note",
-       "text": "Concept & System Design stage. No franchise recruitment or expert contracts yet; disclosed only after validation."
-      },
-      {
-       "type": "actions",
-       "items": [
-        [
-         "mailto:cksals00@gmail.com?subject=%5BAP%20Holdings%5D%20AP%20SELECT%20%ED%98%91%EB%A0%A5%20%EB%AC%B8%EC%9D%98",
-         "AP SELECT partnership inquiry",
-         "primary"
-        ],
-        [
-         "/ko/products/safe/",
-         "AP Safe",
-         "link"
-        ],
-        [
-         "/ko/products/light/",
-         "AP Light",
-         "link"
-        ]
-       ]
-      }
-     ]
-    }
-   ],
-   "hideGeneric": true
-  },
-  {
-   "id": "commerce",
-   "name": "Global K-Commerce",
-   "tag": "Buy what you saw. Again, back home.",
-   "status": "inDev",
-   "role": "GLOBAL K-COMMERCE",
-   "desc": "Buy what you saw in LIA's video, right there.\nWhat you discovered in Korea, bought again back home.",
-   "note": "Zero inventory · partner links disclosed · prices unchanged",
-   "flow": [
-    "LIA / Content",
-    "Foreign Audience",
-    "Product Discovery",
-    "AP Commerce / Marketplace",
-    "Purchase",
-    "Fulfillment",
-    "Repurchase"
-   ],
-   "hideGeneric": true,
-   "sections": [
-    {
-     "id": "map",
-     "label": "01 · How you buy",
-     "title": "Buy what you saw.\nBuy it again back home.",
-     "desc": "What you liked in LIA's videos and the apps, one link away. Lia Select and K-Craft ship from AP; stays, tours, Coupang and Shopee stay on the sites you already use.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/commerce_map_en.jpg",
-       "alt": "See it in a video → shipped by AP (Lia Select · AP SELECT · K-Craft) / on the sites you already use (Agoda · Klook · Coupang · Shopee)"
-      }
-     ]
-    },
-    {
-     "id": "own",
-     "label": "02 · Shipped by AP",
-     "title": "Only what she used.\nTo your door.",
-     "soft": true,
-     "desc": "Only what LIA has used and chosen goes on the shelf. Order, and AP handles payment through delivery.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/commerce_own_en.jpg",
-       "alt": "Lia Select · AP SELECT · K-Craft · Shopee — from order to your door"
-      },
-      {
-       "type": "actions",
-       "items": [
-        [
-         "/en/products/liaselect/",
-         "See Lia Select",
-         "button"
-        ]
-       ]
-      }
-     ]
-    },
-    {
-     "id": "partner",
-     "label": "03 · On the sites you already use",
-     "title": "Stays, tours and repurchases,\nwhere you already shop.",
-     "desc": "Booking and payment stay on the sites you already use. AP helps only with the choosing. Buying through a link costs the same.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/commerce_partner_en.jpg",
-       "alt": "One concert trip — Agoda before · Klook on arrival · Coupang in Korea · Shopee back home"
-      }
-     ]
-    },
-    {
-     "id": "funnel",
-     "label": "04 · A better fit next time",
-     "title": "What gets watched most\nbecomes the next shelf.",
-     "soft": true,
-     "desc": "Which videos and products drew the most response shapes the next curation. No account, no sign-in.",
-     "blocks": [
-      {
-       "type": "flow",
-       "items": [
-        "See it in a video",
-        "Save",
-        "Buy",
-        "Receive",
-        "Buy again"
-       ]
-      },
-      {
-       "type": "tags",
-       "items": [
-        "Vietnam first, then English-speaking markets",
-        "Sales open when the response repeats",
-        "Zero inventory · partner links disclosed · prices unchanged"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "today",
-     "label": "05 · Today",
-     "title": "Today, at Lia Select.",
-     "cta": true,
-     "desc": "Nine K-beauty items and three review videos. Purchase links in LIA's channel profile. Shopee listing and partner expansion follow in order.",
-     "blocks": [
-      {
-       "type": "actions",
-       "items": [
-        [
-         "/en/products/liaselect/",
-         "Lia Select",
-         "primary"
-        ],
-        [
-         "/en/products/lia/",
-         "LIA",
-         "button"
-        ],
-        [
-         "mail:Commerce partnership proposal",
-         "Partner proposal",
-         "button"
-        ]
-       ]
-      },
-      {
-       "type": "note",
-       "text": "Partner links disclosed · zero inventory · no effect on prices"
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "craft",
-   "name": "AP K-Craft",
-   "tag": "The artisan's hands, to the world.",
-   "status": "inDev",
-   "role": "TRADITIONAL CRAFT · Connecting masters with the world",
-   "desc": "Works by intangible cultural heritage holders and masters, for overseas buyers.\nFinding artisans, recording the making, multilingual promotion, and selling certified originals only.",
-   "note": "Culture first, livelihood next, items as the means.",
-   "flow": [
-    "Master",
-    "Work",
-    "Digital Passport",
-    "Provenance",
-    "Export Review",
-    "Customs",
-    "Insurance",
-    "Packaging",
-    "Logistics",
-    "Delivery",
-    "Condition",
-    "Claim",
-    "Outcome"
-   ],
-   "image": "/media/craft_frame.jpg",
-   "video": "/media/craft.mp4",
-   "sections": [
-    {
-     "id": "why",
-     "label": "01 · The problem",
-     "title": "The skill exists.\nNo one to carry it on.",
-     "desc": "Limited outlets and large distribution margins. Creating alone cannot sustain a living. Fewer of each generation choose a craft that demands years of training. The works exist, but there is no channel or trust mechanism to reach overseas buyers.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/craft_why_en.jpg",
-       "alt": "Four problems artisans face → four openings created by Hallyu"
-      }
-     ]
-    },
-    {
-     "id": "how",
-     "label": "02 · How",
-     "title": "尋 · 錄 · 廣 · 賣\nFind, record, promote, sell.",
-     "desc": "Phase 1 is trust before sales. First the world learns “this master exists.” Sales open once the response is confirmed.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/craft_how_en.jpg",
-       "alt": "Find · record · promote · sell — what the artisan gets at each step"
-      }
-     ]
-    },
-    {
-     "id": "items",
-     "label": "03 · Items and difference",
-     "title": "A structure that proves authenticity.",
-     "soft": true,
-     "desc": "Celadon and white porcelain, mother-of-pearl lacquerware and woodwork, hanji lamps and fans. Only artisan-made pieces distinct from cheap imports. Every work with signature, making record and provenance.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/craft_proof_en.jpg",
-       "alt": "Work card — artisan credentials · making-process video · signature and provenance · three item groups"
-      }
-     ]
-    },
-    {
-     "id": "model",
-     "label": "04 · All three gain",
-     "title": "Artisan, platform, buyer.",
-     "desc": "Artisans gain fair income and the means to train successors, the platform gains transaction fees and an artisan network, overseas buyers gain verified originals and a trustworthy origin.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/craft_value_en.jpg",
-       "alt": "Artisan · overseas buyer · platform — what each gives and gets"
-      },
-      {
-       "type": "note",
-       "text": "AP does not provide appraisal, insurance or customs itself. It records, connects and coordinates, with specialist partners."
-      }
-     ]
-    },
-    {
-     "id": "today",
-     "label": "05 · Today",
-     "title": "With artisans and workshops.",
-     "cta": true,
-     "desc": "Artisans and workshops, heritage institutions, overseas partners.\nStarting with the first master and the first making record.",
-     "blocks": [
-      {
-       "type": "actions",
-       "items": [
-        [
-         "mail:K-Craft artisan · workshop partnership inquiry",
-         "Artisan · workshop inquiry",
-         "primary"
-        ],
-        [
-         "/ko/products/lia/",
-         "See LIA's channel",
-         "button"
-        ]
-       ]
-      },
-      {
-       "type": "note",
-       "text": "Sales are Phase 2. Now: finding, recording, promoting."
-      }
-     ]
-    }
-   ],
-   "hideGeneric": true
-  },
-  {
-   "id": "lia",
-   "name": "LIA",
-   "tag": "Meet LIA.\nDiscover Korea.",
-   "status": "audience",
-   "role": "AP HOLDINGS · AI Influencer No. 1",
-   "desc": "LIA lives in Seoul. She introduces Korea's culture, places and products\nto the world, in English.\nEvery day on Instagram, TikTok and the blog.",
-   "note": "AI-generated persona · AI disclosure on every post",
-   "flow": [
-    "Creator",
-    "Korea Discovery Creator",
-    "Commerce Influencer",
-    "Korea Promotion IP"
-   ],
-   "image": "/media/lia/lia_hero_sq.jpg",
-   "heroSplit": true,
-   "hideArchive": true,
-   "heroLinks": [
+  ],
+  "lab": [
     [
-     "https://www.instagram.com/lia_park55/",
-     "Instagram"
+      "Dawn Grace",
+      "An independent reflection and prayer app",
+      "6803325336",
+      "/privacy.html"
     ],
     [
-     "https://www.tiktok.com/@lia_park55",
-     "TikTok"
+      "IRON GRADE",
+      "Benchmark workout tracking and grading",
+      "6808070870",
+      "/irongrade/privacy.html"
+    ],
+    [
+      "The Other Hours",
+      "A training and growth guide for parents of young basketball players",
+      "6803709958",
+      "/theotherhours_privacy.html"
+    ],
+    [
+      "나의 첫투자",
+      "An introductory financial-learning and simulated-investment experiment",
+      "6803763681",
+      "/privacy.html"
+    ],
+    [
+      "K-Concert Trip",
+      "A concert-trip guide for international fans",
+      "6803810106",
+      "/kfan_privacy.html"
     ]
-   ],
-   "sections": [
-    {
-     "id": "week",
-     "label": "01 · When you follow",
-     "title": "Every week,\nthis is what arrives.",
-     "desc": "A 30-second stretch on Monday, an app review on Wednesday, a Korea story on Friday, a folktale on the weekend. English captions. Stories every day.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/lia_feed_en.jpg",
-       "alt": "LIA's Instagram feed — Mon Desk Body · Wed App Moment · Fri Korea, Explained · Weekend Tiger Tales"
-      }
-     ]
-    },
-    {
-     "id": "persona",
-     "label": "02 · Who she is",
-     "title": "A twenty-something in Seoul.\nWith friends all over the world.",
-     "soft": true,
-     "desc": "Spends the day at a desk, the evening at convenience stores and late-night cafés, and weekends reading old tales aloud. Doesn't show off what she knows — asks what you're curious about, on your behalf.",
-     "blocks": [
-      {
-       "type": "tags",
-       "items": [
-        "Korea, Explained — the real questions no guidebook answers",
-        "Tiger Tales — folktales with the four tiger siblings",
-        "Desk Body — 30 seconds to undo a day of sitting",
-        "First User — first-hand reviews of AP apps"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "actor",
-     "label": "03 · On camera",
-     "title": "Every day, no shoot.\nLIA in front of the camera.",
-     "desc": "Behind the scenes on a drama set, the music video “Ride the Wave”, a debut greeting and a press conference. An actress with no rest days and no aging.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/lia_camera_en.jpg",
-       "alt": "LIA on a camera monitor — REC · drama set · music video · Tiger Tales"
-      },
-      {
-       "type": "tags",
-       "items": [
-        "Drama set — three hours of waiting, twelve seconds of filming",
-        "Music video “Ride the Wave”",
-        "Debut greeting",
-        "Press conference",
-        "Rehearsal room, 11 p.m.",
-        "6 a.m. wrap"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "daily",
-     "label": "04 · A day with LIA",
-     "title": "From the Han River at dawn\nto the rehearsal room at night.",
-     "soft": true,
-     "desc": "A 5:40 a.m. run along the Han River, coffee in a neighborhood alley, an evening yoga mat, a bedside reset. Beauty, wellness and travel stories, every day.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/lia_day_en.jpg",
-       "alt": "A day with LIA — 5:40 dawn run · 9:00 working notes · 13:00 neighborhood alley · 19:30 rehearsal room · 22:00 bedside reset"
-      }
-     ]
-    },
-    {
-     "id": "picks",
-     "label": "05 · Lia Select",
-     "title": "Tried,\nthen chosen.",
-     "desc": "K-beauty LIA used, filmed and reviewed, downsides included. Sun care · essence · cushion · mask · tint · cleanser. See it in the video, buy through the profile link.",
-     "blocks": [
-      {
-       "type": "gallery",
-       "cols": 6,
-       "ratio": "1/1",
-       "items": [
-        {
-         "src": "/media/lia/rimg_suncream.jpg",
-         "caption": "Sun care"
-        },
-        {
-         "src": "/media/lia/rimg_essence.jpg",
-         "caption": "Essence"
-        },
-        {
-         "src": "/media/lia/rimg_cushion.jpg",
-         "caption": "Cushion"
-        },
-        {
-         "src": "/media/lia/rimg_mask.jpg",
-         "caption": "Mask"
-        },
-        {
-         "src": "/media/lia/rimg_tint.jpg",
-         "caption": "Tint"
-        },
-        {
-         "src": "/media/lia/rimg_cleanser.jpg",
-         "caption": "Cleanser"
-        }
-       ]
-      },
-      {
-       "type": "actions",
-       "items": [
-        [
-         "/en/products/liaselect/",
-         "See Lia Select",
-         "button"
-        ]
-       ]
-      }
-     ]
-    },
-    {
-     "id": "channels",
-     "label": "06 · Where to watch",
-     "title": "Instagram. TikTok. Blog.",
-     "soft": true,
-     "desc": "Instagram reels of 15–20 seconds with English captions. TikTok carries 30–45-second folktales. The blog, in Korean, tells the longer story of the apps and products.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/lia_channels_en.jpg",
-       "alt": "Three phones — Instagram feed · TikTok Tiger Tales · blog"
-      },
-      {
-       "type": "actions",
-       "items": [
-        [
-         "https://www.instagram.com/lia_park55/",
-         "Instagram",
-         "button"
-        ],
-        [
-         "https://www.tiktok.com/@lia_park55",
-         "TikTok",
-         "button"
-        ]
-       ]
-      }
-     ]
-    },
-    {
-     "id": "shop",
-     "label": "07 · Buy what you saw",
-     "title": "What you saw in the video,\nthrough the profile link.",
-     "desc": "What LIA used is on Lia Select; stays, tours, Coupang and Shopee stay on the sites you already use. Partner links are disclosed and prices are the same.",
-     "blocks": [
-      {
-       "type": "flow",
-       "items": [
-        "See it in a video",
-        "Profile link",
-        "Lia Select · partners",
-        "Delivered home"
-       ]
-      },
-      {
-       "type": "actions",
-       "items": [
-        [
-         "/en/products/commerce/",
-         "How you buy — AP Commerce",
-         "button"
-        ]
-       ]
-      }
-     ]
-    },
-    {
-     "id": "brands",
-     "label": "08 · With brands",
-     "title": "Same face,\nin any language.",
-     "soft": true,
-     "desc": "With a script, it posts today. English first, then Chinese and Japanese. One person presents apps, travel, K-beauty and craft.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/lia_brand_en.jpg",
-       "alt": "The same photo with English, Chinese and Japanese captions — 24h · 1 · EN→中→日 · 0"
-      },
-      {
-       "type": "tags",
-       "items": [
-        "Brand collaborations",
-        "Cameos in games and apps",
-        "Ambassador for tourism, regions and cultural events",
-        "Multilingual LIA"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "today",
-     "label": "09 · Today",
-     "title": "Follow LIA today.",
-     "cta": true,
-     "desc": "An AI-generated persona. AI disclosure on every post. No purchased followers · no invented numbers · partner links disclosed.",
-     "blocks": [
-      {
-       "type": "actions",
-       "items": [
-        [
-         "https://www.instagram.com/lia_park55/",
-         "Instagram",
-         "primary"
-        ],
-        [
-         "https://www.tiktok.com/@lia_park55",
-         "TikTok",
-         "button"
-        ],
-        [
-         "mail:LIA collaboration inquiry",
-         "Brand collaboration inquiry",
-         "button"
-        ]
-       ]
-      },
-      {
-       "type": "note",
-       "text": "AI-generated persona · AI disclosure on every post"
-      }
-     ]
-    }
-   ],
-   "hideGeneric": true
-  },
-  {
-   "id": "rgrg",
-   "name": "RGRG",
-   "tag": "The scholarship quiz show, in your hand.",
-   "status": "inDev",
-   "role": "Six on one stage. One buzzer, first to press.",
-   "desc": "A TV quiz-show studio in your phone.\nFrom riddles to Korean history, languages and certifications — learn by competing.",
-   "note": "Built on an existing project. Quiz Pack expansion planned for languages, certifications, education, culture and corporate training.",
-   "flow": [
-    "RGRG CORE",
-    "Learner Locale",
-    "Instruction Language",
-    "Target Language / Subject",
-    "Quiz Pack"
-   ],
-   "image": "/media/gfx/phone_rgrg_en.jpg",
-   "sections": [
-    {
-     "id": "buzzer",
-     "label": "01 · The stage",
-     "title": "Question up — hit the buzzer.",
-     "desc": "Six players on one stage. Only the first to buzz may answer. Five seconds. Wrong costs points; right earns the time left on the clock. Fast beats knowledgeable.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg_stage_en.jpg",
-       "alt": "Six on one stage — only the first to buzz answers, five seconds"
-      }
-     ]
-    },
-    {
-     "id": "subjects",
-     "label": "02 · What kind of questions",
-     "title": "From riddles\nto Korean history.",
-     "soft": true,
-     "desc": "Nine topics. Easy · normal · hard. Ten questions per round, three minutes.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg_subjects_en.jpg",
-       "alt": "Riddles · school · history · certifications — four question cards"
-      }
-     ]
-    },
-    {
-     "id": "edu",
-     "label": "03 · In the classroom",
-     "title": "A lesson becomes a match.",
-     "desc": "The teacher sets the questions and the whole class takes the stage. Preview and review habits show up as scores, and missed questions go straight to the mistake notebook.",
-     "blocks": [
-      {
-       "type": "milestones",
-       "items": [
-        [
-         "Classroom",
-         "Whole-class match",
-         "Teacher-set questions · teams of six · live rankings"
-        ],
-        [
-         "Academy",
-         "Quiz packs by chapter",
-         "Packs swapped to match progress · automatic review of mistakes"
-        ],
-        [
-         "Home",
-         "A preview habit",
-         "Today's mini-game · one three-minute round a day"
-        ],
-        [
-         "Overseas",
-         "Learning Korean",
-         "Language pairs for learners in Vietnam and Japan"
-        ]
-       ]
-      }
-     ]
-    },
-    {
-     "id": "round",
-     "label": "04 · One round",
-     "title": "One round, five minutes.",
-     "soft": true,
-     "desc": "Main game · today's mini-game · a bet on the last question. There is a place where third becomes first.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg_round_en.jpg",
-       "alt": "One round, five minutes — main game · today's mini-game · final bet"
-      }
-     ]
-    },
-    {
-     "id": "create",
-     "label": "05 · Writing questions",
-     "title": "Others compete\non the questions I wrote.",
-     "desc": "Write a question, earn credits. Multiple choice or true/false. That is why the questions never run dry.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg_create_en.jpg",
-       "alt": "Question editor — multiple choice · true/false · credits"
-      }
-     ]
-    },
-    {
-     "id": "packs",
-     "label": "06 · Quiz packs",
-     "title": "Same game, different subject.",
-     "soft": true,
-     "desc": "One game. What you swap is the quiz pack. No rebuilding the game for each country.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg_packs_en.jpg",
-       "alt": "One game core with quiz packs for languages · certifications · education · culture · corporate training"
-      }
-     ]
-    },
-    {
-     "id": "today",
-     "label": "07 · Today",
-     "title": "iPhone · iPad · Android.",
-     "cta": true,
-     "desc": "Six-player live matching · 1,150+ questions · nine topics · eight characters.\nPreparing for release. Quiz-pack partnerships for schools, academies and companies by inquiry.",
-     "blocks": [
-      {
-       "type": "tags",
-       "items": [
-        "iPhone · iPad",
-        "Android",
-        "Six-player live matching",
-        "1,150+ questions",
-        "Nine topics",
-        "Eight characters",
-        "No pay-to-win"
-       ]
-      },
-      {
-       "type": "actions",
-       "items": [
-        [
-         "mail:RGRG quiz pack partnership inquiry",
-         "Quiz pack partnership inquiry",
-         "primary"
-        ],
-        [
-         "/ko/products/cubs/",
-         "Hangeul: Hangeul Cubs",
-         "button"
-        ]
-       ]
-      }
-     ]
-    }
-   ],
-   "hideGeneric": true
-  },
-  {
-   "id": "cubs",
-   "name": "Hangeul Cubs",
-   "tag": "Learn Hangeul\nwith four tiger siblings.",
-   "status": "existing",
-   "role": "HANGEUL CUBS · Hangeul learning app",
-   "desc": "For foreigners and children meeting Korean for the first time.\nOne batchim per episode. English · Vietnamese · French.",
-   "note": "Released for iPhone · iPad · no ads · no accounts",
-   "flow": [
-    "APP",
-    "SHORTS",
-    "YOUTUBE",
-    "CULTURE",
-    "TRAVEL"
-   ],
-   "image": "/media/gfx/cubs_free_en.jpg",
-   "sections": [
-    {
-     "id": "siblings",
-     "label": "01 · Four siblings",
-     "title": "One final consonant each,\nfour siblings share the teaching.",
-     "desc": "Daho covers the basics of batchim, Kkobi ㄴ and ㄹ, Aari the ㅇ ending, Rami the ㄱ · ㄷ · ㅂ stops. One batchim per episode.",
-     "blocks": [
-      {
-       "type": "milestones",
-       "items": [
-        [
-         "DAHO · eldest",
-         "Daho",
-         "The basics of batchim. One block underneath — that's all."
-        ],
-        [
-         "KKOBI · second",
-         "Kkobi",
-         "ㄴ and ㄹ. Hear the sounds split at the tip of the tongue."
-        ],
-        [
-         "AARI · third",
-         "Aari",
-         "The ㅇ ending. Ringing like a bell: ng, ng, ng."
-        ],
-        [
-         "RAMI · youngest",
-         "Rami",
-         "ㄱ · ㄷ · ㅂ stops. Short, and cut off clean."
-        ]
-       ]
-      }
-     ]
-    },
-    {
-     "id": "screens",
-     "label": "02 · Learn · listen · solve",
-     "title": "Three screens, one flow.",
-     "soft": true,
-     "desc": "The signature: final consonants shown in a separate color. 반/방 · 발/밥 · 문/물 · 곰/공 — sounds where one batchim changes the meaning. Ending with a first sentence you will actually use: “물 주세요.”",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/cubs/screens.jpg",
-       "alt": "Batchim words · minimal-pair listening · first sentence — three app screens"
-      },
-      {
-       "type": "tags",
-       "items": [
-        "42 lessons",
-        "EN · VI · FR hints",
-        "On-device pronunciation",
-        "Fully offline",
-        "No ads · no accounts"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "arena",
-     "label": "03 · Challenge",
-     "title": "Compete on what you learned.",
-     "desc": "Lessons are for learning; the challenge is for competing. Three rounds, twelve questions, about two minutes — warm-up · today's mini-game · final bet. Unlocks after finishing at least one lesson.",
-     "blocks": [
-      {
-       "type": "flow",
-       "items": [
-        "R1 Warm-up · 5 questions · 10 seconds",
-        "R2 Today's mini-game · true/false · flash · elimination",
-        "R3 Final bet · stake your points to double them"
-       ]
-      },
-      {
-       "type": "tags",
-       "items": [
-        "Faster means more points",
-        "Flames from two in a row",
-        "Questions only from finished lessons"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "video",
-     "label": "04 · Beyond the app",
-     "title": "Hangeul lessons on video\nwith the four siblings.",
-     "soft": true,
-     "desc": "From the vowel ㅏ to final consonants, episodes hosted by the four siblings. English narration, Korean subtitles. Meet Hangeul before opening the app — in production.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/cubs/yt_ep1.jpg",
-       "alt": "EP1 · vowel ㅏ — YouTube episode poster"
-      }
-     ]
-    },
-    {
-     "id": "today",
-     "label": "05 · Today",
-     "title": "Today, on the App Store.",
-     "cta": true,
-     "desc": "iPhone · iPad. The same lessons on a bigger screen.\nLesson-pack expansion and the YouTube channel are in preparation.",
-     "blocks": [
-      {
-       "type": "actions",
-       "items": [
-        [
-         "https://apps.apple.com/kr/app/id6803749436",
-         "App Store",
-         "primary"
-        ],
-        [
-         "/ko/products/rgrg/",
-         "Compete by quiz in RGRG",
-         "button"
-        ]
-       ]
-      },
-      {
-       "type": "note",
-       "text": "Android · YouTube channel — coming later"
-      }
-     ]
-    }
-   ],
-   "hideGeneric": true,
-   "link": "https://apps.apple.com/kr/app/id6803749436",
-   "linkLabel": "App Store"
-  },
-  {
-   "id": "lastwave",
-   "name": "LAST WAVE",
-   "tag": "Creating through play.",
-   "status": "inDev",
-   "role": "Creator-led Game & IP",
-   "desc": "A 3D FPS about surviving a Seoul torn open by the Rift. 50 waves.\nA young creator's imagination, built into a game by AP.",
-   "note": "A project in development. The young creator's personal information stays private.",
-   "flow": [
-    "Imagine",
-    "Build",
-    "Test",
-    "Creator Feedback",
-    "Governance",
-    "Release"
-   ],
-   "image": "/media/gfx/phone_lw_en.jpg",
-   "sections": [
-    {
-     "id": "world",
-     "label": "01",
-     "title": "From Gangnam into the Rift,\n50 waves.",
-     "desc": "Gangnam → Lotte Tower, Jamsil → inside the Rift. VOID TITAN waits at the end.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/lw_waves_en.jpg",
-       "alt": "Gangnam · Lotte Tower · inside the Rift — 50 waves"
-      }
-     ]
-    },
-    {
-     "id": "roles",
-     "label": "02",
-     "title": "A child's imagination\nbecomes a game.",
-     "soft": true,
-     "desc": "World, characters, story and fun come from the young creator's crayon drafts. Engineering, safety, monetization and release are AP's. The creator's personal information is never disclosed.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/lw_collab.jpg",
-       "alt": "A child's crayon sketch becoming a 3D game character"
-      },
-      {
-       "type": "grid2",
-       "items": [
-        {
-         "type": "proof",
-         "h3": "YOUNG CREATOR · imagination",
-         "ol": [
-          "World — a Seoul torn open by the Rift",
-          "Characters — five heroes, six enemies",
-          "Story · skills · bosses",
-          "Fun — what makes it exciting"
-         ]
-        },
-        {
-         "type": "proof",
-         "h3": "AP · responsibility",
-         "ol": [
-          "Engineering · balance · QA",
-          "Safety · privacy",
-          "Monetization — skins and passes, no pay-to-win",
-          "Release · operations"
-         ]
-        }
-       ]
-      },
-      {
-       "type": "actions",
-       "items": [
-        [
-         "/ko/products/rgrg/",
-         "RGRG — learning by quiz battle",
-         "button"
-        ],
-        [
-         "/ko/products/cubs/",
-         "Hangeul Cubs",
-         "button"
-        ]
-       ]
-      }
-     ]
-    }
-   ],
-   "hideGeneric": true
-  },
-  {
-   "id": "liaselect",
-   "name": "Lia Select",
-   "tag": "Tried,\nthen chosen.",
-   "status": "audience",
-   "role": "LIA SELECT · K-BEAUTY",
-   "desc": "K-beauty LIA used, filmed and reviewed, downsides included.\nOnly verified Korean cosmetics on this shelf. Short videos, honest reviews, partner links.",
-   "note": "Product images provided by each brand · purchase links in LIA's channel profile.",
-   "flow": [
-    "Discover",
-    "Curated",
-    "Partner link"
-   ],
-   "hideGeneric": true,
-   "sections": [
-    {
-     "id": "picks",
-     "label": "01 · Lia's Picks",
-     "title": "What Korea uses every day.",
-     "desc": "Sun care · essence · cushion · mask · tint · cleanser. One per category.",
-     "blocks": [
-      {
-       "type": "gallery",
-       "cols": 3,
-       "items": [
-        {
-         "src": "/media/shop/01_dalba.jpg",
-         "caption": "Sun Care · d'Alba — UV Essence Tone-Up Sun Cream"
-        },
-        {
-         "src": "/media/shop/02_cosrx.jpg",
-         "caption": "Essence · COSRX — Advanced Snail 96 Mucin Power Essence"
-        },
-        {
-         "src": "/media/shop/03_tirtir.jpg",
-         "caption": "Cushion · TIRTIR — Mask Fit Red Cushion"
-        },
-        {
-         "src": "/media/shop/04_biodance.jpg",
-         "caption": "Mask · Biodance — Bio-Collagen Real Deep Mask"
-        },
-        {
-         "src": "/media/shop/06_romnd.jpg",
-         "caption": "Lip · rom&nd — Juicy Lasting Tint"
-        },
-        {
-         "src": "/media/shop/07_anua.jpg",
-         "caption": "Cleanser · Anua — Heartleaf Pore Control Cleansing Oil"
-        },
-        {
-         "src": "/media/shop/08_skin1004.jpg",
-         "caption": "Sun Care · SKIN1004 — Madagascar Centella Air-Fit Sun"
-        },
-        {
-         "src": "/media/shop/09_mediheal.jpg",
-         "caption": "Mask · Mediheal — Daily Sheet Mask"
-        },
-        {
-         "src": "/media/shop/10_banilaco.jpg",
-         "caption": "Cleanser · banila co — Clean It Zero Cleansing Balm"
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "reviews",
-     "label": "02 · Lia Reviews",
-     "title": "Starting with the moment of use.",
-     "soft": true,
-     "desc": "Sunscreen · mask · lip tint. Fifteen seconds of LIA trying it herself.",
-     "blocks": [
-      {
-       "type": "videos",
-       "items": [
-        {
-         "src": "/media/lia/review_ep1_suncream.mp4",
-         "poster": "/media/lia/review_ep1_suncream_poster.jpg",
-         "caption": "EP1 · Sunscreen"
-        },
-        {
-         "src": "/media/lia/review_ep2_mask.mp4",
-         "poster": "/media/lia/review_ep2_mask_poster.jpg",
-         "caption": "EP2 · Mask"
-        },
-        {
-         "src": "/media/lia/review_ep3_tint.mp4",
-         "poster": "/media/lia/review_ep3_tint_poster.jpg",
-         "caption": "EP3 · Lip tint"
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "how",
-     "label": "03 · How it works",
-     "title": "From LIA's shelf\nto your cart.",
-     "desc": "LIA using it in a short video → only what she recommends goes on the shelf → partner link in LIA's profile · local delivery.",
-     "blocks": [
-      {
-       "type": "flow",
-       "items": [
-        "Discover — in the video",
-        "Curated — on the shelf",
-        "Partner link — in the profile"
-       ]
-      },
-      {
-       "type": "tags",
-       "items": [
-        "Zero inventory",
-        "Every partner link disclosed",
-        "No effect on user prices"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "today",
-     "label": "04 · Today",
-     "title": "On LIA's channel.",
-     "cta": true,
-     "desc": "Purchase links in the Instagram profile. Tried, then chosen.",
-     "blocks": [
-      {
-       "type": "actions",
-       "items": [
-        [
-         "https://www.instagram.com/lia_park55/",
-         "Instagram",
-         "primary"
-        ],
-        [
-         "/ko/products/lia/",
-         "About LIA",
-         "button"
-        ],
-        [
-         "/ko/products/commerce/",
-         "Global K-Commerce",
-         "button"
-        ]
-       ]
-      }
-     ]
-    }
-   ]
-  }
- ],
- "lab": [
-  [
-   "Dawn Grace",
-   "An independent reflection and prayer app",
-   "6803325336",
-   "/privacy.html"
-  ],
-  [
-   "IRON GRADE",
-   "Benchmark workout tracking and grading",
-   "6808070870",
-   "/irongrade/privacy.html"
-  ],
-  [
-   "The Other Hours",
-   "A training and growth guide for parents of young basketball players",
-   "6803709958",
-   "/theotherhours_privacy.html"
-  ],
-  [
-   "나의 첫투자",
-   "An introductory financial-learning and simulated-investment experiment",
-   "6803763681",
-   "/privacy.html"
-  ],
-  [
-   "K-Concert Trip",
-   "A concert-trip guide for international fans",
-   "6803810106",
-   "/kfan_privacy.html"
   ]
- ]
 }
