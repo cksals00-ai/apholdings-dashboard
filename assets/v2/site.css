@@ -120,5 +120,7 @@ html[lang=en] figure.wide::after{content:'← swipe to see more'}
 .tags span{font-size:12px}.flow li{font-size:12px}
 .milestones{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}
 }
-/* v2.11 mobile footer — one row */
-@media(max-width:800px){.footer-bottom{flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:11px;line-height:1.5}.footer-bottom span+span::before{content:'·';margin-right:12px;opacity:.6}.footer-bottom a{margin-left:auto;white-space:nowrap}}
+.footer-bottom .rights{font-style:normal}
+/* v2.12 mobile footer — one row */
+@media(max-width:800px){.footer-bottom{flex-direction:row;flex-wrap:nowrap;align-items:center;gap:0 8px;font-size:10.5px;line-height:1.5;white-space:nowrap}.footer-bottom .rights{display:none}.footer-bottom span+span::before{content:'·';margin-right:8px;opacity:.6}.footer-bottom a{margin-left:auto}}
+@media(max-width:360px){.footer-bottom{font-size:9.5px}}
