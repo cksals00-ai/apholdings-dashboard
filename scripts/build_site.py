@@ -49,7 +49,7 @@ def footer(l):
  pol='<li class="pol-label">'+('앱 개인정보 처리방침' if l=='ko' else 'App privacy policies')+'</li>'+''.join(f'<li>{link(url,name,"")}</li>' for name,url in POLICIES)
  ko=l=='ko'
  col=lambda t,items:'<div><b>'+e(t)+'</b>'+''.join(link(u,n,'') for n,u in items)+'</div>'
- cols=col('AP Holdings' ,[(('회사 소개' if ko else 'About'),f'/{l}/about/'),('IR / INVESTORS',f'/{l}/ir/'),('Founder’s Lab',f'/{l}/lab/')])
+ cols=col('AP Holdings' ,[(('회사 소개' if ko else 'About'),f'/{l}/about/'),('IR / INVESTORS',f'/{l}/ir/'),('Founder’s Lab',f'/{l}/lab/'),(('관리자' if ko else 'Admin'),'/admin/')])
  cols+=col('Decision Intelligence',[(prod(l,x)['name'],ph(l,x)) for x in ['safe','light','revenue','travel']])
  cols+=col('Commerce',[(prod(l,x)['name'],ph(l,x)) for x in ['select','commerce','liaselect','craft','lia']])
  cols+=col('Play & Learn',[(prod(l,x)['name'],ph(l,x)) for x in ['rgrg','cubs','lastwave']])
