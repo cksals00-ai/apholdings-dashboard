@@ -39,7 +39,7 @@ def head(l,title,description,path,index=True,alternate_suffix=''):
  alternates=''.join(f'<link rel="alternate" hreflang="{lang}" href="{ORIGIN}/{lang}/{alternate_suffix}">' for lang in PUBLISHED) if index else ''
  if index:alternates+=f'<link rel="alternate" hreflang="x-default" href="{ORIGIN}/en/{alternate_suffix}">'
  sd={'@context':'https://schema.org','@type':'Organization','name':'AP Holdings','url':ORIGIN,'logo':ORIGIN+'/img/ap_mark.png','description':description,'email':CFG['contact'],'sameAs':['https://www.instagram.com/lia_park55/','https://www.tiktok.com/@lia_park55']}
- return f'''<!doctype html><html lang="{l}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description,quote=True)}"><meta name="robots" content="{'index,follow' if index else 'noindex,follow'}"><link rel="canonical" href="{canonical}">{alternates}<meta property="og:type" content="website"><meta property="og:site_name" content="AP Holdings"><meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:locale" content="{'ko_KR' if l=='ko' else 'en_US'}"><meta name="theme-color" content="#ffffff"><link rel="icon" href="/img/ap_mark.png">{fonts}<link rel="stylesheet" href="/assets/v2/site.css?v=2.9"><script defer src="/assets/v2/site.js?v=2.4"></script><script type="application/ld+json">{json.dumps(sd,ensure_ascii=False).replace('<','\\u003c')}</script></head>'''
+ return f'''<!doctype html><html lang="{l}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description,quote=True)}"><meta name="robots" content="{'index,follow' if index else 'noindex,follow'}"><link rel="canonical" href="{canonical}">{alternates}<meta property="og:type" content="website"><meta property="og:site_name" content="AP Holdings"><meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:locale" content="{'ko_KR' if l=='ko' else 'en_US'}"><meta name="theme-color" content="#ffffff"><link rel="icon" href="/img/ap_mark.png">{fonts}<link rel="stylesheet" href="/assets/v2/site.css?v=2.10"><script defer src="/assets/v2/site.js?v=2.4"></script><script type="application/ld+json">{json.dumps(sd,ensure_ascii=False).replace('<','\\u003c')}</script></head>'''
 def nav(l,suffix=''):
  urls=[home(l)+'#businesses',home(l)+'#portfolio',f'/{l}/about/',f'/{l}/ir/',home(l)+'#contact']
  links=''.join(f'<a href="{u}"'+(' class="ir-link"' if i==3 else '')+'>'+e(label)+'</a>' for i,(u,label) in enumerate(zip(urls,c(l,'nav'))))
@@ -134,6 +134,22 @@ def ir_page(l):
  if secs: return hero+sections(secs)
  return hero
 # Optional evidence sections per product/connector, data-driven from locale JSON. Existing v2 classes only.
+
+def mobile_src(src):
+ import os
+ if not src.endswith('.jpg'):return None
+ base=src[:-4]
+ if base.endswith('_en'):
+  cand=base[:-3]+'_m_en.jpg'
+ else:
+  cand=base+'_m.jpg'
+ return cand if os.path.exists(ROOT/cand.lstrip('/')) else None
+def media_fig(src,alt,margin='0 0 45px'):
+ m=mobile_src(src)
+ img=f'<img src="{src}" alt="{e(alt)}" width="1600" height="900" loading="lazy" style="width:100%;max-height:none;border-radius:24px">'
+ if m:return f'<figure class="pic" style="margin:{margin}"><div class="product-media" style="background:transparent;padding:0"><picture><source media="(max-width:800px)" srcset="{m}">{img}</picture></div>'
+ return f'<figure class="wide" style="margin:{margin}"><div class="product-media" style="background:transparent;padding:0">{img}</div>'
+
 def blocks(items):
  h=''
  for b in items:
@@ -146,7 +162,7 @@ def blocks(items):
   elif t=='quote':h+=f'<p class="quote">{e(b["text"])}</p>'
   elif t=='note':h+=f'<p class="note">{e(b["text"])}</p>'
   elif t=='p':h+=f'<p>{e(b["text"])}</p>'
-  elif t=='media':h+=f'<figure class="wide" style="margin:0 0 45px"><div class="product-media" style="background:transparent;padding:0"><img src="{b["src"]}" alt="{e(b["alt"])}" width="1600" height="900" loading="lazy" style="width:100%;max-height:none;border-radius:24px"></div>'+(f'<figcaption class="note">{e(b["caption"])}</figcaption>' if b.get('caption') else '')+'</figure>'
+  elif t=='media':h+=media_fig(b["src"],b["alt"])+(f'<figcaption class="note">{e(b["caption"])}</figcaption>' if b.get('caption') else '')+'</figure>'
   elif t=='split':h+='<div class="split"><div>'+blocks(b['left'])+'</div><div>'+blocks(b['right'])+'</div></div>'
   elif t=='h3':h+=f'<h3>{e(b["text"])}</h3>'
   elif t=='videos':h+='<div class="grid-3" style="margin:0 0 45px">'+''.join(f'<figure style="margin:0"><video controls playsinline preload="none" poster="{v["poster"]}" src="{v["src"]}"></video><figcaption class="note" style="margin-top:10px">{e(v["caption"])}</figcaption></figure>' for v in b['items'])+'</div>'
@@ -173,8 +189,11 @@ def product_page(l,p):
  if p.get('heroSplit') and p.get('image'):
   body+=f'<article class="showcase-lia"><a class="showcase-lia-image" href="{p["image"]}"><img src="{p["image"]}" width="800" height="800" loading="lazy" alt="{e(p["name"])}"></a><div class="showcase-copy"><span class="eyebrow">{e(p["role"])}</span><h3>{e(p["tag"])}</h3><p>{e(p["desc"])}</p>'+(f'<div class="actions">'+''.join(button(u,l2) for u,l2 in p.get("heroLinks",[]))+'</div>' if p.get('heroLinks') else '')+'</div></article>'
  elif p.get('image'):
-  visual=f'<video autoplay muted loop playsinline preload="metadata" poster="{p["image"]}" src="{p["video"]}" aria-label="{e(p["name"])}" style="width:100%;border-radius:24px"></video>' if p.get('video') else f'<img src="{p["image"]}" alt="{e(p["name"])}" width="1600" height="900" loading="lazy" style="width:100%;max-height:none;border-radius:24px">'
-  body+=f'<figure style="margin:0 0 45px"><div class="product-media" style="background:transparent;padding:0">{visual}</div></figure>'
+  if p.get('video'):
+   visual=f'<video autoplay muted loop playsinline preload="metadata" poster="{p["image"]}" src="{p["video"]}" aria-label="{e(p["name"])}" style="width:100%;border-radius:24px"></video>'
+   body+=f'<figure style="margin:0 0 45px"><div class="product-media" style="background:transparent;padding:0">{visual}</div></figure>'
+  else:
+   body+=media_fig(p["image"],p["name"])+'</figure>'
  body+=('<div class="product-body" hidden>' if (p.get('hideGeneric') or p.get('heroSplit')) else f'<div class="product-body"><span class="eyebrow">{e(p["role"])}</span><h2>{e(p["tag"])}</h2>{flow(p["flow"])}<p class="note">{e(p["note"])}</p>')
  if p.get('link'):body+=f'<div class="actions">{link(p["link"],p["linkLabel"],"button",True)}</div>'
  if pid=='safe':body+=f'<p>{c(l,"legacySafe")}</p><div class="actions">{button("/business/safelist-connect.html",c(l,"connector"))}</div>'
