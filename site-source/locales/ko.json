@@ -821,8 +821,8 @@
    "tag": "Understand what fits you.",
    "status": "inDev",
    "role": "Explainable Choice Intelligence",
-   "desc": "개인별 선택 기준. 후보 비교. 설명 가능한 Trade-off.",
-   "note": "선호도·근거 기반의 선택 지원. 전문가 판단·의료상담의 대체 목적 제외.",
+   "desc": "사려는 과자, 한 봉지에 몇 칼로리인지.\n같은 진열대에서 더 가벼운 것까지.",
+   "note": "열량만 말합니다. 「살이 안 찐다」고는 말하지 않습니다. 식약처 공개 자료 기준.",
    "flow": [
     "User Criteria",
     "Candidates",

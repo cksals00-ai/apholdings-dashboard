@@ -697,8 +697,8 @@
    "tag": "Understand what fits you.",
    "status": "inDev",
    "role": "Explainable Choice Intelligence",
-   "desc": "Personal criteria. Candidate comparison. Explainable trade-offs.",
-   "note": "Choice support based on preference and evidence. Not a substitute for expert judgment or medical advice.",
+   "desc": "How many calories in the bag you're about to buy.\nAnd the lighter option on the same shelf.",
+   "note": "Calories only. It never says “you won't gain weight”. Based on MFDS public data.",
    "flow": [
     "User Criteria",
     "Candidates",
@@ -728,7 +728,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/light_learn.jpg",
+       "src": "/media/gfx/light_learn_en.jpg",
        "alt": "LightList conversations — swap it · what to order · told first · this week's numbers"
       },
       {
