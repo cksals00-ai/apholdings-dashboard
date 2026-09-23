@@ -1022,7 +1022,9 @@
     ],
     "connectNote": "설치도 가입도 없습니다. 식약처 공개 자료 31만 7천 건. 알레르기·회피 성분은 세이프리스트가 봅니다 — 커넥터 설치 절차는 두 서비스가 같습니다."
    },
-   "hideGeneric": true
+   "hideGeneric": true,
+   "image": "/media/lightlist_frame.jpg",
+   "video": "/media/lightlist_hero.mp4"
   },
   {
    "id": "revenue",
@@ -1051,8 +1053,8 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/revenue_goodmorning.jpg",
-       "alt": "감지 → 알림 → 담당자 결정 → 7·14·30일 뒤 검증"
+       "src": "/media/gfx/revenue_today.jpg",
+       "alt": "AP Revenue 워크스페이스 — 오늘 결정할 일 3건, 근거 · 관측 금액 · 수락/수정/보류"
       }
      ]
     },
@@ -1106,7 +1108,13 @@
      "label": "03 · 고객사가 얻는 것",
      "title": "엑셀 비교 대신,\n근거가 남는 결정.",
      "desc": "여러 사업장에 같은 운영 기준.\n놓치기 쉬운 취소·채널 이상을 조기에.\n「왜 이런 결정을 했는가」가 남고,\n실행 전후 성과로 기준이 좋아진다.",
-     "blocks": []
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_value.jpg",
+       "alt": "엑셀 비교 → 근거가 남는 결정 카드, 7·14·30일 검증"
+      }
+     ]
     },
     {
      "id": "today",

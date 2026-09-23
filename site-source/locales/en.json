@@ -595,7 +595,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/safe_scene.jpg",
+       "src": "/media/gfx/safe_scene_en.jpg",
        "alt": "One sentence → AI → Safelist verdict → only unflagged items reach the cart"
       }
      ]
@@ -609,7 +609,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/safe_why.jpg",
+       "src": "/media/gfx/safe_why_en.jpg",
        "alt": "AI alone guesses; with Safelist it answers from MFDS source records"
       },
       {
@@ -626,7 +626,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/safe_privacy.jpg",
+       "src": "/media/gfx/safe_privacy_en.jpg",
        "alt": "My data stays on my phone — the server sees only the label and the avoid list, then discards them"
       }
      ]
@@ -668,7 +668,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/safe_exits.jpg",
+       "src": "/media/gfx/safe_exits_en.jpg",
        "alt": "Three exits — inside the AI · online safe market · physical store"
       },
       {
@@ -714,7 +714,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/light_scene.jpg",
+       "src": "/media/gfx/light_scene_en.jpg",
        "alt": "One sentence → AI → LightList weighs per 100g and per bag together → the lighter pick"
       }
      ]
@@ -767,7 +767,9 @@
      "cta": true
     }
    ],
-   "hideGeneric": true
+   "hideGeneric": true,
+   "image": "/media/lightlist_frame.jpg",
+   "video": "/media/lightlist_hero.mp4"
   },
   {
    "id": "revenue",
@@ -796,8 +798,8 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/revenue_goodmorning.jpg",
-       "alt": "Detect → alert → manager decides → verified 7 · 14 · 30 days later"
+       "src": "/media/gfx/revenue_today_en.jpg",
+       "alt": "AP Revenue workspace — three decisions today, evidence · observed amount · accept/edit/hold"
       }
      ]
     },
@@ -851,7 +853,13 @@
      "label": "03 · What clients get",
      "title": "Instead of comparing spreadsheets,\ndecisions with evidence.",
      "desc": "The same operating standard across properties. Easy-to-miss cancellation and channel anomalies caught early. “Why this decision” stays on record, and before/after results sharpen the standard.",
-     "blocks": []
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_value_en.jpg",
+       "alt": "Spreadsheet comparison → a decision card with evidence, verified at 7 · 14 · 30 days"
+      }
+     ]
     },
     {
      "id": "today",
@@ -911,7 +919,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/travel_scene.jpg",
+       "src": "/media/gfx/travel_scene_en.jpg",
        "alt": "Market signals → opportunity (Japan → Seoul · couples in their 30s · Nov 1–9) → manager decides → outcome"
       }
      ]
