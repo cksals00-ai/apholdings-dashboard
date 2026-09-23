@@ -812,7 +812,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/revenue_apply.jpg",
+       "src": "/media/gfx/revenue_apply_en.jpg",
        "alt": "PMS · CRS · competitor rates → AP Revenue engine → today's decision queue → manager approval → CRS · channel manager → learning from outcomes"
       },
       {
@@ -1068,7 +1068,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/select_franchise.jpg",
+       "src": "/media/gfx/select_franchise_en.jpg",
        "alt": "Three store formats — MINI · SELECT · LAB — on one headquarters system"
       },
       {
@@ -1729,7 +1729,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/rgrg_packs.jpg",
+       "src": "/media/gfx/rgrg_packs_en.jpg",
        "alt": "One game core with quiz packs for languages · certifications · education · culture · corporate training"
       }
      ]
@@ -1788,7 +1788,7 @@
     "CULTURE",
     "TRAVEL"
    ],
-   "image": "/media/gfx/cubs_free.jpg",
+   "image": "/media/gfx/cubs_free_en.jpg",
    "sections": [
     {
      "id": "siblings",
@@ -1934,7 +1934,7 @@
     "Governance",
     "Release"
    ],
-   "image": "/media/gfx/phone_lw.jpg",
+   "image": "/media/gfx/phone_lw_en.jpg",
    "sections": [
     {
      "id": "world",
@@ -1944,7 +1944,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/lw_waves.jpg",
+       "src": "/media/gfx/lw_waves_en.jpg",
        "alt": "Gangnam · Lotte Tower · inside the Rift — 50 waves"
       }
      ]
