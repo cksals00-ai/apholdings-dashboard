@@ -3,7 +3,8 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_68JEef0wu8PIRAF9wXvuvQ_7jyd1zzv';
 const OWNER_EMAIL = 'cksals00@gmail.com';
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: true, detectSessionInUrl: true } });
+const RECOVERY_REDIRECT = `${window.location.origin}/admin/`;
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'implicit' } });
 
 const BUSINESSES = {
   CORPORATE: 'Corporate',
@@ -22,6 +23,7 @@ const STATUSES = {
 const STATUS_ORDER = Object.keys(STATUSES);
 let items = [];
 let currentUser = null;
+let recoveryMode = false;
 
 const $ = (selector) => document.querySelector(selector);
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (char) => ({ '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;' }[char]));
@@ -33,6 +35,13 @@ function setAuthView(loggedIn) {
   $('#app-view').hidden = !loggedIn;
 }
 
+function showAuthForm(name) {
+  $('#login-form').hidden = name !== 'login';
+  $('#recovery-form').hidden = name !== 'recovery';
+  $('#new-password-form').hidden = name !== 'new-password';
+  $('#login-title').textContent = name === 'new-password' ? '관리자 비밀번호 설정' : '사업 진행 현황';
+}
+
 async function verifyOwner(session) {
   if (!session?.user || session.user.email?.toLowerCase() !== OWNER_EMAIL) return false;
   const { error } = await supabase.from('admin_portfolio_items').select('id').limit(1);
@@ -42,6 +51,12 @@ async function verifyOwner(session) {
 async function initialize() {
   populateSelects();
   const { data: { session } } = await supabase.auth.getSession();
+  if (recoveryMode && session?.user?.email?.toLowerCase() === OWNER_EMAIL) {
+    currentUser = session.user;
+    setAuthView(false);
+    showAuthForm('new-password');
+    return;
+  }
   if (await verifyOwner(session)) {
     currentUser = session.user;
     setAuthView(true);
@@ -52,6 +67,15 @@ async function initialize() {
     setAuthView(false);
   }
 }
+
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'PASSWORD_RECOVERY') {
+    recoveryMode = true;
+    currentUser = session?.user || null;
+    setAuthView(false);
+    showAuthForm('new-password');
+  }
+});
 
 $('#login-form').addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -71,6 +95,44 @@ $('#login-form').addEventListener('submit', async (event) => {
   setAuthView(true);
   button.disabled = false;
   await Promise.all([loadItems(), loadNotionStatus()]);
+});
+
+$('#forgot-password').addEventListener('click', () => showAuthForm('recovery'));
+document.querySelectorAll('[data-back-login]').forEach((button) => button.addEventListener('click', () => showAuthForm('login')));
+
+$('#recovery-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const button = event.submitter;
+  button.disabled = true;
+  $('#recovery-message').textContent = '';
+  const { error } = await supabase.auth.resetPasswordForEmail(OWNER_EMAIL, { redirectTo: RECOVERY_REDIRECT });
+  $('#recovery-message').textContent = error
+    ? '메일을 보내지 못했습니다. 잠시 후 다시 시도해 주세요.'
+    : '재설정 메일을 보냈습니다. 받은 메일의 링크를 눌러 새 비밀번호를 설정해 주세요.';
+  button.disabled = false;
+});
+
+$('#new-password-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const password = $('#new-password').value;
+  const confirmPassword = $('#new-password-confirm').value;
+  const message = $('#new-password-message');
+  if (password !== confirmPassword) { message.textContent = '비밀번호가 서로 일치하지 않습니다.'; return; }
+  const button = event.submitter;
+  button.disabled = true;
+  const { error } = await supabase.auth.updateUser({ password });
+  if (error) {
+    message.textContent = '비밀번호를 저장하지 못했습니다. 재설정 링크를 다시 받아 주세요.';
+    button.disabled = false;
+    return;
+  }
+  recoveryMode = false;
+  history.replaceState({}, '', '/admin/');
+  await supabase.auth.signOut({ scope: 'local' });
+  $('#new-password-form').reset();
+  showAuthForm('login');
+  $('#login-message').textContent = '비밀번호가 설정됐습니다. 새 비밀번호로 로그인해 주세요.';
+  button.disabled = false;
 });
 
 $('#logout').addEventListener('click', async () => { await supabase.auth.signOut(); items = []; currentUser = null; setAuthView(false); });
@@ -233,5 +295,20 @@ async function startNotionConnection() {
 $('#notion-button').addEventListener('click', startNotionConnection);
 $('#notion-connect-main').addEventListener('click', startNotionConnection);
 $('#notion-refresh').addEventListener('click', loadNotionStatus);
+
+$('#change-password-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const password = $('#settings-password').value;
+  const confirmPassword = $('#settings-password-confirm').value;
+  const message = $('#change-password-message');
+  if (password !== confirmPassword) { message.textContent = '비밀번호가 서로 일치하지 않습니다.'; return; }
+  const button = event.submitter;
+  button.disabled = true;
+  message.textContent = '';
+  const { error } = await supabase.auth.updateUser({ password });
+  message.textContent = error ? '변경하지 못했습니다. 다시 로그인한 뒤 시도해 주세요.' : '비밀번호가 변경됐습니다.';
+  if (!error) event.currentTarget.reset();
+  button.disabled = false;
+});
 
 initialize();
