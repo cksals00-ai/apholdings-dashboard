@@ -124,3 +124,6 @@ html[lang=en] figure.wide::after{content:'← swipe to see more'}
 /* v2.12 mobile footer — one row */
 @media(max-width:800px){.footer-bottom{flex-direction:row;flex-wrap:nowrap;align-items:center;gap:0 8px;font-size:10.5px;line-height:1.5;white-space:nowrap}.footer-bottom .rights{display:none}.footer-bottom span+span::before{content:'·';margin-right:8px;opacity:.6}.footer-bottom a{margin-left:auto}}
 @media(max-width:360px){.footer-bottom{font-size:9.5px}}
+
+.why-lead{max-width:720px;margin-top:18px;font-size:16px;line-height:1.7;color:var(--muted)}.home-why .principles{grid-template-columns:repeat(4,1fr)}.home-why .principles p{white-space:pre-line}@media(max-width:800px){.why-lead{font-size:14px;margin-top:14px}.home-why .principles{grid-template-columns:1fr 1fr}}@media(max-width:520px){.why-lead{font-size:13px}.home-why .principles{grid-template-columns:1fr;gap:18px}.home-why .principles article{padding-top:16px}.home-why .principles p{white-space:normal}}
+.why-pic{margin:28px 0 0;border-radius:20px;overflow:hidden;background:#e9eeeb}.why-pic img{display:block;width:100%;height:auto}@media(max-width:800px){.why-pic{margin-top:20px;border-radius:16px}}
