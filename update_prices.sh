@@ -6,7 +6,7 @@
 set -uo pipefail
 REPO="$HOME/apdash"
 URL="https://cksals00-ai.github.io/apholdings-dashboard/data/prices.json"
-DRIVE="$HOME/Library/CloudStorage/GoogleDrive-cksals00@gmail.com/내 드라이브/AP_HOLDINGS_QUEUE/reports"
+DRIVE="$HOME/Library/CloudStorage/GoogleDrive-alfred.park@apholdings.kr/내 드라이브/AP_HOLDINGS_QUEUE/reports"
 TODAY=$(date +%Y-%m-%d)
 STAMP=$(date +%Y%m%d-%H%M)
 RPT="$DRIVE/PRICES-$STAMP.md"

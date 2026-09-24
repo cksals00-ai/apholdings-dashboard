@@ -2,7 +2,7 @@
 # A.P Holdings 배포 v3 (D-125) — 공개 사이트/내부 대시보드 분리
 #  site/     → apholdings-dashboard (공개: 문샷 랜딩·privacy·data)
 #  site_ops/ → ap-ops-7k2m9x       (내부: 대표 계좌 대시보드, PIN 게이트)
-BASE="$HOME/Library/CloudStorage/GoogleDrive-cksals00@gmail.com/내 드라이브/AP_HOLDINGS_QUEUE"
+BASE="$HOME/Library/CloudStorage/GoogleDrive-alfred.park@apholdings.kr/내 드라이브/AP_HOLDINGS_QUEUE"
 PUB_SRC="$BASE/site";      PUB_REPO="$HOME/apdash"
 OPS_SRC="$BASE/site_ops";  OPS_REPO="$HOME/apops"
 LOG="$PUB_REPO/deploy.log"
@@ -35,7 +35,7 @@ VERSION_CHECK
   rsync -a --exclude '.git' --exclude 'deploy.log' --exclude 'deploy_dashboard.sh' "$SRC/" "$REPO/"
   git add -A
   git diff --cached --quiet && return 0
-  git -c user.name="AP Holdings" -c user.email="cksals00@gmail.com" commit -m "update $(date '+%Y-%m-%d %H:%M')" >> "$LOG" 2>&1
+  git -c user.name="AP Holdings" -c user.email="alfred.park@apholdings.kr" commit -m "update $(date '+%Y-%m-%d %H:%M')" >> "$LOG" 2>&1
   git push origin main >> "$LOG" 2>&1 && echo "$(date '+%F %T') pushed $(basename "$REPO")" >> "$LOG" || echo "$(date '+%F %T') PUSH FAIL $(basename "$REPO")" >> "$LOG"
 }
 
