@@ -2447,7 +2447,9 @@
      ]
     }
    ],
-   "hideGeneric": true
+   "hideGeneric": true,
+   "link": "https://games.apholdings.kr/ko/",
+   "linkLabel": "AP Games 공식 사이트"
   },
   {
    "id": "liaselect",

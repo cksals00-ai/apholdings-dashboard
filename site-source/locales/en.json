@@ -2156,7 +2156,9 @@
      ]
     }
    ],
-   "hideGeneric": true
+   "hideGeneric": true,
+   "link": "https://games.apholdings.kr/en/",
+   "linkLabel": "AP Games official site"
   },
   {
    "id": "liaselect",
