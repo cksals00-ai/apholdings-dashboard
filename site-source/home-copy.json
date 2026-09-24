@@ -1,336 +1,336 @@
 {
-  "ko": {
-    "hero": "복잡한 선택 · 거래 · 아이디어의 시스템화.",
-    "cta": "핵심 엔진과 사업 보기",
-    "featured": "복잡함에서 결정까지, 다섯 단계.",
-    "select": "물건을 파는 매장이 아니라, 물건을 고르는 매장.",
-    "concept": "AI 콘셉트 · 설계 단계",
-    "lia": "AI Influencer · 한국의 문화·장소·제품 소개",
-    "revenue": "매출 데이터에서 실행 우선순위로.",
-    "proof": "독립 개발 · Working Proof",
-    "visualNote": "개념 흐름 · 실제 운영 데이터 미포함",
-    "portfolio": "고르는 순간. 사는 순간. 배우는 순간.",
-    "groups": [
-      "Decision Intelligence",
-      "Commerce",
-      "Play & Learn"
-    ],
-    "short": {
-      "safe": "우리 애가 먹어도 되는지, 성분표를 대신 읽어 줍니다.",
-      "light": "사려는 과자, 한 봉지에 몇 칼로리인지 바로 말해 줍니다.",
-      "revenue": "예약이 느려진 날짜를 매일 아침 먼저 알립니다. 가격 결정은 담당자의 몫.",
-      "travel": "어느 나라 손님이 언제 늘어날지, 신호를 모아 보여 줍니다.",
-      "select": "보고 만져 보고 고른 뒤, 주문은 집으로.",
-      "commerce": "한국에서 발견한 물건을 돌아가서도 다시 삽니다.",
-      "craft": "장인의 작품이 해외 구매자에게 닿기까지, 거래를 정리합니다.",
-      "lia": "한국의 문화·장소·제품을 세계에 소개하는 AI 인플루언서.",
-      "rgrg": "버저 한 번, 먼저 누른 사람만. 퀴즈로 겨루며 배웁니다.",
-      "cubs": "호랑이 4남매와 놀이로 배우는 한글.",
-      "lastwave": "어린 창작자의 상상을 어른들이 게임으로 만듭니다."
-    },
-    "why": "AP를 고르는 이유.",
-    "principles": [
-      "초록불을 만들지 않는다. 「보이지 않았다」까지만 말하고 「안전하다」고는 하지 않는다.\n마지막 결정은 부모가, 담당자가. 틀려도 사람이 다치지 않는 쪽으로 설계한다.",
-      "모든 답에 근거가 붙는다 — 식약처 신고번호, 예약 기록, 원문.\n답이 그대로 서류가 된다. 병원에, 회의에, 상사에게 들고 간다.",
-      "AI 의 추측이 아니라 공개 원본을 대조한다.\n식약처 190만 행, 실제 예약 기록. 자료에 없으면 「없다」고 답한다.",
-      "모르는 것을 아는 척하지 않는다. 안이 안 보이는 원재료는 「확인 필요」로 남긴다.\n진단·의료·다이어트 조언이 아니라고 먼저 밝힌다. 그래서 도입해도 법적 부담이 없다.",
-      "공개 자료는 매주 월요일 자정에 자동으로 다시 받는다.\n오래된 답, 없어진 제품으로 판정하지 않는다.",
-      "아이 프로필·사진·기록은 기기 밖으로 나가지 않는다.\n서버는 질문만 받고 답과 함께 버린다. 계정도, 로그인도 없다.",
-      "서버가 없거나 무상태라 유지비가 거의 없다.\n커넥터는 무료, 앱은 무료 또는 한 번 결제. 구독·광고 없음.",
-      "주소 한 줄, 2분. 설치 없이 쓰던 AI 안에서 그대로.\n클로드·챗지피티·시리 어디서든 같은 답 — AI 를 바꿔도 판정은 남는다."
-    ],
-    "globalMore": "글로벌 설계 원칙",
-    "aboutTitle": "사람이 포기하던 자리에, AI.",
-    "about": "AI가 사람을 대신하는 자리가 아니라, 사람이 멈춘 자리.\n판단은 끝까지 사람.\nA.P — Alfred Park · AI People.",
-    "aboutMore": "회사 소개",
-    "lab": "독립 프로젝트 · 제작과 학습의 기록",
-    "contact": "제품 · 전문가 · 브랜드 · 글로벌 파트너십",
-    "detail": "자세히 보기",
-    "engineIntro": "과자 한 봉지도, 호텔 객실 가격도 같은 구조. 예: 우유·밀 알레르기 아이와 오예스.",
-    "engineSteps": [
-      [
-        "데이터",
-        "신고된 원재료 · 피하는 성분"
-      ],
-      [
-        "맥락",
-        "「우유·밀 금지」와 「알류·밀·카카오」의 대조"
-      ],
-      [
-        "판단",
-        "걸림. 근거 첨부."
-      ],
-      [
-        "사람의 결정",
-        "권고까지가 시스템. 결정은 보호자."
-      ],
-      [
-        "학습",
-        "선택과 결과의 축적 → 다음 판단"
-      ]
-    ],
-    "engineNote": "AP Safe · Light · Revenue · Travel · SELECT 공통 구조. 최종 결정의 주체는 사람.",
-    "groupDesc": [
-      "고르기 어려운 순간에, 근거와 함께 답합니다. 결정은 사람이.",
-      "콘텐츠 발견부터 제품 체험, 구매와 글로벌 배송까지.",
-      "언어·지식 학습과 창작의 게임화."
-    ],
-    "liaChannel": "Instagram · TikTok 콘텐츠 / 글로벌 Korea Discovery IP",
-    "examples": {
-      "safe": [
-        "피할 것 걸러내기",
-        "「오예스, 우리 애 먹어도 돼? 우유랑 밀 피해.」",
-        "「밀이 들어 있어요.」 신고된 성분과 근거까지."
-      ],
-      "light": [
-        "덜 무거운 것 고르기",
-        "「새우깡 사려는데 더 가벼운 거 있어?」",
-        "「한 봉지 465kcal. 같은 칸에 70kcal짜리가 있어요.」"
-      ],
-      "revenue": [
-        "오늘 볼 날짜 고르기",
-        "어제까지의 예약·취소 데이터",
-        "「10월 10일이 위험합니다. 가격·재고를 검토하세요.」 → 담당자가 결정"
-      ],
-      "travel": [
-        "볼 시장 고르기",
-        "항공 공급·검색량·환율·연휴",
-        "「이번 달은 대만을 보세요.」 → 캠페인 판단"
-      ]
-    },
-    "input": "이렇게 물으면",
-    "output": "이렇게 답합니다",
-    "safeNote": "의료진단·절대적 안전보증 제외",
-    "rgrgTag": "언어와 지식, 퀴즈로 겨루는 학습.",
-    "rgrgPacks": "다국어 · 언어 · 자격증 · 교육 Quiz Pack",
-    "rgrgNote": "기존 게임 화면 · 글로벌 Quiz Pack 확장 설계",
-    "proofLabels": {
-      "safe": "운영 중 · 세이프리스트 앱 · AI 커넥터",
-      "light": "운영 중 · 라이트리스트 AI 커넥터"
-    },
-    "portfolioIntro": [
-      "고르기 어려운 순간, 근거 있는 답.",
-      "발견에서 체험, 구매와 배송까지.",
-      "겨루며 배우고, 놀며 만든다."
-    ],
-    "decision": {
-      "safeTitle": [
-        "Know what",
-        "to avoid."
-      ],
-      "safe": "우리 애가 먹어도 되는지, 성분표를 대신 읽습니다.",
-      "safeSub": "「오예스, 우유랑 밀 피해.」 → 「밀이 들어 있어요.」 근거까지.",
-      "safeQuiet": "세이프리스트 앱 · AI 커넥터 운영 중",
-      "lightTitle": [
-        "Understand",
-        "what fits you."
-      ],
-      "light": "사려는 과자, 한 봉지에 몇 칼로리인지.",
-      "lightSub": "포장 뒷면은 100g당. 봉지는 46g·66g·90g. 한 봉지로 세면 순서가 뒤집힙니다.",
-      "revenue": "예약 데이터를 오늘 결정할 일로.\n판단은 담당자가.",
-      "travel": "어느 나라 손님이 언제 늘어날지, 신호를 모아 보여 줍니다."
-    },
-    "principleNames": [
-      "01 · 안전하다",
-      "02 · 증빙이 남는다",
-      "03 · 원본만 믿는다",
-      "04 · 한계를 말한다",
-      "05 · 매주 새로워진다",
-      "06 · 내 정보는 내 폰에",
-      "07 · 값이 싸다",
-      "08 · 바로 붙고, 묶이지 않는다"
-    ],
-    "whyLead": "AI는 이미 어디에나 있다. 고르는 기준은 똑똑함이 아니라, 믿고 맡길 수 있느냐다.",
-    "whyAlt": "AP의 답 한 장 — 판정, 원재료 대조, 확인 필요, 근거(식약처 신고번호·원문), 갱신일, 아이 정보 전송 없음, 무료, 클로드·챗지피티·시리. 여덟 가지 이유가 답 안에 다 있다.",
-    "whyFacts": [
-      {
-        "step": "원본",
-        "big": "190만",
-        "unit": "행",
-        "title": "공개 원본만 대조한다",
-        "sub": "식약처 공개 자료 · 매주 월요일 자동 갱신"
-      },
-      {
-        "step": "근거",
-        "big": "100",
-        "unit": "%",
-        "title": "모든 답에 근거가 붙는다",
-        "sub": "신고번호 · 원문 · 갱신일을 답과 함께 준다"
-      },
-      {
-        "step": "내 폰",
-        "big": "0",
-        "unit": "건",
-        "title": "개인정보를 저장하지 않는다",
-        "sub": "계정 · 로그인 없음. 질문은 답과 함께 버린다"
-      }
-    ]
+ "ko": {
+  "hero": "복잡한 선택 · 거래 · 아이디어의 시스템화.",
+  "cta": "핵심 엔진과 사업 보기",
+  "featured": "복잡함에서 결정까지, 다섯 단계.",
+  "select": "물건을 파는 매장이 아니라, 물건을 고르는 매장.",
+  "concept": "AI 콘셉트 · 설계 단계",
+  "lia": "AI Influencer · 한국의 문화·장소·제품 소개",
+  "revenue": "매출 데이터에서 실행 우선순위로.",
+  "proof": "독립 개발 · Working Proof",
+  "visualNote": "개념 흐름 · 실제 운영 데이터 미포함",
+  "portfolio": "고르는 순간. 사는 순간. 배우는 순간.",
+  "groups": [
+   "Decision Intelligence",
+   "Commerce",
+   "Play & Learn"
+  ],
+  "short": {
+   "safe": "우리 애가 먹어도 되는지, 성분표를 대신 읽어 줍니다.",
+   "light": "사려는 과자, 한 봉지에 몇 칼로리인지 바로 말해 줍니다.",
+   "revenue": "예약이 느려진 날짜를 매일 아침 먼저 알립니다. 가격 결정은 담당자의 몫.",
+   "travel": "어느 나라 손님이 언제 늘어날지, 신호를 모아 보여 줍니다.",
+   "select": "보고 만져 보고 고른 뒤, 주문은 집으로.",
+   "commerce": "한국에서 발견한 물건을 돌아가서도 다시 삽니다.",
+   "craft": "장인의 작품이 해외 구매자에게 닿기까지, 거래를 정리합니다.",
+   "lia": "한국의 문화·장소·제품을 세계에 소개하는 AI 인플루언서.",
+   "rgrg": "버저 한 번, 먼저 누른 사람만. 퀴즈로 겨루며 배웁니다.",
+   "cubs": "호랑이 4남매와 놀이로 배우는 한글.",
+   "lastwave": "어린 창작자의 상상을 어른들이 게임으로 만듭니다."
   },
-  "en": {
-    "hero": "Complex choices, transactions and ideas, turned into systems.",
-    "cta": "Explore our engine and businesses",
-    "featured": "From complexity to decision, in five steps.",
-    "select": "Not a store that sells things — a store that chooses them.",
-    "concept": "AI concept · design stage",
-    "lia": "AI Influencer · Korea's culture, places and products",
-    "revenue": "From revenue data to priorities for action.",
-    "proof": "Independently built · Working Proof",
-    "visualNote": "Concept flow · no live operating data",
-    "portfolio": "The moment of choosing. Buying. Learning.",
-    "groups": [
-      "Decision Intelligence",
-      "Commerce",
-      "Play & Learn"
-    ],
-    "short": {
-      "safe": "Reads the label for you, so you know if your child can eat it.",
-      "light": "Tells you how many calories are in the bag you're about to buy.",
-      "revenue": "Flags the dates where bookings have slowed, every morning. Pricing stays with the manager.",
-      "travel": "Gathers the signals that show which country's guests will grow, and when.",
-      "select": "See it, touch it, choose it — then it ships to your home.",
-      "commerce": "What you discovered in Korea, bought again back home.",
-      "craft": "Puts the trade in order, from the artisan's work to the overseas buyer.",
-      "lia": "An AI influencer introducing Korea's culture, places and products to the world.",
-      "rgrg": "One buzzer, first to press. Learn by competing in quizzes.",
-      "cubs": "Hangeul learned through play with four tiger siblings.",
-      "lastwave": "Adults building a young creator's imagination into a game."
-    },
-    "why": "Why choose AP.",
-    "principles": [
-      "No green light. We say “not found,” never “safe.” The last call belongs to the parent, to the manager. Built to fail on the side of caution.",
-      "Every answer carries its source — MFDS report number, booking record, original text. The answer is the document you take to the clinic, the meeting, your boss.",
-      "No guessing. We check public originals: 1.9 million MFDS rows, real booking records. If it is not in the data, we say so.",
-      "We do not pretend to know. Opaque ingredients stay “needs checking.” We state up front that this is not diagnosis, medical or diet advice — so adopting it carries no legal weight.",
-      "Public data is re-fetched automatically every Monday at midnight. No verdicts from stale records or discontinued products.",
-      "Child profile, photos, logs never leave the device. Servers see the question and discard it with the answer. No account, no login.",
-      "Stateless or serverless, so almost no running cost. Connectors are free; apps are free or one-time. No subscription, no ads.",
-      "One address, two minutes, inside the AI you already use. Same answer in Claude, ChatGPT or Siri — switch AI, keep the verdict."
-    ],
-    "globalMore": "Global design principles",
-    "aboutTitle": "Where people had given up, AI.",
-    "about": "Not where AI replaces a person, but where a person had stopped.\nJudgment stays human, to the end.\nA.P — Alfred Park · AI People.",
-    "aboutMore": "About the company",
-    "lab": "Independent projects. A record of building and learning.",
-    "contact": "Products · Experts · Brands · Global partnerships",
-    "detail": "Learn more",
-    "engineIntro": "A bag of snacks and a hotel room rate share the same structure. Example: a child allergic to milk and wheat, and an Oh Yes.",
-    "engineSteps": [
-      [
-        "Data",
-        "Filed ingredients · the avoid list"
-      ],
-      [
-        "Context",
-        "“No milk or wheat” checked against “eggs · wheat · cocoa”"
-      ],
-      [
-        "Judgment",
-        "Flagged. Evidence attached."
-      ],
-      [
-        "Human decision",
-        "The system goes as far as the recommendation. The parent decides."
-      ],
-      [
-        "Learning",
-        "Choices and outcomes accumulate → the next judgment"
-      ]
-    ],
-    "engineNote": "The structure shared by AP Safe · Light · Revenue · Travel · SELECT. People make the final decision.",
-    "groupDesc": [
-      "Answers with evidence at the hard-to-choose moment. People decide.",
-      "From content discovery to product trial, purchase and global delivery.",
-      "Language and knowledge learning, and creation, as games."
-    ],
-    "liaChannel": "Instagram · TikTok content / global Korea Discovery IP",
-    "examples": {
-      "safe": [
-        "Filtering out what to avoid",
-        "“Can my child eat this Oh Yes? Avoid milk and wheat.”",
-        "“It contains wheat.” With the filed ingredient and its source."
-      ],
-      "light": [
-        "Choosing the lighter one",
-        "“Buying Saewookkang — anything lighter?”",
-        "“465 kcal a bag. There's a 70 kcal one on the same shelf.”"
-      ],
-      "revenue": [
-        "Choosing the dates to look at today",
-        "Booking and cancellation data through yesterday",
-        "“October 10 is at risk. Review price and inventory.” → the manager decides"
-      ],
-      "travel": [
-        "Choosing the market to watch",
-        "Air capacity · search volume · exchange rates · holidays",
-        "“Watch Taiwan this month.” → campaign decision"
-      ]
-    },
-    "input": "Ask like this",
-    "output": "It answers like this",
-    "safeNote": "Not a medical diagnosis or an absolute guarantee of safety",
-    "rgrgTag": "Language and knowledge — learning by quiz battle.",
-    "rgrgPacks": "Multilingual · language · certification · education Quiz Packs",
-    "rgrgNote": "Existing game screens · global Quiz Pack expansion design",
-    "principleNames": [
-      "01 · Safe by design",
-      "02 · Evidence attached",
-      "03 · Source data only",
-      "04 · Honest about limits",
-      "05 · Fresh every week",
-      "06 · Your data stays on your phone",
-      "07 · Costs little",
-      "08 · Plugs in, never locks in"
-    ],
-    "proofLabels": {
-      "safe": "In operation · Safelist app · AI connector",
-      "light": "In operation · LightList AI connector"
-    },
-    "portfolioIntro": [
-      "At the hard-to-choose moment, an answer with evidence.",
-      "From discovery to trial, purchase and delivery.",
-      "Learn by competing, create by playing."
-    ],
-    "decision": {
-      "safeTitle": [
-        "Know what",
-        "to avoid."
-      ],
-      "safe": "Reads the label for you, so you know if your child can eat it.",
-      "safeSub": "“Oh Yes — avoid milk and wheat.” → “It contains wheat.” With the evidence.",
-      "safeQuiet": "Safelist app · AI connector in operation",
-      "lightTitle": [
-        "Understand",
-        "what fits you."
-      ],
-      "light": "How many calories in the bag you're about to buy.",
-      "lightSub": "The back of the pack is per 100g. Bags are 46g · 66g · 90g. Count per bag and the order flips.",
-      "revenue": "Booking data, into today's decisions.\nThe manager decides.",
-      "travel": "Gathers the signals that show which country's guests will grow, and when."
-    },
-    "whyLead": "AI is already everywhere. The question is no longer “is it smart” but “can I trust it with this.”",
-    "whyAlt": "One AP answer — verdict, ingredient check, needs-check flag, source (MFDS filing, original text), refresh date, no child data sent, free, Claude · ChatGPT · Siri. All eight reasons inside one answer.",
-    "whyFacts": [
-      {
-        "step": "Source",
-        "big": "1.9M",
-        "unit": "rows",
-        "title": "Checked against public originals",
-        "sub": "MFDS open data · refreshed every Monday"
-      },
-      {
-        "step": "Evidence",
-        "big": "100",
-        "unit": "%",
-        "title": "Every answer carries its source",
-        "sub": "Report number, original text and date come with the answer."
-      },
-      {
-        "step": "Your phone",
-        "big": "0",
-        "unit": "",
-        "title": "Personal data stored",
-        "sub": "No account, no login. Questions are discarded with the answer."
-      }
-    ]
-  }
+  "why": "AP를 고르는 이유.",
+  "principles": [
+   "초록불을 만들지 않는다. 「보이지 않았다」까지만 말하고 「안전하다」고는 하지 않는다.\n마지막 결정은 부모가, 담당자가. 틀려도 사람이 다치지 않는 쪽으로 설계한다.",
+   "모든 답에 근거가 붙는다 — 식약처 신고번호, 예약 기록, 원문.\n답이 그대로 서류가 된다. 병원에, 회의에, 상사에게 들고 간다.",
+   "AI 의 추측이 아니라 공개 원본을 대조한다.\n식약처 190만 행, 실제 예약 기록. 자료에 없으면 「없다」고 답한다.",
+   "모르는 것을 아는 척하지 않는다. 안이 안 보이는 원재료는 「확인 필요」로 남긴다.\n진단·의료·다이어트 조언이 아니라고 먼저 밝힌다. 그래서 도입해도 법적 부담이 없다.",
+   "공개 자료는 매주 월요일 자정에 자동으로 다시 받는다.\n오래된 답, 없어진 제품으로 판정하지 않는다.",
+   "아이 프로필·사진·기록은 기기 밖으로 나가지 않는다.\n서버는 질문만 받고 답과 함께 버린다. 계정도, 로그인도 없다.",
+   "서버가 없거나 무상태라 유지비가 거의 없다.\n커넥터는 무료, 앱은 무료 또는 한 번 결제. 구독·광고 없음.",
+   "주소 한 줄, 2분. 설치 없이 쓰던 AI 안에서 그대로.\n클로드·챗지피티·시리 어디서든 같은 답 — AI 를 바꿔도 판정은 남는다."
+  ],
+  "globalMore": "글로벌 설계 원칙",
+  "aboutTitle": "사람이 포기하던 자리에, AI.",
+  "about": "AI가 사람을 대신하는 자리가 아니라, 사람이 멈춘 자리.\n판단은 끝까지 사람.\nA.P — Alfred Park · AI People.",
+  "aboutMore": "회사 소개",
+  "lab": "독립 프로젝트 · 제작과 학습의 기록",
+  "contact": "제품 · 전문가 · 브랜드 · 글로벌 파트너십",
+  "detail": "자세히 보기",
+  "engineIntro": "과자 한 봉지도, 호텔 객실 가격도 같은 구조. 예: 우유·밀 알레르기 아이와 오예스.",
+  "engineSteps": [
+   [
+    "데이터",
+    "신고된 원재료 · 피하는 성분"
+   ],
+   [
+    "맥락",
+    "「우유·밀 금지」와 「알류·밀·카카오」의 대조"
+   ],
+   [
+    "판단",
+    "걸림. 근거 첨부."
+   ],
+   [
+    "사람의 결정",
+    "권고까지가 시스템. 결정은 보호자."
+   ],
+   [
+    "학습",
+    "선택과 결과의 축적 → 다음 판단"
+   ]
+  ],
+  "engineNote": "AP Safe · Light · Revenue · Travel · SELECT 공통 구조. 최종 결정의 주체는 사람.",
+  "groupDesc": [
+   "고르기 어려운 순간에, 근거와 함께 답합니다. 결정은 사람이.",
+   "콘텐츠 발견부터 제품 체험, 구매와 글로벌 배송까지.",
+   "언어·지식 학습과 창작의 게임화."
+  ],
+  "liaChannel": "Instagram · TikTok 콘텐츠 / 글로벌 Korea Discovery IP",
+  "examples": {
+   "safe": [
+    "피할 것 걸러내기",
+    "「오예스, 우리 애 먹어도 돼? 우유랑 밀 피해.」",
+    "「밀이 들어 있어요.」 신고된 성분과 근거까지."
+   ],
+   "light": [
+    "덜 무거운 것 고르기",
+    "「새우깡 사려는데 더 가벼운 거 있어?」",
+    "「한 봉지 465kcal. 같은 칸에 70kcal짜리가 있어요.」"
+   ],
+   "revenue": [
+    "오늘 볼 날짜 고르기",
+    "어제까지의 예약·취소 데이터",
+    "「10월 10일이 위험합니다. 가격·재고를 검토하세요.」 → 담당자가 결정"
+   ],
+   "travel": [
+    "볼 시장 고르기",
+    "항공 공급·검색량·환율·연휴",
+    "「이번 달은 대만을 보세요.」 → 캠페인 판단"
+   ]
+  },
+  "input": "이렇게 물으면",
+  "output": "이렇게 답합니다",
+  "safeNote": "의료진단·절대적 안전보증 제외",
+  "rgrgTag": "언어와 지식, 퀴즈로 겨루는 학습.",
+  "rgrgPacks": "다국어 · 언어 · 자격증 · 교육 Quiz Pack",
+  "rgrgNote": "기존 게임 화면 · 글로벌 Quiz Pack 확장 설계",
+  "proofLabels": {
+   "safe": "운영 중 · 세이프리스트 앱 · AI 커넥터",
+   "light": "운영 중 · 라이트리스트 AI 커넥터"
+  },
+  "portfolioIntro": [
+   "고르기 어려운 순간, 근거 있는 답.",
+   "발견에서 체험, 구매와 배송까지.",
+   "겨루며 배우고, 놀며 만든다."
+  ],
+  "decision": {
+   "safeTitle": [
+    "Know what",
+    "to avoid."
+   ],
+   "safe": "우리 애가 먹어도 되는지, 성분표를 대신 읽습니다.",
+   "safeSub": "「오예스, 우유랑 밀 피해.」 → 「밀이 들어 있어요.」 근거까지.",
+   "safeQuiet": "세이프리스트 앱 · AI 커넥터 운영 중",
+   "lightTitle": [
+    "Understand",
+    "what fits you."
+   ],
+   "light": "사려는 과자, 한 봉지에 몇 칼로리인지.",
+   "lightSub": "포장 뒷면은 100g당. 봉지는 46g·66g·90g. 한 봉지로 세면 순서가 뒤집힙니다.",
+   "revenue": "예약 데이터를 오늘 결정할 일로.\n판단은 담당자가.",
+   "travel": "어느 나라 손님이 언제 늘어날지, 신호를 모아 보여 줍니다."
+  },
+  "principleNames": [
+   "01 · 안전하다",
+   "02 · 증빙이 남는다",
+   "03 · 원본만 믿는다",
+   "04 · 한계를 말한다",
+   "05 · 매주 새로워진다",
+   "06 · 내 정보는 내 폰에",
+   "07 · 값이 싸다",
+   "08 · 바로 붙고, 묶이지 않는다"
+  ],
+  "whyLead": "AI는 이미 어디에나 있다. 고르는 기준은 똑똑함이 아니라, 믿고 맡길 수 있느냐다.",
+  "whyAlt": "AP의 답 한 장 — 판정, 원재료 대조, 확인 필요, 근거(식약처 신고번호·원문), 갱신일, 아이 정보 전송 없음, 무료, 클로드·챗지피티·시리. 여덟 가지 이유가 답 안에 다 있다.",
+  "whyFacts": [
+   {
+    "step": "원본",
+    "big": "190만",
+    "unit": "행",
+    "title": "공개 원본만 대조한다",
+    "sub": "식약처 공개 자료 · 매주 월요일 자동 갱신"
+   },
+   {
+    "step": "근거",
+    "big": "100",
+    "unit": "%",
+    "title": "모든 답에 근거가 붙는다",
+    "sub": "신고번호 · 원문 · 갱신일을 답과 함께 준다"
+   },
+   {
+    "step": "내 폰",
+    "big": "0",
+    "unit": "건",
+    "title": "개인정보를 저장하지 않는다",
+    "sub": "계정 · 로그인 없음. 질문은 답과 함께 버린다"
+   }
+  ]
+ },
+ "en": {
+  "hero": "Complex choices, transactions and ideas, turned into systems.",
+  "cta": "Explore our engine and businesses",
+  "featured": "From complexity to decision, in five steps.",
+  "select": "Not a store that sells things — a store that chooses them.",
+  "concept": "AI concept · design stage",
+  "lia": "AI Influencer · Korea's culture, places and products",
+  "revenue": "From revenue data to priorities for action.",
+  "proof": "Independently built · Working Proof",
+  "visualNote": "Concept flow · no live operating data",
+  "portfolio": "The moment of choosing. Buying. Learning.",
+  "groups": [
+   "Decision Intelligence",
+   "Commerce",
+   "Play & Learn"
+  ],
+  "short": {
+   "safe": "Reads the label for you, so you know if your child can eat it.",
+   "light": "Tells you how many calories are in the bag you're about to buy.",
+   "revenue": "Flags the dates where bookings have slowed, every morning. Pricing stays with the manager.",
+   "travel": "Gathers the signals that show which country's guests will grow, and when.",
+   "select": "See it, touch it, choose it — then it ships to your home.",
+   "commerce": "What you discovered in Korea, bought again back home.",
+   "craft": "Puts the trade in order, from the artisan's work to the overseas buyer.",
+   "lia": "An AI influencer introducing Korea's culture, places and products to the world.",
+   "rgrg": "One buzzer, first to press. Learn by competing in quizzes.",
+   "cubs": "Hangeul learned through play with four tiger siblings.",
+   "lastwave": "Adults building a young creator's imagination into a game."
+  },
+  "why": "Why choose AP.",
+  "principles": [
+   "No green light. We say “not found,” never “safe.” The last call belongs to the parent, to the manager. Built to fail on the side of caution.",
+   "Every answer carries its source — MFDS report number, booking record, original text. The answer is the document you take to the clinic, the meeting, your boss.",
+   "No guessing. We check public originals: 1.9 million MFDS rows, real booking records. If it is not in the data, we say so.",
+   "We do not pretend to know. Opaque ingredients stay “needs checking.” We state up front that this is not diagnosis, medical or diet advice — so adopting it carries no legal weight.",
+   "Public data is re-fetched automatically every Monday at midnight. No verdicts from stale records or discontinued products.",
+   "Child profile, photos, logs never leave the device. Servers see the question and discard it with the answer. No account, no login.",
+   "Stateless or serverless, so almost no running cost. Connectors are free; apps are free or one-time. No subscription, no ads.",
+   "One address, two minutes, inside the AI you already use. Same answer in Claude, ChatGPT or Siri — switch AI, keep the verdict."
+  ],
+  "globalMore": "Global design principles",
+  "aboutTitle": "Where people had given up, AI.",
+  "about": "Not where AI replaces a person, but where a person had stopped.\nJudgment stays human, to the end.\nA.P — Alfred Park · AI People.",
+  "aboutMore": "About the company",
+  "lab": "Independent projects. A record of building and learning.",
+  "contact": "Products · Experts · Brands · Global partnerships",
+  "detail": "Learn more",
+  "engineIntro": "A bag of snacks and a hotel room rate share the same structure. Example: a child allergic to milk and wheat, and an Oh Yes.",
+  "engineSteps": [
+   [
+    "Data",
+    "Filed ingredients · the avoid list"
+   ],
+   [
+    "Context",
+    "“No milk or wheat” checked against “eggs · wheat · cocoa”"
+   ],
+   [
+    "Judgment",
+    "Flagged. Evidence attached."
+   ],
+   [
+    "Human decision",
+    "The system goes as far as the recommendation. The parent decides."
+   ],
+   [
+    "Learning",
+    "Choices and outcomes accumulate → the next judgment"
+   ]
+  ],
+  "engineNote": "The structure shared by AP Safe · Light · Revenue · Travel · SELECT. People make the final decision.",
+  "groupDesc": [
+   "Answers with evidence at the hard-to-choose moment. People decide.",
+   "From content discovery to product trial, purchase and global delivery.",
+   "Language and knowledge learning, and creation, as games."
+  ],
+  "liaChannel": "Instagram · TikTok content / global Korea Discovery IP",
+  "examples": {
+   "safe": [
+    "Filtering out what to avoid",
+    "“Can my child eat this Oh Yes? Avoid milk and wheat.”",
+    "“It contains wheat.” With the filed ingredient and its source."
+   ],
+   "light": [
+    "Choosing the lighter one",
+    "“Buying Saewookkang — anything lighter?”",
+    "“465 kcal a bag. There's a 70 kcal one on the same shelf.”"
+   ],
+   "revenue": [
+    "Choosing the dates to look at today",
+    "Booking and cancellation data through yesterday",
+    "“October 10 is at risk. Review price and inventory.” → the manager decides"
+   ],
+   "travel": [
+    "Choosing the market to watch",
+    "Air capacity · search volume · exchange rates · holidays",
+    "“Watch Taiwan this month.” → campaign decision"
+   ]
+  },
+  "input": "Ask like this",
+  "output": "It answers like this",
+  "safeNote": "Not a medical diagnosis or an absolute guarantee of safety",
+  "rgrgTag": "Language and knowledge — learning by quiz battle.",
+  "rgrgPacks": "Multilingual · language · certification · education Quiz Packs",
+  "rgrgNote": "Existing game screens · global Quiz Pack expansion design",
+  "principleNames": [
+   "01 · Safe by design",
+   "02 · Evidence attached",
+   "03 · Source data only",
+   "04 · Honest about limits",
+   "05 · Fresh every week",
+   "06 · Your data stays on your phone",
+   "07 · Costs little",
+   "08 · Plugs in, never locks in"
+  ],
+  "proofLabels": {
+   "safe": "In operation · Safelist app · AI connector",
+   "light": "In operation · LightList AI connector"
+  },
+  "portfolioIntro": [
+   "At the hard-to-choose moment, an answer with evidence.",
+   "From discovery to trial, purchase and delivery.",
+   "Learn by competing, create by playing."
+  ],
+  "decision": {
+   "safeTitle": [
+    "Know what",
+    "to avoid."
+   ],
+   "safe": "Reads the label for you, so you know if your child can eat it.",
+   "safeSub": "“Oh Yes — avoid milk and wheat.” → “It contains wheat.” With the evidence.",
+   "safeQuiet": "Safelist app · AI connector in operation",
+   "lightTitle": [
+    "Understand",
+    "what fits you."
+   ],
+   "light": "How many calories in the bag you're about to buy.",
+   "lightSub": "The back of the pack is per 100g. Bags are 46g · 66g · 90g. Count per bag and the order flips.",
+   "revenue": "Booking data, into today's decisions.\nThe manager decides.",
+   "travel": "Gathers the signals that show which country's guests will grow, and when."
+  },
+  "whyLead": "AI is already everywhere. The question is no longer “is it smart” but “can I trust it with this.”",
+  "whyAlt": "One AP answer — verdict, ingredient check, needs-check flag, source (MFDS filing, original text), refresh date, no child data sent, free, Claude · ChatGPT · Siri. All eight reasons inside one answer.",
+  "whyFacts": [
+   {
+    "step": "Source",
+    "big": "1.9M",
+    "unit": "rows",
+    "title": "Checked against public originals",
+    "sub": "MFDS open data · refreshed every Monday"
+   },
+   {
+    "step": "Evidence",
+    "big": "100",
+    "unit": "%",
+    "title": "Every answer carries its source",
+    "sub": "Report number, original text and date come with the answer."
+   },
+   {
+    "step": "Your phone",
+    "big": "0",
+    "unit": "",
+    "title": "Personal data stored",
+    "sub": "No account, no login. Questions are discarded with the answer."
+   }
+  ]
+ }
 }
