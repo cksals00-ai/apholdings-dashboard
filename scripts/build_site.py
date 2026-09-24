@@ -185,7 +185,7 @@ def sections(items):
   h+=f'<section class="section{" soft" if sec.get("soft") else ""} anchor" id="{e(sec["id"])}"><div class="wrap">{head_}{blocks(rest)}</div></section>'
  return h
 def product_page(l,p):
- pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (오~알지)" if pid=="rgrg" and l=="ko" else "")}</h1>{"" if p.get("heroSplit") else f'<h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p>'}</div></section><section class="section"><div class="wrap">'
+ pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (오~알지)" if pid=="rgrg" and l=="ko" else "")}</h1>{"" if p.get("heroSplit") else f'<h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p>'}{(f'<div class="actions hero-actions">{link(p["link"],p["linkLabel"]+" →","button primary",True)}</div>') if (p.get("link") and pid=="lastwave") else ""}</div></section><section class="section"><div class="wrap">'
  if pid=='rgrg' and False:
   body+='<figure class="rgrg-detail"><img src="/media/games/qa_shot_01.jpg" alt="RGRG — existing quiz battle interface" width="1396" height="644"><figcaption class="note">'+HOME_COPY[l]['rgrgNote']+'</figcaption></figure>'
  if p.get('heroSplit') and p.get('image'):

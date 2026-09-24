@@ -144,3 +144,4 @@ html[lang=en] figure.wide::after{content:'← swipe to see more'}
 .wf-sub{font-size:14px;color:var(--muted);line-height:1.6;margin:0}
 @media(max-width:800px){.why-flow{grid-template-columns:1fr;margin-top:28px}.why-flow li,.why-flow li+li{padding:22px 0 24px 26px;border-top:0;border-left:2px solid #1f4a33}.why-flow li::before,.why-flow li+li::before{left:-7px;top:26px}.why-flow li:not(:last-child)::after{right:auto;left:-9px;top:auto;bottom:-10px;transform:rotate(135deg)}.wf-big{font-size:44px;margin:10px 0}}
 .why-lead,.wf-sub,.why-flow h3{text-wrap:pretty}.why-lead{max-width:720px}.wf-big{margin:10px 0 12px}
+.page-hero .hero-actions{margin-top:28px}
