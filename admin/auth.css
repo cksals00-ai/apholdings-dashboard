@@ -1,3 +1,7 @@
+[hidden] {
+  display: none !important;
+}
+
 .auth-link {
   display: block;
   margin: 14px auto 0;
