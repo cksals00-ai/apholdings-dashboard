@@ -28,12 +28,25 @@ export function createInvestment(supabase, getUser, openArchive) {
     const state = validateState(data.state);
     if (epoch === generation && getUser()) send({ type: 'ap-investment-state', state, revision: data.revision });
   }
+  async function readAI(epoch) {
+    try {
+      const month = new Date().toISOString().slice(0, 7) + '-01T00:00:00Z';
+      const results = await Promise.all([
+        supabase.from('admin_investment_ai_runtime').select('status,detail,checked_at,monthly_budget_usd,model').eq('id', 'worker').maybeSingle(),
+        supabase.from('admin_investment_ai_runs').select('kind,status,summary,source_asof,source_revision,model,created_at').order('created_at', { ascending: false }).limit(10),
+        supabase.from('admin_investment_ai_runs').select('reserved_usd').gte('created_at', month)
+      ]);
+      if (results.some(r => r.error)) throw new Error('ai-read');
+      if (epoch === generation && getUser()) send({ type: 'ap-investment-ai', runtime: results[0].data, runs: results[1].data || [], reserved: (results[2].data || []).reduce((sum, row) => sum + Number(row.reserved_usd || 0), 0) });
+    } catch { if (epoch === generation && getUser()) send({ type: 'ap-investment-ai-error' }); }
+  }
   window.addEventListener('message', async event => {
     if (event.source !== frame.contentWindow || !getUser() || !loaded) return;
     const m = event.data, epoch = generation;
     if (!m || typeof m.type !== 'string') return;
     try {
-      if (m.type === 'ap-investment-ready') await readState(epoch);
+      if (m.type === 'ap-investment-ready') await Promise.all([readState(epoch), readAI(epoch)]);
+      if (m.type === 'ap-investment-ai-refresh') await readAI(epoch);
       if (m.type === 'ap-investment-archive') openArchive();
       if (m.type === 'ap-investment-save') {
         if (saving) return;
@@ -58,9 +71,9 @@ export function createInvestment(supabase, getUser, openArchive) {
     const epoch = generation;
     message.textContent = '투자운용 화면을 불러오는 중입니다…'; retry.hidden = true;
     try {
-      const { data, error } = await supabase.from('admin_trading_documents').select('key_hex,sha256').eq('id', 'investment-v1').single();
+      const { data, error } = await supabase.from('admin_trading_documents').select('key_hex,sha256').eq('id', 'investment-v2').single();
       if (error || !data) throw new Error('access');
-      const response = await fetch('/admin/investment.enc.json?v=20260926-1', { cache: 'no-store' });
+      const response = await fetch('/admin/investment-v2.enc.json?v=20260926-2', { cache: 'no-store' });
       if (!response.ok) throw new Error('fetch');
       const encrypted = await response.json();
       const decode = v => Uint8Array.from(atob(v), c => c.charCodeAt(0));

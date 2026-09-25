@@ -1,4 +1,4 @@
-import { createInvestment } from './investment.js?v=1.4';
+import { createInvestment } from './investment.js?v=1.6-investment-charts';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
