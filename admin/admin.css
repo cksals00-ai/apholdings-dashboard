@@ -6,4 +6,28 @@
 #trading-document[hidden] { display: none; }
 @media (max-width: 700px) { .trading-panel { padding: 10px; } #trading-document { height: 78vh; min-height: 480px; } }
 
-.investment-mode .filters,.investment-mode .top-actions{display:none}.investment-mode .topbar{margin-bottom:22px}#investment-dashboard{width:100%;height:calc(100vh - 140px);min-height:740px;border:0;display:block;background:#f4f6f8}#investment-dashboard[hidden]{display:none}#trading-archive{margin-top:18px}#trading-archive>summary{cursor:pointer;padding:18px;background:#fff;border:1px solid #e4e9f1;border-radius:12px;font-weight:700;color:#69768b}#trading-archive .trading-panel{margin-top:12px}@media(max-width:760px){.sidebar nav{grid-template-columns:repeat(5,max-content)}#investment-dashboard{height:85vh;min-height:650px}}
+/* 데이터 자산 원장 (2026-09-26) */
+.asset-filters{display:grid;grid-template-columns:repeat(3,minmax(120px,170px)) 1fr;gap:12px;margin:18px 0 4px}
+.asset-filters label{margin-bottom:0}
+.asset-table-wrap{overflow-x:auto;margin-top:6px}
+.asset-table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:860px}
+.asset-table th{text-align:left;color:var(--muted);font-size:.75rem;font-weight:800;letter-spacing:.06em;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.asset-table td{padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.asset-table tbody tr{cursor:pointer}
+.asset-table tbody tr:hover{background:#f8fafc}
+.asset-table tr.retired td{color:#98a2b3}
+.asset-table .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.asset-table .date{white-space:nowrap;color:#475467}
+.asset-table .title b{display:block;font-weight:700}
+.asset-table .title small{display:block;color:var(--muted);margin-top:4px;line-height:1.5;max-width:520px}
+.asset-kind{display:inline-block;border-radius:100px;padding:3px 9px;font-size:.75rem;font-weight:750;background:var(--blue-soft);color:var(--blue);white-space:nowrap}
+.asset-kind[data-kind="public_db"]{background:#ecfdf3;color:var(--green)}
+.asset-kind[data-kind="derived"]{background:#eef2ff;color:var(--blue)}
+.asset-kind[data-kind="dictionary"],.asset-kind[data-kind="rule"]{background:#fff7ed;color:var(--orange)}
+.asset-kind[data-kind="paper"]{background:#fdf2fa;color:#a1266f}
+.asset-growth{margin-top:8px;color:var(--muted);font-size:.8rem}
+@media(max-width:900px){.asset-filters{grid-template-columns:1fr 1fr}}
+#asset-form{padding:25px}
+#assets-section .panel-wide{margin-top:18px;padding:22px;overflow:visible}
+
+.investment-mode .filters,.investment-mode .top-actions{display:none}.investment-mode .topbar{margin-bottom:22px}#investment-dashboard{width:100%;height:calc(100vh - 140px);min-height:740px;border:0;display:block;background:#f4f6f8}#investment-dashboard[hidden]{display:none}#trading-archive{margin-top:18px}#trading-archive>summary{cursor:pointer;padding:18px;background:#fff;border:1px solid #e4e9f1;border-radius:12px;font-weight:700;color:#69768b}#trading-archive .trading-panel{margin-top:12px}@media(max-width:760px){.sidebar nav{grid-template-columns:repeat(6,max-content)}#investment-dashboard{height:85vh;min-height:650px}}

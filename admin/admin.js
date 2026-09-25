@@ -144,7 +144,7 @@ $('#new-password-form').addEventListener('submit', async (event) => {
   button.disabled = false;
 });
 
-$('#logout').addEventListener('click', async () => { await supabase.auth.signOut(); items = []; currentUser = null; setAuthView(false); });
+$('#logout').addEventListener('click', async () => { await supabase.auth.signOut(); items = []; assets = []; assetsLoaded = false; currentUser = null; setAuthView(false); });
 
 async function loadItems() {
   $('.workspace').classList.add('loading');
@@ -245,6 +245,8 @@ function showSection(name) {
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
   document.querySelector('.topbar h1').textContent = investing ? '투자운용' : 'Portfolio Control Room';
   if (investing) investment.load();
+  if (name === 'assets') loadAssets();
+  $('.filters').hidden = name === 'assets';
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
 }
@@ -383,3 +385,120 @@ async function loadTradingDocument() {
 }
 
 $('#trading-retry').addEventListener('click', loadTradingDocument);
+
+
+// ── 데이터 자산 원장 (2026-09-26) — admin_data_assets, 소유자만 읽고 쓴다 ──
+const ASSET_PRODUCTS = { safe: '세이프리스트', light: '라이트리스트', common: '공통' };
+const ASSET_KINDS = { public_db: '공공 원천 DB', derived: '가공 판정 DB', dictionary: '사전', rule: '판정 규칙', paper: '논문', other: '기타' };
+const ASSET_STATUS = { active: '사용 중', planned: '예정', retired: '이전 버전' };
+let assets = [];
+let assetsLoaded = false;
+const fmtNum = (n) => (n === null || n === undefined || n === '') ? '—' : Number(n).toLocaleString('ko-KR');
+const fmtBig = (n) => n >= 10000 ? `${(n / 10000).toLocaleString('ko-KR', { maximumFractionDigits: 1 })}만` : fmtNum(n);
+
+async function loadAssets(force = false) {
+  if (!currentUser || (assetsLoaded && !force)) { renderAssets(); return; }
+  $('#asset-message').textContent = '불러오는 중입니다…';
+  const { data, error } = await supabase.from('admin_data_assets').select('*').order('collected_on', { ascending: false, nullsFirst: false }).order('created_at', { ascending: false });
+  if (error) { $('#asset-message').textContent = '데이터 자산을 불러오지 못했습니다. 다시 로그인해 주세요.'; return; }
+  assets = data || []; assetsLoaded = true;
+  $('#asset-message').textContent = '';
+  renderAssets();
+}
+
+function visibleAssets() {
+  const product = $('#asset-product').value, kind = $('#asset-kind').value, status = $('#asset-status').value;
+  const q = $('#asset-search').value.trim().toLowerCase();
+  return assets.filter((a) => (product === 'ALL' || a.product === product) && (kind === 'ALL' || a.kind === kind)
+    && (status === 'ALL' || a.status !== 'retired')
+    && (!q || `${a.title} ${a.provider || ''} ${a.source || ''} ${a.note || ''}`.toLowerCase().includes(q)));
+}
+
+function renderAssetCards() {
+  const product = $('#asset-product').value;
+  const live = assets.filter((a) => a.status === 'active' && (product === 'ALL' || a.product === product));
+  const sum = (k) => live.filter((a) => a.kind === k).reduce((s, a) => s + Number(a.records || 0), 0);
+  const cnt = (ks) => live.filter((a) => ks.includes(a.kind)).length;
+  const cards = [
+    ['공공 원천 DB', `${fmtBig(sum('public_db'))}행`, `${cnt(['public_db'])}종 · 식약처 등 전량 수집`],
+    ['가공 판정 DB', `${fmtBig(sum('derived'))}건`, `${cnt(['derived'])}종 · 앱·AI 커넥터가 쓰는 자산`],
+    ['사전 · 규칙', `${cnt(['dictionary', 'rule'])}종`, '오탐·누락을 잡아 온 판단 기준'],
+    ['논문', `${cnt(['paper'])}편`, '분석해 쌓을 예정'],
+    ['전체 기록', `${assets.length}건`, `이전 버전 포함 · 최신 ${assets.map((a) => a.collected_on || '').sort().pop() || '—'}`]
+  ];
+  $('#asset-cards').innerHTML = cards.map(([l, v, n]) => `<article class="summary-card"><span>${l}</span><b>${v}</b><small>${escapeHtml(n)}</small></article>`).join('');
+}
+
+function renderAssets() {
+  renderAssetCards();
+  const rows = visibleAssets();
+  $('#asset-rows').innerHTML = rows.length ? rows.map((a) => `<tr data-asset="${a.id}" class="${a.status}">
+    <td class="date">${a.collected_on || '—'}</td>
+    <td>${ASSET_PRODUCTS[a.product] || a.product}</td>
+    <td><span class="asset-kind" data-kind="${a.kind}">${ASSET_KINDS[a.kind] || a.kind}</span>${a.status !== 'active' ? `<div class="asset-growth">${ASSET_STATUS[a.status]}</div>` : ''}</td>
+    <td class="title"><b>${escapeHtml(a.title)}</b>${a.note ? `<small>${escapeHtml(a.note)}</small>` : ''}</td>
+    <td class="num">${fmtNum(a.records)} ${escapeHtml(a.unit || '')}${a.size_bytes ? `<div class="asset-growth">${(a.size_bytes / 1048576).toLocaleString('ko-KR', { maximumFractionDigits: 1 })} MB</div>` : ''}</td>
+    <td>${escapeHtml(a.provider || '')}${a.source ? `<div class="asset-growth">${escapeHtml(a.source)}</div>` : ''}</td>
+    <td>${escapeHtml(a.refresh || '—')}${a.as_of ? `<div class="asset-growth">기준 ${escapeHtml(a.as_of)}</div>` : ''}</td>
+  </tr>`).join('') : '<tr><td colspan="7" class="empty">조건에 맞는 자산이 없습니다.</td></tr>';
+}
+
+function openAssetDialog(a = null) {
+  $('#asset-form').reset(); $('#asset-form-message').textContent = '';
+  $('#asset-dialog-title').textContent = a ? '자산 편집' : '자산 추가';
+  $('#asset-delete').hidden = !a; $('#asset-id').value = a?.id || '';
+  const set = (id, v) => { $(id).value = v ?? ''; };
+  set('#asset-f-product', a?.product || ($('#asset-product').value !== 'ALL' ? $('#asset-product').value : 'safe'));
+  set('#asset-f-kind', a?.kind || 'public_db'); set('#asset-f-title', a?.title); set('#asset-f-provider', a?.provider);
+  set('#asset-f-source', a?.source); set('#asset-f-records', a?.records); set('#asset-f-unit', a?.unit);
+  set('#asset-f-date', a?.collected_on || new Date().toISOString().slice(0, 10)); set('#asset-f-asof', a?.as_of);
+  set('#asset-f-refresh', a?.refresh); set('#asset-f-status', a?.status || 'active'); set('#asset-f-license', a?.license);
+  set('#asset-f-size', a?.size_bytes ? Math.round(a.size_bytes / 104857.6) / 10 : ''); set('#asset-f-location', a?.location);
+  set('#asset-f-url', a?.url); set('#asset-f-note', a?.note);
+  $('#asset-dialog').showModal();
+}
+
+function assetsToCsv(list) {
+  const cols = ['collected_on', 'product', 'kind', 'status', 'title', 'provider', 'source', 'records', 'unit', 'size_bytes', 'as_of', 'refresh', 'license', 'url', 'note'];
+  const cell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  return '\ufeff' + [cols.join(','), ...list.map((a) => cols.map((c) => cell(c === 'product' ? ASSET_PRODUCTS[a[c]] : c === 'kind' ? ASSET_KINDS[a[c]] : c === 'status' ? ASSET_STATUS[a[c]] : a[c])).join(','))].join('\n');
+}
+
+(function initAssets() {
+  $('#asset-product').insertAdjacentHTML('beforeend', Object.entries(ASSET_PRODUCTS).map(([v, l]) => `<option value="${v}">${l}</option>`).join(''));
+  $('#asset-kind').insertAdjacentHTML('beforeend', Object.entries(ASSET_KINDS).map(([v, l]) => `<option value="${v}">${l}</option>`).join(''));
+  $('#asset-f-product').innerHTML = Object.entries(ASSET_PRODUCTS).map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+  $('#asset-f-kind').innerHTML = Object.entries(ASSET_KINDS).map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+  ['#asset-product', '#asset-kind', '#asset-status', '#asset-search'].forEach((s) => $(s).addEventListener('input', renderAssets));
+  $('#asset-rows').addEventListener('click', (e) => { const tr = e.target.closest('[data-asset]'); if (tr) openAssetDialog(assets.find((a) => a.id === tr.dataset.asset)); });
+  $('#asset-add').addEventListener('click', () => openAssetDialog());
+  document.querySelectorAll('[data-asset-close]').forEach((b) => b.addEventListener('click', () => $('#asset-dialog').close()));
+  $('#asset-export').addEventListener('click', () => {
+    const blob = new Blob([assetsToCsv(visibleAssets())], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `ap_data_assets_${new Date().toISOString().slice(0, 10)}.csv`; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+  $('#asset-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const id = $('#asset-id').value; const v = (s) => $(s).value.trim();
+    const mb = v('#asset-f-size');
+    const payload = {
+      product: v('#asset-f-product'), kind: v('#asset-f-kind'), title: v('#asset-f-title'), provider: v('#asset-f-provider') || null,
+      source: v('#asset-f-source') || null, records: v('#asset-f-records') === '' ? null : Number(v('#asset-f-records')), unit: v('#asset-f-unit') || null,
+      collected_on: v('#asset-f-date') || null, as_of: v('#asset-f-asof') || null, refresh: v('#asset-f-refresh') || null,
+      status: v('#asset-f-status'), license: v('#asset-f-license') || null, size_bytes: mb === '' ? null : Math.round(Number(mb) * 1048576),
+      location: v('#asset-f-location') || null, url: v('#asset-f-url') || null, note: v('#asset-f-note') || null,
+      updated_by: currentUser.id, updated_at: new Date().toISOString()
+    };
+    const q = id ? supabase.from('admin_data_assets').update(payload).eq('id', id) : supabase.from('admin_data_assets').insert({ ...payload, created_by: currentUser.id });
+    const { error } = await q;
+    if (error) { $('#asset-form-message').textContent = '저장하지 못했습니다. 입력값을 확인해 주세요.'; return; }
+    $('#asset-dialog').close(); await loadAssets(true);
+  });
+  $('#asset-delete').addEventListener('click', async () => {
+    const id = $('#asset-id').value; if (!id || !confirm('이 자산 기록을 삭제할까요? 이전 버전으로 두려면 상태를 바꾸세요.')) return;
+    const { error } = await supabase.from('admin_data_assets').delete().eq('id', id);
+    if (error) { $('#asset-form-message').textContent = '삭제하지 못했습니다.'; return; }
+    $('#asset-dialog').close(); await loadAssets(true);
+  });
+})();

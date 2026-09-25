@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" href="/img/ap_mark.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.4-investment">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.5-investment-assets">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
 </head>
 <body>
@@ -50,6 +50,7 @@
         <button class="nav-item active" data-section="overview">Overview</button>
         <button class="nav-item" data-section="gantt">Action Plan</button>
         <button class="nav-item" data-section="board">Status Board</button>
+        <button class="nav-item" data-section="assets">데이터 자산</button>
         <button class="nav-item" data-section="trading">투자운용</button>
         <button class="nav-item" data-section="settings">Connections</button>
       </nav>
@@ -88,6 +89,22 @@
 
       <section id="board-section" class="view-section" hidden>
         <div id="status-board" class="status-board"></div>
+      </section>
+
+      <section id="assets-section" class="view-section" hidden>
+        <div id="asset-cards" class="summary-grid"></div>
+        <section class="panel panel-wide">
+          <div class="panel-head"><div><p class="eyebrow">DATA ASSETS · SAFE · LIGHT</p><h2>데이터 자산 원장</h2></div><div class="top-actions"><button id="asset-export" class="secondary" type="button">CSV 내보내기</button><button id="asset-add" class="primary" type="button">+ 자산 추가</button></div></div>
+          <p class="panel-note">수집한 공공 DB · 우리가 가공한 판정 DB · 사전과 규칙 · 논문을 한곳에 쌓습니다. 줄을 누르면 편집할 수 있습니다.</p>
+          <div class="asset-filters">
+            <label>제품<select id="asset-product"><option value="ALL">전체</option></select></label>
+            <label>구분<select id="asset-kind"><option value="ALL">전체</option></select></label>
+            <label>상태<select id="asset-status"><option value="ACTIVE">사용 중</option><option value="ALL">이력 포함 전체</option></select></label>
+            <label class="search-field">검색<input id="asset-search" type="search" placeholder="자산 · 출처 · 메모"></label>
+          </div>
+          <p id="asset-message" class="form-message" role="status"></p>
+          <div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>기준일</th><th>제품</th><th>구분</th><th>자산</th><th class="num">규모</th><th>출처</th><th>갱신</th></tr></thead><tbody id="asset-rows"></tbody></table></div>
+        </section>
       </section>
 
       <section id="trading-section" class="view-section" hidden>
@@ -148,6 +165,33 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.4-investment"></script>
+  <dialog id="asset-dialog">
+    <form id="asset-form" method="dialog">
+      <div class="dialog-head"><div><p class="eyebrow">DATA ASSET</p><h2 id="asset-dialog-title">자산 추가</h2></div><button class="icon-button" type="button" data-asset-close aria-label="닫기">×</button></div>
+      <input id="asset-id" type="hidden">
+      <div class="form-grid">
+        <label>제품<select id="asset-f-product" required></select></label>
+        <label>구분<select id="asset-f-kind" required></select></label>
+        <label class="span-2">자산 이름<input id="asset-f-title" required maxlength="200" placeholder="예: 식품 품목제조보고 원재료 전량 / 논문 제목"></label>
+        <label>제공 기관 · 저자<input id="asset-f-provider" maxlength="200"></label>
+        <label>출처 (API · 저널)<input id="asset-f-source" maxlength="300"></label>
+        <label>건수<input id="asset-f-records" type="number" min="0" step="1"></label>
+        <label>단위<input id="asset-f-unit" maxlength="40" placeholder="행 · 제품 · 식품 · 편"></label>
+        <label>기준일 (수집·게재)<input id="asset-f-date" type="date"></label>
+        <label>자료 기준<input id="asset-f-asof" maxlength="80"></label>
+        <label>갱신 주기<input id="asset-f-refresh" maxlength="200"></label>
+        <label>상태<select id="asset-f-status"><option value="active">사용 중</option><option value="planned">예정</option><option value="retired">이전 버전</option></select></label>
+        <label>이용 조건 · 라이선스<input id="asset-f-license" maxlength="200"></label>
+        <label>크기 (MB)<input id="asset-f-size" type="number" min="0" step="0.1"></label>
+        <label class="span-2">저장 위치<input id="asset-f-location" maxlength="300"></label>
+        <label class="span-2">링크 (원문·DOI)<input id="asset-f-url" type="url" maxlength="500"></label>
+        <label class="span-2">메모 (품질 · 가공 방법 · 핵심 발견)<textarea id="asset-f-note" rows="4" maxlength="4000"></textarea></label>
+      </div>
+      <p id="asset-form-message" class="form-message" role="alert"></p>
+      <div class="dialog-actions"><button id="asset-delete" type="button" class="danger" hidden>삭제</button><span></span><button type="button" class="secondary" data-asset-close>취소</button><button type="submit" class="primary">저장</button></div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/admin/admin.js?v=1.5-investment-assets"></script>
 </body>
 </html>
