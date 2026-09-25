@@ -1,3 +1,4 @@
+import { createInvestment } from './investment.js?v=1.4';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
@@ -34,7 +35,7 @@ const formatDate = (value) => value ? new Intl.DateTimeFormat('ko-KR', { month:'
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) clearTradingDocument();
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -240,7 +241,10 @@ document.addEventListener('click', (event) => {
 });
 
 function showSection(name) {
-  if (name === 'trading') loadTradingDocument();
+  const investing = name === 'trading';
+  document.querySelector('.workspace').classList.toggle('investment-mode', investing);
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : 'Portfolio Control Room';
+  if (investing) investment.load();
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
 }
@@ -320,6 +324,12 @@ $('#change-password-form').addEventListener('submit', async (event) => {
   button.disabled = false;
 });
 
+const investment = createInvestment(supabase, () => currentUser, () => {
+  $('#trading-archive').open = true;
+  loadTradingDocument();
+  $('#trading-archive').scrollIntoView({ behavior: 'smooth' });
+});
+$('#trading-archive').addEventListener('toggle', () => { if ($('#trading-archive').open) loadTradingDocument(); });
 initialize();
 
 

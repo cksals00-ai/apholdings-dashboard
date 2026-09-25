@@ -5,3 +5,5 @@
 #trading-document { display: block; width: 100%; height: calc(100vh - 220px); min-height: 560px; border: 0; border-radius: 10px; background: #fff; }
 #trading-document[hidden] { display: none; }
 @media (max-width: 700px) { .trading-panel { padding: 10px; } #trading-document { height: 78vh; min-height: 480px; } }
+
+.investment-mode .filters,.investment-mode .top-actions{display:none}.investment-mode .topbar{margin-bottom:22px}#investment-dashboard{width:100%;height:calc(100vh - 140px);min-height:740px;border:0;display:block;background:#f4f6f8}#investment-dashboard[hidden]{display:none}#trading-archive{margin-top:18px}#trading-archive>summary{cursor:pointer;padding:18px;background:#fff;border:1px solid #e4e9f1;border-radius:12px;font-weight:700;color:#69768b}#trading-archive .trading-panel{margin-top:12px}@media(max-width:760px){.sidebar nav{grid-template-columns:repeat(5,max-content)}#investment-dashboard{height:85vh;min-height:650px}}

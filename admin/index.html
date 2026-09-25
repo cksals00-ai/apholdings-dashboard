@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" href="/img/ap_mark.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.3-trading">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.4-investment">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
 </head>
 <body>
@@ -50,7 +50,7 @@
         <button class="nav-item active" data-section="overview">Overview</button>
         <button class="nav-item" data-section="gantt">Action Plan</button>
         <button class="nav-item" data-section="board">Status Board</button>
-        <button class="nav-item" data-section="trading">트레이딩 총람</button>
+        <button class="nav-item" data-section="trading">투자운용</button>
         <button class="nav-item" data-section="settings">Connections</button>
       </nav>
       <div class="sidebar-foot">
@@ -91,12 +91,17 @@
       </section>
 
       <section id="trading-section" class="view-section" hidden>
+        <p id="investment-message" role="status" aria-live="polite"></p>
+        <button id="investment-retry" class="secondary" type="button" hidden>다시 불러오기</button>
+        <iframe id="investment-dashboard" title="투자운용 대시보드" sandbox="allow-scripts" referrerpolicy="no-referrer" hidden></iframe>
+        <details id="trading-archive"><summary>연구 총람 원문 · 2026-09-25 기록</summary>
         <section class="panel trading-panel">
           <div class="panel-head"><div><p class="eyebrow">TRADING ARCHIVE · 2026-09-25</p><h2>A.P Holdings 트레이딩 총람</h2></div><button id="trading-retry" class="secondary" type="button" hidden>다시 불러오기</button></div>
           <p class="panel-note">2026-09-25 기준 원문입니다. 현재 잔고·시세와 구분해 참고하세요.</p>
           <p id="trading-message" role="status" aria-live="polite"></p>
           <iframe id="trading-document" title="A.P Holdings 트레이딩 총람 원문" sandbox="allow-scripts allow-modals" referrerpolicy="no-referrer" hidden></iframe>
         </section>
+        </details>
       </section>
 
       <section id="settings-section" class="view-section" hidden>
@@ -143,6 +148,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.3-trading"></script>
+  <script type="module" src="/admin/admin.js?v=1.4-investment"></script>
 </body>
 </html>
