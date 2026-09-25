@@ -31,3 +31,15 @@
 #assets-section .panel-wide{margin-top:18px;padding:22px;overflow:visible}
 
 .investment-mode .filters,.investment-mode .top-actions{display:none}.investment-mode .topbar{margin-bottom:22px}#investment-dashboard{width:100%;height:calc(100vh - 140px);min-height:740px;border:0;display:block;background:#f4f6f8}#investment-dashboard[hidden]{display:none}#trading-archive{margin-top:18px}#trading-archive>summary{cursor:pointer;padding:18px;background:#fff;border:1px solid #e4e9f1;border-radius:12px;font-weight:700;color:#69768b}#trading-archive .trading-panel{margin-top:12px}@media(max-width:760px){.sidebar nav{grid-template-columns:repeat(6,max-content)}#investment-dashboard{height:85vh;min-height:650px}}
+
+/* Commerce */
+.pill{display:inline-block;font-size:.72rem;padding:.15rem .5rem;border-radius:999px;border:1px solid var(--line,#e7e5e4);white-space:nowrap}
+.pill.ok{color:#0b7a53;border-color:#bfe3d3;background:#f2fbf7}
+.pill.warn{color:#9a6700;border-color:#f0dfae;background:#fffaf0}
+.pill.bad{color:#b42318;border-color:#f2cfcb;background:#fef4f3}
+
+#commerce-section > .panel{margin-top:20px;padding:22px}#commerce-section .summary-grid{gap:14px}#commerce-partners small{display:block;margin-top:8px}#commerce-section .pill{display:inline-block}#commerce-section .commerce-toolbar{display:flex;justify-content:flex-end;margin-bottom:12px}#commerce-section td{vertical-align:top}#commerce-section .num{text-align:right}#commerce-section a{color:var(--blue)}
+.filters[hidden],.top-actions[hidden]{display:none!important}
+#commerce-section .asset-table tbody tr{cursor:default}
+[hidden]{display:none!important}
+@media(max-width:760px){.sidebar nav{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:max-content}}
