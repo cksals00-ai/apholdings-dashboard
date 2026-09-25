@@ -71,9 +71,9 @@ export function createInvestment(supabase, getUser, openArchive) {
     const epoch = generation;
     message.textContent = '투자운용 화면을 불러오는 중입니다…'; retry.hidden = true;
     try {
-      const { data, error } = await supabase.from('admin_trading_documents').select('key_hex,sha256').eq('id', 'investment-v2').single();
+      const { data, error } = await supabase.from('admin_trading_documents').select('key_hex,sha256').eq('id', 'investment-v3').single();
       if (error || !data) throw new Error('access');
-      const response = await fetch('/admin/investment-v2.enc.json?v=20260926-2', { cache: 'no-store' });
+      const response = await fetch('/admin/investment-v3.enc.json?v=20260926-3', { cache: 'no-store' });
       if (!response.ok) throw new Error('fetch');
       const encrypted = await response.json();
       const decode = v => Uint8Array.from(atob(v), c => c.charCodeAt(0));

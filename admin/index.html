@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" href="/img/ap_mark.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.6-investment-charts">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.7-commerce">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
 </head>
 <body>
@@ -52,6 +52,7 @@
         <button class="nav-item" data-section="board">Status Board</button>
         <button class="nav-item" data-section="assets">데이터 자산</button>
         <button class="nav-item" data-section="trading">투자운용</button>
+        <button class="nav-item" data-section="commerce">커머스</button>
         <button class="nav-item" data-section="settings">Connections</button>
       </nav>
       <div class="sidebar-foot">
@@ -119,6 +120,66 @@
           <iframe id="trading-document" title="A.P Holdings 트레이딩 총람 원문" sandbox="allow-scripts allow-modals" referrerpolicy="no-referrer" hidden></iframe>
         </section>
         </details>
+      </section>
+
+      <section id="commerce-section" class="view-section" hidden>
+        <div class="commerce-toolbar"><button id="commerce-refresh" class="secondary" type="button">새로고침</button></div>
+        <p id="commerce-message" class="form-message" role="status" aria-live="polite"></p>
+        <div id="commerce-cards" class="summary-grid"></div>
+
+        <section class="panel panel-wide">
+          <div class="panel-head">
+            <div><p class="eyebrow">COMMERCE · AFFILIATE</p><h2>제휴 파트너</h2></div>
+          </div>
+          <p class="panel-note">축마다 승인 단계 · 링크 규격 · 요율 · 붙는 채널이 다릅니다. 승인이 나면 상태와 계정을 채워 넣습니다.</p>
+          <div id="commerce-partners" class="summary-grid"></div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-head">
+            <div><p class="eyebrow">BLOCKERS</p><h2>막힌 것</h2></div>
+          </div>
+          <p class="panel-note">여기가 풀려야 진도가 나갑니다. 해결 상태는 원본 데이터에서 관리합니다.</p>
+          <div class="asset-table-wrap"><table class="asset-table">
+            <thead><tr><th>건</th><th>파트너</th><th>담당</th><th>기한</th><th>상태</th></tr></thead>
+            <tbody id="commerce-blockers"></tbody>
+          </table></div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-head">
+            <div><p class="eyebrow">CURATION</p><h2>상품</h2></div>
+          </div>
+          <div class="asset-filters">
+            <label>파트너<select id="commerce-filter"><option value="ALL">전체</option></select></label>
+          </div>
+          <div class="asset-table-wrap"><table class="asset-table">
+            <thead><tr><th>상품</th><th>파트너</th><th>연계</th><th class="num">가격</th><th>배제기준</th><th>상태</th><th>링크</th></tr></thead>
+            <tbody id="commerce-products"></tbody>
+          </table></div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-head">
+            <div><p class="eyebrow">CONTENT</p><h2>콘텐츠</h2></div>
+          </div>
+          <p class="panel-note">대가성 · AI고지 · 정보형 · 스크린샷 점검 상태를 확인합니다.</p>
+          <div class="asset-table-wrap"><table class="asset-table">
+            <thead><tr><th>제목</th><th>파트너</th><th>채널</th><th>키워드</th><th>게시일</th><th>컴플라이언스</th><th>상태</th></tr></thead>
+            <tbody id="commerce-content"></tbody>
+          </table></div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-head">
+            <div><p class="eyebrow">REPORT</p><h2>실적 넣기</h2></div>
+          </div>
+          <p class="panel-note">파트너 콘솔에서 받은 리포트 CSV를 올리면 파싱해 저장합니다. 같은 파트너·날짜·서브ID는 덮어씁니다.</p>
+          <div class="asset-filters">
+            <label>파트너<select id="commerce-imp-partner"></select></label>
+            <label class="search-field">CSV<input id="commerce-file" type="file" accept=".csv,text/csv"></label>
+          </div>
+        </section>
       </section>
 
       <section id="settings-section" class="view-section" hidden>
@@ -192,6 +253,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.6-investment-charts"></script>
+  <script type="module" src="/admin/admin.js?v=1.7-commerce"></script>
 </body>
 </html>

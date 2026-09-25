@@ -1,4 +1,4 @@
-import { createInvestment } from './investment.js?v=1.6-investment-charts';
+import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
@@ -35,7 +35,7 @@ const formatDate = (value) => value ? new Intl.DateTimeFormat('ko-KR', { month:'
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); }
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -243,10 +243,12 @@ document.addEventListener('click', (event) => {
 function showSection(name) {
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
-  $('.filters').hidden = name === 'assets';
+  if (name === 'commerce') loadCommerce();
+  $('.filters').hidden = name === 'assets' || name === 'commerce';
+  $('.top-actions').hidden = name === 'commerce';
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
 }
@@ -502,3 +504,208 @@ function assetsToCsv(list) {
     $('#asset-dialog').close(); await loadAssets(true);
   });
 })();
+
+
+
+// ── 커머스 (2026-09-26) — admin_commerce_*, 소유자만 읽고 쓴다 ──
+const CM_PARTNER_STATUS = { live: ['ok', '운영중'], approved: ['ok', '승인'], pending: ['warn', '승인대기'], applied: ['warn', '신청'], candidate: ['', '검토'], paused: ['', '중단'], rejected: ['bad', '거절'] };
+const CM_SEVERITY = { blocking: ['bad', '막힘'], normal: ['warn', '보통'], watch: ['', '관찰'] };
+const CM_EXCLUSIONS = [['chk_cosmetic', '화장품'], ['chk_kidfood', '아동식품'], ['chk_sono', '소노'], ['chk_travel_dup', '여행중복'], ['chk_medical', '의료기기']];
+const CM_COMPLIANCE = [['chk_disclosure', '대가성'], ['chk_ai_notice', 'AI고지'], ['chk_info_tone', '정보형'], ['chk_screenshot', '스크린샷']];
+let cmPartners = [], cmProducts = [], cmContent = [], cmBlockers = [], cmStats = [];
+let commerceLoaded = false;
+let commerceGeneration = 0;
+const cmWon = (n) => Number(n || 0).toLocaleString('ko-KR');
+const cmDate = (d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d) && Number.isFinite(Date.parse(d)) ? new Intl.DateTimeFormat('ko-KR', { month: 'short', day: 'numeric' }).format(new Date(`${d}T00:00:00`)) : '—';
+const cmPartnerName = (id) => cmPartners.find((p) => p.id === id)?.name || '—';
+const cmTag = (cls, label) => `<span class="pill ${cls}">${escapeHtml(label)}</span>`;
+
+function clearCommerce() {
+  commerceGeneration += 1;
+  commerceLoaded = false;
+  cmPartners = []; cmProducts = []; cmContent = []; cmBlockers = []; cmStats = [];
+  for (const id of ['commerce-cards', 'commerce-partners', 'commerce-products', 'commerce-content', 'commerce-blockers']) $('#' + id).innerHTML = '';
+  $('#commerce-filter').innerHTML = '<option value="ALL">전체</option>';
+  $('#commerce-imp-partner').innerHTML = '';
+  $('#commerce-message').textContent = '';
+}
+
+async function cmReadAll(query) {
+  const rows = [];
+  for (let from = 0; ; from += 500) {
+    const { data, error } = await query().range(from, from + 499);
+    if (error) throw error;
+    rows.push(...(data || []));
+    if (!data || data.length < 500) return rows;
+  }
+}
+
+async function loadCommerce(force = false) {
+  if (!currentUser) return false;
+  if (commerceLoaded && !force) { renderCommerce(); return true; }
+  const generation = ++commerceGeneration;
+  $('#commerce-message').textContent = '불러오는 중입니다…';
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+  const since = new Date(Date.parse(today + 'T00:00:00Z') - 29 * 864e5).toISOString().slice(0, 10);
+  try {
+    const result = await Promise.all([
+      cmReadAll(() => supabase.from('admin_commerce_partners').select('*').order('sort_order').order('id')),
+      cmReadAll(() => supabase.from('admin_commerce_products').select('*').order('created_at').order('id')),
+      cmReadAll(() => supabase.from('admin_commerce_content').select('*').order('created_at').order('id')),
+      cmReadAll(() => supabase.from('admin_commerce_blockers').select('*').eq('status', 'open').order('severity').order('due_on', { nullsFirst: false }).order('id')),
+      cmReadAll(() => supabase.from('admin_commerce_stats').select('*').gte('stat_date', since).lte('stat_date', today).order('stat_date').order('partner_id').order('sub_id'))
+    ]);
+    if (generation !== commerceGeneration || !currentUser) return false;
+    [cmPartners, cmProducts, cmContent, cmBlockers, cmStats] = result;
+    commerceLoaded = true;
+    const selected = $('#commerce-filter').value;
+    const importer = $('#commerce-imp-partner').value;
+    const opts = cmPartners.map((x) => `<option value="${escapeHtml(x.id)}">${escapeHtml(x.name)}</option>`).join('');
+    $('#commerce-filter').innerHTML = `<option value="ALL">전체</option>${opts}`;
+    $('#commerce-imp-partner').innerHTML = opts;
+    if (cmPartners.some(x => x.id === selected)) $('#commerce-filter').value = selected;
+    if (cmPartners.some(x => x.id === importer)) $('#commerce-imp-partner').value = importer;
+    renderCommerce();
+    $('#commerce-message').textContent = '';
+    return true;
+  } catch (error) {
+    if (generation === commerceGeneration && currentUser) $('#commerce-message').textContent = '커머스 데이터를 불러오지 못했습니다. 연결과 접근 권한을 확인한 뒤 새로고침해 주세요.';
+    return false;
+  }
+}
+
+function renderCommerce() {
+  const sum = (k) => cmStats.reduce((a, r) => a + Number(r[k] || 0), 0);
+  const live = cmPartners.filter((x) => x.status === 'live').length;
+  const posted = cmContent.filter((x) => x.status === 'posted').length;
+  const cards = [
+    ['운영 파트너', `${live} / ${cmPartners.length}`, '승인 나면 상태를 올립니다'],
+    ['클릭', cmWon(sum('clicks')), '최근 30일'],
+    ['구매', `${cmWon(sum('orders'))}건`, `전환 ${sum('clicks') ? (sum('orders') / sum('clicks') * 100).toFixed(2) : '0.00'}%`],
+    ['수익', `${cmWon(sum('commission'))}원`, '최근 30일 · 세전'],
+    ['막힌 것', `${cmBlockers.length}건`, `게시 ${posted}건`]
+  ];
+  $('#commerce-cards').innerHTML = cards.map(([l, v, n]) => `<article class="summary-card"><span>${l}</span><b>${v}</b><small>${escapeHtml(n)}</small></article>`).join('');
+
+  $('#commerce-partners').innerHTML = cmPartners.map((x) => {
+    const [cls, label] = CM_PARTNER_STATUS[x.status] || ['', x.status];
+    const line = (k, v) => v ? `<small>${k} · ${escapeHtml(v)}</small>` : '';
+    return `<article class="summary-card"><span>${escapeHtml(x.name)} ${cmTag(cls, label)}</span><b style="font-size:.95rem">${escapeHtml(x.region || '')}</b>${line('계정', x.account_id)}${line('요율', x.commission)}${line('채널', x.channels)}</article>`;
+  }).join('') || '<p class="panel-note">등록된 파트너가 없습니다.</p>';
+
+  $('#commerce-blockers').innerHTML = cmBlockers.map((x) => {
+    const [cls, label] = CM_SEVERITY[x.severity] || ['', x.severity];
+    return `<tr><td><b>${escapeHtml(x.title)}</b>${x.detail ? `<br><small>${escapeHtml(x.detail)}</small>` : ''}</td><td>${escapeHtml(cmPartnerName(x.partner_id))}</td><td>${escapeHtml(x.owner)}</td><td>${cmDate(x.due_on)}</td><td>${cmTag(cls, label)}</td></tr>`;
+  }).join('') || '<tr><td colspan="5">막힌 것 없습니다.</td></tr>';
+
+  const filter = $('#commerce-filter').value || 'ALL';
+  const rows = cmProducts.filter((x) => filter === 'ALL' || x.partner_id === filter);
+  $('#commerce-products').innerHTML = rows.map((x) => {
+    const hit = CM_EXCLUSIONS.filter(([k]) => x[k]);
+    const flags = hit.length ? hit.map(([, l]) => cmTag('bad', l)).join(' ') : cmTag('ok', '전항 통과');
+    const st = { live: 'ok', approved: 'ok', candidate: 'warn' }[x.status] || '';
+    return `<tr><td>${escapeHtml(x.name)}${x.note ? `<br><small>${escapeHtml(x.note)}</small>` : ''}</td><td>${escapeHtml(cmPartnerName(x.partner_id))}</td><td>${escapeHtml(x.linked_app || '—')}</td><td class="num">${x.product_price != null ? cmWon(x.product_price) : '—'}</td><td>${flags}</td><td>${cmTag(st, x.status)}</td><td>${cmSafeURL(x.tracking_url) ? `<a href="${escapeHtml(x.tracking_url)}" target="_blank" rel="nofollow sponsored noopener">열기</a>` : '—'}</td></tr>`;
+  }).join('') || '<tr><td colspan="7">등록된 상품이 없습니다.</td></tr>';
+
+  $('#commerce-content').innerHTML = cmContent.map((x) => {
+    const chips = CM_COMPLIANCE.map(([k, l]) => cmTag(x[k] ? 'ok' : 'warn', l)).join(' ');
+    const st = { posted: 'ok', ready: 'warn' }[x.status] || '';
+    return `<tr><td>${cmSafeURL(x.post_url) ? `<a href="${escapeHtml(x.post_url)}" target="_blank" rel="noopener">${escapeHtml(x.title)}</a>` : escapeHtml(x.title)}</td><td>${escapeHtml(cmPartnerName(x.partner_id))}</td><td>${escapeHtml(x.channel)}</td><td>${x.dm_keyword ? `<code>${escapeHtml(x.dm_keyword)}</code>` : '—'}</td><td>${cmDate(x.posted_on)}</td><td>${chips}</td><td>${cmTag(st, x.status)}</td></tr>`;
+  }).join('') || '<tr><td colspan="7">등록된 콘텐츠가 없습니다.</td></tr>';
+}
+
+$('#commerce-filter').addEventListener('change', renderCommerce);
+
+function cmSafeURL(value) {
+  try { return ['https:', 'http:'].includes(new URL(value).protocol); } catch { return false; }
+}
+
+function cmParseCSV(text) {
+  const rows = []; let row = [], field = '', quoted = false, closed = false;
+  text = text.replace(/^\uFEFF/, '');
+  const finishField = () => { row.push(field.trim()); field = ''; closed = false; };
+  const finishRow = () => { finishField(); if (row.some(v => v !== '')) rows.push(row); row = []; };
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (quoted) {
+      if (ch === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; }
+        else { quoted = false; closed = true; }
+      } else field += ch;
+    } else if (ch === ',') finishField();
+    else if (ch === '\n' || ch === '\r') { if (ch === '\r' && text[i + 1] === '\n') i++; finishRow(); }
+    else if (ch === '"' && !field.trim() && !closed) { field = ''; quoted = true; }
+    else if (ch === '"' || (closed && ch.trim())) throw new Error('CSV 따옴표 형식이 올바르지 않습니다.');
+    else if (!closed) field += ch;
+  }
+  if (quoted) throw new Error('CSV에 닫히지 않은 따옴표가 있습니다.');
+  finishRow(); return rows;
+}
+
+function cmReportRows(text, partner_id) {
+  const [head, ...records] = cmParseCSV(text);
+  if (!head || !records.length) throw new Error('행이 없습니다.');
+  const col = re => head.findIndex(h => re.test(h));
+  const idx = { date: col(/날짜|일자|date/i), clicks: col(/클릭|click/i), orders: col(/구매\s*건|주문|건수|order/i), gross_amount: col(/합산|거래|매출|gross|^금액$/i), commission: col(/수익|커미션|수수료|commission/i), sub: col(/서브|채널|sub/i) };
+  if (idx.date < 0 || idx.clicks < 0) throw new Error('날짜·클릭 열을 찾지 못했습니다. 기간별 리포트 CSV인지 확인해 주세요.');
+  const keys = new Set();
+  return records.map((cells, index) => {
+    const fail = message => { throw new Error(`${index + 2}행: ${message}`); };
+    if (cells.length !== head.length) fail('열 개수가 다릅니다.');
+    const match = cells[idx.date].match(/^(\d{4})[-./]?\s?(\d{1,2})[-./]?\s?(\d{1,2})\.?$/);
+    if (!match) fail('날짜 형식이 올바르지 않습니다.');
+    const stat_date = `${match[1]}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`;
+    const date = new Date(stat_date + 'T00:00:00Z');
+    if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0,10) !== stat_date) fail('존재하지 않는 날짜입니다.');
+    const row = { partner_id, stat_date, sub_id: idx.sub >= 0 && cells[idx.sub] ? cells[idx.sub] : '기본값', source: 'csv' };
+    const key = JSON.stringify([stat_date, row.sub_id]);
+    if (keys.has(key)) fail('같은 날짜·서브ID가 중복됩니다. 합산 또는 정리한 뒤 다시 올려 주세요.');
+    keys.add(key);
+    for (const name of ['clicks', 'orders', 'gross_amount', 'commission']) {
+      const value = idx[name] < 0 ? '' : cells[idx[name]].replace(/[,₩\s원]/g, '');
+      if (value && !/^-?\d+(?:\.\d+)?$/.test(value)) fail('숫자 형식이 올바르지 않습니다.');
+      row[name] = value === '' ? 0 : Number(value);
+      if (!Number.isFinite(row[name]) || Math.abs(row[name]) > Number.MAX_SAFE_INTEGER) fail('숫자가 너무 큽니다.');
+      if (!Number.isInteger(row[name])) fail('현재 실적 원장은 정수 단위만 저장합니다. 소수 금액은 확인 후 정리해 주세요.');
+      if (['clicks', 'orders'].includes(name) && (row[name] < 0 || row[name] > 2147483647)) fail('클릭·주문 수 범위를 확인해 주세요.');
+    }
+    return row;
+  });
+}
+
+$('#commerce-refresh').addEventListener('click', () => loadCommerce(true));
+$('#commerce-file').addEventListener('change', async event => {
+  const input = event.target, file = input.files?.[0];
+  const partner_id = $('#commerce-imp-partner').value;
+  if (!file) return;
+  if (!currentUser || !partner_id) { $('#commerce-message').textContent = '로그인 상태와 선택한 파트너를 확인해 주세요.'; input.value = ''; return; }
+  if (file.size > 5 * 1024 * 1024) { $('#commerce-message').textContent = '5MB 이하의 CSV 파일을 선택해 주세요.'; input.value = ''; return; }
+  const userId = currentUser.id;
+  const generation = commerceGeneration;
+  const active = () => currentUser?.id === userId && generation === commerceGeneration;
+  input.disabled = true;
+  $('#commerce-imp-partner').disabled = true;
+  $('#commerce-refresh').disabled = true;
+  $('#commerce-message').textContent = '읽는 중입니다…';
+  try {
+    const buffer = await file.arrayBuffer();
+    let text;
+    try { text = new TextDecoder('utf-8', { fatal: true }).decode(buffer); }
+    catch { text = new TextDecoder('euc-kr', { fatal: true }).decode(buffer); }
+    const rows = cmReportRows(text, partner_id);
+    if (!active()) return;
+    $('#commerce-message').textContent = `${rows.length}행 저장 중입니다…`;
+    const { error } = await supabase.from('admin_commerce_stats').upsert(rows, { onConflict: 'partner_id,stat_date,sub_id' });
+    if (error) throw error;
+    if (!active()) return;
+    const refreshed = await loadCommerce(true);
+    if (currentUser?.id !== userId) return;
+    $('#commerce-message').textContent = `${rows.length}행 저장했습니다.${refreshed ? '' : ' 화면 갱신에 실패했습니다. 새로고침해 주세요.'}`;
+  } catch (error) {
+    if (active()) $('#commerce-message').textContent = `저장하지 못했습니다: ${error.message || error}`;
+  } finally {
+    input.value = ''; input.disabled = false;
+    $('#commerce-imp-partner').disabled = false;
+    $('#commerce-refresh').disabled = false;
+  }
+});
