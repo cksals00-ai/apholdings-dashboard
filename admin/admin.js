@@ -24,6 +24,9 @@ const STATUS_ORDER = Object.keys(STATUSES);
 let items = [];
 let currentUser = null;
 let recoveryMode = false;
+let tradingGeneration = 0;
+let tradingLoaded = false;
+let tradingLoading = false;
 
 const $ = (selector) => document.querySelector(selector);
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (char) => ({ '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;' }[char]));
@@ -31,6 +34,7 @@ const formatDate = (value) => value ? new Intl.DateTimeFormat('ko-KR', { month:'
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
 function setAuthView(loggedIn) {
+  if (!loggedIn) clearTradingDocument();
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -69,6 +73,10 @@ async function initialize() {
 }
 
 supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT') {
+    currentUser = null;
+    setAuthView(false);
+  }
   if (event === 'PASSWORD_RECOVERY') {
     recoveryMode = true;
     currentUser = session?.user || null;
@@ -232,6 +240,7 @@ document.addEventListener('click', (event) => {
 });
 
 function showSection(name) {
+  if (name === 'trading') loadTradingDocument();
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
 }
@@ -312,3 +321,55 @@ $('#change-password-form').addEventListener('submit', async (event) => {
 });
 
 initialize();
+
+
+function clearTradingDocument() {
+  tradingGeneration += 1;
+  tradingLoaded = false;
+  tradingLoading = false;
+  const frame = $('#trading-document');
+  frame.hidden = true;
+  frame.removeAttribute('srcdoc');
+  $('#trading-message').textContent = '';
+  $('#trading-retry').hidden = true;
+}
+
+async function loadTradingDocument() {
+  if (tradingLoaded || tradingLoading || !currentUser) return;
+  tradingLoading = true;
+  const generation = tradingGeneration;
+  const userId = currentUser.id;
+  const stillCurrent = () => generation === tradingGeneration && currentUser?.id === userId;
+  $('#trading-message').textContent = '총람을 불러오는 중입니다…';
+  $('#trading-retry').hidden = true;
+  try {
+    const { data, error } = await supabase.from('admin_trading_documents')
+      .select('key_hex,sha256').eq('id', 'overview-20260925').single();
+    if (error || !data) throw new Error('document-access');
+    const response = await fetch('/admin/trading-overview.enc.json?v=20260925', { cache: 'no-store' });
+    if (!response.ok) throw new Error('document-fetch');
+    const encrypted = await response.json();
+    const decode = (value) => Uint8Array.from(atob(value), (c) => c.charCodeAt(0));
+    const key = await crypto.subtle.importKey('raw',
+      Uint8Array.from(data.key_hex.match(/.{2}/g), (byte) => parseInt(byte, 16)),
+      'AES-GCM', false, ['decrypt']);
+    const plaintext = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: decode(encrypted.iv) }, key, decode(encrypted.ciphertext));
+    const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', plaintext)), (b) => b.toString(16).padStart(2, '0')).join('');
+    if (digest !== data.sha256) throw new Error('document-integrity');
+    if (!stillCurrent()) return;
+    const policy = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">`;
+    const html = new TextDecoder().decode(plaintext).replace(/<head[^>]*>/i, (head) => head + policy);
+    $('#trading-document').srcdoc = html;
+    $('#trading-document').hidden = false;
+    $('#trading-message').textContent = '';
+    tradingLoaded = true;
+  } catch {
+    if (!stillCurrent()) return;
+    $('#trading-message').textContent = '총람을 불러오지 못했습니다. 로그인 상태와 연결을 확인한 뒤 다시 시도해 주세요.';
+    $('#trading-retry').hidden = false;
+  } finally {
+    if (stillCurrent()) tradingLoading = false;
+  }
+}
+
+$('#trading-retry').addEventListener('click', loadTradingDocument);
