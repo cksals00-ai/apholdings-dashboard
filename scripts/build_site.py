@@ -8,6 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 CFG=json.loads((ROOT/'site-source/content.json').read_text())
 ORIGIN=CFG['origin']; PUBLISHED=[k for k,v in CFG['locales'].items() if v['status']=='published']
 DATA={l:json.loads((ROOT/f'site-source/locales/{l}.json').read_text()) for l in PUBLISHED}
+from status_overlay import apply as _status_apply; _status_apply(DATA,ROOT)  # site-source/status.json → 제품 「지금」 현황
 MEDIA=json.loads((ROOT/'site-source/brand-media.json').read_text())
 HOME_COPY=json.loads((ROOT/'site-source/home-copy.json').read_text())
 SELECT_MEDIA=json.loads((ROOT/'site-source/select-media.json').read_text())

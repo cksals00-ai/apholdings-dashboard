@@ -566,14 +566,15 @@
     ]
    }
   ],
-  "pilot": "작동 파일럿"
+  "pilot": "작동 파일럿",
+  "live": "출시 · App Store"
  },
  "products": [
   {
    "id": "safe",
    "name": "AP Safe",
    "tag": "Know what to avoid.",
-   "status": "inDev",
+   "status": "live",
    "role": "어떤 AI에게 물어도, 기준은 내 몸.",
    "desc": "내 폰에 저장된 「피할 성분」으로 AI가 거르고, 걸리지 않는 것만 고릅니다.\n성분 스캐너에서 AI 안심 커머스로.",
    "note": "제품정보 기반의 의사결정 지원. 의료진단·절대적 안전보증 제외.",
@@ -584,7 +585,7 @@
     "Human Decision"
    ],
    "link": "https://apps.apple.com/kr/app/id6805684034",
-   "linkLabel": "기존 Safelist 앱",
+   "linkLabel": "세이프리스트 앱",
    "image": "/media/safelist_frame.jpg",
    "video": "/media/safelist.mp4",
    "sections": [
@@ -867,13 +868,13 @@
          ],
          [
           "챗지피티",
-          "지금은 개발자 모드 · 곧 앱 디렉터리",
-          "설정 → 커넥터 → 고급 → 개발자 모드 켜고 위 주소를 추가 (플랜·지역에 따라 다릅니다). 앱 디렉터리 등록은 심사 중 — 등록되면 검색해서 켜기만 하면 됩니다."
+          "지금은 개발자 모드 · 앱 디렉터리 준비 중",
+          "설정 → 커넥터 → 고급 → 개발자 모드 켜고 위 주소를 추가 (플랜·지역에 따라 다릅니다). 앱 디렉터리 등록은 준비 중 — 등록되면 검색해서 켜기만 하면 됩니다."
          ],
          [
           "제미나이 · 시리",
           "아이폰 앱으로",
-          "세이프리스트 앱 1.5의 시리 단축어를 그대로 씁니다. 「세이프리스트에서 제품 확인」「옷 소재 확인」 한마디. 1.5는 심사 중, 통과되는 날부터."
+          "세이프리스트 앱 1.5의 시리 단축어를 그대로 씁니다. 「세이프리스트에서 제품 확인」「옷 소재 확인」 한마디. 1.5 출시 — 지금 바로 됩니다."
          ],
          [
           "그 밖의 AI",
@@ -944,7 +945,7 @@
    "id": "light",
    "name": "AP Light",
    "tag": "Understand what fits you.",
-   "status": "inDev",
+   "status": "live",
    "role": "Explainable Choice Intelligence",
    "desc": "사려는 과자, 한 봉지에 몇 칼로리인지.\n같은 진열대에서 더 가벼운 것까지.",
    "note": "열량만 말합니다. 「살이 안 찐다」고는 말하지 않습니다. 식약처 공개 자료 기준.",
@@ -989,7 +990,7 @@
     {
      "id": "today",
      "label": "03 · 지금",
-     "title": "오늘, 클로드에서.",
+     "title": "오늘, App Store와 클로드에서.",
      "soft": true,
      "desc": "주소 한 줄이면 클로드에 붙는다.\n열량은 100g당과 한 봉지, 항상 함께.",
      "blocks": [
@@ -997,20 +998,25 @@
        "type": "actions",
        "items": [
         [
+         "https://apps.apple.com/kr/app/id6815295026",
+         "App Store",
+         "primary"
+        ],
+        [
          "/business/lightlist-connect.html",
          "클로드에 붙이기",
-         "primary"
+         "button"
         ],
         [
          "/ko/products/safe/",
          "알레르기 · 회피 성분은 AP Safe",
-         "button"
+         "link"
         ]
        ]
       },
       {
        "type": "note",
-       "text": "iOS 앱 — App Store 심사 중 · ChatGPT · Gemini 추후"
+       "text": ""
       }
      ],
      "cta": true
@@ -1149,7 +1155,9 @@
    },
    "hideGeneric": true,
    "image": "/media/lightlist_frame.jpg",
-   "video": "/media/lightlist_hero.mp4"
+   "video": "/media/lightlist_hero.mp4",
+   "link": "https://apps.apple.com/kr/app/id6815295026",
+   "linkLabel": "라이트리스트 앱"
   },
   {
    "id": "revenue",

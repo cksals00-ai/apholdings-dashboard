@@ -1,0 +1,51 @@
+{
+ "_readme": "제품 진행 현황. scripts/update_status.py 가 facts 를 매일 갱신하고, build_site.py 가 제품 페이지 「지금」 섹션과 카드 상태에 반영한다. manual 은 사람(클레어)이 사실 확인 후 고친다.",
+ "checked": "2026-09-26",
+ "products": {
+  "safe": {
+   "stage": "live",
+   "appId": "6805684034",
+   "health": "https://safelist-mcp.onrender.com/health",
+   "facts": {
+    "appVersion": "1.5",
+    "appDate": "2026-09-24",
+    "appLive": true,
+    "connector": "ok",
+    "count": 666649
+   },
+   "manual": [
+    {
+     "ko": "Siri · 1.5부터",
+     "en": "Siri · from 1.5"
+    },
+    {
+     "ko": "ChatGPT · 등록 준비",
+     "en": "ChatGPT · listing in preparation"
+    },
+    {
+     "ko": "Android · 추후",
+     "en": "Android · later"
+    }
+   ]
+  },
+  "light": {
+   "stage": "live",
+   "appId": "6815295026",
+   "health": "https://lightlist-mcp.onrender.com/health",
+   "facts": {
+    "appVersion": "1.0",
+    "appDate": "2026-09-25",
+    "appLive": true,
+    "connector": "ok",
+    "count": 317043,
+    "asOf": "2026년 9월"
+   },
+   "manual": [
+    {
+     "ko": "ChatGPT · Gemini · 추후",
+     "en": "ChatGPT · Gemini · later"
+    }
+   ]
+  }
+ }
+}

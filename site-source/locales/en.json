@@ -566,14 +566,15 @@
     ]
    }
   ],
-  "pilot": "Working pilot"
+  "pilot": "Working pilot",
+  "live": "Live on the App Store"
  },
  "products": [
   {
    "id": "safe",
    "name": "AP Safe",
    "tag": "Know what to avoid.",
-   "status": "inDev",
+   "status": "live",
    "role": "Whichever AI you ask, the standard is my body.",
    "desc": "The avoid list saved on my phone filters what the AI shows, and only unflagged items get picked.\nFrom ingredient scanner to AI-assisted safe commerce.",
    "note": "Decision support based on product information. Not a medical diagnosis or an absolute guarantee of safety.",
@@ -782,7 +783,7 @@
    "id": "light",
    "name": "AP Light",
    "tag": "Understand what fits you.",
-   "status": "inDev",
+   "status": "live",
    "role": "Explainable Choice Intelligence",
    "desc": "How many calories in the bag you're about to buy.\nAnd the lighter option on the same shelf.",
    "note": "Calories only. It never says “you won't gain weight”. Based on MFDS public data.",
@@ -827,7 +828,7 @@
     {
      "id": "today",
      "label": "03 · Today",
-     "title": "Today, in Claude.",
+     "title": "Today, on the App Store and in Claude.",
      "soft": true,
      "desc": "One line of address connects it to Claude.\nCalories per 100g and per bag, always together.",
      "blocks": [
@@ -835,20 +836,25 @@
        "type": "actions",
        "items": [
         [
-         "/business/lightlist-connect.html",
-         "Connect to Claude",
+         "https://apps.apple.com/kr/app/id6815295026",
+         "App Store",
          "primary"
         ],
         [
-         "/ko/products/safe/",
-         "Allergens and avoid lists: AP Safe",
+         "/business/lightlist-connect.html",
+         "Connect to Claude",
          "button"
+        ],
+        [
+         "/en/products/safe/",
+         "Allergens and avoid lists: AP Safe",
+         "link"
         ]
        ]
       },
       {
        "type": "note",
-       "text": "iOS app — in App Store review · ChatGPT · Gemini coming later"
+       "text": ""
       }
      ],
      "cta": true
@@ -856,7 +862,9 @@
    ],
    "hideGeneric": true,
    "image": "/media/lightlist_frame.jpg",
-   "video": "/media/lightlist_hero.mp4"
+   "video": "/media/lightlist_hero.mp4",
+   "link": "https://apps.apple.com/kr/app/id6815295026",
+   "linkLabel": "LightList app"
   },
   {
    "id": "revenue",
