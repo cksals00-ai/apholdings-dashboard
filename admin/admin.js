@@ -1,4 +1,5 @@
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
+import { createContentOperations } from './content.js?v=1.0';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
@@ -33,9 +34,10 @@ const $ = (selector) => document.querySelector(selector);
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (char) => ({ '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;' }[char]));
 const formatDate = (value) => value ? new Intl.DateTimeFormat('ko-KR', { month:'short', day:'numeric' }).format(new Date(`${value}T00:00:00`)) : '미정';
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+const contentOperations = createContentOperations(supabase, () => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); }
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -243,13 +245,14 @@ document.addEventListener('click', (event) => {
 function showSection(name) {
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? '콘텐츠 운영' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
   if (name === 'apps') loadApps();
-  $('.filters').hidden = name === 'assets' || name === 'commerce' || name === 'apps';
-  $('.top-actions').hidden = name === 'commerce' || name === 'apps';
+  if (name === 'content') contentOperations.load();
+  $('.filters').hidden = ['assets','commerce','apps','content'].includes(name);
+  $('.top-actions').hidden = ['commerce','apps','content'].includes(name);
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
 }

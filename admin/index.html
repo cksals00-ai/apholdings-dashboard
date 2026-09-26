@@ -9,6 +9,7 @@
   <link rel="icon" href="/img/ap_mark.png">
   <link rel="stylesheet" href="/admin/admin.css?v=1.9-apps-sales">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
+  <link rel="stylesheet" href="/admin/content.css?v=1.0">
 </head>
 <body>
   <div id="login-view" class="auth-shell">
@@ -51,6 +52,7 @@
         <button class="nav-item" data-section="gantt">Action Plan</button>
         <button class="nav-item" data-section="board">Status Board</button>
         <button class="nav-item" data-section="apps">앱 현황</button>
+        <button class="nav-item" data-section="content">콘텐츠 운영</button>
         <button class="nav-item" data-section="assets">데이터 자산</button>
         <button class="nav-item" data-section="trading">투자운용</button>
         <button class="nav-item" data-section="commerce">커머스</button>
@@ -116,6 +118,8 @@
           <div id="app-sales"></div>
         </section>
       </section>
+
+      <section id="content-section" class="view-section" hidden aria-label="콘텐츠 운영"></section>
 
       <section id="assets-section" class="view-section" hidden>
         <div id="asset-cards" class="summary-grid"></div>
@@ -320,6 +324,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.9-apps-sales"></script>
+  <script type="module" src="/admin/admin.js?v=1.10-content"></script>
 </body>
 </html>
