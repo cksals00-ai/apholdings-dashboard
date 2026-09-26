@@ -720,6 +720,8 @@ const APP_ISSUE = { open: '열림', resolved: '해결', dropped: '종료' };
 let apps = [];
 let appEvents = [];
 let appMetrics = [];
+let appRuntime = [];
+let appIap = [];
 let appsLoaded = false;
 const appName = (id) => apps.find((a) => a.id === id)?.name?.split(/ [—:] /)[0] || id;
 const appDay = (d) => d ? new Intl.DateTimeFormat('ko-KR', { year: '2-digit', month: 'numeric', day: 'numeric' }).format(new Date(`${d}T00:00:00`)) : '—';
@@ -731,11 +733,14 @@ async function loadApps(force = false) {
   if (!currentUser || (appsLoaded && !force)) { renderApps(); return; }
   $('#app-message').textContent = '불러오는 중입니다…';
   const since = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10);
-  const [a, e, m] = await Promise.all([
+  const [a, e, m, rt, iap] = await Promise.all([
     supabase.from('admin_apps').select('*').order('sort_order').order('name'),
     supabase.from('admin_app_events').select('*').order('event_date', { ascending: false }).limit(2000),
-    supabase.from('admin_app_metrics_daily').select('*').gte('day', since).order('day').limit(5000)
+    supabase.from('admin_app_metrics_daily').select('*').gte('day', since).order('day').limit(5000),
+    supabase.from('admin_app_sync_runtime').select('*'),
+    supabase.from('admin_app_iap_events').select('*').order('received_at', { ascending: false }).limit(20)
   ]);
+  appRuntime = rt.error ? [] : (rt.data || []); appIap = iap.error ? [] : (iap.data || []);
   if (a.error || e.error) { $('#app-message').textContent = '앱 현황을 불러오지 못했습니다. 다시 로그인해 주세요.'; return; }
   apps = a.data || []; appEvents = (e.data || []).sort(byNewest); appMetrics = m.error ? [] : (m.data || []);
   appsLoaded = true; $('#app-message').textContent = '';
@@ -806,11 +811,35 @@ function renderAppEvents() {
 
 function renderAppSales() {
   const has = appMetrics.length > 0;
-  $('#app-sales-state').textContent = has ? `최근 ${appMetrics.map((r) => r.day).sort().pop()} 기준` : '연결 예정';
-  if (!has) { $('#app-sales').innerHTML = '<p class="panel-note app-sales-empty">App Store Connect 일별 판매 보고서를 받아 쌓으면 이 자리에 앱별 판매량 · 매출(최근 7일 · 30일)이 나타납니다. 저장할 표는 이미 준비되어 있습니다.</p>'; return; }
-  const list = apps.filter((a) => a.status !== 'excluded').map((a) => ({ a, w: appSales(a.id, 7), m: appSales(a.id, 30) }));
-  const cell = (s) => s ? `${s.units.toLocaleString('ko-KR')}건<div class="asset-growth">₩${Math.round(s.krw).toLocaleString('ko-KR')}</div>` : '—';
-  $('#app-sales').innerHTML = `<div class="asset-table-wrap"><table class="asset-table app-sales-table"><thead><tr><th>앱</th><th class="num">7일 판매 · 매출</th><th class="num">30일 판매 · 매출</th><th class="num">30일 다운로드</th></tr></thead><tbody>${list.map(({ a, w, m }) => `<tr><td><b>${escapeHtml(appName(a.id))}</b></td><td class="num">${cell(w)}</td><td class="num">${cell(m)}</td><td class="num">${m ? m.dl.toLocaleString('ko-KR') : '—'}</td></tr>`).join('')}</tbody></table></div>`;
+  const rs = appRuntime.find((r) => r.id === 'asc_sales'), rn = appRuntime.find((r) => r.id === 'asc_notifications');
+  const label = { ready: '연결됨', setup_required: '키 등록 대기', waiting: '주소 등록 대기', error: '오류' };
+  $('#app-sales-state').textContent = rs ? (label[rs.status] || rs.status) : '연결 예정';
+  $('#app-sales-state').dataset.state = rs?.status || '';
+  const stamp = (t) => t ? new Intl.DateTimeFormat('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(t)) : '—';
+  const status = `<div class="app-sync">
+    <div><b>일별 판매 보고서</b><span>매일 01:40 · 08:40 자동 · 다음 날 반영</span><p>${escapeHtml(rs?.detail || '아직 연결 전입니다.')}${rs?.last_report_day ? ` · 최신 보고서 ${escapeHtml(rs.last_report_day)}` : ''} <em>${stamp(rs?.checked_at)} 확인</em></p></div>
+    <div><b>실시간 결제 알림</b><span>인앱 결제 · 구독 · 환불 즉시</span><p>${escapeHtml(rn?.detail || '아직 연결 전입니다.')} <em>${stamp(rn?.checked_at)}</em></p></div>
+    <button id="app-sales-sync" class="secondary" type="button">지금 가져오기</button>
+  </div>`;
+  let table = '';
+  if (has) {
+    const list = apps.filter((a) => a.status !== 'excluded').map((a) => ({ a, w: appSales(a.id, 7), m: appSales(a.id, 30) }));
+    const cell = (s) => s ? `${s.units.toLocaleString('ko-KR')}건<div class="asset-growth">₩${Math.round(s.krw).toLocaleString('ko-KR')}</div>` : '—';
+    const fx = appMetrics.some((r) => r.fx_note);
+    table = `<div class="asset-table-wrap"><table class="asset-table app-sales-table"><thead><tr><th>앱</th><th class="num">7일 판매 · 수익</th><th class="num">30일 판매 · 수익</th><th class="num">30일 다운로드</th></tr></thead><tbody>${list.map(({ a, w, m }) => `<tr><td><b>${escapeHtml(appName(a.id))}</b></td><td class="num">${cell(w)}</td><td class="num">${cell(m)}</td><td class="num">${m ? m.dl.toLocaleString('ko-KR') : '—'}</td></tr>`).join('')}</tbody></table></div><p class="panel-note">판매 = 유료 다운로드 + 인앱 결제 · 수익 = Apple 수수료를 뺀 개발자 수익${fx ? ' · 외화는 환율 환산 추정치' : ''}</p>`;
+  } else {
+    table = '<p class="panel-note app-sales-empty">보고서가 들어오면 이 자리에 앱별 7일 · 30일 판매, 수익, 다운로드가 나타납니다.</p>';
+  }
+  const money = (e) => e.price_milli != null && e.currency ? `${(e.price_milli / 1000).toLocaleString('ko-KR')} ${escapeHtml(e.currency)}` : '';
+  const live = appIap.length ? `<h3 class="app-sub">실시간 결제 알림 · 최근 ${appIap.length}건</h3><div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>시각</th><th>앱</th><th>종류</th><th>상품</th><th class="num">금액</th></tr></thead><tbody>${appIap.map((e) => `<tr><td class="date">${stamp(e.event_at || e.received_at)}</td><td>${escapeHtml(e.app_id ? appName(e.app_id) : (e.bundle_id || '—'))}</td><td><span class="app-kind" data-kind="${/REFUND|REVOKE|EXPIRED/.test(e.notification_type) ? 'rejected' : 'approved'}">${escapeHtml(e.notification_type)}${e.subtype ? ` · ${escapeHtml(e.subtype)}` : ''}</span>${e.environment === 'Sandbox' ? '<div class="asset-growth">테스트</div>' : ''}</td><td>${escapeHtml(e.product_id || '—')}</td><td class="num">${money(e)}</td></tr>`).join('')}</tbody></table></div>` : '';
+  $('#app-sales').innerHTML = status + table + live;
+  $('#app-sales-sync').addEventListener('click', async (ev) => {
+    const b = ev.currentTarget; b.disabled = true; b.textContent = '가져오는 중…';
+    const { data, error } = await supabase.functions.invoke('asc-sales-sync', { body: { days: 7 } });
+    const msg = error ? '판매 보고서를 가져오지 못했습니다. 잠시 뒤 다시 시도해 주세요.' : data?.status === 'setup_required' ? 'App Store Connect API 키 등록이 먼저 필요합니다.' : data?.status === 'skipped' ? '10분 안에 이미 가져왔습니다.' : data?.status === 'ok' ? `판매 보고서 ${data.fetched}일치를 가져왔습니다.` : '가져오기에 실패했습니다.';
+    if (!error) await loadApps(true);
+    $('#app-message').textContent = msg; b.disabled = false; b.textContent = '지금 가져오기';
+  });
 }
 
 function openAppDialog(a = null) {

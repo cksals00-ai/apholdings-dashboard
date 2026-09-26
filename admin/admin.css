@@ -84,3 +84,14 @@
 .app-sales-empty{margin:0;line-height:1.6}
 #app-form,#event-form{padding:25px}
 @media(max-width:760px){.app-grid{grid-template-columns:1fr}#apps-section .panel-head{flex-wrap:wrap}.app-actions{width:100%}.app-actions button{flex:1}#apps-section .panel-wide{padding:16px}}
+.app-sync{display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:start;margin-bottom:16px}
+.app-sync>div{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fafbfc}
+.app-sync b{display:block;font-size:.88rem}
+.app-sync span{display:block;color:var(--muted);font-size:.74rem;margin-top:2px}
+.app-sync p{margin:8px 0 0;font-size:.82rem;line-height:1.5;color:#475467}
+.app-sync em{font-style:normal;color:var(--muted);font-size:.74rem;white-space:nowrap}
+#app-sales-state[data-state="ready"]{background:#ecfdf3;color:var(--green)}
+#app-sales-state[data-state="error"]{background:#fef3f2;color:var(--red)}
+#app-sales-state[data-state="setup_required"]{background:#fff7ed;color:var(--orange)}
+.app-sub{font-size:.95rem;margin:20px 0 6px}
+@media(max-width:760px){.app-sync{grid-template-columns:1fr}}
