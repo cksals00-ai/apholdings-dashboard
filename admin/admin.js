@@ -1,5 +1,5 @@
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
-import { createContentOperations } from './content.js?v=1.1-dashboard';
+import { createContentOperations } from './content.js?v=1.2-series';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
