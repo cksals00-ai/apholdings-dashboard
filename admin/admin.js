@@ -1,5 +1,5 @@
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
-import { createContentOperations } from './content.js?v=1.0';
+import { createContentOperations } from './content.js?v=1.1-dashboard';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
@@ -37,7 +37,7 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const contentOperations = createContentOperations(supabase, () => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); }
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); $('#ap-visual-row')?.remove(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -186,6 +186,12 @@ function renderSummary(list) {
     ['완료', list.filter((x) => x.status === 'DONE').length, '검증·정리 완료']
   ];
   $('#summary-cards').innerHTML = values.map(([label,value,note]) => `<article class="summary-card"><span>${label}</span><b>${value}</b><small>${note}</small></article>`).join('');
+  let visuals = $('#ap-visual-row');
+  if (!visuals) { visuals=document.createElement('div'); visuals.id='ap-visual-row'; visuals.className='ap-visual-row'; $('#summary-cards').after(visuals); }
+  const palette={TODO:'#a5b4fc',IN_PROGRESS:'#4665ed',WAITING:'#e2a645',ON_HOLD:'#c38adf',CANCELLED:'#cbd5e1',DONE:'#219c78'};
+  const stages=STATUS_ORDER.map(k=>({key:k,label:STATUSES[k],count:list.filter(x=>x.status===k).length}));
+  visuals.innerHTML=`<section class="ap-health"><p class="eyebrow">PORTFOLIO PULSE</p><h2>업무 흐름 한눈에</h2><div class="ap-state-bar" role="img" aria-label="${stages.map(x=>`${x.label} ${x.count}개`).join(', ')}">${stages.map(x=>`<span style="width:${x.count/Math.max(list.length,1)*100}%;background:${palette[x.key]}"></span>`).join('')}</div><div class="ap-state-legend">${stages.map(x=>`<span><i class="co-dot" style="background:${palette[x.key]}"></i>${x.label} <b>${x.count}</b></span>`).join('')}</div></section><div class="ap-shortcuts"><button class="ap-shortcut" data-section="content"><span class="ap-shortcut-icon" aria-hidden="true">▶</span><div><strong>YouTube·콘텐츠</strong><small>게시 성과 · 제작 현황<br>대시보드 열기 →</small></div></button><button class="ap-shortcut" data-section="apps"><span class="ap-shortcut-icon" aria-hidden="true">▦</span><div><strong>앱 현황</strong><small>출시 · 업데이트 · 매출<br>대시보드 열기 →</small></div></button></div>`;
+
 }
 
 function renderBusinessSummary(list) {
@@ -245,7 +251,7 @@ document.addEventListener('click', (event) => {
 function showSection(name) {
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? '콘텐츠 운영' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
