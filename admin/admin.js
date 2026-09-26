@@ -243,12 +243,13 @@ document.addEventListener('click', (event) => {
 function showSection(name) {
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
-  $('.filters').hidden = name === 'assets' || name === 'commerce';
-  $('.top-actions').hidden = name === 'commerce';
+  if (name === 'apps') loadApps();
+  $('.filters').hidden = name === 'assets' || name === 'commerce' || name === 'apps';
+  $('.top-actions').hidden = name === 'commerce' || name === 'apps';
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
 }
@@ -709,3 +710,183 @@ $('#commerce-file').addEventListener('change', async event => {
     $('#commerce-refresh').disabled = false;
   }
 });
+
+
+// ── 앱 현황 (2026-09-26) — admin_apps · admin_app_events · admin_app_metrics_daily, 소유자만 읽고 쓴다 ──
+const APP_STATUS = { live: '출시', in_review: '심사 중', preparing: '준비 중', paused: '보류', excluded: '제외' };
+const APP_KINDS = { plan: '계획', upload: '빌드 업로드', submitted: '제출', rejected: '반려', cancelled: '취소 · 회수', approved: '승인 · 출시', released: '출시', note: '메모' };
+const APP_KIND_RANK = { plan: 0, upload: 1, submitted: 2, rejected: 3, cancelled: 4, approved: 5, released: 6, note: 7 };
+const APP_ISSUE = { open: '열림', resolved: '해결', dropped: '종료' };
+let apps = [];
+let appEvents = [];
+let appMetrics = [];
+let appsLoaded = false;
+const appName = (id) => apps.find((a) => a.id === id)?.name?.split(/ [—:] /)[0] || id;
+const appDay = (d) => d ? new Intl.DateTimeFormat('ko-KR', { year: '2-digit', month: 'numeric', day: 'numeric' }).format(new Date(`${d}T00:00:00`)) : '—';
+const appSafeURL = (u) => /^https:\/\//.test(u || '') ? u : '';
+const kstToday = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+const byNewest = (a, b) => (b.event_date || '').localeCompare(a.event_date || '') || (APP_KIND_RANK[b.kind] ?? 0) - (APP_KIND_RANK[a.kind] ?? 0) || (b.created_at || '').localeCompare(a.created_at || '');
+
+async function loadApps(force = false) {
+  if (!currentUser || (appsLoaded && !force)) { renderApps(); return; }
+  $('#app-message').textContent = '불러오는 중입니다…';
+  const since = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10);
+  const [a, e, m] = await Promise.all([
+    supabase.from('admin_apps').select('*').order('sort_order').order('name'),
+    supabase.from('admin_app_events').select('*').order('event_date', { ascending: false }).limit(2000),
+    supabase.from('admin_app_metrics_daily').select('*').gte('day', since).order('day').limit(5000)
+  ]);
+  if (a.error || e.error) { $('#app-message').textContent = '앱 현황을 불러오지 못했습니다. 다시 로그인해 주세요.'; return; }
+  apps = a.data || []; appEvents = (e.data || []).sort(byNewest); appMetrics = m.error ? [] : (m.data || []);
+  appsLoaded = true; $('#app-message').textContent = '';
+  const keep = $('#app-f-app').value;
+  $('#app-f-app').innerHTML = '<option value="ALL">전체 앱</option>' + apps.map((x) => `<option value="${escapeHtml(x.id)}">${escapeHtml(appName(x.id))}</option>`).join('');
+  $('#app-f-app').value = apps.some((x) => x.id === keep) ? keep : 'ALL';
+  $('#event-d-app').innerHTML = apps.map((x) => `<option value="${escapeHtml(x.id)}">${escapeHtml(appName(x.id))}</option>`).join('');
+  renderApps();
+}
+
+function appSales(id, days = 30) {
+  const since = new Date(Date.now() - days * 864e5).toISOString().slice(0, 10);
+  const rows = appMetrics.filter((r) => (!id || r.app_id === id) && r.day >= since);
+  return rows.length ? rows.reduce((s, r) => ({ units: s.units + (r.units || 0) + (r.iap_units || 0), krw: s.krw + Number(r.proceeds_krw || 0), dl: s.dl + (r.downloads || 0) }), { units: 0, krw: 0, dl: 0 }) : null;
+}
+
+function renderApps() {
+  const active = apps.filter((a) => a.status !== 'excluded');
+  const count = (s) => apps.filter((a) => a.status === s).length;
+  const open = appEvents.filter((e) => e.issue_status === 'open');
+  const since = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  const recent = appEvents.filter((e) => e.event_date >= since && e.kind !== 'plan').length;
+  const sales = appSales(null);
+  const cards = [
+    ['출시', `${count('live') + count('in_review')}개`, `스토어에 나가 있는 앱 · 제외 ${count('excluded')}개 별도`],
+    ['심사 중', `${count('in_review')}개`, apps.filter((a) => a.status === 'in_review').map((a) => appName(a.id)).join(' · ') || '없음'],
+    ['준비 중', `${count('preparing')}개`, apps.filter((a) => a.status === 'preparing').map((a) => appName(a.id)).join(' · ') || '없음'],
+    ['열린 이슈', `${open.length}건`, open.map((e) => appName(e.app_id)).join(' · ') || '없음'],
+    ['최근 30일 업데이트', `${recent}건`, sales ? `판매 ${sales.units.toLocaleString('ko-KR')}건 · ₩${Math.round(sales.krw).toLocaleString('ko-KR')}` : '판매 · 매출은 연결 예정']
+  ];
+  $('#app-cards').innerHTML = cards.map(([l, v, n]) => `<article class="summary-card"><span>${l}</span><b>${v}</b><small>${escapeHtml(n)}</small></article>`).join('');
+  const selected = $('#app-f-app').value;
+  $('#app-grid').innerHTML = [...active, ...apps.filter((a) => a.status === 'excluded')].map((a) => {
+    const evs = appEvents.filter((e) => e.app_id === a.id);
+    const last = evs.find((e) => e.kind !== 'plan') || evs[0];
+    const issues = evs.filter((e) => e.issue_status === 'open');
+    const s = appSales(a.id); const url = appSafeURL(a.store_url);
+    return `<article class="app-card${selected === a.id ? ' selected' : ''}" data-app-card="${escapeHtml(a.id)}" data-status="${escapeHtml(a.status)}" tabindex="0">
+      <div class="app-card-head"><b>${escapeHtml(appName(a.id))}</b><span class="app-status" data-status="${escapeHtml(a.status)}">${APP_STATUS[a.status] || escapeHtml(a.status)}</span></div>
+      <div class="app-meta">${escapeHtml(a.current_version ? `v${a.current_version}` : '—')}${a.pricing ? ` · ${escapeHtml(a.pricing)}` : ''}</div>
+      ${last ? `<div class="app-line"><span>최근</span><p>${appDay(last.event_date)} · ${escapeHtml(last.title)}</p></div>` : ''}
+      ${a.next_action ? `<div class="app-line"><span>다음</span><p>${escapeHtml(a.next_action)}${a.next_owner ? ` <em>${escapeHtml(a.next_owner)}</em>` : ''}</p></div>` : ''}
+      ${issues.map((e) => `<div class="app-line app-issue"><span>이슈</span><p>${escapeHtml(e.issue || e.title)}</p></div>`).join('')}
+      <div class="app-card-foot"><span class="app-sales-mini">${a.status === 'excluded' ? escapeHtml(a.notes || '') : s ? `30일 ${s.units.toLocaleString('ko-KR')}건 · ₩${Math.round(s.krw).toLocaleString('ko-KR')}` : '판매 · 매출 연결 예정'}</span><span class="app-links">${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">스토어</a>` : ''}<button class="text-button" type="button" data-app-edit="${escapeHtml(a.id)}">편집</button></span></div>
+    </article>`;
+  }).join('');
+  renderAppEvents(); renderAppSales();
+}
+
+function renderAppEvents() {
+  const app = $('#app-f-app').value, kind = $('#app-f-kind').value, issue = $('#app-f-issue').value;
+  const q = $('#app-f-search').value.trim().toLowerCase();
+  const rows = appEvents.filter((e) => (app === 'ALL' || e.app_id === app) && (kind === 'ALL' || e.kind === kind)
+    && (issue === 'ALL' || (issue === 'OPEN' ? e.issue_status === 'open' : !!(e.issue || e.issue_status)))
+    && (!q || [e.version, e.build, e.title, e.detail, e.issue, appName(e.app_id)].join(' ').toLowerCase().includes(q)));
+  $('#app-log-title').textContent = app === 'ALL' ? '업데이트 내역' : `업데이트 내역 · ${appName(app)}`;
+  $('#app-log-count').textContent = `${rows.length}건 · 줄을 누르면 편집`;
+  const today = kstToday();
+  $('#app-event-rows').innerHTML = rows.length ? rows.map((e) => `<tr data-app-event="${e.id}" class="${e.event_date > today ? 'future' : ''}">
+    <td class="date">${appDay(e.event_date)}</td>
+    <td><b>${escapeHtml(appName(e.app_id))}</b></td>
+    <td class="num">${escapeHtml(e.version || '—')}${e.build ? `<div class="asset-growth">빌드 ${escapeHtml(e.build)}</div>` : ''}</td>
+    <td><span class="app-kind" data-kind="${escapeHtml(e.kind)}">${APP_KINDS[e.kind] || escapeHtml(e.kind)}</span></td>
+    <td class="title"><b>${escapeHtml(e.title)}</b>${e.detail ? `<small>${escapeHtml(e.detail)}</small>` : ''}</td>
+    <td>${e.issue || e.issue_status ? `${e.issue_status ? `<span class="app-issue-pill" data-issue="${escapeHtml(e.issue_status)}">${APP_ISSUE[e.issue_status] || ''}</span>` : ''}<div class="app-issue-text">${escapeHtml(e.issue || '')}</div>` : '<span class="asset-growth">—</span>'}</td>
+  </tr>`).join('') : '<tr><td colspan="6" class="asset-growth">조건에 맞는 기록이 없습니다.</td></tr>';
+}
+
+function renderAppSales() {
+  const has = appMetrics.length > 0;
+  $('#app-sales-state').textContent = has ? `최근 ${appMetrics.map((r) => r.day).sort().pop()} 기준` : '연결 예정';
+  if (!has) { $('#app-sales').innerHTML = '<p class="panel-note app-sales-empty">App Store Connect 일별 판매 보고서를 받아 쌓으면 이 자리에 앱별 판매량 · 매출(최근 7일 · 30일)이 나타납니다. 저장할 표는 이미 준비되어 있습니다.</p>'; return; }
+  const list = apps.filter((a) => a.status !== 'excluded').map((a) => ({ a, w: appSales(a.id, 7), m: appSales(a.id, 30) }));
+  const cell = (s) => s ? `${s.units.toLocaleString('ko-KR')}건<div class="asset-growth">₩${Math.round(s.krw).toLocaleString('ko-KR')}</div>` : '—';
+  $('#app-sales').innerHTML = `<div class="asset-table-wrap"><table class="asset-table app-sales-table"><thead><tr><th>앱</th><th class="num">7일 판매 · 매출</th><th class="num">30일 판매 · 매출</th><th class="num">30일 다운로드</th></tr></thead><tbody>${list.map(({ a, w, m }) => `<tr><td><b>${escapeHtml(appName(a.id))}</b></td><td class="num">${cell(w)}</td><td class="num">${cell(m)}</td><td class="num">${m ? m.dl.toLocaleString('ko-KR') : '—'}</td></tr>`).join('')}</tbody></table></div>`;
+}
+
+function openAppDialog(a = null) {
+  $('#app-form').reset(); $('#app-form-message').textContent = '';
+  $('#app-dialog-title').textContent = a ? '앱 편집' : '앱 추가';
+  const set = (s, v) => { $(s).value = v ?? ''; };
+  set('#app-d-id', a?.id); $('#app-d-id').readOnly = !!a;
+  set('#app-d-name', a?.name); set('#app-d-status', a?.status || 'preparing'); set('#app-d-version', a?.current_version);
+  set('#app-d-pricing', a?.pricing); set('#app-d-axis', a?.axis); set('#app-d-bundle', a?.bundle_id); set('#app-d-sort', a?.sort_order ?? 100);
+  set('#app-d-url', a?.store_url); set('#app-d-next', a?.next_action); set('#app-d-owner', a?.next_owner); set('#app-d-notes', a?.notes);
+  $('#app-form').dataset.mode = a ? 'edit' : 'new';
+  $('#app-dialog').showModal();
+}
+
+function openEventDialog(e = null) {
+  $('#event-form').reset(); $('#event-form-message').textContent = '';
+  $('#event-dialog-title').textContent = e ? '업데이트 기록 편집' : '업데이트 기록';
+  $('#event-delete').hidden = !e; $('#event-id').value = e?.id || '';
+  const set = (s, v) => { $(s).value = v ?? ''; };
+  const pick = $('#app-f-app').value;
+  set('#event-d-app', e?.app_id || (pick !== 'ALL' ? pick : apps[0]?.id)); set('#event-d-date', e?.event_date || kstToday());
+  set('#event-d-kind', e?.kind || 'submitted'); set('#event-d-version', e?.version); set('#event-d-build', e?.build);
+  set('#event-d-title', e?.title); set('#event-d-detail', e?.detail); set('#event-d-issue', e?.issue);
+  set('#event-d-issue-status', e?.issue_status || ''); set('#event-d-source', e?.source || (e ? '' : '직접'));
+  $('#event-dialog').showModal();
+}
+
+(function initApps() {
+  $('#app-f-kind').insertAdjacentHTML('beforeend', Object.entries(APP_KINDS).map(([v, l]) => `<option value="${v}">${l}</option>`).join(''));
+  $('#event-d-kind').innerHTML = Object.entries(APP_KINDS).map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+  $('#app-d-status').innerHTML = Object.entries(APP_STATUS).map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+  ['#app-f-app', '#app-f-kind', '#app-f-issue', '#app-f-search'].forEach((s) => $(s).addEventListener('input', () => (s === '#app-f-app' ? renderApps() : renderAppEvents())));
+  $('#app-grid').addEventListener('click', (ev) => {
+    const edit = ev.target.closest('[data-app-edit]');
+    if (edit) { openAppDialog(apps.find((a) => a.id === edit.dataset.appEdit)); return; }
+    if (ev.target.closest('a')) return;
+    const card = ev.target.closest('[data-app-card]'); if (!card) return;
+    $('#app-f-app').value = $('#app-f-app').value === card.dataset.appCard ? 'ALL' : card.dataset.appCard;
+    renderApps();
+    if ($('#app-f-app').value !== 'ALL') $('#app-log-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('#app-grid').addEventListener('keydown', (ev) => { if (ev.key === 'Enter' && ev.target.matches('[data-app-card]')) ev.target.click(); });
+  $('#app-event-rows').addEventListener('click', (ev) => { const tr = ev.target.closest('[data-app-event]'); if (tr) openEventDialog(appEvents.find((e) => e.id === tr.dataset.appEvent)); });
+  $('#app-add').addEventListener('click', () => openAppDialog());
+  $('#event-add').addEventListener('click', () => openEventDialog());
+  document.querySelectorAll('[data-app-close]').forEach((b) => b.addEventListener('click', () => $('#app-dialog').close()));
+  document.querySelectorAll('[data-event-close]').forEach((b) => b.addEventListener('click', () => $('#event-dialog').close()));
+  $('#logout').addEventListener('click', () => { apps = []; appEvents = []; appMetrics = []; appsLoaded = false; });
+  $('#app-form').addEventListener('submit', async (event) => {
+    event.preventDefault(); if (!currentUser) return;
+    const v = (s) => $(s).value.trim();
+    const payload = { name: v('#app-d-name'), status: v('#app-d-status'), current_version: v('#app-d-version') || null, pricing: v('#app-d-pricing') || null,
+      axis: v('#app-d-axis') || null, bundle_id: v('#app-d-bundle') || null, sort_order: Number(v('#app-d-sort') || 100), store_url: v('#app-d-url') || null,
+      next_action: v('#app-d-next') || null, next_owner: v('#app-d-owner') || null, notes: v('#app-d-notes') || null,
+      updated_at: new Date().toISOString(), updated_by: currentUser.id };
+    const id = v('#app-d-id');
+    const q = $('#app-form').dataset.mode === 'edit' ? supabase.from('admin_apps').update(payload).eq('id', id) : supabase.from('admin_apps').insert({ id, ...payload });
+    const { error } = await q;
+    if (error) { $('#app-form-message').textContent = error.code === '23505' ? '이미 등록된 App Store ID입니다.' : '저장하지 못했습니다. 입력값을 확인해 주세요.'; return; }
+    $('#app-dialog').close(); await loadApps(true);
+  });
+  $('#event-form').addEventListener('submit', async (event) => {
+    event.preventDefault(); if (!currentUser) return;
+    const v = (s) => $(s).value.trim(); const id = $('#event-id').value;
+    const payload = { app_id: v('#event-d-app'), event_date: v('#event-d-date'), kind: v('#event-d-kind'), version: v('#event-d-version') || null,
+      build: v('#event-d-build') || null, title: v('#event-d-title'), detail: v('#event-d-detail') || null, issue: v('#event-d-issue') || null,
+      issue_status: v('#event-d-issue-status') || null, source: v('#event-d-source') || null };
+    const q = id ? supabase.from('admin_app_events').update(payload).eq('id', id) : supabase.from('admin_app_events').insert({ ...payload, created_by: currentUser.id });
+    const { error } = await q;
+    if (error) { $('#event-form-message').textContent = '저장하지 못했습니다. 입력값을 확인해 주세요.'; return; }
+    $('#event-dialog').close(); await loadApps(true);
+  });
+  $('#event-delete').addEventListener('click', async () => {
+    const id = $('#event-id').value; if (!id || !confirm('이 업데이트 기록을 삭제할까요?')) return;
+    const { error } = await supabase.from('admin_app_events').delete().eq('id', id);
+    if (error) { $('#event-form-message').textContent = '삭제하지 못했습니다.'; return; }
+    $('#event-dialog').close(); await loadApps(true);
+  });
+})();

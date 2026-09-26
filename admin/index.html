@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" href="/img/ap_mark.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.7.1-commerce">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.8-apps">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
 </head>
 <body>
@@ -50,6 +50,7 @@
         <button class="nav-item active" data-section="overview">Overview</button>
         <button class="nav-item" data-section="gantt">Action Plan</button>
         <button class="nav-item" data-section="board">Status Board</button>
+        <button class="nav-item" data-section="apps">앱 현황</button>
         <button class="nav-item" data-section="assets">데이터 자산</button>
         <button class="nav-item" data-section="trading">투자운용</button>
         <button class="nav-item" data-section="commerce">커머스</button>
@@ -90,6 +91,30 @@
 
       <section id="board-section" class="view-section" hidden>
         <div id="status-board" class="status-board"></div>
+      </section>
+
+      <section id="apps-section" class="view-section" hidden>
+        <div id="app-cards" class="summary-grid"></div>
+        <section class="panel panel-wide">
+          <div class="panel-head"><div><p class="eyebrow">APP PORTFOLIO · APP STORE</p><h2>앱별 현황</h2></div><div class="app-actions"><button id="app-add" class="secondary" type="button">+ 앱 추가</button><button id="event-add" class="primary" type="button">+ 업데이트 기록</button></div></div>
+          <p class="panel-note">카드를 누르면 아래 업데이트 내역이 그 앱만 보입니다. 「편집」으로 상태 · 현재 버전 · 다음 할 일을 고칩니다.</p>
+          <p id="app-message" class="form-message" role="status"></p>
+          <div id="app-grid" class="app-grid"></div>
+        </section>
+        <section class="panel panel-wide">
+          <div class="panel-head"><div><p class="eyebrow">UPDATE LOG</p><h2 id="app-log-title">업데이트 내역</h2></div><span id="app-log-count" class="panel-note"></span></div>
+          <div class="asset-filters app-filters">
+            <label>앱<select id="app-f-app"><option value="ALL">전체 앱</option></select></label>
+            <label>구분<select id="app-f-kind"><option value="ALL">전체</option></select></label>
+            <label>이슈<select id="app-f-issue"><option value="ALL">전체</option><option value="ISSUE">이슈 있는 것</option><option value="OPEN">열린 이슈만</option></select></label>
+            <label class="search-field">검색<input id="app-f-search" type="search" placeholder="버전 · 내용 · 이슈"></label>
+          </div>
+          <div class="asset-table-wrap"><table class="asset-table app-log"><thead><tr><th>일자</th><th>앱</th><th>버전 · 빌드</th><th>구분</th><th>내용</th><th>이슈</th></tr></thead><tbody id="app-event-rows"></tbody></table></div>
+        </section>
+        <section class="panel panel-wide">
+          <div class="panel-head"><div><p class="eyebrow">SALES · REVENUE</p><h2>판매량 · 매출</h2></div><span id="app-sales-state" class="status-pill">연결 예정</span></div>
+          <div id="app-sales"></div>
+        </section>
       </section>
 
       <section id="assets-section" class="view-section" hidden>
@@ -253,6 +278,48 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.7-commerce"></script>
+  <dialog id="app-dialog">
+    <form id="app-form" method="dialog">
+      <div class="dialog-head"><div><p class="eyebrow">APP</p><h2 id="app-dialog-title">앱 편집</h2></div><button class="icon-button" type="button" data-app-close aria-label="닫기">×</button></div>
+      <div class="form-grid">
+        <label>App Store ID<input id="app-d-id" required maxlength="20" pattern="[0-9]+" placeholder="숫자 ID"></label>
+        <label>앱 이름<input id="app-d-name" required maxlength="120"></label>
+        <label>상태<select id="app-d-status" required></select></label>
+        <label>현재 버전<input id="app-d-version" maxlength="80" placeholder="예: 1.5 출시 · 1.6 심사 중"></label>
+        <label>가격 · 수익 구조<input id="app-d-pricing" maxlength="160"></label>
+        <label>사업 축<input id="app-d-axis" maxlength="80"></label>
+        <label>번들 ID<input id="app-d-bundle" maxlength="160"></label>
+        <label>정렬 순서<input id="app-d-sort" type="number" step="1" value="100"></label>
+        <label class="span-2">App Store 링크<input id="app-d-url" type="url" maxlength="300"></label>
+        <label class="span-2">다음 할 일<textarea id="app-d-next" rows="2" maxlength="1000"></textarea></label>
+        <label class="span-2">담당<input id="app-d-owner" maxlength="120" placeholder="예: 대표 → 클레어"></label>
+        <label class="span-2">메모<textarea id="app-d-notes" rows="3" maxlength="2000"></textarea></label>
+      </div>
+      <p id="app-form-message" class="form-message" role="alert"></p>
+      <div class="dialog-actions"><span></span><button type="button" class="secondary" data-app-close>취소</button><button type="submit" class="primary">저장</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="event-dialog">
+    <form id="event-form" method="dialog">
+      <div class="dialog-head"><div><p class="eyebrow">UPDATE LOG</p><h2 id="event-dialog-title">업데이트 기록</h2></div><button class="icon-button" type="button" data-event-close aria-label="닫기">×</button></div>
+      <input id="event-id" type="hidden">
+      <div class="form-grid">
+        <label>앱<select id="event-d-app" required></select></label>
+        <label>일자<input id="event-d-date" type="date" required></label>
+        <label>구분<select id="event-d-kind" required></select></label>
+        <label>버전 · 빌드<span class="app-vb"><input id="event-d-version" maxlength="20" placeholder="1.6"><input id="event-d-build" maxlength="20" placeholder="빌드"></span></label>
+        <label class="span-2">내용<input id="event-d-title" required maxlength="200" placeholder="예: 1.6 제출 — 심사 대기"></label>
+        <label class="span-2">상세<textarea id="event-d-detail" rows="3" maxlength="4000"></textarea></label>
+        <label class="span-2">이슈사항<textarea id="event-d-issue" rows="2" maxlength="2000" placeholder="반려 사유 · 막힌 점 · 필요한 결정"></textarea></label>
+        <label>이슈 상태<select id="event-d-issue-status"><option value="">없음</option><option value="open">열림</option><option value="resolved">해결</option><option value="dropped">종료(진행 안 함)</option></select></label>
+        <label>출처<input id="event-d-source" maxlength="120" placeholder="ASC · Apple 메일 · 직접"></label>
+      </div>
+      <p id="event-form-message" class="form-message" role="alert"></p>
+      <div class="dialog-actions"><button id="event-delete" type="button" class="danger" hidden>삭제</button><span></span><button type="button" class="secondary" data-event-close>취소</button><button type="submit" class="primary">저장</button></div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/admin/admin.js?v=1.8-apps"></script>
 </body>
 </html>
