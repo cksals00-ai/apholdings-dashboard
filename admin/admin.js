@@ -772,15 +772,6 @@ function renderApps() {
   const open = appEvents.filter((e) => e.issue_status === 'open');
   const since = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
   const recent = appEvents.filter((e) => e.event_date >= since && e.kind !== 'plan').length;
-  const sales = appSales(null);
-  const cards = [
-    ['출시', `${count('live') + count('in_review')}개`, `스토어에 나가 있는 앱 · 제외 ${count('excluded')}개 별도`],
-    ['심사 중', `${count('in_review')}개`, apps.filter((a) => a.status === 'in_review').map((a) => appName(a.id)).join(' · ') || '없음'],
-    ['준비 중', `${count('preparing')}개`, apps.filter((a) => a.status === 'preparing').map((a) => appName(a.id)).join(' · ') || '없음'],
-    ['열린 이슈', `${open.length}건`, open.map((e) => appName(e.app_id)).join(' · ') || '없음'],
-    ['최근 30일 업데이트', `${recent}건`, sales ? `판매 ${sales.units.toLocaleString('ko-KR')}건 · ₩${Math.round(sales.krw).toLocaleString('ko-KR')}` : '판매 · 매출은 연결 예정']
-  ];
-  $('#app-cards').innerHTML = cards.map(([l, v, n]) => `<article class="summary-card"><span>${l}</span><b>${v}</b><small>${escapeHtml(n)}</small></article>`).join('');
   const selected = $('#app-f-app').value;
   $('#app-grid').innerHTML = [...active, ...apps.filter((a) => a.status === 'excluded')].map((a) => {
     const evs = appEvents.filter((e) => e.app_id === a.id);
@@ -796,7 +787,7 @@ function renderApps() {
       <div class="app-card-foot"><span class="app-sales-mini">${a.status === 'excluded' ? escapeHtml(a.notes || '') : s ? `30일 ${s.units.toLocaleString('ko-KR')}건 · ₩${Math.round(s.krw).toLocaleString('ko-KR')}` : '판매 · 매출 연결 예정'}</span><span class="app-links">${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">스토어</a>` : ''}<button class="text-button" type="button" data-app-edit="${escapeHtml(a.id)}">편집</button></span></div>
     </article>`;
   }).join('');
-  renderAppEvents(); renderAppSales();
+  renderAppEvents(); renderAppSales(); renderAppViz();
 }
 
 function renderAppEvents() {
@@ -926,5 +917,136 @@ function openEventDialog(e = null) {
     const { error } = await supabase.from('admin_app_events').delete().eq('id', id);
     if (error) { $('#event-form-message').textContent = '삭제하지 못했습니다.'; return; }
     $('#event-dialog').close(); await loadApps(true);
+  });
+})();
+
+
+// ── 앱 현황 시각화 (2026-09-27) — KPI · 파이프라인 · 국가별 다운로드 · 일별 추이 · 심사 타임라인 ──
+const VIZ_COUNTRY = [['KR', '한국'], ['FR', '프랑스'], ['US', '미국'], ['ETC', '기타']];
+const vizEsc = (v) => escapeHtml(v == null ? '' : String(v));
+const vizTip = (value, label) => `data-tip-v="${vizEsc(value)}" data-tip-l="${vizEsc(label)}" tabindex="0"`;
+const vizWon = (n) => `₩${Math.round(n || 0).toLocaleString('ko-KR')}`;
+const vizMD = (d) => { const [, m, dd] = d.split('-'); return `${Number(m)}/${Number(dd)}`; };
+const vizAddDays = (d, n) => new Date(Date.parse(`${d}T00:00:00Z`) + n * 864e5).toISOString().slice(0, 10);
+
+function vizMetrics30() {
+  const since = vizAddDays(kstToday(), -30);
+  return appMetrics.filter((r) => r.day >= since);
+}
+
+function renderAppKpis() {
+  const m = vizMetrics30();
+  const sum = (k) => m.reduce((s, r) => s + (Number(r[k]) || 0), 0);
+  const count = (s) => apps.filter((a) => a.status === s).length;
+  const open = appEvents.filter((e) => e.issue_status === 'open');
+  const since = vizAddDays(kstToday(), -30);
+  const rev = appEvents.filter((e) => e.event_date >= since);
+  const ok = rev.filter((e) => e.kind === 'approved').length, no = rev.filter((e) => e.kind === 'rejected').length;
+  const byApp = {}; m.forEach((r) => { byApp[r.app_id] = (byApp[r.app_id] || 0) + (r.downloads || 0); });
+  const top = Object.entries(byApp).sort((a, b) => b[1] - a[1])[0];
+  const tiles = [
+    ['스토어 출시', `${count('live') + count('in_review')}`, '개', `심사 중 ${count('in_review')} · 준비 중 ${count('preparing')}`, ''],
+    ['30일 다운로드', sum('downloads').toLocaleString('ko-KR'), '건', top ? `최다 ${appName(top[0])} ${top[1]}건` : '판매 보고서 대기', ''],
+    ['30일 수익', vizWon(sum('proceeds_krw')), '', `유료 ${sum('units')}건 · 인앱 ${sum('iap_units')}건 · 수수료 뺀 금액`, ''],
+    ['열린 이슈', `${open.length}`, '건', open.map((e) => appName(e.app_id)).join(' · ') || '없음', open.length ? 'alert' : ''],
+    ['30일 심사 승인', `${ok}`, '건', `반려 ${no}건 · 제출 ${rev.filter((e) => e.kind === 'submitted').length}건`, '']
+  ];
+  $('#app-cards').innerHTML = tiles.map(([l, v, u, n, cls]) => `<article class="app-kpi ${cls}"><span>${cls === 'alert' ? '<i aria-hidden="true">!</i>' : ''}${l}</span><b>${vizEsc(v)}<em>${vizEsc(u)}</em></b><small>${vizEsc(n)}</small></article>`).join('');
+}
+
+function renderAppPipeline() {
+  const dl = {}; vizMetrics30().forEach((r) => { dl[r.app_id] = (dl[r.app_id] || 0) + (r.downloads || 0); });
+  const sel = $('#app-f-app').value;
+  const chip = (a) => {
+    const issue = appEvents.find((e) => e.app_id === a.id && e.issue_status === 'open');
+    const last = appEvents.find((e) => e.app_id === a.id && e.kind !== 'plan');
+    const tip = [a.next_action ? `다음: ${a.next_action}${a.next_owner ? ` (${a.next_owner})` : ''}` : '', last ? `최근: ${vizMD(last.event_date)} ${last.title}` : '', issue ? `이슈: ${issue.issue || issue.title}` : ''].filter(Boolean).join('\n');
+    return `<button type="button" class="pipe-chip${sel === a.id ? ' on' : ''}" data-app-card="${vizEsc(a.id)}" data-tip-v="${vizEsc(appName(a.id))}" data-tip-l="${vizEsc(tip || '기록 없음')}">
+      <b>${vizEsc(appName(a.id))}</b><span>${vizEsc(a.current_version || '—')}</span>
+      ${dl[a.id] ? `<em class="pipe-dl">↓${dl[a.id]}</em>` : ''}${issue ? '<em class="pipe-issue"><i aria-hidden="true">!</i>이슈</em>' : ''}</button>`;
+  };
+  const col = (key, title, sub) => {
+    const list = apps.filter((a) => a.status === key || (key === 'preparing' && a.status === 'paused'));
+    return `<div class="pipe-col" data-stage="${key}"><div class="pipe-head"><b>${title}</b><span>${list.length}</span></div><small>${sub}</small><div class="pipe-list">${list.map(chip).join('') || '<p class="pipe-empty">없음</p>'}</div></div>`;
+  };
+  const arrow = '<div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h14m-5-6 6 6-6 6"/></svg></div>';
+  const excluded = apps.filter((a) => a.status === 'excluded');
+  $('#app-pipeline').innerHTML = `<div class="pipe-flow">${col('preparing', '준비 중', '빌드 · 수정 · 재제출 준비')}${arrow}${col('in_review', '심사 중', 'Apple 심사 대기')}${arrow}${col('live', '출시', 'App Store 판매 중')}</div>`
+    + (excluded.length ? `<div class="pipe-excluded"><span>제외</span>${excluded.map((a) => `<em>${vizEsc(appName(a.id))}</em>`).join('')}</div>` : '');
+}
+
+function renderAppBars() {
+  const m = vizMetrics30();
+  const rows = apps.filter((a) => a.status !== 'excluded').map((a) => {
+    const seg = { KR: 0, FR: 0, US: 0, ETC: 0 }; let krw = 0;
+    m.filter((r) => r.app_id === a.id).forEach((r) => { const k = seg[r.country] !== undefined ? r.country : 'ETC'; seg[k] += r.downloads || 0; krw += Number(r.proceeds_krw) || 0; });
+    return { a, seg, total: seg.KR + seg.FR + seg.US + seg.ETC, krw };
+  }).sort((x, y) => y.total - x.total);
+  const max = Math.max(1, ...rows.map((r) => r.total));
+  $('#app-bars-legend').innerHTML = VIZ_COUNTRY.map(([k, l], i) => `<span><i class="sw s${i + 1}"></i>${l}</span>`).join('');
+  $('#app-bars').innerHTML = rows.map(({ a, seg, total, krw }) => {
+    const parts = VIZ_COUNTRY.map(([k, l], i) => seg[k] ? `<i class="seg s${i + 1}" style="width:${(seg[k] / max) * 100}%" ${vizTip(`${seg[k]}건`, `${appName(a.id)} · ${l}`)}></i>` : '').join('');
+    return `<div class="bar-row"><span class="bar-name">${vizEsc(appName(a.id))}</span><div class="bar-track">${parts}<b class="bar-total">${total}${krw ? `<em>${vizWon(krw)}</em>` : ''}</b></div></div>`;
+  }).join('') || '<p class="panel-note">판매 보고서가 들어오면 표시됩니다.</p>';
+}
+
+function renderAppDaily() {
+  const end = kstToday(); const days = [];
+  for (let i = 30; i >= 1; i--) days.push(vizAddDays(end, -i));
+  const by = {}; appMetrics.forEach((r) => { const d = by[r.day] || (by[r.day] = { dl: 0, up: 0, paid: 0, krw: 0 }); d.dl += r.downloads || 0; d.up += r.updates || 0; d.paid += (r.units || 0) + (r.iap_units || 0); d.krw += Number(r.proceeds_krw) || 0; });
+  const max = Math.max(2, ...days.map((d) => by[d]?.dl || 0));
+  const top = Math.ceil(max / 2) * 2;
+  const lastReport = appRuntime.find((r) => r.id === 'asc_sales')?.last_report_day;
+  $('#app-daily').innerHTML = `<div class="col-plot"><div class="col-grid"><span style="bottom:100%"><em>${top}</em></span><span style="bottom:50%"><em>${top / 2}</em></span><span style="bottom:0"><em>0</em></span></div><div class="col-bars">${days.map((d) => {
+    const v = by[d] || { dl: 0, up: 0, paid: 0, krw: 0 }; const pending = lastReport && d > lastReport;
+    return `<div class="col-hit${pending ? ' pending' : ''}" ${vizTip(pending ? '보고서 대기' : `다운로드 ${v.dl}건`, `${vizMD(d)} · 업데이트 ${v.up} · 판매 ${v.paid}${v.krw ? ` · ${vizWon(v.krw)}` : ''}`)}><i style="height:${(v.dl / top) * 100}%"></i>${v.paid ? '<em class="col-sale" aria-hidden="true"></em>' : ''}</div>`;
+  }).join('')}</div></div><div class="col-axis"><span>${vizMD(days[0])}</span><span>${vizMD(days[15])}</span><span>${vizMD(days[29])}</span></div>`;
+}
+
+function renderAppTimeline() {
+  const shown = appEvents.filter((e) => ['submitted', 'approved', 'released', 'rejected', 'cancelled'].includes(e.kind));
+  if (!shown.length) { $('#app-timeline').innerHTML = ''; return; }
+  const start = shown.map((e) => e.event_date).sort()[0]; const end = kstToday();
+  const span = Math.max(1, (Date.parse(end) - Date.parse(start)) / 864e5);
+  const x = (d) => ((Date.parse(d) - Date.parse(start)) / 864e5 / span) * 100;
+  const order = [...apps].sort((a, b) => (a.status === 'excluded') - (b.status === 'excluded') || a.sort_order - b.sort_order);
+  const ticks = []; for (let d = start; d <= end; d = vizAddDays(d, 7)) if (x(d) < 85) ticks.push(d);
+  const lanes = order.map((a) => {
+    const ev = shown.filter((e) => e.app_id === a.id).sort((p, q) => p.event_date.localeCompare(q.event_date) || (APP_KIND_RANK[p.kind] ?? 0) - (APP_KIND_RANK[q.kind] ?? 0));
+    if (!ev.length) return '';
+    const spans = []; let openAt = null;
+    ev.forEach((e) => { if (e.kind === 'submitted') openAt = e.event_date; else if (openAt) { spans.push([openAt, e.event_date]); openAt = null; } });
+    if (openAt) spans.push([openAt, end, 'wait']);
+    const marks = ev.map((e) => `<i class="tl-m k-${e.kind}" style="left:${x(e.event_date)}%" ${vizTip(`${APP_KINDS[e.kind]} · ${vizMD(e.event_date)}`, `${appName(a.id)} ${e.version || ''} — ${e.title}${e.issue ? `\n이슈: ${e.issue}` : ''}`)}></i>`).join('');
+    return `<div class="tl-row${a.status === 'excluded' ? ' dim' : ''}"><span class="tl-name">${vizEsc(appName(a.id))}</span><div class="tl-track">${spans.map(([s, t, w]) => `<b class="tl-span${w ? ' wait' : ''}" style="left:${x(s)}%;width:${Math.max(0.6, x(t) - x(s))}%"></b>`).join('')}${marks}</div></div>`;
+  }).join('');
+  $('#app-timeline').innerHTML = `${lanes}<div class="tl-row tl-axis"><span></span><div class="tl-track">${ticks.map((d) => `<em style="left:${x(d)}%">${vizMD(d)}</em>`).join('')}<em class="tl-today" style="left:100%">오늘</em></div></div>`;
+}
+
+function renderAppViz() { renderAppKpis(); renderAppPipeline(); renderAppBars(); renderAppDaily(); renderAppTimeline(); }
+
+(function initAppViz() {
+  const root = $('#app-viz'), tip = $('#app-tip');
+  if (!root || !tip) return;
+  const show = (el, cx, cy) => {
+    tip.replaceChildren();
+    const v = document.createElement('b'); v.textContent = el.dataset.tipV;
+    const l = document.createElement('span'); l.textContent = el.dataset.tipL;
+    tip.append(v, l); tip.hidden = false;
+    const box = root.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    let left = cx - box.left + 14, top = cy - box.top - h - 10;
+    if (left + w > box.width) left = cx - box.left - w - 14;
+    if (top < 0) top = cy - box.top + 16;
+    tip.style.left = `${Math.max(0, left)}px`; tip.style.top = `${top}px`;
+  };
+  root.addEventListener('pointermove', (e) => { const el = e.target.closest('[data-tip-v]'); if (el) show(el, e.clientX, e.clientY); else tip.hidden = true; });
+  root.addEventListener('pointerleave', () => { tip.hidden = true; });
+  root.addEventListener('focusin', (e) => { const el = e.target.closest('[data-tip-v]'); if (el) { const r = el.getBoundingClientRect(); show(el, r.left + r.width / 2, r.top); } });
+  root.addEventListener('focusout', () => { tip.hidden = true; });
+  $('#app-pipeline').addEventListener('click', (e) => {
+    const c = e.target.closest('[data-app-card]'); if (!c) return;
+    $('#app-f-app').value = $('#app-f-app').value === c.dataset.appCard ? 'ALL' : c.dataset.appCard;
+    renderApps();
+    if ($('#app-f-app').value !== 'ALL') $('#app-log-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 })();

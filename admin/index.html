@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" href="/img/ap_mark.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.9-apps-sales">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.12-apps-viz">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
   <link rel="stylesheet" href="/admin/content.css?v=1.1-dashboard">
 </head>
@@ -96,12 +96,33 @@
       </section>
 
       <section id="apps-section" class="view-section" hidden>
-        <div id="app-cards" class="summary-grid"></div>
+        <div id="app-viz" class="app-viz">
+        <div id="app-cards" class="app-kpis"></div>
+        <section class="panel app-viz-panel">
+          <div class="panel-head"><div><p class="eyebrow">PIPELINE</p><h2>앱이 지금 어디에 있나</h2></div><span class="panel-note">칩을 누르면 아래 기록이 그 앱만 보입니다 · ↓ 30일 다운로드</span></div>
+          <div id="app-pipeline"></div>
+        </section>
+        <div class="app-viz-two">
+          <section class="panel app-viz-panel">
+            <div class="panel-head"><div><p class="eyebrow">DOWNLOADS · 30일</p><h2>앱별 다운로드 · 국가</h2></div><div id="app-bars-legend" class="viz-legend"></div></div>
+            <div id="app-bars"></div>
+          </section>
+          <section class="panel app-viz-panel">
+            <div class="panel-head"><div><p class="eyebrow">DAILY · 30일</p><h2>하루 다운로드</h2></div><div class="viz-legend"><span><i class="sw s1"></i>다운로드</span><span><i class="sw s2" style="border-radius:50%"></i>판매 있던 날</span></div></div>
+            <div id="app-daily"></div>
+          </section>
+        </div>
+        <section class="panel app-viz-panel">
+          <div class="panel-head"><div><p class="eyebrow">REVIEW TIMELINE</p><h2>심사 타임라인</h2></div><div class="viz-legend tl-legend"><span><i class="k-submitted"></i>제출</span><span><i class="k-span"></i>심사 기간</span><span><i class="k-approved"></i>승인 ✓</span><span><i class="k-rejected"></i>반려 ✕</span><span><i class="k-cancelled"></i>취소</span></div></div>
+          <div id="app-timeline"></div>
+        </section>
+        <div id="app-tip" class="app-tip" role="tooltip" hidden></div>
+        </div>
         <section class="panel panel-wide">
-          <div class="panel-head"><div><p class="eyebrow">APP PORTFOLIO · APP STORE</p><h2>앱별 현황</h2></div><div class="app-actions"><button id="app-add" class="secondary" type="button">+ 앱 추가</button><button id="event-add" class="primary" type="button">+ 업데이트 기록</button></div></div>
-          <p class="panel-note">카드를 누르면 아래 업데이트 내역이 그 앱만 보입니다. 「편집」으로 상태 · 현재 버전 · 다음 할 일을 고칩니다.</p>
+          <div class="panel-head"><div><p class="eyebrow">APP PORTFOLIO · APP STORE</p><h2>앱 관리</h2></div><div class="app-actions"><button id="app-add" class="secondary" type="button">+ 앱 추가</button><button id="event-add" class="primary" type="button">+ 업데이트 기록</button></div></div>
+          <p class="panel-note">앱별 다음 할 일 · 담당 · 편집은 아래 카드에서 합니다.</p>
           <p id="app-message" class="form-message" role="status"></p>
-          <div id="app-grid" class="app-grid"></div>
+          <details class="app-more"><summary>앱 카드 펼치기 (다음 할 일 · 편집)</summary><div id="app-grid" class="app-grid"></div></details>
         </section>
         <section class="panel panel-wide">
           <div class="panel-head"><div><p class="eyebrow">UPDATE LOG</p><h2 id="app-log-title">업데이트 내역</h2></div><span id="app-log-count" class="panel-note"></span></div>
@@ -324,6 +345,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.11-dashboard"></script>
+  <script type="module" src="/admin/admin.js?v=1.12-apps-viz"></script>
 </body>
 </html>
