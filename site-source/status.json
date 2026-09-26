@@ -1,14 +1,14 @@
 {
  "_readme": "제품 진행 현황. scripts/update_status.py 가 facts 를 매일 갱신하고, build_site.py 가 제품 페이지 「지금」 섹션과 카드 상태에 반영한다. manual 은 사람(클레어)이 사실 확인 후 고친다.",
- "checked": "2026-09-26",
+ "checked": "2026-09-27",
  "products": {
   "safe": {
    "stage": "live",
    "appId": "6805684034",
    "health": "https://safelist-mcp.onrender.com/health",
    "facts": {
-    "appVersion": "1.5",
-    "appDate": "2026-09-24",
+    "appVersion": "1.6",
+    "appDate": "2026-09-27",
     "appLive": true,
     "connector": "ok",
     "count": 666649
