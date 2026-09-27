@@ -2036,12 +2036,19 @@
      "label": "04 · Beyond the app",
      "title": "Hangeul lessons on video\nwith the four siblings.",
      "soft": true,
-     "desc": "From the vowel ㅏ to final consonants, episodes hosted by the four siblings. English narration, Korean subtitles. Meet Hangeul before opening the app — in production.",
+     "desc": "From the vowel ㅏ to final consonants, episodes hosted by the four siblings. English narration, Korean subtitles. EP1, “The vowel ㅏ”, is out — meet Hangeul before opening the app.",
      "blocks": [
       {
        "type": "media",
        "src": "/media/cubs/yt_ep1.jpg",
        "alt": "EP1 · vowel ㅏ — YouTube episode poster"
+      },
+      {
+       "type": "actions",
+       "items": [
+        ["https://youtu.be/vpZ7JeHaz6I", "Watch EP1 on YouTube", "primary"],
+        ["https://www.youtube.com/@hangeulcubs", "Channel @hangeulcubs", "link"]
+       ]
       }
      ]
     },
@@ -2050,7 +2057,7 @@
      "label": "05 · Today",
      "title": "Today, on the App Store.",
      "cta": true,
-     "desc": "iPhone · iPad. The same lessons on a bigger screen.\nLesson-pack expansion and the YouTube channel are in preparation.",
+     "desc": "iPhone · iPad. The same lessons on a bigger screen.\nEP1 is live on the YouTube channel. Lesson-pack expansion is in preparation.",
      "blocks": [
       {
        "type": "actions",
