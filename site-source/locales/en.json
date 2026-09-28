@@ -2068,11 +2068,6 @@
          "primary"
         ],
         [
-         "https://edu.apholdings.kr/en/",
-         "AP Edu official site",
-         "button"
-        ],
-        [
          "/ko/products/rgrg/",
          "Compete by quiz in RGRG",
          "button"
@@ -2087,8 +2082,8 @@
     }
    ],
    "hideGeneric": true,
-   "link": "https://apps.apple.com/kr/app/id6803749436",
-   "linkLabel": "App Store"
+   "link": "https://edu.apholdings.kr/en/",
+   "linkLabel": "AP Edu official site"
   },
   {
    "id": "lastwave",

@@ -2361,11 +2361,6 @@
          "primary"
         ],
         [
-         "https://edu.apholdings.kr/ko/",
-         "AP Edu 공식 사이트",
-         "button"
-        ],
-        [
          "/ko/products/rgrg/",
          "퀴즈로 겨루는 RGRG",
          "button"
@@ -2380,8 +2375,8 @@
     }
    ],
    "hideGeneric": true,
-   "link": "https://apps.apple.com/kr/app/id6803749436",
-   "linkLabel": "앱스토어에서 보기"
+   "link": "https://edu.apholdings.kr/ko/",
+   "linkLabel": "AP Edu 공식 사이트"
   },
   {
    "id": "lastwave",
