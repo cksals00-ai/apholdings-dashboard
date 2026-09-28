@@ -806,16 +806,22 @@ function renderApps() {
   renderAppEvents(); renderAppSales(); renderAppAds(); renderAppViz();
 }
 
+const APP_LOG_PREVIEW = 5;
+let appLogOpen = false, appLogKey = '';
 function renderAppEvents() {
   const app = $('#app-f-app').value, kind = $('#app-f-kind').value, issue = $('#app-f-issue').value;
   const q = $('#app-f-search').value.trim().toLowerCase();
+  const key = [app, kind, issue, q].join('|'); if (key !== appLogKey) { appLogKey = key; appLogOpen = false; }
   const rows = appEvents.filter((e) => (app === 'ALL' || e.app_id === app) && (kind === 'ALL' || e.kind === kind)
     && (issue === 'ALL' || (issue === 'OPEN' ? e.issue_status === 'open' : !!(e.issue || e.issue_status)))
     && (!q || [e.version, e.build, e.title, e.detail, e.issue, appName(e.app_id)].join(' ').toLowerCase().includes(q)));
   $('#app-log-title').textContent = app === 'ALL' ? '업데이트 내역' : `업데이트 내역 · ${appName(app)}`;
   $('#app-log-count').textContent = `${rows.length}건 · 줄을 누르면 편집`;
   const today = kstToday();
-  $('#app-event-rows').innerHTML = rows.length ? rows.map((e) => `<tr data-app-event="${e.id}" class="${e.event_date > today ? 'future' : ''}">
+  const shown = appLogOpen ? rows : rows.slice(0, APP_LOG_PREVIEW);
+  const more = $('#app-log-more');
+  if (more) { more.hidden = rows.length <= APP_LOG_PREVIEW; more.textContent = appLogOpen ? '접기 ▲' : `더보기 · 나머지 ${rows.length - APP_LOG_PREVIEW}건 ▼`; more.setAttribute('aria-expanded', String(appLogOpen)); }
+  $('#app-event-rows').innerHTML = rows.length ? shown.map((e) => `<tr data-app-event="${e.id}" class="${e.event_date > today ? 'future' : ''}">
     <td class="date">${appDay(e.event_date)}</td>
     <td><b>${escapeHtml(appName(e.app_id))}</b></td>
     <td class="num">${escapeHtml(e.version || '—')}${e.build ? `<div class="asset-growth">빌드 ${escapeHtml(e.build)}</div>` : ''}</td>
@@ -958,6 +964,7 @@ function openEventDialog(e = null) {
     if ($('#app-f-app').value !== 'ALL') $('#app-log-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
   $('#app-grid').addEventListener('keydown', (ev) => { if (ev.key === 'Enter' && ev.target.matches('[data-app-card]')) ev.target.click(); });
+  $('#app-log-more')?.addEventListener('click', () => { appLogOpen = !appLogOpen; renderAppEvents(); if (!appLogOpen) $('#app-log-title').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   $('#app-event-rows').addEventListener('click', (ev) => { const tr = ev.target.closest('[data-app-event]'); if (tr) openEventDialog(appEvents.find((e) => e.id === tr.dataset.appEvent)); });
   $('#app-add').addEventListener('click', () => openAppDialog());
   $('#event-add').addEventListener('click', () => openEventDialog());

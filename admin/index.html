@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" href="/img/ap_mark.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.15.1-apple-ads">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.16-log-more">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
   <link rel="stylesheet" href="/admin/content.css?v=1.1-dashboard">
 </head>
@@ -134,6 +134,7 @@
             <label class="search-field">검색<input id="app-f-search" type="search" placeholder="버전 · 내용 · 이슈"></label>
           </div>
           <div class="asset-table-wrap"><table class="asset-table app-log"><thead><tr><th>일자</th><th>앱</th><th>버전 · 빌드</th><th>구분</th><th>내용</th><th>이슈</th></tr></thead><tbody id="app-event-rows"></tbody></table></div>
+          <div class="app-log-more"><button id="app-log-more" class="secondary" type="button" aria-controls="app-event-rows" hidden></button></div>
         </section>
         <section class="panel panel-wide">
           <div class="panel-head"><div><p class="eyebrow">SALES · REVENUE</p><h2>판매량 · 매출</h2></div><span id="app-sales-state" class="status-pill">연결 예정</span></div>
@@ -352,6 +353,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.15.1-apple-ads"></script>
+  <script type="module" src="/admin/admin.js?v=1.16-log-more"></script>
 </body>
 </html>
