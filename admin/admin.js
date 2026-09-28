@@ -862,7 +862,9 @@ function renderAppSales() {
 const ADS_STATUS = { ENABLED: ['on', '운영'], RUNNING: ['on', '운영'], PAUSED: ['paused', '일시중지'], ON_HOLD: ['paused', '보류'], ENDED: ['', '종료'], DELETED: ['', '삭제'] };
 function adsRows() {
   const api = appAds.filter((r) => r.period_days === 1);
-  const since = new Date(Date.now() - 8 * 864e5).toISOString().slice(0, 10);
+  const last = api.reduce((m, r) => r.day > m ? r.day : m, '');
+  const fresh = last && last >= new Date(Date.now() - 4 * 864e5).toISOString().slice(0, 10);
+  const since = fresh ? new Date(Date.parse(`${last}T00:00:00Z`) - 6 * 864e5).toISOString().slice(0, 10) : '9999';
   const recent = api.filter((r) => r.day >= since);
   if (recent.length) {
     const map = new Map();
