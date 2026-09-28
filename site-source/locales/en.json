@@ -1948,7 +1948,7 @@
     "CULTURE",
     "TRAVEL"
    ],
-   "image": "/media/gfx/cubs_free_en.jpg",
+   "image": "/media/cubs/family.jpg",
    "sections": [
     {
      "id": "siblings",
@@ -2040,7 +2040,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/cubs/yt_ep1.jpg",
+       "src": "/media/cubs/yt_ep1_thumb.jpg",
        "alt": "EP1 · vowel ㅏ — YouTube episode poster"
       },
       {

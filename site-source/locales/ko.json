@@ -2241,7 +2241,7 @@
     "CULTURE",
     "TRAVEL"
    ],
-   "image": "/media/gfx/cubs_free.jpg",
+   "image": "/media/cubs/family.jpg",
    "sections": [
     {
      "id": "siblings",
@@ -2333,7 +2333,7 @@
      "blocks": [
       {
        "type": "media",
-       "src": "/media/cubs/yt_ep1.jpg",
+       "src": "/media/cubs/yt_ep1_thumb.jpg",
        "alt": "EP1 · 모음 ㅏ — 유튜브 에피소드 포스터"
       },
       {
