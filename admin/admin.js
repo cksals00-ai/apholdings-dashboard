@@ -1,6 +1,7 @@
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createContentOperations } from './content.js?v=1.2-series';
 import { createGrants } from './grants.js?v=2.0-strategy';
+import { createBusinessPlan } from './business-plan.js?v=1.0.0';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
@@ -38,9 +39,10 @@ const formatDate = (value) => value ? new Intl.DateTimeFormat('ko-KR', { month:'
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const contentOperations = createContentOperations(supabase, () => currentUser);
 const grants = createGrants(supabase, () => currentUser);
+const businessPlan = createBusinessPlan(supabase, () => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); grants.clear(); $('#ap-visual-row')?.remove(); }
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); grants.clear(); businessPlan.clear(); $('#ap-visual-row')?.remove(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -72,6 +74,7 @@ async function initialize() {
     setAuthView(true);
     $('#user-email').textContent = currentUser.email;
     await Promise.all([loadItems(), loadNotionStatus()]);
+    if (location.hash === '#plan') showSection('plan');
   } else {
     if (session) await supabase.auth.signOut();
     setAuthView(false);
@@ -109,6 +112,7 @@ $('#login-form').addEventListener('submit', async (event) => {
   setAuthView(true);
   button.disabled = false;
   await Promise.all([loadItems(), loadNotionStatus()]);
+  if (location.hash === '#plan') showSection('plan');
 });
 
 $('#forgot-password').addEventListener('click', () => showAuthForm('recovery'));
@@ -255,15 +259,18 @@ document.addEventListener('click', (event) => {
 function showSection(name) {
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'plan' ? '사업계획·기업가치' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
   if (name === 'apps') loadApps();
   if (name === 'content') contentOperations.load();
   if (name === 'grants') grants.load();
-  $('.filters').hidden = ['assets','commerce','apps','content','grants'].includes(name);
-  $('.top-actions').hidden = ['commerce','apps','content','grants'].includes(name);
+  if (name === 'plan') businessPlan.load();
+  if (name === 'plan') history.replaceState(null, '', '#plan');
+  else if (location.hash === '#plan') history.replaceState(null, '', location.pathname + location.search);
+  $('.filters').hidden = ['assets','commerce','apps','content','grants','plan'].includes(name);
+  $('.top-actions').hidden = ['commerce','apps','content','grants','plan'].includes(name);
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
 }

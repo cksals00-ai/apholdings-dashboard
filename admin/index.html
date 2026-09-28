@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/admin/admin.css?v=1.17.1-sales-ads-viz">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
   <link rel="stylesheet" href="/admin/content.css?v=1.1-dashboard">
+  <link rel="stylesheet" href="/admin/business-plan.css?v=1.0.0">
 </head>
 <body>
   <div id="login-view" class="auth-shell">
@@ -49,6 +50,7 @@
       <a class="brand brand-light" href="/ko/"><img src="/img/ap_mark.png" alt="" width="38" height="19"> AP HOLDINGS</a>
       <nav aria-label="관리자 메뉴">
         <button class="nav-item active" data-section="overview">Overview</button>
+        <button class="nav-item" data-section="plan">사업계획·기업가치</button>
         <button class="nav-item" data-section="gantt">Action Plan</button>
         <button class="nav-item" data-section="board">Status Board</button>
         <button class="nav-item" data-section="apps">앱 현황</button>
@@ -87,6 +89,8 @@
           <section class="panel"><div class="panel-head"><div><p class="eyebrow">NEXT</p><h2>지금 봐야 할 일</h2></div></div><div id="priority-list" class="priority-list"></div></section>
         </div>
       </section>
+
+      <section id="plan-section" class="view-section" hidden aria-label="사업계획·기업가치"></section>
 
       <section id="gantt-section" class="view-section" hidden>
         <section class="panel panel-wide"><div class="panel-head"><div><p class="eyebrow">ACTION PLAN</p><h2>사업별 일정</h2></div><span class="panel-note">막대를 누르면 편집할 수 있습니다.</span></div><div id="gantt" class="gantt-wrap"></div></section>
@@ -353,6 +357,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.17.1-sales-ads-viz"></script>
+  <script type="module" src="/admin/admin.js?v=1.18-business-plan"></script>
 </body>
 </html>
