@@ -1189,7 +1189,7 @@ function adsViz(list) {
     }).join('')}</div></div><div class="col-axis ad-axis"><span>${vizMD(days[0])}</span><span>${vizMD(days[7])}</span><span>${vizMD(days[13])}</span></div>`;
   }
   return `${kpis}<div class="app-viz-two viz-pair"><div><div class="viz-sub-head"><h3 class="app-sub">캠페인별 7일 광고비</h3><div class="viz-legend">${legend.replace(/^<div class="viz-legend">|<\/div>$/g, '')}<span><i class="sw sw-zero"></i>설치 0</span></div></div>${bars}</div>
-    <div><div class="viz-sub-head"><h3 class="app-sub">하루 광고비 · 14일</h3><div class="viz-legend"><span><i class="sw s3" style="border-radius:50%"></i>설치 있던 날</span></div></div>${chart14}</div></div>`;
+    <div><div class="viz-sub-head"><h3 class="app-sub">하루 광고비 · 14일</h3><div class="viz-legend">${legend.replace(/^<div class="viz-legend">|<\/div>$/g, '')}<span><i class="sw s3" style="border-radius:50%"></i>설치 있던 날</span></div></div>${chart14}</div></div>`;
 }
 
 function renderAppViz() { renderAppKpis(); renderAppPipeline(); renderAppBars(); renderAppDaily(); renderAppTimeline(); }
