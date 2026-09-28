@@ -93,6 +93,14 @@
 #app-sales-state[data-state="ready"]{background:#ecfdf3;color:var(--green)}
 #app-sales-state[data-state="error"]{background:#fef3f2;color:var(--red)}
 #app-sales-state[data-state="setup_required"]{background:#fff7ed;color:var(--orange)}
+#app-ads-state[data-state="ready"]{background:#ecfdf3;color:var(--green)}
+#app-ads-state[data-state="error"]{background:#fef3f2;color:var(--red)}
+#app-ads-state[data-state="setup_required"]{background:#fff7ed;color:var(--orange)}
+.ads-status{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:999px;background:#f2f4f7;color:#475467}
+.ads-status[data-s="on"]{background:#ecfdf3;color:var(--green)}
+.ads-status[data-s="paused"]{background:#fff7ed;color:var(--orange)}
+.ads-table tfoot td{font-weight:700;border-top:2px solid var(--line)}
+.ads-table .ads-warn{color:var(--red)}
 .app-sub{font-size:.95rem;margin:20px 0 6px}
 @media(max-width:760px){.app-sync{grid-template-columns:1fr}}
 /* 앱 현황 시각화 (2026-09-27) — dataviz 기본 팔레트 슬롯 1~4, 상태색은 아이콘+글자와 함께 */

@@ -745,6 +745,7 @@ let appEvents = [];
 let appMetrics = [];
 let appRuntime = [];
 let appIap = [];
+let appAds = [];
 let appsLoaded = false;
 const appName = (id) => apps.find((a) => a.id === id)?.name?.split(/ [—:] /)[0] || id;
 const appDay = (d) => d ? new Intl.DateTimeFormat('ko-KR', { year: '2-digit', month: 'numeric', day: 'numeric' }).format(new Date(`${d}T00:00:00`)) : '—';
@@ -756,14 +757,15 @@ async function loadApps(force = false) {
   if (!currentUser || (appsLoaded && !force)) { renderApps(); return; }
   $('#app-message').textContent = '불러오는 중입니다…';
   const since = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10);
-  const [a, e, m, rt, iap] = await Promise.all([
+  const [a, e, m, rt, iap, ads] = await Promise.all([
     supabase.from('admin_apps').select('*').order('sort_order').order('name'),
     supabase.from('admin_app_events').select('*').order('event_date', { ascending: false }).limit(2000),
     supabase.from('admin_app_metrics_daily').select('*').gte('day', since).order('day').limit(5000),
     supabase.from('admin_app_sync_runtime').select('*'),
-    supabase.from('admin_app_iap_events').select('*').order('received_at', { ascending: false }).limit(20)
+    supabase.from('admin_app_iap_events').select('*').order('received_at', { ascending: false }).limit(20),
+    supabase.from('admin_ads_campaign_daily').select('*').gte('day', new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10)).order('day', { ascending: false }).limit(3000)
   ]);
-  appRuntime = rt.error ? [] : (rt.data || []); appIap = iap.error ? [] : (iap.data || []);
+  appRuntime = rt.error ? [] : (rt.data || []); appIap = iap.error ? [] : (iap.data || []); appAds = ads.error ? [] : (ads.data || []);
   if (a.error || e.error) { $('#app-message').textContent = '앱 현황을 불러오지 못했습니다. 다시 로그인해 주세요.'; return; }
   apps = a.data || []; appEvents = (e.data || []).sort(byNewest); appMetrics = m.error ? [] : (m.data || []);
   appsLoaded = true; $('#app-message').textContent = '';
@@ -801,7 +803,7 @@ function renderApps() {
       <div class="app-card-foot"><span class="app-sales-mini">${a.status === 'excluded' ? escapeHtml(a.notes || '') : s ? `30일 ${s.units.toLocaleString('ko-KR')}건 · ₩${Math.round(s.krw).toLocaleString('ko-KR')}` : '판매 · 매출 연결 예정'}</span><span class="app-links">${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">스토어</a>` : ''}<button class="text-button" type="button" data-app-edit="${escapeHtml(a.id)}">편집</button></span></div>
     </article>`;
   }).join('');
-  renderAppEvents(); renderAppSales(); renderAppViz();
+  renderAppEvents(); renderAppSales(); renderAppAds(); renderAppViz();
 }
 
 function renderAppEvents() {
@@ -851,6 +853,64 @@ function renderAppSales() {
     const b = ev.currentTarget; b.disabled = true; b.textContent = '가져오는 중…';
     const { data, error } = await supabase.functions.invoke('asc-sales-sync', { body: { days: 7 } });
     const msg = error ? '판매 보고서를 가져오지 못했습니다. 잠시 뒤 다시 시도해 주세요.' : data?.status === 'setup_required' ? 'App Store Connect API 키 등록이 먼저 필요합니다.' : data?.status === 'skipped' ? '10분 안에 이미 가져왔습니다.' : data?.status === 'ok' ? `판매 보고서 ${data.fetched}일치를 가져왔습니다.` : '가져오기에 실패했습니다.';
+    if (!error) await loadApps(true);
+    $('#app-message').textContent = msg; b.disabled = false; b.textContent = '지금 가져오기';
+  });
+}
+
+// ── Apple Ads (2026-09-28) — admin_ads_campaign_daily · apple-ads-sync 가 매일 08:50 채운다. 키 등록 전에는 클레어가 콘솔에서 읽은 7일 스냅샷 ──
+const ADS_STATUS = { ENABLED: ['on', '운영'], RUNNING: ['on', '운영'], PAUSED: ['paused', '일시중지'], ON_HOLD: ['paused', '보류'], ENDED: ['', '종료'], DELETED: ['', '삭제'] };
+function adsRows() {
+  const api = appAds.filter((r) => r.period_days === 1);
+  const since = new Date(Date.now() - 8 * 864e5).toISOString().slice(0, 10);
+  const recent = api.filter((r) => r.day >= since);
+  if (recent.length) {
+    const map = new Map();
+    for (const r of recent) {
+      const c = map.get(r.campaign_id) || { ...r, spend: 0, impressions: 0, taps: 0, installs: 0, from: r.day, to: r.day };
+      c.spend += Number(r.spend || 0); c.impressions += r.impressions || 0; c.taps += r.taps || 0; c.installs += r.installs || 0;
+      if (r.day > c.to) { c.to = r.day; c.status = r.status; c.daily_budget = r.daily_budget; }
+      if (r.day < c.from) c.from = r.day;
+      map.set(r.campaign_id, c);
+    }
+    const list = [...map.values()]; const to = list.reduce((m, r) => r.to > m ? r.to : m, '');
+    return { list, source: 'api', label: `Apple Ads API · ${appDay(list.reduce((m, r) => r.from < m ? r.from : m, to))} ~ ${appDay(to)}` };
+  }
+  const snap = appAds.filter((r) => r.period_days === 7);
+  const day = snap.reduce((m, r) => r.day > m ? r.day : m, '');
+  return { list: snap.filter((r) => r.day === day), source: 'snapshot', label: day ? `콘솔 스냅샷 · ${appDay(day)}까지 7일 (클레어 확인)` : '' };
+}
+
+function renderAppAds() {
+  const box = $('#app-ads'); if (!box) return;
+  const rt = appRuntime.find((r) => r.id === 'apple_ads');
+  const label = { ready: '연결됨', setup_required: '키 등록 대기', error: '오류' };
+  $('#app-ads-state').textContent = rt ? (label[rt.status] || rt.status) : '연결 예정';
+  $('#app-ads-state').dataset.state = rt?.status || '';
+  const stamp = (t) => t ? new Intl.DateTimeFormat('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(t)) : '—';
+  const { list, label: src } = adsRows();
+  const rank = (r) => (ADS_STATUS[r.status]?.[0] === 'on' ? 0 : ADS_STATUS[r.status]?.[0] === 'paused' ? 1 : 2);
+  list.sort((a, b) => rank(a) - rank(b) || Number(b.spend) - Number(a.spend));
+  const cur = list[0]?.currency || 'USD';
+  const money = (v) => `${cur === 'USD' ? '$' : ''}${Number(v || 0).toFixed(2)}${cur === 'USD' ? '' : ` ${escapeHtml(cur)}`}`;
+  const pct = (a, b) => b ? `${(a / b * 100).toFixed(1)}%` : '—';
+  const cpa = (r) => r.installs ? money(r.spend / r.installs) : Number(r.spend) > 0 ? '<span class="ads-warn">설치 0</span>' : '—';
+  const tot = list.reduce((s, r) => ({ spend: s.spend + Number(r.spend || 0), impressions: s.impressions + (r.impressions || 0), taps: s.taps + (r.taps || 0), installs: s.installs + (r.installs || 0) }), { spend: 0, impressions: 0, taps: 0, installs: 0 });
+  const n = (v) => Number(v || 0).toLocaleString('ko-KR');
+  const status = `<div class="app-sync">
+    <div><b>자동 동기화</b><span>매일 08:50 · 최근 14일 캠페인 일별 성과</span><p>${escapeHtml(rt?.detail || '아직 연결 전입니다.')}${rt?.last_report_day ? ` · 최신 ${escapeHtml(rt.last_report_day)}` : ''} <em>${stamp(rt?.checked_at)} 확인</em></p></div>
+    <div><b>지금 보이는 숫자</b><span>${escapeHtml(src || '데이터 없음')}</span><p>지출 ÷ 설치 = 설치당 비용(CPA) · 탭률 = 탭 ÷ 노출. 입찰 · 예산 변경은 Apple Ads 콘솔에서 합니다. <a href="https://app-ads.apple.com/" target="_blank" rel="noopener">콘솔 열기</a></p></div>
+    <button id="app-ads-sync" class="secondary" type="button">지금 가져오기</button>
+  </div>`;
+  const table = list.length ? `<div class="asset-table-wrap"><table class="asset-table ads-table"><thead><tr><th>캠페인</th><th>상태</th><th class="num">일 예산</th><th class="num">지출</th><th class="num">노출</th><th class="num">탭 · 탭률</th><th class="num">설치</th><th class="num">설치당 비용</th></tr></thead><tbody>${list.map((r) => {
+    const [k, t] = ADS_STATUS[r.status] || ['', r.status || '—'];
+    return `<tr><td><b>${escapeHtml(r.app_name || appName(r.app_id) || '—')}</b><div class="asset-growth">${escapeHtml(r.campaign_name || r.campaign_id)}${r.countries ? ` · ${escapeHtml(r.countries)}` : ''}</div></td><td><span class="ads-status" data-s="${k}">${escapeHtml(t)}</span></td><td class="num">${r.daily_budget != null ? money(r.daily_budget) : '—'}</td><td class="num">${money(r.spend)}</td><td class="num">${n(r.impressions)}</td><td class="num">${n(r.taps)}<div class="asset-growth">${pct(r.taps, r.impressions)}</div></td><td class="num">${n(r.installs)}</td><td class="num">${cpa(r)}</td></tr>`;
+  }).join('')}</tbody><tfoot><tr><td>합계</td><td></td><td></td><td class="num">${money(tot.spend)}</td><td class="num">${n(tot.impressions)}</td><td class="num">${n(tot.taps)}<div class="asset-growth">${pct(tot.taps, tot.impressions)}</div></td><td class="num">${n(tot.installs)}</td><td class="num">${cpa(tot)}</td></tr></tfoot></table></div>` : '<p class="panel-note app-sales-empty">광고 데이터가 들어오면 이 자리에 캠페인별 지출 · 탭 · 설치가 나타납니다.</p>';
+  box.innerHTML = status + table;
+  $('#app-ads-sync').addEventListener('click', async (ev) => {
+    const b = ev.currentTarget; b.disabled = true; b.textContent = '가져오는 중…';
+    const { data, error } = await supabase.functions.invoke('apple-ads-sync', { body: { days: 14 } });
+    const msg = error ? 'Apple Ads 성과를 가져오지 못했습니다. 잠시 뒤 다시 시도해 주세요.' : data?.status === 'setup_required' ? 'Apple Ads API 키 등록이 먼저 필요합니다. 지금은 콘솔 스냅샷을 보여 드립니다.' : data?.status === 'skipped' ? '10분 안에 이미 가져왔습니다.' : data?.status === 'ok' ? `캠페인 ${data.campaigns}개 · ${data.rows}행을 가져왔습니다.` : '가져오기에 실패했습니다.';
     if (!error) await loadApps(true);
     $('#app-message').textContent = msg; b.disabled = false; b.textContent = '지금 가져오기';
   });
