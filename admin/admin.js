@@ -854,7 +854,7 @@ function renderAppSales() {
   }
   const money = (e) => e.price_milli != null && e.currency ? `${(e.price_milli / 1000).toLocaleString('ko-KR')} ${escapeHtml(e.currency)}` : '';
   const live = appIap.length ? `<h3 class="app-sub">실시간 결제 알림 · 최근 ${appIap.length}건</h3><div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>시각</th><th>앱</th><th>종류</th><th>상품</th><th class="num">금액</th></tr></thead><tbody>${appIap.map((e) => `<tr><td class="date">${stamp(e.event_at || e.received_at)}</td><td>${escapeHtml(e.app_id ? appName(e.app_id) : (e.bundle_id || '—'))}</td><td><span class="app-kind" data-kind="${/REFUND|REVOKE|EXPIRED/.test(e.notification_type) ? 'rejected' : 'approved'}">${escapeHtml(e.notification_type)}${e.subtype ? ` · ${escapeHtml(e.subtype)}` : ''}</span>${e.environment === 'Sandbox' ? '<div class="asset-growth">테스트</div>' : ''}</td><td>${escapeHtml(e.product_id || '—')}</td><td class="num">${money(e)}</td></tr>`).join('')}</tbody></table></div>` : '';
-  $('#app-sales').innerHTML = status + table + live;
+  $('#app-sales').innerHTML = status + (has ? salesViz() + `<details class="app-more viz-table"><summary>표로 보기</summary>${table}</details>` : table) + live;
   $('#app-sales-sync').addEventListener('click', async (ev) => {
     const b = ev.currentTarget; b.disabled = true; b.textContent = '가져오는 중…';
     const { data, error } = await supabase.functions.invoke('asc-sales-sync', { body: { days: 7 } });
@@ -914,7 +914,7 @@ function renderAppAds() {
     const [k, t] = ADS_STATUS[r.status] || ['', r.status || '—'];
     return `<tr><td><b>${escapeHtml(r.app_name || appName(r.app_id) || '—')}</b><div class="asset-growth">${escapeHtml(r.campaign_name || r.campaign_id)}${r.countries ? ` · ${escapeHtml(r.countries)}` : ''}</div></td><td><span class="ads-status" data-s="${k}">${escapeHtml(t)}</span></td><td class="num">${r.daily_budget != null ? money(r.daily_budget) : '—'}</td><td class="num">${money(r.spend)}</td><td class="num">${n(r.impressions)}</td><td class="num">${n(r.taps)}<div class="asset-growth">${pct(r.taps, r.impressions)}</div></td><td class="num">${n(r.installs)}</td><td class="num">${cpa(r)}</td></tr>`;
   }).join('')}</tbody><tfoot><tr><td>합계</td><td></td><td></td><td class="num">${money(tot.spend)}</td><td class="num">${n(tot.impressions)}</td><td class="num">${n(tot.taps)}<div class="asset-growth">${pct(tot.taps, tot.impressions)}</div></td><td class="num">${n(tot.installs)}</td><td class="num">${cpa(tot)}</td></tr></tfoot></table></div>` : '<p class="panel-note app-sales-empty">광고 데이터가 들어오면 이 자리에 캠페인별 지출 · 탭 · 설치가 나타납니다.</p>';
-  box.innerHTML = status + table;
+  box.innerHTML = status + (list.length ? adsViz(list) + `<details class="app-more viz-table"><summary>캠페인 표로 보기</summary>${table}</details>` : table);
   $('#app-ads-sync').addEventListener('click', async (ev) => {
     const b = ev.currentTarget; b.disabled = true; b.textContent = '가져오는 중…';
     const { data, error } = await supabase.functions.invoke('apple-ads-sync', { body: { days: 14 } });
@@ -1106,26 +1106,116 @@ function renderAppTimeline() {
   $('#app-timeline').innerHTML = `${lanes}<div class="tl-row tl-axis"><span></span><div class="tl-track">${ticks.map((d) => `<em style="left:${x(d)}%">${vizMD(d)}</em>`).join('')}<em class="tl-today" style="left:100%">오늘</em></div></div>`;
 }
 
+// ── 판매 · 광고 시각화 (2026-09-28) — 표는 「표로 보기」 안으로 ──
+const vizNice = (v) => { if (v <= 0) return 1; const p = 10 ** Math.floor(Math.log10(v)); return [1, 2, 2.5, 5, 10].map((k) => k * p).find((x) => x >= v); };
+const vizWonShort = (n) => n >= 10000 ? `₩${(n / 10000).toLocaleString('ko-KR')}만` : n >= 1000 ? `₩${(n / 1000).toLocaleString('ko-KR')}천` : `₩${n}`;
+const vizUsd = (n) => `$${Number(n || 0).toFixed(2)}`;
+const vizKpis = (tiles) => `<div class="app-kpis k4 viz-kpis">${tiles.map(([l, v, u, n, cls]) => `<article class="app-kpi ${cls || ''}"><span>${cls === 'alert' ? '<i aria-hidden="true">!</i>' : ''}${vizEsc(l)}</span><b>${vizEsc(v)}<em>${vizEsc(u)}</em></b><small>${vizEsc(n)}</small></article>`).join('')}</div>`;
+
+function salesViz() {
+  const m30 = vizMetrics30(), since7 = vizAddDays(kstToday(), -7);
+  const krw = (r) => Number(r.proceeds_krw) || 0, paid = (r) => (r.units || 0) + (r.iap_units || 0), dl = (r) => r.downloads || 0;
+  const sum = (rows, f) => rows.reduce((t, r) => t + f(r), 0);
+  const tot30 = sum(m30, krw), tot7 = sum(m30.filter((r) => r.day >= since7), krw), paid30 = sum(m30, paid), dl30 = sum(m30, dl);
+  const sales = m30.filter((r) => paid(r) > 0).sort((a, b) => b.day.localeCompare(a.day));
+  const last = sales[0];
+  const ago = last ? Math.round((Date.parse(kstToday()) - Date.parse(last.day)) / 864e5) : 0;
+  const kpis = vizKpis([
+    ['30일 수익', vizWon(tot30), '', `7일 ${vizWon(tot7)} · 수수료 뺀 금액`],
+    ['30일 판매', `${paid30}`, '건', `유료 ${sum(m30, (r) => r.units || 0)} · 인앱 ${sum(m30, (r) => r.iap_units || 0)}`],
+    ['판매 전환', dl30 ? (paid30 / dl30 * 100).toFixed(1) : '—', dl30 ? '%' : '', `다운로드 ${dl30.toLocaleString('ko-KR')}건 중 판매`],
+    ['마지막 판매', last ? vizMD(last.day) : '—', '', last ? `${appName(last.app_id)} · ${ago}일 전` : '30일 안 판매 없음', last && ago >= 14 ? 'alert' : '']
+  ]);
+  // 앱별 — 다운로드와 수익은 단위가 달라 두 줄 막대로 나눈다
+  const rows = apps.filter((a) => a.status !== 'excluded').map((a) => {
+    const r = m30.filter((x) => x.app_id === a.id);
+    return { a, has: appMetrics.some((x) => x.app_id === a.id), d: sum(r, dl), p: sum(r, paid), k: sum(r, krw) };
+  });
+  const shown = rows.filter((r) => r.has).sort((x, y) => y.k - x.k || y.d - x.d);
+  const none = rows.filter((r) => !r.has).map((r) => appName(r.a.id));
+  const maxD = Math.max(1, ...shown.map((r) => r.d)), maxK = Math.max(1, ...shown.map((r) => r.k));
+  const byApp = `<div class="sv-row sv-head"><span></span><span>다운로드</span><span>수익 · 판매</span></div>${shown.map(({ a, d, p, k }) => `<div class="sv-row"><span class="bar-name">${vizEsc(appName(a.id))}</span>
+    <div class="bar-track">${d ? `<i class="seg s1" style="width:${d / maxD * 82}%" ${vizTip(`${d}건`, `${appName(a.id)} · 30일 다운로드`)}></i>` : ''}<b class="bar-total">${d || '0'}</b></div>
+    <div class="bar-track">${k ? `<i class="seg s2" style="width:${k / maxK * 70}%" ${vizTip(vizWon(k), `${appName(a.id)} · 30일 판매 ${p}건`)}></i>` : ''}<b class="bar-total${k ? '' : ' muted'}">${k ? vizWon(k) : '₩0'}${p ? `<em>${p}건</em>` : ''}</b></div></div>`).join('')}${none.length ? `<p class="panel-note sv-none">보고서 없음 · ${vizEsc(none.join(', '))}</p>` : ''}`;
+  // 30일 누적 수익 (계단선)
+  const end = kstToday(), days = []; for (let i = 30; i >= 1; i--) days.push(vizAddDays(end, -i));
+  const lastReport = appRuntime.find((r) => r.id === 'asc_sales')?.last_report_day;
+  let cum = 0; const pts = days.map((d) => { const r = appMetrics.filter((x) => x.day === d); const k = sum(r, krw), p = sum(r, paid); cum += k; return { d, k, p, cum, who: [...new Set(r.filter((x) => paid(x) > 0).map((x) => appName(x.app_id)))].join(', '), pending: lastReport && d > lastReport }; });
+  const top = vizNice(Math.max(cum, 1000)), n = pts.length;
+  const X = (i) => (i + 0.5) / n * 100, Y = (v) => 100 - v / top * 100;
+  let path = `M0 ${Y(0)}`; pts.forEach((pt, i) => { path += ` L${X(i)} ${Y(i ? pts[i - 1].cum : 0)} L${X(i)} ${Y(pt.cum)}`; }); path += ` L100 ${Y(cum)}`;
+  const cumChart = `<div class="cum-plot"><div class="col-grid">${[1, 0.5, 0].map((f) => `<span style="bottom:${f * 100}%"><em>${vizWonShort(top * f)}</em></span>`).join('')}</div>
+    <svg class="cum-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="cum-area" d="${path} L100 100 L0 100 Z"/><path class="cum-line" d="${path}"/></svg>
+    ${pts.filter((pt) => pt.k > 0).map((pt) => `<i class="cum-dot" style="left:${X(pts.indexOf(pt))}%;bottom:${100 - Y(pt.cum)}%"></i>`).join('')}
+    <b class="cum-end" style="bottom:${100 - Y(cum)}%">${vizWon(cum)}</b>
+    <div class="col-bars">${pts.map((pt) => `<div class="col-hit${pt.pending ? ' pending' : ''}" ${vizTip(pt.pending ? '보고서 대기' : `누적 ${vizWon(pt.cum)}`, `${vizMD(pt.d)} · ${pt.k ? `그날 ${vizWon(pt.k)} · 판매 ${pt.p}건 (${pt.who})` : '판매 없음'}`)}></div>`).join('')}</div></div>
+    <div class="col-axis cum-axis"><span>${vizMD(days[0])}</span><span>${vizMD(days[15])}</span><span>${vizMD(days[29])}</span></div>`;
+  return `${kpis}<div class="app-viz-two viz-pair"><div><h3 class="app-sub">앱별 30일 · 다운로드와 수익</h3>${byApp}</div><div><h3 class="app-sub">30일 누적 수익</h3>${cumChart}</div></div>`;
+}
+
+function adsViz(list) {
+  const tot = list.reduce((t, r) => ({ s: t.s + Number(r.spend || 0), i: t.i + (r.impressions || 0), t: t.t + (r.taps || 0), n: t.n + (r.installs || 0) }), { s: 0, i: 0, t: 0, n: 0 });
+  const waste = list.filter((r) => !r.installs && Number(r.spend) > 0);
+  const wasteS = waste.reduce((t, r) => t + Number(r.spend), 0);
+  const running = list.filter((r) => ADS_STATUS[r.status]?.[0] === 'on');
+  const kpis = vizKpis([
+    ['7일 광고비', vizUsd(tot.s), '', `운영 중 ${running.length}개 · 일 예산 합 ${vizUsd(running.reduce((t, r) => t + Number(r.daily_budget || 0), 0))}`],
+    ['7일 설치', `${tot.n}`, '건', `탭 ${tot.t} · 탭률 ${tot.i ? (tot.t / tot.i * 100).toFixed(1) : '0'}%`],
+    ['설치당 비용', tot.n ? vizUsd(tot.s / tot.n) : '—', '', '7일 광고비 ÷ 설치'],
+    ['설치 없이 쓴 돈', vizUsd(wasteS), '', tot.s ? `광고비의 ${Math.round(wasteS / tot.s * 100)}% · 캠페인 ${waste.length}개` : '—', wasteS > 0 ? 'alert' : '']
+  ]);
+  // 앱 색은 앱 목록 순서로 고정 (순위가 아니라 앱을 따라간다)
+  const adApps = apps.filter((a) => appAds.some((r) => r.app_id === a.id)).map((a) => a.id);
+  const cls = (id) => `s${Math.min(4, adApps.indexOf(id) + 1 || 4)}`;
+  const legend = `<div class="viz-legend">${adApps.map((id) => `<span><i class="sw ${cls(id)}"></i>${vizEsc(appName(id))}</span>`).join('')}</div>`;
+  // 캠페인별 7일 지출 막대 — 설치 0 은 빗금
+  const maxS = Math.max(0.01, ...list.map((r) => Number(r.spend || 0)));
+  const bars = [...list].sort((a, b) => Number(b.spend) - Number(a.spend)).map((r) => {
+    const s = Number(r.spend || 0), zero = !r.installs && s > 0, [, st] = ADS_STATUS[r.status] || ['', r.status || ''];
+    return `<div class="ad-row"><span class="bar-name">${vizEsc(appName(r.app_id) || r.app_name || '')}<small>${vizEsc(r.campaign_name)} · ${vizEsc(st)}</small></span><div class="bar-track">${s ? `<i class="seg ${cls(r.app_id)}${zero ? ' zero' : ''}" style="width:${s / maxS * 62}%" ${vizTip(vizUsd(s), `${r.campaign_name}\n노출 ${Number(r.impressions || 0).toLocaleString('ko-KR')} · 탭 ${r.taps} · 설치 ${r.installs}${r.installs ? ` · 설치당 ${vizUsd(s / r.installs)}` : ''}`)}></i>` : ''}<b class="bar-total">${vizUsd(s)}<em>${zero ? '<i class="z-ico" aria-hidden="true">!</i>설치 0' : r.installs ? `설치 ${r.installs} · ${vizUsd(s / r.installs)}` : '지출 없음'}</em></b></div></div>`;
+  }).join('');
+  // 하루 광고비 14일 — 앱별 누적 막대 + 설치 있던 날 점
+  const api = appAds.filter((r) => r.period_days === 1);
+  let chart14 = '<p class="panel-note">API 일별 데이터가 들어오면 하루 광고비 추이가 나옵니다.</p>';
+  if (api.length) {
+    const lastDay = api.reduce((m, r) => r.day > m ? r.day : m, '');
+    const days = []; for (let i = 13; i >= 0; i--) days.push(vizAddDays(lastDay, -i));
+    const by = {}; api.forEach((r) => { const d = by[r.day] || (by[r.day] = { s: 0, n: 0, t: 0, app: {} }); d.s += Number(r.spend || 0); d.n += r.installs || 0; d.t += r.taps || 0; d.app[r.app_id] = (d.app[r.app_id] || 0) + Number(r.spend || 0); });
+    const top = vizNice(Math.max(1, ...days.map((d) => by[d]?.s || 0)));
+    chart14 = `<div class="col-plot ad-plot"><div class="col-grid">${[1, 0.5, 0].map((f) => `<span style="bottom:${f * 100}%"><em>$${+(top * f).toFixed(2)}</em></span>`).join('')}</div><div class="col-bars ad-cols">${days.map((d) => {
+      const v = by[d] || { s: 0, n: 0, t: 0, app: {} };
+      const parts = adApps.filter((id) => v.app[id] > 0).map((id) => `<i class="${cls(id)}" style="flex:${v.app[id]}"></i>`).join('');
+      return `<div class="col-hit" ${vizTip(`${vizMD(d)} · ${vizUsd(v.s)}`, `${adApps.filter((id) => v.app[id] > 0).map((id) => `${appName(id)} ${vizUsd(v.app[id])}`).join(' · ') || '지출 없음'}\n탭 ${v.t} · 설치 ${v.n}`)}>${v.s ? `<div class="stk" style="height:${v.s / top * 100}%">${parts}</div>` : ''}${v.n ? `<em class="col-sale ad-inst" aria-hidden="true"></em>` : ''}</div>`;
+    }).join('')}</div></div><div class="col-axis ad-axis"><span>${vizMD(days[0])}</span><span>${vizMD(days[7])}</span><span>${vizMD(days[13])}</span></div>`;
+  }
+  return `${kpis}<div class="app-viz-two viz-pair"><div><div class="viz-sub-head"><h3 class="app-sub">캠페인별 7일 광고비</h3><div class="viz-legend">${legend.replace(/^<div class="viz-legend">|<\/div>$/g, '')}<span><i class="sw sw-zero"></i>설치 0</span></div></div>${bars}</div>
+    <div><div class="viz-sub-head"><h3 class="app-sub">하루 광고비 · 14일</h3><div class="viz-legend"><span><i class="sw s3" style="border-radius:50%"></i>설치 있던 날</span></div></div>${chart14}</div></div>`;
+}
+
 function renderAppViz() { renderAppKpis(); renderAppPipeline(); renderAppBars(); renderAppDaily(); renderAppTimeline(); }
 
 (function initAppViz() {
   const root = $('#app-viz'), tip = $('#app-tip');
   if (!root || !tip) return;
+  document.body.append(tip); // 고정 위치 — 판매·광고 패널에서도 같은 툴팁을 쓴다
   const show = (el, cx, cy) => {
     tip.replaceChildren();
     const v = document.createElement('b'); v.textContent = el.dataset.tipV;
     const l = document.createElement('span'); l.textContent = el.dataset.tipL;
     tip.append(v, l); tip.hidden = false;
-    const box = root.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
-    let left = cx - box.left + 14, top = cy - box.top - h - 10;
-    if (left + w > box.width) left = cx - box.left - w - 14;
-    if (top < 0) top = cy - box.top + 16;
-    tip.style.left = `${Math.max(0, left)}px`; tip.style.top = `${top}px`;
+    const w = tip.offsetWidth, h = tip.offsetHeight, vw = document.documentElement.clientWidth;
+    let left = cx + 14, top = cy - h - 10;
+    if (left + w > vw - 8) left = cx - w - 14;
+    if (top < 8) top = cy + 16;
+    tip.style.left = `${Math.max(8, left)}px`; tip.style.top = `${top}px`;
   };
-  root.addEventListener('pointermove', (e) => { const el = e.target.closest('[data-tip-v]'); if (el) show(el, e.clientX, e.clientY); else tip.hidden = true; });
-  root.addEventListener('pointerleave', () => { tip.hidden = true; });
-  root.addEventListener('focusin', (e) => { const el = e.target.closest('[data-tip-v]'); if (el) { const r = el.getBoundingClientRect(); show(el, r.left + r.width / 2, r.top); } });
-  root.addEventListener('focusout', () => { tip.hidden = true; });
+  ['#app-viz', '#app-sales', '#app-ads'].map((q) => $(q)).filter(Boolean).forEach((r) => {
+    r.addEventListener('pointermove', (e) => { const el = e.target.closest('[data-tip-v]'); if (el) show(el, e.clientX, e.clientY); else tip.hidden = true; });
+    r.addEventListener('pointerleave', () => { tip.hidden = true; });
+    r.addEventListener('focusin', (e) => { const el = e.target.closest('[data-tip-v]'); if (el) { const b = el.getBoundingClientRect(); show(el, b.left + b.width / 2, b.top); } });
+    r.addEventListener('focusout', () => { tip.hidden = true; });
+  });
+  window.addEventListener('scroll', () => { tip.hidden = true; }, { passive: true });
   $('#app-pipeline').addEventListener('click', (e) => {
     const c = e.target.closest('[data-app-card]'); if (!c) return;
     $('#app-f-app').value = $('#app-f-app').value === c.dataset.appCard ? 'ALL' : c.dataset.appCard;
