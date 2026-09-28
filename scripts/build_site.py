@@ -187,6 +187,8 @@ def sections(items):
   h+=f'<section class="section{" soft" if sec.get("soft") else ""} anchor" id="{e(sec["id"])}"><div class="wrap">{head_}{blocks(rest)}</div></section>'
  return h
 def product_page(l,p):
+ if l=='ko' and p['id']=='revenue':
+  return (ROOT/'site-source/pages/revenue-ko.html').read_text(encoding='utf-8')
  pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (오~알지)" if pid=="rgrg" and l=="ko" else "")}</h1>{"" if p.get("heroSplit") else f'<h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p>'}{(f'<div class="actions hero-actions">{link(p["link"],p["linkLabel"]+" →","button primary",True)}</div>') if (p.get("link") and (p.get("hideGeneric") or p.get("heroSplit"))) else ""}</div></section><section class="section"><div class="wrap">'
  if pid=='rgrg' and False:
   body+='<figure class="rgrg-detail"><img src="/media/games/qa_shot_01.jpg" alt="RGRG — existing quiz battle interface" width="1396" height="644"><figcaption class="note">'+HOME_COPY[l]['rgrgNote']+'</figcaption></figure>'
@@ -223,6 +225,8 @@ for l in PUBLISHED:
  out(f'{l}/about/index.html',shell(l,'About — AP Holdings',c(l,'origin'),f'/{l}/about/',about(l),'about/'))
  out(f'{l}/lab/index.html',shell(l,'Founder’s Lab — AP Holdings',c(l,'labDesc'),f'/{l}/lab/',f'<section class="page-hero"><div class="wrap"><span class="eyebrow">INDEPENDENT PROJECTS / EXPERIMENTS</span><h1>Ideas we build,<br>test and learn from.</h1><p class="lead">{c(l,"labDesc")}</p></div></section>'+lab(l,True),'lab/'))
  for p in DATA[l]['products']:
+  if l=='ko' and p['id']=='revenue':
+   p=dict(p,desc='호텔·리조트의 예약·취소·매출 데이터를 분석해 운영 담당자가 검토할 문제와 근거를 정리합니다. 고객 유형, 제공 결과물, 파일럿 범위와 연동 조건을 확인하세요.')
   out(f'{l}/products/{p["id"]}/index.html',shell(l,p['name']+' — AP Holdings',p['desc'],ph(l,p['id']),product_page(l,p),f'products/{p["id"]}/'))
 # Keep root as a useful Korean page instead of browser/IP-dependent redirects.
 out('index.html',shell('ko','AP HOLDINGS — We turn complexity into systems.',c('ko','hero'),'/ko/',home_page('ko')))
