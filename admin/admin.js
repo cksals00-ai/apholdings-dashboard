@@ -1,6 +1,6 @@
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createContentOperations } from './content.js?v=1.2-series';
-import { createGrants } from './grants.js?v=1.0-grants';
+import { createGrants } from './grants.js?v=2.0-strategy';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
@@ -25,6 +25,7 @@ const STATUSES = {
 };
 const STATUS_ORDER = Object.keys(STATUSES);
 let items = [];
+let pendingGrantId = null;
 let currentUser = null;
 let recoveryMode = false;
 let tradingGeneration = 0;
@@ -157,6 +158,7 @@ async function loadItems() {
   if (error) { alert('진행 현황을 불러오지 못했습니다. 다시 로그인해 주세요.'); return; }
   items = data || [];
   render();
+  document.dispatchEvent(new CustomEvent('ap:items'));
 }
 
 function filteredItems() {
@@ -192,7 +194,7 @@ function renderSummary(list) {
   if (!visuals) { visuals=document.createElement('div'); visuals.id='ap-visual-row'; visuals.className='ap-visual-row'; $('#summary-cards').after(visuals); }
   const palette={TODO:'#a5b4fc',IN_PROGRESS:'#4665ed',WAITING:'#e2a645',ON_HOLD:'#c38adf',CANCELLED:'#cbd5e1',DONE:'#219c78'};
   const stages=STATUS_ORDER.map(k=>({key:k,label:STATUSES[k],count:list.filter(x=>x.status===k).length}));
-  visuals.innerHTML=`<section class="ap-health"><p class="eyebrow">PORTFOLIO PULSE</p><h2>업무 흐름 한눈에</h2><div class="ap-state-bar" role="img" aria-label="${stages.map(x=>`${x.label} ${x.count}개`).join(', ')}">${stages.map(x=>`<span style="width:${x.count/Math.max(list.length,1)*100}%;background:${palette[x.key]}"></span>`).join('')}</div><div class="ap-state-legend">${stages.map(x=>`<span><i class="co-dot" style="background:${palette[x.key]}"></i>${x.label} <b>${x.count}</b></span>`).join('')}</div></section><div class="ap-shortcuts"><button class="ap-shortcut" data-section="content"><span class="ap-shortcut-icon" aria-hidden="true">▶</span><div><strong>YouTube·콘텐츠</strong><small>게시 성과 · 제작 현황<br>대시보드 열기 →</small></div></button><button class="ap-shortcut" data-section="apps"><span class="ap-shortcut-icon" aria-hidden="true">▦</span><div><strong>앱 현황</strong><small>출시 · 업데이트 · 매출<br>대시보드 열기 →</small></div></button><button class="ap-shortcut" data-section="grants"><span class="ap-shortcut-icon" aria-hidden="true">◎</span><div><strong>지원사업</strong><small>마감 D-day · 대표님 차례<br>진행 현황 열기 →</small></div></button></div>`;
+  visuals.innerHTML=`<section class="ap-health"><p class="eyebrow">PORTFOLIO PULSE</p><h2>업무 흐름 한눈에</h2><div class="ap-state-bar" role="img" aria-label="${stages.map(x=>`${x.label} ${x.count}개`).join(', ')}">${stages.map(x=>`<span style="width:${x.count/Math.max(list.length,1)*100}%;background:${palette[x.key]}"></span>`).join('')}</div><div class="ap-state-legend">${stages.map(x=>`<span><i class="co-dot" style="background:${palette[x.key]}"></i>${x.label} <b>${x.count}</b></span>`).join('')}</div></section><div class="ap-shortcuts"><button class="ap-shortcut" data-section="content"><span class="ap-shortcut-icon" aria-hidden="true">▶</span><div><strong>YouTube·콘텐츠</strong><small>게시 성과 · 제작 현황<br>대시보드 열기 →</small></div></button><button class="ap-shortcut" data-section="apps"><span class="ap-shortcut-icon" aria-hidden="true">▦</span><div><strong>앱 현황</strong><small>출시 · 업데이트 · 매출<br>대시보드 열기 →</small></div></button><button class="ap-shortcut" data-section="grants"><span class="ap-shortcut-icon" aria-hidden="true">◎</span><div><strong>지원사업</strong><small>유치 전략 · 지금 할 일<br>Action Plan 연동 →</small></div></button></div>`;
 
 }
 
@@ -267,6 +269,7 @@ function showSection(name) {
 }
 
 function openDialog(item = null) {
+  pendingGrantId = null;
   $('#item-form').reset(); $('#item-message').textContent = '';
   $('#dialog-title').textContent = item ? 'Action 편집' : 'Action 추가';
   $('#delete-item').hidden = !item; $('#item-id').value = item?.id || '';
@@ -286,6 +289,14 @@ function openDialog(item = null) {
 }
 
 $('#add-button').addEventListener('click', () => openDialog());
+document.addEventListener('ap:new-action', (event) => {
+  const d = event.detail || {};
+  openDialog();
+  $('#item-business').value = 'CORPORATE';
+  $('#item-product').value = d.product || '';
+  $('#item-title').value = d.title || '';
+  pendingGrantId = d.grantId || null;
+});
 document.querySelectorAll('[data-close]').forEach((button) => button.addEventListener('click', () => $('#item-dialog').close()));
 $('#item-form').addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -297,7 +308,7 @@ $('#item-form').addEventListener('submit', async (event) => {
     owner_name: $('#item-owner').value.trim() || 'Alfred Park', dependency: $('#item-dependency').value.trim(), next_action: $('#item-next').value.trim(),
     updated_by: currentUser.id, updated_at: new Date().toISOString()
   };
-  const query = id ? supabase.from('admin_portfolio_items').update(payload).eq('id',id) : supabase.from('admin_portfolio_items').insert({ ...payload, created_by: currentUser.id });
+  const query = id ? supabase.from('admin_portfolio_items').update(payload).eq('id',id) : supabase.from('admin_portfolio_items').insert({ ...payload, created_by: currentUser.id, ...(pendingGrantId ? { grant_id: pendingGrantId } : {}) });
   const { error } = await query;
   if (error) { $('#item-message').textContent = '저장하지 못했습니다. 날짜와 입력값을 확인해 주세요.'; return; }
   $('#item-dialog').close(); await loadItems();
