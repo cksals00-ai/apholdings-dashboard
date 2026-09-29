@@ -1779,10 +1779,10 @@
   {
    "id": "rgrg",
    "name": "RGRG",
-   "tag": "Anyone, any age — a six-player live quiz battle.",
+   "tag": "A live online quiz battle platform anyone, any age, can pick up and enjoy — where general knowledge grows naturally as you play.",
    "status": "inDev",
-   "role": "Six on one stage. First to buzz answers.",
-   "desc": "A live online quiz battle anyone can pick up and enjoy.\nPick a room, hit the buzzer — and your general knowledge grows as you play.",
+   "role": "Play first. Knowledge follows.",
+   "desc": "Not an educational game — a game for everyone.\nLearning is one part of it.",
    "note": "iPhone, landscape · Games › Trivia · preparing for release.",
    "flow": [
     "RGRG CORE",
@@ -1794,65 +1794,65 @@
    "image": "/media/gfx/rgrg2_hero_en.jpg",
    "sections": [
     {
-     "id": "rooms",
-     "label": "01 · Pick a room",
-     "title": "Pick a room,\nstart the battle.",
-     "desc": "Multiple choice · O/X · Initials · Speed · Trivia · Random. Every room plays by its own rules. Tap one and you're in.",
+     "id": "intent",
+     "label": "01 · Why we made it",
+     "title": "A quiz is play,\nnot study.",
+     "desc": "A game anyone can enjoy comes first. General knowledge is what grows, naturally, while you play. Education is one part of it.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg3_battle_en.jpg",
+       "alt": "Six characters on one stage — a quiz battle for all ages"
+      }
+     ]
+    },
+    {
+     "id": "everyone",
+     "label": "02 · For all ages",
+     "title": "Kids and parents,\nfriends and coworkers — one match.",
+     "soft": true,
+     "desc": "A room that asks neither your age nor your level. Family, friends and colleagues on the same stage.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg3_wait_en.jpg",
+       "alt": "Waiting room — six seats, open to anyone"
+      }
+     ]
+    },
+    {
+     "id": "knowledge",
+     "label": "03 · Knowledge, naturally",
+     "title": "Every lost round\narms the next one.",
+     "desc": "Nothing to memorise — just the urge to win. Missed questions go to the mistake notebook and come back in the next match. Current affairs, history, science, culture, riddles.",
+     "blocks": []
+    },
+    {
+     "id": "platform",
+     "label": "04 · A live online platform",
+     "title": "Not a workbook you do alone —\na stage you share.",
+     "soft": true,
+     "desc": "Multiple choice · O/X · Initials · Speed · Trivia · Random — a different kind of fun in every room. A platform where others compete on the questions you write.",
      "blocks": [
       {
        "type": "media",
        "src": "/media/gfx/rgrg2_room_en.jpg",
-       "alt": "QUIZ ROOM — six rooms: multiple choice, O/X, initials, speed, trivia, random"
-      }
-     ]
-    },
-    {
-     "id": "waiting",
-     "label": "02 · Waiting room",
-     "title": "Six seats.\nStarts when full.",
-     "soft": true,
-     "desc": "The match begins the moment the room fills; empty seats are filled by AI characters. Format, expected time and topics are shown up front — the room's real values.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg2_wait_en.jpg",
-       "alt": "Waiting room — six seats and game info (format, time, topics)"
-      }
-     ]
-    },
-    {
-     "id": "buzzer",
-     "label": "03 · The stage",
-     "title": "Question up — hit the buzzer.",
-     "desc": "Six players on one stage. Only the first to buzz may answer. Five seconds. Wrong costs points; right earns the time left on the clock. Fast beats knowledgeable.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg2_battle_en.jpg",
-       "alt": "QUIZ BATTLE — six on one stage, only the first to buzz answers"
+       "alt": "QUIZ ROOM — six rooms"
       }
      ]
     },
     {
      "id": "characters",
-     "label": "04 · Characters",
-     "title": "Eight characters,\ntitles you earn.",
-     "soft": true,
-     "desc": "Tap a character to switch instantly. Titles come as you play; unlock with gold. Nothing you can buy wins a match.",
+     "label": "05 · Characters",
+     "title": "A character that plays as you,\ntitles that build up.",
+     "desc": "Eight characters and titles. Nothing you can buy wins a match.",
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/rgrg2_chars_en.jpg",
-       "alt": "Characters — eight characters, titles, gold unlocks"
+       "src": "/media/gfx/rgrg3_chars_en.jpg",
+       "alt": "Characters — eight characters and titles"
       }
      ]
-    },
-    {
-     "id": "create",
-     "label": "05 · Writing questions",
-     "title": "Others compete\non the questions I wrote.",
-     "desc": "Write a question and earn credits — multiple choice or O/X. That's why the questions never run dry.",
-     "blocks": []
     },
     {
      "id": "today",
@@ -1860,13 +1860,13 @@
      "title": "iPhone · preparing for release.",
      "soft": true,
      "cta": true,
-     "desc": "Six-player live matchmaking · six rooms · eight characters. Every lost round goes into the mistake notebook — a weapon for the next one.",
+     "desc": "A live online quiz battle anyone, any age, can enjoy.",
      "blocks": [
       {
        "type": "tags",
        "items": [
-        "iPhone",
-        "6-player live matchmaking",
+        "All ages",
+        "Live online",
         "6 rooms",
         "8 characters",
         "Mistake notebook",

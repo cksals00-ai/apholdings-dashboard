@@ -101,8 +101,8 @@
   "input": "이렇게 물으면",
   "output": "이렇게 답합니다",
   "safeNote": "의료진단·절대적 안전보증 제외",
-  "rgrgTag": "남녀노소 누구나 즐기는 실시간 퀴즈 배틀.",
-  "rgrgPacks": "사지선다 · OX · 초성 · 스피드 · 상식 · 랜덤 — 방 여섯, 규칙 여섯.",
+  "rgrgTag": "남녀노소 누구나, 놀다 보면 넓어지는 상식.",
+  "rgrgPacks": "누구나 쉽게 즐기고, 게임을 하면서 자연스럽게 상식을 넓혀가는 실시간 온라인 퀴즈 배틀 플랫폼. 교육은 그 일부.",
   "rgrgNote": "실제 게임 화면 · 2026.09",
   "proofLabels": {
    "safe": "운영 중 · 세이프리스트 앱 · AI 커넥터",
@@ -268,8 +268,8 @@
   "input": "Ask like this",
   "output": "It answers like this",
   "safeNote": "Not a medical diagnosis or an absolute guarantee of safety",
-  "rgrgTag": "A live quiz battle for anyone, any age.",
-  "rgrgPacks": "Multiple choice · O/X · Initials · Speed · Trivia · Random — six rooms, six rule sets.",
+  "rgrgTag": "For all ages — knowledge that grows as you play.",
+  "rgrgPacks": "A live online quiz battle platform anyone can enjoy, where general knowledge grows naturally. Education is one part of it.",
   "rgrgNote": "Actual game screen · Sept 2026",
   "principleNames": [
    "01 · Safe by design",
