@@ -101,9 +101,9 @@
   "input": "이렇게 물으면",
   "output": "이렇게 답합니다",
   "safeNote": "의료진단·절대적 안전보증 제외",
-  "rgrgTag": "언어와 지식, 퀴즈로 겨루는 학습.",
-  "rgrgPacks": "다국어 · 언어 · 자격증 · 교육 Quiz Pack",
-  "rgrgNote": "기존 게임 화면 · 글로벌 Quiz Pack 확장 설계",
+  "rgrgTag": "남녀노소 누구나 즐기는 실시간 퀴즈 배틀.",
+  "rgrgPacks": "사지선다 · OX · 초성 · 스피드 · 상식 · 랜덤 — 방 여섯, 규칙 여섯.",
+  "rgrgNote": "실제 게임 화면 · 2026.09",
   "proofLabels": {
    "safe": "운영 중 · 세이프리스트 앱 · AI 커넥터",
    "light": "운영 중 · 라이트리스트 AI 커넥터"
@@ -268,9 +268,9 @@
   "input": "Ask like this",
   "output": "It answers like this",
   "safeNote": "Not a medical diagnosis or an absolute guarantee of safety",
-  "rgrgTag": "Language and knowledge — learning by quiz battle.",
-  "rgrgPacks": "Multilingual · language · certification · education Quiz Packs",
-  "rgrgNote": "Existing game screens · global Quiz Pack expansion design",
+  "rgrgTag": "A live quiz battle for anyone, any age.",
+  "rgrgPacks": "Multiple choice · O/X · Initials · Speed · Trivia · Random — six rooms, six rule sets.",
+  "rgrgNote": "Actual game screen · Sept 2026",
   "principleNames": [
    "01 · Safe by design",
    "02 · Evidence attached",

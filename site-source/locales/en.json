@@ -1779,11 +1779,11 @@
   {
    "id": "rgrg",
    "name": "RGRG",
-   "tag": "The scholarship quiz show, in your hand.",
+   "tag": "Anyone, any age — a six-player live quiz battle.",
    "status": "inDev",
-   "role": "Six on one stage. One buzzer, first to press.",
-   "desc": "A TV quiz-show studio in your phone.\nFrom riddles to Korean history, languages and certifications — learn by competing.",
-   "note": "Built on an existing project. Quiz Pack expansion planned for languages, certifications, education, culture and corporate training.",
+   "role": "Six on one stage. First to buzz answers.",
+   "desc": "A live online quiz battle anyone can pick up and enjoy.\nPick a room, hit the buzzer — and your general knowledge grows as you play.",
+   "note": "iPhone, landscape · Games › Trivia · preparing for release.",
    "flow": [
     "RGRG CORE",
     "Learner Locale",
@@ -1791,79 +1791,59 @@
     "Target Language / Subject",
     "Quiz Pack"
    ],
-   "image": "/media/gfx/phone_rgrg_en.jpg",
+   "image": "/media/gfx/rgrg2_hero_en.jpg",
    "sections": [
     {
+     "id": "rooms",
+     "label": "01 · Pick a room",
+     "title": "Pick a room,\nstart the battle.",
+     "desc": "Multiple choice · O/X · Initials · Speed · Trivia · Random. Every room plays by its own rules. Tap one and you're in.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg2_room_en.jpg",
+       "alt": "QUIZ ROOM — six rooms: multiple choice, O/X, initials, speed, trivia, random"
+      }
+     ]
+    },
+    {
+     "id": "waiting",
+     "label": "02 · Waiting room",
+     "title": "Six seats.\nStarts when full.",
+     "soft": true,
+     "desc": "The match begins the moment the room fills; empty seats are filled by AI characters. Format, expected time and topics are shown up front — the room's real values.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg2_wait_en.jpg",
+       "alt": "Waiting room — six seats and game info (format, time, topics)"
+      }
+     ]
+    },
+    {
      "id": "buzzer",
-     "label": "01 · The stage",
+     "label": "03 · The stage",
      "title": "Question up — hit the buzzer.",
      "desc": "Six players on one stage. Only the first to buzz may answer. Five seconds. Wrong costs points; right earns the time left on the clock. Fast beats knowledgeable.",
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/rgrg_stage_en.jpg",
-       "alt": "Six on one stage — only the first to buzz answers, five seconds"
+       "src": "/media/gfx/rgrg2_battle_en.jpg",
+       "alt": "QUIZ BATTLE — six on one stage, only the first to buzz answers"
       }
      ]
     },
     {
-     "id": "subjects",
-     "label": "02 · What kind of questions",
-     "title": "From riddles\nto Korean history.",
+     "id": "characters",
+     "label": "04 · Characters",
+     "title": "Eight characters,\ntitles you earn.",
      "soft": true,
-     "desc": "Nine topics. Easy · normal · hard. Ten questions per round, three minutes.",
+     "desc": "Tap a character to switch instantly. Titles come as you play; unlock with gold. Nothing you can buy wins a match.",
      "blocks": [
       {
        "type": "media",
-       "src": "/media/gfx/rgrg_subjects_en.jpg",
-       "alt": "Riddles · school · history · certifications — four question cards"
-      }
-     ]
-    },
-    {
-     "id": "edu",
-     "label": "03 · In the classroom",
-     "title": "A lesson becomes a match.",
-     "desc": "The teacher sets the questions and the whole class takes the stage. Preview and review habits show up as scores, and missed questions go straight to the mistake notebook.",
-     "blocks": [
-      {
-       "type": "milestones",
-       "items": [
-        [
-         "Classroom",
-         "Whole-class match",
-         "Teacher-set questions · teams of six · live rankings"
-        ],
-        [
-         "Academy",
-         "Quiz packs by chapter",
-         "Packs swapped to match progress · automatic review of mistakes"
-        ],
-        [
-         "Home",
-         "A preview habit",
-         "Today's mini-game · one three-minute round a day"
-        ],
-        [
-         "Overseas",
-         "Learning Korean",
-         "Language pairs for learners in Vietnam and Japan"
-        ]
-       ]
-      }
-     ]
-    },
-    {
-     "id": "round",
-     "label": "04 · One round",
-     "title": "One round, five minutes.",
-     "soft": true,
-     "desc": "Main game · today's mini-game · a bet on the last question. There is a place where third becomes first.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg_round_en.jpg",
-       "alt": "One round, five minutes — main game · today's mini-game · final bet"
+       "src": "/media/gfx/rgrg2_chars_en.jpg",
+       "alt": "Characters — eight characters, titles, gold unlocks"
       }
      ]
     },
@@ -1871,45 +1851,25 @@
      "id": "create",
      "label": "05 · Writing questions",
      "title": "Others compete\non the questions I wrote.",
-     "desc": "Write a question, earn credits. Multiple choice or true/false. That is why the questions never run dry.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg_create_en.jpg",
-       "alt": "Question editor — multiple choice · true/false · credits"
-      }
-     ]
-    },
-    {
-     "id": "packs",
-     "label": "06 · Quiz packs",
-     "title": "Same game, different subject.",
-     "soft": true,
-     "desc": "One game. What you swap is the quiz pack. No rebuilding the game for each country.",
-     "blocks": [
-      {
-       "type": "media",
-       "src": "/media/gfx/rgrg_packs_en.jpg",
-       "alt": "One game core with quiz packs for languages · certifications · education · culture · corporate training"
-      }
-     ]
+     "desc": "Write a question and earn credits — multiple choice or O/X. That's why the questions never run dry.",
+     "blocks": []
     },
     {
      "id": "today",
-     "label": "07 · Today",
-     "title": "iPhone · iPad · Android.",
+     "label": "06 · Now",
+     "title": "iPhone · preparing for release.",
+     "soft": true,
      "cta": true,
-     "desc": "Six-player live matching · 1,150+ questions · nine topics · eight characters.\nPreparing for release. Quiz-pack partnerships for schools, academies and companies by inquiry.",
+     "desc": "Six-player live matchmaking · six rooms · eight characters. Every lost round goes into the mistake notebook — a weapon for the next one.",
      "blocks": [
       {
        "type": "tags",
        "items": [
-        "iPhone · iPad",
-        "Android",
-        "Six-player live matching",
-        "1,150+ questions",
-        "Nine topics",
-        "Eight characters",
+        "iPhone",
+        "6-player live matchmaking",
+        "6 rooms",
+        "8 characters",
+        "Mistake notebook",
         "No pay-to-win"
        ]
       },
@@ -1917,13 +1877,13 @@
        "type": "actions",
        "items": [
         [
-         "mail:RGRG quiz pack partnership inquiry",
-         "Quiz pack partnership inquiry",
+         "https://games.apholdings.kr/en/",
+         "AP Games",
          "primary"
         ],
         [
-         "/ko/products/cubs/",
-         "Hangeul: Hangeul Cubs",
+         "mail:RGRG partnership inquiry",
+         "Partnership inquiry",
          "button"
         ]
        ]
@@ -2077,7 +2037,7 @@
         ],
         [
          "/ko/products/rgrg/",
-         "Compete by quiz in RGRG",
+         "Live quiz battles in RGRG",
          "button"
         ]
        ]
@@ -2166,7 +2126,7 @@
        "items": [
         [
          "/ko/products/rgrg/",
-         "RGRG — learning by quiz battle",
+         "RGRG — a live quiz battle for all ages",
          "button"
         ],
         [
