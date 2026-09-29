@@ -481,7 +481,9 @@ $('#item-form').addEventListener('submit', async (event) => {
     updated_by: currentUser.id, updated_at: new Date().toISOString()
   };
   if (id && items.find((x) => x.id === id)?.status === 'DONE') { payload.status = 'DONE'; payload.progress = 100; }
-  const query = id ? supabase.from('admin_portfolio_items').update(payload).eq('id',id) : supabase.from('admin_portfolio_items').insert({ ...payload, created_by: currentUser.id, ...(pendingGrantId ? { grant_id: pendingGrantId } : {}) }).select('id').single();
+  // 수정 시 owner_id는 보내지 않는다 — authenticated 역할에 owner_id 열 UPDATE 권한이 없고, DB 트리거(admin_portfolio_resolve_owner)가 owner_name으로 owner_id를 채운다.
+  const { owner_id: _ownerId, ...updatePayload } = payload;
+  const query = id ? supabase.from('admin_portfolio_items').update(updatePayload).eq('id',id) : supabase.from('admin_portfolio_items').insert({ ...payload, created_by: currentUser.id, ...(pendingGrantId ? { grant_id: pendingGrantId } : {}) }).select('id').single();
   const { data: saved, error } = await query;
   if (error) { $('#item-message').textContent = /done_locked/.test(error.message || '') ? '완료된 Action은 상태를 바꿀 수 없어요. 「이어서 새 Action」으로 만들어 주세요.' : '저장하지 못했습니다. 날짜와 입력값을 확인해 주세요.'; return; }
   if (!id && saved?.id && pendingLinks.length) {
