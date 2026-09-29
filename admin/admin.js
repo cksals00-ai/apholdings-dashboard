@@ -235,7 +235,10 @@ function setApView(view) {
 }
 function calChip(item, today) {
   const due = item.end_date || item.start_date; const late = due < today;
-  return `<button type="button" class="cal-chip${late ? ' late' : ''}" data-edit="${item.id}" data-status="${item.status}" title="${escapeHtml(item.product)} · ${escapeHtml(item.title)} · ${STATUSES[item.status]}"><span>${escapeHtml(item.title)}</span></button>`;
+  // 칸이 좁아도 뜻이 보이게: 「주제 · 할 일」이면 주제를 굵게, 괄호 속 부연은 뺀 핵심어만 두 줄까지
+  const t = String(item.title || '').replace(/\s*[\(（][^)）]*[\)）]/g, '').trim();
+  const cut = t.indexOf(' · '); const tag = cut > 0 && cut <= 12 ? t.slice(0, cut) : ''; const body = tag ? t.slice(cut + 3) : t;
+  return `<button type="button" class="cal-chip${late ? ' late' : ''}" data-edit="${item.id}" data-status="${item.status}" title="${escapeHtml(item.product)} · ${escapeHtml(item.title)} · ${STATUSES[item.status]}">${tag ? `<b>${escapeHtml(tag)}</b> ` : ''}${escapeHtml(body)}</button>`;
 }
 function renderCalendar(list) {
   const box = $('#ap-calendar'); if (!box) return;
