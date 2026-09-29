@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" href="/img/ap_mark.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.17.1-sales-ads-viz">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.19-action-calendar">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
   <link rel="stylesheet" href="/admin/content.css?v=1.1-dashboard">
   <link rel="stylesheet" href="/admin/business-plan.css?v=1.0.0">
@@ -52,7 +52,6 @@
         <button class="nav-item active" data-section="overview">Overview</button>
         <button class="nav-item" data-section="plan">사업계획·기업가치</button>
         <button class="nav-item" data-section="gantt">Action Plan</button>
-        <button class="nav-item" data-section="board">Status Board</button>
         <button class="nav-item" data-section="apps">앱 현황</button>
         <button class="nav-item" data-section="content">YouTube·콘텐츠 현황</button>
         <button class="nav-item" data-section="assets">데이터 자산</button>
@@ -93,11 +92,15 @@
       <section id="plan-section" class="view-section" hidden aria-label="사업계획·기업가치"></section>
 
       <section id="gantt-section" class="view-section" hidden>
-        <section class="panel panel-wide"><div class="panel-head"><div><p class="eyebrow">ACTION PLAN</p><h2>사업별 일정</h2></div><span class="panel-note">막대를 누르면 편집할 수 있습니다.</span></div><div id="gantt" class="gantt-wrap"></div></section>
-      </section>
-
-      <section id="board-section" class="view-section" hidden>
-        <div id="status-board" class="status-board"></div>
+        <div class="ap-view-bar">
+          <div class="ap-view-toggle" role="tablist" aria-label="Action Plan 보기">
+            <button type="button" role="tab" data-apview="cal" class="on" aria-selected="true">캘린더</button>
+            <button type="button" role="tab" data-apview="board" aria-selected="false">상태 보드</button>
+          </div>
+          <span class="panel-note">완료·취소를 뺀 챙길 일만 기한 날짜에 · 누르면 편집</span>
+        </div>
+        <section id="ap-cal-panel" class="panel ap-cal-panel"><div id="ap-calendar"></div></section>
+        <div id="ap-board-panel" hidden><div id="status-board" class="status-board"></div></div>
       </section>
 
       <section id="apps-section" class="view-section" hidden>
@@ -357,6 +360,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.18-business-plan"></script>
+  <script type="module" src="/admin/admin.js?v=1.19-action-calendar"></script>
 </body>
 </html>

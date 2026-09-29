@@ -181,7 +181,7 @@ function render() {
   renderSummary(visible);
   renderBusinessSummary(visible);
   renderPriority(visible);
-  renderGantt(visible);
+  renderCalendar(visible);
   renderBoard(visible);
 }
 
@@ -223,6 +223,55 @@ function renderBoard(list) {
   }).join('');
 }
 
+// ── Action Plan 캘린더 (2026-09-29) — 완료·취소를 뺀 챙길 일만, 기한(end_date, 없으면 start_date) 날짜 칸에 ──
+let calCursor = (() => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), 1); })();
+let apView = (() => { try { return localStorage.getItem('ap-action-view') || 'cal'; } catch { return 'cal'; } })();
+const ymdLocal = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+function setApView(view) {
+  apView = view === 'board' ? 'board' : 'cal';
+  try { localStorage.setItem('ap-action-view', apView); } catch {}
+  $('#ap-cal-panel').hidden = apView !== 'cal'; $('#ap-board-panel').hidden = apView !== 'board';
+  document.querySelectorAll('[data-apview]').forEach((b) => { const on = b.dataset.apview === apView; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
+}
+function calChip(item, today) {
+  const due = item.end_date || item.start_date; const late = due < today;
+  return `<button type="button" class="cal-chip${late ? ' late' : ''}" data-edit="${item.id}" data-status="${item.status}" title="${escapeHtml(item.product)} · ${escapeHtml(item.title)} · ${STATUSES[item.status]}"><span>${escapeHtml(item.title)}</span></button>`;
+}
+function renderCalendar(list) {
+  const box = $('#ap-calendar'); if (!box) return;
+  const today = ymdLocal(new Date());
+  const open = list.filter((x) => !['DONE','CANCELLED'].includes(x.status));
+  const dated = open.filter((x) => x.end_date || x.start_date);
+  const undated = open.filter((x) => !x.end_date && !x.start_date);
+  const byDay = {}; for (const x of dated) { const k = x.end_date || x.start_date; (byDay[k] ||= []).push(x); }
+  const rank = { CRITICAL:0, HIGH:1, MEDIUM:2, LOW:3 };
+  Object.values(byDay).forEach((a) => a.sort((p, q) => rank[p.priority] - rank[q.priority]));
+  const overdue = dated.filter((x) => (x.end_date || x.start_date) < today).sort((p, q) => (p.end_date || p.start_date).localeCompare(q.end_date || q.start_date));
+  const y = calCursor.getFullYear(), m = calCursor.getMonth();
+  const first = new Date(y, m, 1), gridStart = new Date(y, m, 1 - first.getDay());
+  const cells = [];
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate() + i); const k = ymdLocal(d);
+    if (i >= 35 && d.getMonth() !== m) break;
+    const rows = byDay[k] || []; const more = rows.length > 3 ? `<span class="cal-more">+${rows.length - 3}</span>` : '';
+    cells.push(`<div class="cal-cell${d.getMonth() !== m ? ' out' : ''}${k === today ? ' today' : ''}${d.getDay() === 0 ? ' sun' : ''}"><span class="cal-date">${d.getDate()}</span>${rows.slice(0, 3).map((x) => calChip(x, today)).join('')}${more}</div>`);
+  }
+  // 모바일: 이번 달 + 기한 지남을 날짜 목록으로
+  const monthKeys = Object.keys(byDay).filter((k) => k.startsWith(`${y}-${String(m+1).padStart(2,'0')}`)).sort();
+  const agenda = monthKeys.map((k) => { const d = new Date(`${k}T00:00:00`); return `<div class="cal-agenda-day${k === today ? ' today' : ''}"><b>${d.getMonth()+1}/${d.getDate()} (${'일월화수목금토'[d.getDay()]})</b><div>${byDay[k].map((x) => calChip(x, today)).join('')}</div></div>`; }).join('') || '<p class="empty">이번 달 기한인 일이 없습니다.</p>';
+  box.innerHTML = `<div class="cal-head"><button type="button" class="secondary cal-nav" data-cal="-1" aria-label="이전 달">‹</button><h2>${y}년 ${m+1}월</h2><button type="button" class="secondary cal-nav" data-cal="1" aria-label="다음 달">›</button><button type="button" class="secondary cal-today" data-cal="0">오늘</button><span class="cal-count">이번 달 ${monthKeys.reduce((n, k) => n + byDay[k].length, 0)}건</span></div>
+  ${overdue.length ? `<div class="cal-overdue"><span class="cal-overdue-label">기한 지남 ${overdue.length}</span>${overdue.map((x) => calChip(x, today)).join('')}</div>` : ''}
+  <div class="cal-grid"><div class="cal-dow">${[...'일월화수목금토'].map((w) => `<span>${w}</span>`).join('')}</div><div class="cal-cells">${cells.join('')}</div></div>
+  <div class="cal-agenda">${agenda}</div>
+  ${undated.length ? `<details class="cal-undated"><summary>날짜 없는 일 ${undated.length}건</summary><div>${undated.map((x) => calChip(x, '9999')).join('')}</div></details>` : ''}`;
+}
+document.addEventListener('click', (event) => {
+  const nav = event.target.closest('[data-cal]');
+  if (nav) { const step = Number(nav.dataset.cal); calCursor = step ? new Date(calCursor.getFullYear(), calCursor.getMonth() + step, 1) : (() => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), 1); })(); renderCalendar(filteredItems()); }
+  const v = event.target.closest('[data-apview]'); if (v) setApView(v.dataset.apview);
+});
+setApView(apView);
+
 function renderGantt(list) {
   const dated = list.filter((x) => x.start_date || x.end_date);
   if (!dated.length) { $('#gantt').innerHTML = '<p class="empty">기간이 입력된 Action이 없습니다.</p>'; return; }
@@ -257,6 +306,7 @@ document.addEventListener('click', (event) => {
 });
 
 function showSection(name) {
+  if (name === 'board') { name = 'gantt'; setApView('board'); }
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
   document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'plan' ? '사업계획·기업가치' : 'Portfolio Control Room';
