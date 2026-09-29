@@ -27,6 +27,8 @@ const STATUSES = {
 const STATUS_ORDER = Object.keys(STATUSES);
 let items = [];
 let pendingGrantId = null;
+let links = [];            // admin_portfolio_links — Action 간 연결 (follow_up: 이전→이어서, related: 관련)
+let pendingLinks = [];     // 새 Action 저장 뒤 만들 연결 [{other, kind, dir}]
 let currentUser = null;
 let recoveryMode = false;
 let tradingGeneration = 0;
@@ -157,10 +159,13 @@ $('#logout').addEventListener('click', async () => { await supabase.auth.signOut
 
 async function loadItems() {
   $('.workspace').classList.add('loading');
-  const { data, error } = await supabase.from('admin_portfolio_items').select('*').order('sort_order').order('created_at');
+  const [{ data, error }, linkRes] = await Promise.all([
+    supabase.from('admin_portfolio_items').select('*').order('sort_order').order('created_at'),
+    supabase.from('admin_portfolio_links').select('*')
+  ]);
   $('.workspace').classList.remove('loading');
   if (error) { alert('진행 현황을 불러오지 못했습니다. 다시 로그인해 주세요.'); return; }
-  items = data || [];
+  items = data || []; links = linkRes.error ? [] : (linkRes.data || []);
   render();
   document.dispatchEvent(new CustomEvent('ap:items'));
 }
@@ -219,7 +224,7 @@ function renderPriority(list) {
 function renderBoard(list) {
   $('#status-board').innerHTML = STATUS_ORDER.map((status) => {
     const rows = list.filter((x) => x.status === status);
-    return `<section class="status-column"><div class="status-column-head"><h2>${STATUSES[status]}</h2><span class="status-column-count">${rows.length}</span></div><div class="task-stack">${rows.map((item) => `<article class="task-card" data-edit="${item.id}"><div class="meta"><span>${escapeHtml(BUSINESSES[item.business_unit])}</span><span>${escapeHtml(item.product)}</span></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.next_action || item.dependency || '')}</p><div class="progress-track"><div class="progress-bar" style="width:${item.progress}%"></div></div></article>`).join('') || '<p class="empty">없음</p>'}</div></section>`;
+    return `<section class="status-column"><div class="status-column-head"><h2>${STATUSES[status]}</h2><span class="status-column-count">${rows.length}</span></div><div class="task-stack">${rows.map((item) => `<article class="task-card" data-edit="${item.id}"><div class="meta"><span>${escapeHtml(BUSINESSES[item.business_unit])}</span><span>${escapeHtml(item.product)}</span>${linkBadge(item.id)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.next_action || item.dependency || '')}</p><div class="progress-track"><div class="progress-bar" style="width:${item.progress}%"></div></div></article>`).join('') || '<p class="empty">없음</p>'}</div></section>`;
   }).join('');
 }
 
@@ -345,8 +350,61 @@ function openDialog(item = null) {
   $('#item-owner').value = item?.owner_name || 'Alfred Park';
   $('#item-dependency').value = item?.dependency || '';
   $('#item-next').value = item?.next_action || '';
+  const done = item?.status === 'DONE';
+  $('#item-status').disabled = done; $('#item-progress').disabled = done;
+  $('#item-done-note').hidden = !done; $('#follow-item').hidden = !done;
+  pendingLinks = [];
+  renderLinkBox(item?.id || '');
   $('#item-dialog').showModal();
 }
+
+// ── Action 연결 ──
+function itemLinks(id) { return links.filter((l) => l.from_id === id || l.to_id === id); }
+function linkBadge(id) {
+  const ls = itemLinks(id); if (!ls.length) return '';
+  const prev = ls.some((l) => l.kind === 'follow_up' && l.to_id === id);
+  return `<span class="link-badge" title="연결된 Action ${ls.length}개">${prev ? '↳ 이어서 · ' : ''}연결 ${ls.length}</span>`;
+}
+function linkLabel(l, id) {
+  if (l.kind === 'follow_up') return l.to_id === id ? '이전' : '이어서';
+  return '관련';
+}
+function renderLinkBox(id) {
+  const rows = id ? itemLinks(id).map((l) => ({ l, other: items.find((x) => x.id === (l.from_id === id ? l.to_id : l.from_id)) })).filter((r) => r.other) : [];
+  const pend = pendingLinks.map((p) => ({ p, other: items.find((x) => x.id === p.other) })).filter((r) => r.other);
+  const chip = (label, other, rm) => `<span class="link-chip" data-status="${other.status}"><button type="button" class="link-open" data-link-open="${other.id}"><em>${label}</em> ${escapeHtml(other.title)} <small>${STATUSES[other.status]}</small></button><button type="button" class="link-x" ${rm} aria-label="연결 해제">×</button></span>`;
+  $('#item-links').innerHTML = [...rows.map((r) => chip(linkLabel(r.l, id), r.other, `data-link-del="${r.l.id}"`)), ...pend.map((r, i) => chip(r.p.kind === 'follow_up' ? '이전' : '관련', r.other, `data-link-pend="${i}"`))].join('') || '<span class="link-empty">없음</span>';
+  const linked = new Set([...rows.map((r) => r.other.id), ...pend.map((r) => r.other.id), id]);
+  const opts = items.filter((x) => !linked.has(x.id)).sort((a, b) => (a.product || '').localeCompare(b.product || '') || (a.title || '').localeCompare(b.title || ''));
+  $('#item-link-add').innerHTML = '<option value="">— 연결할 Action 선택 —</option>' + opts.map((x) => `<option value="${x.id}">${escapeHtml(x.product)} · ${escapeHtml(x.title)}${x.status === 'DONE' ? ' (완료)' : ''}</option>`).join('');
+}
+$('#item-link-button').addEventListener('click', async () => {
+  const other = $('#item-link-add').value; if (!other) return; const id = $('#item-id').value;
+  if (!id) { pendingLinks.push({ other, kind: 'related' }); renderLinkBox(''); return; }
+  const { data, error } = await supabase.from('admin_portfolio_links').insert({ from_id: id, to_id: other, kind: 'related' }).select().single();
+  if (error) { $('#item-message').textContent = '연결하지 못했습니다(이미 연결돼 있을 수 있어요).'; return; }
+  links.push(data); renderLinkBox(id); render();
+});
+$('#item-links').addEventListener('click', async (event) => {
+  const open = event.target.closest('[data-link-open]');
+  if (open) { event.stopPropagation(); const it = items.find((x) => x.id === open.dataset.linkOpen); if (it) { $('#item-dialog').close(); openDialog(it); } return; }
+  const del = event.target.closest('[data-link-del]');
+  if (del) { event.stopPropagation(); const { error } = await supabase.from('admin_portfolio_links').delete().eq('id', del.dataset.linkDel);
+    if (error) { $('#item-message').textContent = '연결을 해제하지 못했습니다.'; return; }
+    links = links.filter((l) => l.id !== del.dataset.linkDel); renderLinkBox($('#item-id').value); render(); return; }
+  const pd = event.target.closest('[data-link-pend]');
+  if (pd) { event.stopPropagation(); pendingLinks.splice(Number(pd.dataset.linkPend), 1); renderLinkBox(''); }
+});
+$('#follow-item').addEventListener('click', () => {
+  const parent = items.find((x) => x.id === $('#item-id').value); if (!parent) return;
+  $('#item-dialog').close(); openDialog();
+  $('#dialog-title').textContent = 'Action 추가 · 이어서';
+  $('#item-business').value = parent.business_unit; $('#item-product').value = parent.product || '';
+  $('#item-title').value = `${parent.title} — 이어서`; $('#item-priority').value = parent.priority || 'MEDIUM';
+  $('#item-owner').value = parent.owner_name || 'Alfred Park';
+  pendingLinks = [{ other: parent.id, kind: 'follow_up' }]; renderLinkBox('');
+  $('#item-title').focus(); $('#item-title').select();
+});
 
 $('#add-button').addEventListener('click', () => openDialog());
 document.addEventListener('ap:new-action', (event) => {
@@ -368,9 +426,16 @@ $('#item-form').addEventListener('submit', async (event) => {
     owner_name: $('#item-owner').value.trim() || 'Alfred Park', dependency: $('#item-dependency').value.trim(), next_action: $('#item-next').value.trim(),
     updated_by: currentUser.id, updated_at: new Date().toISOString()
   };
-  const query = id ? supabase.from('admin_portfolio_items').update(payload).eq('id',id) : supabase.from('admin_portfolio_items').insert({ ...payload, created_by: currentUser.id, ...(pendingGrantId ? { grant_id: pendingGrantId } : {}) });
-  const { error } = await query;
-  if (error) { $('#item-message').textContent = '저장하지 못했습니다. 날짜와 입력값을 확인해 주세요.'; return; }
+  if (id && items.find((x) => x.id === id)?.status === 'DONE') { payload.status = 'DONE'; payload.progress = 100; }
+  const query = id ? supabase.from('admin_portfolio_items').update(payload).eq('id',id) : supabase.from('admin_portfolio_items').insert({ ...payload, created_by: currentUser.id, ...(pendingGrantId ? { grant_id: pendingGrantId } : {}) }).select('id').single();
+  const { data: saved, error } = await query;
+  if (error) { $('#item-message').textContent = /done_locked/.test(error.message || '') ? '완료된 Action은 상태를 바꿀 수 없어요. 「이어서 새 Action」으로 만들어 주세요.' : '저장하지 못했습니다. 날짜와 입력값을 확인해 주세요.'; return; }
+  if (!id && saved?.id && pendingLinks.length) {
+    const rows = pendingLinks.map((p) => p.kind === 'follow_up' ? { from_id: p.other, to_id: saved.id, kind: 'follow_up' } : { from_id: saved.id, to_id: p.other, kind: 'related' });
+    const { error: le } = await supabase.from('admin_portfolio_links').insert(rows);
+    if (le) alert('Action은 저장했지만 연결을 만들지 못했습니다. 편집 창에서 다시 연결해 주세요.');
+  }
+  pendingLinks = [];
   $('#item-dialog').close(); await loadItems();
 });
 

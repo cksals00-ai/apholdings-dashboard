@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" href="/img/ap_mark.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.19.2-cal-narrow">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.20-action-links">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
   <link rel="stylesheet" href="/admin/content.css?v=1.1-dashboard">
   <link rel="stylesheet" href="/admin/business-plan.css?v=1.0.0">
@@ -285,9 +285,12 @@
         <label>담당자<input id="item-owner" maxlength="120" value="Alfred Park"></label>
         <label class="span-2">대기·의존사항<textarea id="item-dependency" rows="2" maxlength="1000"></textarea></label>
         <label class="span-2">다음 행동<textarea id="item-next" rows="2" maxlength="1000"></textarea></label>
+        <div class="span-2 link-box"><span class="link-box-label">연결된 Action</span><div id="item-links" class="link-chips"></div>
+          <div class="link-add"><select id="item-link-add" aria-label="연결할 Action"></select><button id="item-link-button" type="button" class="secondary">연결</button></div></div>
       </div>
+      <p id="item-done-note" class="done-note" hidden>완료된 Action은 상태를 바꿀 수 없어요. 이어서 할 일이 있으면 「이어서 새 Action」으로 만들면 이 Action과 연결됩니다.</p>
       <p id="item-message" class="form-message" role="alert"></p>
-      <div class="dialog-actions"><button id="delete-item" type="button" class="danger" hidden>삭제</button><span></span><button type="button" class="secondary" data-close>취소</button><button type="submit" class="primary">저장</button></div>
+      <div class="dialog-actions"><button id="delete-item" type="button" class="danger" hidden>삭제</button><button id="follow-item" type="button" class="secondary" hidden>이어서 새 Action</button><span></span><button type="button" class="secondary" data-close>취소</button><button type="submit" class="primary">저장</button></div>
     </form>
   </dialog>
 
@@ -360,6 +363,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.19.2-cal-narrow"></script>
+  <script type="module" src="/admin/admin.js?v=1.20-action-links"></script>
 </body>
 </html>

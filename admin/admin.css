@@ -251,3 +251,11 @@
 .ap-cal-panel{container-type:inline-size}.cal-chip{-webkit-line-clamp:3;padding:4px 6px}
 .cal-agenda-day{grid-template-columns:92px 1fr;align-items:start}.cal-agenda .cal-chip{white-space:normal;font-size:.8rem;padding:6px 10px}
 @container (max-width: 980px){.cal-grid{display:none}.cal-agenda{display:grid;gap:10px}.cal-agenda-day{display:grid;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px}.cal-agenda-day b{font-size:.84rem;padding-top:5px}.cal-agenda-day.today b{color:var(--blue)}.cal-agenda-day div{display:flex;flex-wrap:wrap;gap:6px}}
+/* Action 연결 · 완료 잠금 */
+.link-box{display:grid;gap:8px;margin-bottom:16px}.link-box-label{color:#344054;font-size:.875rem;font-weight:650}.link-chips{display:flex;flex-wrap:wrap;gap:6px}.link-empty{color:var(--muted);font-size:.82rem}
+.link-chip{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:99px;background:#f8fafc;overflow:hidden;max-width:100%}.link-chip[data-status="DONE"]{background:#eefaf4;border-color:#cdeedd}
+.link-open{border:0;background:transparent;padding:6px 4px 6px 12px;font-size:.8rem;font-weight:650;color:var(--ink);cursor:pointer;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:520px}.link-open em{font-style:normal;color:var(--blue);font-weight:850;margin-right:4px}.link-open small{color:var(--muted);margin-left:4px}
+.link-x{border:0;background:transparent;color:var(--muted);padding:6px 10px 6px 4px;cursor:pointer;font-size:1rem}.link-x:hover{color:var(--red)}
+.link-add{display:flex;gap:8px}.link-add select{flex:1;min-width:0}.link-badge{color:#344fc7;font-weight:800}
+.done-note{margin:4px 0 0;padding:10px 12px;border-radius:10px;background:#eefaf4;color:#136246;font-size:.84rem}
+select:disabled,input:disabled{background:#f2f4f7;color:#667085}
