@@ -1305,9 +1305,9 @@
     {
      "id": "own",
      "label": "02 · Shipped by AP",
-     "title": "Only what she used.\nTo your door.",
+     "title": "The reasons, too.\nTo your door.",
      "soft": true,
-     "desc": "Only what LIA has used and chosen goes on the shelf. Order, and AP handles payment through delivery.",
+     "desc": "Only what LIA picked after checking ingredients, reviews and price goes on the shelf. Order, and AP handles payment through delivery.",
      "blocks": [
       {
        "type": "media",
@@ -1547,7 +1547,7 @@
      "id": "week",
      "label": "01 · When you follow",
      "title": "Every week,\nthis is what arrives.",
-     "desc": "A 30-second stretch on Monday, an app review on Wednesday, a Korea story on Friday, a folktale on the weekend. English captions. Stories every day.",
+     "desc": "A 30-second stretch on Monday, an app walkthrough on Wednesday, a Korea story on Friday, a folktale on the weekend. English captions. Stories every day.",
      "blocks": [
       {
        "type": "media",
@@ -1569,7 +1569,7 @@
         "Korea, Explained — the real questions no guidebook answers",
         "Tiger Tales — folktales with the four tiger siblings",
         "Desk Body — 30 seconds to undo a day of sitting",
-        "First User — first-hand reviews of AP apps"
+        "First User — a first look at AP apps, screen by screen"
        ]
       }
      ]
@@ -1615,8 +1615,8 @@
     {
      "id": "picks",
      "label": "05 · Lia Select",
-     "title": "Tried,\nthen chosen.",
-     "desc": "K-beauty LIA used, filmed and reviewed, downsides included. Sun care · essence · cushion · mask · tint · cleanser. See it in the video, buy through the profile link.",
+     "title": "Checked,\nthen chosen.",
+     "desc": "K-beauty LIA picks after checking ingredients and reviews, downsides included. Sun care · essence · cushion · mask · tint · cleanser. See it in the video, buy through the profile link.",
      "blocks": [
       {
        "type": "gallery",
@@ -1694,7 +1694,7 @@
      "id": "shop",
      "label": "07 · Buy what you saw",
      "title": "What you saw in the video,\nthrough the profile link.",
-     "desc": "What LIA used is on Lia Select; stays, tours, Coupang and Shopee stay on the sites you already use. Partner links are disclosed and prices are the same.",
+     "desc": "What LIA picks is on Lia Select; stays, tours, Coupang and Shopee stay on the sites you already use. Partner links are disclosed and prices are the same.",
      "blocks": [
       {
        "type": "flow",
@@ -2046,8 +2046,16 @@
       {
        "type": "actions",
        "items": [
-        ["https://youtu.be/vpZ7JeHaz6I", "Watch EP1 on YouTube", "primary"],
-        ["https://www.youtube.com/@hangeulcubs", "Channel @hangeulcubs", "link"]
+        [
+         "https://youtu.be/vpZ7JeHaz6I",
+         "Watch EP1 on YouTube",
+         "primary"
+        ],
+        [
+         "https://www.youtube.com/@hangeulcubs",
+         "Channel @hangeulcubs",
+         "link"
+        ]
        ]
       }
      ]
@@ -2178,10 +2186,10 @@
   {
    "id": "liaselect",
    "name": "Lia Select",
-   "tag": "Tried,\nthen chosen.",
+   "tag": "Checked,\nthen chosen.",
    "status": "audience",
    "role": "LIA SELECT · K-BEAUTY",
-   "desc": "K-beauty LIA used, filmed and reviewed, downsides included.\nOnly verified Korean cosmetics on this shelf. Short videos, honest reviews, partner links.",
+   "desc": "K-beauty LIA picks after checking ingredients and reviews, downsides included.\nOnly Korean cosmetics with checked ingredient lists on this shelf. Short videos, honest introductions, partner links.",
    "note": "Product images provided by each brand · purchase links in LIA's channel profile.",
    "flow": [
     "Discover",
@@ -2243,9 +2251,9 @@
     {
      "id": "reviews",
      "label": "02 · Lia Reviews",
-     "title": "Starting with the moment of use.",
+     "title": "Starting with the close-up.",
      "soft": true,
-     "desc": "Sunscreen · mask · lip tint. Fifteen seconds of LIA trying it herself.",
+     "desc": "Sunscreen · mask · lip tint. Fifteen seconds of LIA introducing it. LIA is an AI-made character.",
      "blocks": [
       {
        "type": "videos",
@@ -2273,7 +2281,7 @@
      "id": "how",
      "label": "03 · How it works",
      "title": "From LIA's shelf\nto your cart.",
-     "desc": "LIA using it in a short video → only what she recommends goes on the shelf → partner link in LIA's profile · local delivery.",
+     "desc": "LIA introduces it in a short video → only what she picks goes on the shelf → partner link in LIA's profile · local delivery.",
      "blocks": [
       {
        "type": "flow",
@@ -2298,7 +2306,7 @@
      "label": "04 · Today",
      "title": "On LIA's channel.",
      "cta": true,
-     "desc": "Purchase links in the Instagram profile. Tried, then chosen.",
+     "desc": "Purchase links in the Instagram profile. Checked, then chosen.",
      "blocks": [
       {
        "type": "actions",
