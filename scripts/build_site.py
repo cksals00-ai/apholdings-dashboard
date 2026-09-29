@@ -78,7 +78,7 @@ def global_section(l):
 def about(l):
  secs=DATA[l]['copy'].get('aboutSections')
  if secs:
-  return f'<section class="page-hero"><div class="wrap"><span class="eyebrow">ABOUT AP HOLDINGS</span><h1>{e(c(l,"founderTitle"))}</h1><p class="lead">{e(c(l,"origin"))}</p></div></section>'+sections(secs)
+  return f'<section class="page-hero"><div class="wrap"><span class="eyebrow">ABOUT AP HOLDINGS</span><h1>{e(c(l,"founderTitle"))}</h1><p class="lead">{e(c(l,"origin"))}</p><div class="actions hero-actions">{link("/media/docs/apholdings_company_profile_2026-09.pdf",("회사소개서 PDF · 2026.09" if l=="ko" else "Company profile PDF · Korean · Sept 2026"),"button primary")}</div></div></section>'+sections(secs)
  caps='<ul class="founder-list">'+''.join('<li>'+x+'</li>' for x in CAPABILITIES)+'</ul>'
  return f'<section id="about" class="section"><div class="wrap"><span class="eyebrow">ABOUT AP HOLDINGS</span><div class="split"><div><h2>{c(l,"founderTitle")}</h2><p style="margin-top:28px">{c(l,"origin")}</p></div><div><h3>Founder Capability</h3><p style="margin-top:24px">{c(l,"founder")}</p>{caps}<p class="note">{c(l,"firewall")}</p>{link(f"/{l}/ir/",'IR / INVESTORS')}</div></div></div></section>'
 def lab(l,full=False):
