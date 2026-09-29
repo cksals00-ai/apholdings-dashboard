@@ -165,3 +165,18 @@ html[lang=en] figure.wide::after{content:'← swipe to see more'}
 .rgrg-copy .visual-caption{font-size:11.5px;margin:6px 0 16px}
 .rgrg-copy .text-link{font-size:13px;padding:11px 20px}
 }
+/* (9/29 2차) RGRG 카드 모바일 — 한 번 더 줄임: 그림 칸 낮추고 설명·주석 정리 */
+@media(max-width:700px){
+.rgrg-stage{padding:14px 14px 0}
+.rgrg-title{font-size:24px;margin-bottom:10px}
+.rgrg-star{font-size:24px;right:14px;top:10px}
+.rgrg-copy{padding:22px 22px 24px}
+.rgrg-copy .eyebrow{font-size:10.5px}
+.rgrg-copy h4{font-size:21px;line-height:1.35;margin:10px 0 6px}
+.rgrg-copy p{font-size:14px;line-height:1.55;margin:6px 0}
+.rgrg-stats{margin:12px 0 2px;padding-top:12px;gap:8px}
+.rgrg-stats b{font-size:17px}
+.rgrg-stats span{font-size:11px}
+.rgrg-copy .visual-caption{display:none}
+.rgrg-copy .text-link{font-size:13px;padding:10px 18px;margin-top:10px}
+}
