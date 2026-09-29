@@ -24,7 +24,7 @@
 .asset-kind[data-kind="public_db"]{background:#ecfdf3;color:var(--green)}
 .asset-kind[data-kind="derived"]{background:#eef2ff;color:var(--blue)}
 .asset-kind[data-kind="dictionary"],.asset-kind[data-kind="rule"]{background:#fff7ed;color:var(--orange)}
-.asset-kind[data-kind="paper"]{background:#fdf2fa;color:#a1266f}
+.asset-kind[data-kind="paper"]{background:#fdf2fa;color:#a1266f}.asset-kind[data-kind="stat"]{background:#eefbfd;color:#0e7490}.asset-table td.title a{color:inherit;text-decoration:underline;text-decoration-color:#c7cfdb;text-underline-offset:3px}
 .asset-growth{margin-top:8px;color:var(--muted);font-size:.8rem}
 @media(max-width:900px){.asset-filters{grid-template-columns:1fr 1fr}}
 #asset-form{padding:25px}

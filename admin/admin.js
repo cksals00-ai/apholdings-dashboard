@@ -596,7 +596,7 @@ $('#trading-retry').addEventListener('click', loadTradingDocument);
 
 // ── 데이터 자산 원장 (2026-09-26) — admin_data_assets, 소유자만 읽고 쓴다 ──
 const ASSET_PRODUCTS = { safe: '세이프리스트', light: '라이트리스트', common: '공통' };
-const ASSET_KINDS = { public_db: '공공 원천 DB', derived: '가공 판정 DB', dictionary: '사전', rule: '판정 규칙', paper: '논문', other: '기타' };
+const ASSET_KINDS = { public_db: '공공 원천 DB', derived: '가공 판정 DB', dictionary: '사전', rule: '판정 규칙', paper: '논문', stat: '통계', other: '기타' };
 const ASSET_STATUS = { active: '사용 중', planned: '예정', retired: '이전 버전' };
 let assets = [];
 let assetsLoaded = false;
@@ -630,7 +630,7 @@ function renderAssetCards() {
     ['공공 원천 DB', `${fmtBig(sum('public_db'))}행`, `${cnt(['public_db'])}종 · 식약처 등 전량 수집`],
     ['가공 판정 DB', `${fmtBig(sum('derived'))}건`, `${cnt(['derived'])}종 · 앱·AI 커넥터가 쓰는 자산`],
     ['사전 · 규칙', `${cnt(['dictionary', 'rule'])}종`, '오탐·누락을 잡아 온 판단 기준'],
-    ['논문', `${cnt(['paper'])}편`, '분석해 쌓을 예정'],
+    ['논문 · 통계', `${cnt(['paper'])}편 · ${cnt(['stat'])}건`, `최신 ${live.filter((a) => ['paper', 'stat'].includes(a.kind)).map((a) => a.collected_on || '').sort().pop() || '—'} · 매일 아침 자동 추가`],
     ['전체 기록', `${assets.length}건`, `이전 버전 포함 · 최신 ${assets.map((a) => a.collected_on || '').sort().pop() || '—'}`]
   ];
   $('#asset-cards').innerHTML = cards.map(([l, v, n]) => `<article class="summary-card"><span>${l}</span><b>${v}</b><small>${escapeHtml(n)}</small></article>`).join('');
@@ -643,7 +643,7 @@ function renderAssets() {
     <td class="date">${a.collected_on || '—'}</td>
     <td>${ASSET_PRODUCTS[a.product] || a.product}</td>
     <td><span class="asset-kind" data-kind="${a.kind}">${ASSET_KINDS[a.kind] || a.kind}</span>${a.status !== 'active' ? `<div class="asset-growth">${ASSET_STATUS[a.status]}</div>` : ''}</td>
-    <td class="title"><b>${escapeHtml(a.title)}</b>${a.note ? `<small>${escapeHtml(a.note)}</small>` : ''}</td>
+    <td class="title"><b>${a.url && ['paper', 'stat'].includes(a.kind) ? `<a href="${escapeHtml(a.url)}" target="_blank" rel="noopener">${escapeHtml(a.title)}</a>` : escapeHtml(a.title)}</b>${a.note ? `<small>${escapeHtml(a.note)}</small>` : ''}</td>
     <td class="num">${fmtNum(a.records)} ${escapeHtml(a.unit || '')}${a.size_bytes ? `<div class="asset-growth">${(a.size_bytes / 1048576).toLocaleString('ko-KR', { maximumFractionDigits: 1 })} MB</div>` : ''}</td>
     <td>${escapeHtml(a.provider || '')}${a.source ? `<div class="asset-growth">${escapeHtml(a.source)}</div>` : ''}</td>
     <td>${escapeHtml(a.refresh || '—')}${a.as_of ? `<div class="asset-growth">기준 ${escapeHtml(a.as_of)}</div>` : ''}</td>
@@ -677,7 +677,7 @@ function assetsToCsv(list) {
   $('#asset-f-product').innerHTML = Object.entries(ASSET_PRODUCTS).map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
   $('#asset-f-kind').innerHTML = Object.entries(ASSET_KINDS).map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
   ['#asset-product', '#asset-kind', '#asset-status', '#asset-search'].forEach((s) => $(s).addEventListener('input', renderAssets));
-  $('#asset-rows').addEventListener('click', (e) => { const tr = e.target.closest('[data-asset]'); if (tr) openAssetDialog(assets.find((a) => a.id === tr.dataset.asset)); });
+  $('#asset-rows').addEventListener('click', (e) => { if (e.target.closest('a')) return; const tr = e.target.closest('[data-asset]'); if (tr) openAssetDialog(assets.find((a) => a.id === tr.dataset.asset)); });
   $('#asset-add').addEventListener('click', () => openAssetDialog());
   document.querySelectorAll('[data-asset-close]').forEach((b) => b.addEventListener('click', () => $('#asset-dialog').close()));
   $('#asset-export').addEventListener('click', () => {
