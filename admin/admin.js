@@ -28,7 +28,8 @@ const STATUS_ORDER = Object.keys(STATUSES);
 let items = [];
 let pendingGrantId = null;
 let links = [];            // admin_portfolio_links — Action 간 연결 (follow_up: 이전→이어서, related: 관련)
-let pendingLinks = [];     // 새 Action 저장 뒤 만들 연결 [{other, kind, dir}]
+let pendingLinks = [];
+let people = [];           // admin_people — 담당자 명부(닉네임)     // 새 Action 저장 뒤 만들 연결 [{other, kind, dir}]
 let currentUser = null;
 let recoveryMode = false;
 let tradingGeneration = 0;
@@ -159,13 +160,14 @@ $('#logout').addEventListener('click', async () => { await supabase.auth.signOut
 
 async function loadItems() {
   $('.workspace').classList.add('loading');
-  const [{ data, error }, linkRes] = await Promise.all([
+  const [{ data, error }, linkRes, peopleRes] = await Promise.all([
     supabase.from('admin_portfolio_items').select('*').order('sort_order').order('created_at'),
-    supabase.from('admin_portfolio_links').select('*')
+    supabase.from('admin_portfolio_links').select('*'),
+    supabase.from('admin_people').select('*').order('sort').order('created_at')
   ]);
   $('.workspace').classList.remove('loading');
   if (error) { alert('진행 현황을 불러오지 못했습니다. 다시 로그인해 주세요.'); return; }
-  items = data || []; links = linkRes.error ? [] : (linkRes.data || []);
+  items = data || []; links = linkRes.error ? [] : (linkRes.data || []); people = peopleRes.error ? [] : (peopleRes.data || []); renderPeople();
   render();
   document.dispatchEvent(new CustomEvent('ap:items'));
 }
@@ -173,10 +175,12 @@ async function loadItems() {
 function filteredItems() {
   const business = $('#business-filter').value;
   const status = $('#status-filter').value;
+  const owner = $('#owner-filter')?.value || 'ALL';
   const query = $('#search-filter').value.trim().toLowerCase();
   return items.filter((item) =>
     (business === 'ALL' || item.business_unit === business) &&
     (status === 'ALL' || item.status === status) &&
+    (owner === 'ALL' || item.owner_name === owner) &&
     (!query || `${item.product} ${item.title} ${item.description}`.toLowerCase().includes(query))
   );
 }
@@ -224,7 +228,7 @@ function renderPriority(list) {
 function renderBoard(list) {
   $('#status-board').innerHTML = STATUS_ORDER.map((status) => {
     const rows = list.filter((x) => x.status === status);
-    return `<section class="status-column"><div class="status-column-head"><h2>${STATUSES[status]}</h2><span class="status-column-count">${rows.length}</span></div><div class="task-stack">${rows.map((item) => `<article class="task-card" data-edit="${item.id}"><div class="meta"><span>${escapeHtml(BUSINESSES[item.business_unit])}</span><span>${escapeHtml(item.product)}</span>${linkBadge(item.id)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.next_action || item.dependency || '')}</p><div class="progress-track"><div class="progress-bar" style="width:${item.progress}%"></div></div></article>`).join('') || '<p class="empty">없음</p>'}</div></section>`;
+    return `<section class="status-column"><div class="status-column-head"><h2>${STATUSES[status]}</h2><span class="status-column-count">${rows.length}</span></div><div class="task-stack">${rows.map((item) => `<article class="task-card" data-edit="${item.id}"><div class="meta"><span>${escapeHtml(BUSINESSES[item.business_unit])}</span><span>${escapeHtml(item.product)}</span><span class="owner-chip">${escapeHtml(item.owner_name || '')}</span>${linkBadge(item.id)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.next_action || item.dependency || '')}</p><div class="progress-track"><div class="progress-bar" style="width:${item.progress}%"></div></div></article>`).join('') || '<p class="empty">없음</p>'}</div></section>`;
   }).join('');
 }
 
@@ -347,7 +351,7 @@ function openDialog(item = null) {
   $('#item-start').value = item?.start_date || '';
   $('#item-end').value = item?.end_date || '';
   $('#item-progress').value = item?.progress ?? 0;
-  $('#item-owner').value = item?.owner_name || 'Alfred Park';
+  fillOwnerSelect(item?.owner_name || '대표');
   $('#item-dependency').value = item?.dependency || '';
   $('#item-next').value = item?.next_action || '';
   const done = item?.status === 'DONE';
@@ -357,6 +361,56 @@ function openDialog(item = null) {
   renderLinkBox(item?.id || '');
   $('#item-dialog').showModal();
 }
+
+// ── 담당자 명부 ──
+function activePeople() { return people.filter((x) => x.active); }
+function fillOwnerSelect(current) {
+  const list = activePeople(); const names = list.map((x) => x.nickname);
+  const extra = current && !names.includes(current) ? [current] : [];
+  $('#item-owner').innerHTML = [...names, ...extra].map((n) => `<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join('') + '<option value="__add">+ 담당자 추가…</option>';
+  $('#item-owner').value = current && [...names, ...extra].includes(current) ? current : (names[0] || '');
+  $('#item-owner').dataset.prev = $('#item-owner').value;
+}
+$('#item-owner').addEventListener('change', async () => {
+  const sel = $('#item-owner'); if (sel.value !== '__add') { sel.dataset.prev = sel.value; return; }
+  const nick = (prompt('새 담당자 닉네임 (예: 주문팀장)') || '').trim();
+  if (!nick) { sel.value = sel.dataset.prev || ''; return; }
+  const { data, error } = await supabase.from('admin_people').insert({ nickname: nick, role: 'staff', sort: 100 }).select().single();
+  if (error) { $('#item-message').textContent = '담당자를 추가하지 못했습니다(같은 닉네임이 있을 수 있어요).'; sel.value = sel.dataset.prev || ''; return; }
+  people.push(data); renderPeople(); fillOwnerSelect(nick);
+});
+function renderPeople() {
+  const f = $('#owner-filter'); if (f) { const v = f.value; f.innerHTML = '<option value="ALL">전체 담당자</option>' + activePeople().map((x) => `<option value="${escapeHtml(x.nickname)}">${escapeHtml(x.nickname)}</option>`).join(''); f.value = [...f.options].some((o) => o.value === v) ? v : 'ALL'; }
+  const box = $('#people-list'); if (!box) return;
+  const count = (p) => items.filter((i) => i.owner_id === p.id && !['DONE','CANCELLED'].includes(i.status)).length;
+  const roleName = { owner: '대표', staff: '사람', ai: 'AI' };
+  box.innerHTML = people.map((p) => `<div class="people-row${p.active ? '' : ' off'}" data-person="${p.id}">
+    <input class="people-nick-edit" value="${escapeHtml(p.nickname)}" maxlength="30" aria-label="닉네임">
+    <span class="people-role">${roleName[p.role] || p.role}</span>
+    <input class="people-email-edit" type="email" value="${escapeHtml(p.email || '')}" maxlength="120" placeholder="연결할 계정 이메일" aria-label="연결할 계정 이메일">
+    <span class="people-count">진행 Action ${count(p)}</span>
+    <button type="button" class="secondary people-save">저장</button>
+    ${p.role === 'owner' ? '' : `<button type="button" class="text-link people-toggle">${p.active ? '숨기기' : '다시 쓰기'}</button>`}
+  </div>`).join('');
+}
+$('#people-list')?.addEventListener('click', async (event) => {
+  const row = event.target.closest('[data-person]'); if (!row) return; const id = row.dataset.person; const p = people.find((x) => x.id === id);
+  let patch = null;
+  if (event.target.closest('.people-save')) patch = { nickname: row.querySelector('.people-nick-edit').value.trim(), email: row.querySelector('.people-email-edit').value.trim() || null };
+  if (event.target.closest('.people-toggle')) patch = { active: !p.active };
+  if (!patch || (patch.nickname !== undefined && !patch.nickname)) return;
+  const { data, error } = await supabase.from('admin_people').update(patch).eq('id', id).select().single();
+  $('#people-message').textContent = error ? '저장하지 못했습니다(같은 닉네임이 있을 수 있어요).' : '저장했습니다.';
+  if (!error) { Object.assign(p, data); await loadItems(); }
+});
+$('#people-form')?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const row = { nickname: $('#people-nick').value.trim(), role: $('#people-role').value, email: $('#people-email').value.trim() || null, sort: 100 };
+  if (!row.nickname) return;
+  const { data, error } = await supabase.from('admin_people').insert(row).select().single();
+  $('#people-message').textContent = error ? '추가하지 못했습니다(같은 닉네임이 있을 수 있어요).' : `「${row.nickname}」을(를) 담당자로 추가했습니다.`;
+  if (!error) { people.push(data); $('#people-form').reset(); renderPeople(); }
+});
 
 // ── Action 연결 ──
 function itemLinks(id) { return links.filter((l) => l.from_id === id || l.to_id === id); }
@@ -401,7 +455,7 @@ $('#follow-item').addEventListener('click', () => {
   $('#dialog-title').textContent = 'Action 추가 · 이어서';
   $('#item-business').value = parent.business_unit; $('#item-product').value = parent.product || '';
   $('#item-title').value = `${parent.title} — 이어서`; $('#item-priority').value = parent.priority || 'MEDIUM';
-  $('#item-owner').value = parent.owner_name || 'Alfred Park';
+  fillOwnerSelect(parent.owner_name || '대표');
   pendingLinks = [{ other: parent.id, kind: 'follow_up' }]; renderLinkBox('');
   $('#item-title').focus(); $('#item-title').select();
 });
@@ -423,7 +477,7 @@ $('#item-form').addEventListener('submit', async (event) => {
     business_unit: $('#item-business').value, product: $('#item-product').value.trim(), title: $('#item-title').value.trim(),
     description: $('#item-description').value.trim(), status: $('#item-status').value, priority: $('#item-priority').value,
     start_date: $('#item-start').value || null, end_date: $('#item-end').value || null, progress: Number($('#item-progress').value),
-    owner_name: $('#item-owner').value.trim() || 'Alfred Park', dependency: $('#item-dependency').value.trim(), next_action: $('#item-next').value.trim(),
+    owner_name: $('#item-owner').value || '대표', owner_id: people.find((x) => x.nickname === $('#item-owner').value)?.id || null, dependency: $('#item-dependency').value.trim(), next_action: $('#item-next').value.trim(),
     updated_by: currentUser.id, updated_at: new Date().toISOString()
   };
   if (id && items.find((x) => x.id === id)?.status === 'DONE') { payload.status = 'DONE'; payload.progress = 100; }

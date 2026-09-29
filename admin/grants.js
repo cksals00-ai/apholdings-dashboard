@@ -41,14 +41,14 @@ export function createGrants(db, getUser) {
   }
   function actionRow(a) {
     const late = a.end_date && a.end_date < today() && OPEN(a.status);
-    return `<li class="gr-act" data-status="${esc(a.status)}"><button type="button" data-edit="${esc(a.id)}"><span class="gr-owner" data-owner="${/claire/i.test(a.owner_name) ? 'claire' : 'alfred'}">${/claire/i.test(a.owner_name) ? '클레어' : '대표'}</span><span class="gr-act-t"><b>${esc(a.title)}</b>${a.next_action ? `<small>${esc(a.next_action)}</small>` : ''}</span><span class="gr-act-s">${esc(ACT[a.status] || a.status)}</span><time class="${late ? 'late' : ''}">${late ? '지남 · ' : ''}${day(a.end_date)}</time></button></li>`;
+    return `<li class="gr-act" data-status="${esc(a.status)}"><button type="button" data-edit="${esc(a.id)}"><span class="gr-owner" data-owner="${/claire|클레어/i.test(a.owner_name) ? 'claire' : 'alfred'}">${/claire|클레어/i.test(a.owner_name) ? '클레어' : '대표'}</span><span class="gr-act-t"><b>${esc(a.title)}</b>${a.next_action ? `<small>${esc(a.next_action)}</small>` : ''}</span><span class="gr-act-s">${esc(ACT[a.status] || a.status)}</span><time class="${late ? 'late' : ''}">${late ? '지남 · ' : ''}${day(a.end_date)}</time></button></li>`;
   }
   function render() {
     if (!strategy) { $('#gr-body').innerHTML = '<p class="empty">전략이 아직 없어요.</p>'; return; }
     const phases = strategy.phases || [], principles = strategy.principles || [];
     const g = grants.find(x => x.id === selected);
     const open = actions.filter(a => OPEN(a.status)).sort((a, b) => (a.end_date || '9999').localeCompare(b.end_date || '9999'));
-    const mine = open.filter(a => !/claire/i.test(a.owner_name));
+    const mine = open.filter(a => !/claire|클레어/i.test(a.owner_name));
     const watch = grants.filter(x => !x.phase), dropped = grants.filter(x => x.phase === 'dropped');
     $('#gr-body').innerHTML = `
       <section class="gr-hero panel"><p class="eyebrow">FUNDING STRATEGY · 지원금 유치 전략</p><h2>${esc(strategy.goal)}</h2><p>${esc(strategy.summary || '')}</p>

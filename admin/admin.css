@@ -259,3 +259,8 @@
 .link-add{display:flex;gap:8px}.link-add select{flex:1;min-width:0}.link-badge{color:#344fc7;font-weight:800}
 .done-note{margin:4px 0 0;padding:10px 12px;border-radius:10px;background:#eefaf4;color:#136246;font-size:.84rem}
 select:disabled,input:disabled{background:#f2f4f7;color:#667085}
+/* 담당자 */
+.filters{grid-template-columns:200px 170px 150px minmax(220px,1fr)}.owner-chip{background:#f1f3f7;border-radius:99px;padding:0 7px;color:#475467;font-weight:700}
+.people-panel{max-width:920px;margin-bottom:18px}.people-list{display:grid;gap:8px;margin:14px 0}.people-row{display:grid;grid-template-columns:150px 54px minmax(160px,1fr) 110px auto auto;gap:8px;align-items:center}.people-row.off{opacity:.5}.people-row input{padding:8px 10px}.people-role{font-size:.78rem;font-weight:800;color:var(--muted)}.people-count{font-size:.78rem;color:var(--muted)}.people-row .secondary{padding:8px 12px}.text-link{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:.82rem;text-decoration:underline}
+.people-form{display:grid;grid-template-columns:1fr 110px 1.4fr auto;gap:10px;align-items:end}.people-form label{margin:0}
+@media(max-width:760px){.people-row,.people-form{grid-template-columns:1fr}.filters{grid-template-columns:1fr}}

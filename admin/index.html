@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" href="/img/ap_mark.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.20-action-links">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.21-people">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
   <link rel="stylesheet" href="/admin/content.css?v=1.1-dashboard">
   <link rel="stylesheet" href="/admin/business-plan.css?v=1.0.0">
@@ -78,6 +78,7 @@
       <section class="filters" aria-label="필터">
         <label>사업부<select id="business-filter"><option value="ALL">전체 사업부</option></select></label>
         <label>상태<select id="status-filter"><option value="ALL">전체 상태</option></select></label>
+        <label>담당자<select id="owner-filter"><option value="ALL">전체 담당자</option></select></label>
         <label class="search-field">검색<input id="search-filter" type="search" placeholder="제품 또는 Action 검색"></label>
       </section>
 
@@ -248,6 +249,18 @@
       </section>
 
       <section id="settings-section" class="view-section" hidden>
+        <section class="panel connection-panel people-panel">
+          <div class="panel-head"><div><p class="eyebrow">PEOPLE</p><h2>담당자</h2></div><span class="status-pill">Action 담당자 목록</span></div>
+          <p>Action의 담당자로 고를 수 있는 사람입니다. 나중에 관리자 계정을 추가하면 여기서 닉네임을 정하고 그 계정 이메일을 적어 연결하세요. 닉네임을 바꾸면 담당 Action 이름도 함께 바뀝니다.</p>
+          <div id="people-list" class="people-list"></div>
+          <form id="people-form" class="people-form">
+            <label>닉네임<input id="people-nick" maxlength="30" required placeholder="예: 주문팀장"></label>
+            <label>역할<select id="people-role"><option value="staff">사람</option><option value="ai">AI</option></select></label>
+            <label>연결할 계정 이메일 (선택)<input id="people-email" type="email" maxlength="120" placeholder="계정을 만들면 적어 주세요"></label>
+            <button class="primary" type="submit">담당자 추가</button>
+          </form>
+          <p id="people-message" class="form-message" role="status"></p>
+        </section>
         <section class="panel connection-panel account-panel">
           <div class="panel-head"><div><p class="eyebrow">SECURITY</p><h2>관리자 계정</h2></div><span class="status-pill">OWNER ONLY</span></div>
           <p>현재 로그인한 관리자 계정의 비밀번호를 변경합니다. GitHub 로그인 연결은 그대로 유지됩니다.</p>
@@ -282,7 +295,7 @@
         <label>시작일<input id="item-start" type="date"></label>
         <label>종료일<input id="item-end" type="date"></label>
         <label>진행률<input id="item-progress" type="number" min="0" max="100" value="0"></label>
-        <label>담당자<input id="item-owner" maxlength="120" value="Alfred Park"></label>
+        <label>담당자<select id="item-owner" required></select></label>
         <label class="span-2">대기·의존사항<textarea id="item-dependency" rows="2" maxlength="1000"></textarea></label>
         <label class="span-2">다음 행동<textarea id="item-next" rows="2" maxlength="1000"></textarea></label>
         <div class="span-2 link-box"><span class="link-box-label">연결된 Action</span><div id="item-links" class="link-chips"></div>
@@ -363,6 +376,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.20-action-links"></script>
+  <script type="module" src="/admin/admin.js?v=1.21-people"></script>
 </body>
 </html>
