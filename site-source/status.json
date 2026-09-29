@@ -7,8 +7,8 @@
    "appId": "6805684034",
    "health": "https://safelist-mcp.onrender.com/health",
    "facts": {
-    "appVersion": "1.6",
-    "appDate": "2026-09-27",
+    "appVersion": "1.7",
+    "appDate": "2026-09-29",
     "appLive": true,
     "connector": "ok",
     "count": 666993
