@@ -53,7 +53,7 @@ def footer(l,social=False):
  cols=col('AP Holdings' ,[(('회사 소개' if ko else 'About'),f'/{l}/about/'),('IR / INVESTORS',f'/{l}/ir/'),('Founder’s Lab',f'/{l}/lab/'),(('관리자' if ko else 'Admin'),'/admin/')])
  cols+=col('Decision Intelligence',[(prod(l,x)['name'],ph(l,x)) for x in ['safe','light','revenue','travel']])
  cols+=col('Commerce',[(prod(l,x)['name'],ph(l,x)) for x in ['select','commerce','liaselect','craft','lia']])
- cols+=col('Play & Learn',[(prod(l,x)['name'],ph(l,x)) for x in ['rgrg','cubs','lastwave']]+[('AP Games','https://games.apholdings.kr/'+l+'/'),('AP Edu','https://edu.apholdings.kr/'+l+'/')])
+ cols+=col('Play & Learn',[(prod(l,x)['name'],ph(l,x)) for x in ['rgrg','cubs','lastwave']]+[('AP Games','https://games.apholdings.kr/'+l+'/'),('AP Edu','https://edu.apholdings.kr/'+l+'/'),('AP Entertainment','https://ent.apholdings.kr/'+l+'/')])
  cols+=col(('커넥터' if ko else 'Connectors'),[(('세이프리스트 · 클로드' if ko else 'Safelist · Claude'),'/business/safelist-connect.html'),(('라이트리스트 · 클로드' if ko else 'Lightlist · Claude'),'/business/lightlist-connect.html')])
  contact_line=f'<div class="footer-contact" id="contact"><div><span class="eyebrow">CONTACT</span><h3>Build with AP.</h3><p>{c(l,"contact")}</p></div><div>{link("mailto:"+CFG["contact"],CFG["contact"],"contact-email")}{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div>'
  yt='<a class="footer-social" href="https://www.youtube.com/@APHoldings" target="_blank" rel="noopener noreferrer" aria-label="AP Holdings YouTube '+('채널' if ko else 'channel')+'">▶ <span>@APHoldings</span></a>'
