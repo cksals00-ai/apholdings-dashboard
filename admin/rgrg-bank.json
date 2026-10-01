@@ -1,0 +1,897 @@
+{
+ "generatedAt": "2026-10-01T23:29:08+09:00",
+ "bankSize": 1205,
+ "categories": {
+  "certification": 125,
+  "elementary": 138,
+  "general": 188,
+  "high": 117,
+  "koreanHistory": 114,
+  "language": 112,
+  "middle": 130,
+  "nonsense": 130,
+  "vocabulary": 151
+ },
+ "longestChoiceBias": {
+  "overall": 24.3,
+  "byCategory": {
+   "certification": 22.6,
+   "elementary": 21.1,
+   "general": 27.9,
+   "high": 28.1,
+   "koreanHistory": 24.6,
+   "language": 26.7,
+   "middle": 21.7,
+   "nonsense": 23.3,
+   "vocabulary": 22.7
+  }
+ },
+ "ledger": [
+  {
+   "date": "2026-10-01",
+   "files": {
+    "master_bank.csv": {
+     "읽음": 50,
+     "통과": 48,
+     "탈락": 2
+    }
+   },
+   "accepted": 48,
+   "rejected": 2,
+   "bankSize": 1205
+  }
+ ],
+ "rejected": [
+  {
+   "file": "master_bank.csv",
+   "line": 16,
+   "sourceID": "Q00015",
+   "category": "general",
+   "prompt": "셰익스피어의 4대 비극에 속하지 않는 작품은?",
+   "reasons": [
+    "이미 은행에 있다 (hi-004(high))"
+   ],
+   "date": "2026-10-01"
+  },
+  {
+   "file": "master_bank.csv",
+   "line": 30,
+   "sourceID": "Q00029",
+   "category": "general",
+   "prompt": "훈민정음이 반포된 해는?",
+   "reasons": [
+    "이미 은행에 있다 (kh-022(koreanHistory))"
+   ],
+   "date": "2026-10-01"
+  }
+ ],
+ "recentLimit": 400,
+ "recent": [
+  {
+   "id": "ge-419",
+   "category": "general",
+   "prompt": "2019년 킬로그램 재정의에 쓰인 기본 상수는?",
+   "choices": [
+    "플랑크 상수",
+    "볼츠만 상수",
+    "중력 상수",
+    "전자의 전하량"
+   ],
+   "answerIndex": 0,
+   "explanation": "2019년부터 킬로그램은 플랑크 상수 등 정의 상수로 정의된다.",
+   "difficulty": 0.8,
+   "source": "https://en.wikipedia.org/wiki/Kilogram",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00050"
+  },
+  {
+   "id": "ge-418",
+   "category": "general",
+   "prompt": "로제타석으로 이집트 상형문자를 해독한 학자는?",
+   "choices": [
+    "샹폴리옹",
+    "아서 에번스",
+    "하워드 카터",
+    "슐리만"
+   ],
+   "answerIndex": 0,
+   "explanation": "장프랑수아 샹폴리옹은 1822년 로제타석을 바탕으로 이집트 문자 해독을 발표했다.",
+   "difficulty": 0.7,
+   "source": "https://en.wikipedia.org/wiki/Rosetta_Stone",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00049"
+  },
+  {
+   "id": "ge-417",
+   "category": "general",
+   "prompt": "전승 판소리 '다섯 마당'에 속하지 않는 것은?",
+   "choices": [
+    "변강쇠타령",
+    "적벽가",
+    "수궁가",
+    "흥보가"
+   ],
+   "answerIndex": 0,
+   "explanation": "판소리 다섯 마당은 춘향가·흥보가·심청가·적벽가·수궁가다.",
+   "difficulty": 0.7,
+   "source": "https://ko.wikipedia.org/wiki/%ED%8C%90%EC%86%8C%EB%A6%AC",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00048"
+  },
+  {
+   "id": "ge-416",
+   "category": "general",
+   "prompt": "사람 염색체는 46개다. 침팬지 등 다른 대형 유인원은?",
+   "choices": [
+    "48개",
+    "46개",
+    "50개",
+    "44개"
+   ],
+   "answerIndex": 0,
+   "explanation": "사람의 핵형은 46개이고 다른 대형 유인원은 48개의 염색체를 가진다.",
+   "difficulty": 0.8,
+   "source": "https://en.wikipedia.org/wiki/Karyotype",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00047"
+  },
+  {
+   "id": "ge-415",
+   "category": "general",
+   "prompt": "지진파 S파가 지구 외핵을 통과하지 못하는 까닭은?",
+   "choices": [
+    "외핵이 액체라서",
+    "외핵이 자성을 띠어서",
+    "외핵이 기체라서",
+    "외핵이 진공이라서"
+   ],
+   "answerIndex": 0,
+   "explanation": "S파는 액체를 통과하지 못하는데, 외핵은 녹은 액체 상태다.",
+   "difficulty": 0.7,
+   "source": "https://en.wikipedia.org/wiki/S_wave",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00046"
+  },
+  {
+   "id": "ge-414",
+   "category": "general",
+   "prompt": "1868년 일식 때 태양 스펙트럼에서 처음 발견된 원소는?",
+   "choices": [
+    "헬륨",
+    "아르곤",
+    "수소",
+    "네온"
+   ],
+   "answerIndex": 0,
+   "explanation": "헬륨은 1868년 일식 때 태양빛의 노란 스펙트럼선으로 처음 발견되었다.",
+   "difficulty": 0.7,
+   "source": "https://en.wikipedia.org/wiki/Helium",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00045"
+  },
+  {
+   "id": "ge-413",
+   "category": "general",
+   "prompt": "표준 88건반 피아노의 검은 건반 수는?",
+   "choices": [
+    "36개",
+    "32개",
+    "44개",
+    "40개"
+   ],
+   "answerIndex": 0,
+   "explanation": "현대 피아노는 흰 건반 52개와 검은 건반 36개, 모두 88개 건반이다.",
+   "difficulty": 0.7,
+   "source": "https://en.wikipedia.org/wiki/Piano",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00044"
+  },
+  {
+   "id": "ge-412",
+   "category": "general",
+   "prompt": "고흐가 '별이 빛나는 밤'을 그린 해는?",
+   "choices": [
+    "1889년",
+    "1869년",
+    "1879년",
+    "1899년"
+   ],
+   "answerIndex": 0,
+   "explanation": "'별이 빛나는 밤'은 1889년 6월 생레미드프로방스 요양원에서 그려졌다.",
+   "difficulty": 0.8,
+   "source": "https://en.wikipedia.org/wiki/The_Starry_Night",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00043"
+  },
+  {
+   "id": "ge-411",
+   "category": "general",
+   "prompt": "면적이 사하라 사막보다 큰 사막은?",
+   "choices": [
+    "남극 사막",
+    "고비 사막",
+    "아라비아 사막",
+    "칼라하리 사막"
+   ],
+   "answerIndex": 0,
+   "explanation": "사하라는 가장 큰 뜨거운 사막으로, 남극과 북극 사막보다만 작다.",
+   "difficulty": 0.7,
+   "source": "https://en.wikipedia.org/wiki/Sahara",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00042"
+  },
+  {
+   "id": "ge-410",
+   "category": "general",
+   "prompt": "금성이 한 번 자전하는 데 걸리는 시간(항성일)은?",
+   "choices": [
+    "약 243 지구일",
+    "약 1 지구일",
+    "약 59 지구일",
+    "약 225 지구일"
+   ],
+   "answerIndex": 0,
+   "explanation": "금성의 항성일은 243 지구일로, 공전 주기 224.7일보다 길다.",
+   "difficulty": 0.7,
+   "source": "https://en.wikipedia.org/wiki/Venus",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00041"
+  },
+  {
+   "id": "ge-409",
+   "category": "general",
+   "prompt": "그레고리력에서 윤년이 아닌 해는?",
+   "choices": [
+    "1900년",
+    "1600년",
+    "2400년",
+    "2000년"
+   ],
+   "answerIndex": 0,
+   "explanation": "100으로 나누어떨어지지만 400으로는 나누어떨어지지 않는 1900년은 평년이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Leap_year",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00040"
+  },
+  {
+   "id": "ge-408",
+   "category": "general",
+   "prompt": "꿀벌의 8자 춤(와글 댄스)이 알려 주는 정보는?",
+   "choices": [
+    "먹이의 방향과 거리",
+    "날씨 변화",
+    "여왕벌의 위치",
+    "천적의 출현"
+   ],
+   "answerIndex": 0,
+   "explanation": "꿀벌은 8자 춤으로 꽃·물·새 둥지 후보지의 방향과 거리를 전달한다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Waggle_dance",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00039"
+  },
+  {
+   "id": "ge-407",
+   "category": "general",
+   "prompt": "문어가 가진 심장의 개수는?",
+   "choices": [
+    "3개",
+    "4개",
+    "1개",
+    "2개"
+   ],
+   "answerIndex": 0,
+   "explanation": "문어는 온몸 순환용 심장 1개와 아가미 심장 2개, 모두 3개의 심장을 가진다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Octopus",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00038"
+  },
+  {
+   "id": "ge-406",
+   "category": "general",
+   "prompt": "해마에서 알을 배 주머니에 품어 기르는 쪽은?",
+   "choices": [
+    "수컷",
+    "암컷",
+    "둘 다 품지 않음",
+    "암수가 번갈아"
+   ],
+   "answerIndex": 0,
+   "explanation": "암컷 해마가 수컷의 육아낭에 알을 넣으면 수컷이 이를 품는다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Seahorse",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00037"
+  },
+  {
+   "id": "ge-405",
+   "category": "general",
+   "prompt": "스테인리스강이 녹슬지 않게 하는 핵심 첨가 원소는?",
+   "choices": [
+    "크로뮴",
+    "주석",
+    "마그네슘",
+    "납"
+   ],
+   "answerIndex": 0,
+   "explanation": "스테인리스강은 크로뮴을 함유해 녹과 부식에 강한 철 합금이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Stainless_steel",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00036"
+  },
+  {
+   "id": "ge-404",
+   "category": "general",
+   "prompt": "피사의 사탑은 원래 어떤 용도의 건축물인가?",
+   "choices": [
+    "대성당의 종탑",
+    "천문 관측탑",
+    "성벽 감시탑",
+    "항구의 등대"
+   ],
+   "answerIndex": 0,
+   "explanation": "피사의 사탑은 피사 대성당의 독립된 종탑(캄파닐레)이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00035"
+  },
+  {
+   "id": "ge-403",
+   "category": "general",
+   "prompt": "위성 중 유일하게 짙은 대기를 가진 것으로 알려진 것은?",
+   "choices": [
+    "타이탄",
+    "이오",
+    "유로파",
+    "가니메데"
+   ],
+   "answerIndex": 0,
+   "explanation": "토성의 위성 타이탄은 짙은 대기를 가진 유일한 위성으로 알려져 있다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Titan_(moon)",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00034"
+  },
+  {
+   "id": "ge-402",
+   "category": "general",
+   "prompt": "순수한 물의 밀도가 가장 큰 온도에 가장 가까운 것은?",
+   "choices": [
+    "약 4 ℃",
+    "약 −4 ℃",
+    "0 ℃",
+    "약 10 ℃"
+   ],
+   "answerIndex": 0,
+   "explanation": "물의 밀도는 약 3.98℃에서 최대가 되고 그 이후로는 줄어든다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Properties_of_water",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00033"
+  },
+  {
+   "id": "ge-401",
+   "category": "general",
+   "prompt": "1901년 사람의 주요 혈액형을 처음 구분한 과학자는?",
+   "choices": [
+    "카를 란트슈타이너",
+    "윌리엄 하비",
+    "루이 파스퇴르",
+    "로베르트 코흐"
+   ],
+   "answerIndex": 0,
+   "explanation": "카를 란트슈타이너는 1901년 주요 혈액형을 구분해 현대 혈액형 분류를 세웠다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Karl_Landsteiner",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00032"
+  },
+  {
+   "id": "ge-400",
+   "category": "general",
+   "prompt": "두부를 굳히는 간수(니가리)의 주성분은?",
+   "choices": [
+    "염화마그네슘",
+    "황산구리",
+    "탄산칼슘",
+    "염화나트륨"
+   ],
+   "answerIndex": 0,
+   "explanation": "간수는 바닷물에서 염화나트륨을 뺀 뒤 얻으며 주성분은 염화마그네슘이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Tofu",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00031"
+  },
+  {
+   "id": "ge-399",
+   "category": "general",
+   "prompt": "일본 전통 시 하이쿠의 음(音) 구성은?",
+   "choices": [
+    "5-7-5",
+    "5-7-5-7-7",
+    "7-5-7",
+    "7-7-7"
+   ],
+   "answerIndex": 0,
+   "explanation": "전통 하이쿠는 5-7-5 패턴의 17음으로 이루어진다.",
+   "difficulty": 0.4,
+   "source": "https://en.wikipedia.org/wiki/Haiku",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00030"
+  },
+  {
+   "id": "ge-398",
+   "category": "general",
+   "prompt": "베토벤 교향곡 9번 '환희의 송가' 가사의 원작 시인은?",
+   "choices": [
+    "프리드리히 실러",
+    "괴테",
+    "하인리히 하이네",
+    "릴케"
+   ],
+   "answerIndex": 0,
+   "explanation": "4악장 가사는 실러의 시 '환희에 부쳐'를 바탕으로 했다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Symphony_No._9_(Beethoven)",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00028"
+  },
+  {
+   "id": "ge-397",
+   "category": "general",
+   "prompt": "다빈치의 '최후의 만찬' 벽화가 있는 도시는?",
+   "choices": [
+    "밀라노",
+    "베네치아",
+    "로마",
+    "피렌체"
+   ],
+   "answerIndex": 0,
+   "explanation": "'최후의 만찬'은 밀라노 산타 마리아 델레 그라치에 수도원 식당에 있다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/The_Last_Supper_(Leonardo)",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00027"
+  },
+  {
+   "id": "ge-396",
+   "category": "general",
+   "prompt": "호숫가가 지구 육지에서 가장 낮은 곳인 호수는?",
+   "choices": [
+    "사해",
+    "아랄해",
+    "카스피해",
+    "그레이트솔트호"
+   ],
+   "answerIndex": 0,
+   "explanation": "사해의 수면은 해수면보다 400m 이상 낮아 그 호숫가가 육지 최저 지점이다.",
+   "difficulty": 0.4,
+   "source": "https://en.wikipedia.org/wiki/Dead_Sea",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00026"
+  },
+  {
+   "id": "ge-395",
+   "category": "general",
+   "prompt": "주권 국가의 수도 중 가장 북쪽에 있는 도시는?",
+   "choices": [
+    "레이캬비크",
+    "헬싱키",
+    "스톡홀름",
+    "오슬로"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이슬란드의 레이캬비크는 북위 64°08′로 주권 국가 수도 중 가장 북쪽에 있다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Reykjav%C3%ADk",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00025"
+  },
+  {
+   "id": "ge-394",
+   "category": "general",
+   "prompt": "아프리카 최고봉 킬리만자로산이 있는 나라는?",
+   "choices": [
+    "탄자니아",
+    "에티오피아",
+    "우간다",
+    "케냐"
+   ],
+   "answerIndex": 0,
+   "explanation": "킬리만자로는 탄자니아에 있는 휴화산으로 아프리카에서 가장 높은 산이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Mount_Kilimanjaro",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00024"
+  },
+  {
+   "id": "ge-393",
+   "category": "general",
+   "prompt": "국토가 이탈리아에 완전히 둘러싸인 나라는?",
+   "choices": [
+    "산마리노",
+    "모나코",
+    "안도라",
+    "리히텐슈타인"
+   ],
+   "answerIndex": 0,
+   "explanation": "산마리노는 사방이 이탈리아로 둘러싸인 내륙국이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/San_Marino",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00023"
+  },
+  {
+   "id": "ge-392",
+   "category": "general",
+   "prompt": "분자 연구로 확인된 자이언트판다의 분류상 과(科)는?",
+   "choices": [
+    "곰과",
+    "너구리과",
+    "족제비과",
+    "고양이과"
+   ],
+   "answerIndex": 0,
+   "explanation": "자이언트판다는 한때 너구리과와의 관계가 논의됐으나 분자 연구로 곰과임이 확인됐다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Giant_panda",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00022"
+  },
+  {
+   "id": "ge-391",
+   "category": "general",
+   "prompt": "RNA에서 DNA의 티민(T) 대신 쓰이는 염기는?",
+   "choices": [
+    "우라실",
+    "구아닌",
+    "아데닌",
+    "사이토신"
+   ],
+   "answerIndex": 0,
+   "explanation": "RNA의 우라실은 DNA에서는 티민으로 대체된다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Uracil",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00021"
+  },
+  {
+   "id": "ge-390",
+   "category": "general",
+   "prompt": "사람 눈이 볼 수 있는 빛의 파장 범위에 가장 가까운 것은?",
+   "choices": [
+    "약 380~750 nm",
+    "약 10~380 nm",
+    "약 750~2500 nm",
+    "약 1~10 mm"
+   ],
+   "answerIndex": 0,
+   "explanation": "사람의 눈은 대략 380~750나노미터 파장의 빛에 반응한다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Visible_spectrum",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00020"
+  },
+  {
+   "id": "ge-389",
+   "category": "general",
+   "prompt": "건조 공기에서 질소·산소 다음으로 많은 기체는?",
+   "choices": [
+    "아르곤",
+    "네온",
+    "이산화탄소",
+    "헬륨"
+   ],
+   "answerIndex": 0,
+   "explanation": "건조 공기는 질소 78.08%, 산소 20.95%, 아르곤 0.93%, 이산화탄소 0.04% 순이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Atmosphere_of_Earth",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00019"
+  },
+  {
+   "id": "ge-388",
+   "category": "general",
+   "prompt": "달이 늘 같은 면만 지구를 향하는 현상을 뜻하는 말은?",
+   "choices": [
+    "조석 고정",
+    "근일점 이동",
+    "세차 운동",
+    "역행 운동"
+   ],
+   "answerIndex": 0,
+   "explanation": "조석 고정으로 달의 자전 주기와 공전 주기가 같아져 같은 면만 지구를 향한다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Tidal_locking",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00018"
+  },
+  {
+   "id": "ge-387",
+   "category": "general",
+   "prompt": "수은 외에 표준 상태에서 액체인 유일한 원소는?",
+   "choices": [
+    "브로민",
+    "플루오린",
+    "아이오딘",
+    "염소"
+   ],
+   "answerIndex": 0,
+   "explanation": "표준 온도·압력에서 액체인 원소는 브로민과 수은 둘뿐이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Bromine",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00017"
+  },
+  {
+   "id": "ge-386",
+   "category": "general",
+   "prompt": "사람 몸에서 가장 작고 가벼운 뼈는?",
+   "choices": [
+    "등자뼈",
+    "새끼발가락뼈",
+    "망치뼈",
+    "모루뼈"
+   ],
+   "answerIndex": 0,
+   "explanation": "중이에 있는 등자뼈는 인체에서 가장 작고 가벼운 뼈다.",
+   "difficulty": 0.4,
+   "source": "https://en.wikipedia.org/wiki/Stapes",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00016"
+  },
+  {
+   "id": "ge-385",
+   "category": "general",
+   "prompt": "태풍과 허리케인은 모두 어떤 기상 현상의 지역별 이름인가?",
+   "choices": [
+    "열대 저기압",
+    "계절풍",
+    "온대 저기압",
+    "토네이도"
+   ],
+   "answerIndex": 0,
+   "explanation": "열대 저기압은 발생 위치와 세기에 따라 허리케인, 태풍 등으로 불린다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Tropical_cyclone",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00014"
+  },
+  {
+   "id": "ge-384",
+   "category": "general",
+   "prompt": "멘델이 유전 법칙을 밝힐 때 교배 실험에 쓴 식물은?",
+   "choices": [
+    "완두",
+    "옥수수",
+    "감자",
+    "담배"
+   ],
+   "answerIndex": 0,
+   "explanation": "멘델은 완두의 키, 꼬투리, 씨앗 모양·색 등 7가지 형질을 연구했다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Gregor_Mendel",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00013"
+  },
+  {
+   "id": "ge-383",
+   "category": "general",
+   "prompt": "전기 단위 '옴(Ω)'이 나타내는 물리량은?",
+   "choices": [
+    "전기 저항",
+    "전류",
+    "전압",
+    "전력"
+   ],
+   "answerIndex": 0,
+   "explanation": "옴은 국제단위계(SI)의 전기 저항 단위로 게오르크 옴의 이름을 땄다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Ohm",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00012"
+  },
+  {
+   "id": "ge-382",
+   "category": "general",
+   "prompt": "뉴턴 운동 제3법칙을 흔히 부르는 이름은?",
+   "choices": [
+    "작용·반작용 법칙",
+    "만유인력 법칙",
+    "가속도 법칙",
+    "관성 법칙"
+   ],
+   "answerIndex": 0,
+   "explanation": "제3법칙은 한 물체가 힘을 가하면 같은 크기의 반대 방향 힘을 받는다는 작용·반작용 법칙이다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00011"
+  },
+  {
+   "id": "ge-381",
+   "category": "general",
+   "prompt": "피부가 자외선(UVB)을 받으면 합성되는 비타민은?",
+   "choices": [
+    "비타민 D",
+    "비타민 C",
+    "비타민 A",
+    "비타민 K"
+   ],
+   "answerIndex": 0,
+   "explanation": "피부가 햇빛의 UVB를 받으면 비타민 D(콜레칼시페롤)가 합성된다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Vitamin_D",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00010"
+  },
+  {
+   "id": "ge-380",
+   "category": "general",
+   "prompt": "고추의 매운맛을 내는 주성분은?",
+   "choices": [
+    "캡사이신",
+    "피페린",
+    "진저롤",
+    "알리신"
+   ],
+   "answerIndex": 0,
+   "explanation": "캡사이신은 고추의 주요 활성 성분으로 매운맛을 낸다.",
+   "difficulty": 0.2,
+   "source": "https://en.wikipedia.org/wiki/Capsaicin",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00009"
+  },
+  {
+   "id": "ge-379",
+   "category": "general",
+   "prompt": "김치가 발효될 때 주로 활동하는 미생물은?",
+   "choices": [
+    "젖산균",
+    "초산균",
+    "푸른곰팡이",
+    "누룩곰팡이"
+   ],
+   "answerIndex": 0,
+   "explanation": "김치는 발효 과정에서 젖산균(유산균)이 많이 증식한다.",
+   "difficulty": 0.2,
+   "source": "https://en.wikipedia.org/wiki/Kimchi",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00008"
+  },
+  {
+   "id": "ge-378",
+   "category": "general",
+   "prompt": "고려 팔만대장경판을 보관하고 있는 절은?",
+   "choices": [
+    "해인사",
+    "불국사",
+    "송광사",
+    "통도사"
+   ],
+   "answerIndex": 0,
+   "explanation": "경남 합천 가야산의 해인사는 팔만대장경(재조대장경)으로 유명하다.",
+   "difficulty": 0.3,
+   "source": "https://ko.wikipedia.org/wiki/%ED%95%B4%EC%9D%B8%EC%82%AC",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00007"
+  },
+  {
+   "id": "ge-377",
+   "category": "general",
+   "prompt": "올림픽 오륜기의 고리 색깔에 포함되지 않는 것은?",
+   "choices": [
+    "주황",
+    "파랑",
+    "초록",
+    "노랑"
+   ],
+   "answerIndex": 0,
+   "explanation": "오륜기의 다섯 고리는 파랑·노랑·검정·초록·빨강이다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Olympic_symbols",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00006"
+  },
+  {
+   "id": "ge-376",
+   "category": "general",
+   "prompt": "오페라 '카르멘'을 작곡한 음악가는?",
+   "choices": [
+    "조르주 비제",
+    "주세페 베르디",
+    "조아키노 로시니",
+    "자코모 푸치니"
+   ],
+   "answerIndex": 0,
+   "explanation": "'카르멘'은 프랑스 작곡가 조르주 비제의 4막 오페라다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Carmen",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00005"
+  },
+  {
+   "id": "ge-375",
+   "category": "general",
+   "prompt": "본초 자오선의 기준인 그리니치 천문대가 있는 도시는?",
+   "choices": [
+    "런던",
+    "베를린",
+    "파리",
+    "로마"
+   ],
+   "answerIndex": 0,
+   "explanation": "그리니치 자오선은 영국 런던의 왕립 그리니치 천문대를 지난다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Prime_meridian_(Greenwich)",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00004"
+  },
+  {
+   "id": "ge-374",
+   "category": "general",
+   "prompt": "알을 낳는 포유류로 유명한 오스트레일리아 동물은?",
+   "choices": [
+    "오리너구리",
+    "왈라비",
+    "웜뱃",
+    "주머니쥐"
+   ],
+   "answerIndex": 0,
+   "explanation": "오리너구리는 오스트레일리아 동부에 사는 알 낳는 포유류(단공류)다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Platypus",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00003"
+  },
+  {
+   "id": "ge-373",
+   "category": "general",
+   "prompt": "혈당을 낮추는 호르몬 인슐린을 분비하는 기관은?",
+   "choices": [
+    "이자(췌장)",
+    "갑상샘",
+    "간",
+    "부신"
+   ],
+   "answerIndex": 0,
+   "explanation": "인슐린은 이자(췌장) 랑게르한스섬의 베타세포에서 만들어진다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Insulin",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00002"
+  },
+  {
+   "id": "ge-372",
+   "category": "general",
+   "prompt": "다이아몬드와 흑연은 같은 원소의 동소체다. 이 원소는?",
+   "choices": [
+    "탄소",
+    "황",
+    "규소",
+    "붕소"
+   ],
+   "answerIndex": 0,
+   "explanation": "다이아몬드와 흑연은 모두 탄소로 이루어진 동소체다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Allotropes_of_carbon",
+   "addedOn": "2026-09-30",
+   "sourceID": "Q00001"
+  }
+ ],
+ "crossSubjectDuplicates": [
+  "mi-113(middle) ≈ hi-220(high)",
+  "ge-115(general) ≈ mi-h009(middle)",
+  "mi-202(middle) ≈ ge-235(general)",
+  "hi-216(high) ≈ mi-326(middle)",
+  "ce-225(certification) ≈ kh-039(koreanHistory)",
+  "vo-018(vocabulary) ≈ la-308(language)",
+  "vo-020(vocabulary) ≈ la-309(language)",
+  "vo-039(vocabulary) ≈ la-307(language)"
+ ]
+}

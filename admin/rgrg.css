@@ -1,0 +1,91 @@
+/* 알지알지오알지 탭 — admin.css·content.css 에 없는 것만 둔다.
+   표·패널·KPI·필터는 기존 클래스(.asset-table, .panel, .app-kpi, .asset-filters)를 그대로 쓴다. */
+#rgrg-section{margin-top:26px}
+#rgrg-section>.panel,#rgrg-section>details.panel{margin-top:18px;padding:22px}
+#rgrg-section .asset-table tbody tr{cursor:default}
+#rgrg-section .viz-kpis{margin-top:18px}
+
+/* 읽기 전용임을 숨기지 않고 한 줄로 적는다 — 없는 버튼을 만드는 것보다 이게 정직하다. */
+.rg-note{margin:16px 0 0;padding:11px 14px;border:1px solid #dfe3ea;border-left:3px solid #98a2b3;
+  border-radius:10px;background:#f8fafc;color:#475467;font-size:.82rem;line-height:1.6}
+
+.rg-hero p:last-child{margin-bottom:0}
+.rg-trend{display:grid;gap:4px;justify-items:end;color:var(--blue);min-width:120px}
+.rg-trend small{color:var(--muted);font-size:.72rem;white-space:nowrap}
+.rg-spark{width:120px;height:28px;display:block}
+
+/* 반입 현황 */
+.rg-ledger{min-width:900px}
+.rg-ledger .num small{display:block;color:var(--muted);font-size:.7rem;font-weight:600}
+.rg-delta{color:var(--green)}
+.rg-hot{color:var(--red);font-weight:700}
+.rg-files{min-width:280px}
+.rg-file{display:block;color:var(--muted);font-size:.74rem;line-height:1.6}
+.rg-file b{color:#475467}
+
+/* 탈락 사유 — 이 페이지의 핵심이라 표를 넓게 두고 사유를 줄여 쓰지 않는다. */
+.rg-rej .panel-head h2{color:var(--red)}
+.rg-rej-table{min-width:980px}
+.rg-src small{display:block;color:var(--muted);font-size:.73rem;margin-top:4px;white-space:nowrap}
+.rg-prompt{max-width:360px;line-height:1.6;color:#344054}
+.rg-reasons{margin:0;padding:0;list-style:none;display:grid;gap:6px;min-width:260px}
+.rg-reasons li{background:#fff1f0;color:#8c2019;border-radius:8px;padding:7px 10px;font-size:.81rem;line-height:1.5}
+.rg-reason-none{background:#f2f4f7!important;color:#667085!important}
+
+/* 은행 검색 */
+.rg-filters{grid-template-columns:repeat(3,minmax(120px,170px)) 1fr}
+.rg-filters-2{grid-template-columns:minmax(120px,170px) 1fr}
+.rg-bank{min-width:760px}
+.rg-id{display:block;color:var(--muted);font-size:.72rem;margin-top:4px}
+.rg-qcell{max-width:620px;line-height:1.6}
+.rg-choices{margin:10px 0 0;padding-left:20px;display:grid;gap:4px;color:#475467;font-size:.85rem}
+.rg-choices li.on{color:var(--green);font-weight:700}
+.rg-choices li.on::after{content:' ✓'}
+.rg-exp{display:block;color:var(--muted);font-size:.78rem;line-height:1.6;margin-top:8px}
+
+/* 주제별 분포 · 찍기 기대 정답률 */
+.rg-dist{min-width:560px}
+.rg-dist .progress-track{min-width:120px}
+.rg-dist td small{color:var(--muted);font-size:.72rem}
+.rg-bias{display:inline-block;border-radius:99px;padding:4px 9px;font-size:.76rem;font-weight:800;
+  font-variant-numeric:tabular-nums;background:#eaf8f2;color:var(--green)}
+.rg-bias[data-level=warn]{background:#fff7e8;color:#9a6200}
+.rg-bias[data-level=bad]{background:#fff1f0;color:var(--red)}
+.rg-bias[data-level=na]{background:#f2f4f7;color:#98a2b3}
+
+/* 주제가 다른 중복 */
+.rg-dups summary{font-size:1rem;font-weight:750;cursor:pointer}
+.rg-dups[open] summary{margin-bottom:16px}
+.rg-dup-list{margin:0;padding-left:20px;display:grid;gap:7px;line-height:1.6;font-size:.88rem;color:#344054}
+
+@media(max-width:900px){
+  .rg-filters,.rg-filters-2{grid-template-columns:1fr 1fr}
+  .rg-filters .search-field,.rg-filters-2 .search-field{grid-column:1/-1}
+  .rg-trend{justify-items:start}
+}
+@media(max-width:600px){
+  #rgrg-section>.panel,#rgrg-section>details.panel{padding:16px}
+  .rg-filters,.rg-filters-2{grid-template-columns:1fr}
+}
+
+/* ── 사이드바 하위 메뉴 (2026-10-01) ─────────────────────────────────────────
+   대표님 지시: 「사이드바 메뉴가 너무 많아서」 알지알지오알지를 앱 현황 아래로.
+   admin.css 는 한 줄로 압축돼 있어 손대면 통째로 깨질 수 있으므로 여기에 둔다. */
+.nav-group{display:grid;gap:4px}
+.nav-parent{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}
+/* 화살표는 글자가 아니라 도형으로 그린다 — 폰트에 없는 글자를 쓰면 기기마다 다르게 보인다. */
+.nav-caret{width:0;height:0;flex:0 0 auto;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.55;transform:rotate(-90deg);transition:transform .14s ease}
+.nav-parent[aria-expanded="true"] .nav-caret{transform:rotate(0deg);opacity:.9}
+.nav-sub{display:grid;gap:4px;padding-left:10px;margin-left:4px;border-left:1px solid #22304b}
+.nav-sub[hidden]{display:none}
+/* 하위 항목은 한 급 작게 — 부모와 같은 무게면 메뉴가 줄어든 느낌이 안 난다. */
+.nav-child{padding:9px 12px;font-size:.86rem}
+/* 접혀 있어도 그 안에 켜진 화면이 있으면 부모에 점을 찍는다. */
+.nav-parent.has-active-child::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--blue);flex:0 0 auto}
+@media(max-width:760px){
+  /* 좁은 화면의 메뉴는 가로 격자다. 하위를 들여쓰면 칸이 어긋나므로 평평하게 둔다. */
+  .nav-group{display:contents}
+  .nav-sub{display:contents;padding:0;margin:0;border:0}
+  .nav-sub[hidden]{display:none}
+  .nav-caret{display:none}
+}

@@ -3,6 +3,7 @@ import { createContentOperations } from './content.js?v=1.2-series';
 import { createGrants } from './grants.js?v=2.0-strategy';
 import { createMarketing } from './marketing.js?v=1.2';
 import { createBusinessPlan } from './business-plan.js?v=1.0.0';
+import { createRgrg } from './rgrg.js?v=1.0';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
@@ -45,9 +46,10 @@ const contentOperations = createContentOperations(supabase, () => currentUser);
 const grants = createGrants(supabase, () => currentUser);
 const marketing = createMarketing(supabase, () => currentUser);
 const businessPlan = createBusinessPlan(supabase, () => currentUser);
+const rgrg = createRgrg(() => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); $('#ap-visual-row')?.remove(); }
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); rgrg.clear(); $('#ap-visual-row')?.remove(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -316,14 +318,68 @@ document.addEventListener('click', (event) => {
   const edit = event.target.closest('[data-edit]');
   if (edit) openDialog(items.find((x) => x.id === edit.dataset.edit));
   const nav = event.target.closest('[data-section]');
-  if (nav) showSection(nav.dataset.section);
+  if (nav) {
+    // **부모 메뉴를 누르면 그 섹션으로 가면서 하위도 같이 연다.**
+    // 하위를 열려면 화살표를 정확히 눌러야 하는 구조로 두면, 하위가 있다는 걸 모르는 사람은
+    // 영영 못 찾는다. 부모를 한 번 더 누르면 접힌다 — 접은 상태는 기억한다.
+    if (nav.classList.contains('nav-parent')) {
+      const group = nav.closest('.nav-group');
+      const already = nav.dataset.section === currentSection;
+      setNavGroup(group, already ? !isNavGroupOpen(group) : true);
+    }
+    showSection(nav.dataset.section);
+  }
 });
+
+// ── 사이드바 하위 메뉴 (2026-10-01) ──────────────────────────────────────────
+//
+// 대표님 지시: 「사이드바 메뉴가 너무 많아서」 알지알지오알지를 앱 현황 아래로 넣고
+// 숨길 수 있게. 접은 상태를 기억하는 이유는, 접어 둔 게 새로 고치면 다시 펴지면
+// 접는 기능이 있으나 마나이기 때문이다.
+const NAV_OPEN_KEY = 'admin.navOpenGroups';
+
+function openGroupSet() {
+  try { return new Set(JSON.parse(localStorage.getItem(NAV_OPEN_KEY) || '[]')); }
+  catch { return new Set(); }   // 사생활 보호 모드에서는 읽기가 막힌다 — 그때는 그냥 접힌 채로 둔다
+}
+
+function isNavGroupOpen(group) {
+  return group ? group.querySelector('.nav-sub')?.hidden === false : false;
+}
+
+function setNavGroup(group, open) {
+  if (!group) return;
+  const sub = group.querySelector('.nav-sub');
+  const parent = group.querySelector('.nav-parent');
+  if (!sub || !parent) return;
+  sub.hidden = !open;
+  parent.setAttribute('aria-expanded', String(open));
+  const set = openGroupSet();
+  if (open) set.add(group.dataset.navgroup); else set.delete(group.dataset.navgroup);
+  try { localStorage.setItem(NAV_OPEN_KEY, JSON.stringify([...set])); } catch { /* 무시 */ }
+}
+
+function restoreNavGroups() {
+  const set = openGroupSet();
+  document.querySelectorAll('.nav-group').forEach((g) => {
+    const sub = g.querySelector('.nav-sub');
+    const parent = g.querySelector('.nav-parent');
+    if (!sub || !parent) return;
+    const open = set.has(g.dataset.navgroup);
+    sub.hidden = !open;
+    parent.setAttribute('aria-expanded', String(open));
+  });
+}
+restoreNavGroups();
+
+let currentSection = 'overview';
 
 function showSection(name) {
   if (name === 'board') { name = 'gantt'; setApView('board'); }
+  currentSection = name;
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'plan' ? '사업계획·기업가치' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'plan' ? '사업계획·기업가치' : name === 'rgrg' ? '알지알지오알지' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
@@ -332,12 +388,18 @@ function showSection(name) {
   if (name === 'grants') grants.load();
   if (name === 'marketing') { marketing.load(); loadApps(); }
   if (name === 'plan') businessPlan.load();
+  if (name === 'rgrg') rgrg.load();
   if (name === 'plan') history.replaceState(null, '', '#plan');
   else if (location.hash === '#plan') history.replaceState(null, '', location.pathname + location.search);
-  $('.filters').hidden = ['assets','commerce','apps','content','grants','marketing','plan'].includes(name);
-  $('.top-actions').hidden = ['commerce','apps','content','grants','plan'].includes(name);
+  $('.filters').hidden = ['assets','commerce','apps','content','grants','marketing','plan','rgrg'].includes(name);
+  $('.top-actions').hidden = ['commerce','apps','content','grants','plan','rgrg'].includes(name);
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
+  // 지금 보고 있는 화면이 하위 항목이면 그 묶음은 열려 있어야 한다.
+  // 안 그러면 「켜져 있는데 메뉴에서는 안 보이는」 상태가 된다.
+  const child = document.querySelector(`.nav-child[data-section="${name}"]`);
+  if (child) setNavGroup(child.closest('.nav-group'), true);
+  // 부모가 켜졌을 때 그 묶음에 하위가 있다는 표시(화살표)는 CSS 가 맡는다.
 }
 
 function openDialog(item = null) {
