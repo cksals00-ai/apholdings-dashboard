@@ -1,6 +1,6 @@
 {
  "_readme": "제품 진행 현황. scripts/update_status.py 가 facts 를 매일 갱신하고, build_site.py 가 제품 페이지 「지금」 섹션과 카드 상태에 반영한다. manual 은 사람(클레어)이 사실 확인 후 고친다.",
- "checked": "2026-10-01",
+ "checked": "2026-10-02",
  "products": {
   "safe": {
    "stage": "live",
@@ -37,7 +37,7 @@
     "appDate": "2026-09-25",
     "appLive": true,
     "connector": "ok",
-    "count": 317043,
+    "count": 307049,
     "asOf": "2026년 9월"
    },
    "manual": [
