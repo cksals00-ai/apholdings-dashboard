@@ -1,6 +1,7 @@
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createContentOperations } from './content.js?v=1.2-series';
 import { createGrants } from './grants.js?v=2.0-strategy';
+import { createMarketing } from './marketing.js?v=1.2';
 import { createBusinessPlan } from './business-plan.js?v=1.0.0';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
@@ -42,10 +43,11 @@ const formatDate = (value) => value ? new Intl.DateTimeFormat('ko-KR', { month:'
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const contentOperations = createContentOperations(supabase, () => currentUser);
 const grants = createGrants(supabase, () => currentUser);
+const marketing = createMarketing(supabase, () => currentUser);
 const businessPlan = createBusinessPlan(supabase, () => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); grants.clear(); businessPlan.clear(); $('#ap-visual-row')?.remove(); }
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); $('#ap-visual-row')?.remove(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -321,17 +323,18 @@ function showSection(name) {
   if (name === 'board') { name = 'gantt'; setApView('board'); }
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'plan' ? '사업계획·기업가치' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'plan' ? '사업계획·기업가치' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
   if (name === 'apps') loadApps();
   if (name === 'content') contentOperations.load();
   if (name === 'grants') grants.load();
+  if (name === 'marketing') { marketing.load(); loadApps(); }
   if (name === 'plan') businessPlan.load();
   if (name === 'plan') history.replaceState(null, '', '#plan');
   else if (location.hash === '#plan') history.replaceState(null, '', location.pathname + location.search);
-  $('.filters').hidden = ['assets','commerce','apps','content','grants','plan'].includes(name);
+  $('.filters').hidden = ['assets','commerce','apps','content','grants','marketing','plan'].includes(name);
   $('.top-actions').hidden = ['commerce','apps','content','grants','plan'].includes(name);
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
