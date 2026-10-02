@@ -1,0 +1,581 @@
+{
+ "generatedAt": "2026-10-02T02:18:36.200Z",
+ "source": "서버 함수 settle-match·start-match 가 실제로 쓰는 값 + 앱 코드의 이름",
+ "rounds": [
+  {
+   "kind": "main",
+   "title": "본게임",
+   "rule": "지문만 보고 BUZZ · 잡으면 3초 안에 골라요 · 틀리면 배점만큼 감점",
+   "usesBuzzer": true,
+   "hidesChoices": true,
+   "answerSeconds": 3,
+   "byDifficulty": [
+    {
+     "label": "쉬움",
+     "difficulty": 0.2,
+     "points": 110,
+     "penalty": 110,
+     "guessEv": -55
+    },
+    {
+     "label": "보통",
+     "difficulty": 0.5,
+     "points": 150,
+     "penalty": 150,
+     "guessEv": -75
+    },
+    {
+     "label": "어려움",
+     "difficulty": 0.8,
+     "points": 210,
+     "penalty": 210,
+     "guessEv": -105
+    }
+   ]
+  },
+  {
+   "kind": "warmup",
+   "title": "워밍업",
+   "rule": "빠를수록 + · 틀리면 감점",
+   "usesBuzzer": true,
+   "hidesChoices": true,
+   "answerSeconds": 2.5,
+   "byDifficulty": [
+    {
+     "label": "쉬움",
+     "difficulty": 0.2,
+     "points": 70,
+     "penalty": 70,
+     "guessEv": -35
+    },
+    {
+     "label": "보통",
+     "difficulty": 0.5,
+     "points": 100,
+     "penalty": 100,
+     "guessEv": -50
+    },
+    {
+     "label": "어려움",
+     "difficulty": 0.8,
+     "points": 140,
+     "penalty": 140,
+     "guessEv": -70
+    }
+   ]
+  },
+  {
+   "kind": "buzzer",
+   "title": "버저 쟁탈",
+   "rule": "보기는 잡아야 열려요 · 잡으면 3초 안에 · 틀리면 배점만큼 감점",
+   "usesBuzzer": true,
+   "hidesChoices": true,
+   "answerSeconds": 3,
+   "byDifficulty": [
+    {
+     "label": "쉬움",
+     "difficulty": 0.2,
+     "points": 210,
+     "penalty": 210,
+     "guessEv": -105
+    },
+    {
+     "label": "보통",
+     "difficulty": 0.5,
+     "points": 300,
+     "penalty": 300,
+     "guessEv": -150
+    },
+    {
+     "label": "어려움",
+     "difficulty": 0.8,
+     "points": 420,
+     "penalty": 420,
+     "guessEv": -210
+    }
+   ]
+  },
+  {
+   "kind": "survival",
+   "title": "서바이벌",
+   "rule": "틀리면 탈락 · 끝까지 살면 보너스",
+   "usesBuzzer": true,
+   "hidesChoices": true,
+   "answerSeconds": 3,
+   "byDifficulty": [
+    {
+     "label": "쉬움",
+     "difficulty": 0.2,
+     "points": 80,
+     "penalty": 80,
+     "guessEv": -40
+    },
+    {
+     "label": "보통",
+     "difficulty": 0.5,
+     "points": 120,
+     "penalty": 120,
+     "guessEv": -60
+    },
+    {
+     "label": "어려움",
+     "difficulty": 0.8,
+     "points": 170,
+     "penalty": 170,
+     "guessEv": -85
+    }
+   ]
+  },
+  {
+   "kind": "betting",
+   "title": "파이널 베팅",
+   "rule": "¼이 걸려 있다 · 맞히면 판돈이 두 배로, 틀리면 잃는다 · 안 걸기도 한 번에",
+   "usesBuzzer": true,
+   "hidesChoices": true,
+   "answerSeconds": 3.5,
+   "byDifficulty": [
+    {
+     "label": "쉬움",
+     "difficulty": 0.2,
+     "points": 140,
+     "penalty": 0,
+     "guessEv": null
+    },
+    {
+     "label": "보통",
+     "difficulty": 0.5,
+     "points": 200,
+     "penalty": 0,
+     "guessEv": null
+    },
+    {
+     "label": "어려움",
+     "difficulty": 0.8,
+     "points": 280,
+     "penalty": 0,
+     "guessEv": null
+    }
+   ]
+  },
+  {
+   "kind": "ox",
+   "title": "OX 속사",
+   "rule": "4초 안에 O나 X · 각자 답한다 · 틀리면 감점",
+   "usesBuzzer": false,
+   "hidesChoices": false,
+   "answerSeconds": null,
+   "byDifficulty": [
+    {
+     "label": "쉬움",
+     "difficulty": 0.2,
+     "points": 40,
+     "penalty": 40,
+     "guessEv": 0
+    },
+    {
+     "label": "보통",
+     "difficulty": 0.5,
+     "points": 60,
+     "penalty": 60,
+     "guessEv": 0
+    },
+    {
+     "label": "어려움",
+     "difficulty": 0.8,
+     "points": 80,
+     "penalty": 80,
+     "guessEv": 0
+    }
+   ]
+  },
+  {
+   "kind": "flash",
+   "title": "순간 기억",
+   "rule": "2.5초 뒤 지문이 사라진다 · 선택지만 남는다",
+   "usesBuzzer": true,
+   "hidesChoices": false,
+   "answerSeconds": 3.5,
+   "byDifficulty": [
+    {
+     "label": "쉬움",
+     "difficulty": 0.2,
+     "points": 130,
+     "penalty": 130,
+     "guessEv": -65
+    },
+    {
+     "label": "보통",
+     "difficulty": 0.5,
+     "points": 180,
+     "penalty": 180,
+     "guessEv": -90
+    },
+    {
+     "label": "어려움",
+     "difficulty": 0.8,
+     "points": 250,
+     "penalty": 250,
+     "guessEv": -125
+    }
+   ]
+  },
+  {
+   "kind": "elimination",
+   "title": "소거",
+   "rule": "2초마다 오답 하나 소거 · 늦을수록 점수 ↓",
+   "usesBuzzer": true,
+   "hidesChoices": false,
+   "answerSeconds": 3.5,
+   "byDifficulty": [
+    {
+     "label": "쉬움",
+     "difficulty": 0.2,
+     "points": 110,
+     "penalty": 110,
+     "guessEv": -55
+    },
+    {
+     "label": "보통",
+     "difficulty": 0.5,
+     "points": 160,
+     "penalty": 160,
+     "guessEv": -80
+    },
+    {
+     "label": "어려움",
+     "difficulty": 0.8,
+     "points": 220,
+     "penalty": 220,
+     "guessEv": -110
+    }
+   ]
+  }
+ ],
+ "rooms": [
+  {
+   "room": "fourChoice",
+   "title": "사지선다",
+   "capacity": 6,
+   "rounds": [
+    {
+     "kind": "main",
+     "title": "본게임",
+     "questions": 10,
+     "seconds": 20
+    }
+   ],
+   "totalSeconds": 203,
+   "pool": [
+    "nonsense",
+    "elementary",
+    "middle",
+    "high",
+    "certification",
+    "koreanHistory",
+    "language",
+    "vocabulary",
+    "general"
+   ]
+  },
+  {
+   "room": "general",
+   "title": "상식",
+   "capacity": 6,
+   "rounds": [
+    {
+     "kind": "main",
+     "title": "본게임",
+     "questions": 10,
+     "seconds": 20
+    }
+   ],
+   "totalSeconds": 203,
+   "pool": [
+    "general",
+    "elementary",
+    "middle",
+    "nonsense",
+    "koreanHistory",
+    "vocabulary"
+   ]
+  },
+  {
+   "room": "chosung",
+   "title": "초성",
+   "capacity": 6,
+   "rounds": [
+    {
+     "kind": "main",
+     "title": "본게임",
+     "questions": 9,
+     "seconds": 18
+    }
+   ],
+   "totalSeconds": 165,
+   "pool": [
+    "general",
+    "elementary",
+    "middle",
+    "nonsense",
+    "koreanHistory",
+    "vocabulary"
+   ]
+  },
+  {
+   "room": "speed",
+   "title": "스피드",
+   "capacity": 6,
+   "rounds": [
+    {
+     "kind": "warmup",
+     "title": "워밍업",
+     "questions": 16,
+     "seconds": 9
+    }
+   ],
+   "totalSeconds": 147,
+   "pool": [
+    "general",
+    "elementary",
+    "middle",
+    "nonsense",
+    "koreanHistory",
+    "vocabulary"
+   ]
+  },
+  {
+   "room": "ox",
+   "title": "OX",
+   "capacity": 6,
+   "rounds": [
+    {
+     "kind": "ox",
+     "title": "OX 속사",
+     "questions": 20,
+     "seconds": 6.5
+    }
+   ],
+   "totalSeconds": 133,
+   "pool": [
+    "general",
+    "elementary",
+    "middle",
+    "koreanHistory",
+    "vocabulary"
+   ]
+  },
+  {
+   "room": "random",
+   "title": "랜덤",
+   "capacity": 6,
+   "rounds": [
+    {
+     "kind": "main",
+     "title": "본게임",
+     "questions": 10,
+     "seconds": 20
+    }
+   ],
+   "totalSeconds": 203,
+   "pool": [
+    "nonsense",
+    "elementary",
+    "middle",
+    "high",
+    "certification",
+    "koreanHistory",
+    "language",
+    "vocabulary",
+    "general"
+   ]
+  },
+  {
+   "room": "duel",
+   "title": "1:1 대결",
+   "capacity": 2,
+   "rounds": [
+    {
+     "kind": "main",
+     "title": "본게임",
+     "questions": 6,
+     "seconds": 18
+    },
+    {
+     "kind": "betting",
+     "title": "파이널 베팅",
+     "questions": 1,
+     "seconds": 24
+    }
+   ],
+   "totalSeconds": 139,
+   "pool": [
+    "nonsense",
+    "elementary",
+    "middle",
+    "high",
+    "certification",
+    "koreanHistory",
+    "language",
+    "vocabulary",
+    "general"
+   ]
+  }
+ ],
+ "abilities": [
+  {
+   "ability": "dimOne",
+   "title": "직감",
+   "character": "토끼",
+   "what": "오답 n개 흐림",
+   "byTier": [
+    1,
+    1,
+    1,
+    2,
+    2
+   ],
+   "touchesScore": false
+  },
+  {
+   "ability": "keyword",
+   "title": "핵심",
+   "character": "부엉이",
+   "what": "핵심어 n개 강조",
+   "byTier": [
+    1,
+    1,
+    2,
+    2,
+    3
+   ],
+   "touchesScore": false
+  },
+  {
+   "ability": "peek",
+   "title": "투시",
+   "character": "여우",
+   "what": "숨긴 보기를 n초 먼저 봄 (버저 문항)",
+   "byTier": [
+    2,
+    2,
+    3,
+    3,
+    4
+   ],
+   "touchesScore": false
+  },
+  {
+   "ability": "recall",
+   "title": "회상",
+   "character": "코끼리",
+   "what": "n번 이상 틀린 문항이면 정답",
+   "byTier": [
+    3,
+    3,
+    2,
+    2,
+    1
+   ],
+   "touchesScore": false
+  },
+  {
+   "ability": "moreTime",
+   "title": "연장",
+   "character": "늘보",
+   "what": "답할 시간 +n초",
+   "byTier": [
+    2,
+    3,
+    3,
+    4,
+    5
+   ],
+   "touchesScore": true
+  },
+  {
+   "ability": "bonus",
+   "title": "집중",
+   "character": "개미",
+   "what": "점수 ×n%",
+   "byTier": [
+    120,
+    130,
+    140,
+    150,
+    160
+   ],
+   "touchesScore": true
+  },
+  {
+   "ability": "keepStreak",
+   "title": "불굴",
+   "character": "사자",
+   "what": "틀려도 연속 n번 유지",
+   "byTier": [
+    1,
+    1,
+    1,
+    2,
+    2
+   ],
+   "touchesScore": true
+  },
+  {
+   "ability": "autoCorrect",
+   "title": "필중",
+   "character": "매",
+   "what": "판 앞쪽 n%에서 자동 정답",
+   "byTier": [
+    30,
+    45,
+    60,
+    80,
+    100
+   ],
+   "touchesScore": true
+  }
+ ],
+ "masteryThresholds": [
+  0,
+  5,
+  15,
+  30,
+  60
+ ],
+ "age": [
+  {
+   "band": "u14",
+   "title": "만 14세 미만",
+   "middle": false,
+   "high": false,
+   "certification": false
+  },
+  {
+   "band": "14_15",
+   "title": "만 14–15세",
+   "middle": true,
+   "high": false,
+   "certification": true
+  },
+  {
+   "band": "16_18",
+   "title": "만 16–18세",
+   "middle": true,
+   "high": true,
+   "certification": true
+  },
+  {
+   "band": "19p",
+   "title": "만 19세 이상",
+   "middle": true,
+   "high": true,
+   "certification": true
+  }
+ ],
+ "notes": [
+  "부저 문항은 보기를 숨긴다 — 버저를 잡은 사람에게만 열린다. 「투시」로만 잠깐 엿볼 수 있다.",
+  "부저 라운드에서 틀리면 배점을 통째로 잃는다 — 보기 없이 찍으면 손해, 반쯤 알면 본전.",
+  "잡은 뒤 답 창을 넘기면 오답과 같은 감점 + 그 문항에서 잠김.",
+  "여럿이 하는 방은 가장 어린 사람의 연령대에 맞춰 중등·고등·자격증 문항을 거른다. 나이를 안 밝힌 사람은 제한하지 않는다."
+ ]
+}

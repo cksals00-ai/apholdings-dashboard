@@ -4,6 +4,8 @@ import { createGrants } from './grants.js?v=2.0-strategy';
 import { createMarketing } from './marketing.js?v=1.2';
 import { createBusinessPlan } from './business-plan.js?v=1.0.0';
 import { createRgrg } from './rgrg.js?v=1.0';
+import { createRgrgSettings } from './rgrg-settings.js?v=1.0';
+import { initNavTidy } from './nav-tidy.js?v=1.0';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://cgijpcimixaregbpvqbf.supabase.co';
@@ -47,9 +49,10 @@ const grants = createGrants(supabase, () => currentUser);
 const marketing = createMarketing(supabase, () => currentUser);
 const businessPlan = createBusinessPlan(supabase, () => currentUser);
 const rgrg = createRgrg(() => currentUser);
+const rgrgSettings = createRgrgSettings(() => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); rgrg.clear(); $('#ap-visual-row')?.remove(); }
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); rgrg.clear(); rgrgSettings.clear(); $('#ap-visual-row')?.remove(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -371,6 +374,7 @@ function restoreNavGroups() {
   });
 }
 restoreNavGroups();
+initNavTidy();   // (2026-10-02) 「메뉴 정리」 — 안 쓰는 메뉴 숨기기
 
 let currentSection = 'overview';
 
@@ -379,7 +383,7 @@ function showSection(name) {
   currentSection = name;
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'plan' ? '사업계획·기업가치' : name === 'rgrg' ? '알지알지오알지' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'plan' ? '사업계획·기업가치' : name === 'rgrg' ? '알지알지 · 문제은행' : name === 'rgrg-settings' ? '알지알지 · 게임 설정' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
@@ -389,10 +393,11 @@ function showSection(name) {
   if (name === 'marketing') { marketing.load(); loadApps(); }
   if (name === 'plan') businessPlan.load();
   if (name === 'rgrg') rgrg.load();
+  if (name === 'rgrg-settings') rgrgSettings.load();
   if (name === 'plan') history.replaceState(null, '', '#plan');
   else if (location.hash === '#plan') history.replaceState(null, '', location.pathname + location.search);
-  $('.filters').hidden = ['assets','commerce','apps','content','grants','marketing','plan','rgrg'].includes(name);
-  $('.top-actions').hidden = ['commerce','apps','content','grants','plan','rgrg'].includes(name);
+  $('.filters').hidden = ['assets','commerce','apps','content','grants','marketing','plan','rgrg','rgrg-settings'].includes(name);
+  $('.top-actions').hidden = ['commerce','apps','content','grants','plan','rgrg','rgrg-settings'].includes(name);
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
   // 지금 보고 있는 화면이 하위 항목이면 그 묶음은 열려 있어야 한다.

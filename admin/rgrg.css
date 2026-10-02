@@ -89,3 +89,46 @@
   .nav-sub[hidden]{display:none}
   .nav-caret{display:none}
 }
+
+/* ── 알지알지 게임 설정 (2026-10-02) ─────────────────────────────────────────
+   읽기 전용 표. 표·패널·KPI 는 기존 클래스(.asset-table, .panel, .app-kpi)를 그대로 쓰고 여기엔 없는 것만. */
+#rgrg-settings-section{margin-top:26px}
+#rgrg-settings-section>.panel{margin-top:18px;padding:22px}
+#rgrg-settings-section .asset-table tbody tr{cursor:default}
+#rgrg-settings-section .asset-table tbody tr:hover{background:transparent}
+.gs-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gs-kpis b{font-size:1.45rem}
+.gs-table{min-width:900px}
+.gs-table th small{display:block;font-weight:600;letter-spacing:0;color:#98a2b3;font-size:.68rem;margin-top:2px}
+.gs-sub{display:block;color:var(--muted);font-size:.72rem;margin-top:3px}
+.gs-tag{display:inline-block;border-radius:99px;padding:4px 9px;font-size:.74rem;font-weight:800;background:#f2f4f7;color:#475467;white-space:nowrap}
+.gs-hide{background:#eef2ff;color:#344fc7}
+.gs-pen{color:var(--red);font-weight:700}
+.gs-rule,.gs-pool{max-width:320px;color:#475467;font-size:.84rem;line-height:1.55}
+.gs-ability{font-size:1rem}
+.gs-yes{color:var(--green);font-weight:800}
+.gs-no{color:#98a2b3;font-weight:700}
+.gs-notes{margin:0;padding-left:20px;display:grid;gap:8px;line-height:1.65;color:#344054}
+@media(max-width:1100px){.gs-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){#rgrg-settings-section>.panel{padding:16px}}
+
+/* ── 메뉴 정리(숨기기) (2026-10-02) ─────────────────────────────────────────
+   「메뉴 정리」 → 메뉴를 누르면 숨김/보임 → 「완료」. 숨긴 메뉴는 이 브라우저에만 기억한다. */
+.nav-tidy{margin-top:14px;align-self:flex-start;background:transparent;border:1px dashed #33415c;color:#8e9ab3;border-radius:9px;padding:8px 12px;font-size:.78rem;font-weight:700;cursor:pointer}
+.nav-tidy:hover{color:#fff;border-color:#55657f}
+.nav-tidy[aria-pressed="true"]{background:var(--blue);border:1px solid var(--blue);color:#fff}
+body:not(.nav-editing) .sidebar .nav-off{display:none!important}
+body.nav-editing .sidebar .nav-sub[hidden]{display:grid}
+body.nav-editing .sidebar .nav-item[data-section]{position:relative;padding-right:46px}
+body.nav-editing .sidebar .nav-item[data-section]::before{content:"보임";position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:.66rem;font-weight:800;color:#7ee2b8;text-decoration:none}
+body.nav-editing .sidebar .nav-item.nav-off-self{opacity:.5;text-decoration:line-through}
+body.nav-editing .sidebar .nav-item.nav-off-self::before{content:"숨김";color:#f59f9f}
+body.nav-editing .sidebar .nav-item[data-locked]::before{content:"고정";color:#8e9ab3}
+@media(max-width:760px){
+  body.nav-editing .sidebar .nav-sub[hidden]{display:contents}
+  .nav-tidy{margin-top:10px}
+}
+/* 좁은 화면에서 라운드·방 이름이 두 줄로 꺾이지 않게 — 표는 가로로 밀어서 본다. */
+.gs-table th,.gs-table td:first-child b{white-space:nowrap}
+#rgrg-settings-section .panel-head h2{white-space:nowrap}
+@media(max-width:600px){#rgrg-settings-section .panel-head{flex-wrap:wrap;gap:6px}}

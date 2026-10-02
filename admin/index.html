@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
   <link rel="stylesheet" href="/admin/content.css?v=1.2-icon-center">
   <link rel="stylesheet" href="/admin/business-plan.css?v=1.0.0">
-  <link rel="stylesheet" href="/admin/rgrg.css?v=1.1-submenu">
+  <link rel="stylesheet" href="/admin/rgrg.css?v=1.2-settings">
 </head>
 <body>
   <div id="login-view" class="auth-shell">
@@ -56,7 +56,8 @@
         <div class="nav-group" data-navgroup="apps">
           <button class="nav-item nav-parent" data-section="apps" aria-expanded="false" aria-controls="nav-sub-apps">앱 현황<span class="nav-caret" aria-hidden="true"></span></button>
           <div class="nav-sub" id="nav-sub-apps" hidden>
-            <button class="nav-item nav-child" data-section="rgrg">알지알지오알지</button>
+            <button class="nav-item nav-child" data-section="rgrg">알지알지 · 문제은행</button>
+            <button class="nav-item nav-child" data-section="rgrg-settings">알지알지 · 게임 설정</button>
           </div>
         </div>
         <button class="nav-item" data-section="content">YouTube·콘텐츠 현황</button>
@@ -162,6 +163,7 @@
       <section id="grants-section" class="view-section" hidden aria-label="지원사업"></section>
       <section id="marketing-section" class="view-section" hidden aria-label="홍보"></section>
       <section id="rgrg-section" class="view-section" hidden aria-label="알지알지오알지"></section>
+      <section id="rgrg-settings-section" class="view-section" hidden aria-label="알지알지 게임 설정"></section>
 
       <section id="assets-section" class="view-section" hidden>
         <div id="asset-cards" class="summary-grid"></div>
@@ -381,6 +383,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.25-submenu"></script>
+  <script type="module" src="/admin/admin.js?v=1.26-settings"></script>
 </body>
 </html>
