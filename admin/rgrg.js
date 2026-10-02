@@ -15,7 +15,7 @@ const stamp = s => s ? new Intl.DateTimeFormat('ko-KR', { dateStyle: 'medium', t
 
 // 앱의 QuizCategory 와 같은 이름을 쓴다. 모르는 키는 지우지 않고 원문 그대로 보여 준다 —
 // 파이프라인이 주제를 하나 더 늘렸을 때 화면에서 조용히 사라지면 안 된다.
-const CAT = { nonsense: '넌센스', elementary: '초등', middle: '중등', high: '고등', certification: '자격증', koreanHistory: '한국사', language: '어학', vocabulary: '영단어', general: '상식' };
+const CAT = { nonsense: '넌센스', elementary: '초등', middle: '중등', high: '고등', certification: '자격증', koreanHistory: '한국사', language: '어학', vocabulary: '영단어', general: '상식', idol: '아이돌' };
 const catName = k => CAT[k] || String(k ?? '미분류');
 
 // 사지선다에서 「제일 긴 보기」를 찍었을 때 맞을 확률. 25%가 아니면 보기 길이가 정답을 알려 주고 있다는 뜻.

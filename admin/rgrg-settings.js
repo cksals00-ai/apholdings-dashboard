@@ -12,7 +12,7 @@ const num = n => n == null || Number.isNaN(Number(n)) ? '—' : Number(n).toLoca
 const sec = n => n == null ? '—' : `${Number(n) % 1 === 0 ? Number(n) : Number(n).toFixed(1)}초`;
 const stamp = s => s ? new Intl.DateTimeFormat('ko-KR', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Seoul' }).format(new Date(s)) : '';
 const mmss = s => { const m = Math.floor(s / 60), r = Math.round(s % 60); return `${m}분 ${String(r).padStart(2, '0')}초`; };
-const CAT = { nonsense: '넌센스', elementary: '초등', middle: '중등', high: '고등', certification: '자격증', koreanHistory: '한국사', language: '어학', vocabulary: '영단어', general: '상식' };
+const CAT = { nonsense: '넌센스', elementary: '초등', middle: '중등', high: '고등', certification: '자격증', koreanHistory: '한국사', language: '어학', vocabulary: '영단어', general: '상식', idol: '아이돌' };
 const yes = ok => ok ? '<span class="gs-yes">나옴</span>' : '<span class="gs-no">안 나옴</span>';
 
 export function createRgrgSettings(getUser) {
@@ -51,7 +51,7 @@ export function createRgrgSettings(getUser) {
 
     body.innerHTML = `
       <div class="app-kpis k4 gs-kpis">
-        <div class="app-kpi"><span>버저 잡은 뒤 답 창</span><b>${sec(main?.answerSeconds)}</b><small>스피드 ${sec(rounds.find(r => r.kind === 'warmup')?.answerSeconds)} · 파이널 ${sec(rounds.find(r => r.kind === 'betting')?.answerSeconds)}</small></div>
+        <div class="app-kpi"><span>버저 잡은 뒤 답 창</span><b>${sec(main?.answerSeconds)}</b><small>파이널 ${sec(rounds.find(r => r.kind === 'betting')?.answerSeconds)} · 스피드·OX는 부저 없이 동시에 답</small></div>
         <div class="app-kpi"><span>부저 오답 감점</span><b>배점 그대로</b><small>본게임 보통 ${num(mid?.points)}점 → −${num(mid?.penalty)}</small></div>
         <div class="app-kpi"><span>보기</span><b>잡아야 열림</b><small>투시 ${peek ? `${peek.byTier[0]}~${peek.byTier[peek.byTier.length - 1]}초` : '—'} 엿보기</small></div>
         <div class="app-kpi"><span>나이에 맞는 문항</span><b>${age.length}칸</b><small>가장 어린 사람 기준</small></div>
@@ -71,7 +71,7 @@ export function createRgrgSettings(getUser) {
               <td class="num">${m?.guessEv == null ? '—' : `<span class="${m.guessEv < 0 ? 'gs-pen' : ''}">${m.guessEv > 0 ? '+' : ''}${num(m.guessEv)}</span>`}</td>
               <td class="gs-rule">${esc(r.rule)}</td></tr>`;
           }).join('')}</tbody></table></div>
-        <p class="rg-note">찍기 기댓값이 0 이하여야 「모르면 누르지 않는 쪽」이 이득입니다. 부저 라운드는 보기 넷 중 찍기라 배점의 −½, OX 는 각자 답해 0 입니다.</p>
+        <p class="rg-note">찍기 기댓값이 0 이하여야 「모르면 누르지 않는 쪽」이 이득입니다. 부저 라운드는 보기 넷 중 찍기라 배점의 −½, OX·스피드는 각자 답해 0 입니다.</p>
       </section>
 
       <section class="panel">
@@ -96,7 +96,7 @@ export function createRgrgSettings(getUser) {
       </section>
 
       <section class="panel">
-        <div class="panel-head"><div><p class="eyebrow">AGE</p><h2>나이에 맞는 문항</h2></div><span class="panel-note">초등·상식·넌센스·한국사·영단어·어학은 누구에게나 나옵니다</span></div>
+        <div class="panel-head"><div><p class="eyebrow">AGE</p><h2>나이에 맞는 문항</h2></div><span class="panel-note">초등·상식·넌센스·한국사·영단어·어학·아이돌은 누구에게나 나옵니다</span></div>
         <div class="asset-table-wrap"><table class="asset-table gs-table">
           <thead><tr><th>연령대</th><th>중등</th><th>고등</th><th>자격증</th></tr></thead>
           <tbody>${age.map(a => `<tr><td><b>${esc(a.title)}</b></td><td>${yes(a.middle)}</td><td>${yes(a.high)}</td><td>${yes(a.certification)}</td></tr>`).join('')}</tbody></table></div>

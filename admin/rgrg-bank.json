@@ -1,29 +1,31 @@
 {
- "generatedAt": "2026-10-01T23:29:08+09:00",
- "bankSize": 1205,
+ "generatedAt": "2026-10-02T16:33:39+09:00",
+ "bankSize": 1244,
  "categories": {
-  "certification": 125,
-  "elementary": 138,
-  "general": 188,
-  "high": 117,
-  "koreanHistory": 114,
-  "language": 112,
-  "middle": 130,
-  "nonsense": 130,
-  "vocabulary": 151
+  "certification": 112,
+  "elementary": 125,
+  "general": 161,
+  "high": 100,
+  "idol": 161,
+  "koreanHistory": 100,
+  "language": 104,
+  "middle": 113,
+  "nonsense": 122,
+  "vocabulary": 146
  },
  "longestChoiceBias": {
-  "overall": 24.3,
+  "overall": 24.6,
   "byCategory": {
-   "certification": 22.6,
-   "elementary": 21.1,
-   "general": 27.9,
+   "certification": 23.7,
+   "elementary": 21.4,
+   "general": 28.5,
    "high": 28.1,
+   "idol": 26.6,
    "koreanHistory": 24.6,
-   "language": 26.7,
-   "middle": 21.7,
-   "nonsense": 23.3,
-   "vocabulary": 22.7
+   "language": 25.4,
+   "middle": 20.3,
+   "nonsense": 23.2,
+   "vocabulary": 22.8
   }
  },
  "ledger": [
@@ -39,6 +41,19 @@
    "accepted": 48,
    "rejected": 2,
    "bankSize": 1205
+  },
+  {
+   "date": "2026-10-02",
+   "files": {
+    "2026-10-02_idol.csv": {
+     "읽음": 161,
+     "통과": 161,
+     "탈락": 0
+    }
+   },
+   "accepted": 161,
+   "rejected": 0,
+   "bankSize": 1244
   }
  ],
  "rejected": [
@@ -67,6 +82,2743 @@
  ],
  "recentLimit": 400,
  "recent": [
+  {
+   "id": "id-161",
+   "category": "idol",
+   "prompt": "BTS의 데뷔 당시 멤버 수는?",
+   "choices": [
+    "7명",
+    "5명",
+    "6명",
+    "9명"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS는 7인조로 데뷔했다.",
+   "difficulty": 0.2,
+   "source": "https://ko.wikipedia.org/wiki/%EB%B0%A9%ED%83%84%EC%86%8C%EB%85%84%EB%8B%A8",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0161"
+  },
+  {
+   "id": "id-160",
+   "category": "idol",
+   "prompt": "TWICE는 몇 인조로 데뷔했을까?",
+   "choices": [
+    "9명",
+    "7명",
+    "8명",
+    "10명"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE는 9인조로 데뷔했다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Twice",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0160"
+  },
+  {
+   "id": "id-159",
+   "category": "idol",
+   "prompt": "아이들(i-dle)의 데뷔 당시 멤버 수는?",
+   "choices": [
+    "6명",
+    "4명",
+    "5명",
+    "7명"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이들(i-dle)은 6인조로 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/I-dle",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0159"
+  },
+  {
+   "id": "id-158",
+   "category": "idol",
+   "prompt": "Stray Kids의 데뷔 당시 멤버 수는?",
+   "choices": [
+    "9명",
+    "7명",
+    "8명",
+    "10명"
+   ],
+   "answerIndex": 0,
+   "explanation": "Stray Kids는 9인조로 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Stray_Kids",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0158"
+  },
+  {
+   "id": "id-157",
+   "category": "idol",
+   "prompt": "ZEROBASEONE의 데뷔 당시 멤버 수는?",
+   "choices": [
+    "9명",
+    "7명",
+    "8명",
+    "11명"
+   ],
+   "answerIndex": 0,
+   "explanation": "ZEROBASEONE은 9인조로 데뷔했다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Zerobaseone",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0157"
+  },
+  {
+   "id": "id-156",
+   "category": "idol",
+   "prompt": "ENHYPEN의 데뷔 당시 멤버 수는?",
+   "choices": [
+    "7명",
+    "5명",
+    "6명",
+    "8명"
+   ],
+   "answerIndex": 0,
+   "explanation": "ENHYPEN은 7인조로 데뷔했다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Enhypen",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0156"
+  },
+  {
+   "id": "id-155",
+   "category": "idol",
+   "prompt": "LE SSERAFIM의 데뷔 당시 멤버 수는?",
+   "choices": [
+    "6명",
+    "4명",
+    "5명",
+    "7명"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM은 6인조로 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Le_Sserafim",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0155"
+  },
+  {
+   "id": "id-154",
+   "category": "idol",
+   "prompt": "레드벨벳의 데뷔 당시 멤버 수는?",
+   "choices": [
+    "4명",
+    "3명",
+    "5명",
+    "6명"
+   ],
+   "answerIndex": 0,
+   "explanation": "레드벨벳은 4인조로 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Red_Velvet_(group)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0154"
+  },
+  {
+   "id": "id-153",
+   "category": "idol",
+   "prompt": "EXO의 데뷔 당시 멤버 수는?",
+   "choices": [
+    "12명",
+    "9명",
+    "10명",
+    "11명"
+   ],
+   "answerIndex": 0,
+   "explanation": "EXO는 12인조로 데뷔했다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Exo",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0153"
+  },
+  {
+   "id": "id-152",
+   "category": "idol",
+   "prompt": "세븐틴의 데뷔 당시 멤버 수는?",
+   "choices": [
+    "13명",
+    "11명",
+    "12명",
+    "15명"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴은 13인조로 데뷔했다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Seventeen_(South_Korean_band)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0152"
+  },
+  {
+   "id": "id-151",
+   "category": "idol",
+   "prompt": "아이유가 가수로 데뷔한 해는?",
+   "choices": [
+    "2008년",
+    "2007년",
+    "2010년",
+    "2006년"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이유는 2008년에 데뷔했다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/IU_(entertainer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0151"
+  },
+  {
+   "id": "id-150",
+   "category": "idol",
+   "prompt": "NCT 127의 데뷔 연도는?",
+   "choices": [
+    "2016년",
+    "2014년",
+    "2017년",
+    "2018년"
+   ],
+   "answerIndex": 0,
+   "explanation": "NCT 127은 2016년에 데뷔했다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/NCT_127",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0150"
+  },
+  {
+   "id": "id-149",
+   "category": "idol",
+   "prompt": "RIIZE의 데뷔 연도는?",
+   "choices": [
+    "2023년",
+    "2021년",
+    "2024년",
+    "2022년"
+   ],
+   "answerIndex": 0,
+   "explanation": "RIIZE는 2023년에 데뷔했다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Riize",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0149"
+  },
+  {
+   "id": "id-148",
+   "category": "idol",
+   "prompt": "아이들(i-dle)의 데뷔 연도는?",
+   "choices": [
+    "2018년",
+    "2016년",
+    "2017년",
+    "2019년"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이들(i-dle)은 2018년에 데뷔했다.",
+   "difficulty": 0.45,
+   "source": "https://ko.wikipedia.org/wiki/%EC%95%84%EC%9D%B4%EB%93%A4_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0148"
+  },
+  {
+   "id": "id-147",
+   "category": "idol",
+   "prompt": "레드벨벳의 데뷔 연도는?",
+   "choices": [
+    "2014년",
+    "2013년",
+    "2015년",
+    "2012년"
+   ],
+   "answerIndex": 0,
+   "explanation": "레드벨벳은 2014년에 데뷔했다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Red_Velvet_(group)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0147"
+  },
+  {
+   "id": "id-146",
+   "category": "idol",
+   "prompt": "EXO의 데뷔 연도는?",
+   "choices": [
+    "2012년",
+    "2010년",
+    "2013년",
+    "2014년"
+   ],
+   "answerIndex": 0,
+   "explanation": "EXO는 2012년에 데뷔했다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Exo",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0146"
+  },
+  {
+   "id": "id-145",
+   "category": "idol",
+   "prompt": "세븐틴의 데뷔 연도는?",
+   "choices": [
+    "2015년",
+    "2016년",
+    "2014년",
+    "2017년"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴은 2015년에 데뷔했다.",
+   "difficulty": 0.35,
+   "source": "https://ko.wikipedia.org/wiki/%EC%84%B8%EB%B8%90%ED%8B%B4_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0145"
+  },
+  {
+   "id": "id-144",
+   "category": "idol",
+   "prompt": "빅뱅의 공식 데뷔일은?",
+   "choices": [
+    "2006년 8월 19일",
+    "2007년 8월 19일",
+    "2006년 8월 26일",
+    "2006년 9월 19일"
+   ],
+   "answerIndex": 0,
+   "explanation": "빅뱅은 2006년 8월 19일에 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://ko.wikipedia.org/wiki/%EB%B9%85%EB%B1%85_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0144"
+  },
+  {
+   "id": "id-143",
+   "category": "idol",
+   "prompt": "TXT의 공식 데뷔일은?",
+   "choices": [
+    "2019년 3월 4일",
+    "2018년 3월 4일",
+    "2019년 2월 4일",
+    "2019년 1월 4일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TXT는 2019년 3월 4일에 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://ko.wikipedia.org/wiki/%ED%88%AC%EB%AA%A8%EB%A1%9C%EC%9A%B0%EB%B0%94%EC%9D%B4%ED%88%AC%EA%B2%8C%EB%8D%94",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0143"
+  },
+  {
+   "id": "id-142",
+   "category": "idol",
+   "prompt": "ITZY의 공식 데뷔일은?",
+   "choices": [
+    "2019년 2월 12일",
+    "2018년 2월 12일",
+    "2019년 2월 5일",
+    "2019년 12월 12일"
+   ],
+   "answerIndex": 0,
+   "explanation": "ITZY는 2019년 2월 12일에 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://ko.wikipedia.org/wiki/ITZY",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0142"
+  },
+  {
+   "id": "id-141",
+   "category": "idol",
+   "prompt": "LE SSERAFIM의 공식 데뷔일은?",
+   "choices": [
+    "2022년 5월 2일",
+    "2022년 5월 27일",
+    "2022년 4월 2일",
+    "2022년 7월 2일"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM은 2022년 5월 2일에 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://ko.wikipedia.org/wiki/%EB%A5%B4%EC%84%B8%EB%9D%BC%ED%95%8C",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0141"
+  },
+  {
+   "id": "id-140",
+   "category": "idol",
+   "prompt": "aespa의 공식 데뷔일은?",
+   "choices": [
+    "2020년 11월 17일",
+    "2020년 10월 17일",
+    "2020년 11월 14일",
+    "2020년 11월 20일"
+   ],
+   "answerIndex": 0,
+   "explanation": "aespa는 2020년 11월 17일에 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Aespa",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0140"
+  },
+  {
+   "id": "id-139",
+   "category": "idol",
+   "prompt": "IVE의 공식 데뷔일은?",
+   "choices": [
+    "2021년 12월 1일",
+    "2021년 10월 1일",
+    "2021년 2월 1일",
+    "2020년 12월 1일"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE는 2021년 12월 1일에 데뷔했다.",
+   "difficulty": 0.55,
+   "source": "https://ko.wikipedia.org/wiki/%EC%95%84%EC%9D%B4%EB%B8%8C_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0139"
+  },
+  {
+   "id": "id-138",
+   "category": "idol",
+   "prompt": "TWICE의 공식 데뷔일은?",
+   "choices": [
+    "2015년 10월 20일",
+    "2016년 10월 20일",
+    "2015년 10월 23일",
+    "2014년 10월 20일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE는 2015년 10월 20일에 데뷔했다.",
+   "difficulty": 0.55,
+   "source": "https://ko.wikipedia.org/wiki/%ED%8A%B8%EC%99%80%EC%9D%B4%EC%8A%A4",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0138"
+  },
+  {
+   "id": "id-137",
+   "category": "idol",
+   "prompt": "BLACKPINK의 공식 데뷔일은?",
+   "choices": [
+    "2016년 8월 8일",
+    "2016년 9월 8일",
+    "2016년 8월 11일",
+    "2016년 10월 8일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BLACKPINK는 2016년 8월 8일에 데뷔했다.",
+   "difficulty": 0.45,
+   "source": "https://ko.wikipedia.org/wiki/%EB%B8%94%EB%9E%99%ED%95%91%ED%81%AC",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0137"
+  },
+  {
+   "id": "id-136",
+   "category": "idol",
+   "prompt": "BTS의 공식 데뷔일은?",
+   "choices": [
+    "2013년 6월 13일",
+    "2012년 6월 13일",
+    "2013년 5월 13일",
+    "2013년 6월 10일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS는 2013년 6월 13일에 데뷔했다.",
+   "difficulty": 0.45,
+   "source": "https://ko.wikipedia.org/wiki/%EB%B0%A9%ED%83%84%EC%86%8C%EB%85%84%EB%8B%A8",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0136"
+  },
+  {
+   "id": "id-135",
+   "category": "idol",
+   "prompt": "LE SSERAFIM의 데뷔 미니앨범 이름은?",
+   "choices": [
+    "FEARLESS",
+    "ANTIFRAGILE",
+    "UNFORGIVEN",
+    "EASY"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM의 데뷔 작품은 'FEARLESS'다.",
+   "difficulty": 0.35,
+   "source": "https://ko.wikipedia.org/wiki/%EB%A5%B4%EC%84%B8%EB%9D%BC%ED%95%8C",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0135"
+  },
+  {
+   "id": "id-134",
+   "category": "idol",
+   "prompt": "아이유의 데뷔곡은?",
+   "choices": [
+    "미아",
+    "좋은 날",
+    "잔소리",
+    "마쉬멜로우"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이유의 데뷔 작품은 '미아'다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/IU_(entertainer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0134"
+  },
+  {
+   "id": "id-133",
+   "category": "idol",
+   "prompt": "RIIZE의 데뷔 싱글 앨범 이름은?",
+   "choices": [
+    "Get A Guitar",
+    "Talk Saxy",
+    "Love 119",
+    "Boom Boom Bass"
+   ],
+   "answerIndex": 0,
+   "explanation": "RIIZE의 데뷔 작품은 'Get A Guitar'다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Riize",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0133"
+  },
+  {
+   "id": "id-132",
+   "category": "idol",
+   "prompt": "EXO의 데뷔 싱글은?",
+   "choices": [
+    "MAMA",
+    "으르렁",
+    "늑대와 미녀",
+    "중독"
+   ],
+   "answerIndex": 0,
+   "explanation": "EXO의 데뷔 작품은 'MAMA'다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Exo",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0132"
+  },
+  {
+   "id": "id-131",
+   "category": "idol",
+   "prompt": "ENHYPEN의 데뷔 타이틀곡은?",
+   "choices": [
+    "Given-Taken",
+    "Drunk-Dazed",
+    "FEVER",
+    "Polaroid Love"
+   ],
+   "answerIndex": 0,
+   "explanation": "ENHYPEN의 데뷔 작품은 'Given-Taken'이다.",
+   "difficulty": 0.55,
+   "source": "https://ko.wikipedia.org/wiki/%EC%97%94%ED%95%98%EC%9D%B4%ED%94%88",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0131"
+  },
+  {
+   "id": "id-130",
+   "category": "idol",
+   "prompt": "아이들(i-dle)의 데뷔곡은?",
+   "choices": [
+    "LATATA",
+    "한(一)",
+    "Senorita",
+    "Uh-Oh"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이들(i-dle)의 데뷔 작품은 'LATATA'다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/I-dle",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0130"
+  },
+  {
+   "id": "id-129",
+   "category": "idol",
+   "prompt": "레드벨벳의 데뷔 싱글은?",
+   "choices": [
+    "행복 (Happiness)",
+    "Be Natural",
+    "아이스크림 케이크",
+    "Dumb Dumb"
+   ],
+   "answerIndex": 0,
+   "explanation": "레드벨벳의 데뷔 작품은 '행복 (Happiness)'다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Red_Velvet_(group)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0129"
+  },
+  {
+   "id": "id-128",
+   "category": "idol",
+   "prompt": "ITZY의 데뷔곡은?",
+   "choices": [
+    "DALLA DALLA",
+    "WANNABE",
+    "ICY",
+    "LOCO"
+   ],
+   "answerIndex": 0,
+   "explanation": "ITZY의 데뷔 작품은 'DALLA DALLA'다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Itzy",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0128"
+  },
+  {
+   "id": "id-127",
+   "category": "idol",
+   "prompt": "aespa의 데뷔곡은?",
+   "choices": [
+    "Black Mamba",
+    "Next Level",
+    "Savage",
+    "Spicy"
+   ],
+   "answerIndex": 0,
+   "explanation": "aespa의 데뷔 작품은 'Black Mamba'다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Aespa",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0127"
+  },
+  {
+   "id": "id-126",
+   "category": "idol",
+   "prompt": "IVE의 데뷔곡은?",
+   "choices": [
+    "ELEVEN",
+    "LOVE DIVE",
+    "After LIKE",
+    "I AM"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE의 데뷔 작품은 'ELEVEN'이다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Ive_(group)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0126"
+  },
+  {
+   "id": "id-125",
+   "category": "idol",
+   "prompt": "NewJeans가 처음 공개한 데뷔곡은?",
+   "choices": [
+    "Attention",
+    "Hype Boy",
+    "Ditto",
+    "OMG"
+   ],
+   "answerIndex": 0,
+   "explanation": "NewJeans의 데뷔 작품은 'Attention'이다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/NewJeans",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0125"
+  },
+  {
+   "id": "id-124",
+   "category": "idol",
+   "prompt": "Stray Kids의 공식 데뷔 타이틀곡은?",
+   "choices": [
+    "District 9",
+    "God's Menu",
+    "MIROH",
+    "Back Door"
+   ],
+   "answerIndex": 0,
+   "explanation": "Stray Kids의 데뷔 작품은 'District 9'이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Stray_Kids",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0124"
+  },
+  {
+   "id": "id-123",
+   "category": "idol",
+   "prompt": "세븐틴의 데뷔 타이틀곡은?",
+   "choices": [
+    "아낀다",
+    "만세",
+    "예쁘다",
+    "아주 NICE"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴의 데뷔 작품은 '아낀다'다.",
+   "difficulty": 0.5,
+   "source": "https://ko.wikipedia.org/wiki/%EC%84%B8%EB%B8%90%ED%8B%B4_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0123"
+  },
+  {
+   "id": "id-122",
+   "category": "idol",
+   "prompt": "TWICE의 데뷔곡은?",
+   "choices": [
+    "Like OOH-AHH",
+    "CHEER UP",
+    "TT",
+    "KNOCK KNOCK"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE의 데뷔 작품은 'Like OOH-AHH'다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Twice",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0122"
+  },
+  {
+   "id": "id-121",
+   "category": "idol",
+   "prompt": "BLACKPINK의 데뷔 싱글 앨범 이름은?",
+   "choices": [
+    "SQUARE ONE",
+    "SQUARE TWO",
+    "THE ALBUM",
+    "BORN PINK"
+   ],
+   "answerIndex": 0,
+   "explanation": "BLACKPINK의 데뷔 작품은 'SQUARE ONE'이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Blackpink",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0121"
+  },
+  {
+   "id": "id-120",
+   "category": "idol",
+   "prompt": "BTS의 데뷔 타이틀곡은?",
+   "choices": [
+    "No More Dream",
+    "Boy In Luv",
+    "I NEED U",
+    "Danger"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS의 데뷔 작품은 'No More Dream'이다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/BTS",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0120"
+  },
+  {
+   "id": "id-119",
+   "category": "idol",
+   "prompt": "레드벨벳의 소속사는?",
+   "choices": [
+    "SM 엔터테인먼트",
+    "YG 엔터테인먼트",
+    "JYP 엔터테인먼트",
+    "스타쉽 엔터테인먼트"
+   ],
+   "answerIndex": 0,
+   "explanation": "레드벨벳의 소속사는 SM 엔터테인먼트다.",
+   "difficulty": 0.3,
+   "source": "https://ko.wikipedia.org/wiki/%EB%A0%88%EB%93%9C%EB%B2%A8%EB%B2%B3_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0119"
+  },
+  {
+   "id": "id-118",
+   "category": "idol",
+   "prompt": "Stray Kids의 소속사는?",
+   "choices": [
+    "JYP 엔터테인먼트",
+    "SM 엔터테인먼트",
+    "YG 엔터테인먼트",
+    "스타쉽 엔터테인먼트"
+   ],
+   "answerIndex": 0,
+   "explanation": "Stray Kids의 소속사는 JYP 엔터테인먼트다.",
+   "difficulty": 0.3,
+   "source": "https://ko.wikipedia.org/wiki/%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%9D%B4_%ED%82%A4%EC%A6%88",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0118"
+  },
+  {
+   "id": "id-117",
+   "category": "idol",
+   "prompt": "ZEROBASEONE을 데뷔시킨 소속사는?",
+   "choices": [
+    "웨이크원",
+    "빌리프랩",
+    "플레디스",
+    "쏘스뮤직"
+   ],
+   "answerIndex": 0,
+   "explanation": "ZEROBASEONE은 웨이크원 소속으로 데뷔했다.",
+   "difficulty": 0.6,
+   "source": "https://ko.wikipedia.org/wiki/%EC%A0%9C%EB%A1%9C%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%9B%90",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0117"
+  },
+  {
+   "id": "id-116",
+   "category": "idol",
+   "prompt": "ENHYPEN의 소속 레이블은?",
+   "choices": [
+    "빌리프랩",
+    "플레디스",
+    "쏘스뮤직",
+    "웨이크원"
+   ],
+   "answerIndex": 0,
+   "explanation": "ENHYPEN의 소속사는 빌리프랩이다.",
+   "difficulty": 0.55,
+   "source": "https://ko.wikipedia.org/wiki/%EC%97%94%ED%95%98%EC%9D%B4%ED%94%88",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0116"
+  },
+  {
+   "id": "id-115",
+   "category": "idol",
+   "prompt": "아이들(i-dle)의 소속사는?",
+   "choices": [
+    "큐브 엔터테인먼트",
+    "스타쉽 엔터테인먼트",
+    "JYP 엔터테인먼트",
+    "YG 엔터테인먼트"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이들(i-dle)의 소속사는 큐브 엔터테인먼트다.",
+   "difficulty": 0.45,
+   "source": "https://ko.wikipedia.org/wiki/%EC%95%84%EC%9D%B4%EB%93%A4_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0115"
+  },
+  {
+   "id": "id-114",
+   "category": "idol",
+   "prompt": "세븐틴의 소속 레이블은?",
+   "choices": [
+    "플레디스",
+    "쏘스뮤직",
+    "빌리프랩",
+    "웨이크원"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴의 소속사는 플레디스다.",
+   "difficulty": 0.45,
+   "source": "https://ko.wikipedia.org/wiki/%EC%84%B8%EB%B8%90%ED%8B%B4_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0114"
+  },
+  {
+   "id": "id-113",
+   "category": "idol",
+   "prompt": "LE SSERAFIM이 소속된 하이브 산하 레이블은?",
+   "choices": [
+    "쏘스뮤직",
+    "빌리프랩",
+    "플레디스",
+    "웨이크원"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM의 소속사는 쏘스뮤직이다.",
+   "difficulty": 0.55,
+   "source": "https://ko.wikipedia.org/wiki/%EB%A5%B4%EC%84%B8%EB%9D%BC%ED%95%8C",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0113"
+  },
+  {
+   "id": "id-112",
+   "category": "idol",
+   "prompt": "IVE의 소속사는?",
+   "choices": [
+    "스타쉽 엔터테인먼트",
+    "큐브 엔터테인먼트",
+    "JYP 엔터테인먼트",
+    "SM 엔터테인먼트"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE의 소속사는 스타쉽 엔터테인먼트다.",
+   "difficulty": 0.35,
+   "source": "https://ko.wikipedia.org/wiki/%EC%95%84%EC%9D%B4%EB%B8%8C_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0112"
+  },
+  {
+   "id": "id-111",
+   "category": "idol",
+   "prompt": "aespa의 소속사는?",
+   "choices": [
+    "SM 엔터테인먼트",
+    "JYP 엔터테인먼트",
+    "YG 엔터테인먼트",
+    "큐브 엔터테인먼트"
+   ],
+   "answerIndex": 0,
+   "explanation": "aespa의 소속사는 SM 엔터테인먼트다.",
+   "difficulty": 0.3,
+   "source": "https://ko.wikipedia.org/wiki/%EC%97%90%EC%8A%A4%ED%8C%8C",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0111"
+  },
+  {
+   "id": "id-110",
+   "category": "idol",
+   "prompt": "TWICE를 데뷔시킨 기획사는?",
+   "choices": [
+    "JYP 엔터테인먼트",
+    "YG 엔터테인먼트",
+    "SM 엔터테인먼트",
+    "스타쉽 엔터테인먼트"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE의 소속사는 JYP 엔터테인먼트다.",
+   "difficulty": 0.25,
+   "source": "https://ko.wikipedia.org/wiki/%ED%8A%B8%EC%99%80%EC%9D%B4%EC%8A%A4",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0110"
+  },
+  {
+   "id": "id-109",
+   "category": "idol",
+   "prompt": "BLACKPINK의 소속 기획사는?",
+   "choices": [
+    "YG 엔터테인먼트",
+    "SM 엔터테인먼트",
+    "JYP 엔터테인먼트",
+    "큐브 엔터테인먼트"
+   ],
+   "answerIndex": 0,
+   "explanation": "BLACKPINK의 소속사는 YG 엔터테인먼트다.",
+   "difficulty": 0.2,
+   "source": "https://en.wikipedia.org/wiki/Blackpink",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0109"
+  },
+  {
+   "id": "id-108",
+   "category": "idol",
+   "prompt": "방탄소년단(BTS)의 소속사는?",
+   "choices": [
+    "빅히트 뮤직",
+    "SM 엔터테인먼트",
+    "JYP 엔터테인먼트",
+    "YG 엔터테인먼트"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS의 소속사는 빅히트 뮤직이다.",
+   "difficulty": 0.2,
+   "source": "https://ko.wikipedia.org/wiki/%EB%B0%A9%ED%83%84%EC%86%8C%EB%85%84%EB%8B%A8",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0108"
+  },
+  {
+   "id": "id-107",
+   "category": "idol",
+   "prompt": "NewJeans의 공식 팬클럽 이름은?",
+   "choices": [
+    "Bunnies",
+    "FEARNOT",
+    "Neverland",
+    "ReVeluv"
+   ],
+   "answerIndex": 0,
+   "explanation": "NewJeans의 공식 팬덤명은 'Bunnies'다.",
+   "difficulty": 0.45,
+   "source": "https://enews.imbc.com/News/RetrieveNewsInfo/364047",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0107"
+  },
+  {
+   "id": "id-106",
+   "category": "idol",
+   "prompt": "아이들(i-dle)의 팬덤명은?",
+   "choices": [
+    "Neverland",
+    "ReVeluv",
+    "FEARNOT",
+    "Bunnies"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이들(i-dle)의 공식 팬덤명은 'Neverland'다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/I-dle",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0106"
+  },
+  {
+   "id": "id-105",
+   "category": "idol",
+   "prompt": "IVE의 공식 팬덤명은?",
+   "choices": [
+    "DIVE",
+    "MY",
+    "FEARNOT",
+    "MIDZY"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE의 공식 팬덤명은 'DIVE'다.",
+   "difficulty": 0.45,
+   "source": "https://www.starinnews.com/news/articleView.html?idxno=330381",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0105"
+  },
+  {
+   "id": "id-104",
+   "category": "idol",
+   "prompt": "ITZY의 공식 팬덤명은?",
+   "choices": [
+    "MIDZY",
+    "ONCE",
+    "DIVE",
+    "MY"
+   ],
+   "answerIndex": 0,
+   "explanation": "ITZY의 공식 팬덤명은 'MIDZY'다.",
+   "difficulty": 0.5,
+   "source": "https://sports.khan.co.kr/article/201907081316003",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0104"
+  },
+  {
+   "id": "id-103",
+   "category": "idol",
+   "prompt": "LE SSERAFIM의 공식 팬덤명은?",
+   "choices": [
+    "FEARNOT",
+    "DIVE",
+    "MIDZY",
+    "Bunnies"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM의 공식 팬덤명은 'FEARNOT'이다.",
+   "difficulty": 0.5,
+   "source": "https://www.newsis.com/view/NISX20220808_0001970441",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0103"
+  },
+  {
+   "id": "id-102",
+   "category": "idol",
+   "prompt": "아이유의 공식 팬클럽 이름은?",
+   "choices": [
+    "유애나",
+    "아미",
+    "블링크",
+    "원스"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이유의 공식 팬덤명은 '유애나'다.",
+   "difficulty": 0.35,
+   "source": "https://ko.wikipedia.org/wiki/%EC%95%84%EC%9D%B4%EC%9C%A0",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0102"
+  },
+  {
+   "id": "id-101",
+   "category": "idol",
+   "prompt": "빅뱅(BIGBANG)의 팬클럽 이름은?",
+   "choices": [
+    "VIP",
+    "ARMY",
+    "EXO-L",
+    "BLINK"
+   ],
+   "answerIndex": 0,
+   "explanation": "빅뱅의 공식 팬덤명은 'VIP'다.",
+   "difficulty": 0.3,
+   "source": "https://ko.wikipedia.org/wiki/%EB%B9%85%EB%B1%85_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0101"
+  },
+  {
+   "id": "id-100",
+   "category": "idol",
+   "prompt": "ENHYPEN의 팬덤명은?",
+   "choices": [
+    "ENGENE",
+    "MOA",
+    "STAY",
+    "CARAT"
+   ],
+   "answerIndex": 0,
+   "explanation": "ENHYPEN의 공식 팬덤명은 'ENGENE'이다.",
+   "difficulty": 0.5,
+   "source": "https://ko.wikipedia.org/wiki/%EC%97%94%ED%95%98%EC%9D%B4%ED%94%88",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0100"
+  },
+  {
+   "id": "id-099",
+   "category": "idol",
+   "prompt": "투모로우바이투게더(TXT)의 팬덤명은?",
+   "choices": [
+    "MOA",
+    "ENGENE",
+    "STAY",
+    "ARMY"
+   ],
+   "answerIndex": 0,
+   "explanation": "TXT의 공식 팬덤명은 'MOA'다.",
+   "difficulty": 0.35,
+   "source": "https://ko.wikipedia.org/wiki/%ED%88%AC%EB%AA%A8%EB%A1%9C%EC%9A%B0%EB%B0%94%EC%9D%B4%ED%88%AC%EA%B2%8C%EB%8D%94",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0099"
+  },
+  {
+   "id": "id-098",
+   "category": "idol",
+   "prompt": "aespa의 공식 팬덤명은?",
+   "choices": [
+    "MY",
+    "DIVE",
+    "ONCE",
+    "MIDZY"
+   ],
+   "answerIndex": 0,
+   "explanation": "aespa의 공식 팬덤명은 'MY'다.",
+   "difficulty": 0.45,
+   "source": "https://ko.wikipedia.org/wiki/%EC%97%90%EC%8A%A4%ED%8C%8C",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0098"
+  },
+  {
+   "id": "id-097",
+   "category": "idol",
+   "prompt": "EXO의 공식 팬클럽 이름은?",
+   "choices": [
+    "EXO-L",
+    "VIP",
+    "CARAT",
+    "ARMY"
+   ],
+   "answerIndex": 0,
+   "explanation": "EXO의 공식 팬덤명은 'EXO-L'이다.",
+   "difficulty": 0.35,
+   "source": "https://ko.wikipedia.org/wiki/%EC%97%91%EC%86%8C",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0097"
+  },
+  {
+   "id": "id-096",
+   "category": "idol",
+   "prompt": "Stray Kids의 공식 팬덤명은?",
+   "choices": [
+    "STAY",
+    "CARAT",
+    "ENGENE",
+    "MOA"
+   ],
+   "answerIndex": 0,
+   "explanation": "Stray Kids의 공식 팬덤명은 'STAY'다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Stray_Kids",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0096"
+  },
+  {
+   "id": "id-095",
+   "category": "idol",
+   "prompt": "세븐틴의 공식 팬클럽 이름은?",
+   "choices": [
+    "CARAT",
+    "STAY",
+    "MOA",
+    "ENGENE"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴의 공식 팬덤명은 'CARAT'이다.",
+   "difficulty": 0.3,
+   "source": "https://ko.wikipedia.org/wiki/%EC%84%B8%EB%B8%90%ED%8B%B4_(%EC%9D%8C%EC%95%85_%EA%B7%B8%EB%A3%B9)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0095"
+  },
+  {
+   "id": "id-094",
+   "category": "idol",
+   "prompt": "TWICE 팬들을 부르는 이름은?",
+   "choices": [
+    "ONCE",
+    "BLINK",
+    "MIDZY",
+    "DIVE"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE의 공식 팬덤명은 'ONCE'다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/Twice",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0094"
+  },
+  {
+   "id": "id-093",
+   "category": "idol",
+   "prompt": "BLACKPINK의 팬덤명은?",
+   "choices": [
+    "BLINK",
+    "ARMY",
+    "ONCE",
+    "MY"
+   ],
+   "answerIndex": 0,
+   "explanation": "BLACKPINK의 공식 팬덤명은 'BLINK'다.",
+   "difficulty": 0.25,
+   "source": "https://en.wikipedia.org/wiki/Blackpink",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0093"
+  },
+  {
+   "id": "id-092",
+   "category": "idol",
+   "prompt": "방탄소년단(BTS)의 공식 팬덤명은?",
+   "choices": [
+    "ARMY",
+    "ONCE",
+    "BLINK",
+    "CARAT"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS의 공식 팬덤명은 'ARMY'다.",
+   "difficulty": 0.2,
+   "source": "https://ko.wikipedia.org/wiki/%EB%B0%A9%ED%83%84%EC%86%8C%EB%85%84%EB%8B%A8",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0092"
+  },
+  {
+   "id": "id-091",
+   "category": "idol",
+   "prompt": "아이들(i-dle)의 리더는 누구일까?",
+   "choices": [
+    "소연",
+    "미연",
+    "민니",
+    "우기"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이들(i-dle)의 리더는 소연이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/I-dle",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0091"
+  },
+  {
+   "id": "id-090",
+   "category": "idol",
+   "prompt": "TXT의 리더는 누구일까?",
+   "choices": [
+    "수빈",
+    "연준",
+    "범규",
+    "태현"
+   ],
+   "answerIndex": 0,
+   "explanation": "TXT의 리더는 수빈이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Tomorrow_X_Together",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0090"
+  },
+  {
+   "id": "id-089",
+   "category": "idol",
+   "prompt": "EXO의 리더는 누구일까?",
+   "choices": [
+    "수호",
+    "백현",
+    "찬열",
+    "카이"
+   ],
+   "answerIndex": 0,
+   "explanation": "EXO의 리더는 수호다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Exo",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0089"
+  },
+  {
+   "id": "id-088",
+   "category": "idol",
+   "prompt": "ITZY의 리더는 누구일까?",
+   "choices": [
+    "예지",
+    "류진",
+    "리아",
+    "유나"
+   ],
+   "answerIndex": 0,
+   "explanation": "ITZY의 리더는 예지다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Itzy",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0088"
+  },
+  {
+   "id": "id-087",
+   "category": "idol",
+   "prompt": "LE SSERAFIM의 리더는 누구일까?",
+   "choices": [
+    "김채원",
+    "사쿠라",
+    "허윤진",
+    "카즈하"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM의 리더는 김채원이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/Le_Sserafim",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0087"
+  },
+  {
+   "id": "id-086",
+   "category": "idol",
+   "prompt": "IVE의 리더는 누구일까?",
+   "choices": [
+    "안유진",
+    "장원영",
+    "가을",
+    "리즈"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE의 리더는 안유진이다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Ive_(group)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0086"
+  },
+  {
+   "id": "id-085",
+   "category": "idol",
+   "prompt": "세븐틴의 리더는 누구일까?",
+   "choices": [
+    "에스쿱스",
+    "정한",
+    "호시",
+    "우지"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴의 리더는 에스쿱스다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/Seventeen_(South_Korean_band)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0085"
+  },
+  {
+   "id": "id-084",
+   "category": "idol",
+   "prompt": "Stray Kids의 리더는 누구일까?",
+   "choices": [
+    "방찬",
+    "창빈",
+    "현진",
+    "리노"
+   ],
+   "answerIndex": 0,
+   "explanation": "Stray Kids의 리더는 방찬이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/Stray_Kids",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0084"
+  },
+  {
+   "id": "id-083",
+   "category": "idol",
+   "prompt": "TWICE의 리더는 누구일까?",
+   "choices": [
+    "지효",
+    "나연",
+    "정연",
+    "사나"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE의 리더는 지효다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Twice",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0083"
+  },
+  {
+   "id": "id-082",
+   "category": "idol",
+   "prompt": "BTS의 리더는 누구일까?",
+   "choices": [
+    "RM",
+    "진",
+    "슈가",
+    "정국"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS의 리더는 RM이다.",
+   "difficulty": 0.25,
+   "source": "https://en.wikipedia.org/wiki/BTS",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0082"
+  },
+  {
+   "id": "id-081",
+   "category": "idol",
+   "prompt": "일본 출신 니키(NI-KI)가 속한 그룹은?",
+   "choices": [
+    "ENHYPEN",
+    "TXT",
+    "ZEROBASEONE",
+    "Stray Kids"
+   ],
+   "answerIndex": 0,
+   "explanation": "니키는 ENHYPEN의 멤버다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Ni-Ki",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0081"
+  },
+  {
+   "id": "id-080",
+   "category": "idol",
+   "prompt": "성한빈이 리더로 데뷔한 보이그룹은?",
+   "choices": [
+    "ZEROBASEONE",
+    "ENHYPEN",
+    "TXT",
+    "Stray Kids"
+   ],
+   "answerIndex": 0,
+   "explanation": "성한빈은 ZEROBASEONE의 리더로 데뷔했다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Sung_Han-bin",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0080"
+  },
+  {
+   "id": "id-079",
+   "category": "idol",
+   "prompt": "이동혁(해찬)이 속한 보이그룹은?",
+   "choices": [
+    "NCT 127",
+    "EXO",
+    "SEVENTEEN",
+    "Stray Kids"
+   ],
+   "answerIndex": 0,
+   "explanation": "해찬은 NCT 127의 멤버다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/Haechan",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0079"
+  },
+  {
+   "id": "id-078",
+   "category": "idol",
+   "prompt": "중국 출신 송우기(우기)가 속한 그룹은?",
+   "choices": [
+    "i-dle",
+    "aespa",
+    "ITZY",
+    "LE SSERAFIM"
+   ],
+   "answerIndex": 0,
+   "explanation": "우기는 i-dle의 멤버다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Yuqi",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0078"
+  },
+  {
+   "id": "id-077",
+   "category": "idol",
+   "prompt": "김지수(지수)가 속한 4인조 걸그룹은?",
+   "choices": [
+    "BLACKPINK",
+    "TWICE",
+    "Red Velvet",
+    "aespa"
+   ],
+   "answerIndex": 0,
+   "explanation": "지수는 BLACKPINK의 멤버다.",
+   "difficulty": 0.2,
+   "source": "https://en.wikipedia.org/wiki/Jisoo",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0077"
+  },
+  {
+   "id": "id-076",
+   "category": "idol",
+   "prompt": "대만 출신 쯔위가 속한 걸그룹은?",
+   "choices": [
+    "TWICE",
+    "ITZY",
+    "Red Velvet",
+    "LE SSERAFIM"
+   ],
+   "answerIndex": 0,
+   "explanation": "쯔위는 TWICE의 멤버다.",
+   "difficulty": 0.25,
+   "source": "https://en.wikipedia.org/wiki/Tzuyu",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0076"
+  },
+  {
+   "id": "id-075",
+   "category": "idol",
+   "prompt": "오세훈(세훈)이 속한 보이그룹은?",
+   "choices": [
+    "EXO",
+    "SEVENTEEN",
+    "NCT 127",
+    "BTS"
+   ],
+   "answerIndex": 0,
+   "explanation": "세훈은 EXO의 멤버다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Sehun",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0075"
+  },
+  {
+   "id": "id-074",
+   "category": "idol",
+   "prompt": "강슬기(슬기)가 속한 걸그룹은?",
+   "choices": [
+    "Red Velvet",
+    "aespa",
+    "TWICE",
+    "BLACKPINK"
+   ],
+   "answerIndex": 0,
+   "explanation": "슬기는 Red Velvet의 멤버다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Seulgi",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0074"
+  },
+  {
+   "id": "id-073",
+   "category": "idol",
+   "prompt": "황예지(예지)가 리더인 걸그룹은?",
+   "choices": [
+    "ITZY",
+    "IVE",
+    "LE SSERAFIM",
+    "TWICE"
+   ],
+   "answerIndex": 0,
+   "explanation": "예지는 ITZY의 멤버다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Yeji_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0073"
+  },
+  {
+   "id": "id-072",
+   "category": "idol",
+   "prompt": "최연준(연준)이 속한 보이그룹은?",
+   "choices": [
+    "TXT",
+    "ENHYPEN",
+    "Stray Kids",
+    "NCT 127"
+   ],
+   "answerIndex": 0,
+   "explanation": "연준은 TXT의 멤버다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Yeonjun",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0072"
+  },
+  {
+   "id": "id-071",
+   "category": "idol",
+   "prompt": "김민규(민규)가 활동하는 그룹은?",
+   "choices": [
+    "SEVENTEEN",
+    "Stray Kids",
+    "EXO",
+    "ENHYPEN"
+   ],
+   "answerIndex": 0,
+   "explanation": "민규는 SEVENTEEN의 멤버다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Mingyu",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0071"
+  },
+  {
+   "id": "id-070",
+   "category": "idol",
+   "prompt": "황현진(현진)이 속한 보이그룹은?",
+   "choices": [
+    "Stray Kids",
+    "ENHYPEN",
+    "SEVENTEEN",
+    "TXT"
+   ],
+   "answerIndex": 0,
+   "explanation": "현진은 Stray Kids의 멤버다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Hyunjin_(Stray_Kids_singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0070"
+  },
+  {
+   "id": "id-069",
+   "category": "idol",
+   "prompt": "일본 출신 멤버 사쿠라가 속한 그룹은?",
+   "choices": [
+    "LE SSERAFIM",
+    "Red Velvet",
+    "NewJeans",
+    "BLACKPINK"
+   ],
+   "answerIndex": 0,
+   "explanation": "사쿠라는 LE SSERAFIM의 멤버다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Sakura_Miyawaki",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0069"
+  },
+  {
+   "id": "id-068",
+   "category": "idol",
+   "prompt": "카리나가 속한 걸그룹은?",
+   "choices": [
+    "aespa",
+    "IVE",
+    "Red Velvet",
+    "ITZY"
+   ],
+   "answerIndex": 0,
+   "explanation": "카리나는 aespa의 멤버다.",
+   "difficulty": 0.25,
+   "source": "https://en.wikipedia.org/wiki/Karina_(South_Korean_singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0068"
+  },
+  {
+   "id": "id-067",
+   "category": "idol",
+   "prompt": "장원영이 속한 걸그룹은?",
+   "choices": [
+    "IVE",
+    "ITZY",
+    "aespa",
+    "LE SSERAFIM"
+   ],
+   "answerIndex": 0,
+   "explanation": "장원영은 IVE의 멤버다.",
+   "difficulty": 0.25,
+   "source": "https://en.wikipedia.org/wiki/Jang_Won-young",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0067"
+  },
+  {
+   "id": "id-066",
+   "category": "idol",
+   "prompt": "BLACKPINK 로제의 본명은?",
+   "choices": [
+    "박채영",
+    "김지수",
+    "김제니",
+    "박지영"
+   ],
+   "answerIndex": 0,
+   "explanation": "BLACKPINK 로제의 본명은 박채영이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/Ros%C3%A9_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0066"
+  },
+  {
+   "id": "id-065",
+   "category": "idol",
+   "prompt": "Stray Kids 리노의 본명은?",
+   "choices": [
+    "이민호",
+    "서창빈",
+    "한지성",
+    "김승민"
+   ],
+   "answerIndex": 0,
+   "explanation": "Stray Kids 리노의 본명은 이민호이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Lee_Know",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0065"
+  },
+  {
+   "id": "id-064",
+   "category": "idol",
+   "prompt": "레드벨벳 아이린의 본명은?",
+   "choices": [
+    "배주현",
+    "손승완",
+    "박수영",
+    "강슬기"
+   ],
+   "answerIndex": 0,
+   "explanation": "레드벨벳 아이린의 본명은 배주현이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Irene_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0064"
+  },
+  {
+   "id": "id-063",
+   "category": "idol",
+   "prompt": "aespa 카리나의 본명은?",
+   "choices": [
+    "유지민",
+    "김민정",
+    "유지수",
+    "김지민"
+   ],
+   "answerIndex": 0,
+   "explanation": "aespa 카리나의 본명은 유지민이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Karina_(South_Korean_singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0063"
+  },
+  {
+   "id": "id-062",
+   "category": "idol",
+   "prompt": "EXO 카이의 본명은?",
+   "choices": [
+    "김종인",
+    "김준면",
+    "변백현",
+    "오세훈"
+   ],
+   "answerIndex": 0,
+   "explanation": "EXO 카이의 본명은 김종인이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Kai_(entertainer%2C_born_1994)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0062"
+  },
+  {
+   "id": "id-061",
+   "category": "idol",
+   "prompt": "빅뱅 지드래곤의 본명은?",
+   "choices": [
+    "권지용",
+    "동영배",
+    "강대성",
+    "권지훈"
+   ],
+   "answerIndex": 0,
+   "explanation": "빅뱅 지드래곤의 본명은 권지용이다.",
+   "difficulty": 0.3,
+   "source": "https://en.wikipedia.org/wiki/G-Dragon",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0061"
+  },
+  {
+   "id": "id-060",
+   "category": "idol",
+   "prompt": "아이유의 본명은?",
+   "choices": [
+    "이지은",
+    "이지현",
+    "이은지",
+    "김지은"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이유의 본명은 이지은이다.",
+   "difficulty": 0.25,
+   "source": "https://en.wikipedia.org/wiki/IU_(entertainer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0060"
+  },
+  {
+   "id": "id-059",
+   "category": "idol",
+   "prompt": "BTS 뷔의 본명은?",
+   "choices": [
+    "김태형",
+    "김남준",
+    "전정국",
+    "정호석"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 뷔의 본명은 김태형이다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/V_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0059"
+  },
+  {
+   "id": "id-058",
+   "category": "idol",
+   "prompt": "BTS 제이홉의 본명은?",
+   "choices": [
+    "정호석",
+    "박지민",
+    "민윤기",
+    "김석진"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 제이홉의 본명은 정호석이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/J-Hope",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0058"
+  },
+  {
+   "id": "id-057",
+   "category": "idol",
+   "prompt": "BTS RM의 본명은?",
+   "choices": [
+    "김남준",
+    "김석진",
+    "민윤기",
+    "김태형"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS RM의 본명은 김남준이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/RM_(musician)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0057"
+  },
+  {
+   "id": "id-056",
+   "category": "idol",
+   "prompt": "BTS 슈가의 본명은?",
+   "choices": [
+    "민윤기",
+    "김석진",
+    "정호석",
+    "김남준"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 슈가의 본명은 민윤기이다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Suga",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0056"
+  },
+  {
+   "id": "id-055",
+   "category": "idol",
+   "prompt": "BTS 진의 본명은?",
+   "choices": [
+    "김석진",
+    "김남준",
+    "김태형",
+    "민윤기"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 진의 본명은 김석진이다.",
+   "difficulty": 0.35,
+   "source": "https://en.wikipedia.org/wiki/Jin_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0055"
+  },
+  {
+   "id": "id-054",
+   "category": "idol",
+   "prompt": "가수 아이유(IU)의 생일은?",
+   "choices": [
+    "1993년 5월 16일",
+    "1992년 5월 16일",
+    "1993년 9월 16일",
+    "1994년 3월 16일"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이유는 1993년 5월 16일생이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/IU_(entertainer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0054"
+  },
+  {
+   "id": "id-053",
+   "category": "idol",
+   "prompt": "NewJeans 해린의 생일은 언제일까?",
+   "choices": [
+    "2006년 5월 15일",
+    "2004년 10월 6일",
+    "2008년 4월 21일",
+    "2006년 4월 2일"
+   ],
+   "answerIndex": 0,
+   "explanation": "NewJeans 해린은 2006년 5월 15일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Haerin",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0053"
+  },
+  {
+   "id": "id-052",
+   "category": "idol",
+   "prompt": "빅뱅 태양의 생일은 언제일까?",
+   "choices": [
+    "1988년 5월 18일",
+    "1988년 8월 18일",
+    "1989년 4월 26일",
+    "1989년 1월 14일"
+   ],
+   "answerIndex": 0,
+   "explanation": "빅뱅 태양은 1988년 5월 18일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Taeyang",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0052"
+  },
+  {
+   "id": "id-051",
+   "category": "idol",
+   "prompt": "빅뱅 멤버 지드래곤의 생년월일은?",
+   "choices": [
+    "1988년 8월 18일",
+    "1989년 4월 26일",
+    "1988년 5월 18일",
+    "1988년 4월 3일"
+   ],
+   "answerIndex": 0,
+   "explanation": "빅뱅 지드래곤은 1988년 8월 18일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/G-Dragon",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0051"
+  },
+  {
+   "id": "id-050",
+   "category": "idol",
+   "prompt": "TXT 멤버 수빈의 생년월일은?",
+   "choices": [
+    "2000년 12월 5일",
+    "2001년 3월 13일",
+    "1999년 9월 13일",
+    "2001년 11월 5일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TXT 수빈은 2000년 12월 5일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Soobin_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0050"
+  },
+  {
+   "id": "id-049",
+   "category": "idol",
+   "prompt": "TXT 연준의 생일은 언제일까?",
+   "choices": [
+    "1999년 9월 13일",
+    "2000년 12월 5일",
+    "2001년 3월 13일",
+    "2000년 3월 26일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TXT 연준은 1999년 9월 13일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Yeonjun",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0049"
+  },
+  {
+   "id": "id-048",
+   "category": "idol",
+   "prompt": "아이들(i-dle) 미연의 생일은?",
+   "choices": [
+    "1997년 1월 31일",
+    "2000년 1월 6일",
+    "1999년 9월 23일",
+    "1997년 10월 27일"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이들(i-dle) 미연은 1997년 1월 31일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Miyeon",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0048"
+  },
+  {
+   "id": "id-047",
+   "category": "idol",
+   "prompt": "아이들(i-dle) 소연의 생일은?",
+   "choices": [
+    "1998년 8월 26일",
+    "1999년 9월 23일",
+    "1997년 1월 31일",
+    "1997년 1월 19일"
+   ],
+   "answerIndex": 0,
+   "explanation": "아이들(i-dle) 소연은 1998년 8월 26일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Soyeon",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0047"
+  },
+  {
+   "id": "id-046",
+   "category": "idol",
+   "prompt": "레드벨벳 웬디의 생일은 언제일까?",
+   "choices": [
+    "1994년 2월 21일",
+    "1994년 2월 10일",
+    "1996년 9월 3일",
+    "1995년 3월 12일"
+   ],
+   "answerIndex": 0,
+   "explanation": "레드벨벳 웬디는 1994년 2월 21일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Wendy_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0046"
+  },
+  {
+   "id": "id-045",
+   "category": "idol",
+   "prompt": "레드벨벳 슬기의 생일은 언제일까?",
+   "choices": [
+    "1994년 2월 10일",
+    "1994년 2월 21일",
+    "1991년 3월 29일",
+    "1993년 10월 23일"
+   ],
+   "answerIndex": 0,
+   "explanation": "레드벨벳 슬기는 1994년 2월 10일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Seulgi",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0045"
+  },
+  {
+   "id": "id-044",
+   "category": "idol",
+   "prompt": "레드벨벳 멤버 아이린의 생년월일은?",
+   "choices": [
+    "1991년 3월 29일",
+    "1994년 2월 21일",
+    "1994년 2월 10일",
+    "1992년 11월 9일"
+   ],
+   "answerIndex": 0,
+   "explanation": "레드벨벳 아이린은 1991년 3월 29일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Irene_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0044"
+  },
+  {
+   "id": "id-043",
+   "category": "idol",
+   "prompt": "ITZY 유나의 생일은 언제일까?",
+   "choices": [
+    "2003년 12월 9일",
+    "2001년 6월 5일",
+    "2000년 5월 26일",
+    "2004년 9월 2일"
+   ],
+   "answerIndex": 0,
+   "explanation": "ITZY 유나는 2003년 12월 9일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Yuna_(singer%2C_born_2003)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0043"
+  },
+  {
+   "id": "id-042",
+   "category": "idol",
+   "prompt": "ITZY 예지의 생일은 언제일까?",
+   "choices": [
+    "2000년 5월 26일",
+    "2001년 4월 17일",
+    "2003년 12월 9일",
+    "2001년 6월 19일"
+   ],
+   "answerIndex": 0,
+   "explanation": "ITZY 예지는 2000년 5월 26일생이다.",
+   "difficulty": 0.65,
+   "source": "https://en.wikipedia.org/wiki/Yeji_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0042"
+  },
+  {
+   "id": "id-041",
+   "category": "idol",
+   "prompt": "EXO 디오의 생일은?",
+   "choices": [
+    "1993년 1월 12일",
+    "1994년 4월 12일",
+    "1992년 11월 27일",
+    "1993년 9월 16일"
+   ],
+   "answerIndex": 0,
+   "explanation": "EXO 디오는 1993년 1월 12일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Doh_Kyung-soo",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0041"
+  },
+  {
+   "id": "id-040",
+   "category": "idol",
+   "prompt": "EXO 멤버 카이의 생년월일은?",
+   "choices": [
+    "1994년 1월 14일",
+    "1992년 11월 27일",
+    "1993년 1월 12일",
+    "1993년 12월 3일"
+   ],
+   "answerIndex": 0,
+   "explanation": "EXO 카이는 1994년 1월 14일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Kai_(entertainer%2C_born_1994)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0040"
+  },
+  {
+   "id": "id-039",
+   "category": "idol",
+   "prompt": "EXO 백현의 생일은 언제일까?",
+   "choices": [
+    "1992년 5월 6일",
+    "1994년 1월 14일",
+    "1992년 11월 27일",
+    "1991년 9월 21일"
+   ],
+   "answerIndex": 0,
+   "explanation": "EXO 백현은 1992년 5월 6일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Baekhyun",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0039"
+  },
+  {
+   "id": "id-038",
+   "category": "idol",
+   "prompt": "세븐틴 멤버 민규의 생년월일은?",
+   "choices": [
+    "1997년 4월 6일",
+    "1998년 1월 16일",
+    "1995년 10월 4일",
+    "1997년 1월 17일"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴 민규는 1997년 4월 6일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Mingyu",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0038"
+  },
+  {
+   "id": "id-037",
+   "category": "idol",
+   "prompt": "세븐틴 멤버 호시의 생년월일은?",
+   "choices": [
+    "1996년 6월 15일",
+    "1996년 7월 17일",
+    "1999년 2월 11일",
+    "1997년 8월 20일"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴 호시는 1996년 6월 15일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Hoshi_(South_Korean_singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0037"
+  },
+  {
+   "id": "id-036",
+   "category": "idol",
+   "prompt": "세븐틴 멤버 정한의 생년월일은?",
+   "choices": [
+    "1995년 10월 4일",
+    "1996년 6월 15일",
+    "1996년 11월 22일",
+    "1996년 9월 28일"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴 정한은 1995년 10월 4일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Jeonghan",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0036"
+  },
+  {
+   "id": "id-035",
+   "category": "idol",
+   "prompt": "세븐틴 멤버 에스쿱스의 생년월일은?",
+   "choices": [
+    "1995년 8월 8일",
+    "1997년 4월 6일",
+    "1997년 2월 18일",
+    "1994년 12월 14일"
+   ],
+   "answerIndex": 0,
+   "explanation": "세븐틴 에스쿱스는 1995년 8월 8일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/S.Coups",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0035"
+  },
+  {
+   "id": "id-034",
+   "category": "idol",
+   "prompt": "Stray Kids 멤버 필릭스의 생년월일은?",
+   "choices": [
+    "2000년 9월 15일",
+    "2000년 9월 14일",
+    "1998년 10월 25일",
+    "2000년 3월 5일"
+   ],
+   "answerIndex": 0,
+   "explanation": "Stray Kids 필릭스는 2000년 9월 15일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Felix_(rapper)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0034"
+  },
+  {
+   "id": "id-033",
+   "category": "idol",
+   "prompt": "Stray Kids 현진의 생일은 언제일까?",
+   "choices": [
+    "2000년 3월 20일",
+    "2000년 9월 22일",
+    "2000년 9월 15일",
+    "2000년 6월 16일"
+   ],
+   "answerIndex": 0,
+   "explanation": "Stray Kids 현진은 2000년 3월 20일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Hyunjin_(Stray_Kids_singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0033"
+  },
+  {
+   "id": "id-032",
+   "category": "idol",
+   "prompt": "Stray Kids 방찬의 생일은 언제일까?",
+   "choices": [
+    "1997년 10월 3일",
+    "2001년 2월 8일",
+    "2000년 9월 14일",
+    "1997년 11월 25일"
+   ],
+   "answerIndex": 0,
+   "explanation": "Stray Kids 방찬은 1997년 10월 3일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Bang_Chan",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0032"
+  },
+  {
+   "id": "id-031",
+   "category": "idol",
+   "prompt": "LE SSERAFIM 홍은채의 생일은 언제일까?",
+   "choices": [
+    "2006년 11월 10일",
+    "2003년 8월 9일",
+    "2001년 10월 8일",
+    "2006년 2월 2일"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM 홍은채는 2006년 11월 10일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Hong_Eunchae",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0031"
+  },
+  {
+   "id": "id-030",
+   "category": "idol",
+   "prompt": "LE SSERAFIM 카즈하의 생일은 언제일까?",
+   "choices": [
+    "2003년 8월 9일",
+    "2006년 11월 10일",
+    "2000년 8월 1일",
+    "2003년 7월 27일"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM 카즈하는 2003년 8월 9일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Kazuha_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0030"
+  },
+  {
+   "id": "id-029",
+   "category": "idol",
+   "prompt": "LE SSERAFIM 멤버 허윤진의 생년월일은?",
+   "choices": [
+    "2001년 10월 8일",
+    "2006년 11월 10일",
+    "1998년 3월 19일",
+    "2000년 6월 25일"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM 허윤진은 2001년 10월 8일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Huh_Yunjin",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0029"
+  },
+  {
+   "id": "id-028",
+   "category": "idol",
+   "prompt": "LE SSERAFIM 멤버 김채원의 생년월일은?",
+   "choices": [
+    "2000년 8월 1일",
+    "1998년 3월 19일",
+    "2001년 10월 8일",
+    "2001년 12월 12일"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM 김채원은 2000년 8월 1일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Kim_Chaewon",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0028"
+  },
+  {
+   "id": "id-027",
+   "category": "idol",
+   "prompt": "LE SSERAFIM 사쿠라의 생일은 언제일까?",
+   "choices": [
+    "1998년 3월 19일",
+    "2006년 11월 10일",
+    "2001년 10월 8일",
+    "1999년 7월 23일"
+   ],
+   "answerIndex": 0,
+   "explanation": "LE SSERAFIM 사쿠라는 1998년 3월 19일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Sakura_Miyawaki",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0027"
+  },
+  {
+   "id": "id-026",
+   "category": "idol",
+   "prompt": "aespa 닝닝의 생일은?",
+   "choices": [
+    "2002년 10월 23일",
+    "2000년 4월 11일",
+    "2000년 10월 30일",
+    "2002년 9월 10일"
+   ],
+   "answerIndex": 0,
+   "explanation": "aespa 닝닝은 2002년 10월 23일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Ningning",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0026"
+  },
+  {
+   "id": "id-025",
+   "category": "idol",
+   "prompt": "aespa 멤버 지젤의 생년월일은?",
+   "choices": [
+    "2000년 10월 30일",
+    "2000년 4월 11일",
+    "2002년 10월 23일",
+    "2000년 9월 1일"
+   ],
+   "answerIndex": 0,
+   "explanation": "aespa 지젤은 2000년 10월 30일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Giselle_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0025"
+  },
+  {
+   "id": "id-024",
+   "category": "idol",
+   "prompt": "aespa 멤버 윈터의 생년월일은?",
+   "choices": [
+    "2001년 1월 1일",
+    "2000년 10월 30일",
+    "2000년 4월 11일",
+    "2002년 10월 11일"
+   ],
+   "answerIndex": 0,
+   "explanation": "aespa 윈터는 2001년 1월 1일생이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/Winter_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0024"
+  },
+  {
+   "id": "id-023",
+   "category": "idol",
+   "prompt": "aespa 멤버 카리나의 생년월일은?",
+   "choices": [
+    "2000년 4월 11일",
+    "2002년 10월 23일",
+    "2001년 1월 1일",
+    "2000년 6월 15일"
+   ],
+   "answerIndex": 0,
+   "explanation": "aespa 카리나는 2000년 4월 11일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Karina_(South_Korean_singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0023"
+  },
+  {
+   "id": "id-022",
+   "category": "idol",
+   "prompt": "IVE 이서의 생일은?",
+   "choices": [
+    "2007년 2월 21일",
+    "2004년 8월 31일",
+    "2003년 9월 1일",
+    "2007년 1월 2일"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE 이서는 2007년 2월 21일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Leeseo",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0022"
+  },
+  {
+   "id": "id-021",
+   "category": "idol",
+   "prompt": "IVE 리즈의 생일은?",
+   "choices": [
+    "2004년 11월 21일",
+    "2003년 9월 1일",
+    "2007년 2월 21일",
+    "2004년 7월 13일"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE 리즈는 2004년 11월 21일생이다.",
+   "difficulty": 0.65,
+   "source": "https://en.wikipedia.org/wiki/Liz_(South_Korean_singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0021"
+  },
+  {
+   "id": "id-020",
+   "category": "idol",
+   "prompt": "IVE 멤버 레이의 생년월일은?",
+   "choices": [
+    "2004년 2월 3일",
+    "2003년 9월 1일",
+    "2007년 2월 21일",
+    "2004년 6월 5일"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE 레이는 2004년 2월 3일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Rei_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0020"
+  },
+  {
+   "id": "id-019",
+   "category": "idol",
+   "prompt": "IVE 장원영의 생일은 언제일까?",
+   "choices": [
+    "2004년 8월 31일",
+    "2003년 9월 1일",
+    "2004년 11월 21일",
+    "2004년 6월 12일"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE 장원영은 2004년 8월 31일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Jang_Won-young",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0019"
+  },
+  {
+   "id": "id-018",
+   "category": "idol",
+   "prompt": "IVE 안유진의 생일은?",
+   "choices": [
+    "2003년 9월 1일",
+    "2004년 8월 31일",
+    "2007년 2월 21일",
+    "2004년 11월 2일"
+   ],
+   "answerIndex": 0,
+   "explanation": "IVE 안유진은 2003년 9월 1일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/An_Yu-jin",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0018"
+  },
+  {
+   "id": "id-017",
+   "category": "idol",
+   "prompt": "TWICE 쯔위의 생일은 언제일까?",
+   "choices": [
+    "1999년 6월 14일",
+    "1999년 4월 23일",
+    "1995년 9월 22일",
+    "1999년 11월 14일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE 쯔위는 1999년 6월 14일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Tzuyu",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0017"
+  },
+  {
+   "id": "id-016",
+   "category": "idol",
+   "prompt": "TWICE 멤버 다현의 생년월일은?",
+   "choices": [
+    "1998년 5월 28일",
+    "1999년 4월 23일",
+    "1996년 12월 29일",
+    "1999년 8월 4일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE 다현은 1998년 5월 28일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Dahyun",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0016"
+  },
+  {
+   "id": "id-015",
+   "category": "idol",
+   "prompt": "TWICE 지효의 생일은 언제일까?",
+   "choices": [
+    "1997년 2월 1일",
+    "1999년 6월 14일",
+    "1999년 4월 23일",
+    "1997년 7월 19일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE 지효는 1997년 2월 1일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Jihyo",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0015"
+  },
+  {
+   "id": "id-014",
+   "category": "idol",
+   "prompt": "TWICE 멤버 사나의 생년월일은?",
+   "choices": [
+    "1996년 12월 29일",
+    "1996년 11월 9일",
+    "1995년 9월 22일",
+    "1996년 9월 16일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE 사나는 1996년 12월 29일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Sana_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0014"
+  },
+  {
+   "id": "id-013",
+   "category": "idol",
+   "prompt": "TWICE 멤버 모모의 생년월일은?",
+   "choices": [
+    "1996년 11월 9일",
+    "1995년 9월 22일",
+    "1997년 2월 1일",
+    "1996년 7월 9일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE 모모는 1996년 11월 9일생이다.",
+   "difficulty": 0.6,
+   "source": "https://en.wikipedia.org/wiki/Momo_Hirai",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0013"
+  },
+  {
+   "id": "id-012",
+   "category": "idol",
+   "prompt": "TWICE 나연의 생일은?",
+   "choices": [
+    "1995년 9월 22일",
+    "1997년 2월 1일",
+    "1999년 6월 14일",
+    "1996년 8월 10일"
+   ],
+   "answerIndex": 0,
+   "explanation": "TWICE 나연은 1995년 9월 22일생이다.",
+   "difficulty": 0.55,
+   "source": "https://en.wikipedia.org/wiki/Nayeon",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0012"
+  },
+  {
+   "id": "id-011",
+   "category": "idol",
+   "prompt": "BLACKPINK 리사의 생일은 언제일까?",
+   "choices": [
+    "1997년 3월 27일",
+    "1996년 1월 16일",
+    "1995년 1월 3일",
+    "1997년 4월 2일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BLACKPINK 리사는 1997년 3월 27일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Lisa_(rapper)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0011"
+  },
+  {
+   "id": "id-010",
+   "category": "idol",
+   "prompt": "BLACKPINK 로제의 생일은 언제일까?",
+   "choices": [
+    "1997년 2월 11일",
+    "1996년 1월 16일",
+    "1997년 3월 27일",
+    "1997년 1월 23일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BLACKPINK 로제는 1997년 2월 11일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Ros%C3%A9_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0010"
+  },
+  {
+   "id": "id-009",
+   "category": "idol",
+   "prompt": "BLACKPINK 제니의 생일은 언제일까?",
+   "choices": [
+    "1996년 1월 16일",
+    "1997년 3월 27일",
+    "1997년 2월 11일",
+    "1997년 2월 5일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BLACKPINK 제니는 1996년 1월 16일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Jennie_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0009"
+  },
+  {
+   "id": "id-008",
+   "category": "idol",
+   "prompt": "BLACKPINK 지수의 생일은 언제일까?",
+   "choices": [
+    "1995년 1월 3일",
+    "1996년 1월 16일",
+    "1997년 2월 11일",
+    "1996년 8월 27일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BLACKPINK 지수는 1995년 1월 3일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Jisoo",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0008"
+  },
+  {
+   "id": "id-007",
+   "category": "idol",
+   "prompt": "BTS 멤버 정국의 생년월일은?",
+   "choices": [
+    "1997년 9월 1일",
+    "1994년 9월 12일",
+    "1995년 10월 13일",
+    "1996년 4월 9일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 정국은 1997년 9월 1일생이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/Jung_Kook",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0007"
+  },
+  {
+   "id": "id-006",
+   "category": "idol",
+   "prompt": "BTS 뷔의 생일은?",
+   "choices": [
+    "1995년 12월 30일",
+    "1995년 10월 13일",
+    "1994년 9월 12일",
+    "1994년 11월 9일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 뷔는 1995년 12월 30일생이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/V_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0006"
+  },
+  {
+   "id": "id-005",
+   "category": "idol",
+   "prompt": "BTS 지민의 생일은 언제일까?",
+   "choices": [
+    "1995년 10월 13일",
+    "1992년 12월 4일",
+    "1994년 9월 12일",
+    "1996년 3월 13일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 지민은 1995년 10월 13일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Jimin",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0005"
+  },
+  {
+   "id": "id-004",
+   "category": "idol",
+   "prompt": "BTS 멤버 제이홉의 생년월일은?",
+   "choices": [
+    "1994년 2월 18일",
+    "1995년 12월 30일",
+    "1995년 10월 13일",
+    "1995년 5월 26일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 제이홉은 1994년 2월 18일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/J-Hope",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0004"
+  },
+  {
+   "id": "id-003",
+   "category": "idol",
+   "prompt": "BTS RM의 생일은?",
+   "choices": [
+    "1994년 9월 12일",
+    "1993년 3월 9일",
+    "1994년 2월 18일",
+    "1993년 3월 11일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS RM은 1994년 9월 12일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/RM_(musician)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0003"
+  },
+  {
+   "id": "id-002",
+   "category": "idol",
+   "prompt": "BTS 슈가의 생일은 언제일까?",
+   "choices": [
+    "1993년 3월 9일",
+    "1995년 12월 30일",
+    "1994년 9월 12일",
+    "1993년 5월 13일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 슈가는 1993년 3월 9일생이다.",
+   "difficulty": 0.5,
+   "source": "https://en.wikipedia.org/wiki/Suga",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0002"
+  },
+  {
+   "id": "id-001",
+   "category": "idol",
+   "prompt": "BTS 멤버 진의 생년월일은?",
+   "choices": [
+    "1992년 12월 4일",
+    "1993년 3월 9일",
+    "1995년 10월 13일",
+    "1991년 11월 16일"
+   ],
+   "answerIndex": 0,
+   "explanation": "BTS 진은 1992년 12월 4일생이다.",
+   "difficulty": 0.45,
+   "source": "https://en.wikipedia.org/wiki/Jin_(singer)",
+   "addedOn": "2026-10-02",
+   "sourceID": "ID0001"
+  },
   {
    "id": "ge-419",
    "category": "general",
@@ -884,14 +3636,5 @@
    "sourceID": "Q00001"
   }
  ],
- "crossSubjectDuplicates": [
-  "mi-113(middle) ≈ hi-220(high)",
-  "ge-115(general) ≈ mi-h009(middle)",
-  "mi-202(middle) ≈ ge-235(general)",
-  "hi-216(high) ≈ mi-326(middle)",
-  "ce-225(certification) ≈ kh-039(koreanHistory)",
-  "vo-018(vocabulary) ≈ la-308(language)",
-  "vo-020(vocabulary) ≈ la-309(language)",
-  "vo-039(vocabulary) ≈ la-307(language)"
- ]
+ "crossSubjectDuplicates": []
 }

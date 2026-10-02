@@ -1,14 +1,14 @@
 {
- "generatedAt": "2026-10-02T02:18:36.200Z",
+ "generatedAt": "2026-10-02T07:33:39.612Z",
  "source": "서버 함수 settle-match·start-match 가 실제로 쓰는 값 + 앱 코드의 이름",
  "rounds": [
   {
    "kind": "main",
    "title": "본게임",
-   "rule": "지문만 보고 BUZZ · 잡으면 3초 안에 골라요 · 틀리면 배점만큼 감점",
+   "rule": "지문만 보고 BUZZ · 잡으면 2.5초 안에 골라요 · 틀리면 배점만큼 감점",
    "usesBuzzer": true,
    "hidesChoices": true,
-   "answerSeconds": 3,
+   "answerSeconds": 2.5,
    "byDifficulty": [
     {
      "label": "쉬움",
@@ -36,41 +36,41 @@
   {
    "kind": "warmup",
    "title": "워밍업",
-   "rule": "빠를수록 + · 틀리면 감점",
-   "usesBuzzer": true,
-   "hidesChoices": true,
-   "answerSeconds": 2.5,
+   "rule": "보기가 바로 보여요 · 다 같이 답해요 · 빠를수록 + · 틀리면 조금 감점",
+   "usesBuzzer": false,
+   "hidesChoices": false,
+   "answerSeconds": null,
    "byDifficulty": [
     {
      "label": "쉬움",
      "difficulty": 0.2,
      "points": 70,
-     "penalty": 70,
-     "guessEv": -35
+     "penalty": 30,
+     "guessEv": -5
     },
     {
      "label": "보통",
      "difficulty": 0.5,
      "points": 100,
-     "penalty": 100,
-     "guessEv": -50
+     "penalty": 40,
+     "guessEv": -5
     },
     {
      "label": "어려움",
      "difficulty": 0.8,
      "points": 140,
-     "penalty": 140,
-     "guessEv": -70
+     "penalty": 50,
+     "guessEv": -2
     }
    ]
   },
   {
    "kind": "buzzer",
    "title": "버저 쟁탈",
-   "rule": "보기는 잡아야 열려요 · 잡으면 3초 안에 · 틀리면 배점만큼 감점",
+   "rule": "보기는 잡아야 열려요 · 잡으면 2.5초 안에 · 틀리면 배점만큼 감점",
    "usesBuzzer": true,
    "hidesChoices": true,
-   "answerSeconds": 3,
+   "answerSeconds": 2.5,
    "byDifficulty": [
     {
      "label": "쉬움",
@@ -101,7 +101,7 @@
    "rule": "틀리면 탈락 · 끝까지 살면 보너스",
    "usesBuzzer": true,
    "hidesChoices": true,
-   "answerSeconds": 3,
+   "answerSeconds": 2.5,
    "byDifficulty": [
     {
      "label": "쉬움",
@@ -132,7 +132,7 @@
    "rule": "¼이 걸려 있다 · 맞히면 판돈이 두 배로, 틀리면 잃는다 · 안 걸기도 한 번에",
    "usesBuzzer": true,
    "hidesChoices": true,
-   "answerSeconds": 3.5,
+   "answerSeconds": 3,
    "byDifficulty": [
     {
      "label": "쉬움",
@@ -274,7 +274,8 @@
     "koreanHistory",
     "language",
     "vocabulary",
-    "general"
+    "general",
+    "idol"
    ]
   },
   {
@@ -296,7 +297,8 @@
     "middle",
     "nonsense",
     "koreanHistory",
-    "vocabulary"
+    "vocabulary",
+    "idol"
    ]
   },
   {
@@ -318,7 +320,8 @@
     "middle",
     "nonsense",
     "koreanHistory",
-    "vocabulary"
+    "vocabulary",
+    "idol"
    ]
   },
   {
@@ -340,7 +343,8 @@
     "middle",
     "nonsense",
     "koreanHistory",
-    "vocabulary"
+    "vocabulary",
+    "idol"
    ]
   },
   {
@@ -361,7 +365,8 @@
     "elementary",
     "middle",
     "koreanHistory",
-    "vocabulary"
+    "vocabulary",
+    "idol"
    ]
   },
   {
@@ -386,7 +391,8 @@
     "koreanHistory",
     "language",
     "vocabulary",
-    "general"
+    "general",
+    "idol"
    ]
   },
   {
@@ -417,7 +423,8 @@
     "koreanHistory",
     "language",
     "vocabulary",
-    "general"
+    "general",
+    "idol"
    ]
   }
  ],
