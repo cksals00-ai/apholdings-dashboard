@@ -19,7 +19,7 @@ No application framework, npm installation, runtime API or build service is requ
 - `locales/ko.json`: Korean source copy.
 - `locales/en.json`: English brand reference aligned with the September 22 brief.
 - The builder generates KO/EN home, IR, about, lab and 11 product pages per language.
-- VI, JA, ZH-CN and FR currently show a localized preparation notice with KO/EN links. They are **not completed translations** and are excluded from the sitemap/hreflang with `noindex`.
+- VI, JA, ZH-CN and FR (updated 2026-10-03, owner instruction "all locales, no exceptions") are fully built from AI translations of `en.json` / `home-copy.json` (`status: ai_translated` in content.json). They show a localized AI-translation notice banner, stay `noindex`, and are excluded from the sitemap/hreflang until human/professional QA. Product-screen graphics under /media/gfx remain the English images (alt text and surrounding copy are translated). Short hardcoded UI strings are translated in `scripts/ui_strings.py`.
 - Complete translations, including professional boundaries, require human/professional QA before changing publication status. Future ZH-TW, ZH-HK and TH are configuration targets, not active routes.
 - Source/version/reviewer/approval metadata must be updated when translations are approved. No AI review is recorded as human approval.
 - Product names stay unchanged across locales; Korean pronunciation is supplemental to RGRG.

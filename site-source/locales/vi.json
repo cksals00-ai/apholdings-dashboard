@@ -1,0 +1,2328 @@
+{
+ "copy": {
+  "nav": [
+   "Dịch vụ",
+   "Sản phẩm",
+   "Giới thiệu",
+   "Nhà đầu tư",
+   "Liên hệ"
+  ],
+  "skip": "Chuyển đến nội dung",
+  "menu": "Menu",
+  "language": "Ngôn ngữ",
+  "hero": "Chúng tôi xây dựng các hệ thống thực tiễn giúp con người và doanh nghiệp lựa chọn rõ ràng hơn, thực hiện các giao dịch phức tạp và biến ý tưởng thành sản phẩm.",
+  "explore": "Khám phá những gì chúng tôi xây dựng",
+  "aboutCta": "Về AP Holdings",
+  "portIntro": "Ba danh mục. Một cách xây dựng.",
+  "portDesc": "Từ phán đoán đến giao dịch, từ ý tưởng đến sản phẩm. Chúng tôi biến sự phức tạp thành các hệ thống có thể lặp lại.",
+  "whyTitle": "Bài toán phức tạp xứng đáng có hệ thống tốt hơn.",
+  "why": "Nhiều thông tin hơn không phải lúc nào cũng dẫn đến quyết định tốt hơn. Nhiều lựa chọn hơn không phải lúc nào cũng khiến việc chọn dễ hơn. AP cấu trúc hóa phần phức tạp còn lại giữa thông tin và hành động.",
+  "howTitle": "Phán đoán của con người. Hệ thống rõ ràng hơn.",
+  "how": [
+   "Kết nối những thông tin quan trọng.",
+   "Đưa kiến thức chuyên ngành vào quy trình.",
+   "Biến bí quyết làm một lần thành quy trình có thể lặp lại.",
+   "Xây dựng hệ thống có thể cải thiện qua quá trình sử dụng và kết quả."
+  ],
+  "globalIntro": "Mọi sản phẩm của AP đều Global-by-Design.",
+  "global": "Sản phẩm của chúng tôi được thiết kế ngay từ đầu cho nhiều thị trường, ngôn ngữ, tiền tệ và chính sách. Tách logic cốt lõi của sản phẩm khỏi cấu hình thị trường và các tích hợp địa phương là nguyên tắc chung của toàn công ty.",
+  "globalNote": "Đây là nguyên tắc thiết kế và định hướng mở rộng của chúng tôi, không phải khẳng định rằng mọi sản phẩm đã vận hành tại nhiều quốc gia.",
+  "core": [
+   "Logic sản phẩm có thể tái sử dụng",
+   "Ngôn ngữ vùng, tiền tệ, múi giờ và chính sách",
+   "Thanh toán, logistics, kênh phân phối và chuyên gia"
+  ],
+  "marketTitle": "Một lõi tái sử dụng. Một Market Pack có phiên bản.",
+  "market": "Một gói cấu hình, nội dung và đối tác có phiên bản sẽ kết nối lõi sản phẩm với thị trường mới. Việc rà soát tại địa phương và thử nghiệm thí điểm được thực hiện trước khi mở rộng.",
+  "marketReview": "Nghiên cứu thị trường → rà soát chuyên gia và chính sách → kiểm thử → thí điểm → kích hoạt → đánh giá",
+  "decisionDesc": "Chúng tôi sắp xếp bối cảnh, giải thích các đánh đổi và để con người nắm quyền kiểm soát các quyết định quan trọng.",
+  "learnMore": "Khám phá sản phẩm",
+  "inDev": "Đang phát triển",
+  "concept": "Ý tưởng & thiết kế hệ thống",
+  "working": "Working Proof · Ứng viên sản phẩm hóa",
+  "existing": "Đang vận hành",
+  "audience": "AI Influencer số 1 của AP Holdings",
+  "selectKo": "Xem. Thử. Hiểu. Chọn.",
+  "expertTitle": "Hợp tác với chuyên gia",
+  "expert": "Chuyên gia là đối tác tri thức bên ngoài, không đơn thuần là nhân viên bán hàng. Chúng tôi thiết kế sự hợp tác dựa trên tiêu chí, chuẩn mực bằng chứng, ranh giới chuyên môn và quy trình vận hành chuẩn.",
+  "expertBoundary": "Hỗ trợ ra quyết định chung về sản phẩm khác với tư vấn của chuyên gia có chứng chỉ hành nghề. Chúng tôi không dùng tên của các chuyên gia thuộc lĩnh vực được quản lý để làm chứng thực bán hàng, và không ngụ ý có quan hệ tư vấn khi chưa có thỏa thuận được xác nhận.",
+  "expertPrinciples": [
+   "Tiêu chí",
+   "Chuẩn mực bằng chứng",
+   "Ranh giới chuyên môn",
+   "SOP"
+  ],
+  "gameIntro": "Trí tưởng tượng rộng mở. Trách nhiệm rõ ràng.",
+  "gameDesc": "Học qua thi đấu và vui chơi. Biến ý tưởng sáng tạo thành sản phẩm. Chúng tôi tập trung vào ba dự án và dựa vào mức sử dụng và kết quả thực tế để định hướng mở rộng.",
+  "rgrgTitle": "Một lõi. Nhiều cách học.",
+  "rgrg": "Ngôn ngữ vùng của người học, ngôn ngữ giảng dạy, ngôn ngữ đích hoặc môn học, và Quiz Pack là các yếu tố tách biệt. Cùng một lõi có thể hỗ trợ ngôn ngữ, chứng chỉ, giáo dục, văn hóa và đào tạo tại nơi làm việc: một trò chơi và nền tảng học tập toàn cầu.",
+  "pairs": "Các cặp ngôn ngữ mang tính minh họa, không phải danh sách các gói đã ra mắt.",
+  "creatorTitle": "Nhà sáng tạo trẻ + AP Production",
+  "creator": "Nhà sáng tạo trẻ hình dung ra thế giới, nhân vật, câu chuyện, kỹ năng, boss, sự kiện và niềm vui. AP phụ trách tính khả thi kỹ thuật, QA, cân bằng, an toàn, quyền riêng tư, quản trị kiếm tiền và phát hành.",
+  "assetsTitle": "Những gì còn lại sau khi công việc hoàn tất.",
+  "assets": "Định hướng dài hạn của chúng tôi là tích lũy dữ liệu, quy trình, kiến thức chuyên gia, phần mềm, IP và quan hệ khách hàng thông qua quá trình sử dụng. Kết quả sẽ định hướng cho lần cải thiện tiếp theo.",
+  "origin": "Không phải nơi AI thay thế con người, mà là nơi con người đã dừng lại.\nPhán đoán luôn thuộc về con người, đến cùng.",
+  "founderTitle": "Nơi con người đã bỏ cuộc,\nAI.",
+  "founder": "Kinh nghiệm về vận hành thương mại, bán hàng toàn cầu, du lịch và kinh doanh quốc tế, phân tích dữ liệu, xây dựng sản phẩm và thiết kế quy trình ra quyết định định hình cách chúng tôi xây dựng.",
+  "firewall": "Mã nguồn, tài khoản, tên miền, tài liệu và IP sản phẩm của AP được duy trì độc lập. Dữ liệu mật của chủ lao động, thông tin khách hàng, thông tin vận hành và IP không phải là tài sản của AP.",
+  "mission": "Biến sự phức tạp thành thứ dùng được.",
+  "vision": "Xây dựng những hệ thống ngày càng có giá trị hơn nhờ sử dụng, học hỏi và kết quả.",
+  "labDesc": "Các ứng dụng độc lập và thử nghiệm nhỏ của nhà sáng lập. Một bản ghi về quá trình xây dựng và học hỏi, tách biệt với ba danh mục cốt lõi.",
+  "labMore": "Khám phá các dự án độc lập",
+  "evidence": "Hơn 7 sản phẩm/ứng dụng đã xây dựng hoặc phát hành",
+  "evidenceNote": "Bằng chứng thực thi dựa trên lịch sử xây dựng/phát hành do nhà sáng lập cung cấp và các liên kết ứng dụng hiện có. Đây không phải là khẳng định về mức độ phù hợp sản phẩm–thị trường hay mức độ thu hút quy mô lớn.",
+  "contactTitle": "Cùng xây dựng với AP.",
+  "contact": "Hãy cùng trao đổi về sản phẩm và công nghệ, tư vấn chuyên gia, thương hiệu và thương mại, phân phối toàn cầu, giáo dục và nội dung, hợp tác với nghệ nhân và nghệ sĩ, cũng như các dự án thí điểm.",
+  "contactCta": "Liên hệ AP Holdings",
+  "emailNote": "Địa chỉ liên hệ hiện tại",
+  "privacy": "Chính sách quyền riêng tư",
+  "top": "Lên đầu trang",
+  "irTitle": "Ba mảng kinh doanh.\nMột bộ máy ra quyết định.",
+  "irIntro": "7 ứng dụng đã phát hành · 2 trình kết nối AI đang vận hành · 1 bộ máy quyết định doanh thu khách sạn đang chạy thực tế.\nCùng một bộ máy phục vụ khoảnh khắc lựa chọn, mua sắm và học tập.\nDưới đây là tài liệu công khai phân biệt những gì đã có hiện nay với những gì sẽ được chứng minh tiếp theo.",
+  "investThesis": "Giảm bớt sự phức tạp lặp đi lặp lại giữa thông tin và hành động trong nhiều ngành. Biến những gì học được từ việc sử dụng thành sản phẩm, quy trình và IP có thể tái sử dụng. Ba danh mục áp dụng cùng một nguyên tắc cho các bài toán khác nhau.",
+  "proofTitle": "AP Revenue · Decision Intelligence Working Proof",
+  "proof": "Một Decision Intelligence Working Proof / Productization Candidate do chúng tôi tự phát triển. Nó kiểm chứng cách dữ liệu thương mại phức tạp có thể trở thành các ưu tiên có thể giải thích, hành động của con người và kết quả đo lường được.",
+  "proofNote": "Một ứng viên sản phẩm hóa, không phải bằng chứng về thí điểm bên ngoài, doanh thu hay kết quả kinh doanh đã được xác thực.",
+  "demoTitle": "Quy trình của working proof",
+  "demoSteps": [
+   "Xem xét một ưu tiên có thể giải thích.",
+   "Con người quyết định có hành động hay không.",
+   "Ghi lại kết quả và học hỏi."
+  ],
+  "demoNote": "Minh họa khái niệm về quy trình. Không hiển thị bảng điều khiển vận hành thực tế, dữ liệu khách hàng hay dữ liệu của chủ lao động.",
+  "liaEvidence": "Thử nghiệm ban đầu về phân phối sở hữu. Học hỏi từ nội dung Instagram/TikTok và phản hồi của khán giả quốc tế.",
+  "futureTitle": "Bằng chứng tiếp theo đến từ kết quả bên ngoài.",
+  "future": "Thí điểm bên ngoài, người dùng hoạt động, giao dịch, doanh thu, tái mua và kết quả. Chỉ các chỉ số đã được xác minh mới được chia sẻ, với bằng chứng chi tiết được cung cấp trong quá trình thẩm định của nhà đầu tư.",
+  "milestonesTitle": "Các cổng xác thực trước khi mở rộng.",
+  "milestones": [
+   [
+    "01 · NỀN TẢNG",
+    "Nền tảng sản phẩm độc lập",
+    "Working proof, tài sản ứng dụng hiện có, các tiêu chuẩn công khai và nguyên tắc thiết kế có tính đến thị trường."
+   ],
+   [
+    "02 · XÁC THỰC",
+    "Xác thực từ bên ngoài",
+    "Các thí điểm bên ngoài, kiểm thử khả dụng, đánh giá chuyên gia và xác thực ý định của khán giả theo kế hoạch."
+   ],
+   [
+    "03 · HỆ THỐNG HÓA",
+    "Khả năng lặp lại",
+    "Kết nối hành động, giao dịch, hoàn trả, việc sử dụng lặp lại và kết quả để cải thiện sản phẩm và vận hành."
+   ],
+   [
+    "04 · MỞ RỘNG QUY MÔ",
+    "Mở rộng dựa trên bằng chứng",
+    "Mở rộng sản phẩm sau khi xác thực Market Pack, đối tác địa phương, chính sách và hiệu quả kinh tế đơn vị."
+   ]
+  ],
+  "milestoneNote": "Đây là các giai đoạn xác thực theo kế hoạch, không phải kết quả đã hoàn thành hay ngày ra mắt đã cam kết.",
+  "roadmapTitle": "Xây dựng tại Hàn Quốc. Thiết kế cho thế giới.",
+  "roadmap": "Ưu tiên xác thực ý định của khán giả và thương mại của LIA tại Việt Nam. Đánh giá Nhật Bản, Đài Loan và các thị trường khác dựa trên mức độ phù hợp sản phẩm và mức độ sẵn sàng tại địa phương. Giao dịch hàng thủ công tại Pháp là một hướng nghiên cứu; chúng tôi không ra mắt mọi sản phẩm tại mọi thị trường cùng một lúc.",
+  "materialsTitle": "Tài liệu dành cho nhà đầu tư",
+  "publicTitle": "CÔNG KHAI",
+  "publicDesc": "Tổng quan công ty, luận điểm đầu tư, Global-by-Design, danh mục, năng lực nhà sáng lập và lộ trình. Trang web này là tài liệu công khai hiện tại.",
+  "shareTitle": "CHIA SẺ CHO NHÀ ĐẦU TƯ",
+  "shareDesc": "Bản trình bày đầy đủ cho nhà đầu tư, bản ghi nhớ đầu tư và phụ lục traction đã xác minh. Được chia sẻ riêng sau khi có yêu cầu.",
+  "ndaTitle": "NDA / DATA ROOM",
+  "ndaDesc": "Mô hình tài chính, cap table, hợp đồng, tài liệu pháp lý, IP chi tiết và các chỉ số riêng tư được quản lý thông qua một quy trình kiểm soát truy cập riêng.",
+  "request": "Yêu cầu tài liệu nhà đầu tư",
+  "requestNote": "Hãy xem lại và gửi yêu cầu của bạn trong ứng dụng email. Tài liệu không được tự động tải xuống hoặc gửi từ trang này.",
+  "version": "IR công khai v2.0 · 2026-09-22 · AP Holdings",
+  "history": "Tài sản sản phẩm hiện có",
+  "legacySafe": "Ứng dụng Safelist hiện có là bằng chứng về việc xây dựng. Các tính năng hiện có của ứng dụng này khác với khái niệm sản phẩm AP Safe rộng hơn.",
+  "copy": "Sao chép địa chỉ",
+  "copied": "Đã sao chép",
+  "copyFail": "Hãy chọn địa chỉ và sao chép thủ công.",
+  "connector": "Truy cập trình kết nối hiện có",
+  "connectorNote": "Địa chỉ kết nối hiện có được giữ nguyên. Các chức năng khả dụng phụ thuộc vào trạng thái hiện tại của trình kết nối.",
+  "connectHelp": "Nhập địa chỉ bên dưới vào phần cài đặt trình kết nối từ xa của ứng dụng khách. Hãy kiểm tra khả năng tương thích và yêu cầu xác thực của ứng dụng đó.",
+  "assetNote": "Hình ảnh dự án hiện có. Tính năng và kế hoạch phát hành của các sản phẩm đang phát triển có thể thay đổi.",
+  "rgrgAssetNote": "Các tài sản nhân vật hiện có được giữ nguyên dưới thương hiệu RGRG.",
+  "termsBoundary": "Tình trạng khả dụng của sản phẩm, giao dịch và dịch vụ chuyên môn phụ thuộc vào trạng thái ra mắt và chính sách thị trường áp dụng.",
+  "curationNote": "Hình ảnh sản phẩm hiện có dùng cho nội dung. Hãy xác nhận tình trạng còn hàng, giá và điều kiện giao hàng với kênh bán hàng.",
+  "aboutSections": [
+   {
+    "id": "name",
+    "label": "01 · Cái tên",
+    "title": "Trước hết là một cái tên.\nSau đó là việc chúng tôi làm.",
+    "desc": "A.P — Alfred Park. Tên của người đã khởi đầu. Chúng tôi không giấu ai là người đã xây dựng nên điều này. A.P — AI People. Tên của việc chúng tôi làm hiện nay. Không phải một công ty xử lý AI, mà là một công ty đứng giữa AI và con người.",
+    "blocks": [
+     {
+      "type": "grid2",
+      "items": [
+       {
+        "type": "proof",
+        "h3": "A.P · Alfred Park",
+        "p": "Tên của người đã khởi đầu. Chúng tôi không giấu ai là người đã xây dựng nên điều này."
+       },
+       {
+        "type": "proof",
+        "h3": "A.P · AI People",
+        "p": "Tên của việc chúng tôi làm hiện nay. Một công ty đứng giữa AI và con người."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "philosophy",
+    "label": "02 · Triết lý",
+    "title": "Ba điều.",
+    "soft": true,
+    "desc": "Chúng tôi không đặt AI vào vị trí của con người. Chúng tôi không lấy gì từ người dùng. Điều gì chưa biết, chúng tôi nói là chưa biết.",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "1",
+        "Chúng tôi không đặt AI vào vị trí của con người",
+        "Không phải việc con người không làm được, mà là việc họ đã ngừng làm. 250.000 sản phẩm, 2.455 cổ phiếu — chỉ ở những nơi giới hạn của con người đã làm công việc dừng lại. Phán đoán vẫn thuộc về con người."
+       ],
+       [
+        "2",
+        "Chúng tôi không lấy gì từ người dùng",
+        "Không tài khoản · không quảng cáo · không thu thập dữ liệu. Bản ghi nằm trên thiết bị và biến mất khi xóa ứng dụng."
+       ],
+       [
+        "3",
+        "Điều gì chưa biết, chúng tôi nói là chưa biết",
+        "“Không có công thức nào để chọn trước các cổ phiếu tăng vọt” — kết luận của hai năm phân tích toàn thị trường, được công bố nguyên trạng. Một AI nêu rõ giới hạn của mình thay vì giả vờ chắc chắn."
+       ],
+       [
+        "0 · 0 · 0",
+        "Không hứa những điều không giữ được",
+        "Không tài khoản · không quảng cáo · không thu thập dữ liệu. Khi công ty lớn lên, ba điều này vẫn được giữ."
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "business",
+    "label": "03 · Hoạt động kinh doanh",
+    "title": "Những biến tấu của một câu duy nhất.",
+    "desc": "Chúng tôi đặt AI vào nơi con người đã dừng lại. Khoảnh khắc lựa chọn, mua sắm và học tập.",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "Lựa chọn có bằng chứng",
+        "AP Safe · AP Light · AP Revenue · AP Travel",
+        "250.000 hồ sơ thành phần thực phẩm, 317.000 mục calo, dữ liệu đặt phòng khách sạn, tín hiệu thị trường. Những phán đoán quá lớn đối với một người, được đưa ra kèm bằng chứng."
+       ],
+       [
+        "Thương mại",
+        "AP SELECT · LIA · K-Commerce · K-Craft",
+        "Một cửa hàng biết chọn lọc, một AI influencer, các sàn thương mại điện tử nước ngoài, tác phẩm của nghệ nhân. Từ khám phá đến mua lại."
+       ],
+       [
+        "Chơi & Học",
+        "RGRG · Hangeul Cubs · LAST WAVE",
+        "Thi đấu bằng câu đố, học Hangeul cùng bốn anh em nhà hổ, và xem trí tưởng tượng của một đứa trẻ trở thành trò chơi."
+       ],
+       [
+        "Nhà sáng lập",
+        "Mười lăm năm làm việc thực tế",
+        "Vận hành thương mại, bán hàng toàn cầu, du lịch và kinh doanh quốc tế, và phân tích dữ liệu tại một tập đoàn khách sạn và resort. Anh ấy hiểu điều gì cản trở một quyết định."
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "independence",
+    "label": "04 · Tính độc lập",
+    "title": "Kinh nghiệm được sử dụng.\nTài sản thì không.",
+    "soft": true,
+    "desc": "Mã nguồn, tài khoản, tên miền, tài liệu và IP sản phẩm của AP hoàn toàn độc lập. Dữ liệu, thông tin khách hàng và thông tin vận hành của chủ lao động không thuộc về AP. Các bản demo cho nhà đầu tư chỉ sử dụng dữ liệu tổng hợp, công khai hoặc được cho phép.",
+    "blocks": [
+     {
+      "type": "tags",
+      "items": [
+       "Vận hành thương mại",
+       "Bán hàng toàn cầu",
+       "Du lịch & Kinh doanh quốc tế",
+       "Phân tích dữ liệu",
+       "Xây dựng sản phẩm",
+       "Thiết kế quy trình ra quyết định"
+      ]
+     },
+     {
+      "type": "actions",
+      "items": [
+       [
+        "/ko/ir/",
+        "IR / NHÀ ĐẦU TƯ",
+        "primary"
+       ],
+       [
+        "/ko/lab/",
+        "Founder’s Lab",
+        "button"
+       ]
+      ]
+     }
+    ]
+   }
+  ],
+  "irSections": [
+   {
+    "id": "thesis",
+    "label": "01 · Luận điểm đầu tư",
+    "title": "Không phải vì thiếu thông tin.\nMọi thứ dừng lại vì thiếu quyết định.",
+    "desc": "Chọn một món ăn vặt hay định giá phòng — đều giống nhau. AP đặt dữ liệu, tiêu chí chuyên gia, quy trình và phần mềm vào đúng điểm đó và biến nó thành một hệ thống ra quyết định có thể lặp lại. Một cấu trúc quyết định đã xây dựng một lần sẽ được tái sử dụng ở sản phẩm tiếp theo.",
+    "blocks": [
+     {
+      "type": "flow",
+      "items": [
+       "Hỏi",
+       "Đối chiếu với các bản ghi hiện có",
+       "Trả lời kèm bằng chứng",
+       "Con người quyết định",
+       "Ghi lại kết quả"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "market",
+    "label": "02 · Thị trường",
+    "title": "Năm 20 triệu du khách đến.\nMỗi người chi 1.000 đô la.",
+    "soft": true,
+    "desc": "2,09 triệu lượt khách trong tháng 7 năm 2026, tăng 20,8% so với cùng kỳ. Mục tiêu hằng năm 20 triệu. Chi tiêu mỗi du khách 1.008 đô la. Ở mức 20 triệu, doanh thu du lịch khoảng 20 tỷ đô la. K-beauty, K-food và K-content thu hút khoản chi tiêu đó.",
+    "blocks": [
+     {
+      "type": "grid2",
+      "items": [
+       {
+        "type": "proof",
+        "h3": "Khách quốc tế đến",
+        "ol": [
+         "2025: 18,7 triệu — mức cao nhất mọi thời đại",
+         "Mục tiêu 2026: 20 triệu · mục tiêu 2030: 30 triệu",
+         "Trung Quốc · Nhật Bản · Đài Loan · Hoa Kỳ · Hồng Kông, theo thứ tự đó"
+        ],
+        "note": "Tổng cục Du lịch Hàn Quốc · Bộ Văn hóa, Thể thao và Du lịch"
+       },
+       {
+        "type": "proof",
+        "h3": "AP tham gia ở đâu",
+        "ol": [
+         "Trước chuyến đi — Hangeul · concert · lập kế hoạch (Cubs · K-Concert Trip · Travel)",
+         "Trong chuyến đi — cửa hàng · quét · lựa chọn (SELECT · Safe · K-Scan)",
+         "Sau khi trở về — mua lại (LIA · K-Commerce · K-Craft)"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "model",
+    "label": "03 · Ba mảng kinh doanh và doanh thu",
+    "title": "Cùng một bộ máy,\nba cấu trúc doanh thu.",
+    "desc": "Decision intelligence: thuê bao B2B và trình kết nối. Thương mại: bán hàng trực tiếp, hoa hồng và nhượng quyền. Chơi & Học: mua hàng trong ứng dụng và gói câu đố giáo dục. Không quảng cáo và không bán dữ liệu người dùng.",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "Lựa chọn có bằng chứng",
+        "B2B SaaS · trình kết nối",
+        "Thuê bao khách sạn AP Revenue. Các trình kết nối Safelist và LightList miễn phí để xây dựng tệp người dùng, dẫn tới thị trường an toàn và Hospital Report Pro."
+       ],
+       [
+        "Thương mại",
+        "Bán trực tiếp · hoa hồng · nhượng quyền",
+        "Bán trực tiếp qua Lia Select và Shopee, hoa hồng đối tác từ Agoda · Klook · Coupang, cùng phí nhượng quyền, tiền bản quyền và phí hệ thống của AP SELECT."
+       ],
+       [
+        "Chơi & Học",
+        "IAP · giáo dục B2B",
+        "Các gói bài học Hangeul Cubs, gói câu đố RGRG cho trường học, trung tâm và doanh nghiệp, skin và pass của LAST WAVE (không pay-to-win)."
+       ],
+       [
+        "Chung",
+        "Dữ liệu",
+        "Ai đã hỏi gì, chọn gì và mua gì, được liên kết dưới một ID. Nền tảng cho sản phẩm tiếp theo và việc tuyển chọn."
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "proof",
+    "label": "04 · Đang hoạt động hiện nay",
+    "title": "Đã xây dựng và đã phát hành.",
+    "soft": true,
+    "desc": "Bằng chứng về năng lực thực thi, không phải về mức độ thu hút quy mô lớn. Chỉ công bố các số liệu đã xác minh; bằng chứng chi tiết được trình bày trong quá trình thẩm định của nhà đầu tư.",
+    "blocks": [
+     {
+      "type": "tags",
+      "items": [
+       "Working Proof — tự xây dựng độc lập · đang vận hành",
+       "Dữ liệu demo — DO NHÀ SÁNG LẬP CUNG CẤP · tổng hợp · chỉ công khai"
+      ]
+     },
+     {
+      "type": "grid2",
+      "items": [
+       {
+        "type": "proof",
+        "h3": "Ứng dụng · trình kết nối",
+        "ol": [
+         "7 ứng dụng trên App Store — Safelist · Hangeul Cubs · K-Concert Trip · IRON GRADE · The Other Hours · Dawn Grace · K-Scan",
+         "2 trình kết nối Claude đang vận hành — Safelist (250.000 sản phẩm) · LightList (317.000 bản ghi)"
+        ]
+       },
+       {
+        "type": "proof",
+        "h3": "AP Revenue",
+        "ol": [
+         "revenue.apholdings.kr đang chạy trên môi trường production",
+         "Phát hiện bất thường · xếp thứ tự ưu tiên · quyết định của quản lý · kết quả được ghi lại",
+         "Dữ liệu tổng hợp · 11 bài kiểm thử đạt · trước khi thí điểm bên ngoài"
+        ]
+       },
+       {
+        "type": "proof",
+        "h3": "LIA",
+        "ol": [
+         "Instagram và TikTok đang vận hành",
+         "Người xem nước ngoài phản hồi trước người xem trong nước",
+         "3 bài review K-beauty · 9 sản phẩm Lia Select"
+        ]
+       },
+       {
+        "type": "proof",
+        "h3": "Trò chơi",
+        "ol": [
+         "RGRG bản dựng trận đấu trực tiếp sáu người chơi · đang chuẩn bị phát hành",
+         "LAST WAVE 5 anh hùng · 6 kẻ địch · 3 khu vực Seoul",
+         "Hangeul Cubs 42 bài học · EN · VI · FR"
+        ]
+       }
+      ]
+     },
+     {
+      "type": "actions",
+      "items": [
+       [
+        "https://revenue.apholdings.kr/",
+        "Mở AP Revenue",
+        "button"
+       ],
+       [
+        "/ko/products/lia/",
+        "LIA",
+        "button"
+       ],
+       [
+        "/ko/lab/",
+        "Founder’s Lab",
+        "button"
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "why",
+    "label": "05 · Vì sao chọn AP",
+    "title": "Bốn điều\ntrong một công ty.",
+    "desc": "Một bộ máy quyết định được tái sử dụng cho ba mảng kinh doanh, các kênh đã nắm trong tay, niềm tin được xây dựng bằng cách không lấy gì từ người dùng, và một nhà sáng lập hiểu rõ lĩnh vực.",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "Tái sử dụng bộ máy",
+        "Một cấu trúc quyết định được xây dựng một lần",
+        "Cấu trúc kiểm tra · bằng chứng · quyết định của con người được xây dựng cho Safe được Light, Revenue và Travel dùng nguyên trạng. Chi phí biên giảm theo từng sản phẩm."
+       ],
+       [
+        "Kênh trong tay",
+        "LIA · blog · ứng dụng",
+        "Tiếp cận mà không cần chi phí quảng cáo. Một AI influencer tiếp cận người xem nước ngoài trước, cùng các điểm chạm với người dùng trên bảy ứng dụng."
+       ],
+       [
+        "Niềm tin",
+        "0 · 0 · 0",
+        "Không tài khoản, quảng cáo hay thu thập dữ liệu. Không bao giờ nói “an toàn” — chỉ nói đã tìm thấy gì và không tìm thấy gì."
+       ],
+       [
+        "Lĩnh vực chuyên môn",
+        "Nhà sáng lập, mười lăm năm",
+        "Thương mại, bán hàng toàn cầu, du lịch và dữ liệu tại một tập đoàn khách sạn và resort. Bộ máy doanh thu khách sạn và mảng khách quốc tế đến đều xuất phát từ kinh nghiệm đó."
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "milestones",
+    "label": "06 · 12 tháng tới",
+    "title": "Một ngưỡng\nở mỗi giai đoạn.",
+    "soft": true,
+    "desc": "Từ 02 trở đi là kế hoạch. Xin hãy đọc tách biệt với những gì đã hoàn thành.",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "01 · Hiện tại",
+        "Những gì đã xây dựng",
+        "7 ứng dụng · 2 trình kết nối · Revenue đang chạy thực tế · kênh của LIA · cấu trúc công ty và website"
+       ],
+       [
+        "02 · Tiếp theo",
+        "Xác thực từ bên ngoài",
+        "1 thí điểm Revenue · thử nghiệm người dùng Safe · 1 pop-up SELECT · niêm yết trên Shopee · 1–3 giao dịch hàng thủ công"
+       ],
+       [
+        "03 · Sau đó",
+        "Khả năng lặp lại",
+        "Quyết định → hành động → kết quả được liên kết dưới một ID · hiệu chỉnh chính sách theo từng khách hàng · nhượng quyền đầu tiên"
+       ],
+       [
+        "04 · Mở rộng",
+        "Mở rộng dựa trên bằng chứng",
+        "Việt Nam trước, sau đó là Nhật Bản và Đài Loan. Chỉ nhượng quyền sau khi các cửa hàng tự vận hành chứng minh được hiệu quả. Chỉ những sản phẩm đã được xác thực mới được phát triển"
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "global",
+    "label": "07 · Toàn cầu",
+    "title": "Xây dựng tại Hàn Quốc.\nThiết kế cho thế giới.",
+    "desc": "Thị trường nước ngoài đầu tiên là Việt Nam — trước hết xác thực phản hồi của người xem LIA và nhu cầu thương mại. Nhật Bản và Đài Loan để đánh giá mức độ phù hợp sản phẩm, Pháp để nghiên cứu thương mại hàng thủ công. Thêm một quốc gia nghĩa là thêm một ngôn ngữ và market pack, không phải xây dựng lại sản phẩm.",
+    "blocks": [
+     {
+      "type": "tags",
+      "items": [
+       "Việt Nam — LIA · K-Scan · Shopee",
+       "Nhật Bản · Đài Loan — thứ 1 và thứ 3 về lượng khách đến, mức độ phù hợp sản phẩm",
+       "Pháp — phản hồi đầu tiên từ nước ngoài với Hangeul Cubs, nghiên cứu hàng thủ công",
+       "Thị trường nói tiếng Anh — người quan tâm đến Hàn Quốc"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "founder",
+    "label": "08 · Nhà sáng lập",
+    "title": "Mười lăm năm làm việc thực tế.\nMột công ty độc lập.",
+    "soft": true,
+    "desc": "Vận hành thương mại và bán hàng toàn cầu, du lịch và kinh doanh quốc tế, và phân tích dữ liệu tại một tập đoàn khách sạn và resort. Kinh nghiệm được sử dụng; tài sản thì không — mã nguồn, tài khoản, tên miền, tài liệu và IP sản phẩm hoàn toàn độc lập. Dữ liệu, thông tin khách hàng và thông tin vận hành của chủ lao động không thuộc về AP.",
+    "blocks": [
+     {
+      "type": "tags",
+      "items": [
+       "Vận hành thương mại",
+       "Bán hàng toàn cầu",
+       "Du lịch & Kinh doanh quốc tế",
+       "Phân tích dữ liệu",
+       "Xây dựng sản phẩm",
+       "Thiết kế quy trình ra quyết định"
+      ]
+     },
+     {
+      "type": "note",
+      "text": "Các bản demo cho nhà đầu tư chỉ sử dụng dữ liệu DO NHÀ SÁNG LẬP CUNG CẤP, tổng hợp, công khai hoặc được cho phép."
+     }
+    ]
+   },
+   {
+    "id": "materials",
+    "label": "09 · Tài liệu nhà đầu tư",
+    "title": "Mở theo ba cấp.",
+    "cta": true,
+    "desc": "PUBLIC — trang này. INVESTOR SHARE — bản trình bày cho nhà đầu tư · bản ghi nhớ đầu tư · phụ lục traction đã xác minh.\nNDA / DATA ROOM — mô hình tài chính · cap table · pháp lý · hợp đồng · IP chi tiết · các chỉ số không công khai.",
+    "blocks": [
+     {
+      "type": "actions",
+      "items": [
+       [
+        "mail:Yêu cầu tài liệu nhà đầu tư",
+        "Yêu cầu tài liệu nhà đầu tư",
+        "primary"
+       ],
+       [
+        "/ko/about/",
+        "Giới thiệu về công ty",
+        "button"
+       ]
+      ]
+     },
+     {
+      "type": "note",
+      "text": "Yêu cầu qua email. Không tự động tải xuống. Được cung cấp sau khi xác nhận quyền truy cập."
+     }
+    ]
+   }
+  ],
+  "pilot": "Thí điểm đang hoạt động",
+  "live": "Đã có trên App Store"
+ },
+ "products": [
+  {
+   "id": "safe",
+   "name": "AP Safe",
+   "tag": "Biết điều cần tránh.",
+   "status": "live",
+   "role": "Hỏi AI nào cũng vậy, tiêu chuẩn là cơ thể của tôi.",
+   "desc": "Danh sách cần tránh lưu trên điện thoại của tôi lọc những gì AI hiển thị, và chỉ những mục không bị gắn cờ mới được chọn.\nTừ trình quét thành phần đến thương mại an toàn có AI hỗ trợ.",
+   "note": "Hỗ trợ ra quyết định dựa trên thông tin sản phẩm. Không phải chẩn đoán y khoa hay đảm bảo tuyệt đối về an toàn.",
+   "flow": [
+    "Điều kiện do người dùng nêu rõ",
+    "Thông tin sản phẩm",
+    "Xung đột / Thận trọng",
+    "Quyết định của con người"
+   ],
+   "link": "https://apps.apple.com/kr/app/id6805684034",
+   "linkLabel": "Ứng dụng Safelist",
+   "image": "/media/safelist_frame.jpg",
+   "video": "/media/safelist.mp4",
+   "sections": [
+    {
+     "id": "scene",
+     "label": "01 · Một khung cảnh",
+     "title": "Siri, đồ ăn vặt một tuần\nan toàn cho con tôi.",
+     "desc": "Trước khi mua bất cứ thứ gì, AI nào cũng hỏi Safelist trước. Chỉ những mục không bị gắn cờ mới vào giỏ hàng.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_scene_en.jpg",
+       "alt": "Một câu → AI → kết quả Safelist → chỉ những mục không bị gắn cờ mới vào giỏ hàng"
+      }
+     ]
+    },
+    {
+     "id": "why",
+     "label": "02 · Vì sao là Safelist",
+     "title": "AI là xác suất. Thành phần là sự thật.",
+     "soft": true,
+     "desc": "AI có thể nói rất tự tin về điều nó không biết. Với đồ ăn của trẻ, đó mới là nguy hiểm thực sự. Safelist kiểm tra bản ghi nguồn và chỉ trao cho AI các dữ kiện.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_why_en.jpg",
+       "alt": "Chỉ dùng AI thì đoán; với Safelist thì trả lời từ bản ghi nguồn của MFDS"
+      },
+      {
+       "type": "note",
+       "text": "Không phải chẩn đoán · Cơ sở dữ liệu công khai · Quyết định cuối cùng thuộc về phụ huynh"
+      }
+     ]
+    },
+    {
+     "id": "data",
+     "label": "03 · Dữ liệu nằm ở đâu",
+     "title": "Dữ liệu cơ thể của tôi nằm trên điện thoại của tôi.",
+     "desc": "Hồ sơ của trẻ, ảnh và nhật ký không bao giờ rời khỏi thiết bị. Máy chủ chỉ nhận nhãn và danh sách cần tránh, rồi hủy chúng.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_privacy_en.jpg",
+       "alt": "Dữ liệu của tôi nằm trên điện thoại — máy chủ chỉ thấy nhãn và danh sách cần tránh, rồi hủy chúng"
+      }
+     ]
+    },
+    {
+     "id": "clothing",
+     "label": "04 · Cả quần áo nữa",
+     "title": "100% cotton?\nNhãn sẽ cho bạn biết.",
+     "desc": "Chụp nhãn hướng dẫn giặt hoặc chia sẻ liên kết cửa hàng, Safelist sẽ đọc ra loại sợi nào, bao nhiêu phần trăm. Các loại sợi bạn muốn tránh (mặc định: polyester, nylon, acrylic, len) hiển thị 🔴. Dành cho việc chọn quần áo cho trẻ bị da cơ địa.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_clothing_en.jpg",
+       "alt": "Chụp nhãn hướng dẫn giặt hoặc chia sẻ liên kết cửa hàng — đọc ngay trên điện thoại: cotton 65% · polyester 35%"
+      },
+      {
+       "type": "flow",
+       "items": [
+        "Chụp nhãn · chia sẻ liên kết · dán văn bản",
+        "Đọc ngay trên điện thoại (không gửi đi đâu)",
+        "% sợi · sợi cần tránh 🔴",
+        "Chỉ hiện nhãn 100% cotton"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Dựa trên nhãn của người bán · không thể xác minh chất liệu thực tế · quyết định cuối cùng thuộc về người giám hộ · Safelist 1.8"
+      }
+     ]
+    },
+    {
+     "id": "pilot",
+     "label": "05 · Thí điểm trên web",
+     "soft": true,
+     "title": "Trước khi giới thiệu,\nhãy kiểm tra xung đột trước.",
+     "desc": "So sánh thành phần sản phẩm với các điều kiện cần tránh và thận trọng của người dùng, và áp dụng cùng quy tắc cho các lựa chọn thay thế. Một công cụ làm việc dành cho tổ chức — tách biệt với ứng dụng và trình kết nối.",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "Thí điểm đang hoạt động",
+        "Tài khoản tổ chức · nhập từ Excel",
+        "Bản ghi của người rà soát"
+       ]
+      },
+      {
+       "type": "media",
+       "src": "/media/gfx/ap_safe_pilot_en.jpg",
+       "alt": "Ví dụ tổng hợp của AP Safe (vẽ lại): bảng tổng quan rà soát hiển thị từng sản phẩm thuộc nhóm loại trừ, cần rà soát hoặc không có xung đột rõ ràng, kèm hành động tiếp theo của người rà soát",
+       "caption": "Ví dụ màn hình trên dữ liệu tổng hợp (vẽ lại) · không phải đánh giá về sản phẩm hay thị trường thực tế."
+      },
+      {
+       "type": "p",
+       "text": "Phân biệt các điều kiện xung đột khiến một đề xuất bị loại trừ với thông tin cần kiểm tra thêm. Người rà soát thấy lập luận và ghi lại việc chấp nhận, chỉnh sửa hoặc từ chối, cùng kết quả quan sát được."
+      },
+      {
+       "type": "flow",
+       "items": [
+        "Đối chiếu rõ ràng giữa điều kiện cần tránh/thận trọng và thành phần",
+        "Giữ lại để rà soát khi thiếu thông tin",
+        "Áp dụng cùng điều kiện cho các lựa chọn thay thế",
+        "Nhập từ Excel · lập luận · bản ghi của người rà soát"
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://revenue.apholdings.kr/safe/",
+         "Mở AP Safe",
+         "primary"
+        ],
+        [
+         "https://revenue.apholdings.kr/safe/?demo=1",
+         "Xem ví dụ tổng hợp",
+         "button"
+        ],
+        [
+         "https://revenue.apholdings.kr/safe/?demo=1",
+         "Xem ví dụ ở kích thước đầy đủ",
+         "link"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Một công cụ rà soát đối chiếu các điều kiện đã nhập với dữ liệu thành phần. Không phải chẩn đoán y khoa hay đảm bảo tuyệt đối về an toàn."
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "06 · Hiện nay",
+     "title": "Hiện có trên App Store và trong Claude.",
+     "soft": true,
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://apps.apple.com/kr/app/id6805684034",
+         "App Store",
+         "primary"
+        ],
+        [
+         "/business/safelist-connect.html",
+         "Kết nối với Claude",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Android · ChatGPT · Gemini — sẽ có sau"
+      }
+     ],
+     "desc": "Miễn phí trên App Store. Quét không cần tài khoản.\nMột dòng địa chỉ để kết nối với Claude.",
+     "cta": true
+    },
+    {
+     "id": "exits",
+     "label": "07 · Mua ở đâu",
+     "title": "Ba lối ra.",
+     "desc": "Một công cụ phán định. Ba nơi để mua. Ngay trong AI · một chợ an toàn trực tuyến · một cửa hàng thực tế.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_exits_en.jpg",
+       "alt": "Ba lối ra — trong AI · chợ an toàn trực tuyến · cửa hàng thực tế"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/ko/products/select/",
+         "AP SELECT — cửa hàng biết chọn lọc",
+         "button"
+        ],
+        [
+         "/ko/products/light/",
+         "Calo: AP Light",
+         "button"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "light",
+   "name": "AP Light",
+   "tag": "Hiểu điều phù hợp với bạn.",
+   "status": "live",
+   "role": "Explainable Choice Intelligence",
+   "desc": "Túi bạn sắp mua có bao nhiêu calo.\nVà lựa chọn nhẹ hơn ngay trên cùng kệ.",
+   "note": "Chỉ có calo. Không bao giờ nói “bạn sẽ không tăng cân”. Dựa trên dữ liệu công khai của MFDS.",
+   "flow": [
+    "Tiêu chí của người dùng",
+    "Các ứng viên",
+    "Đánh đổi có thể giải thích",
+    "Lựa chọn của con người"
+   ],
+   "sections": [
+    {
+     "id": "scene",
+     "label": "01 · Một khung cảnh",
+     "title": "Mua Saewookkang —\ncó loại nào nhẹ hơn không?",
+     "desc": "AI nào cũng hỏi LightList trước thay vì đoán. Calo trên 100g và trên mỗi túi, luôn đi cùng nhau.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/light_scene_en.jpg",
+       "alt": "Một câu → AI → LightList cân nhắc cả 100g và mỗi túi → lựa chọn nhẹ hơn"
+      }
+     ]
+    },
+    {
+     "id": "learn",
+     "label": "02 · Càng chọn nhiều",
+     "title": "Càng chọn nhiều,\nnó càng gợi ý sớm.",
+     "soft": true,
+     "desc": "Khi các lựa chọn nhẹ hơn tích lũy, AI học khẩu vị và ngân sách calo của bạn. Nó chọn giúp bạn, xếp hạng và báo cho bạn trước.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/light_learn_en.jpg",
+       "alt": "Các cuộc hội thoại LightList — đổi món · gọi gì · báo trước · số liệu tuần này"
+      },
+      {
+       "type": "note",
+       "text": "Chỉ có calo · bản ghi nằm trên điện thoại của tôi · không bao giờ nói “bạn sẽ không tăng cân”"
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "03 · Hiện nay",
+     "title": "Hiện có trên App Store và trong Claude.",
+     "soft": true,
+     "desc": "Một dòng địa chỉ để kết nối với Claude.\nCalo trên 100g và trên mỗi túi, luôn đi cùng nhau.",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://apps.apple.com/kr/app/id6815295026",
+         "App Store",
+         "primary"
+        ],
+        [
+         "/business/lightlist-connect.html",
+         "Kết nối với Claude",
+         "button"
+        ],
+        [
+         "/en/products/safe/",
+         "Chất gây dị ứng và danh sách cần tránh: AP Safe",
+         "link"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": ""
+      }
+     ],
+     "cta": true
+    }
+   ],
+   "hideGeneric": true,
+   "image": "/media/lightlist_frame.jpg",
+   "video": "/media/lightlist_hero.mp4",
+   "link": "https://apps.apple.com/kr/app/id6815295026",
+   "linkLabel": "Ứng dụng LightList"
+  },
+  {
+   "id": "revenue",
+   "name": "AP Revenue",
+   "tag": "Dữ liệu đặt phòng, thành quyết định hôm nay.",
+   "status": "working",
+   "role": "Revenue Decision Engine",
+   "desc": "Không phải biểu đồ doanh thu khách sạn — mà là bộ máy biến dữ liệu đặt phòng thành các quyết định của hôm nay.",
+   "note": "Decision Intelligence Working Proof / Productization Candidate do chúng tôi tự phát triển.",
+   "flow": [
+    "Dữ liệu thương mại",
+    "Bối cảnh",
+    "Ưu tiên",
+    "Hành động của con người",
+    "Kết quả"
+   ],
+   "link": "https://revenue.apholdings.kr/",
+   "linkLabel": "Mở AP Revenue",
+   "hideGeneric": true,
+   "sections": [
+    {
+     "id": "scene",
+     "label": "01 · Một khung cảnh",
+     "title": "Dữ liệu đặt phòng trở thành\ndanh sách quyết định mỗi sáng.",
+     "desc": "Kết nối dữ liệu đặt phòng và hủy phòng, và danh sách “Quyết định hôm nay” được tạo ra mỗi sáng. Mức ưu tiên · bằng chứng · số tiền quan sát được · hành động đề xuất, mỗi mục một dòng. Quyết định cuối cùng do quản lý ghi lại.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_today_en.jpg",
+       "alt": "Không gian làm việc AP Revenue — ba quyết định hôm nay, bằng chứng · số tiền quan sát được · chấp nhận/chỉnh sửa/giữ lại"
+      }
+     ]
+    },
+    {
+     "id": "apply",
+     "label": "02 · Cách kết nối",
+     "title": "Không cài bên trong PMS.\nNó nằm bên cạnh.",
+     "soft": true,
+     "desc": "PMS lưu kết quả; CRS và channel manager lưu giá và tồn kho tương lai. AP Revenue nằm bên cạnh chúng: phát hiện bất thường · đánh giá cơ hội · đề xuất hành động · học từ kết quả. Chỉ các điều kiện được quản lý phê duyệt mới được đưa trở lại CRS.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_apply_en.jpg",
+       "alt": "PMS · CRS · giá đối thủ → bộ máy AP Revenue → hàng đợi quyết định hôm nay → quản lý phê duyệt → CRS · channel manager → học từ kết quả"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "Việc hủy phòng tập trung ở kênh hoặc sản phẩm nào",
+        "Những ngày lưu trú nào bán chậm",
+        "Cần rà soát chính sách giá và tồn kho ở đâu",
+        "NR · Semi-NR · cut-off · release — áp dụng loại nào",
+        "Doanh thu và tỷ lệ hủy phòng có cải thiện sau đó hay không"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Chỉ riêng PMS bao quát phân tích đặt phòng và hủy phòng; phán đoán về giá và tồn kho sẽ được thực hiện sau khi kết nối CRS và channel manager."
+      }
+     ]
+    },
+    {
+     "id": "value",
+     "label": "03 · Khách hàng nhận được gì",
+     "title": "Thay vì so sánh bảng tính,\nquyết định có bằng chứng.",
+     "desc": "Cùng một tiêu chuẩn vận hành trên các cơ sở lưu trú. Các bất thường dễ bị bỏ sót về hủy phòng và kênh được phát hiện sớm. “Vì sao đưa ra quyết định này” được lưu lại, và kết quả trước/sau giúp tinh chỉnh tiêu chuẩn.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_value_en.jpg",
+       "alt": "So sánh bảng tính → thẻ quyết định kèm bằng chứng, được xác minh sau 7 · 14 · 30 ngày"
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "04 · Hiện nay",
+     "title": "Hiện nay, trong một dịch vụ đang chạy thực tế.",
+     "soft": true,
+     "desc": "Chỉ dùng dữ liệu tổng hợp · không có thông tin khách hàng thật\n11 bài kiểm thử đạt · triển khai production · chỉ dành cho các tổ chức được mời.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_live_en.jpg",
+       "alt": "Màn hình đăng nhập không gian làm việc revenue.apholdings.kr"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://revenue.apholdings.kr/",
+         "Mở AP Revenue",
+         "primary"
+        ],
+        [
+         "mail:Yêu cầu thí điểm AP Revenue",
+         "Yêu cầu thí điểm",
+         "button"
+        ]
+       ]
+      }
+     ],
+     "cta": true
+    }
+   ]
+  },
+  {
+   "id": "travel",
+   "name": "AP Travel",
+   "tag": "Quốc gia nào, khi nào, và ai sẽ đến.",
+   "status": "pilot",
+   "role": "Global Travel Decision Intelligence",
+   "desc": "Ghế máy bay · tỷ giá · lượng tìm kiếm · tín hiệu kỳ nghỉ, được kết hợp để cho thấy\ncơ hội nằm ở đâu: quốc gia nào → thành phố nào · khách nào · tuần nào.",
+   "note": "Khám phá cơ hội giữa các thị trường. Không giới hạn ở khách quốc tế đến một quốc gia nào. Dữ liệu và tính năng sẽ được xác thực theo từng thị trường.",
+   "flow": [
+    "Tín hiệu thị trường",
+    "Bối cảnh",
+    "Cơ hội",
+    "Quyết định của con người",
+    "Chiến dịch",
+    "Kết quả"
+   ],
+   "hideGeneric": true,
+   "sections": [
+    {
+     "id": "scene",
+     "label": "01 · Một khung cảnh",
+     "title": "Khi các tín hiệu trùng khớp,\ncơ hội xuất hiện.",
+     "desc": "Chỉ những thị trường mà tỷ giá, năng lực vận chuyển hàng không và lượng tìm kiếm cùng chỉ một hướng mới được nêu lên, kèm bằng chứng. Ngân sách, kênh và thông điệp vẫn do người làm marketing quyết định.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/travel_scene_en.jpg",
+       "alt": "Tín hiệu thị trường → cơ hội (Nhật Bản → Seoul · các cặp đôi ở độ tuổi 30 · 1–9/11) → quản lý quyết định → kết quả"
+      }
+     ]
+    },
+    {
+     "id": "signals",
+     "label": "02 · Theo dõi những gì",
+     "title": "Sáu tín hiệu.\nChỉ khi chúng đồng thuận.",
+     "soft": true,
+     "desc": "Ghế máy bay · tỷ giá · lượng tìm kiếm · lượng khách đến · kỳ nghỉ · lịch concert. Một hai tín hiệu tốt là chưa đủ. Khi cả sáu cùng chỉ về một nơi, đó mới trở thành cơ hội.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/travel_signals_en.jpg",
+       "alt": "Bảng điều khiển sáu tín hiệu — ghế máy bay · tỷ giá · tìm kiếm · lượng khách đến · kỳ nghỉ · concert, 6/6 trùng khớp"
+      }
+     ]
+    },
+    {
+     "id": "market",
+     "label": "03 · Quy mô thị trường",
+     "title": "Năm 20 triệu du khách đến.\nAi đến và khi nào thì khác nhau.",
+     "desc": "2,09 triệu lượt khách trong tháng 7 năm 2026, tăng 20,8% so với cùng kỳ. Trung Quốc · Nhật Bản · Đài Loan · Hoa Kỳ · Hồng Kông, theo thứ tự đó. Mỗi quốc gia có mùa cao điểm, mức chi tiêu và lý do đến riêng.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/travel_market_en.jpg",
+       "alt": "Lượng khách đến hằng năm 2019–mục tiêu 2030 · lượng khách đến tháng 7 năm 2026 theo quốc tịch"
+      },
+      {
+       "type": "note",
+       "text": "Số liệu được cập nhật sau mỗi lần công bố thống kê hằng tháng. Các ước tính mang tính minh họa, không phải kết quả."
+      }
+     ]
+    },
+    {
+     "id": "who",
+     "label": "04 · Ai sử dụng",
+     "title": "Bất kỳ ai đang chờ\nđón khách.",
+     "soft": true,
+     "desc": "Marketing khách sạn và resort, chính quyền địa phương và cơ quan du lịch, công ty du lịch và OTA, đơn vị tổ chức concert và MICE. Nó trả lời câu hỏi “bây giờ chúng ta quảng cáo ở quốc gia nào” mỗi tuần.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/travel_report_en.jpg",
+       "alt": "Báo cáo cơ hội hằng tuần mà khách sạn, cơ quan du lịch và công ty du lịch nhận được"
+      }
+     ]
+    },
+    {
+     "id": "apply",
+     "label": "05 · Cách kết nối",
+     "title": "Cùng bộ máy với AP Revenue.\nChỉ khác dữ liệu.",
+     "desc": "Tín hiệu → ưu tiên → quyết định của con người → kết quả được ghi lại. Dữ liệu công khai (Korea Tourism Data Lab · TourAPI) và dữ liệu đối tác cung cấp cho danh sách “cơ hội tuần này” hằng tuần và các bản brief chiến dịch.",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "Dữ liệu công khai · đối tác",
+        "Sáu tín hiệu được chuẩn hóa",
+        "Danh sách cơ hội (nguồn → thành phố · khách · tuần)",
+        "Quản lý quyết định",
+        "Chiến dịch",
+        "Được xác minh qua lượt ghé thăm và đặt chỗ"
+       ]
+      },
+      {
+       "type": "tags",
+       "items": [
+        "Báo cáo cơ hội hằng tuần",
+        "Brief chiến dịch",
+        "Liên kết dữ liệu đặt phòng của AP Revenue",
+        "K-Concert Trip — ứng dụng dành cho người hâm mộ K-pop nước ngoài đến Hàn Quốc, kênh đo lường đầu tiên"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "pilot",
+     "label": "06 · Thí điểm trên web",
+     "soft": true,
+     "title": "Chiến dịch tiếp theo\nnên tập trung vào thị trường nào?",
+     "desc": "Xem xét các tín hiệu thị trường cùng nhau — nhu cầu du lịch, nguồn cung hàng không, lượng đặt chỗ — và phân loại thị trường nào nên theo đuổi và chỗ nào bằng chứng vẫn cần bổ sung.",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "Thí điểm đang hoạt động",
+        "Tài khoản tổ chức · nhập từ Excel",
+        "Lịch sử quyết định theo từng thị trường"
+       ]
+      },
+      {
+       "type": "media",
+       "src": "/media/gfx/ap_travel_pilot_en.jpg",
+       "alt": "Ví dụ tổng hợp của AP Travel (vẽ lại): bảng tổng quan thị trường hiển thị từng thị trường thuộc nhóm theo đuổi, theo dõi và giảm ưu tiên, kèm các hành động tiếp theo",
+       "caption": "Ví dụ màn hình trên dữ liệu tổng hợp (vẽ lại) · không phải đánh giá về sản phẩm hay thị trường thực tế."
+      },
+      {
+       "type": "p",
+       "text": "Nhập dữ liệu theo thị trường xuất phát, điểm đến và thời gian đi, và hệ thống sẽ phân loại thành theo đuổi, theo dõi và giảm ưu tiên. Người rà soát thấy lập luận và hành động tiếp theo, đồng thời các quyết định của nhóm và kết quả quan sát được sẽ được tích lũy."
+      },
+      {
+       "type": "flow",
+       "items": [
+        "Tám tín hiệu thị trường kèm nguồn và ngày cập nhật",
+        "Xung đột giữa các ràng buộc nguồn cung, nhu cầu và xu hướng đặt chỗ",
+        "Nhập từ Excel và bản ghi quyết định theo từng thị trường",
+        "So sánh trước/sau khi dữ liệu được làm mới cho cùng một thị trường và giai đoạn"
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://revenue.apholdings.kr/travel/",
+         "Mở AP Travel",
+         "primary"
+        ],
+        [
+         "https://revenue.apholdings.kr/travel/?demo=1",
+         "Xem ví dụ tổng hợp",
+         "button"
+        ],
+        [
+         "https://revenue.apholdings.kr/travel/?demo=1",
+         "Xem ví dụ ở kích thước đầy đủ",
+         "link"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Một công cụ rà soát thị trường dựa trên quy tắc. Điểm số không phải dự báo doanh thu hay đảm bảo hiệu quả."
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "07 · Hiện nay",
+     "title": "Hiện nay, trong một thí điểm trên web.",
+     "cta": true,
+     "desc": "Đăng nhập bằng tài khoản tổ chức, nhập dữ liệu thị trường và ghi lại các quyết định. Cùng bộ máy này chạy trên dữ liệu đặt phòng khách sạn trong AP Revenue.",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://revenue.apholdings.kr/travel/",
+         "Mở AP Travel",
+         "primary"
+        ],
+        [
+         "mail:Yêu cầu thí điểm AP Travel",
+         "Yêu cầu thí điểm",
+         "button"
+        ],
+        [
+         "/en/products/revenue/",
+         "Xem AP Revenue",
+         "link"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Tự động thu thập dữ liệu thị trường · định nghĩa chỉ số chuẩn · xác thực với kết quả thực tế — các bước tiếp theo"
+      }
+     ]
+    }
+   ],
+   "image": "/media/inbound_frame.jpg",
+   "video": "/media/inbound.mp4"
+  },
+  {
+   "id": "select",
+   "name": "AP SELECT",
+   "tag": "Một cửa hàng được thiết kế để lựa chọn.",
+   "status": "concept",
+   "role": "Một cửa hàng được thiết kế để lựa chọn.",
+   "desc": "Không phải cửa hàng bán hàng, mà là cửa hàng biết chọn lọc.\nTư vấn và dùng thử tại cửa hàng. Mua trực tuyến.",
+   "note": "Ý tưởng & Thiết kế hệ thống. Khác với hoạt động cửa hàng hiện tại hoặc tư vấn chuyên môn.",
+   "flow": [
+    "Hồ sơ lựa chọn",
+    "Safe",
+    "Light",
+    "Chuyên gia",
+    "Trải nghiệm trực tiếp",
+    "Khách hàng lựa chọn",
+    "Đặt hàng online",
+    "Kết quả"
+   ],
+   "image": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/4285351f-831d-4d77-9380-dcba09ebccce.webp",
+   "video": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/c849c123-c931-472d-a4ba-59bed043158c.mp4",
+   "sections": [
+    {
+     "id": "consult",
+     "label": "01",
+     "title": "Nó hỏi trước.\nBạn cần tránh gì?",
+     "desc": "Tránh sữa hay lúa mì, ngân sách, ưa loại không mùi hương — chuyên viên tư vấn nắm trước những điều đó. Sau đó, trên kệ chỉ còn những gì phù hợp. Khi có sản phẩm mới đạt tiêu chí của bạn, bạn sẽ được báo đầu tiên.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/select_filter.jpg",
+       "alt": "Nắm tiêu chí của bạn trước, giữ lại ba trong sáu sản phẩm phù hợp"
+      }
+     ]
+    },
+    {
+     "id": "experience",
+     "label": "02",
+     "title": "Cửa hàng để tư vấn và dùng thử.\nKhông có quầy thanh toán.",
+     "soft": true,
+     "desc": "Xem, chạm và thử trực tiếp ba bốn món. Nếu thích một món, chỉ cần một mã QR — đặt online, giao tận nhà.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/select_split.jpg",
+       "alt": "Cửa hàng để tư vấn và dùng thử; online để đặt hàng và giao hàng"
+      }
+     ]
+    },
+    {
+     "id": "franchise",
+     "label": "03 · NHƯỢNG QUYỀN",
+     "title": "Chúng tôi cung cấp một hệ thống, không phải hàng tồn kho.",
+     "desc": "Trụ sở chính cung cấp hệ thống lựa chọn; đơn vị nhượng quyền cung cấp mặt bằng và tư vấn. Việc nhượng quyền chỉ mở sau khi các cửa hàng tự vận hành chứng minh được mô hình.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/select_franchise_en.jpg",
+       "alt": "Ba mô hình cửa hàng — MINI · SELECT · LAB — trên cùng một hệ thống của trụ sở chính"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "Phí giao dịch",
+        "Phí nhượng quyền · tiền bản quyền",
+        "Phí hệ thống",
+        "Bố trí thương hiệu · nội dung",
+        "Tư vấn chuyên gia"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Giai đoạn Thiết kế Khái niệm & Hệ thống. Chưa tuyển đơn vị nhượng quyền hay ký hợp đồng chuyên gia; chỉ công bố sau khi được kiểm chứng."
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "mailto:alfred.park@apholdings.kr?subject=%5BAP%20Holdings%5D%20AP%20SELECT%20%ED%98%91%EB%A0%A5%20%EB%AC%B8%EC%9D%98",
+         "Liên hệ hợp tác AP SELECT",
+         "primary"
+        ],
+        [
+         "/ko/products/safe/",
+         "AP Safe",
+         "link"
+        ],
+        [
+         "/ko/products/light/",
+         "AP Light",
+         "link"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "commerce",
+   "name": "Global K-Commerce",
+   "tag": "Mua thứ bạn đã thấy. Mua lại khi về nhà.",
+   "status": "inDev",
+   "role": "GLOBAL K-COMMERCE",
+   "desc": "Mua ngay thứ bạn thấy trong video của LIA.\nThứ bạn khám phá ở Hàn Quốc, mua lại khi về nước.",
+   "note": "Không tồn kho · liên kết đối tác được công khai · giá không đổi",
+   "flow": [
+    "LIA / Nội dung",
+    "Khán giả nước ngoài",
+    "Khám phá sản phẩm",
+    "AP Commerce / Marketplace",
+    "Mua hàng",
+    "Giao nhận",
+    "Mua lại"
+   ],
+   "hideGeneric": true,
+   "sections": [
+    {
+     "id": "map",
+     "label": "01 · Cách mua",
+     "title": "Mua thứ bạn đã thấy.\nMua lại khi về nhà.",
+     "desc": "Những gì bạn thích trong video của LIA và các ứng dụng, chỉ cách một liên kết. Lia Select và K-Craft do AP giao hàng; lưu trú, tour, Coupang và Shopee vẫn ở các trang bạn quen dùng.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/commerce_map_en.jpg",
+       "alt": "Xem trong video → AP giao hàng (Lia Select · AP SELECT · K-Craft) / trên các trang bạn quen dùng (Agoda · Klook · Coupang · Shopee)"
+      }
+     ]
+    },
+    {
+     "id": "own",
+     "label": "02 · AP giao hàng",
+     "title": "Cả lý do chọn nữa.\nGiao tận cửa.",
+     "soft": true,
+     "desc": "Chỉ những gì LIA chọn sau khi kiểm tra thành phần, đánh giá và giá mới lên kệ. Bạn đặt hàng, AP lo từ thanh toán đến giao hàng.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/commerce_own_en.jpg",
+       "alt": "Lia Select · AP SELECT · K-Craft · Shopee — từ lúc đặt hàng đến tận cửa nhà bạn"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/en/products/liaselect/",
+         "Xem Lia Select",
+         "button"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "partner",
+     "label": "03 · Trên các trang bạn quen dùng",
+     "title": "Lưu trú, tour và mua lại,\nngay nơi bạn vẫn mua sắm.",
+     "desc": "Đặt chỗ và thanh toán vẫn diễn ra trên các trang bạn quen dùng. AP chỉ giúp bạn lựa chọn. Mua qua liên kết có giá như nhau.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/commerce_partner_en.jpg",
+       "alt": "Một chuyến đi xem concert — Agoda trước chuyến đi · Klook khi đến nơi · Coupang ở Hàn Quốc · Shopee khi về nước"
+      }
+     ]
+    },
+    {
+     "id": "funnel",
+     "label": "04 · Phù hợp hơn ở lần sau",
+     "title": "Thứ được xem nhiều nhất\ntrở thành kệ hàng kế tiếp.",
+     "soft": true,
+     "desc": "Video và sản phẩm nào nhận được nhiều phản hồi nhất sẽ định hình đợt tuyển chọn tiếp theo. Không cần tài khoản, không cần đăng nhập.",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "Xem trong video",
+        "Lưu",
+        "Mua",
+        "Nhận hàng",
+        "Mua lại"
+       ]
+      },
+      {
+       "type": "tags",
+       "items": [
+        "Việt Nam trước, sau đó đến các thị trường nói tiếng Anh",
+        "Mở bán khi phản hồi lặp lại",
+        "Không tồn kho · liên kết đối tác được công khai · giá không đổi"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "05 · Hôm nay",
+     "title": "Hôm nay, tại Lia Select.",
+     "cta": true,
+     "desc": "Chín sản phẩm K-beauty và ba video đánh giá. Liên kết mua hàng nằm trong trang hồ sơ kênh của LIA. Đăng bán trên Shopee và mở rộng đối tác sẽ theo thứ tự tiếp theo.",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/en/products/liaselect/",
+         "Lia Select",
+         "primary"
+        ],
+        [
+         "/en/products/lia/",
+         "LIA",
+         "button"
+        ],
+        [
+         "mail:Đề xuất hợp tác thương mại",
+         "Đề xuất đối tác",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Liên kết đối tác được công khai · không tồn kho · không ảnh hưởng đến giá"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "craft",
+   "name": "AP K-Craft",
+   "tag": "Đôi bàn tay nghệ nhân, đến với thế giới.",
+   "status": "inDev",
+   "role": "THỦ CÔNG TRUYỀN THỐNG · Kết nối nghệ nhân với thế giới",
+   "desc": "Tác phẩm của các nghệ nhân và những người nắm giữ di sản văn hóa phi vật thể, dành cho người mua nước ngoài.\nTìm kiếm nghệ nhân, ghi lại quá trình chế tác, quảng bá đa ngôn ngữ và chỉ bán hàng gốc có chứng nhận.",
+   "note": "Văn hóa trước, sinh kế sau, sản phẩm chỉ là phương tiện.",
+   "flow": [
+    "Nghệ nhân",
+    "Tác phẩm",
+    "Hộ chiếu số",
+    "Nguồn gốc xuất xứ",
+    "Thẩm định xuất khẩu",
+    "Hải quan",
+    "Bảo hiểm",
+    "Đóng gói",
+    "Logistics",
+    "Giao hàng",
+    "Tình trạng hàng",
+    "Khiếu nại",
+    "Kết quả"
+   ],
+   "image": "/media/craft_frame.jpg",
+   "video": "/media/craft.mp4",
+   "sections": [
+    {
+     "id": "why",
+     "label": "01 · Vấn đề",
+     "title": "Tay nghề vẫn còn.\nNhưng không có ai nối tiếp.",
+     "desc": "Kênh bán hạn chế và biên lợi nhuận phân phối lớn. Chỉ sáng tác thôi thì không đủ sống. Ngày càng ít người ở mỗi thế hệ chọn một nghề đòi hỏi nhiều năm rèn luyện. Tác phẩm có đó, nhưng chưa có kênh hay cơ chế tạo niềm tin để đến được với người mua nước ngoài.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/craft_why_en.jpg",
+       "alt": "Bốn vấn đề nghệ nhân gặp phải → bốn cơ hội do làn sóng Hallyu tạo ra"
+      }
+     ]
+    },
+    {
+     "id": "how",
+     "label": "02 · Cách làm",
+     "title": "尋 · 錄 · 廣 · 賣\nTìm, ghi lại, quảng bá, bán.",
+     "desc": "Giai đoạn 1 là xây dựng niềm tin trước khi bán. Trước hết, thế giới biết rằng “nghệ nhân này tồn tại”. Việc bán hàng chỉ mở khi phản hồi được xác nhận.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/craft_how_en.jpg",
+       "alt": "Tìm · ghi lại · quảng bá · bán — nghệ nhân nhận được gì ở từng bước"
+      }
+     ]
+    },
+    {
+     "id": "items",
+     "label": "03 · Sản phẩm và điểm khác biệt",
+     "title": "Một cấu trúc chứng minh tính xác thực.",
+     "soft": true,
+     "desc": "Gốm men ngọc và sứ trắng, đồ sơn mài và đồ gỗ khảm xà cừ, đèn và quạt giấy hanji. Chỉ những tác phẩm do nghệ nhân làm, khác biệt với hàng nhập giá rẻ. Mỗi tác phẩm đều có chữ ký, hồ sơ chế tác và nguồn gốc xuất xứ.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/craft_proof_en.jpg",
+       "alt": "Thẻ tác phẩm — chứng nhận nghệ nhân · video quy trình chế tác · chữ ký và nguồn gốc · ba nhóm sản phẩm"
+      }
+     ]
+    },
+    {
+     "id": "model",
+     "label": "04 · Cả ba bên cùng được lợi",
+     "title": "Nghệ nhân, nền tảng, người mua.",
+     "desc": "Nghệ nhân có thu nhập công bằng và phương tiện đào tạo người kế nghiệp, nền tảng có phí giao dịch và mạng lưới nghệ nhân, người mua nước ngoài có hàng gốc đã được xác minh và nguồn gốc đáng tin cậy.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/craft_value_en.jpg",
+       "alt": "Nghệ nhân · người mua nước ngoài · nền tảng — mỗi bên cho đi và nhận lại điều gì"
+      },
+      {
+       "type": "note",
+       "text": "AP không tự thực hiện thẩm định, bảo hiểm hay hải quan. AP ghi chép, kết nối và điều phối cùng các đối tác chuyên môn."
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "05 · Hôm nay",
+     "title": "Cùng các nghệ nhân và xưởng thủ công.",
+     "cta": true,
+     "desc": "Nghệ nhân và xưởng thủ công, các tổ chức di sản, đối tác nước ngoài.\nBắt đầu từ nghệ nhân đầu tiên và bản ghi chế tác đầu tiên.",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "mail:Liên hệ hợp tác nghệ nhân · xưởng thủ công K-Craft",
+         "Liên hệ nghệ nhân · xưởng",
+         "primary"
+        ],
+        [
+         "/ko/products/lia/",
+         "Xem kênh của LIA",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Bán hàng thuộc Giai đoạn 2. Hiện tại: tìm kiếm, ghi lại, quảng bá."
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "lia",
+   "name": "LIA",
+   "tag": "Gặp LIA.\nKhám phá Hàn Quốc.",
+   "status": "audience",
+   "role": "AP HOLDINGS · Người ảnh hưởng AI số 1",
+   "desc": "LIA sống ở Seoul. Cô giới thiệu văn hóa, địa điểm và sản phẩm của Hàn Quốc\nđến thế giới, bằng tiếng Anh.\nMỗi ngày trên Instagram, TikTok và blog.",
+   "note": "Nhân vật do AI tạo ra · có thông báo AI trong mọi bài đăng",
+   "flow": [
+    "Nhà sáng tạo",
+    "Nhà sáng tạo Khám phá Hàn Quốc",
+    "Người ảnh hưởng thương mại",
+    "IP quảng bá Hàn Quốc"
+   ],
+   "image": "/media/lia/lia_hero_sq.jpg",
+   "heroSplit": true,
+   "hideArchive": true,
+   "heroLinks": [
+    [
+     "https://www.instagram.com/lia_park55/",
+     "Instagram"
+    ],
+    [
+     "https://www.tiktok.com/@lia_park55",
+     "TikTok"
+    ]
+   ],
+   "sections": [
+    {
+     "id": "week",
+     "label": "01 · Khi bạn theo dõi",
+     "title": "Mỗi tuần,\nbạn nhận được thế này.",
+     "desc": "Một bài giãn cơ 30 giây vào thứ Hai, hướng dẫn ứng dụng vào thứ Tư, câu chuyện về Hàn Quốc vào thứ Sáu, truyện dân gian vào cuối tuần. Có phụ đề tiếng Anh. Story mỗi ngày.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_feed_en.jpg",
+       "alt": "Bảng tin Instagram của LIA — T2 Desk Body · T4 App Moment · T6 Korea, Explained · Cuối tuần Tiger Tales"
+      }
+     ]
+    },
+    {
+     "id": "persona",
+     "label": "02 · Cô ấy là ai",
+     "title": "Một cô gái ngoài hai mươi ở Seoul.\nCó bạn bè khắp thế giới.",
+     "soft": true,
+     "desc": "Ban ngày ngồi bàn làm việc, buổi tối ở cửa hàng tiện lợi và quán cà phê khuya, cuối tuần đọc to những truyện xưa. Cô không khoe điều mình biết — mà thay bạn hỏi điều bạn tò mò.",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "Korea, Explained — những câu hỏi thật mà sách hướng dẫn không trả lời",
+        "Tiger Tales — truyện dân gian cùng bốn anh em nhà hổ",
+        "Desk Body — 30 giây để gỡ một ngày ngồi nhiều",
+        "First User — lần đầu xem các ứng dụng AP, từng màn hình một"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "actor",
+     "label": "03 · Trước ống kính",
+     "title": "Mỗi ngày, không cần quay phim.\nLIA trước máy quay.",
+     "desc": "Hậu trường phim trường truyền hình, video âm nhạc “Ride the Wave”, lời chào ra mắt và một buổi họp báo. Một nữ diễn viên không có ngày nghỉ và không già đi.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_camera_en.jpg",
+       "alt": "LIA trên màn hình máy quay — REC · phim trường · video âm nhạc · Tiger Tales"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "Phim trường — ba giờ chờ đợi, mười hai giây quay",
+        "Video âm nhạc “Ride the Wave”",
+        "Lời chào ra mắt",
+        "Họp báo",
+        "Phòng tập, 11 giờ đêm",
+        "Kết thúc buổi quay lúc 6 giờ sáng"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "daily",
+     "label": "04 · Một ngày cùng LIA",
+     "title": "Từ sông Hán lúc bình minh\nđến phòng tập lúc đêm khuya.",
+     "soft": true,
+     "desc": "Chạy bộ lúc 5:40 sáng dọc sông Hán, cà phê trong con hẻm khu phố, tấm thảm yoga buổi tối, phút thư giãn bên giường. Câu chuyện về làm đẹp, sức khỏe và du lịch, mỗi ngày.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_day_en.jpg",
+       "alt": "Một ngày cùng LIA — 5:40 chạy bộ lúc bình minh · 9:00 ghi chú công việc · 13:00 con hẻm khu phố · 19:30 phòng tập · 22:00 thư giãn bên giường"
+      }
+     ]
+    },
+    {
+     "id": "picks",
+     "label": "05 · Lia Select",
+     "title": "Kiểm tra trước,\nrồi mới chọn.",
+     "desc": "K-beauty do LIA chọn sau khi kiểm tra thành phần và đánh giá, kể cả các điểm trừ. Chống nắng · essence · cushion · mặt nạ · son tint · sữa rửa mặt. Xem trong video, mua qua liên kết ở trang hồ sơ.",
+     "blocks": [
+      {
+       "type": "gallery",
+       "cols": 6,
+       "ratio": "1/1",
+       "items": [
+        {
+         "src": "/media/lia/rimg_suncream.jpg",
+         "caption": "Chống nắng"
+        },
+        {
+         "src": "/media/lia/rimg_essence.jpg",
+         "caption": "Essence"
+        },
+        {
+         "src": "/media/lia/rimg_cushion.jpg",
+         "caption": "Cushion"
+        },
+        {
+         "src": "/media/lia/rimg_mask.jpg",
+         "caption": "Mặt nạ"
+        },
+        {
+         "src": "/media/lia/rimg_tint.jpg",
+         "caption": "Son tint"
+        },
+        {
+         "src": "/media/lia/rimg_cleanser.jpg",
+         "caption": "Sữa rửa mặt"
+        }
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/en/products/liaselect/",
+         "Xem Lia Select",
+         "button"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "channels",
+     "label": "06 · Xem ở đâu",
+     "title": "Instagram. TikTok. Blog.",
+     "soft": true,
+     "desc": "Reels Instagram dài 15–20 giây có phụ đề tiếng Anh. TikTok đăng truyện dân gian dài 30–45 giây. Blog, bằng tiếng Hàn, kể câu chuyện dài hơn về các ứng dụng và sản phẩm.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_channels_en.jpg",
+       "alt": "Ba chiếc điện thoại — bảng tin Instagram · TikTok Tiger Tales · blog"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://www.instagram.com/lia_park55/",
+         "Instagram",
+         "button"
+        ],
+        [
+         "https://www.tiktok.com/@lia_park55",
+         "TikTok",
+         "button"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "shop",
+     "label": "07 · Mua thứ bạn đã thấy",
+     "title": "Thứ bạn thấy trong video,\nqua liên kết ở trang hồ sơ.",
+     "desc": "Những gì LIA chọn có trên Lia Select; lưu trú, tour, Coupang và Shopee vẫn ở các trang bạn quen dùng. Liên kết đối tác được công khai và giá không thay đổi.",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "Xem trong video",
+        "Liên kết ở hồ sơ",
+        "Lia Select · đối tác",
+        "Giao tận nhà"
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/en/products/commerce/",
+         "Cách mua — AP Commerce",
+         "button"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "brands",
+     "label": "08 · Cùng các thương hiệu",
+     "title": "Cùng một gương mặt,\nbằng mọi ngôn ngữ.",
+     "soft": true,
+     "desc": "Có kịch bản là đăng được ngay hôm nay. Tiếng Anh trước, sau đó là tiếng Trung và tiếng Nhật. Một người giới thiệu ứng dụng, du lịch, K-beauty và thủ công mỹ nghệ.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_brand_en.jpg",
+       "alt": "Cùng một bức ảnh với phụ đề tiếng Anh, tiếng Trung và tiếng Nhật — 24h · 1 · EN→中→日 · 0"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "Hợp tác thương hiệu",
+        "Xuất hiện đặc biệt trong game và ứng dụng",
+        "Đại sứ cho du lịch, địa phương và sự kiện văn hóa",
+        "LIA đa ngôn ngữ"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "09 · Hôm nay",
+     "title": "Theo dõi LIA ngay hôm nay.",
+     "cta": true,
+     "desc": "Nhân vật do AI tạo ra. Có thông báo AI trong mọi bài đăng. Không mua người theo dõi · không bịa số liệu · liên kết đối tác được công khai.",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://www.instagram.com/lia_park55/",
+         "Instagram",
+         "primary"
+        ],
+        [
+         "https://www.tiktok.com/@lia_park55",
+         "TikTok",
+         "button"
+        ],
+        [
+         "mail:Liên hệ hợp tác với LIA",
+         "Liên hệ hợp tác thương hiệu",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Nhân vật do AI tạo ra · có thông báo AI trong mọi bài đăng"
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "rgrg",
+   "name": "RGRG",
+   "tag": "Nền tảng đấu quiz trực tuyến thời gian thực mà ai, ở mọi lứa tuổi, cũng có thể chơi và thích thú — kiến thức phổ thông tự nhiên lớn dần khi bạn chơi.",
+   "status": "inDev",
+   "role": "Chơi trước. Kiến thức theo sau.",
+   "desc": "Không phải trò chơi giáo dục — mà là trò chơi cho mọi người.\nHọc hỏi chỉ là một phần trong đó.",
+   "note": "iPhone, màn hình ngang · Trò chơi › Đố vui · đang chuẩn bị phát hành.",
+   "flow": [
+    "RGRG CORE",
+    "Learner Locale",
+    "Instruction Language",
+    "Target Language / Subject",
+    "Quiz Pack"
+   ],
+   "image": "/media/gfx/rgrg2_hero_en.jpg",
+   "sections": [
+    {
+     "id": "intent",
+     "label": "01 · Vì sao chúng tôi làm ra",
+     "title": "Quiz là để chơi,\nkhông phải để học bài.",
+     "desc": "Trước hết là một trò chơi ai cũng có thể thích. Kiến thức phổ thông là thứ tự nhiên lớn dần khi bạn chơi. Giáo dục chỉ là một phần trong đó.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg3_battle_en.jpg",
+       "alt": "Sáu nhân vật trên một sân khấu — cuộc đấu quiz cho mọi lứa tuổi"
+      }
+     ]
+    },
+    {
+     "id": "everyone",
+     "label": "02 · Cho mọi lứa tuổi",
+     "title": "Trẻ em và cha mẹ,\nbạn bè và đồng nghiệp — một trận đấu.",
+     "soft": true,
+     "desc": "Một căn phòng không hỏi tuổi hay trình độ của bạn. Gia đình, bạn bè và đồng nghiệp trên cùng một sân khấu.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg3_wait_en.jpg",
+       "alt": "Phòng chờ — sáu chỗ ngồi, mở cho tất cả mọi người"
+      }
+     ]
+    },
+    {
+     "id": "knowledge",
+     "label": "03 · Kiến thức, một cách tự nhiên",
+     "title": "Mỗi ván thua\ntrang bị cho ván sau.",
+     "desc": "Không có gì phải học thuộc — chỉ có khát khao chiến thắng. Câu trả lời sai được đưa vào sổ lỗi sai và quay lại ở trận sau. Thời sự, lịch sử, khoa học, văn hóa, câu đố.",
+     "blocks": []
+    },
+    {
+     "id": "platform",
+     "label": "04 · Nền tảng trực tuyến thời gian thực",
+     "title": "Không phải cuốn bài tập làm một mình —\nmà là sân khấu cùng chia sẻ.",
+     "soft": true,
+     "desc": "Trắc nghiệm · Đúng/Sai · Chữ cái đầu · Tốc độ · Đố vui · Ngẫu nhiên — mỗi phòng một kiểu thú vị khác nhau. Một nền tảng nơi người khác thi đấu trên những câu hỏi do bạn viết.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg2_room_en.jpg",
+       "alt": "PHÒNG QUIZ — sáu phòng"
+      }
+     ]
+    },
+    {
+     "id": "characters",
+     "label": "05 · Nhân vật",
+     "title": "Một nhân vật chơi thay bạn,\ndanh hiệu tích lũy dần.",
+     "desc": "Tám nhân vật và danh hiệu. Không có thứ gì mua được giúp thắng trận đấu.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg3_chars_en.jpg",
+       "alt": "Nhân vật — tám nhân vật và danh hiệu"
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "06 · Hiện tại",
+     "title": "iPhone · đang chuẩn bị phát hành.",
+     "soft": true,
+     "cta": true,
+     "desc": "Một trận đấu quiz trực tuyến thời gian thực mà ai, ở mọi lứa tuổi, cũng có thể thích thú.",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "Mọi lứa tuổi",
+        "Trực tuyến thời gian thực",
+        "6 phòng",
+        "8 nhân vật",
+        "Sổ lỗi sai",
+        "Không pay-to-win"
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://games.apholdings.kr/en/",
+         "AP Games",
+         "primary"
+        ],
+        [
+         "mail:Liên hệ hợp tác RGRG",
+         "Liên hệ hợp tác",
+         "button"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "cubs",
+   "name": "Hangeul Cubs",
+   "tag": "Học Hangeul\ncùng bốn anh em nhà hổ.",
+   "status": "existing",
+   "role": "HANGEUL CUBS · Ứng dụng học Hangeul",
+   "desc": "Dành cho người nước ngoài và trẻ em lần đầu làm quen tiếng Hàn.\nMỗi tập một batchim. Tiếng Anh · tiếng Việt · tiếng Pháp.",
+   "note": "Đã phát hành cho iPhone · iPad · không quảng cáo · không tài khoản",
+   "flow": [
+    "APP",
+    "SHORTS",
+    "YOUTUBE",
+    "VĂN HÓA",
+    "DU LỊCH"
+   ],
+   "image": "/media/cubs/family.jpg",
+   "sections": [
+    {
+     "id": "siblings",
+     "label": "01 · Bốn anh em",
+     "title": "Mỗi người một phụ âm cuối,\nbốn anh em cùng chia nhau dạy.",
+     "desc": "Daho phụ trách kiến thức cơ bản về batchim, Kkobi phụ trách ㄴ và ㄹ, Aari phụ trách âm cuối ㅇ, Rami phụ trách các âm tắc ㄱ · ㄷ · ㅂ. Mỗi tập một batchim.",
+     "blocks": [
+      {
+       "type": "milestones",
+       "items": [
+        [
+         "DAHO · con cả",
+         "Daho",
+         "Kiến thức cơ bản về batchim. Một khối ở bên dưới — chỉ có vậy."
+        ],
+        [
+         "KKOBI · con thứ hai",
+         "Kkobi",
+         "ㄴ và ㄹ. Nghe âm tách ra ở đầu lưỡi."
+        ],
+        [
+         "AARI · con thứ ba",
+         "Aari",
+         "Âm cuối ㅇ. Ngân như tiếng chuông: ng, ng, ng."
+        ],
+        [
+         "RAMI · con út",
+         "Rami",
+         "Các âm tắc ㄱ · ㄷ · ㅂ. Ngắn và dứt gọn."
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "screens",
+     "label": "02 · Học · nghe · giải",
+     "title": "Ba màn hình, một mạch học.",
+     "soft": true,
+     "desc": "Điểm đặc trưng: phụ âm cuối được hiển thị bằng màu riêng. 반/방 · 발/밥 · 문/물 · 곰/공 — những âm mà chỉ một batchim cũng làm đổi nghĩa. Kết thúc bằng một câu đầu tiên bạn sẽ thực sự dùng: “물 주세요.”",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/cubs/screens.jpg",
+       "alt": "Từ có batchim · nghe cặp tối thiểu · câu đầu tiên — ba màn hình ứng dụng"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "42 bài học",
+        "Gợi ý EN · VI · FR",
+        "Phát âm ngay trên thiết bị",
+        "Hoàn toàn ngoại tuyến",
+        "Không quảng cáo · không tài khoản"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "arena",
+     "label": "03 · Thử thách",
+     "title": "Thi đấu với những gì bạn đã học.",
+     "desc": "Bài học để học; thử thách để thi đấu. Ba vòng, mười hai câu hỏi, khoảng hai phút — khởi động · trò chơi nhỏ hôm nay · cược chung cuộc. Mở khóa sau khi hoàn thành ít nhất một bài học.",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "V1 Khởi động · 5 câu · 10 giây",
+        "V2 Trò chơi nhỏ hôm nay · đúng/sai · flash · loại trực tiếp",
+        "V3 Cược chung cuộc · đặt điểm để nhân đôi"
+       ]
+      },
+      {
+       "type": "tags",
+       "items": [
+        "Nhanh hơn thì được nhiều điểm hơn",
+        "Có ngọn lửa khi đúng hai câu liên tiếp",
+        "Chỉ hỏi những câu từ các bài học đã hoàn thành"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "video",
+     "label": "04 · Ngoài ứng dụng",
+     "title": "Bài học Hangeul bằng video\ncùng bốn anh em.",
+     "soft": true,
+     "desc": "Từ nguyên âm ㅏ đến phụ âm cuối, các tập do bốn anh em dẫn dắt. Thuyết minh tiếng Anh, phụ đề tiếng Hàn. Tập 1, “Nguyên âm ㅏ”, đã phát hành — làm quen với Hangeul trước khi mở ứng dụng.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/cubs/yt_ep1_thumb.jpg",
+       "alt": "Tập 1 · nguyên âm ㅏ — poster tập phim trên YouTube"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://youtu.be/vpZ7JeHaz6I",
+         "Xem Tập 1 trên YouTube",
+         "primary"
+        ],
+        [
+         "https://www.youtube.com/@hangeulcubs",
+         "Kênh @hangeulcubs",
+         "link"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "05 · Hôm nay",
+     "title": "Hôm nay, trên App Store.",
+     "cta": true,
+     "desc": "iPhone · iPad. Cùng những bài học đó trên màn hình lớn hơn.\nTập 1 đã lên kênh YouTube. Việc mở rộng gói bài học đang được chuẩn bị.",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://apps.apple.com/kr/app/id6803749436",
+         "App Store",
+         "primary"
+        ],
+        [
+         "/ko/products/rgrg/",
+         "Đấu quiz trực tiếp trong RGRG",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Android · kênh YouTube — sẽ có sau"
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true,
+   "link": "https://edu.apholdings.kr/en/",
+   "linkLabel": "Trang chính thức AP Edu"
+  },
+  {
+   "id": "lastwave",
+   "name": "LAST WAVE",
+   "tag": "Sáng tạo qua trò chơi.",
+   "status": "inDev",
+   "role": "Game & IP do nhà sáng tạo dẫn dắt",
+   "desc": "Game FPS 3D về việc sinh tồn tại một Seoul bị Rift xé toạc. 50 wave.\nTrí tưởng tượng của một nhà sáng tạo nhỏ tuổi, được AP xây dựng thành game.",
+   "note": "Dự án đang phát triển. Thông tin cá nhân của nhà sáng tạo nhỏ tuổi được giữ kín.",
+   "flow": [
+    "Hình dung",
+    "Xây dựng",
+    "Kiểm thử",
+    "Phản hồi của nhà sáng tạo",
+    "Quản trị",
+    "Phát hành"
+   ],
+   "image": "/media/gfx/phone_lw_en.jpg",
+   "sections": [
+    {
+     "id": "world",
+     "label": "01",
+     "title": "Từ Gangnam vào Rift,\n50 wave.",
+     "desc": "Gangnam → Lotte Tower, Jamsil → bên trong Rift. VOID TITAN chờ ở cuối đường.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lw_waves_en.jpg",
+       "alt": "Gangnam · Lotte Tower · bên trong Rift — 50 wave"
+      }
+     ]
+    },
+    {
+     "id": "roles",
+     "label": "02",
+     "title": "Trí tưởng tượng của một đứa trẻ\ntrở thành một trò chơi.",
+     "soft": true,
+     "desc": "Thế giới, nhân vật, câu chuyện và niềm vui đều đến từ những bản phác thảo bằng sáp màu của nhà sáng tạo nhỏ tuổi. Kỹ thuật, an toàn, kiếm tiền và phát hành thuộc về AP. Thông tin cá nhân của nhà sáng tạo không bao giờ được tiết lộ.",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lw_collab.jpg",
+       "alt": "Bản phác thảo bằng sáp màu của một đứa trẻ trở thành nhân vật game 3D"
+      },
+      {
+       "type": "grid2",
+       "items": [
+        {
+         "type": "proof",
+         "h3": "NHÀ SÁNG TẠO NHỎ TUỔI · trí tưởng tượng",
+         "ol": [
+          "Thế giới — một Seoul bị Rift xé toạc",
+          "Nhân vật — năm anh hùng, sáu kẻ địch",
+          "Câu chuyện · kỹ năng · trùm",
+          "Niềm vui — điều làm game hấp dẫn"
+         ]
+        },
+        {
+         "type": "proof",
+         "h3": "AP · trách nhiệm",
+         "ol": [
+          "Kỹ thuật · cân bằng · QA",
+          "An toàn · quyền riêng tư",
+          "Kiếm tiền — skin và pass, không pay-to-win",
+          "Phát hành · vận hành"
+         ]
+        }
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/ko/products/rgrg/",
+         "RGRG — trận đấu quiz trực tiếp cho mọi lứa tuổi",
+         "button"
+        ],
+        [
+         "/ko/products/cubs/",
+         "Hangeul Cubs",
+         "button"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true,
+   "link": "https://games.apholdings.kr/en/",
+   "linkLabel": "Trang chính thức AP Games"
+  },
+  {
+   "id": "liaselect",
+   "name": "Lia Select",
+   "tag": "Kiểm tra trước,\nrồi mới chọn.",
+   "status": "audience",
+   "role": "LIA SELECT · K-BEAUTY",
+   "desc": "K-beauty do LIA chọn sau khi kiểm tra thành phần và đánh giá, kể cả các điểm trừ.\nTrên kệ này chỉ có mỹ phẩm Hàn Quốc đã kiểm tra bảng thành phần. Video ngắn, giới thiệu thẳng thắn, liên kết đối tác.",
+   "note": "Hình ảnh sản phẩm do từng thương hiệu cung cấp · liên kết mua hàng nằm trong trang hồ sơ kênh của LIA.",
+   "flow": [
+    "Khám phá",
+    "Tuyển chọn",
+    "Liên kết đối tác"
+   ],
+   "hideGeneric": true,
+   "sections": [
+    {
+     "id": "picks",
+     "label": "01 · Lựa chọn của Lia",
+     "title": "Thứ người Hàn dùng mỗi ngày.",
+     "desc": "Chống nắng · essence · cushion · mặt nạ · son tint · sữa rửa mặt. Mỗi loại một sản phẩm.",
+     "blocks": [
+      {
+       "type": "gallery",
+       "cols": 3,
+       "items": [
+        {
+         "src": "/media/shop/01_dalba.jpg",
+         "caption": "Chống nắng · d'Alba — UV Essence Tone-Up Sun Cream"
+        },
+        {
+         "src": "/media/shop/02_cosrx.jpg",
+         "caption": "Essence · COSRX — Advanced Snail 96 Mucin Power Essence"
+        },
+        {
+         "src": "/media/shop/03_tirtir.jpg",
+         "caption": "Cushion · TIRTIR — Mask Fit Red Cushion"
+        },
+        {
+         "src": "/media/shop/04_biodance.jpg",
+         "caption": "Mặt nạ · Biodance — Bio-Collagen Real Deep Mask"
+        },
+        {
+         "src": "/media/shop/06_romnd.jpg",
+         "caption": "Son môi · rom&nd — Juicy Lasting Tint"
+        },
+        {
+         "src": "/media/shop/07_anua.jpg",
+         "caption": "Sữa rửa mặt · Anua — Heartleaf Pore Control Cleansing Oil"
+        },
+        {
+         "src": "/media/shop/08_skin1004.jpg",
+         "caption": "Chống nắng · SKIN1004 — Madagascar Centella Air-Fit Sun"
+        },
+        {
+         "src": "/media/shop/09_mediheal.jpg",
+         "caption": "Mặt nạ · Mediheal — Daily Sheet Mask"
+        },
+        {
+         "src": "/media/shop/10_banilaco.jpg",
+         "caption": "Sữa rửa mặt · banila co — Clean It Zero Cleansing Balm"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reviews",
+     "label": "02 · Đánh giá của Lia",
+     "title": "Bắt đầu từ cận cảnh.",
+     "soft": true,
+     "desc": "Kem chống nắng · mặt nạ · son tint. Mười lăm giây LIA giới thiệu. LIA là nhân vật do AI tạo ra.",
+     "blocks": [
+      {
+       "type": "videos",
+       "items": [
+        {
+         "src": "/media/lia/review_ep1_suncream.mp4",
+         "poster": "/media/lia/review_ep1_suncream_poster.jpg",
+         "caption": "Tập 1 · Kem chống nắng"
+        },
+        {
+         "src": "/media/lia/review_ep2_mask.mp4",
+         "poster": "/media/lia/review_ep2_mask_poster.jpg",
+         "caption": "Tập 2 · Mặt nạ"
+        },
+        {
+         "src": "/media/lia/review_ep3_tint.mp4",
+         "poster": "/media/lia/review_ep3_tint_poster.jpg",
+         "caption": "Tập 3 · Son tint"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "how",
+     "label": "03 · Cách hoạt động",
+     "title": "Từ kệ hàng của LIA\nđến giỏ hàng của bạn.",
+     "desc": "LIA giới thiệu trong một video ngắn → chỉ những gì cô chọn mới lên kệ → liên kết đối tác ở trang hồ sơ của LIA · giao hàng tại địa phương.",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "Khám phá — trong video",
+        "Tuyển chọn — trên kệ",
+        "Liên kết đối tác — ở trang hồ sơ"
+       ]
+      },
+      {
+       "type": "tags",
+       "items": [
+        "Không tồn kho",
+        "Mọi liên kết đối tác đều được công khai",
+        "Không ảnh hưởng đến giá người dùng"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "04 · Hôm nay",
+     "title": "Trên kênh của LIA.",
+     "cta": true,
+     "desc": "Liên kết mua hàng nằm ở trang hồ sơ Instagram. Kiểm tra trước, rồi mới chọn.",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://www.instagram.com/lia_park55/",
+         "Instagram",
+         "primary"
+        ],
+        [
+         "/ko/products/lia/",
+         "Giới thiệu về LIA",
+         "button"
+        ],
+        [
+         "/ko/products/commerce/",
+         "Global K-Commerce",
+         "button"
+        ]
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "lab": [
+  [
+   "Dawn Grace",
+   "Ứng dụng suy ngẫm và cầu nguyện độc lập",
+   "6803325336",
+   "/privacy.html"
+  ],
+  [
+   "IRON GRADE",
+   "Theo dõi và xếp hạng tập luyện theo chuẩn mốc",
+   "6808070870",
+   "/irongrade/privacy.html"
+  ],
+  [
+   "The Other Hours",
+   "Hướng dẫn tập luyện và phát triển dành cho phụ huynh của các cầu thủ bóng rổ nhí",
+   "6803709958",
+   "/theotherhours_privacy.html"
+  ],
+  [
+   "나의 첫투자",
+   "Thử nghiệm nhập môn học tài chính và đầu tư giả lập",
+   "6803763681",
+   "/privacy.html"
+  ],
+  [
+   "K-Concert Trip",
+   "Hướng dẫn chuyến đi xem concert dành cho người hâm mộ quốc tế",
+   "6803810106",
+   "/kfan_privacy.html"
+  ]
+ ]
+}

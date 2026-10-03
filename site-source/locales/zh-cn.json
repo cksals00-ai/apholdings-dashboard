@@ -1,0 +1,2328 @@
+{
+ "copy": {
+  "nav": [
+   "服务",
+   "产品",
+   "关于",
+   "投资者",
+   "联系"
+  ],
+  "skip": "跳到正文",
+  "menu": "菜单",
+  "language": "语言",
+  "hero": "我们打造实用的系统,帮助个人和企业做出更清晰的选择、完成复杂的交易,并把想法变成产品。",
+  "explore": "了解我们的产品",
+  "aboutCta": "关于 AP Holdings",
+  "portIntro": "三大业务组合,一种构建方式。",
+  "portDesc": "从判断到交易,从想法到产品。我们把复杂性变成可重复使用的系统。",
+  "whyTitle": "复杂的问题,值得更好的系统。",
+  "why": "信息越多,未必决策越好;选项越多,未必选择越容易。AP 要做的,是梳理信息与行动之间依然存在的复杂性。",
+  "howTitle": "人的判断,更清晰的系统。",
+  "how": [
+   "连接真正重要的信息。",
+   "把领域知识带入流程。",
+   "把一次性的经验变成可重复的工作流程。",
+   "构建能够在使用和结果中持续改进的系统。"
+  ],
+  "globalIntro": "每一款 AP 产品都是 Global-by-Design。",
+  "global": "我们的产品从一开始就面向多个市场、语言、货币和政策进行设计。将核心产品逻辑与市场配置及本地集成相分离,是全公司的一项原则。",
+  "globalNote": "这是我们的设计原则和拓展方向,并不表示每款产品已经在多个国家运营。",
+  "core": [
+   "可复用的产品逻辑",
+   "地区、货币、时区与政策",
+   "支付、物流、渠道与专家"
+  ],
+  "marketTitle": "可复用的核心,版本化的 Market Pack。",
+  "market": "一套版本化的配置、内容与合作伙伴组合,将核心连接到新市场。拓展之前,先进行本地审查和试点。",
+  "marketReview": "市场调研 → 专家与政策审查 → 测试 → 试点 → 启用 → 复盘",
+  "decisionDesc": "我们梳理背景信息,说明各种取舍,并让人始终掌控重要决定。",
+  "learnMore": "了解产品",
+  "inDev": "开发中",
+  "concept": "概念与系统设计",
+  "working": "Working Proof · 产品化候选",
+  "existing": "运营中",
+  "audience": "AP Holdings AI 网红 1 号",
+  "selectKo": "看一看,试一试,弄明白,再选择。",
+  "expertTitle": "专家协作",
+  "expert": "专家是外部的知识合作伙伴,而不仅仅是销售人员。我们围绕标准、证据要求、专业边界和标准操作流程来设计协作方式。",
+  "expertBoundary": "一般性的产品决策辅助不同于持牌专业人士提供的专业咨询。未经确认的协议,我们不会把受监管专业人士的姓名用作销售背书,也不会暗示存在顾问关系。",
+  "expertPrinciples": [
+   "标准",
+   "证据要求",
+   "专业边界",
+   "SOP"
+  ],
+  "gameIntro": "开放的想象力,清晰的责任。",
+  "gameDesc": "在竞争与游戏中学习,把创意变成产品。我们专注于三个项目,并以真实的使用情况和结果来指导拓展。",
+  "rgrgTitle": "一个核心,多种学习方式。",
+  "rgrg": "学习者所在地区、教学语言、目标语言或学科,以及 Quiz Pack 彼此独立。同一个核心可以支持语言、资格认证、教育、文化和职场学习,成为全球化的学习游戏与平台。",
+  "pairs": "语言组合仅为示例,并非已上线内容包的清单。",
+  "creatorTitle": "Young Creator + AP Production",
+  "creator": "年轻创作者负责构想世界、角色、故事、技能、Boss、活动和乐趣。AP 负责技术可行性、QA、平衡性、安全、隐私、变现治理和发布。",
+  "assetsTitle": "工作完成之后,留下的是什么。",
+  "assets": "我们的长期方向,是在使用过程中逐步积累数据、流程、专家知识、软件、IP 和客户关系。结果会指导下一次改进。",
+  "origin": "不是让 AI 取代人,而是在人停下的地方接手。\n判断,始终属于人。",
+  "founderTitle": "在人们放弃的地方,\nAI。",
+  "founder": "商业运营、全球销售、旅游与国际业务、数据分析、产品构建和决策工作流设计方面的经验,影响着我们构建产品的方式。",
+  "firewall": "AP 的代码、账号、域名、文档和产品 IP 均独立维护。雇主的机密数据、客户信息、运营信息和 IP 不属于 AP 的资产。",
+  "mission": "让复杂性变得可用。",
+  "vision": "构建在使用、学习和结果中不断增值的系统。",
+  "labDesc": "创始人的独立应用与小型实验。这是构建与学习的记录,与三大核心业务组合相互独立。",
+  "labMore": "了解独立项目",
+  "evidence": "已开发或已发布 7 款以上产品/应用",
+  "evidenceNote": "执行力证据,依据创始人提供的开发/发布记录及现有应用链接。这并不表示已达到产品市场契合或大规模增长。",
+  "contactTitle": "与 AP 一起构建。",
+  "contact": "欢迎洽谈产品与技术、专家咨询、品牌与商业、全球分销、教育与内容、工艺与艺术家合作以及试点。",
+  "contactCta": "联系 AP Holdings",
+  "emailNote": "当前联系邮箱",
+  "privacy": "隐私政策",
+  "top": "返回顶部",
+  "irTitle": "三项业务,\n一个决策引擎。",
+  "irIntro": "已发布 7 款应用 · 2 个 AI 连接器运营中 · 1 个酒店收益决策引擎在线运行。\n同一个引擎服务于选择、购买和学习的时刻。\n以下公开资料区分了现有成果与接下来要验证的内容。",
+  "investThesis": "减少各行业中信息与行动之间反复出现的复杂性。把从使用中获得的经验变成可复用的产品、流程和 IP。三大业务组合将同一原则应用于不同的问题。",
+  "proofTitle": "AP Revenue · Decision Intelligence Working Proof",
+  "proof": "一个独立开发的 Decision Intelligence Working Proof / Productization Candidate。它用于检验复杂的商业数据如何转化为可解释的优先事项、人的行动和可衡量的结果。",
+  "proofNote": "这是一个产品化候选,并不能证明已有外部试点、收入或经过验证的业务成果。",
+  "demoTitle": "Working Proof 的工作流程",
+  "demoSteps": [
+   "查看可解释的优先事项。",
+   "由人决定是否行动。",
+   "记录结果并从中学习。"
+  ],
+  "demoNote": "这是概念性的工作流程示意。此处不显示任何在线运营看板、客户数据或雇主数据。",
+  "liaEvidence": "早期的自有渠道分发实验。从 Instagram/TikTok 内容和海外受众的反应中学习。",
+  "futureTitle": "下一步的证明,来自外部成果。",
+  "future": "外部试点、活跃用户、交易、收入、复购与成果。我们只会公布经过验证的指标,详细证据将在投资者尽职调查期间提供。",
+  "milestonesTitle": "拓展之前的验证关口。",
+  "milestones": [
+   [
+    "01 · 基础",
+    "独立的产品基础",
+    "Working Proof、现有应用资产、公开标准以及面向多市场的设计原则。"
+   ],
+   [
+    "02 · 验证",
+    "外部验证",
+    "计划中的外部试点、可用性测试、专家评审和受众意向验证。"
+   ],
+   [
+    "03 · 系统化",
+    "可重复性",
+    "将行动、交易、退货、复购和成果联系起来,以改进产品与运营。"
+   ],
+   [
+    "04 · 规模化",
+    "以证据为导向的拓展",
+    "在 Market Pack、本地合作伙伴、政策和单位经济模型得到验证之后,再拓展产品。"
+   ]
+  ],
+  "milestoneNote": "这些是计划中的验证阶段,并非已完成的成果或已承诺的上线日期。",
+  "roadmapTitle": "韩国打造,面向世界。",
+  "roadmap": "优先验证 LIA 在越南的受众与商业意向。结合产品适配度和本地准备情况,评估日本、台湾及其他市场。法国的工艺品交易是一个研究方向;我们不会同时在所有市场推出所有产品。",
+  "materialsTitle": "投资者资料",
+  "publicTitle": "PUBLIC",
+  "publicDesc": "公司概览、投资逻辑、Global-by-Design、业务组合、创始人能力与路线图。本网页即为当前公开资料。",
+  "shareTitle": "INVESTOR SHARE",
+  "shareDesc": "完整的投资者演示文稿、投资备忘录和经过验证的增长数据附录。需提出申请后另行分享。",
+  "ndaTitle": "NDA / DATA ROOM",
+  "ndaDesc": "财务模型、股权结构表、合同、法律文件、详细 IP 和非公开指标,通过单独的受控访问流程管理。",
+  "request": "申请投资者资料",
+  "requestNote": "请在您的邮件应用中检查并发送申请。本页面不会自动下载或发送资料。",
+  "version": "Public IR v2.0 · 2026-09-22 · AP Holdings",
+  "history": "现有产品资产",
+  "legacySafe": "现有的 Safelist 应用是我们已有构建成果的证据。其当前可用功能不同于更广义的 AP Safe 产品构想。",
+  "copy": "复制地址",
+  "copied": "已复制",
+  "copyFail": "请选中地址并手动复制。",
+  "connector": "现有连接器接入",
+  "connectorNote": "现有的连接地址予以保留。可用功能取决于连接器的当前状态。",
+  "connectHelp": "请在客户端的远程连接器设置中输入下方地址。请自行确认该客户端的兼容性和认证要求。",
+  "assetNote": "现有项目美术素材。开发中产品的功能和发布计划可能会有变动。",
+  "rgrgAssetNote": "在 RGRG 品牌下保留的现有角色素材。",
+  "termsBoundary": "产品、交易和专业服务的可用性取决于上线状态及适用的市场政策。",
+  "curationNote": "内容所用的现有产品图片。请向销售渠道确认供货情况、价格和配送条款。",
+  "aboutSections": [
+   {
+    "id": "name",
+    "label": "01 · 名字",
+    "title": "先说名字。\n再说我们做什么。",
+    "desc": "A.P — Alfred Park。是发起这一切的人的名字。我们不隐瞒是谁创建了它。A.P — AI People。是我们现在所做之事的名字。不是处理 AI 的公司,而是站在 AI 与人之间的公司。",
+    "blocks": [
+     {
+      "type": "grid2",
+      "items": [
+       {
+        "type": "proof",
+        "h3": "A.P · Alfred Park",
+        "p": "发起这一切的人的名字。我们不隐瞒是谁创建了它。"
+       },
+       {
+        "type": "proof",
+        "h3": "A.P · AI People",
+        "p": "是我们现在所做之事的名字。一家站在 AI 与人之间的公司。"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "philosophy",
+    "label": "02 · 理念",
+    "title": "三件事。",
+    "soft": true,
+    "desc": "我们不让 AI 取代人的位置。我们不从用户身上索取。我们不知道的,就说不知道。",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "1",
+        "我们不让 AI 取代人的位置",
+        "不是人做不到的事,而是人已经停下来的事。25 万种商品、2,455 只股票——只在人力的极限使工作停滞的地方介入。判断权留给人。"
+       ],
+       [
+        "2",
+        "我们不从用户身上索取",
+        "无需账号 · 无广告 · 不收集数据。记录保存在设备上,删除应用后随之消失。"
+       ],
+       [
+        "3",
+        "我们不知道的,就说不知道",
+        "“没有办法提前挑出会暴涨的股票”——这是两年全市场分析得出的结论,我们原样公布。一个坦陈自身局限、而不假装确定的 AI。"
+       ],
+       [
+        "0 · 0 · 0",
+        "不做无法兑现的承诺",
+        "零账号 · 零广告 · 零数据收集。随着公司成长,这三点始终不变。"
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "business",
+    "label": "03 · 业务",
+    "title": "一句话的多种变奏。",
+    "desc": "我们把 AI 放在人曾经停下来的地方。选择、购买与学习的时刻。",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "有依据的选择",
+        "AP Safe · AP Light · AP Revenue · AP Travel",
+        "25 万条食品成分记录、31.7 万条热量条目、酒店预订数据、市场信号。这些是一个人难以承担的判断,我们带着依据交付给你。"
+       ],
+       [
+        "商业",
+        "AP SELECT · LIA · K-Commerce · K-Craft",
+        "一家替你挑选的商店、一位 AI 网红、海外电商平台、匠人的作品。从发现到复购。"
+       ],
+       [
+        "玩与学",
+        "RGRG · Hangeul Cubs · LAST WAVE",
+        "用问答竞赛,和四只虎兄妹一起学习韩文,并看着孩子的想象力变成游戏。"
+       ],
+       [
+        "创始人",
+        "十五年的一线经验",
+        "曾在一家酒店度假村集团从事商业运营、全球销售、旅游与国际业务以及数据分析工作。他了解是什么阻碍了决策。"
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "independence",
+    "label": "04 · 独立性",
+    "title": "运用的是经验。\n而不是资产。",
+    "soft": true,
+    "desc": "AP 的代码、账号、域名、文档和产品 IP 完全独立。雇主的数据、客户信息和运营信息不属于 AP。面向投资者的演示仅使用合成数据、公开数据或经许可的数据。",
+    "blocks": [
+     {
+      "type": "tags",
+      "items": [
+       "商业运营",
+       "全球销售",
+       "旅游与国际业务",
+       "数据分析",
+       "产品构建",
+       "决策工作流设计"
+      ]
+     },
+     {
+      "type": "actions",
+      "items": [
+       [
+        "/ko/ir/",
+        "IR / 投资者",
+        "primary"
+       ],
+       [
+        "/ko/lab/",
+        "Founder’s Lab",
+        "button"
+       ]
+      ]
+     }
+    ]
+   }
+  ],
+  "irSections": [
+   {
+    "id": "thesis",
+    "label": "01 · 投资逻辑",
+    "title": "不是因为缺少信息。\n而是因为缺少决定,事情才停滞。",
+    "desc": "挑一包零食,或设定一个房价——道理相同。AP 把数据、专家标准、流程和软件放在这个节点上,将其变成可重复的决策系统。一次建成的决策结构,会在下一个产品中复用。",
+    "blocks": [
+     {
+      "type": "flow",
+      "items": [
+       "提问",
+       "对照现有记录核查",
+       "带着依据作答",
+       "由人决定",
+       "记录结果"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "market",
+    "label": "02 · 市场",
+    "title": "2,000 万人到访的那一年。\n每人消费 1,000 美元。",
+    "soft": true,
+    "desc": "2026 年 7 月到访游客 209 万人次,同比增长 20.8%。全年目标 2,000 万。人均消费 1,008 美元。按 2,000 万计算,旅游收入约 200 亿美元。K-beauty、K-food 和 K-content 将这些消费吸引进来。",
+    "blocks": [
+     {
+      "type": "grid2",
+      "items": [
+       {
+        "type": "proof",
+        "h3": "入境",
+        "ol": [
+         "2025 年:1,870 万——历史新高",
+         "2026 年目标 2,000 万 · 2030 年目标 3,000 万",
+         "依次为中国 · 日本 · 台湾 · 美国 · 香港"
+        ],
+        "note": "韩国观光公社 · 文化体育观光部"
+       },
+       {
+        "type": "proof",
+        "h3": "AP 的切入点",
+        "ol": [
+         "出行前——韩文 · 演唱会 · 行程规划(Cubs · K-Concert Trip · Travel)",
+         "出行中——商店 · 扫描 · 选择(SELECT · Safe · K-Scan)",
+         "回国后——复购(LIA · K-Commerce · K-Craft)"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "model",
+    "label": "03 · 三项业务与收入",
+    "title": "同一个引擎,\n三种收入结构。",
+    "desc": "决策智能:B2B 订阅与连接器。商业:直销、佣金和特许经营。玩与学:应用内购买和教育类问答包。不投放广告,也不出售用户数据。",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "有依据的选择",
+        "B2B SaaS · 连接器",
+        "AP Revenue 酒店订阅。Safelist 和 LightList 连接器免费提供,以积累用户基础,进而通向安心市场和 Hospital Report Pro。"
+       ],
+       [
+        "商业",
+        "直销 · 佣金 · 特许经营",
+        "通过 Lia Select 和 Shopee 直销,来自 Agoda · Klook · Coupang 的合作伙伴佣金,以及 AP SELECT 的特许经营费、版税和系统费。"
+       ],
+       [
+        "玩与学",
+        "IAP · 教育 B2B",
+        "Hangeul Cubs 课程包、面向学校、培训机构和企业的 RGRG 问答包、LAST WAVE 皮肤和通行证(不做付费变强)。"
+       ],
+       [
+        "通用",
+        "数据",
+        "谁问了什么、选了什么、买了什么,在同一个 ID 下关联起来。这是下一个产品和精选工作的基础。"
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "proof",
+    "label": "04 · 目前运行中",
+    "title": "已构建,已上线。",
+    "soft": true,
+    "desc": "这是执行力的证据,而非大规模增长的证据。我们只公布经过验证的数字,详细证据将在投资者评审中提供。",
+    "blocks": [
+     {
+      "type": "tags",
+      "items": [
+       "Working Proof — 独立构建 · 运营中",
+       "演示数据 — 创始人提供 · 合成 · 仅限公开数据"
+      ]
+     },
+     {
+      "type": "grid2",
+      "items": [
+       {
+        "type": "proof",
+        "h3": "应用 · 连接器",
+        "ol": [
+         "App Store 上的 7 款应用——Safelist · Hangeul Cubs · K-Concert Trip · IRON GRADE · The Other Hours · Dawn Grace · K-Scan",
+         "2 个运营中的 Claude 连接器——Safelist(25 万种商品)· LightList(31.7 万条记录)"
+        ]
+       },
+       {
+        "type": "proof",
+        "h3": "AP Revenue",
+        "ol": [
+         "revenue.apholdings.kr 已投入生产",
+         "异常检测 · 优先级排序 · 经理决策 · 结果入档",
+         "合成数据 · 11 项测试通过 · 外部试点之前"
+        ]
+       },
+       {
+        "type": "proof",
+        "h3": "LIA",
+        "ol": [
+         "Instagram 和 TikTok 运营中",
+         "海外观众的反应早于国内观众",
+         "3 篇 K-beauty 测评 · 9 件 Lia Select 商品"
+        ]
+       },
+       {
+        "type": "proof",
+        "h3": "游戏",
+        "ol": [
+         "RGRG 六人实时对战版本 · 发布准备中",
+         "LAST WAVE 5 位英雄 · 6 种敌人 · 3 个首尔区域",
+         "Hangeul Cubs 42 节课程 · EN · VI · FR"
+        ]
+       }
+      ]
+     },
+     {
+      "type": "actions",
+      "items": [
+       [
+        "https://revenue.apholdings.kr/",
+        "打开 AP Revenue",
+        "button"
+       ],
+       [
+        "/ko/products/lia/",
+        "LIA",
+        "button"
+       ],
+       [
+        "/ko/lab/",
+        "Founder’s Lab",
+        "button"
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "why",
+    "label": "05 · 为什么选择 AP",
+    "title": "一家公司,\n四个优势。",
+    "desc": "一个决策引擎复用于三项业务,渠道已在手,以不向用户索取赢得的信任,以及一位了解行业的创始人。",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "引擎复用",
+        "一次建成的决策结构",
+        "为 Safe 构建的核查 · 证据 · 人工决策结构,被 Light、Revenue 和 Travel 原样沿用。每增加一个产品,边际成本就随之下降。"
+       ],
+       [
+        "渠道在手",
+        "LIA · 博客 · 应用",
+        "无需广告投入即可触达。一位率先触达海外观众的 AI 网红,以及遍布七款应用的用户触点。"
+       ],
+       [
+        "信任",
+        "0 · 0 · 0",
+        "无账号、无广告、不收集数据。它从不说“安全”——只说明发现了什么、没发现什么。"
+       ],
+       [
+        "行业经验",
+        "创始人,十五年",
+        "曾在酒店度假村集团从事商业、全球销售、旅游和数据工作。酒店收益引擎和入境业务正源于这段经历。"
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "milestones",
+    "label": "06 · 未来 12 个月",
+    "title": "每个阶段,\n都有一道门槛。",
+    "soft": true,
+    "desc": "自 02 起为计划。请与已完成的内容分开阅读。",
+    "blocks": [
+     {
+      "type": "milestones",
+      "items": [
+       [
+        "01 · 现在",
+        "已构建的内容",
+        "7 款应用 · 2 个连接器 · Revenue 在线运行 · LIA 的渠道 · 公司架构与网站"
+       ],
+       [
+        "02 · 下一步",
+        "外部验证",
+        "1 个 Revenue 试点 · Safe 用户测试 · 1 场 SELECT 快闪店 · Shopee 上架 · 1–3 笔工艺品交易"
+       ],
+       [
+        "03 · 之后",
+        "可重复性",
+        "决策 → 行动 → 结果在同一 ID 下关联 · 按客户校准政策 · 首个特许经营"
+       ],
+       [
+        "04 · 拓展",
+        "以证据为基础的拓展",
+        "先越南,再日本和台湾。直营店验证成功后才开展特许经营。只有经过验证的作品才会扩大"
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "global",
+    "label": "07 · 全球",
+    "title": "韩国打造,\n面向世界。",
+    "desc": "首个海外市场是越南——优先验证 LIA 观众的反应和商业需求。日本和台湾着眼于产品适配,法国着眼于工艺品贸易研究。新增一个国家,意味着新增一种语言和一个 market pack,而不是重新构建产品。",
+    "blocks": [
+     {
+      "type": "tags",
+      "items": [
+       "越南——LIA · K-Scan · Shopee",
+       "日本 · 台湾——到访人数排第 1 和第 3,产品适配度",
+       "法国——对 Hangeul Cubs 的首批海外反响,工艺品研究",
+       "英语地区——对韩国感兴趣的人群"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "founder",
+    "label": "08 · 创始人",
+    "title": "十五年的一线经验。\n一家独立的公司。",
+    "soft": true,
+    "desc": "曾在一家酒店度假村集团从事商业运营与全球销售、旅游与国际业务以及数据分析工作。运用的是经验,而不是资产——代码、账号、域名、文档和产品 IP 完全独立。雇主的数据、客户信息和运营信息不属于 AP。",
+    "blocks": [
+     {
+      "type": "tags",
+      "items": [
+       "商业运营",
+       "全球销售",
+       "旅游与国际业务",
+       "数据分析",
+       "产品构建",
+       "决策工作流设计"
+      ]
+     },
+     {
+      "type": "note",
+      "text": "面向投资者的演示仅使用创始人提供的数据、合成数据、公开数据或经许可的数据。"
+     }
+    ]
+   },
+   {
+    "id": "materials",
+    "label": "09 · 投资者资料",
+    "title": "分三个层级开放。",
+    "cta": true,
+    "desc": "PUBLIC——本页面。INVESTOR SHARE——投资者演示文稿 · 投资备忘录 · 经验证的增长数据附录。\nNDA / DATA ROOM——财务模型 · 股权结构表 · 法律文件 · 合同 · 详细 IP · 非公开指标。",
+    "blocks": [
+     {
+      "type": "actions",
+      "items": [
+       [
+        "mail:申请投资者资料",
+        "申请投资者资料",
+        "primary"
+       ],
+       [
+        "/ko/about/",
+        "关于公司",
+        "button"
+       ]
+      ]
+     },
+     {
+      "type": "note",
+      "text": "通过电子邮件申请。不会自动下载。确认访问权限后提供。"
+     }
+    ]
+   }
+  ],
+  "pilot": "试点运行中",
+  "live": "已在 App Store 上线"
+ },
+ "products": [
+  {
+   "id": "safe",
+   "name": "AP Safe",
+   "tag": "知道该避开什么。",
+   "status": "live",
+   "role": "无论问哪个 AI,标准都是我的身体。",
+   "desc": "保存在我手机上的回避清单,会过滤 AI 展示的内容,只有未被标记的商品才会被选中。\n从成分扫描器到 AI 辅助的安心商务。",
+   "note": "基于产品信息的决策辅助。不是医学诊断,也不是绝对的安全保证。",
+   "flow": [
+    "用户明确设定的条件",
+    "产品信息",
+    "冲突 / 注意",
+    "人工决定"
+   ],
+   "link": "https://apps.apple.com/kr/app/id6805684034",
+   "linkLabel": "Safelist 应用",
+   "image": "/media/safelist_frame.jpg",
+   "video": "/media/safelist.mp4",
+   "sections": [
+    {
+     "id": "scene",
+     "label": "01 · 一个场景",
+     "title": "Siri,\n一周给孩子吃的安全零食。",
+     "desc": "购买之前,任何 AI 都先问 Safelist。只有未被标记的商品才会进入购物车。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_scene_en.jpg",
+       "alt": "一句话 → AI → Safelist 判定 → 只有未被标记的商品进入购物车"
+      }
+     ]
+    },
+    {
+     "id": "why",
+     "label": "02 · 为什么是 Safelist",
+     "title": "AI 是概率。成分是事实。",
+     "soft": true,
+     "desc": "AI 对自己不知道的事也可能说得很有把握。对于孩子的食品,这才是真正的危险。Safelist 核对来源记录,只把事实交给 AI。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_why_en.jpg",
+       "alt": "仅靠 AI 是猜测;有了 Safelist,则依据 MFDS 来源记录作答"
+      },
+      {
+       "type": "note",
+       "text": "不是诊断 · 公开数据库 · 最终决定权在家长"
+      }
+     ]
+    },
+    {
+     "id": "data",
+     "label": "03 · 数据存放在哪里",
+     "title": "我身体的数据,留在我的手机里。",
+     "desc": "孩子的档案、照片和记录绝不离开设备。服务器只接收标签和回避清单,随后即予丢弃。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_privacy_en.jpg",
+       "alt": "我的数据留在我的手机上——服务器只看到标签和回避清单,随后丢弃"
+      }
+     ]
+    },
+    {
+     "id": "clothing",
+     "label": "04 · 衣物也一样",
+     "title": "100% 纯棉?\n看标签就知道。",
+     "desc": "拍下洗涤标签或分享商店链接,Safelist 会读出含有哪些纤维、占多少百分比。您要避开的纤维(默认:涤纶、尼龙、腈纶、羊毛)会显示 🔴。适用于为患有特应性皮肤病的孩子挑选衣物。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_clothing_en.jpg",
+       "alt": "拍下洗涤标签或分享商店链接——在本机读取:棉 65% · 涤纶 35%"
+      },
+      {
+       "type": "flow",
+       "items": [
+        "拍标签 · 分享链接 · 粘贴文本",
+        "在本机读取(不上传任何内容)",
+        "纤维占比 · 回避纤维 🔴",
+        "仅显示 100% 纯棉标签"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "依据卖家标签 · 无法核实实际面料 · 最终决定由监护人做出 · Safelist 1.8"
+      }
+     ]
+    },
+    {
+     "id": "pilot",
+     "label": "05 · 网页试点",
+     "soft": true,
+     "title": "推荐之前,\n先检查冲突。",
+     "desc": "将产品成分与用户的回避和注意条件进行比对,并对备选方案应用同样的规则。这是面向机构的工作区工具,独立于应用和连接器。",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "试点运行中",
+        "机构账号 · Excel 输入",
+        "审核记录"
+       ]
+      },
+      {
+       "type": "media",
+       "src": "/media/gfx/ap_safe_pilot_en.jpg",
+       "alt": "AP Safe 合成示例(重绘):一个审核总览,按产品显示排除、需复核和无明确冲突,并附审核人的下一步操作",
+       "caption": "基于合成数据的界面示例(重绘)· 不构成对真实产品或市场的判断。"
+      },
+      {
+       "type": "p",
+       "text": "将导致排除推荐的冲突条件与需要进一步核查的信息区分开来。审核人可以看到判断依据,并记录接受、修改或拒绝,以及观察到的结果。"
+      },
+      {
+       "type": "flow",
+       "items": [
+        "回避/注意条件与成分的明确匹配",
+        "信息缺失时暂缓,交由复核",
+        "对备选方案应用相同条件",
+        "Excel 输入 · 判断依据 · 审核记录"
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://revenue.apholdings.kr/safe/",
+         "打开 AP Safe",
+         "primary"
+        ],
+        [
+         "https://revenue.apholdings.kr/safe/?demo=1",
+         "查看合成示例",
+         "button"
+        ],
+        [
+         "https://revenue.apholdings.kr/safe/?demo=1",
+         "查看示例大图",
+         "link"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "一个将输入条件与成分数据进行比对的审核工具。不是医学诊断,也不是绝对的安全保证。"
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "06 · 现在",
+     "title": "现在,在 App Store 和 Claude 中。",
+     "soft": true,
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://apps.apple.com/kr/app/id6805684034",
+         "App Store",
+         "primary"
+        ],
+        [
+         "/business/safelist-connect.html",
+         "连接到 Claude",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Android · ChatGPT · Gemini——后续推出"
+      }
+     ],
+     "desc": "在 App Store 免费下载。无需账号即可扫描。\n只需一行地址即可连接到 Claude。",
+     "cta": true
+    },
+    {
+     "id": "exits",
+     "label": "07 · 去哪里买",
+     "title": "三个出口。",
+     "desc": "一个判定引擎。三个购买场所。AI 之内 · 线上安心市场 · 实体店。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/safe_exits_en.jpg",
+       "alt": "三个出口——AI 之内 · 线上安心市场 · 实体店"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/ko/products/select/",
+         "AP SELECT——替你挑选的商店",
+         "button"
+        ],
+        [
+         "/ko/products/light/",
+         "热量:AP Light",
+         "button"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "light",
+   "name": "AP Light",
+   "tag": "了解什么适合你。",
+   "status": "live",
+   "role": "Explainable Choice Intelligence",
+   "desc": "你正要买的这一袋有多少热量。\n以及同一货架上更清淡的选择。",
+   "note": "只说热量。从不说“你不会发胖”。基于 MFDS 公开数据。",
+   "flow": [
+    "用户标准",
+    "候选项",
+    "可解释的取舍",
+    "人工选择"
+   ],
+   "sections": [
+    {
+     "id": "scene",
+     "label": "01 · 一个场景",
+     "title": "要买 Saewookkang——\n有更清淡的吗?",
+     "desc": "任何 AI 都先问 LightList,而不是凭猜测。每 100g 和每袋的热量,总是一并给出。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/light_scene_en.jpg",
+       "alt": "一句话 → AI → LightList 同时权衡每 100g 和每袋 → 更清淡的选择"
+      }
+     ]
+    },
+    {
+     "id": "learn",
+     "label": "02 · 选得越多",
+     "title": "选得越多,\n建议就来得越早。",
+     "soft": true,
+     "desc": "随着更清淡的选择不断积累,AI 会了解你的口味和热量预算。它会替你挑选、排序,并第一时间告诉你。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/light_learn_en.jpg",
+       "alt": "LightList 对话——替换它 · 点什么 · 先告知 · 本周数据"
+      },
+      {
+       "type": "note",
+       "text": "只说热量 · 记录保存在我的手机上 · 从不说“你不会发胖”"
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "03 · 现在",
+     "title": "现在,在 App Store 和 Claude 中。",
+     "soft": true,
+     "desc": "只需一行地址即可连接到 Claude。\n每 100g 和每袋的热量,总是一并给出。",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://apps.apple.com/kr/app/id6815295026",
+         "App Store",
+         "primary"
+        ],
+        [
+         "/business/lightlist-connect.html",
+         "连接到 Claude",
+         "button"
+        ],
+        [
+         "/en/products/safe/",
+         "过敏原与回避清单:AP Safe",
+         "link"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": ""
+      }
+     ],
+     "cta": true
+    }
+   ],
+   "hideGeneric": true,
+   "image": "/media/lightlist_frame.jpg",
+   "video": "/media/lightlist_hero.mp4",
+   "link": "https://apps.apple.com/kr/app/id6815295026",
+   "linkLabel": "LightList 应用"
+  },
+  {
+   "id": "revenue",
+   "name": "AP Revenue",
+   "tag": "把预订数据,变成今天的决策。",
+   "status": "working",
+   "role": "Revenue Decision Engine",
+   "desc": "不是酒店收益图表——而是把预订数据变成今天决策的引擎。",
+   "note": "独立开发的 Decision Intelligence Working Proof / Productization Candidate。",
+   "flow": [
+    "商业数据",
+    "背景",
+    "优先级",
+    "人工行动",
+    "结果"
+   ],
+   "link": "https://revenue.apholdings.kr/",
+   "linkLabel": "打开 AP Revenue",
+   "hideGeneric": true,
+   "sections": [
+    {
+     "id": "scene",
+     "label": "01 · 一个场景",
+     "title": "预订数据,\n每天早上变成一份决策清单。",
+     "desc": "连接预订和取消数据,每天早上生成一份“今日决策”清单。优先级 · 依据 · 观察到的金额 · 建议行动,每项一行。最终决定由经理记录。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_today_en.jpg",
+       "alt": "AP Revenue 工作区——今日三项决策,依据 · 观察到的金额 · 接受/修改/暂缓"
+      }
+     ]
+    },
+    {
+     "id": "apply",
+     "label": "02 · 如何连接",
+     "title": "不是安装在 PMS 内部。\n而是与它并行。",
+     "soft": true,
+     "desc": "PMS 保存结果;CRS 和渠道管理系统保存未来的价格与库存。AP Revenue 位于它们旁边:异常检测 · 机会判断 · 建议行动 · 从结果中学习。只有经理批准的条件才会回传到 CRS。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_apply_en.jpg",
+       "alt": "PMS · CRS · 竞品价格 → AP Revenue 引擎 → 今日决策队列 → 经理审批 → CRS · 渠道管理系统 → 从结果中学习"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "取消集中在哪个渠道或产品",
+        "哪些入住日期销售缓慢",
+        "哪里需要重新审视价格和库存政策",
+        "NR · Semi-NR · cut-off · release——适用哪一种",
+        "之后收入和取消情况是否有所改善"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "仅凭 PMS 可以覆盖预订和取消分析;连接 CRS 和渠道管理系统之后,才能进一步做价格和库存判断。"
+      }
+     ]
+    },
+    {
+     "id": "value",
+     "label": "03 · 客户获得什么",
+     "title": "不再比对电子表格,\n而是有依据的决策。",
+     "desc": "各酒店采用同一运营标准。容易被忽略的取消和渠道异常得以及早发现。“为什么做这个决策”留有记录,前后对比的结果让标准更加精准。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_value_en.jpg",
+       "alt": "电子表格比对 → 一张带有依据的决策卡,在第 7 · 14 · 30 天进行验证"
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "04 · 现在",
+     "title": "现在,在线服务中。",
+     "soft": true,
+     "desc": "仅使用合成数据 · 无真实客户信息\n11 项测试通过 · 已部署至生产环境 · 仅限受邀机构。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/revenue_live_en.jpg",
+       "alt": "revenue.apholdings.kr 工作区登录界面"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://revenue.apholdings.kr/",
+         "打开 AP Revenue",
+         "primary"
+        ],
+        [
+         "mail:AP Revenue 试点咨询",
+         "试点咨询",
+         "button"
+        ]
+       ]
+      }
+     ],
+     "cta": true
+    }
+   ]
+  },
+  {
+   "id": "travel",
+   "name": "AP Travel",
+   "tag": "哪个国家,何时,谁会来。",
+   "status": "pilot",
+   "role": "Global Travel Decision Intelligence",
+   "desc": "航班座位 · 汇率 · 搜索量 · 节假日信号,综合起来显示\n机会在哪里:哪个国家 → 哪个城市 · 哪类客人 · 哪一周。",
+   "note": "跨市场的机会发现。不局限于任何单一国家的入境业务。数据与功能将逐个市场进行验证。",
+   "flow": [
+    "市场信号",
+    "背景",
+    "机会",
+    "人工决定",
+    "营销活动",
+    "结果"
+   ],
+   "hideGeneric": true,
+   "sections": [
+    {
+     "id": "scene",
+     "label": "01 · 一个场景",
+     "title": "当信号一致时,\n机会就出现了。",
+     "desc": "只有汇率、航空运力和搜索量指向同一方向的市场才会被提出,并附上依据。预算、渠道和信息仍由营销人员决定。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/travel_scene_en.jpg",
+       "alt": "市场信号 → 机会(日本 → 首尔 · 30 多岁的情侣 · 11 月 1–9 日)→ 经理决定 → 结果"
+      }
+     ]
+    },
+    {
+     "id": "signals",
+     "label": "02 · 它关注什么",
+     "title": "六个信号。\n只在它们一致时才算。",
+     "soft": true,
+     "desc": "航班座位 · 汇率 · 搜索量 · 到访人数 · 节假日 · 演唱会日程。一两个信号向好并不够。当六个信号都指向同一处,才成为机会。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/travel_signals_en.jpg",
+       "alt": "六信号看板——航班座位 · 汇率 · 搜索 · 到访人数 · 节假日 · 演唱会,6/6 一致"
+      }
+     ]
+    },
+    {
+     "id": "market",
+     "label": "03 · 市场规模",
+     "title": "2,000 万人到访的那一年。\n来的是谁、何时来,各不相同。",
+     "desc": "2026 年 7 月到访游客 209 万人次,同比增长 20.8%。依次为中国 · 日本 · 台湾 · 美国 · 香港。每个国家都有各自的旺季、消费和来访原因。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/travel_market_en.jpg",
+       "alt": "2019–2030 年目标的年度到访人数 · 2026 年 7 月按国籍分的到访人数"
+      },
+      {
+       "type": "note",
+       "text": "数据在每次月度统计发布后更新。估算仅为示例,并非结果。"
+      }
+     ]
+    },
+    {
+     "id": "who",
+     "label": "04 · 谁在使用",
+     "title": "每一位\n等待客人的人。",
+     "soft": true,
+     "desc": "酒店与度假村营销、地方政府和旅游局、旅行社和 OTA、演唱会和 MICE 主办方。它每周回答“我们现在该在哪个国家投放广告”。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/travel_report_en.jpg",
+       "alt": "酒店、旅游局和旅行社收到的每周机会报告"
+      }
+     ]
+    },
+    {
+     "id": "apply",
+     "label": "05 · 如何连接",
+     "title": "与 AP Revenue 相同的引擎。\n只是数据不同。",
+     "desc": "信号 → 优先级 → 人工决定 → 结果入档。公开数据(Korea Tourism Data Lab · TourAPI)和合作伙伴数据,为每周的“本周机会”清单和营销活动简报提供输入。",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "公开 · 合作伙伴数据",
+        "六个信号标准化",
+        "机会清单(来源地 → 城市 · 客人 · 周)",
+        "经理决定",
+        "营销活动",
+        "通过到访和预订加以验证"
+       ]
+      },
+      {
+       "type": "tags",
+       "items": [
+        "每周机会报告",
+        "营销活动简报",
+        "AP Revenue 预订数据对接",
+        "K-Concert Trip——面向访韩海外 K-pop 粉丝的应用,首个测量渠道"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "pilot",
+     "label": "06 · 网页试点",
+     "soft": true,
+     "title": "下一次营销活动\n该聚焦哪个市场?",
+     "desc": "综合审视市场信号——出行需求、航空供给、预订——并判断应当争取哪些市场,以及哪些地方的证据仍需完善。",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "试点运行中",
+        "机构账号 · Excel 输入",
+        "各市场的决策历史"
+       ]
+      },
+      {
+       "type": "media",
+       "src": "/media/gfx/ap_travel_pilot_en.jpg",
+       "alt": "AP Travel 合成示例(重绘):一个市场总览,按市场显示争取、观察和降低优先级,并附下一步行动",
+       "caption": "基于合成数据的界面示例(重绘)· 不构成对真实产品或市场的判断。"
+      },
+      {
+       "type": "p",
+       "text": "按来源市场、目的地和出行时段输入数据,系统会将其分为争取、观察和降低优先级。审核人可以看到判断依据和下一步行动,团队的决策和观察到的结果也会不断积累。"
+      },
+      {
+       "type": "flow",
+       "items": [
+        "八项市场信号,注明来源和截至日期",
+        "供给限制、需求与预订走向之间的冲突",
+        "Excel 输入与各市场的决策记录",
+        "同一市场和时段的数据更新后,进行前后对比"
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://revenue.apholdings.kr/travel/",
+         "打开 AP Travel",
+         "primary"
+        ],
+        [
+         "https://revenue.apholdings.kr/travel/?demo=1",
+         "查看合成示例",
+         "button"
+        ],
+        [
+         "https://revenue.apholdings.kr/travel/?demo=1",
+         "查看示例大图",
+         "link"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "一个基于规则的市场审视工具。评分不是收入预测,也不是业绩保证。"
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "07 · 现在",
+     "title": "现在,处于网页试点阶段。",
+     "cta": true,
+     "desc": "使用机构账号登录,输入市场数据并记录决策。同一个引擎在 AP Revenue 中运行于酒店预订数据之上。",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://revenue.apholdings.kr/travel/",
+         "打开 AP Travel",
+         "primary"
+        ],
+        [
+         "mail:AP Travel 试点咨询",
+         "试点咨询",
+         "button"
+        ],
+        [
+         "/en/products/revenue/",
+         "查看 AP Revenue",
+         "link"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "自动采集市场数据 · 统一指标定义 · 对照真实结果验证——后续步骤"
+      }
+     ]
+    }
+   ],
+   "image": "/media/inbound_frame.jpg",
+   "video": "/media/inbound.mp4"
+  },
+  {
+   "id": "select",
+   "name": "AP SELECT",
+   "tag": "为选择而设计的商店。",
+   "status": "concept",
+   "role": "为选择而设计的商店。",
+   "desc": "不是卖东西的商店,而是替你挑选的商店。\n门店提供建议和试用,线上购买。",
+   "note": "概念与系统设计。有别于当前的门店运营或专业咨询。",
+   "flow": [
+    "选择档案",
+    "Safe",
+    "Light",
+    "专家",
+    "线下体验",
+    "顾客选择",
+    "线上下单",
+    "成果"
+   ],
+   "image": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/4285351f-831d-4d77-9380-dcba09ebccce.webp",
+   "video": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/c849c123-c931-472d-a4ba-59bed043158c.mp4",
+   "sections": [
+    {
+     "id": "consult",
+     "label": "01",
+     "title": "它会先问你，\n你要避开什么？",
+     "desc": "要避开牛奶或小麦、预算多少、偏好无香精——顾问都会先了解。之后货架上只留下符合条件的商品。有新商品通过你的标准时，你会第一时间收到通知。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/select_filter.jpg",
+       "alt": "先了解你的标准，六件中留下符合的三件"
+      }
+     ]
+    },
+    {
+     "id": "experience",
+     "label": "02",
+     "title": "门店用于咨询和试用，\n不设收银台。",
+     "soft": true,
+     "desc": "亲眼看、亲手摸、亲自试三四件。喜欢哪件，扫一下二维码——线上下单，送货到家。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/select_split.jpg",
+       "alt": "门店负责咨询与试用；线上负责下单与配送"
+      }
+     ]
+    },
+    {
+     "id": "franchise",
+     "label": "03 · 加盟",
+     "title": "我们提供的是体系，而不是库存。",
+     "desc": "总部提供选品体系，加盟商提供空间与咨询服务。只有在直营店验证之后，才会开放加盟。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/select_franchise_en.jpg",
+       "alt": "同一套总部体系下的三种门店形态——MINI · SELECT · LAB"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "交易手续费",
+        "加盟费 · 特许权使用费",
+        "系统使用费",
+        "品牌展示 · 内容",
+        "专家咨询"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "目前处于概念与系统设计阶段。尚未开展加盟招募，也未签订专家合同；待验证之后再行披露。"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "mailto:alfred.park@apholdings.kr?subject=%5BAP%20Holdings%5D%20AP%20SELECT%20%ED%98%91%EB%A0%A5%20%EB%AC%B8%EC%9D%98",
+         "AP SELECT 合作咨询",
+         "primary"
+        ],
+        [
+         "/ko/products/safe/",
+         "AP Safe",
+         "link"
+        ],
+        [
+         "/ko/products/light/",
+         "AP Light",
+         "link"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "commerce",
+   "name": "Global K-Commerce",
+   "tag": "看到的好物，回国后再买。",
+   "status": "inDev",
+   "role": "GLOBAL K-COMMERCE",
+   "desc": "在 LIA 的视频里看到的好物，当场就能买。\n在韩国发现的好物，回国后再次购买。",
+   "note": "零库存 · 合作链接已披露 · 价格不变",
+   "flow": [
+    "LIA / 内容",
+    "海外受众",
+    "商品发现",
+    "AP Commerce / 电商平台",
+    "购买",
+    "履约配送",
+    "复购"
+   ],
+   "hideGeneric": true,
+   "sections": [
+    {
+     "id": "map",
+     "label": "01 · 购买方式",
+     "title": "看到的好物，\n回国后再买。",
+     "desc": "在 LIA 的视频和应用里喜欢上的东西，一个链接即可到达。Lia Select 与 K-Craft 由 AP 发货；住宿、旅游行程、Coupang 和 Shopee 仍在您常用的网站上完成。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/commerce_map_en.jpg",
+       "alt": "在视频中看到 → 由 AP 发货（Lia Select · AP SELECT · K-Craft）/ 在您常用的网站上购买（Agoda · Klook · Coupang · Shopee）"
+      }
+     ]
+    },
+    {
+     "id": "own",
+     "label": "02 · 由 AP 发货",
+     "title": "连同选择的理由，\n一起送到家门口。",
+     "soft": true,
+     "desc": "只有 LIA 在核对成分、评价和价格之后挑选的商品才会上架。下单之后，从付款到送达都由 AP 负责。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/commerce_own_en.jpg",
+       "alt": "Lia Select · AP SELECT · K-Craft · Shopee——从下单到送货上门"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/en/products/liaselect/",
+         "查看 Lia Select",
+         "button"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "partner",
+     "label": "03 · 在您常用的网站上",
+     "title": "住宿、旅游行程和复购，\n就在您常去购物的地方。",
+     "desc": "预订与付款仍在您常用的网站上进行。AP 只帮助您做选择。通过链接购买，价格相同。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/commerce_partner_en.jpg",
+       "alt": "一次演唱会之旅——行前用 Agoda · 抵达后用 Klook · 在韩国用 Coupang · 回国后用 Shopee"
+      }
+     ]
+    },
+    {
+     "id": "funnel",
+     "label": "04 · 下次更合适",
+     "title": "最受关注的内容，\n会成为下一个货架。",
+     "soft": true,
+     "desc": "哪些视频和商品获得最多反响，将决定下一轮的选品。无需账号，无需登录。",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "在视频中看到",
+        "收藏",
+        "购买",
+        "收货",
+        "再次购买"
+       ]
+      },
+      {
+       "type": "tags",
+       "items": [
+        "先从越南开始，再到英语市场",
+        "反响持续出现后才开放销售",
+        "零库存 · 合作链接已披露 · 价格不变"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "05 · 现状",
+     "title": "今天，在 Lia Select。",
+     "cta": true,
+     "desc": "九款韩国美妆商品和三条测评视频。购买链接位于 LIA 的频道主页。Shopee 上架和合作伙伴拓展将依次推进。",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/en/products/liaselect/",
+         "Lia Select",
+         "primary"
+        ],
+        [
+         "/en/products/lia/",
+         "LIA",
+         "button"
+        ],
+        [
+         "mail:电商合作提案",
+         "合作提案",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "合作链接已披露 · 零库存 · 不影响价格"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "craft",
+   "name": "AP K-Craft",
+   "tag": "把匠人的双手，带向世界。",
+   "status": "inDev",
+   "role": "传统工艺 · 连接匠人与世界",
+   "desc": "面向海外买家，呈现非物质文化遗产传承人与匠人的作品。\n寻访匠人、记录制作过程、多语种推广，并且只销售经认证的原作。",
+   "note": "文化为先，生计其次，商品只是手段。",
+   "flow": [
+    "匠人",
+    "作品",
+    "数字护照",
+    "来源溯源",
+    "出口审查",
+    "报关",
+    "保险",
+    "包装",
+    "物流",
+    "送达",
+    "状态",
+    "理赔",
+    "成果"
+   ],
+   "image": "/media/craft_frame.jpg",
+   "video": "/media/craft.mp4",
+   "sections": [
+    {
+     "id": "why",
+     "label": "01 · 问题所在",
+     "title": "技艺犹在，\n却后继无人。",
+     "desc": "销售渠道有限，流通环节的利润被大幅分走。单靠创作难以维持生计。愿意投入多年修习工艺的新一代越来越少。作品尚在，却没有能触达海外买家的渠道和信任机制。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/craft_why_en.jpg",
+       "alt": "匠人面临的四个难题 → 韩流带来的四个契机"
+      }
+     ]
+    },
+    {
+     "id": "how",
+     "label": "02 · 方法",
+     "title": "尋 · 錄 · 廣 · 賣\n寻访、记录、推广、销售。",
+     "desc": "第一阶段是先建立信任，再谈销售。首先让世界知道“这位匠人存在”。待反响得到确认后，再开放销售。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/craft_how_en.jpg",
+       "alt": "寻访 · 记录 · 推广 · 销售——匠人在每一步的所得"
+      }
+     ]
+    },
+    {
+     "id": "items",
+     "label": "03 · 品类与差异",
+     "title": "证明真品的结构。",
+     "soft": true,
+     "desc": "青瓷与白瓷、螺钿漆器与木工制品、韩纸灯与扇子。只收录匠人亲手制作、有别于廉价进口品的作品。每件作品都附有签名、制作记录和来源。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/craft_proof_en.jpg",
+       "alt": "作品卡片——匠人资历 · 制作过程视频 · 签名与来源 · 三大品类"
+      }
+     ]
+    },
+    {
+     "id": "model",
+     "label": "04 · 三方共赢",
+     "title": "匠人、平台、买家。",
+     "desc": "匠人获得公平的收入和培养传人的条件，平台获得交易手续费和匠人网络，海外买家获得经过验证的原作和可信的出处。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/craft_value_en.jpg",
+       "alt": "匠人 · 海外买家 · 平台——各自付出什么、得到什么"
+      },
+      {
+       "type": "note",
+       "text": "AP 本身不提供鉴定、保险或报关服务。AP 负责记录、对接与协调，具体由专业合作伙伴承担。"
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "05 · 现状",
+     "title": "与匠人和工坊同行。",
+     "cta": true,
+     "desc": "匠人与工坊、遗产保护机构、海外合作伙伴。\n从第一位匠人和第一份制作记录开始。",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "mail:K-Craft 匠人 · 工坊合作咨询",
+         "匠人 · 工坊咨询",
+         "primary"
+        ],
+        [
+         "/ko/products/lia/",
+         "查看 LIA 的频道",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "销售属于第二阶段。现阶段：寻访、记录、推广。"
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "lia",
+   "name": "LIA",
+   "tag": "认识 LIA。\n发现韩国。",
+   "status": "audience",
+   "role": "AP HOLDINGS · AI 网红 1 号",
+   "desc": "LIA 住在首尔。她用英语向世界介绍\n韩国的文化、地点和商品。\n每天在 Instagram、TikTok 和博客上更新。",
+   "note": "AI 生成的虚拟形象 · 每条内容均标明 AI 身份",
+   "flow": [
+    "创作者",
+    "韩国发现型创作者",
+    "电商网红",
+    "韩国推广 IP"
+   ],
+   "image": "/media/lia/lia_hero_sq.jpg",
+   "heroSplit": true,
+   "hideArchive": true,
+   "heroLinks": [
+    [
+     "https://www.instagram.com/lia_park55/",
+     "Instagram"
+    ],
+    [
+     "https://www.tiktok.com/@lia_park55",
+     "TikTok"
+    ]
+   ],
+   "sections": [
+    {
+     "id": "week",
+     "label": "01 · 关注之后",
+     "title": "每一周，\n你都会收到这些。",
+     "desc": "周一 30 秒拉伸，周三应用上手演示，周五韩国故事，周末民间故事。配英文字幕。每天更新快拍。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_feed_en.jpg",
+       "alt": "LIA 的 Instagram 信息流——周一 Desk Body · 周三 App Moment · 周五 Korea, Explained · 周末 Tiger Tales"
+      }
+     ]
+    },
+    {
+     "id": "persona",
+     "label": "02 · 她是谁",
+     "title": "一位生活在首尔的二十多岁女生。\n朋友遍布世界各地。",
+     "soft": true,
+     "desc": "白天坐在办公桌前，傍晚泡在便利店和深夜咖啡馆，周末为大家朗读古老的故事。她不炫耀自己知道什么——而是替你问出你好奇的问题。",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "Korea, Explained——旅游指南里找不到答案的真实问题",
+        "Tiger Tales——与四只虎兄妹一起读民间故事",
+        "Desk Body——30 秒缓解久坐一天的疲劳",
+        "First User——逐个界面初探 AP 应用"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "actor",
+     "label": "03 · 镜头前",
+     "title": "每天都不用开拍，\nLIA 却始终在镜头前。",
+     "desc": "电视剧片场幕后、音乐视频《Ride the Wave》、出道问候和记者会。一位没有休息日、也不会老去的演员。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_camera_en.jpg",
+       "alt": "摄像机监视器中的 LIA——REC · 电视剧片场 · 音乐视频 · Tiger Tales"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "电视剧片场——等待三个小时，拍摄十二秒",
+        "音乐视频《Ride the Wave》",
+        "出道问候",
+        "记者会",
+        "排练室，晚上 11 点",
+        "凌晨 6 点收工"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "daily",
+     "label": "04 · 与 LIA 度过一天",
+     "title": "从清晨的汉江边，\n到夜晚的排练室。",
+     "soft": true,
+     "desc": "清晨 5:40 沿汉江跑步，在街巷里喝咖啡，傍晚铺开瑜伽垫，睡前整理心情。每天分享美妆、健康和旅行的故事。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_day_en.jpg",
+       "alt": "与 LIA 度过的一天——5:40 晨跑 · 9:00 工作笔记 · 13:00 街巷漫步 · 19:30 排练室 · 22:00 睡前放松"
+      }
+     ]
+    },
+    {
+     "id": "picks",
+     "label": "05 · Lia Select",
+     "title": "先核对，\n再挑选。",
+     "desc": "LIA 在核对成分和评价后挑选的韩国美妆，缺点也一并说明。防晒 · 精华 · 气垫 · 面膜 · 唇釉 · 洁面。在视频里看到，通过主页链接购买。",
+     "blocks": [
+      {
+       "type": "gallery",
+       "cols": 6,
+       "ratio": "1/1",
+       "items": [
+        {
+         "src": "/media/lia/rimg_suncream.jpg",
+         "caption": "防晒"
+        },
+        {
+         "src": "/media/lia/rimg_essence.jpg",
+         "caption": "精华"
+        },
+        {
+         "src": "/media/lia/rimg_cushion.jpg",
+         "caption": "气垫"
+        },
+        {
+         "src": "/media/lia/rimg_mask.jpg",
+         "caption": "面膜"
+        },
+        {
+         "src": "/media/lia/rimg_tint.jpg",
+         "caption": "唇釉"
+        },
+        {
+         "src": "/media/lia/rimg_cleanser.jpg",
+         "caption": "洁面"
+        }
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/en/products/liaselect/",
+         "查看 Lia Select",
+         "button"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "channels",
+     "label": "06 · 在哪里观看",
+     "title": "Instagram、TikTok、博客。",
+     "soft": true,
+     "desc": "Instagram 发布 15–20 秒、配英文字幕的短视频。TikTok 发布 30–45 秒的民间故事。博客以韩语讲述应用和商品背后更完整的故事。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_channels_en.jpg",
+       "alt": "三部手机——Instagram 信息流 · TikTok Tiger Tales · 博客"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://www.instagram.com/lia_park55/",
+         "Instagram",
+         "button"
+        ],
+        [
+         "https://www.tiktok.com/@lia_park55",
+         "TikTok",
+         "button"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "shop",
+     "label": "07 · 看到就买",
+     "title": "视频里看到的，\n通过主页链接购买。",
+     "desc": "LIA 挑选的商品在 Lia Select；住宿、旅游行程、Coupang 和 Shopee 仍在您常用的网站上。合作链接已披露，价格相同。",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "在视频中看到",
+        "主页链接",
+        "Lia Select · 合作伙伴",
+        "送货到家"
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/en/products/commerce/",
+         "购买方式——AP Commerce",
+         "button"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "brands",
+     "label": "08 · 与品牌合作",
+     "title": "同一张面孔，\n任何语言。",
+     "soft": true,
+     "desc": "有了脚本，当天即可发布。先英语，再中文和日语。由同一个人介绍应用、旅行、韩国美妆和工艺。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lia_brand_en.jpg",
+       "alt": "同一张照片配英文、中文和日文字幕——24h · 1 · EN→中→日 · 0"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "品牌合作",
+        "在游戏和应用中客串",
+        "旅游、地区及文化活动形象大使",
+        "多语种 LIA"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "09 · 现状",
+     "title": "今天就关注 LIA。",
+     "cta": true,
+     "desc": "AI 生成的虚拟形象。每条内容均标明 AI 身份。不购买粉丝 · 不虚构数字 · 合作链接已披露。",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://www.instagram.com/lia_park55/",
+         "Instagram",
+         "primary"
+        ],
+        [
+         "https://www.tiktok.com/@lia_park55",
+         "TikTok",
+         "button"
+        ],
+        [
+         "mail:LIA 合作咨询",
+         "品牌合作咨询",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "AI 生成的虚拟形象 · 每条内容均标明 AI 身份"
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "rgrg",
+   "name": "RGRG",
+   "tag": "一个不分年龄、人人都能轻松上手的在线实时问答对战平台——在游戏中，常识自然而然地增长。",
+   "status": "inDev",
+   "role": "先玩起来，知识随之而来。",
+   "desc": "这不是一款教育游戏，而是一款人人都能玩的游戏。\n学习只是其中的一部分。",
+   "note": "iPhone，横屏 · 游戏 › 问答 · 发布筹备中。",
+   "flow": [
+    "RGRG CORE",
+    "学习者所在地区",
+    "教学语言",
+    "目标语言 / 学科",
+    "题库包"
+   ],
+   "image": "/media/gfx/rgrg2_hero_en.jpg",
+   "sections": [
+    {
+     "id": "intent",
+     "label": "01 · 为什么做它",
+     "title": "问答是玩，\n不是学。",
+     "desc": "首先是一款人人都能享受的游戏。常识会在游戏过程中自然增长。教育只是其中的一部分。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg3_battle_en.jpg",
+       "alt": "六个角色同台——适合所有年龄的问答对战"
+      }
+     ]
+    },
+    {
+     "id": "everyone",
+     "label": "02 · 不分年龄",
+     "title": "孩子与家长，\n朋友与同事——同场较量。",
+     "soft": true,
+     "desc": "这里不问你的年龄，也不问你的水平。家人、朋友和同事同台竞技。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg3_wait_en.jpg",
+       "alt": "等候室——六个座位，向所有人开放"
+      }
+     ]
+    },
+    {
+     "id": "knowledge",
+     "label": "03 · 自然积累知识",
+     "title": "每输一局，\n都为下一局蓄力。",
+     "desc": "无需死记硬背——只有想赢的劲头。答错的题目会进入错题本，并在下一场对战中再次出现。时事、历史、科学、文化、谜语。",
+     "blocks": []
+    },
+    {
+     "id": "platform",
+     "label": "04 · 在线实时平台",
+     "title": "不是一个人刷的习题册，\n而是大家共享的舞台。",
+     "soft": true,
+     "desc": "选择题 · O/X · 首字母 · 速答 · 常识 · 随机——每个房间都有不同的乐趣。一个让别人来挑战你所出题目的平台。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg2_room_en.jpg",
+       "alt": "QUIZ ROOM——六个房间"
+      }
+     ]
+    },
+    {
+     "id": "characters",
+     "label": "05 · 角色",
+     "title": "替你上场的角色，\n不断积累的称号。",
+     "desc": "八个角色和称号。花钱买不到比赛的胜利。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/rgrg3_chars_en.jpg",
+       "alt": "角色——八个角色和称号"
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "06 · 现状",
+     "title": "iPhone · 发布筹备中。",
+     "soft": true,
+     "cta": true,
+     "desc": "一个不分年龄、人人都能享受的在线实时问答对战。",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "适合所有年龄",
+        "在线实时",
+        "6 个房间",
+        "8 个角色",
+        "错题本",
+        "无付费取胜"
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://games.apholdings.kr/en/",
+         "AP Games",
+         "primary"
+        ],
+        [
+         "mail:RGRG 合作咨询",
+         "合作咨询",
+         "button"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true
+  },
+  {
+   "id": "cubs",
+   "name": "Hangeul Cubs",
+   "tag": "和四只虎兄妹\n一起学韩文。",
+   "status": "existing",
+   "role": "HANGEUL CUBS · 韩文学习应用",
+   "desc": "为初次接触韩语的外国人和孩子而做。\n每集学一个收音。英语 · 越南语 · 法语。",
+   "note": "已在 iPhone · iPad 上线 · 无广告 · 无需账号",
+   "flow": [
+    "APP",
+    "SHORTS",
+    "YOUTUBE",
+    "CULTURE",
+    "TRAVEL"
+   ],
+   "image": "/media/cubs/family.jpg",
+   "sections": [
+    {
+     "id": "siblings",
+     "label": "01 · 四兄妹",
+     "title": "各管一个收音，\n四兄妹分工授课。",
+     "desc": "Daho 讲收音的基础，Kkobi 讲 ㄴ 和 ㄹ，Aari 讲 ㅇ 收音，Rami 讲 ㄱ · ㄷ · ㅂ 塞音。每集一个收音。",
+     "blocks": [
+      {
+       "type": "milestones",
+       "items": [
+        [
+         "DAHO · 老大",
+         "Daho",
+         "收音的基础。下面垫一块积木——就这么简单。"
+        ],
+        [
+         "KKOBI · 老二",
+         "Kkobi",
+         "ㄴ 和 ㄹ。听听声音在舌尖处分开。"
+        ],
+        [
+         "AARI · 老三",
+         "Aari",
+         "ㅇ 收音。像铃铛一样回响：ng、ng、ng。"
+        ],
+        [
+         "RAMI · 老幺",
+         "Rami",
+         "ㄱ · ㄷ · ㅂ 塞音。短促，干净利落地收住。"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "screens",
+     "label": "02 · 学 · 听 · 做题",
+     "title": "三个界面，一气呵成。",
+     "soft": true,
+     "desc": "最大特色：收音用另一种颜色标出。반/방 · 발/밥 · 문/물 · 곰/공——仅凭一个收音就会改变词义的发音。最后学会一句真正用得上的第一句话：“물 주세요.”",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/cubs/screens.jpg",
+       "alt": "收音单词 · 最小对立体听力 · 第一句话——三个应用界面"
+      },
+      {
+       "type": "tags",
+       "items": [
+        "42 节课",
+        "EN · VI · FR 提示",
+        "设备端发音识别",
+        "完全离线",
+        "无广告 · 无需账号"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "arena",
+     "label": "03 · 挑战",
+     "title": "用学到的内容一较高下。",
+     "desc": "课程用来学习，挑战用来比拼。三轮、十二道题、约两分钟——热身 · 今日小游戏 · 终极下注。完成至少一节课后解锁。",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "R1 热身 · 5 道题 · 10 秒",
+        "R2 今日小游戏 · 判断题 · 闪现 · 淘汰",
+        "R3 终极下注 · 押上积分，赢了翻倍"
+       ]
+      },
+      {
+       "type": "tags",
+       "items": [
+        "答得越快，得分越多",
+        "连续答对两题点燃火焰",
+        "题目只出自已完成的课程"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "video",
+     "label": "04 · 应用之外",
+     "title": "四兄妹主讲的\n韩文视频课程。",
+     "soft": true,
+     "desc": "从元音 ㅏ 到收音，由四兄妹主持的各集内容。英语讲解，韩语字幕。第 1 集《元音 ㅏ》已上线——打开应用之前，先来认识韩文。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/cubs/yt_ep1_thumb.jpg",
+       "alt": "EP1 · 元音 ㅏ——YouTube 节目海报"
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://youtu.be/vpZ7JeHaz6I",
+         "在 YouTube 观看 EP1",
+         "primary"
+        ],
+        [
+         "https://www.youtube.com/@hangeulcubs",
+         "频道 @hangeulcubs",
+         "link"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "05 · 现状",
+     "title": "今天，在 App Store。",
+     "cta": true,
+     "desc": "iPhone · iPad。同样的课程，在更大的屏幕上学习。\nEP1 已在 YouTube 频道上线。课程包扩充正在筹备中。",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://apps.apple.com/kr/app/id6803749436",
+         "App Store",
+         "primary"
+        ],
+        [
+         "/ko/products/rgrg/",
+         "在 RGRG 中进行实时问答对战",
+         "button"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Android · YouTube 频道——后续推出"
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true,
+   "link": "https://edu.apholdings.kr/en/",
+   "linkLabel": "AP Edu 官方网站"
+  },
+  {
+   "id": "lastwave",
+   "name": "LAST WAVE",
+   "tag": "在玩中创造。",
+   "status": "inDev",
+   "role": "创作者主导的游戏与 IP",
+   "desc": "一款 3D FPS 游戏，讲述在被裂隙撕开的首尔中求生，共 50 波。\n一位年轻创作者的想象力，由 AP 做成游戏。",
+   "note": "开发中的项目。这位年轻创作者的个人信息不予公开。",
+   "flow": [
+    "构想",
+    "制作",
+    "测试",
+    "创作者反馈",
+    "治理",
+    "发布"
+   ],
+   "image": "/media/gfx/phone_lw_en.jpg",
+   "sections": [
+    {
+     "id": "world",
+     "label": "01",
+     "title": "从江南到裂隙之中，\n共 50 波。",
+     "desc": "江南 → 乐天塔、蚕室 → 裂隙内部。VOID TITAN 在终点等待。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lw_waves_en.jpg",
+       "alt": "江南 · 乐天塔 · 裂隙内部——50 波"
+      }
+     ]
+    },
+    {
+     "id": "roles",
+     "label": "02",
+     "title": "孩子的想象力，\n变成一款游戏。",
+     "soft": true,
+     "desc": "世界观、角色、故事和乐趣，都来自这位年轻创作者的蜡笔草稿。工程开发、安全、变现和发布由 AP 负责。创作者的个人信息绝不公开。",
+     "blocks": [
+      {
+       "type": "media",
+       "src": "/media/gfx/lw_collab.jpg",
+       "alt": "孩子的蜡笔草图变成 3D 游戏角色"
+      },
+      {
+       "type": "grid2",
+       "items": [
+        {
+         "type": "proof",
+         "h3": "年轻创作者 · 想象力",
+         "ol": [
+          "世界观——被裂隙撕开的首尔",
+          "角色——五位英雄，六种敌人",
+          "故事 · 技能 · 首领",
+          "乐趣——让游戏令人兴奋的地方"
+         ]
+        },
+        {
+         "type": "proof",
+         "h3": "AP · 责任",
+         "ol": [
+          "工程开发 · 平衡性 · QA",
+          "安全 · 隐私",
+          "变现——皮肤和通行证，不设付费取胜",
+          "发布 · 运营"
+         ]
+        }
+       ]
+      },
+      {
+       "type": "actions",
+       "items": [
+        [
+         "/ko/products/rgrg/",
+         "RGRG——适合所有年龄的实时问答对战",
+         "button"
+        ],
+        [
+         "/ko/products/cubs/",
+         "Hangeul Cubs",
+         "button"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "hideGeneric": true,
+   "link": "https://games.apholdings.kr/en/",
+   "linkLabel": "AP Games 官方网站"
+  },
+  {
+   "id": "liaselect",
+   "name": "Lia Select",
+   "tag": "先核对，\n再挑选。",
+   "status": "audience",
+   "role": "LIA SELECT · 韩国美妆",
+   "desc": "LIA 在核对成分和评价后挑选的韩国美妆，缺点也一并说明。\n这个货架上只有成分表经过核对的韩国化妆品。短视频、坦诚的介绍、合作链接。",
+   "note": "商品图片由各品牌提供 · 购买链接位于 LIA 的频道主页。",
+   "flow": [
+    "发现",
+    "精选",
+    "合作链接"
+   ],
+   "hideGeneric": true,
+   "sections": [
+    {
+     "id": "picks",
+     "label": "01 · Lia 精选",
+     "title": "韩国人每天都在用的好物。",
+     "desc": "防晒 · 精华 · 气垫 · 面膜 · 唇釉 · 洁面。每个品类一款。",
+     "blocks": [
+      {
+       "type": "gallery",
+       "cols": 3,
+       "items": [
+        {
+         "src": "/media/shop/01_dalba.jpg",
+         "caption": "防晒 · d'Alba — UV Essence Tone-Up Sun Cream"
+        },
+        {
+         "src": "/media/shop/02_cosrx.jpg",
+         "caption": "精华 · COSRX — Advanced Snail 96 Mucin Power Essence"
+        },
+        {
+         "src": "/media/shop/03_tirtir.jpg",
+         "caption": "气垫 · TIRTIR — Mask Fit Red Cushion"
+        },
+        {
+         "src": "/media/shop/04_biodance.jpg",
+         "caption": "面膜 · Biodance — Bio-Collagen Real Deep Mask"
+        },
+        {
+         "src": "/media/shop/06_romnd.jpg",
+         "caption": "唇部 · rom&nd — Juicy Lasting Tint"
+        },
+        {
+         "src": "/media/shop/07_anua.jpg",
+         "caption": "洁面 · Anua — Heartleaf Pore Control Cleansing Oil"
+        },
+        {
+         "src": "/media/shop/08_skin1004.jpg",
+         "caption": "防晒 · SKIN1004 — Madagascar Centella Air-Fit Sun"
+        },
+        {
+         "src": "/media/shop/09_mediheal.jpg",
+         "caption": "面膜 · Mediheal — Daily Sheet Mask"
+        },
+        {
+         "src": "/media/shop/10_banilaco.jpg",
+         "caption": "洁面 · banila co — Clean It Zero Cleansing Balm"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reviews",
+     "label": "02 · Lia 测评",
+     "title": "从特写镜头开始。",
+     "soft": true,
+     "desc": "防晒 · 面膜 · 唇釉。LIA 十五秒的介绍。LIA 是由 AI 制作的角色。",
+     "blocks": [
+      {
+       "type": "videos",
+       "items": [
+        {
+         "src": "/media/lia/review_ep1_suncream.mp4",
+         "poster": "/media/lia/review_ep1_suncream_poster.jpg",
+         "caption": "EP1 · 防晒"
+        },
+        {
+         "src": "/media/lia/review_ep2_mask.mp4",
+         "poster": "/media/lia/review_ep2_mask_poster.jpg",
+         "caption": "EP2 · 面膜"
+        },
+        {
+         "src": "/media/lia/review_ep3_tint.mp4",
+         "poster": "/media/lia/review_ep3_tint_poster.jpg",
+         "caption": "EP3 · 唇釉"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "how",
+     "label": "03 · 运作方式",
+     "title": "从 LIA 的货架，\n到你的购物车。",
+     "desc": "LIA 用短视频介绍 → 只有她挑选的商品才会上架 → 合作链接位于 LIA 的主页 · 本地配送。",
+     "blocks": [
+      {
+       "type": "flow",
+       "items": [
+        "发现——在视频中",
+        "精选——在货架上",
+        "合作链接——在主页中"
+       ]
+      },
+      {
+       "type": "tags",
+       "items": [
+        "零库存",
+        "所有合作链接均已披露",
+        "不影响用户价格"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "today",
+     "label": "04 · 现状",
+     "title": "在 LIA 的频道上。",
+     "cta": true,
+     "desc": "购买链接位于 Instagram 主页。先核对，再挑选。",
+     "blocks": [
+      {
+       "type": "actions",
+       "items": [
+        [
+         "https://www.instagram.com/lia_park55/",
+         "Instagram",
+         "primary"
+        ],
+        [
+         "/ko/products/lia/",
+         "关于 LIA",
+         "button"
+        ],
+        [
+         "/ko/products/commerce/",
+         "Global K-Commerce",
+         "button"
+        ]
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "lab": [
+  [
+   "Dawn Grace",
+   "独立的反思与祈祷应用",
+   "6803325336",
+   "/privacy.html"
+  ],
+  [
+   "IRON GRADE",
+   "基准训练记录与评级",
+   "6808070870",
+   "/irongrade/privacy.html"
+  ],
+  [
+   "The Other Hours",
+   "面向青少年篮球运动员家长的训练与成长指南",
+   "6803709958",
+   "/theotherhours_privacy.html"
+  ],
+  [
+   "나의 첫투자",
+   "入门级金融学习与模拟投资实验",
+   "6803763681",
+   "/privacy.html"
+  ],
+  [
+   "K-Concert Trip",
+   "面向海外粉丝的演唱会旅行指南",
+   "6803810106",
+   "/kfan_privacy.html"
+  ]
+ ]
+}

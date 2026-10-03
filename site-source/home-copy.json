@@ -332,5 +332,673 @@
     "sub": "No account, no login. Questions are discarded with the answer."
    }
   ]
+ },
+ "vi": {
+  "hero": "Những lựa chọn, giao dịch và ý tưởng phức tạp, được biến thành hệ thống.",
+  "cta": "Khám phá công cụ và các mảng kinh doanh của chúng tôi",
+  "featured": "Từ sự phức tạp đến quyết định, trong năm bước.",
+  "select": "Không phải cửa hàng bán hàng — mà là cửa hàng biết chọn lựa.",
+  "concept": "Khái niệm AI · giai đoạn thiết kế",
+  "lia": "Người ảnh hưởng AI · văn hóa, địa điểm và sản phẩm Hàn Quốc",
+  "revenue": "Từ dữ liệu doanh thu đến các ưu tiên hành động.",
+  "proof": "Tự xây dựng độc lập · Working Proof",
+  "visualNote": "Luồng khái niệm · không có dữ liệu vận hành thực tế",
+  "portfolio": "Khoảnh khắc lựa chọn. Mua sắm. Học tập.",
+  "groups": [
+   "Decision Intelligence",
+   "Thương mại",
+   "Chơi & Học"
+  ],
+  "short": {
+   "safe": "Đọc nhãn thay bạn, để bạn biết con mình có ăn được hay không.",
+   "light": "Cho bạn biết túi bạn sắp mua có bao nhiêu calo.",
+   "revenue": "Mỗi sáng đánh dấu những ngày lượng đặt phòng đang chậm lại. Quyết định giá thuộc về quản lý.",
+   "travel": "Tổng hợp các tín hiệu cho thấy khách của quốc gia nào sẽ tăng, và khi nào.",
+   "select": "Xem, chạm, chọn — rồi hàng được giao tận nhà.",
+   "commerce": "Thứ bạn khám phá ở Hàn Quốc, mua lại khi về nước.",
+   "craft": "Sắp xếp ngành nghề thủ công, từ tác phẩm của nghệ nhân đến người mua nước ngoài.",
+   "lia": "Một người ảnh hưởng AI giới thiệu văn hóa, địa điểm và sản phẩm Hàn Quốc đến thế giới.",
+   "rgrg": "Một chiếc chuông, ai bấm trước thắng. Học qua việc thi quiz.",
+   "cubs": "Học Hangeul qua trò chơi cùng bốn anh em nhà hổ.",
+   "lastwave": "Người lớn biến trí tưởng tượng của một nhà sáng tạo nhỏ tuổi thành trò chơi."
+  },
+  "why": "Vì sao chọn AP.",
+  "principles": [
+   "Không bật đèn xanh. Chúng tôi nói “không tìm thấy”, không bao giờ nói “an toàn”. Quyết định cuối cùng thuộc về phụ huynh, về quản lý. Được xây dựng để nếu có sai thì sai theo hướng thận trọng.",
+   "Mọi câu trả lời đều kèm nguồn — số báo cáo của MFDS, hồ sơ đặt phòng, nguyên văn. Câu trả lời chính là tài liệu bạn mang đến phòng khám, cuộc họp, hay trình sếp.",
+   "Không đoán mò. Chúng tôi đối chiếu bản gốc công khai: 1,9 triệu dòng dữ liệu MFDS, hồ sơ đặt phòng thực tế. Nếu không có trong dữ liệu, chúng tôi nói rõ.",
+   "Chúng tôi không giả vờ biết. Thành phần không rõ ràng được giữ ở trạng thái “cần kiểm tra”. Chúng tôi nêu rõ ngay từ đầu rằng đây không phải chẩn đoán, tư vấn y tế hay chế độ ăn — nên việc áp dụng không mang trọng lượng pháp lý.",
+   "Dữ liệu công khai được tự động tải lại vào nửa đêm mỗi thứ Hai. Không đưa ra kết luận từ hồ sơ cũ hay sản phẩm đã ngừng bán.",
+   "Hồ sơ của trẻ, ảnh, nhật ký không bao giờ rời khỏi thiết bị. Máy chủ chỉ thấy câu hỏi và hủy nó cùng với câu trả lời. Không tài khoản, không đăng nhập.",
+   "Không cần máy chủ lưu trạng thái, hoặc không cần máy chủ, nên gần như không tốn chi phí vận hành. Connector miễn phí; ứng dụng miễn phí hoặc trả một lần. Không thuê bao, không quảng cáo.",
+   "Một địa chỉ, hai phút, ngay trong AI bạn đang dùng. Cùng một câu trả lời trong Claude, ChatGPT hay Siri — đổi AI, giữ nguyên kết luận."
+  ],
+  "globalMore": "Nguyên tắc thiết kế toàn cầu",
+  "aboutTitle": "Ở nơi con người đã bỏ cuộc, có AI.",
+  "about": "Không phải nơi AI thay thế con người, mà là nơi con người đã dừng lại.\nPhán đoán vẫn thuộc về con người, đến cùng.\nA.P — Alfred Park · AI People.",
+  "aboutMore": "Về công ty",
+  "lab": "Các dự án độc lập. Nhật ký của việc xây dựng và học hỏi.",
+  "contact": "Sản phẩm · Chuyên gia · Thương hiệu · Hợp tác toàn cầu",
+  "detail": "Tìm hiểu thêm",
+  "engineIntro": "Một túi snack và giá một phòng khách sạn có chung một cấu trúc. Ví dụ: một đứa trẻ dị ứng sữa và lúa mì, và một gói Oh Yes.",
+  "engineSteps": [
+   [
+    "Dữ liệu",
+    "Thành phần đã đăng ký · danh sách cần tránh"
+   ],
+   [
+    "Ngữ cảnh",
+    "“Không sữa, không lúa mì” được đối chiếu với “trứng · lúa mì · ca cao”"
+   ],
+   [
+    "Phán định",
+    "Được đánh dấu. Có kèm bằng chứng."
+   ],
+   [
+    "Quyết định của con người",
+    "Hệ thống chỉ dừng ở mức khuyến nghị. Phụ huynh quyết định."
+   ],
+   [
+    "Học hỏi",
+    "Lựa chọn và kết quả được tích lũy → cho phán định tiếp theo"
+   ]
+  ],
+  "engineNote": "Cấu trúc chung của AP Safe · Light · Revenue · Travel · SELECT. Con người đưa ra quyết định cuối cùng.",
+  "groupDesc": [
+   "Câu trả lời có bằng chứng vào lúc khó lựa chọn. Con người quyết định.",
+   "Từ khám phá nội dung đến dùng thử sản phẩm, mua hàng và giao hàng toàn cầu.",
+   "Học ngôn ngữ và kiến thức, cùng sáng tạo, dưới dạng trò chơi."
+  ],
+  "liaChannel": "Nội dung Instagram · TikTok / IP Khám phá Hàn Quốc toàn cầu",
+  "examples": {
+   "safe": [
+    "Lọc ra những gì cần tránh",
+    "“Con tôi ăn Oh Yes này được không? Tránh sữa và lúa mì.”",
+    "“Có chứa lúa mì.” Kèm thành phần đã đăng ký và nguồn của nó."
+   ],
+   "light": [
+    "Chọn loại nhẹ hơn",
+    "“Tôi định mua Saewookkang — có loại nào nhẹ hơn không?”",
+    "“465 kcal một túi. Cùng kệ có loại 70 kcal.”"
+   ],
+   "revenue": [
+    "Chọn những ngày cần xem hôm nay",
+    "Dữ liệu đặt phòng và hủy phòng đến hết ngày hôm qua",
+    "“Ngày 10 tháng 10 có rủi ro. Hãy xem lại giá và lượng phòng.” → quản lý quyết định"
+   ],
+   "travel": [
+    "Chọn thị trường cần theo dõi",
+    "Sức chứa hàng không · lượng tìm kiếm · tỷ giá · ngày lễ",
+    "“Tháng này hãy theo dõi Đài Loan.” → quyết định chiến dịch"
+   ]
+  },
+  "input": "Hãy hỏi như thế này",
+  "output": "Nó trả lời như thế này",
+  "safeNote": "Không phải chẩn đoán y tế hay bảo đảm tuyệt đối về an toàn",
+  "rgrgTag": "Cho mọi lứa tuổi — kiến thức lớn dần khi bạn chơi.",
+  "rgrgPacks": "Nền tảng đấu quiz trực tuyến thời gian thực ai cũng có thể thích, nơi kiến thức phổ thông tự nhiên lớn dần. Giáo dục chỉ là một phần trong đó.",
+  "rgrgNote": "Màn hình game thực tế · tháng 9 năm 2026",
+  "principleNames": [
+   "01 · An toàn từ thiết kế",
+   "02 · Có bằng chứng kèm theo",
+   "03 · Chỉ dùng dữ liệu gốc",
+   "04 · Trung thực về giới hạn",
+   "05 · Mới mỗi tuần",
+   "06 · Dữ liệu của bạn ở lại trên điện thoại",
+   "07 · Chi phí thấp",
+   "08 · Cắm vào, không khóa chặt"
+  ],
+  "proofLabels": {
+   "safe": "Đang vận hành · ứng dụng Safelist · AI connector",
+   "light": "Đang vận hành · AI connector LightList"
+  },
+  "portfolioIntro": [
+   "Vào lúc khó lựa chọn, một câu trả lời có bằng chứng.",
+   "Từ khám phá đến dùng thử, mua hàng và giao hàng.",
+   "Học qua thi đấu, sáng tạo qua chơi."
+  ],
+  "decision": {
+   "safeTitle": [
+    "Biết cần",
+    "tránh gì."
+   ],
+   "safe": "Đọc nhãn thay bạn, để bạn biết con mình có ăn được hay không.",
+   "safeSub": "“Oh Yes — tránh sữa và lúa mì.” → “Có chứa lúa mì.” Kèm bằng chứng.",
+   "safeQuiet": "Ứng dụng Safelist · AI connector đang vận hành",
+   "lightTitle": [
+    "Hiểu",
+    "điều gì hợp với bạn."
+   ],
+   "light": "Túi bạn sắp mua có bao nhiêu calo.",
+   "lightSub": "Mặt sau bao bì tính trên 100g. Các túi nặng 46g · 66g · 90g. Tính theo từng túi, thứ tự sẽ đảo ngược.",
+   "revenue": "Dữ liệu đặt phòng, thành các quyết định hôm nay.\nQuản lý quyết định.",
+   "travel": "Tổng hợp các tín hiệu cho thấy khách của quốc gia nào sẽ tăng, và khi nào."
+  },
+  "whyLead": "AI đã có mặt ở khắp nơi. Câu hỏi không còn là “nó có thông minh không” mà là “tôi có thể tin nó trong việc này không”.",
+  "whyAlt": "Một câu trả lời của AP — kết luận, kiểm tra thành phần, cờ cần kiểm tra, nguồn (hồ sơ MFDS, nguyên văn), ngày làm mới, không gửi dữ liệu của trẻ, miễn phí, Claude · ChatGPT · Siri. Cả tám lý do nằm trong một câu trả lời.",
+  "whyFacts": [
+   {
+    "step": "Nguồn",
+    "big": "1.9M",
+    "unit": "dòng",
+    "title": "Đối chiếu với bản gốc công khai",
+    "sub": "Dữ liệu mở MFDS · làm mới mỗi thứ Hai"
+   },
+   {
+    "step": "Bằng chứng",
+    "big": "100",
+    "unit": "%",
+    "title": "Mọi câu trả lời đều kèm nguồn",
+    "sub": "Số báo cáo, nguyên văn và ngày tháng đi kèm câu trả lời."
+   },
+   {
+    "step": "Điện thoại của bạn",
+    "big": "0",
+    "unit": "",
+    "title": "Dữ liệu cá nhân được lưu trữ",
+    "sub": "Không tài khoản, không đăng nhập. Câu hỏi được hủy cùng với câu trả lời."
+   }
+  ]
+ },
+ "ja": {
+  "hero": "複雑な選択・取引・アイデアを、仕組みにする。",
+  "cta": "エンジンと事業を見る",
+  "featured": "複雑さから意思決定まで、5つのステップで。",
+  "select": "売る店ではなく、選ぶ店。",
+  "concept": "AIコンセプト · 設計段階",
+  "lia": "AIインフルエンサー · 韓国の文化・場所・商品",
+  "revenue": "売上データから、行動の優先順位へ。",
+  "proof": "独自開発 · Working Proof",
+  "visualNote": "コンセプトフロー · 実運用データなし",
+  "portfolio": "選ぶ瞬間。買う瞬間。学ぶ瞬間。",
+  "groups": [
+   "Decision Intelligence",
+   "コマース",
+   "遊びと学び"
+  ],
+  "short": {
+   "safe": "ラベルを代わりに読み、お子さまが食べられるかをお知らせします。",
+   "light": "買おうとしている袋に何kcalあるかをお知らせします。",
+   "revenue": "予約の伸びが鈍っている日付を、毎朝お知らせします。価格の判断は支配人が行います。",
+   "travel": "どの国のお客様が、いつ増えるかを示すシグナルを集めます。",
+   "select": "見て、触れて、選ぶ。そのままご自宅へお届けします。",
+   "commerce": "韓国で出会ったものを、帰国後にもう一度。",
+   "craft": "匠の作品から海外のバイヤーまで、取引の流れを整理します。",
+   "lia": "韓国の文化・場所・商品を世界に紹介するAIインフルエンサー。",
+   "rgrg": "ブザーはひとつ、押すのは早い者勝ち。クイズで競いながら学びます。",
+   "cubs": "4匹のトラの兄弟と、遊びながらハングルを学びます。",
+   "lastwave": "大人たちが、若いクリエイターの想像力をゲームにします。"
+  },
+  "why": "APが選ばれる理由。",
+  "principles": [
+   "青信号は出しません。「安全」とは言わず、「見つかりませんでした」と伝えます。最終判断は、保護者や支配人のものです。失敗するなら慎重な側に倒れるよう設計しています。",
+   "すべての回答に出典を添えます — MFDSの届出番号、予約記録、原文。回答は、そのまま診療所や会議、上司に持っていける資料になります。",
+   "推測はしません。公的な一次資料を確認します — MFDSの190万行のデータ、実際の予約記録。データにないことは、ないとお伝えします。",
+   "わかったふりはしません。成分が不明瞭なものは「要確認」のままにします。診断・医療・食事指導ではないことを最初に明示しているため、導入にあたって法的な重みは生じません。",
+   "公的データは、毎週月曜の深夜に自動で再取得します。古い記録や販売終了した商品をもとに判定することはありません。",
+   "お子さまのプロフィール、写真、記録は端末の外に出ません。サーバーは質問を受け取り、回答とともに破棄します。アカウントもログインも不要です。",
+   "ステートレスまたはサーバーレスのため、運用コストはほとんどかかりません。コネクターは無料、アプリは無料または買い切りです。サブスクリプションも広告もありません。",
+   "ひとつのアドレスで、2分で、いつも使っているAIの中で。Claude、ChatGPT、Siriのどれでも同じ回答 — AIを替えても、判定は変わりません。"
+  ],
+  "globalMore": "グローバル設計の原則",
+  "aboutTitle": "人が諦めていたところに、AIを。",
+  "about": "AIが人に取って代わる場所ではなく、人が手を止めていた場所へ。\n判断は、最後まで人のものです。\nA.P — Alfred Park · AI People.",
+  "aboutMore": "会社概要",
+  "lab": "独立プロジェクト。つくりながら学んだ記録。",
+  "contact": "製品 · 専門家 · ブランド · グローバルパートナーシップ",
+  "detail": "詳しく見る",
+  "engineIntro": "ひと袋のお菓子とホテルの客室料金は、同じ構造をしています。例：牛乳と小麦にアレルギーのあるお子さまと、Oh Yes。",
+  "engineSteps": [
+   [
+    "データ",
+    "届出済みの成分 · 避けるものリスト"
+   ],
+   [
+    "文脈",
+    "「牛乳・小麦なし」を「卵 · 小麦 · ココア」と照合"
+   ],
+   [
+    "判断",
+    "該当ありと通知。根拠を添付。"
+   ],
+   [
+    "人による決定",
+    "システムが行うのは推奨まで。決めるのは保護者です。"
+   ],
+   [
+    "学習",
+    "選択と結果が蓄積 → 次の判断へ"
+   ]
+  ],
+  "engineNote": "AP Safe · Light · Revenue · Travel · SELECTに共通する構造です。最終的な決定は人が行います。",
+  "groupDesc": [
+   "選びにくい瞬間に、根拠のある答えを。決めるのは人です。",
+   "コンテンツの発見から、商品の試用、購入、グローバル配送まで。",
+   "言語と知識の学習、そして創作を、ゲームとして。"
+  ],
+  "liaChannel": "Instagram · TikTokコンテンツ / グローバルなKorea Discovery IP",
+  "examples": {
+   "safe": [
+    "避けたいものを絞り込む",
+    "「このOh Yes、うちの子は食べられる？ 牛乳と小麦は避けたい。」",
+    "「小麦が含まれています。」届出済みの成分と出典を添えて。"
+   ],
+   "light": [
+    "軽いほうを選ぶ",
+    "「セウカンを買うんだけど、もっと軽いものはある？」",
+    "「1袋465kcalです。同じ棚に70kcalのものがあります。」"
+   ],
+   "revenue": [
+    "今日見るべき日付を選ぶ",
+    "昨日までの予約・キャンセルデータ",
+    "「10月10日は要注意です。価格と在庫を見直してください。」→ 支配人が決定"
+   ],
+   "travel": [
+    "注目する市場を選ぶ",
+    "航空座席数 · 検索量 · 為替 · 祝日",
+    "「今月は台湾に注目。」→ キャンペーンの判断へ"
+   ]
+  },
+  "input": "こう聞くと",
+  "output": "こう答えます",
+  "safeNote": "医学的な診断ではなく、絶対的な安全の保証でもありません",
+  "rgrgTag": "全年齢向け — 遊ぶほどに育つ知識。",
+  "rgrgPacks": "誰もが楽しめるライブオンラインのクイズ対戦プラットフォーム。一般常識が自然と身につきます。教育は、その一部です。",
+  "rgrgNote": "実際のゲーム画面 · 2026年9月",
+  "principleNames": [
+   "01 · 安全を前提に設計",
+   "02 · 根拠を添付",
+   "03 · 一次データのみ",
+   "04 · 限界を正直に",
+   "05 · 毎週更新",
+   "06 · データはスマホの中に",
+   "07 · 低コスト",
+   "08 · つながるが、縛らない"
+  ],
+  "proofLabels": {
+   "safe": "運用中 · Safelistアプリ · AIコネクター",
+   "light": "運用中 · LightList AIコネクター"
+  },
+  "portfolioIntro": [
+   "選びにくい瞬間に、根拠のある答えを。",
+   "発見から、試用、購入、配送まで。",
+   "競って学び、遊んでつくる。"
+  ],
+  "decision": {
+   "safeTitle": [
+    "避けるべきものを",
+    "知る。"
+   ],
+   "safe": "ラベルを代わりに読み、お子さまが食べられるかをお知らせします。",
+   "safeSub": "「Oh Yes — 牛乳と小麦は避けたい」→「小麦が含まれています」。根拠を添えて。",
+   "safeQuiet": "Safelistアプリ · AIコネクター運用中",
+   "lightTitle": [
+    "自分に合うものを",
+    "理解する。"
+   ],
+   "light": "買おうとしている袋は、何kcalか。",
+   "lightSub": "パッケージ裏の表示は100gあたりです。袋は46g · 66g · 90g。1袋あたりで数えると、順位が入れ替わります。",
+   "revenue": "予約データを、今日の意思決定に。\n決めるのは支配人です。",
+   "travel": "どの国のお客様が、いつ増えるかを示すシグナルを集めます。"
+  },
+  "whyLead": "AIはすでにあらゆる場所にあります。問われているのはもう「賢いか」ではなく、「このことを任せて信頼できるか」です。",
+  "whyAlt": "APのひとつの回答に — 判定、成分チェック、要確認フラグ、出典（MFDSの届出、原文）、更新日、お子さまのデータは送信しない、無料、Claude · ChatGPT · Siri対応。8つの理由が、すべてひとつの回答に入っています。",
+  "whyFacts": [
+   {
+    "step": "出典",
+    "big": "1.9M",
+    "unit": "行",
+    "title": "公的な一次資料で確認",
+    "sub": "MFDSオープンデータ · 毎週月曜に更新"
+   },
+   {
+    "step": "根拠",
+    "big": "100",
+    "unit": "%",
+    "title": "すべての回答に出典を添付",
+    "sub": "届出番号、原文、日付を回答に添えます。"
+   },
+   {
+    "step": "あなたのスマホ",
+    "big": "0",
+    "unit": "",
+    "title": "保存される個人データ",
+    "sub": "アカウントもログインも不要。質問は回答とともに破棄されます。"
+   }
+  ]
+ },
+ "zh-cn": {
+  "hero": "把复杂的选择、交易与想法，变成体系。",
+  "cta": "探索我们的引擎与业务",
+  "featured": "从复杂到决策，只需五步。",
+  "select": "不是卖东西的商店——而是帮你挑选的商店。",
+  "concept": "AI 概念 · 设计阶段",
+  "lia": "AI 网红 · 韩国的文化、地点与商品",
+  "revenue": "从营收数据到行动优先级。",
+  "proof": "独立构建 · Working Proof",
+  "visualNote": "概念流程 · 无实际运营数据",
+  "portfolio": "选择的时刻。购买的时刻。学习的时刻。",
+  "groups": [
+   "Decision Intelligence",
+   "商业",
+   "玩与学"
+  ],
+  "short": {
+   "safe": "替你读标签，让你知道孩子能不能吃。",
+   "light": "告诉你即将购买的这一袋有多少卡路里。",
+   "revenue": "每天早晨标出预订放缓的日期。定价仍由经理决定。",
+   "travel": "汇集各类信号，显示哪个国家的游客将会增长、何时增长。",
+   "select": "看一看、摸一摸、选一选——然后送货到家。",
+   "commerce": "在韩国发现的好物，回国后再次购买。",
+   "craft": "把行业梳理清楚，从匠人的作品到海外买家。",
+   "lia": "一位 AI 网红，向世界介绍韩国的文化、地点与商品。",
+   "rgrg": "一个抢答器，先按者先答。在问答竞赛中学习。",
+   "cubs": "和四只虎兄妹在游戏中学韩文。",
+   "lastwave": "由成年人把一位年轻创作者的想象力做成游戏。"
+  },
+  "why": "为什么选择 AP。",
+  "principles": [
+   "没有绿灯。我们只说“未发现”，从不说“安全”。最终的判断属于家长、属于经理。设计上宁可偏向谨慎。",
+   "每个答案都附有来源——MFDS 报告编号、预订记录、原文。这个答案本身，就是可以带去诊所、会议、带给上司的文件。",
+   "不靠猜测。我们核对公开的原始资料：190 万条 MFDS 数据、真实的预订记录。数据中没有的内容，我们会如实说明。",
+   "我们不假装知道。来源不明的成分一律标为“需要确认”。我们事先声明，这不是诊断，也不是医疗或饮食建议——因此采用它不构成任何法律效力。",
+   "公开数据每周一零点自动重新获取。不会依据过期记录或已停产的商品作出判断。",
+   "儿童档案、照片和记录绝不离开设备。服务器收到问题后，会连同答案一并丢弃。无需账号，无需登录。",
+   "无状态或无服务器架构，因此几乎没有运行成本。连接器免费；应用免费或一次性付费。无订阅，无广告。",
+   "一个地址，两分钟，就在您已在使用的 AI 之中。在 Claude、ChatGPT 或 Siri 中得到同样的答案——换一个 AI，结论不变。"
+  ],
+  "globalMore": "全球化设计原则",
+  "aboutTitle": "在人们放弃的地方，用 AI。",
+  "about": "不是让 AI 取代人，而是在人已经停下的地方继续前进。\n判断始终由人来做，直到最后。\nA.P — Alfred Park · AI People.",
+  "aboutMore": "关于公司",
+  "lab": "独立项目。构建与学习的记录。",
+  "contact": "产品 · 专家 · 品牌 · 全球合作",
+  "detail": "了解更多",
+  "engineIntro": "一袋零食和一间酒店客房的价格，具有相同的结构。示例：对牛奶和小麦过敏的孩子，和一盒 Oh Yes。",
+  "engineSteps": [
+   [
+    "数据",
+    "备案成分 · 需避开的清单"
+   ],
+   [
+    "情境",
+    "将“不含牛奶和小麦”与“鸡蛋 · 小麦 · 可可”进行比对"
+   ],
+   [
+    "判断",
+    "已标记。附有依据。"
+   ],
+   [
+    "人工决策",
+    "系统只做到给出建议。决定由家长作出。"
+   ],
+   [
+    "学习",
+    "选择与结果不断积累 → 用于下一次判断"
+   ]
+  ],
+  "engineNote": "AP Safe · Light · Revenue · Travel · SELECT 共有的结构。最终决定由人作出。",
+  "groupDesc": [
+   "在难以抉择的时刻，给出有依据的答案。由人来决定。",
+   "从内容发现到商品试用、购买和全球配送。",
+   "以游戏的方式进行语言与知识学习，以及创作。"
+  ],
+  "liaChannel": "Instagram · TikTok 内容 / 面向全球的 Korea Discovery IP",
+  "examples": {
+   "safe": [
+    "筛掉需要避开的成分",
+    "“我家孩子能吃这个 Oh Yes 吗？要避开牛奶和小麦。”",
+    "“含有小麦。”并附上备案成分及其来源。"
+   ],
+   "light": [
+    "选更轻的那个",
+    "“我要买 Saewookkang——有没有更轻的？”",
+    "“一袋 465 kcal。同一货架上有一款 70 kcal 的。”"
+   ],
+   "revenue": [
+    "选出今天要关注的日期",
+    "截至昨日的预订与取消数据",
+    "“10 月 10 日存在风险。请检查价格和库存。”→ 由经理决定"
+   ],
+   "travel": [
+    "选出要关注的市场",
+    "航空运力 · 搜索量 · 汇率 · 节假日",
+    "“本月请关注台湾。”→ 营销活动决策"
+   ]
+  },
+  "input": "这样提问",
+  "output": "它这样回答",
+  "safeNote": "不是医疗诊断，也不是绝对安全的保证",
+  "rgrgTag": "适合所有年龄——在玩中增长知识。",
+  "rgrgPacks": "一个人人都能享受的在线实时问答对战平台，常识在其中自然增长。教育只是其中的一部分。",
+  "rgrgNote": "实际游戏画面 · 2026 年 9 月",
+  "principleNames": [
+   "01 · 设计即安全",
+   "02 · 附带依据",
+   "03 · 只用原始数据",
+   "04 · 坦诚说明局限",
+   "05 · 每周更新",
+   "06 · 数据留在你的手机里",
+   "07 · 成本很低",
+   "08 · 即插即用，不被绑定"
+  ],
+  "proofLabels": {
+   "safe": "运行中 · Safelist 应用 · AI 连接器",
+   "light": "运行中 · LightList AI 连接器"
+  },
+  "portfolioIntro": [
+   "在难以抉择的时刻，给出有依据的答案。",
+   "从发现到试用、购买和配送。",
+   "在比拼中学习，在游戏中创造。"
+  ],
+  "decision": {
+   "safeTitle": [
+    "知道要",
+    "避开什么。"
+   ],
+   "safe": "替你读标签，让你知道孩子能不能吃。",
+   "safeSub": "“Oh Yes——要避开牛奶和小麦。”→“含有小麦。”并附依据。",
+   "safeQuiet": "Safelist 应用 · AI 连接器运行中",
+   "lightTitle": [
+    "了解",
+    "什么适合你。"
+   ],
+   "light": "你即将购买的这一袋有多少卡路里。",
+   "lightSub": "包装背面按每 100g 标注。而一袋是 46g · 66g · 90g。按每袋来算，排序就会反过来。",
+   "revenue": "把预订数据，变成今天的决策。\n由经理决定。",
+   "travel": "汇集各类信号，显示哪个国家的游客将会增长、何时增长。"
+  },
+  "whyLead": "AI 已无处不在。问题不再是“它聪不聪明”，而是“这件事我能不能放心交给它”。",
+  "whyAlt": "一个 AP 的答案——结论、成分核对、需确认标记、来源（MFDS 备案、原文）、更新日期、不上传儿童数据、免费、Claude · ChatGPT · Siri。八个理由全部包含在一个答案之中。",
+  "whyFacts": [
+   {
+    "step": "来源",
+    "big": "1.9M",
+    "unit": "条",
+    "title": "对照公开原始资料核对",
+    "sub": "MFDS 开放数据 · 每周一更新"
+   },
+   {
+    "step": "依据",
+    "big": "100",
+    "unit": "%",
+    "title": "每个答案都附有来源",
+    "sub": "报告编号、原文和日期随答案一同提供。"
+   },
+   {
+    "step": "你的手机",
+    "big": "0",
+    "unit": "",
+    "title": "存储的个人数据",
+    "sub": "无需账号，无需登录。问题会连同答案一并丢弃。"
+   }
+  ]
+ },
+ "fr": {
+  "hero": "Des choix, des transactions et des idées complexes, transformés en systèmes.",
+  "cta": "Découvrir notre moteur et nos activités",
+  "featured": "De la complexité à la décision, en cinq étapes.",
+  "select": "Pas un magasin qui vend — un magasin qui choisit.",
+  "concept": "Concept IA · phase de conception",
+  "lia": "Influenceuse IA · culture, lieux et produits de la Corée",
+  "revenue": "Des données de revenus aux priorités d'action.",
+  "proof": "Développé de façon indépendante · Working Proof",
+  "visualNote": "Flux conceptuel · aucune donnée d'exploitation réelle",
+  "portfolio": "Le moment de choisir. D'acheter. D'apprendre.",
+  "groups": [
+   "Decision Intelligence",
+   "Commerce",
+   "Jouer & apprendre"
+  ],
+  "short": {
+   "safe": "Lit l'étiquette à votre place, pour savoir si votre enfant peut le manger.",
+   "light": "Vous dit combien de calories contient le sachet que vous allez acheter.",
+   "revenue": "Signale chaque matin les dates où les réservations ont ralenti. La tarification reste au responsable.",
+   "travel": "Rassemble les signaux qui montrent de quel pays viendront davantage de clients, et quand.",
+   "select": "Voyez-le, touchez-le, choisissez-le — puis il est expédié chez vous.",
+   "commerce": "Ce que vous avez découvert en Corée, racheté une fois rentré chez vous.",
+   "craft": "Met de l'ordre dans la filière, du travail de l'artisan à l'acheteur étranger.",
+   "lia": "Une influenceuse IA qui présente au monde la culture, les lieux et les produits de la Corée.",
+   "rgrg": "Un buzzer, le premier qui appuie. Apprendre en s'affrontant aux quiz.",
+   "cubs": "Le hangeul appris par le jeu avec quatre tigreaux frères et sœurs.",
+   "lastwave": "Des adultes qui transforment l'imagination d'un jeune créateur en jeu."
+  },
+  "why": "Pourquoi choisir AP.",
+  "principles": [
+   "Pas de feu vert. Nous disons « non trouvé », jamais « sûr ». Le dernier mot revient au parent, au responsable. Conçu pour échouer du côté de la prudence.",
+   "Chaque réponse porte sa source — numéro de déclaration MFDS, registre de réservation, texte d'origine. La réponse est le document que vous emportez chez le médecin, en réunion, auprès de votre supérieur.",
+   "Pas de devinettes. Nous vérifions les originaux publics : 1,9 million de lignes MFDS, de vrais registres de réservation. Si ce n'est pas dans les données, nous le disons.",
+   "Nous ne prétendons pas savoir. Les ingrédients opaques restent « à vérifier ». Nous indiquons d'emblée qu'il ne s'agit ni d'un diagnostic, ni d'un avis médical ou diététique — son adoption n'engage donc aucune responsabilité juridique.",
+   "Les données publiques sont récupérées à nouveau automatiquement chaque lundi à minuit. Aucun verdict fondé sur des fiches périmées ou des produits abandonnés.",
+   "Le profil de l'enfant, les photos et les journaux ne quittent jamais l'appareil. Les serveurs voient la question et l'écartent avec la réponse. Pas de compte, pas de connexion.",
+   "Sans état ou sans serveur, donc presque aucun coût d'exploitation. Les connecteurs sont gratuits ; les applications sont gratuites ou à paiement unique. Pas d'abonnement, pas de publicité.",
+   "Une adresse, deux minutes, dans l'IA que vous utilisez déjà. La même réponse dans Claude, ChatGPT ou Siri — changez d'IA, gardez le verdict."
+  ],
+  "globalMore": "Principes de conception globale",
+  "aboutTitle": "Là où l'on avait renoncé, l'IA.",
+  "about": "Non pas là où l'IA remplace une personne, mais là où une personne s'était arrêtée.\nLe jugement reste humain, jusqu'au bout.\nA.P — Alfred Park · AI People.",
+  "aboutMore": "À propos de l'entreprise",
+  "lab": "Projets indépendants. La trace de ce que nous construisons et apprenons.",
+  "contact": "Produits · Experts · Marques · Partenariats internationaux",
+  "detail": "En savoir plus",
+  "engineIntro": "Un sachet de snacks et le tarif d'une chambre d'hôtel partagent la même structure. Exemple : un enfant allergique au lait et au blé, et un Oh Yes.",
+  "engineSteps": [
+   [
+    "Données",
+    "Ingrédients déclarés · la liste à éviter"
+   ],
+   [
+    "Contexte",
+    "« Sans lait ni blé » confronté à « œufs · blé · cacao »"
+   ],
+   [
+    "Jugement",
+    "Signalé. Preuve jointe."
+   ],
+   [
+    "Décision humaine",
+    "Le système va jusqu'à la recommandation. Le parent décide."
+   ],
+   [
+    "Apprentissage",
+    "Choix et résultats s'accumulent → le jugement suivant"
+   ]
+  ],
+  "engineNote": "La structure commune à AP Safe · Light · Revenue · Travel · SELECT. Ce sont les personnes qui prennent la décision finale.",
+  "groupDesc": [
+   "Des réponses étayées au moment où il est difficile de choisir. Les personnes décident.",
+   "De la découverte de contenus à l'essai du produit, à l'achat et à la livraison internationale.",
+   "L'apprentissage des langues et des connaissances, et la création, sous forme de jeux."
+  ],
+  "liaChannel": "Contenus Instagram · TikTok / IP mondiale de découverte de la Corée",
+  "examples": {
+   "safe": [
+    "Filtrer ce qu'il faut éviter",
+    "« Mon enfant peut-il manger cet Oh Yes ? Éviter le lait et le blé. »",
+    "« Il contient du blé. » Avec l'ingrédient déclaré et sa source."
+   ],
+   "light": [
+    "Choisir le plus léger",
+    "« J'achète des Saewookkang — y a-t-il plus léger ? »",
+    "« 465 kcal le sachet. Il y en a un à 70 kcal dans le même rayon. »"
+   ],
+   "revenue": [
+    "Choisir les dates à examiner aujourd'hui",
+    "Données de réservation et d'annulation jusqu'à hier",
+    "« Le 10 octobre est à risque. Revoir le prix et les disponibilités. » → le responsable décide"
+   ],
+   "travel": [
+    "Choisir le marché à surveiller",
+    "Capacité aérienne · volume de recherches · taux de change · jours fériés",
+    "« Surveiller Taïwan ce mois-ci. » → décision de campagne"
+   ]
+  },
+  "input": "Demandez ainsi",
+  "output": "Il répond ainsi",
+  "safeNote": "Ni un diagnostic médical, ni une garantie absolue de sécurité",
+  "rgrgTag": "Pour tous les âges — un savoir qui grandit en jouant.",
+  "rgrgPacks": "Une plateforme de quiz en direct en ligne que chacun peut apprécier, où la culture générale se développe naturellement. L'éducation n'en est qu'une partie.",
+  "rgrgNote": "Écran de jeu réel · sept. 2026",
+  "principleNames": [
+   "01 · Sûr dès la conception",
+   "02 · Preuve jointe",
+   "03 · Données sources uniquement",
+   "04 · Honnête sur ses limites",
+   "05 · Actualisé chaque semaine",
+   "06 · Vos données restent sur votre téléphone",
+   "07 · Coûte peu",
+   "08 · Se branche, sans enfermer"
+  ],
+  "proofLabels": {
+   "safe": "En exploitation · application Safelist · connecteur IA",
+   "light": "En exploitation · connecteur IA LightList"
+  },
+  "portfolioIntro": [
+   "Au moment où il est difficile de choisir, une réponse étayée.",
+   "De la découverte à l'essai, à l'achat et à la livraison.",
+   "Apprendre en s'affrontant, créer en jouant."
+  ],
+  "decision": {
+   "safeTitle": [
+    "Savoir ce qu'il faut",
+    "éviter."
+   ],
+   "safe": "Lit l'étiquette à votre place, pour savoir si votre enfant peut le manger.",
+   "safeSub": "« Oh Yes — éviter le lait et le blé. » → « Il contient du blé. » Avec la preuve.",
+   "safeQuiet": "Application Safelist · connecteur IA en exploitation",
+   "lightTitle": [
+    "Comprendre",
+    "ce qui vous convient."
+   ],
+   "light": "Combien de calories dans le sachet que vous allez acheter.",
+   "lightSub": "Le dos de l'emballage indique les valeurs pour 100 g. Les sachets font 46 g · 66 g · 90 g. Comptez par sachet et le classement s'inverse.",
+   "revenue": "Les données de réservation, converties en décisions du jour.\nLe responsable décide.",
+   "travel": "Rassemble les signaux qui montrent de quel pays viendront davantage de clients, et quand."
+  },
+  "whyLead": "L'IA est déjà partout. La question n'est plus « est-elle intelligente » mais « puis-je lui faire confiance pour cela ».",
+  "whyAlt": "Une réponse AP — verdict, vérification des ingrédients, signalement « à vérifier », source (déclaration MFDS, texte d'origine), date d'actualisation, aucune donnée d'enfant envoyée, gratuit, Claude · ChatGPT · Siri. Les huit raisons réunies dans une seule réponse.",
+  "whyFacts": [
+   {
+    "step": "Source",
+    "big": "1.9M",
+    "unit": "lignes",
+    "title": "Vérifié auprès des originaux publics",
+    "sub": "Données ouvertes MFDS · actualisées chaque lundi"
+   },
+   {
+    "step": "Preuve",
+    "big": "100",
+    "unit": "%",
+    "title": "Chaque réponse porte sa source",
+    "sub": "Le numéro de déclaration, le texte d'origine et la date accompagnent la réponse."
+   },
+   {
+    "step": "Votre téléphone",
+    "big": "0",
+    "unit": "",
+    "title": "Données personnelles stockées",
+    "sub": "Pas de compte, pas de connexion. Les questions sont écartées avec la réponse."
+   }
+  ]
  }
 }

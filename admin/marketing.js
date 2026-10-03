@@ -9,7 +9,7 @@ const HORIZONS = [['daily', '오늘', '하루 한 편'], ['weekly', '이번 주'
 
 export function createMarketing(db, getUser) {
   const root = document.querySelector('#marketing-section');
-  let strategy = null, reports = [], benchmarks = [], loaded = false, gen = 0, idx = 0, horizon = 'daily';
+  let strategy = null, reports = [], benchmarks = [], nsrc = [], nitems = [], loaded = false, gen = 0, idx = 0, horizon = 'daily';
   root.innerHTML = `<p id="mk-message" class="form-message" role="status" aria-live="polite"></p><div id="mk-body"></div>
     <section class="panel panel-wide" id="mk-ads-panel"><div class="panel-head"><div><p class="eyebrow">PAID · APPLE ADS (중단 · 기록 보존)</p><h2>검색 광고 성과 — 앱 현황에서 이관</h2></div><span id="app-ads-state" class="status-pill">연결 예정</span></div><p class="panel-note" style="margin:-8px 0 14px">유료 광고는 2026-09-29 전부 중단(재개는 대표 판단). 캠페인 기록과 동기화는 그대로 유지해 무료 채널 성과와 비교하는 기준선으로 쓴다.</p><div id="app-ads"></div></section>`;
   const $ = s => root.querySelector(s), msg = s => { $('#mk-message').textContent = s; };
@@ -18,16 +18,18 @@ export function createMarketing(db, getUser) {
     if (!getUser()) return; if (loaded && !force) { render(); return; }
     const t = ++gen; msg('홍보 현황을 불러오는 중…');
     try {
-      const [a, b, c] = await Promise.all([
+      const [a, b, c, d, f] = await Promise.all([
         db.from('admin_marketing_strategy').select('*').eq('id', 1).maybeSingle(),
         db.from('admin_marketing_reports').select('*').order('report_date', { ascending: false }).limit(60),
         db.from('admin_marketing_benchmarks').select('*').order('followers', { ascending: false, nullsFirst: false }),
+        db.from('admin_news_sources').select('*').order('priority').order('name'),
+        db.from('admin_news_items').select('*').order('published', { ascending: false, nullsFirst: false }).limit(80),
       ]);
       if (a.error || b.error || c.error) throw a.error || b.error || c.error; if (t !== gen) return;
-      strategy = a.data; reports = b.data || []; benchmarks = c.data || []; loaded = true; idx = 0; render(); msg('');
+      strategy = a.data; reports = b.data || []; benchmarks = c.data || []; nsrc = d.error ? [] : d.data || []; nitems = f.error ? [] : f.data || []; loaded = true; idx = 0; render(); msg('');
     } catch { if (t === gen) msg('홍보 현황을 불러오지 못했습니다. 로그인과 연결 상태를 확인한 후 새로고침하세요.'); }
   }
-  function clear() { gen++; strategy = null; reports = []; benchmarks = []; loaded = false; $('#mk-body').innerHTML = ''; msg(''); }
+  function clear() { gen++; strategy = null; reports = []; benchmarks = []; nsrc = []; nitems = []; loaded = false; $('#mk-body').innerHTML = ''; msg(''); }
 
   function render() {
     const r = reports[idx], h = strategy?.horizons || {}, ad = strategy?.adlens || {};
@@ -72,7 +74,12 @@ export function createMarketing(db, getUser) {
       </section>
       <section class="panel"><div class="panel-head"><div><p class="eyebrow">BENCHMARK ACCOUNTS</p><h2>같은 카테고리 상위 계정 ${bench.length}</h2></div><span class="panel-note">중앙값 = 릴스 조회수÷팔로워 · 장르 기준선 0.10</span></div>
         <div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>플랫폼</th><th>계정</th><th>팔로워</th><th>표본</th><th>중앙값</th><th>최고</th><th>메모</th></tr></thead><tbody>${bench.map(b => `<tr><td>${esc(b.platform)}</td><td>${link(b.platform === 'instagram' ? 'https://www.instagram.com/' + b.handle + '/' : b.platform === 'youtube' ? 'https://www.youtube.com/@' + b.handle : '', '@' + b.handle)}</td><td>${num(b.followers)}</td><td>${num(b.posts_sampled)}</td><td>${b.median_ratio == null ? '—' : Number(b.median_ratio).toFixed(2)}</td><td>${b.top_ratio == null ? '—' : Number(b.top_ratio).toFixed(1)}</td><td class="co-small">${esc(b.note || '')}</td></tr>`).join('')}</tbody></table></div>
-      </section>`;
+      </section>
+      <section class="panel"><div class="panel-head"><div><p class="eyebrow">AP NEWS · 소스 링크 DB</p><h2>뉴스 소스 ${nsrc.length} · 참고 글 ${nitems.length}</h2></div><span class="panel-note">주 1회 자동 점검 · 재해석 초안 ${nitems.filter(i => i.status === 'drafted' || i.status === 'published').length}건 · <a href="/ko/news/" target="_blank" rel="noopener">AP News 보기</a></span></div>
+        <div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>소스</th><th>종류</th><th>상태</th><th>점검 주기</th><th>마지막 점검</th><th>메모</th></tr></thead><tbody>${nsrc.map(x => `<tr><td>${link(x.list_url || x.url, x.name)}</td><td>${esc(x.kind)}</td><td>${esc(x.status)}</td><td>${x.check_every_days}일</td><td>${x.last_checked ? esc(String(x.last_checked).slice(0, 10)) : '—'}</td><td>${esc(x.notes || '')}</td></tr>`).join('') || '<tr><td colspan="6">소스가 없습니다.</td></tr>'}</tbody></table></div>
+        <div class="asset-table-wrap" style="margin-top:14px"><table class="asset-table"><thead><tr><th>날짜</th><th>참고 글</th><th>상태</th><th>우리 글</th></tr></thead><tbody>${nitems.map(i => `<tr><td>${esc(String(i.published || '').slice(0, 10))}</td><td>${link(i.url, i.title)}</td><td>${esc(i.status)}</td><td>${i.our_slug ? link('https://www.apholdings.kr/ko/news/' + i.our_slug + '/', i.our_slug) : '—'}</td></tr>`).join('') || '<tr><td colspan="4">수집된 글이 없습니다.</td></tr>'}</tbody></table></div>
+      </section>
+      `;
   }
 
   root.addEventListener('click', e => {
