@@ -180,3 +180,5 @@ html[lang=en] figure.wide::after{content:'← swipe to see more'}
 .rgrg-copy .visual-caption{display:none}
 .rgrg-copy .text-link{font-size:13px;padding:10px 18px;margin-top:10px}
 }
+.ai-notice{background:#f4f1ea;border-bottom:1px solid #e3ddd0;font-size:13px;line-height:1.5;color:#5b554a;padding:9px 0}
+html[lang=ja] p,html[lang=ja] li,html[lang=ja] h1,html[lang=ja] h2,html[lang=ja] h3,html[lang=zh-cn] p,html[lang=zh-cn] li,html[lang=zh-cn] h1,html[lang=zh-cn] h2,html[lang=zh-cn] h3{word-break:normal;overflow-wrap:anywhere}

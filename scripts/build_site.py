@@ -7,7 +7,8 @@ import json,re
 ROOT=Path(__file__).resolve().parents[1]
 CFG=json.loads((ROOT/'site-source/content.json').read_text())
 ORIGIN=CFG['origin']; PUBLISHED=[k for k,v in CFG['locales'].items() if v['status']=='published']
-DATA={l:json.loads((ROOT/f'site-source/locales/{l}.json').read_text()) for l in PUBLISHED}
+BUILT=[k for k,v in CFG['locales'].items() if v['status'] in ('published','ai_translated')]  # ai_translated: 전 어권 원칙(2026-10-03) — 빌드·노출하되 noindex + AI 번역 고지
+DATA={l:json.loads((ROOT/f'site-source/locales/{l}.json').read_text()) for l in BUILT}
 from status_overlay import apply as _status_apply; _status_apply(DATA,ROOT)  # site-source/status.json → 제품 「지금」 현황
 MEDIA=json.loads((ROOT/'site-source/brand-media.json').read_text())
 HOME_COPY=json.loads((ROOT/'site-source/home-copy.json').read_text())
@@ -20,6 +21,8 @@ CAPABILITIES=['Commercial Operations','Global Sales','Tourism & International Bu
 MARKET=['Locale','Currency','Timezone','Policy','Evidence','Expert','Marketplace','Payment','Logistics','Partner','Pricing','CS','Terms','Analytics']
 POLICIES=[('Safelist','/safelist/privacy.html'),('LightList','/lightlist/privacy.html'),('Hangeul Cubs','/hangeulcubs_privacy.html'),('RGRG','/rgrg/privacy.html'),('IRON GRADE','/irongrade/privacy.html'),('The Other Hours','/theotherhours_privacy.html'),('K-Concert Trip','/kfan_privacy.html'),('나의 첫투자','/privacy.html'),('K-Scan','/kscan/privacy.html'),('Goyo','/goyo/privacy.html')]
 def out(path,text):
+ if path.split('/')[0] in ('vi','ja','zh-cn','fr') and path.endswith('.html'):
+  from ui_strings import localize;text=localize(path.split('/')[0],text)
  p=ROOT/path;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text);GENERATED.append(path)
 def c(l,k):return DATA[l]['copy'][k]
 def prod(l,pid):return next((x for x in DATA[l]["products"] if x["id"]==pid),None) or next(x for x in DATA["ko"]["products"] if x["id"]==pid)
@@ -40,25 +43,28 @@ def head(l,title,description,path,index=True,alternate_suffix=''):
  alternates=''.join(f'<link rel="alternate" hreflang="{lang}" href="{ORIGIN}/{lang}/{alternate_suffix}">' for lang in PUBLISHED) if index else ''
  if index:alternates+=f'<link rel="alternate" hreflang="x-default" href="{ORIGIN}/en/{alternate_suffix}">'
  sd={'@context':'https://schema.org','@type':'Organization','name':'AP Holdings','url':ORIGIN,'logo':ORIGIN+'/img/ap_mark.png','description':description,'email':CFG['contact'],'sameAs':['https://www.instagram.com/lia_park55/','https://www.tiktok.com/@lia_park55']}
- return f'''<!doctype html><html lang="{l}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description,quote=True)}"><meta name="robots" content="{'index,follow' if index else 'noindex,follow'}"><link rel="canonical" href="{canonical}">{alternates}<meta property="og:type" content="website"><meta property="og:site_name" content="AP Holdings"><meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:locale" content="{'ko_KR' if l=='ko' else 'en_US'}"><meta name="theme-color" content="#ffffff"><link rel="icon" href="/img/ap_mark.png">{fonts}<link rel="stylesheet" href="/assets/v2/site.css?v=2.18"><script defer src="/assets/v2/site.js?v=2.4"></script><script type="application/ld+json">{json.dumps(sd,ensure_ascii=False).replace('<','\\u003c')}</script></head>'''
+ return f'''<!doctype html><html lang="{l}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description,quote=True)}"><meta name="robots" content="{'index,follow' if index else 'noindex,follow'}"><link rel="canonical" href="{canonical}">{alternates}<meta property="og:type" content="website"><meta property="og:site_name" content="AP Holdings"><meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:locale" content="{ {'ko':'ko_KR','vi':'vi_VN','ja':'ja_JP','zh-cn':'zh_CN','fr':'fr_FR'}.get(l,'en_US') }"><meta name="theme-color" content="#ffffff"><link rel="icon" href="/img/ap_mark.png">{fonts}<link rel="stylesheet" href="/assets/v2/site.css?v=2.19"><script defer src="/assets/v2/site.js?v=2.4"></script><script type="application/ld+json">{json.dumps(sd,ensure_ascii=False).replace('<','\\u003c')}</script></head>'''
 def nav(l,suffix=''):
  urls=[home(l)+'#businesses',home(l)+'#portfolio',f'/{l}/about/',f'/{l}/ir/',home(l)+'#contact']
- links=''.join(f'<a href="{u}"'+(' class="ir-link"' if i==3 else '')+'>'+e(label)+'</a>' for i,(u,label) in enumerate(zip(urls,c(l,'nav'))))+'<a href="/admin/">'+('관리자' if l=='ko' else 'Admin')+'</a>'  # AdLens portal login (added 2026-09-24 by another session in generated HTML; kept here so builds preserve it)
- langs=''.join(f'<li><a href="/{key}/{suffix if key in PUBLISHED else ""}" lang="{key}"'+(' aria-current="page"' if key==l else '')+'>'+e(value['label'])+('' if key in PUBLISHED else '<small>In preparation</small>')+'</a></li>' for key,value in CFG['locales'].items())
+ links=''.join(f'<a href="{u}"'+(' class="ir-link"' if i==3 else '')+'>'+e(label)+'</a>' for i,(u,label) in enumerate(zip(urls,c(l,'nav'))))+f'<a href="/{l}/news/">AP News</a>'+'<a href="/admin/">'+('관리자' if l=='ko' else 'Admin')+'</a>'  # AdLens portal login (added 2026-09-24 by another session in generated HTML; kept here so builds preserve it)
+ langs=''.join(f'<li><a href="/{key}/{suffix if key in BUILT else ""}" lang="{key}"'+(' aria-current="page"' if key==l else '')+'>'+e(value['label'])+('' if key in BUILT else '<small>In preparation</small>')+'</a></li>' for key,value in CFG['locales'].items())
  return f'<a class="skip" href="#main">{c(l,"skip")}</a><header class="site-header"><div class="wrap header-inner">{logo(l)}<nav class="desktop-nav" aria-label="Main">{links}</nav><details class="language"><summary aria-label="{c(l,"language")}">{l.upper()}</summary><ul>{langs}</ul></details><details class="mobile-menu"><summary>{c(l,"menu")}</summary><nav aria-label="Mobile">{links}</nav></details></div></header>'
 def footer(l,social=False):
  pol='<li class="pol-label">'+('앱 개인정보 처리방침' if l=='ko' else 'App privacy policies')+'</li>'+''.join(f'<li>{link(url,name,"")}</li>' for name,url in POLICIES)
  ko=l=='ko'
  col=lambda t,items:'<div><b>'+e(t)+'</b>'+''.join(link(u,n,'') for n,u in items)+'</div>'
- cols=col('AP Holdings' ,[(('회사 소개' if ko else 'About'),f'/{l}/about/'),('IR / INVESTORS',f'/{l}/ir/'),('Founder’s Lab',f'/{l}/lab/'),(('관리자' if ko else 'Admin'),'/admin/')])
+ cols=col('AP Holdings' ,[(('회사 소개' if ko else c(l,'nav')[2]),f'/{l}/about/'),('IR / INVESTORS',f'/{l}/ir/'),('Founder’s Lab',f'/{l}/lab/'),]+[('AP News',f'/{l}/news/')]+[(('관리자' if ko else 'Admin'),'/admin/')])
  cols+=col('Decision Intelligence',[(prod(l,x)['name'],ph(l,x)) for x in ['safe','light','revenue','travel']])
  cols+=col('Commerce',[(prod(l,x)['name'],ph(l,x)) for x in ['select','commerce','liaselect','craft','lia']])
- cols+=col('Play & Learn',[(prod(l,x)['name'],ph(l,x)) for x in ['rgrg','cubs','lastwave']]+[('AP Games','https://games.apholdings.kr/'+l+'/'),('AP Edu','https://edu.apholdings.kr/'+l+'/'),('AP Entertainment','https://ent.apholdings.kr/'+l+'/')])
+ cols+=col('Play & Learn',[(prod(l,x)['name'],ph(l,x)) for x in ['rgrg','cubs','lastwave']]+[('AP Games','https://games.apholdings.kr/'+l+'/'),('AP Edu','https://edu.apholdings.kr/'+l+'/')])
  cols+=col(('커넥터' if ko else 'Connectors'),[(('세이프리스트 · 클로드' if ko else 'Safelist · Claude'),'/business/safelist-connect.html'),(('라이트리스트 · 클로드' if ko else 'Lightlist · Claude'),'/business/lightlist-connect.html')])
  contact_line=f'<div class="footer-contact" id="contact"><div><span class="eyebrow">CONTACT</span><h3>Build with AP.</h3><p>{c(l,"contact")}</p></div><div>{link("mailto:"+CFG["contact"],CFG["contact"],"contact-email")}{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div>'
  yt='<a class="footer-social" href="https://www.youtube.com/@APHoldings" target="_blank" rel="noopener noreferrer" aria-label="AP Holdings YouTube '+('채널' if ko else 'channel')+'">▶ <span>@APHoldings</span></a>'
  return f'<footer class="site-footer"><div class="wrap">{contact_line}<div class="footer-top">{logo(l)}<div class="footer-map">{cols}</div></div><ul class="footer-policies" aria-label="{c(l,"privacy")}">{pol}</ul><div class="footer-bottom"><span>© 2026 AP Holdings.<em class="rights"> All rights reserved.</em></span><span>Built in Korea. Designed for the world.</span>{link('#top',c(l,'top'),'')}{yt if social else ''}</div></div></footer>'
-def shell(l,title,desc,path,body,suffix='',index=True):return head(l,title,desc,path,index,suffix)+'<body id="top">'+nav(l,suffix)+'<main id="main">'+body+'</main>'+footer(l,path==home(l))+'</body></html>\n'
+def ai_banner(l):
+ n=CFG['locales'].get(l,{}).get('ai_notice') if CFG['locales'].get(l,{}).get('status')=='ai_translated' else None
+ return f'<div class="ai-notice" role="note"><div class="wrap">{e(n)}</div></div>' if n else ''
+def shell(l,title,desc,path,body,suffix='',index=True):return head(l,title,desc,path,index and l in PUBLISHED,suffix)+'<body id="top">'+nav(l,suffix)+ai_banner(l)+'<main id="main">'+body+'</main>'+footer(l,path==home(l))+'</body></html>\n'
 def intro(label,title,desc=''):return f'<div class="section-intro"><div><span class="eyebrow">{e(label)}</span><h2>{e(title)}</h2></div>'+('<p>'+e(desc)+'</p>' if desc else '')+'</div>'
 def contact(l):return f'<section class="contact-section anchor" id="contact"><div class="wrap"><span class="eyebrow">CONTACT</span><h2>{c(l,"contactTitle")}</h2><p>{c(l,"contact")}</p><div class="contact-bottom"><div>{link("mailto:"+CFG["contact"],CFG["contact"],"contact-email")}<p class="note">{c(l,"emailNote")}</p></div>{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div></section>'
 def portnav(l):return '<div class="wrap"><div class="three portfolio-nav">'+''.join(f'<a href="{home(l)}#{gid}"><span class="number">0{i+1}</span><h2>{title}</h2><p>{tag}</p></a>' for i,(gid,title,tag,_) in enumerate(GROUPS))+'</div></div>'
@@ -219,7 +225,7 @@ def product_page(l,p):
  body=re.sub(r'<section class="section"><div class="wrap"><div class="product-body" hidden>.*?</div></div></section>','',body,flags=re.S)
  return body
 # Generate real, crawlable KO/EN documents; the builder, not client JS, selects copy.
-for l in PUBLISHED:
+for l in BUILT:
  out(f'{l}/index.html',shell(l,'AP HOLDINGS — We turn complexity into systems.',c(l,'hero'),home(l),home_page(l)))
  out(f'{l}/ir/index.html',shell(l,'IR / INVESTORS — AP Holdings',c(l,'irIntro'),f'/{l}/ir/',ir_page(l),'ir/'))
  out(f'{l}/about/index.html',shell(l,'About — AP Holdings',c(l,'origin'),f'/{l}/about/',about(l),'about/'))
@@ -253,7 +259,7 @@ for pid,old in [('safe','safelist'),('light','lightlist')]:
  out(path.lstrip('/'),shell('ko',p['name']+' Connector — AP Holdings',p['desc'],path,content,index=False))
 # New localized public pages require human/professional QA. No placeholder translations are indexed.
 for l,cfg in CFG['locales'].items():
- if l in PUBLISHED:continue
+ if l in BUILT:continue
  content=f'<section class="page-hero"><div class="wrap empty-page"><span class="eyebrow">AP HOLDINGS / {e(cfg["label"])}</span><h1>We turn complexity into systems.</h1><p lang="{l}">{e(cfg["notice"])}</p><div class="actions">{button("/en/","English",True)}{button("/ko/","한국어")}</div></div></section>'
  text=shell('en','AP Holdings — '+cfg['label'],cfg['notice'],f'/{l}/',content,index=False).replace('<html lang="en">',f'<html lang="{l}">',1)
  out(f'{l}/index.html',text)

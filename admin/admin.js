@@ -1,7 +1,7 @@
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createContentOperations } from './content.js?v=1.2-series';
 import { createGrants } from './grants.js?v=2.0-strategy';
-import { createMarketing } from './marketing.js?v=1.2';
+import { createMarketing } from './marketing.js?v=1.3';
 import { createBusinessPlan } from './business-plan.js?v=1.0.0';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
