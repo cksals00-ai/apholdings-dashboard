@@ -39,7 +39,7 @@ def timeline():
 def prompt():
     return _r(80,36,320,200,'a',12,.12)+''.join(_r(112,70+i*26,(200 if i%2==0 else 150)+ (i==5)*40,12,'c' if i in(1,3,5) else 'b',6,1 if i in(1,3,5) else .6) for i in range(6))
 MOTIFS={'launch':welcome,'weekly':weekly,'label':label,'models':models,'debt':debt,'ask':ask,'leaks':leaks,'skills':skills,'connect':connect,'lenses':lenses,'plans':plans,'voice':voice,'timeline':timeline,'prompt':prompt}
-BY_NO={1:'launch',2:'weekly',3:'label',4:'models',5:'debt',6:'ask',7:'leaks',8:'skills',9:'connect',10:'lenses',11:'plans',12:'voice',13:'timeline',14:'prompt'}
+BY_NO={1:'launch',2:'weekly',3:'label',4:'models',5:'debt',6:'ask',7:'leaks',8:'skills',9:'connect',10:'lenses',11:'plans',12:'voice',13:'timeline',14:'prompt',15:'weekly',16:'models',17:'lenses'}
 def cover(no,large=False):
     f=MOTIFS[BY_NO.get(no,'launch')]
     par='meet' if large else 'slice'
