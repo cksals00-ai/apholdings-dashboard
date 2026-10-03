@@ -124,7 +124,7 @@ def shell(lang, title, desc, path, main_html, og_type='website'):
     if lang in INDEXED:
         alts = ''.join(f'<link rel="alternate" hreflang="{k}" href="{ORIGIN}/{k}/news/{sub}">' for k in ('ko', 'en'))
         h = h.replace('</head>', alts + '</head>', 1)
-    h = h.replace('</head>', '<link rel="stylesheet" href="/assets/v2/news.css?v=2.0"></head>', 1)
+    h = h.replace('</head>', '<link rel="stylesheet" href="/assets/v2/news.css?v=2.1"></head>', 1)
     # 언어 선택: 같은 글의 각 어권 버전으로
     lis = ''.join(f'<li><a href="/{k}/news/{sub}" lang="{k}"' + (' aria-current="page"' if k == lang else '') + f'>{LNAME[k]}</a></li>' for k in LANGS)
     h = re.sub(r'<details class="language">.*?</details>', f'<details class="language"><summary aria-label="{UI[lang]["lang_label"]}">{lang.upper()}</summary><ul>{lis}</ul></details>', h, 1, re.S)

@@ -42,3 +42,7 @@
 @media(max-width:980px){.news-grid{grid-template-columns:repeat(2,1fr)}.news-hero-in{grid-template-columns:1fr}.news-hero-art{max-height:240px}}
 @media(max-width:640px){.news-grid,.news-grid.three{grid-template-columns:1fr;gap:20px;padding-top:24px}.news-item.is-feature a{flex-direction:column}.news-item.is-feature .news-thumb{min-height:0;aspect-ratio:16/9}.news-item.is-feature .news-txt{padding:20px}.news-hero{padding:40px 0 20px}.post-cover{height:170px}}
 html[lang=ja] .post p,html[lang=ja] .post li,html[lang=ja] .post h1,html[lang=ja] .post h2,html[lang=ja] .news-hero p,html[lang=ja] .news-hero h1,html[lang=ja] .news-item p,html[lang=ja] .news-item h2,html[lang=ja] .post-body blockquote,html[lang=ja] .glance b,html[lang=zh-cn] .post p,html[lang=zh-cn] .post li,html[lang=zh-cn] .post h1,html[lang=zh-cn] .post h2,html[lang=zh-cn] .news-hero p,html[lang=zh-cn] .news-hero h1,html[lang=zh-cn] .news-item p,html[lang=zh-cn] .news-item h2,html[lang=zh-cn] .post-body blockquote,html[lang=zh-cn] .glance b{word-break:normal;overflow-wrap:anywhere}
+/* v2.1 — 기사 본문 가운데 정렬: 읽는 칼럼(760px)을 화면 가운데로 */
+.post .wrap>:not(.related){max-width:760px;margin-left:auto;margin-right:auto}
+.post-back{display:block}
+.post .related{max-width:1040px;margin-left:auto;margin-right:auto}
