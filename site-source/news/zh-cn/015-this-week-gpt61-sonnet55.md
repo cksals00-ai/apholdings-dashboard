@@ -3,13 +3,15 @@ no: 15
 slug: this-week-gpt61-sonnet55
 date: 2026-10-03
 category: 每周资讯
-tags: 每周 AI 资讯 · GPT-6.1 Sol · Claude Sonnet 5.5 · Gemini
-title: 本周 AI 资讯——“更便宜、更快”成了三家公司的共同说法
-summary: 9 月最后一周，OpenAI 和 Anthropic 推出了方向一致的模型。我们对照官方资料确认了变化在哪里，以及对上班族意味着什么。
+tags: 每周 AI 资讯 · GPT-6.1 Sol · Claude Sonnet 5.5 · Gemini 4 Argon
+title: 本周 AI 资讯——两家公司说“更便宜”，谷歌说“更强，先给少数人”
+summary: 9 月最后一周，OpenAI 和 Anthropic 推出了用更低成本完成同样工作的模型，谷歌则先向有限范围开放了 Gemini 4 Argon。我们对照官方资料确认了变化在哪里，以及对上班族意味着什么。
 ---
 > 本文由 AI（Claude）协助起草，编辑已审校。Anthropic 是开发了撰写本文所用 Claude 的公司，可能存在利益关系，因此我们把所有数字都标注为“公司发布的内容”，对其他公司的消息也采用同样的标准。
 
-本周（9 月 28 日至 10 月 3 日）有两项重大发布。两者都是**先说降价，而不是先说性能提升**。
+> **更正（2026-10-03）** 本文最初版本写道，我们“在谷歌官方资料中没能确认 Gemini 4 的发布”。谷歌已于 9 月 30 日在官方博客发布 Gemini 4 Argon。我们更正了标题、开头段落和第 3 部分，并补充了出处。
+
+本周（9 月 28 日至 10 月 3 日）有三项重大发布。OpenAI 和 Anthropic 都是**先说降价，而不是先说性能提升**，谷歌则选择先向少数人开放其最强的新模型。
 
 ## 1. OpenAI——GPT-6.1 Sol
 
@@ -21,9 +23,11 @@ OpenAI 在介绍 GPT-6.1 Sol 时称，它“以低得多的成本提供接近上
 
 Anthropic 介绍 Sonnet 5.5 时称，它“比之前的 Sonnet 5 快 30% 以上，大多数任务的成本最多可低 30%”。token 单价不变（输入 2 美元、输出 10 美元），说明是因为完成同样的工作**使用的 token 更少**，所以费用降低。本月 22 日，上位模型 Opus 5.5 发布，Anthropic 称这一模型“按日常工作量计算，运行成本比 Opus 5 低 40%”。Anthropic 把 Sonnet 5.5 定位为制作文档、幻灯片、电子表格以及修复范围明确的 bug 等日常任务，把 Opus 5.5 定位为需要判断的复杂工作。法国 IT 媒体 Next.ink 指出单价并没有下降，并总结说这是靠效率来降低费用的结构。
 
-## 3. 谷歌——本周未确认到重大新模型发布
+## 3. 谷歌——Gemini 4 Argon：最强的模型先给少数人
 
-谷歌在 10 月 1 日更新了开发者模型文档，目前列为稳定版的有 Gemini 3.8 Flash（用于长时间开发工作和智能体）、图像用的 Nano Banana Pro（4K、文字表现）、语音用的 Gemini 3.8 Live。部分 AI 资讯网站报道了本周发布“Gemini 4”，但我们在谷歌官方资料中**没能确认，因此没有将其作为本文的消息。**（不过在由人类投票排名的 Arena 网站上，已经出现了 Gemini 4 Argon。详情请看本周同时发布的《谁用得多》一篇。）
+谷歌于 9 月 30 日在官方博客发布了 Gemini 4 Argon。该模型首先通过谷歌的 Fairwind 计划向值得信赖的网络安全防御者开放，在完善安全防护之后再扩大范围，先从付费 API 客户和 Google AI Ultra 订阅用户开始。与另外两家把“价格”放在前面不同，谷歌把“谨慎开放最强模型”放在了前面。除谷歌自己的发布外，我们没有找到对性能数字的独立验证，因此不在此转述。
+
+**需要知道：**在 10 月 1 日更新的开发者模型文档中，目前可以直接使用的稳定版是 Gemini 3.8 Flash（用于长时间开发工作和智能体）、图像用的 Nano Banana Pro（4K、文字表现）和语音用的 Gemini 3.8 Live。由人类投票排名的 Arena 网站上也已经出现了 Gemini 4 Argon。详情请看本周同时发布的《谁用得多》一篇。
 
 ## 我们的解读
 
@@ -42,3 +46,4 @@ Anthropic 介绍 Sonnet 5.5 时称，它“比之前的 Sonnet 5 快 30% 以上�
 - [Claude Opus 5.5 (Anthropic)](https://www.anthropic.com/claude-opus-5-5) — 英文
 - [Claude Sonnet 5.5 : plus rapide, plus efficace, mais pas moins cher (Next.ink)](https://next.ink/brief-article/claude-sonnet-5-5-plus-rapide-plus-efficace-mais-pas-moins-cher/) — 法文
 - [Gemini models (Google AI for Developers)](https://ai.google.dev/gemini-api/docs/models) — 英文
+- [Gemini 4 Argon: our next era of frontier intelligence (Google)](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/) — 英文

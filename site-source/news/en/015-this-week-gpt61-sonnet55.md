@@ -3,13 +3,15 @@ no: 15
 slug: this-week-gpt61-sonnet55
 date: 2026-10-03
 category: Weekly News
-tags: Weekly AI news · GPT-6.1 Sol · Claude Sonnet 5.5 · Gemini
-title: This Week in AI — "Cheaper and Faster" Was the Common Line From Three Companies
-summary: In the last week of September, OpenAI and Anthropic released models heading in the same direction. We checked official sources to sort out what changed and what it means for people who work with AI.
+tags: Weekly AI news · GPT-6.1 Sol · Claude Sonnet 5.5 · Gemini 4 Argon
+title: This Week in AI — Two Companies Said "Cheaper," Google Said "Stronger, for a Few First"
+summary: In the last week of September, OpenAI and Anthropic released models that do the same work for less, while Google opened Gemini 4 Argon to a limited group first. We checked official sources to sort out what changed and what it means for people who work with AI.
 ---
 > This article was drafted together with AI (Claude) and reviewed by an editor. Anthropic is the company that makes Claude, which was used to write this article. Because it may have a stake, we label every figure as "announced by the company," and we treated news about other companies by the same standard.
 
-This week (September 28 to October 3) there were two major announcements. In both, **the message about lower prices came before the message about higher performance.**
+> **Correction (2026-10-03)** The first version of this article said we "could not confirm a Gemini 4 launch in Google's official materials." Google announced Gemini 4 Argon on its official blog on September 30. We corrected the title, the opening paragraph and section 3, and added the source.
+
+This week (September 28 to October 3) there were three major announcements. From OpenAI and Anthropic, **the message about lower prices came before the message about higher performance**, while Google chose to open its strongest new model to a limited group first.
 
 ## 1. OpenAI — GPT-6.1 Sol
 
@@ -21,9 +23,11 @@ Introducing GPT-6.1 Sol, OpenAI describes it as "intelligence close to the previ
 
 Anthropic describes Sonnet 5.5 as "more than 30% faster than the previous Sonnet 5, and up to 30% cheaper on most tasks." Per-token prices are unchanged ($2 input, $10 output); the explanation is that it finishes the same job with **fewer tokens**, so the cost goes down. On the 22nd of the same month, the higher-tier Opus 5.5 was released, and Anthropic says it "runs at 40% lower cost than Opus 5 on typical work." Anthropic positions Sonnet 5.5 for well-defined everyday tasks such as making documents, slides and spreadsheets and fixing bugs, and Opus 5.5 for complex work that requires judgment. The French IT outlet Next.ink pointed out that the unit price did not go down, and summed it up as a structure in which the price falls through efficiency.
 
-## 3. Google — We Could Not Confirm a Major New Model Announcement This Week
+## 3. Google — Gemini 4 Argon: The Strongest Model Goes to a Few First
 
-Google updated its developer model documentation as of October 1, and lists the current stable models as Gemini 3.8 Flash (for long-running development work and agents), Nano Banana Pro for images (4K, text rendering), and Gemini 3.8 Live for voice. Some AI news sites reported a "Gemini 4" launch this week, but **we could not confirm it in Google's official materials, so we did not use it as news in this article.** (That said, Gemini 4 Argon is listed on Arena, the site that ranks models by human votes. For details, see the piece we posted this week, "Who Uses Which AI the Most.")
+Google announced Gemini 4 Argon on its official blog on September 30. It is first rolling out to trusted cyber defenders through Google's Fairwind Program, and Google says it will widen access, starting with paid API customers and Google AI Ultra subscribers, after refining its guardrails. Where the other two led with price, Google led with "opening the strongest model carefully." We did not find independent verification of the performance figures beyond Google's own announcement, so we do not repeat them.
+
+**Good to know:** In the developer model documentation updated on October 1, the stable models you can use right now are Gemini 3.8 Flash (for long-running development work and agents), Nano Banana Pro for images (4K, text rendering) and Gemini 3.8 Live for voice. Gemini 4 Argon is also listed on Arena, the site that ranks models by human votes. For details, see the piece we posted this week, "Who Uses Which AI the Most."
 
 ## Our Interpretation
 
@@ -42,3 +46,4 @@ This article was written after directly opening and checking the official announ
 - [Claude Opus 5.5 (Anthropic)](https://www.anthropic.com/claude-opus-5-5) — English
 - [Claude Sonnet 5.5 : plus rapide, plus efficace, mais pas moins cher (Next.ink)](https://next.ink/brief-article/claude-sonnet-5-5-plus-rapide-plus-efficace-mais-pas-moins-cher/) — French
 - [Gemini models (Google AI for Developers)](https://ai.google.dev/gemini-api/docs/models) — English
+- [Gemini 4 Argon: our next era of frontier intelligence (Google)](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/) — English
