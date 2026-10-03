@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>나의 첫투자 — 첫투자 지침서 & 모의투자</title>
+<meta name="description" content="첫투자하는 사람의 지침서와 모의투자 연습. 추천 없음 · 실주문 없음 · 계정 없음. 설정에서 아이 버전으로 바꿀 수 있어요.">
+<meta name="theme-color" content="#FAF6ED">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="나의 첫투자">
+<meta property="og:title" content="나의 첫투자 — 첫투자 지침서 & 모의투자">
+<meta property="og:description" content="진짜 돈을 넣기 전에, 여기서 연습하며 익히는 10가지. 추천 없음 · 실주문 없음 · 계정 없음.">
+<meta property="og:url" content="https://www.apholdings.kr/firstinvest/">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#FAF6ED; --panel:#FFFFFF; --panel2:#EFF7F2; --jade:#3D946E; --jadeDeep:#21664D;
+  --paper:#1F2421; --dim:#5C6661; --muted:#8C948F; --up:#E64D47; --down:#4073E6; --warn:#ED9E33;
+  --line:rgba(31,36,33,.08); --tabH:64px; --safeB:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:#EDE8DC}
+body{font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;color:var(--paper);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+input,select{font:inherit;color:inherit}
+.app{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;background:var(--ink);position:relative;box-shadow:0 0 0 1px rgba(0,0,0,.04),0 20px 60px rgba(0,0,0,.06)}
+header.top{position:sticky;top:0;z-index:5;background:rgba(250,246,237,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;display:flex;align-items:center;gap:10px;min-height:56px}
+header.top h1{font-size:22px;font-weight:800;letter-spacing:-.3px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header.top .back{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;font-size:20px;color:var(--jadeDeep);background:var(--panel)}
+header.top .mode{font-size:12px;font-weight:700;color:var(--jadeDeep);background:var(--panel2);padding:5px 10px;border-radius:999px}
+main{padding:4px 16px calc(var(--tabH) + var(--safeB) + 28px)}
+main.withDock{padding-bottom:calc(var(--tabH) + var(--safeB) + 104px)}
+.stack>*+*{margin-top:16px}
+.card{background:var(--panel);border-radius:18px;padding:16px}
+.card.mint{background:var(--panel2);box-shadow:inset 0 0 0 1px rgba(61,148,110,.3)}
+.cap{font-size:12px;color:var(--muted)}
+.lead{font-size:14.5px;color:var(--dim)}
+.h{font-size:17px;font-weight:800}
+.big{font-size:32px;font-weight:800;letter-spacing:-.5px;font-variant-numeric:tabular-nums;line-height:1.15}
+.num{font-variant-numeric:tabular-nums}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--dim)}
+.row{display:flex;align-items:center;gap:12px}
+.sp{flex:1;min-width:0}
+.emo{width:42px;height:42px;border-radius:12px;background:var(--panel2);display:grid;place-items:center;font-size:22px;flex:0 0 auto}
+.list>*+*{margin-top:8px}
+.item{display:flex;align-items:center;gap:12px;background:var(--panel);border-radius:14px;padding:12px;width:100%;text-align:left}
+.item b{display:block;font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item small{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.right{text-align:right;flex:0 0 auto}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-top:1px solid var(--line);margin-top:12px;padding-top:12px}
+.stats small{display:block;font-size:11.5px;color:var(--muted)} .stats b{font-size:13.5px;color:var(--dim);font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:var(--panel);border-radius:14px;padding:12px;text-align:left;min-width:0}
+.tile .t1{display:flex;justify-content:space-between;align-items:center;font-size:22px}
+.tile b{display:block;font-size:14.5px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile .p{font-size:12px;color:var(--dim);margin-top:2px}
+.pct{font-size:12px;font-weight:800}
+.search{display:flex;align-items:center;gap:8px;background:var(--panel);border-radius:14px;padding:0 14px;height:48px;box-shadow:inset 0 0 0 1px var(--line)}
+.search input{flex:1;border:0;outline:0;background:none;font-size:16px;height:100%}
+.ring{width:56px;height:56px;position:relative;flex:0 0 auto}
+.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font-size:24px}
+.badge{font-size:12px;font-weight:800;color:var(--jadeDeep)}
+.pill{display:inline-block;font-size:13px;font-weight:700;color:var(--jadeDeep);background:var(--panel2);padding:7px 10px;border-radius:10px}
+.bar{display:flex;gap:4px} .bar i{flex:1;height:5px;border-radius:3px;background:rgba(61,148,110,.2)} .bar i.on{background:var(--jade)}
+.quiz{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.qbtn{height:52px;border-radius:14px;background:var(--ink);font-weight:800;font-size:15.5px;box-shadow:inset 0 0 0 1.5px var(--line)}
+.qbtn.ok{background:var(--panel2);color:var(--jadeDeep);box-shadow:inset 0 0 0 2px var(--jade)}
+.qbtn.bad{background:#FDECEB;color:var(--up);box-shadow:inset 0 0 0 2px var(--up)}
+.qbtn:disabled{cursor:default}
+.answer{margin-top:12px;padding:12px;border-radius:12px;background:var(--panel2);font-weight:700;font-size:14.5px}
+.answer.no{color:var(--up)} .answer.ok{color:var(--jadeDeep)}
+.lessonBody{font-size:16.5px;line-height:1.75;white-space:pre-line}
+.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tabH) + var(--safeB) + 12px);width:min(480px,100%);padding:0 16px;z-index:6;display:flex;gap:10px}
+.btn{height:58px;border-radius:18px;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;gap:6px;flex:1}
+.btn.jade{background:var(--jade);color:#fff}
+.btn.red{background:var(--up);color:#fff}
+.btn.blue{background:var(--down);color:#fff}
+.btn.ghost{background:var(--panel);color:var(--dim);box-shadow:inset 0 0 0 1px var(--line);flex:0 0 auto;padding:0 18px}
+.btn:disabled{opacity:.38;cursor:default}
+nav.tabs{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);height:calc(var(--tabH) + var(--safeB));padding-bottom:var(--safeB);background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:7}
+nav.tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--muted);text-decoration:none;font-size:11.5px;font-weight:700}
+nav.tabs a .i{font-size:21px;line-height:1;filter:grayscale(1);opacity:.55}
+nav.tabs a.on{color:var(--jadeDeep)} nav.tabs a.on .i{filter:none;opacity:1}
+.foot{font-size:11.5px;color:var(--muted);text-align:center;margin-top:20px}
+.foot a{color:var(--jadeDeep)}
+.chart{width:100%;height:150px;display:block}
+.sheetBg{position:fixed;inset:0;background:rgba(20,24,22,.42);z-index:20;display:flex;align-items:flex-end;justify-content:center;animation:fade .18s}
+.sheet{background:var(--ink);width:min(480px,100%);max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px 18px calc(18px + var(--safeB));animation:rise .22s cubic-bezier(.2,.8,.2,1)}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:rgba(0,0,0,.15);margin:0 auto 12px}
+@keyframes fade{from{opacity:0}} @keyframes rise{from{transform:translateY(40px);opacity:.5}}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{height:40px;padding:0 14px;border-radius:12px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);font-weight:700;font-size:14px}
+.chip.on{background:var(--panel2);color:var(--jadeDeep);box-shadow:inset 0 0 0 2px var(--jade)}
+.field{width:100%;height:48px;border-radius:12px;border:0;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);padding:0 14px;font-size:16px;outline:0}
+.field:focus{box-shadow:inset 0 0 0 2px var(--jade)}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper button{width:44px;height:44px;border-radius:12px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);font-size:22px;font-weight:700}
+.toggle{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.toggle:last-child{border-bottom:0}
+.sw{width:50px;height:30px;border-radius:15px;background:#D5D9D6;position:relative;flex:0 0 auto;transition:.2s}
+.sw:after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:.2s}
+.sw.on{background:var(--jade)} .sw.on:after{left:23px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.kv:last-child{border-bottom:0} .kv span:first-child{color:var(--dim)} .kv span:last-child{text-align:right;font-weight:600}
+.secT{font-size:13px;font-weight:700;color:var(--muted);margin:22px 4px 8px}
+.err{color:var(--up);font-size:13.5px;font-weight:600;margin-top:8px}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--paper);color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;font-weight:600;z-index:30;max-width:90%;animation:fade .2s}
+.empty{text-align:center;padding:34px 16px}
+.empty .e{font-size:40px}
+.hint{font-size:13px;color:var(--muted)}
+.load{padding:80px 0;text-align:center;color:var(--muted)}
+@media (min-width:520px){ .app{margin-top:0} }
+</style>
+</head>
+<body>
+<div class="app" id="app"><div class="load">불러오는 중…</div></div>
+<nav class="tabs" id="tabs"></nav>
+<script>
+"use strict";
+const DATA = {"rooms": [{"id": 0, "name": "첫투자 지침서", "emoji": "📜", "intro": "진짜 돈을 넣기 전에, 여기서 연습하며 익히는 10가지.", "lessons": [{"id": "0-1", "t": "1. 목적과 기간부터", "b": "이 돈을 언제 쓸 건지 먼저 정합니다. 3년 안에 쓸 돈은 투자하지 않습니다.\n목적이 없으면 흔들릴 때 팔게 됩니다.", "term": "투자 기간", "q": "1년 뒤 전세금으로 쓸 돈도 주식에 넣어도 된다.", "a": false, "w": "짧게 쓸 돈은 변동을 견딜 시간이 없습니다."}, {"id": "0-2", "t": "2. 잃어도 되는 돈만", "b": "생활비·비상금(월 지출 3~6개월분)을 먼저 남기고 남는 돈으로 시작합니다.\n빚(신용·마이너스)으로 하는 투자는 하지 않습니다.", "term": "비상금 · 레버리지", "q": "비상금을 먼저 만들고 남는 돈으로 투자한다.", "a": true, "w": "맞습니다. 급할 때 팔지 않기 위해서입니다."}, {"id": "0-3", "t": "3. 비용은 확정, 수익은 불확정", "b": "수수료 0.015%, 매도세 0.15%는 매번 확정 비용입니다.\n자주 사고팔수록 확정 비용만 쌓입니다. 이 앱의 기록에서 비용 합계를 확인하세요.", "term": "거래비용", "q": "거래를 자주 할수록 수익이 확정된다.", "a": false, "w": "확정되는 것은 비용입니다."}, {"id": "0-4", "t": "4. 나눠 담기", "b": "한 종목·한 업종에 30% 이상 넣지 않습니다.\n처음엔 5~10곳, 서로 다른 업종으로. 지수 ETF는 나눠 담기를 한 번에 해 줍니다.", "term": "분산 · 집중", "q": "확신이 있으면 한 종목에 전부 넣는 것이 낫다.", "a": false, "w": "확신은 미래를 보장하지 않습니다."}, {"id": "0-5", "t": "5. 아는 회사만", "b": "무엇을 만들어 어떻게 돈을 버는지 한 문장으로 말할 수 없으면 사지 않습니다.\n종목 화면의 '무엇을 만드나'를 스스로 채울 수 있어야 합니다.", "term": "사업모델", "q": "이름만 들어 본 회사라도 오르고 있으면 사도 된다.", "a": false, "w": "설명할 수 있는 회사만 삽니다."}, {"id": "0-6", "t": "6. 예측하지 말고 대응", "b": "2년간 한국 전종목을 살펴봐도, 급등을 미리 알려 주는 신호는 없었습니다.\n예측 대신 규칙을 정하고(얼마 빠지면 줄인다, 얼마 오르면 일부 판다) 지킵니다.", "term": "손절 · 익절 규칙", "q": "차트를 잘 보면 내일 오를 종목을 알 수 있다.", "a": false, "w": "과거는 보이지만 미래는 보이지 않습니다."}, {"id": "0-7", "t": "7. 감정을 기록", "b": "살 때 이유, 팔 때 이유를 한 줄 적습니다.\n두려움에 팔고 욕심에 사는 패턴은 기록에서만 보입니다. 이 앱의 기록 탭이 그 노트입니다.", "term": "투자 일지", "q": "매매 이유를 적어 두면 같은 실수를 줄일 수 있다.", "a": true, "w": "맞습니다. 기록이 없으면 반복합니다."}, {"id": "0-8", "t": "8. 남의 말은 정보, 결정은 나", "b": "추천·리딩방·'확실한 정보'는 대부분 그 사람의 이익입니다.\n이 앱도 어떤 종목도 추천하지 않습니다. 정보를 모아 스스로 결정합니다.", "term": "유사투자자문", "q": "유료 리딩방 정보는 검증된 것이다.", "a": false, "w": "검증되지 않았고, 이익 충돌이 있습니다."}, {"id": "0-9", "t": "9. 세금과 계좌", "b": "국내 주식 매도 시 거래세, 해외 주식·배당은 소득세가 붙습니다.\n연금저축·ISA 같은 세제 계좌를 먼저 채우는 것이 보통 유리합니다. (개인 상황은 전문가와 확인)", "term": "세제 혜택 계좌", "q": "세금은 투자 결과와 무관하다.", "a": false, "w": "세후 수익이 진짜 수익입니다."}, {"id": "0-10", "t": "10. 저금처럼, 오래", "b": "매달 같은 날 같은 금액을 넣는 것이 타이밍보다 강합니다.\n돈은 소중하고, 투자는 저금처럼 오래 걸립니다. 이 앱에서 하루 한 번씩 연습해 보세요.", "term": "적립식 · 장기투자", "q": "타이밍을 맞추는 것보다 꾸준히 넣는 것이 대체로 낫다.", "a": true, "w": "맞습니다. 시간이 가장 큰 편입니다."}]}, {"id": 1, "name": "돈은 어디로 흐를까", "emoji": "💧", "intro": "용돈은 어디에서 와서 어디로 갈까요?", "lessons": [{"id": "1-1", "t": "용돈은 시간이에요", "b": "용돈은 누군가 일해서 번 돈이에요. 네가 도와서 받은 용돈도 네 시간이에요.\n그래서 돈은 소중해요. 함부로 쓰면 시간이 사라지는 것과 같아요.", "term": null, "q": "돈은 하늘에서 그냥 떨어진다.", "a": false, "w": "돈은 누군가의 시간과 일에서 나와요."}, {"id": "1-2", "t": "돈은 돌아다녀요", "b": "네 용돈 → 편의점 → 사장님 → 과자 공장 → 일하는 사람 월급 → 다시 누군가의 용돈.\n돈은 한 곳에 멈추지 않고 돌아다녀요.", "term": null, "q": "편의점에서 쓴 돈은 그 자리에서 사라진다.", "a": false, "w": "다른 사람의 월급이 되어 또 돌아다녀요."}, {"id": "1-3", "t": "세 갈래 길", "b": "돈이 생기면 세 가지를 할 수 있어요.\n모으기(저축) · 쓰기(소비) · 회사에 맡겨 함께 키우기(투자).\n셋 다 필요해요. 균형이 중요해요.", "term": "저축 · 소비 · 투자", "q": "투자는 회사에 돈을 맡겨 함께 키우는 것이다.", "a": true, "w": "맞아요. 회사가 잘되면 내 돈도 자라요."}, {"id": "1-4", "t": "가만히 두면 작아져요", "b": "1,000원으로 아이스크림 1개를 살 수 있어요.\n10년 뒤엔 값이 올라 1,000원으로 못 살 수도 있어요. 이걸 물가가 오른다고 해요.\n그래서 돈을 그냥 두면 조금씩 힘이 약해져요.", "term": "물가", "q": "돈을 서랍에 두면 힘이 그대로 유지된다.", "a": false, "w": "물가가 오르면 같은 돈으로 살 수 있는 게 줄어요."}, {"id": "1-5", "t": "시간의 힘", "b": "매달 1만 원을 10년 모으면 120만 원.\n해마다 5%씩 자라면 155만 원쯤 돼요. 이자가 또 이자를 낳아서요.\n오래 두는 게 가장 큰 힘이에요.", "term": "복리", "q": "오래 둘수록 돈이 자라는 힘이 커진다.", "a": true, "w": "맞아요. 시간이 제일 큰 친구예요."}]}, {"id": 2, "name": "회사와 주식", "emoji": "🏭", "intro": "주식은 회사를 아주 작게 나눈 조각이에요.", "lessons": [{"id": "2-1", "t": "회사란", "b": "회사는 사람들이 모여 물건이나 서비스를 만드는 곳이에요.\n라면 회사, 게임 회사, 자동차 회사.\n회사도 물건을 만들려면 돈이 필요해요.", "term": null, "q": "회사는 돈이 필요 없다.", "a": false, "w": "공장도 짓고 월급도 줘야 해요."}, {"id": "2-2", "t": "주식 = 회사 조각", "b": "회사를 아주 작게 나눈 조각이 주식이에요.\n조각을 하나 사면 나는 그 회사의 작은 주인이 돼요.\n큰 회사도 조각은 몇 만 원부터 있어요.", "term": "주식", "q": "주식을 사면 그 회사의 작은 주인이 된다.", "a": true, "w": "맞아요. 아주 작아도 주인이에요."}, {"id": "2-3", "t": "값은 왜 오르내릴까", "b": "회사가 돈을 잘 벌면 조각을 갖고 싶은 사람이 늘어요.\n갖고 싶은 사람이 많으면 값이 올라요. 줄이 길어지는 것과 같아요.\n반대면 내려요.", "term": "수요와 공급", "q": "사고 싶은 사람이 많아지면 값이 내린다.", "a": false, "w": "줄이 길어지면 값은 올라요."}, {"id": "2-4", "t": "배당", "b": "회사가 번 돈의 일부를 주인들에게 나눠 주는 것이 배당이에요.\n조각을 오래 들고 있으면 받을 수 있어요.\n모든 회사가 주는 건 아니에요.", "term": "배당", "q": "배당은 회사가 주인에게 나눠 주는 돈이다.", "a": true, "w": "맞아요. 주인이라서 받는 거예요."}, {"id": "2-5", "t": "우리 동네 회사", "b": "초코파이는 오리온이, 신라면은 농심이, 카카오톡은 카카오가 만들어요.\n네가 아는 물건 뒤에는 회사가 있어요.\n회사 탭의 도감에서 찾아봐요.", "term": null, "q": "내가 먹는 과자도 어떤 회사가 만든다.", "a": true, "w": "맞아요. 도감에서 확인해 봐요."}]}, {"id": 3, "name": "말을 배우자", "emoji": "🔤", "intro": "어려운 말도 쉬운 말로 바꾸면 쉬워요.", "lessons": [{"id": "3-1", "t": "사기 · 팔기", "b": "조각을 사서 주인이 되는 것 = 사기(매수).\n조각을 다른 사람에게 넘기는 것 = 팔기(매도).\n이 앱에서는 '사기' '팔기'라고 써요.", "term": "매수 · 매도", "q": "매도는 조각을 사는 것이다.", "a": false, "w": "매도는 팔기예요. 매수가 사기."}, {"id": "3-2", "t": "오늘 마지막 값", "b": "하루 장이 끝날 때의 값이 종가예요.\n우리 앱은 이 값으로 연습해요. 그래서 하루에 값이 한 번만 바뀌어요.\n실시간이 아니에요.", "term": "종가", "q": "이 앱의 값은 1초마다 바뀐다.", "a": false, "w": "하루 한 번, 마지막 값만 써요."}, {"id": "3-3", "t": "얼마나 변했나", "b": "어제보다 몇 % 올랐나 내렸나를 등락률이라고 해요.\n올랐으면 빨강, 내렸으면 파랑. 한국의 규칙이에요.\n(다른 나라는 반대인 곳도 있어요.)", "term": "등락률", "q": "한국에서 빨강은 값이 올랐다는 뜻이다.", "a": true, "w": "맞아요. 빨강 = 오름, 파랑 = 내림."}, {"id": "3-4", "t": "번 돈 · 잃은 돈", "b": "지금 값 − 산 값 = 손익.\n아직 팔지 않았으면 숫자일 뿐이에요(평가손익).\n팔아서 확정되면 진짜 번 돈(실현손익)이에요.", "term": "손익 · 평가손익 · 실현손익", "q": "아직 팔지 않은 이익은 확정된 돈이다.", "a": false, "w": "팔기 전까지는 숫자일 뿐이에요."}, {"id": "3-5", "t": "조금씩 떼어 가요", "b": "사고팔 때 수수료와 세금을 조금씩 떼어 가요.\n너무 자주 사고팔면 그만큼 사라져요.\n그래서 자주 바꾸는 건 손해예요.", "term": "거래비용", "q": "자주 사고팔수록 돈이 더 잘 모인다.", "a": false, "w": "매번 조금씩 떼어 가니까 손해예요."}, {"id": "3-6", "t": "나눠 담기", "b": "계란을 한 바구니에 다 담으면 떨어질 때 다 깨져요.\n여러 회사에 나눠 담는 것을 분산투자라고 해요.\n한 회사에 전부 넣지 않아요.", "term": "분산투자", "q": "한 회사에 전부 넣는 게 가장 안전하다.", "a": false, "w": "나눠 담아야 한 곳이 흔들려도 괜찮아요."}]}, {"id": 4, "name": "그림 읽기", "emoji": "📈", "intro": "그래프는 과거만 보여 줘요. 미래는 아무도 몰라요.", "lessons": [{"id": "4-1", "t": "선 하나가 말해 주는 것", "b": "값을 날짜 순서로 점 찍고 이으면 선이 돼요.\n오른쪽 위로 가면 올랐고, 아래로 가면 내렸어요.\n회사 화면의 '네가 본 날들' 선이 그거예요.", "term": "차트", "q": "선이 오른쪽 아래로 가면 값이 올랐다.", "a": false, "w": "아래로 가면 내린 거예요."}, {"id": "4-2", "t": "세 가지 걸음", "b": "오르는 계단, 내리는 계단, 옆으로 걷기.\n그래프는 이 세 가지 중 하나처럼 보여요.\n어떤 걸음인지 이름 붙여 보세요.", "term": "추세", "q": "그래프는 항상 오르는 계단이다.", "a": false, "w": "내리기도 하고 옆으로도 걸어요."}, {"id": "4-3", "t": "함정: 어제 올랐으니 오늘도?", "b": "어제 많이 올랐다고 오늘도 오르진 않아요.\n우리가 2년 동안 수천 개 회사를 살펴봤는데, 미리 알 방법은 없었어요.\n그래프는 과거만 보여 줘요.", "term": null, "q": "어제 많이 오른 회사는 오늘도 꼭 오른다.", "a": false, "w": "아무도 미리 알 수 없어요. 정직하게 말해요."}, {"id": "4-4", "t": "값이 많이 흔들림", "b": "어떤 회사는 값이 위아래로 크게 움직여요. 이걸 변동성이 크다고 해요.\n크게 오를 수도, 크게 내릴 수도 있어요.\n흔들리는 걸 견딜 수 있을 만큼만 담아요.", "term": "변동성", "q": "변동성이 크면 값이 크게 움직인다.", "a": true, "w": "맞아요. 위로도 아래로도요."}]}, {"id": 5, "name": "조심해야 할 것", "emoji": "🛡️", "intro": "진짜 돈은 사라지면 돌아오지 않아요.", "lessons": [{"id": "5-1", "t": "빚내서 하지 않기", "b": "남의 돈을 빌려서 조각을 사면 안 돼요.\n값이 내려도 빌린 돈은 그대로 갚아야 해요.\n내가 가진 돈, 없어져도 괜찮은 만큼만.", "term": null, "q": "빌린 돈으로 사면 더 많이 벌 수 있으니 좋다.", "a": false, "w": "내리면 빚만 남아요. 절대 안 돼요."}, {"id": "5-2", "t": "'이거 오른다'는 말", "b": "누가 '이거 꼭 오른다'고 하면 한 번 더 생각해요.\n미래는 그 사람도 몰라요.\n부모님과 이야기하고 스스로 결정해요.", "term": null, "q": "친구가 오른다고 하면 바로 사도 된다.", "a": false, "w": "친구도 미래는 몰라요."}, {"id": "5-3", "t": "떨어진 나무는 조용하다", "b": "'주식으로 돈 벌었대'라는 이야기만 들려요.\n잃은 사람은 말하지 않아서 조용해요.\n들리는 이야기만 믿으면 안 돼요.", "term": "생존편향", "q": "들리는 성공 이야기가 전부다.", "a": false, "w": "조용한 실패 이야기가 더 많아요."}, {"id": "5-4", "t": "모르는 회사는 사지 않기", "b": "그 회사가 무엇을 만드는지 말할 수 없으면 사지 않아요.\n이 앱도 살 때 한 번 물어봐요.\n아는 회사부터, 조금씩.", "term": null, "q": "무엇을 만드는지 몰라도 이름이 멋지면 산다.", "a": false, "w": "설명할 수 있는 회사만 사요."}, {"id": "5-5", "t": "저금처럼, 오래", "b": "저금은 돈을 지키는 것. 투자는 회사를 응원하며 돈이 자라게 두는 것.\n둘 다 오래 걸려요.\n하루에 한 번, 저금통에 넣듯 천천히.", "term": "장기투자", "q": "투자는 하루에 여러 번 빨리 바꿔야 잘된다.", "a": false, "w": "저금처럼 천천히, 오래가 답이에요."}]}], "catalog": [{"brand": "초코파이 · 꼬북칩", "code": "271560", "makes": "과자를 만들어 세계에 팔아요", "cat": "먹는 것", "emoji": "🍫"}, {"brand": "신라면 · 짜파게티", "code": "004370", "makes": "라면과 스낵을 만들어요", "cat": "먹는 것", "emoji": "🍜"}, {"brand": "바나나맛우유 · 메로나", "code": "005180", "makes": "우유와 아이스크림을 만들어요", "cat": "먹는 것", "emoji": "🍌"}, {"brand": "비비고 만두 · 햇반", "code": "097950", "makes": "밥·만두·설탕 같은 먹거리를 만들어요", "cat": "먹는 것", "emoji": "🥟"}, {"brand": "칠성사이다 · 펩시", "code": "005300", "makes": "음료수를 만들어요", "cat": "먹는 것", "emoji": "🥤"}, {"brand": "빼빼로 · 자일리톨", "code": "280360", "makes": "과자와 아이스크림을 만들어요", "cat": "먹는 것", "emoji": "🍬"}, {"brand": "진라면 · 오뚜기 카레", "code": "007310", "makes": "라면·카레·케첩을 만들어요", "cat": "먹는 것", "emoji": "🍛"}, {"brand": "불닭볶음면", "code": "003230", "makes": "매운 라면을 만들어 세계에 팔아요", "cat": "먹는 것", "emoji": "🔥"}, {"brand": "CU 편의점", "code": "282330", "makes": "편의점 CU를 운영해요", "cat": "편의점·마트", "emoji": "🏪"}, {"brand": "GS25 편의점", "code": "007070", "makes": "편의점 GS25와 슈퍼를 운영해요", "cat": "편의점·마트", "emoji": "🛒"}, {"brand": "이마트", "code": "139480", "makes": "큰 마트를 운영해요", "cat": "편의점·마트", "emoji": "🛍️"}, {"brand": "갤럭시 폰 · TV", "code": "005930", "makes": "폰·TV·반도체를 만들어요", "cat": "폰·게임·TV", "emoji": "📱"}, {"brand": "카카오톡 · 카카오T", "code": "035720", "makes": "메신저와 여러 앱을 만들어요", "cat": "폰·게임·TV", "emoji": "💬"}, {"brand": "네이버 · 웹툰", "code": "035420", "makes": "검색·웹툰·쇼핑 앱을 만들어요", "cat": "폰·게임·TV", "emoji": "🟩"}, {"brand": "리니지 (게임)", "code": "036570", "makes": "게임을 만들어요", "cat": "폰·게임·TV", "emoji": "🎮"}, {"brand": "배틀그라운드", "code": "259960", "makes": "게임을 만들어요", "cat": "폰·게임·TV", "emoji": "🪂"}, {"brand": "메이플스토리", "code": "225570", "makes": "게임을 만들어요", "cat": "폰·게임·TV", "emoji": "🍁"}, {"brand": "LG TV · 냉장고", "code": "066570", "makes": "TV·냉장고·세탁기를 만들어요", "cat": "폰·게임·TV", "emoji": "📺"}, {"brand": "현대 자동차", "code": "005380", "makes": "자동차를 만들어요", "cat": "타는 것", "emoji": "🚗"}, {"brand": "기아 자동차", "code": "000270", "makes": "자동차를 만들어요", "cat": "타는 것", "emoji": "🚙"}, {"brand": "대한항공 비행기", "code": "003490", "makes": "비행기로 사람과 짐을 옮겨요", "cat": "타는 것", "emoji": "✈️"}, {"brand": "큰 배 (조선)", "code": "329180", "makes": "아주 큰 배를 만들어요", "cat": "타는 것", "emoji": "🚢"}, {"brand": "MLB 모자 · 디스커버리", "code": "383220", "makes": "옷과 모자 브랜드를 만들어요", "cat": "입는 것·놀이", "emoji": "🧢"}, {"brand": "휠라 운동화", "code": "081660", "makes": "운동화와 옷을 만들어요", "cat": "입는 것·놀이", "emoji": "👟"}, {"brand": "롯데월드 · 롯데리아", "code": "004990", "makes": "놀이공원·마트·과자 회사들을 거느려요", "cat": "입는 것·놀이", "emoji": "🎡"}, {"brand": "CGV 영화관", "code": "079160", "makes": "영화관을 운영해요", "cat": "입는 것·놀이", "emoji": "🎬"}, {"brand": "BTS (하이브)", "code": "352820", "makes": "가수를 키우고 음악을 만들어요", "cat": "입는 것·놀이", "emoji": "🎤"}, {"brand": "카카오뱅크", "code": "323410", "makes": "폰 속 은행이에요", "cat": "돈·병원·전기", "emoji": "🏦"}, {"brand": "안티푸라민 (약)", "code": "000100", "makes": "약을 만들어요", "cat": "돈·병원·전기", "emoji": "💊"}, {"brand": "집의 전기 (한국전력)", "code": "015760", "makes": "전기를 만들어 집에 보내요", "cat": "돈·병원·전기", "emoji": "💡"}, {"brand": "폰 통화 (SK텔레콤)", "code": "017670", "makes": "폰이 통화·인터넷 되게 해요", "cat": "돈·병원·전기", "emoji": "📶"}, {"brand": "병 고치는 약 (셀트리온)", "code": "068270", "makes": "병을 고치는 약을 연구해요", "cat": "돈·병원·전기", "emoji": "🧪"}]};
+const STORE_URL = "https://apps.apple.com/kr/app/id6803763681";
+const FEE = 0.00015, TAX = 0.0015;
+
+// ───── 저장 (이 기기 브라우저에만) ─────
+const LS = {
+  get(k, d){ try{ const v = localStorage.getItem('fi.'+k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem('fi.'+k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem('fi.'+k); }catch(e){} }
+};
+const S = Object.assign({ kidMode:false, seedCash:10000000, dailyLimit:10, pauseBeforeBuy:false, catalogOnly:false, roomsInOrder:false, note:'', name:'', pin:null }, LS.get('settings', {}));
+const saveS = () => LS.set('settings', S);
+let PF = LS.get('pf', null) || { seed:S.seedCash, cash:S.seedCash, holdings:[], trades:[] };
+if(PF.seed==null) PF.seed = S.seedCash;
+const newPF = () => { PF={ seed:S.seedCash, cash:S.seedCash, holdings:[], trades:[] }; savePF(); };
+const savePF = () => LS.set('pf', PF);
+let LP = LS.get('learn', { done:[], right:0, total:0 });
+const saveLP = () => LS.set('learn', LP);
+let SEEN = LS.get('seen', {});
+const today = () => { const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
+const tradesToday = () => LS.get('tc.'+today(), 0);
+const noteTrade = () => LS.set('tc.'+today(), tradesToday()+1);
+const canTrade = () => tradesToday() < S.dailyLimit;
+
+// ───── 시장 ─────
+let M = { asof:'—', basis:'종가', stocks:[], by:{} };
+async function loadMarket(){
+  const r = await fetch('/data/prices.json', {cache:'no-store'});
+  if(!r.ok) throw new Error('시세 파일을 받지 못했어요');
+  const f = await r.json();
+  M = { asof:f.asof, basis:f.basis||'종가', stocks:f.stocks, by:{} };
+  f.stocks.forEach(s => M.by[s.c] = s);
+}
+const stock = c => M.by[c];
+const CAT = DATA.catalog, CATS = ["먹는 것","편의점·마트","폰·게임·TV","타는 것","입는 것·놀이","돈·병원·전기"];
+const entry = c => CAT.find(e => e.code === c);
+const CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+const cho = s => [...s].map(ch => { const v=ch.charCodeAt(0); return v>=0xAC00&&v<=0xD7A3 ? CHO[Math.floor((v-0xAC00)/588)] : ch; }).join('');
+function search(q){
+  const t=q.trim(); if(!t) return [];
+  const low=t.toLowerCase(), isCho=[...t].every(c=>CHO.includes(c));
+  return M.stocks.filter(s => s.c.startsWith(t) || s.n.toLowerCase().includes(low) || (CAT.find(e=>e.code===s.c)?.brand||'').includes(t) || (isCho && cho(s.n).includes(t)))
+    .sort((a,b)=>b.a-a.a).slice(0,30);
+}
+function recordSeen(codes){
+  const day = (M.asof||today()).slice(0,10); let ch=false;
+  codes.forEach(c => { const s=stock(c); if(!s) return; const m=SEEN[c]||{}; if(m[day]!==s.p){ m[day]=s.p; SEEN[c]=m; ch=true; } });
+  if(ch) LS.set('seen', SEEN);
+}
+
+// ───── 말투 사전 (Lex) ─────
+const fmt = v => Math.round(v).toLocaleString('ko-KR');
+const won = v => fmt(v)+'원';
+const pct = v => (v>=0?'+':'')+v.toFixed(2)+'%';
+function kidMoney(v){
+  const a=Math.abs(v), sg=v<0?'-':'';
+  if(a>=1e8) return sg+(a/1e8).toFixed(1)+'억 원';
+  if(a>=1e4){ const man=Math.floor(a/1e4), rest=Math.floor(a)%1e4; return sg+fmt(man)+'만'+(rest? ' '+fmt(rest)+'원':' 원'); }
+  return sg+won(a);
+}
+function kidChange(p){ if(p<-5) return '어제보다 많이 내렸어요'; if(p<-0.5) return '어제보다 조금 내렸어요'; if(p<=0.5) return '어제와 거의 같아요'; if(p<=5) return '어제보다 조금 올랐어요'; return '어제보다 많이 올랐어요'; }
+const L = {
+  get kid(){ return S.kidMode; },
+  get home(){ return this.kid?'내 저금통':'내 자산'; }, get learn(){ return this.kid?'배우기':'지침서'; },
+  get company(){ return this.kid?'회사':'종목'; }, get report(){ return this.kid?'리포트':'기록'; },
+  get buy(){ return this.kid?'사기':'매수'; }, get sell(){ return this.kid?'팔기':'매도'; },
+  get share(){ return this.kid?'조각':'주'; }, get owned(){ return this.kid?'내가 주인인 회사':'보유 종목'; },
+  get cash(){ return this.kid?'남은 용돈':'예수금'; }, get value(){ return this.kid?'회사 조각 값':'평가금액'; },
+  get total(){ return this.kid?'내 저금통에 있는 돈':'총 가상자산'; }, get settings(){ return this.kid?'부모님':'설정'; },
+  money(v){ return this.kid?kidMoney(v):won(v); }, change(p){ return this.kid?kidChange(p):pct(p); },
+  diff(v){ if(this.kid && Math.abs(v)<1) return '처음과 같아요'; return this.kid ? (v>=0?'처음보다 '+kidMoney(Math.abs(v))+' 늘었어요':'처음보다 '+kidMoney(Math.abs(v))+' 줄었어요') : (v>=0?'+':'-')+won(Math.abs(v)); }
+};
+const cls = v => v>0?'up':(v<0?'down':'flat');
+const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// ───── 포트폴리오 ─────
+const holding = c => PF.holdings.find(h=>h.code===c);
+const pfValue = () => PF.holdings.reduce((t,h)=>t+h.qty*((stock(h.code)||{}).p||h.avg),0);
+const equity = () => PF.cash + pfValue();
+const retPct = () => (equity()/PF.seed-1)*100;
+function buy(s, amount){
+  const qty=Math.floor(amount/s.p); if(qty<1) return L.kid?'조각 1개 값보다 많이 골라야 해요':'1주 금액('+won(s.p)+')보다 커야 합니다';
+  const gross=qty*s.p, fee=gross*FEE, total=gross+fee;
+  if(total>PF.cash+0.001) return L.kid?'남은 용돈이 모자라요':'예수금이 부족합니다';
+  PF.cash-=total; const h=holding(s.c);
+  if(h){ const nq=h.qty+qty; h.avg=(h.avg*h.qty+total)/nq; h.qty=nq; h.name=s.n; }
+  else PF.holdings.push({code:s.c,name:s.n,qty,avg:total/qty});
+  PF.trades.unshift({date:Date.now(),code:s.c,name:s.n,side:'매수',qty,price:s.p,fee,realized:null});
+  savePF(); return null;
+}
+function sell(s, qty){
+  const h=holding(s.c); if(!h) return '보유하지 않은 종목입니다';
+  const q=Math.min(qty,h.qty); if(q<1) return '1주 이상 입력하세요';
+  const gross=q*s.p, cost=gross*(FEE+TAX), net=gross-cost, realized=net-h.avg*q;
+  PF.cash+=net; h.qty-=q; if(h.qty<0.5) PF.holdings=PF.holdings.filter(x=>x.code!==s.c);
+  PF.trades.unshift({date:Date.now(),code:s.c,name:s.n,side:'매도',qty:q,price:s.p,fee:cost,realized});
+  savePF(); return null;
+}
+
+// ───── 배움 ─────
+const ROOMS_ALL = DATA.rooms;
+const rooms = () => L.kid ? ROOMS_ALL.filter(r=>r.id>0) : ROOMS_ALL;
+const allLessons = () => rooms().flatMap(r=>r.lessons);
+const isDone = id => LP.done.includes(id);
+const roomDone = r => r.lessons.every(l=>isDone(l.id));
+const roomProg = r => r.lessons.filter(l=>isDone(l.id)).length / r.lessons.length;
+function unlocked(r){ if(!S.roomsInOrder || r.id <= (L.kid?1:0)) return true; const prev=rooms().find(x=>x.id===r.id-1); return prev?roomDone(prev):true; }
+const badges = () => rooms().filter(roomDone);
+function nextLesson(){ for(const r of rooms()){ if(!unlocked(r)) continue; const l=r.lessons.find(l=>!isDone(l.id)); if(l) return {r,l}; } return null; }
+function complete(id, correct){ if(!isDone(id)){ LP.done.push(id); LP.total++; if(correct) LP.right++; saveLP(); } }
+
+// ───── 부모 PIN (해시만 저장) ─────
+async function hash(p){ const b=await crypto.subtle.digest('SHA-256', new TextEncoder().encode('fi-pin:'+p)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+function switchMode(kid){ S.kidMode=kid; S.seedCash=kid?1000000:10000000; S.dailyLimit=kid?1:10; S.catalogOnly=kid; S.pauseBeforeBuy=kid; S.roomsInOrder=kid; saveS(); newPF(); LS.set('tc.'+today(),0); }
+
+// ───── 공통 UI ─────
+const $app = document.getElementById('app');
+let gatePassed = false;
+function toast(t){ const d=document.createElement('div'); d.className='toast'; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),2200); }
+function tabs(active){
+  const T=[['home',L.kid?'🐷':'💼',L.home],['learn','📖',L.learn],['co',L.kid?'🏭':'🔎',L.company],['report','📊',L.report]];
+  document.getElementById('tabs').innerHTML = T.map(([k,i,t])=>`<a href="#/${k}" class="${active===k?'on':''}" aria-label="${t}"${active===k?' aria-current="page"':''}><span class="i">${i}</span>${t}</a>`).join('');
+}
+function page(title, body, {back=null, dock='', tab='home'}={}){
+  tabs(tab);
+  $app.innerHTML = `<header class="top">${back?`<button class="back" aria-label="뒤로" onclick="history.back()">‹</button>`:''}<h1>${esc(title)}</h1>${!back?`<span class="mode">${L.kid?'아이 버전':'어른 버전'}</span>`:''}</header><main class="${dock?'withDock':''}"><div class="stack">${body}</div></main>${dock?`<div class="dock">${dock}</div>`:''}`;
+  window.scrollTo(0,0);
+}
+function lineChart(pts){
+  const W=320,H=140,p=10, vs=pts.map(x=>x[1]); let mn=Math.min(...vs)*0.97, mx=Math.max(...vs)*1.03; if(mx===mn){mx+=1;mn-=1;}
+  const X=i=>p+(W-2*p)*(pts.length===1?0.5:i/(pts.length-1)), Y=v=>H-p-(H-2*p)*(v-mn)/(mx-mn);
+  const d=pts.map((x,i)=>(i?'L':'M')+X(i).toFixed(1)+' '+Y(x[1]).toFixed(1)).join(' ');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="본 날들의 값 선 그래프"><path d="${d}" fill="none" stroke="var(--jade)" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>${pts.map((x,i)=>`<circle cx="${X(i)}" cy="${Y(x[1])}" r="3.5" fill="var(--jadeDeep)"/>`).join('')}</svg>`;
+}
+
+// ───── 화면: 홈 ─────
+function vHome(){
+  const eq=equity(), diff=eq-PF.seed;
+  let b='';
+  if(S.note) b+=`<div class="card row"><span style="font-size:22px">💌</span><div class="sp"><div class="cap">${L.kid?'부모님 한마디':'나에게 한마디'}</div><div style="font-weight:700">${esc(S.note)}</div></div></div>`;
+  b+=`<section class="card mint" aria-label="${L.total}"><div class="row"><span style="font-size:44px">${L.kid?'🐷':'💼'}</span><div class="sp"><div class="cap">${L.total}</div><div class="big">${L.money(eq)}</div></div></div>
+     <div style="margin-top:6px"><b class="${cls(diff)}">${L.diff(diff)}</b> <span class="cap">(${pct(retPct())})</span></div>
+     <div class="stats"><div><small>${L.cash}</small><b class="num">${L.money(PF.cash)}</b></div><div><small>${L.value}</small><b class="num">${L.money(pfValue())}</b></div><div><small>${L.kid?'오늘 남은 연습':'오늘 남은 거래'}</small><b>${Math.max(0,S.dailyLimit-tradesToday())}회</b></div></div></section>`;
+  if(!PF.holdings.length){
+    b+=`<div class="card empty"><div class="e">🌱</div><div class="h">${L.kid?'아직 주인인 회사가 없어요':'아직 보유 종목이 없습니다'}</div><p class="lead" style="margin-top:6px">${L.kid?`회사 탭에서 네가 아는 회사를 찾아<br>가상 용돈 ${kidMoney(PF.seed)}으로 시작해 봐요`:`종목 탭에서 아는 회사를 찾아<br>가상 자금 ${won(PF.seed)}으로 연습을 시작하세요`}</p></div>`;
+  } else {
+    b+=`<div><div class="h" style="margin-bottom:8px">${L.owned}</div><div class="list">${PF.holdings.map(h=>{const s=stock(h.code); if(!s) return ''; const e=entry(h.code); const cur=h.qty*s.p, d=cur-h.qty*h.avg;
+      return `<a class="item" href="#/co/${s.c}" style="text-decoration:none;color:inherit"><span class="emo">${e?e.emoji:'🏢'}</span><span class="sp"><b>${esc(e?e.brand:s.n)}</b><small>${esc(s.n)} · ${fmt(h.qty)}${L.share}</small></span><span class="right"><b class="num" style="font-size:14.5px">${L.money(cur)}</b><small class="${cls(d)}" style="font-weight:800">${d>=0?'+':'-'}${L.money(Math.abs(d))}</small></span></a>`;}).join('')}</div></div>`;
+  }
+  const nl=nextLesson();
+  if(nl) b+=`<a class="item" href="#/learn/${nl.r.id}/${nl.r.lessons.indexOf(nl.l)}" style="text-decoration:none;color:inherit"><span class="emo">📖</span><span class="sp"><small>오늘의 카드</small><b>${esc(nl.l.t)}</b></span><span style="color:var(--muted)">›</span></a>`;
+  b+=`<p class="foot">${L.kid?`연습용 가상 돈이에요 · 진짜 돈이 아니에요 · 값은 ${M.asof} 마지막 값(종가)`:`모의투자입니다 · 투자 권유가 아닙니다 · 시세는 ${M.asof} 종가 기준`}</p>`;
+  page(S.name ? (L.kid? S.name+'의 저금통' : S.name+'의 자산') : L.home, b, {tab:'home'});
+}
+
+// ───── 화면: 배우기 ─────
+function ringSVG(p){ const r=24,c=2*Math.PI*r; return `<svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="${r}" fill="none" stroke="rgba(61,148,110,.2)" stroke-width="5"/><circle cx="28" cy="28" r="${r}" fill="none" stroke="var(--jade)" stroke-width="5" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-p)}"/></svg>`; }
+function vLearn(){
+  let b=`<p class="lead">${L.kid?'방을 순서대로 열어요. 카드 하나는 1분, 끝에 한 문장 퀴즈가 있어요.':'첫투자 지침서 10장부터. 카드 하나 1분, 끝에 한 문장 퀴즈. 아이 버전의 5개 방도 같이 열려 있습니다.'}</p><div class="list">`;
+  rooms().forEach(r=>{ const u=unlocked(r), n=r.lessons.filter(l=>isDone(l.id)).length;
+    b+=`<${u?'a href="#/learn/'+r.id+'"':'div aria-disabled="true"'} class="item" style="text-decoration:none;color:inherit;padding:14px${u?'':';opacity:.6'}"><span class="ring">${ringSVG(roomProg(r))}<span>${u?r.emoji:'🔒'}</span></span><span class="sp"><b>${r.id===0?esc(r.name):'방 '+r.id+' · '+esc(r.name)}</b><small style="white-space:normal">${u?esc(r.intro):'앞 방을 다 배우면 열려요'}</small><small class="badge" style="margin-top:2px">${n} / ${r.lessons.length} 카드</small></span>${roomDone(r)?'<span class="badge">배지 🏅</span>':''}</${u?'a':'div'}>`; });
+  b+='</div>';
+  const bs=badges(); if(bs.length) b+=`<div><div class="h" style="margin-bottom:8px">내 배지</div><div class="chips">${bs.map(r=>`<span class="emo" style="border-radius:50%;width:48px;height:48px;font-size:24px">${r.emoji}</span>`).join('')}</div></div>`;
+  page(L.learn, b, {tab:'learn'});
+}
+function vLesson(rid, idx){
+  const r=rooms().find(x=>x.id===rid); if(!r||!unlocked(r)) return go('#/learn');
+  idx=Math.max(0,Math.min(idx|0, r.lessons.length-1)); const l=r.lessons[idx];
+  const prev=isDone(l.id);
+  let b=`<div class="bar" aria-hidden="true">${r.lessons.map((_,i)=>`<i class="${i<=idx?'on':''}"></i>`).join('')}</div>
+  <article class="card" style="padding:20px"><div class="cap">${r.emoji}  ${r.id===0?'지침서':'방 '+r.id} · 카드 ${idx+1} / ${r.lessons.length}</div>
+  <h2 style="font-size:23px;font-weight:800;margin:8px 0 12px;letter-spacing:-.3px">${esc(l.t)}</h2><p class="lessonBody">${esc(l.b)}</p>
+  ${l.term?`<div style="margin-top:14px"><span class="pill">원래 말: ${esc(l.term)}</span></div>`:''}
+  <hr style="border:0;border-top:1px solid var(--line);margin:18px 0 12px"><div class="cap">한 문장 퀴즈</div><div style="font-weight:800;font-size:17px;margin-top:4px">${esc(l.q)}</div>
+  <div class="quiz" id="quiz"><button class="qbtn" data-v="1">O  맞아요</button><button class="qbtn" data-v="0">X  아니에요</button></div><div id="ans"></div></article>`;
+  const last = idx===r.lessons.length-1;
+  const dock=`<button class="btn ghost" ${idx===0?'disabled':''} onclick="go('#/learn/${rid}/${idx-1}',true)">이전</button>`+
+    (last? `<button class="btn jade" id="nextB" ${prev?'':'disabled'} onclick="go('#/learn',true)">${roomDone(r)?'다 배웠어요 🏅':'방 목록으로'}</button>` : `<button class="btn jade" id="nextB" ${prev?'':'disabled'} onclick="go('#/learn/${rid}/${idx+1}',true)">다음 카드</button>`);
+  page(r.name, b, {back:true, dock, tab:'learn'});
+  const q=document.getElementById('quiz'), ans=document.getElementById('ans'), nb=document.getElementById('nextB');
+  q.addEventListener('click', e=>{ const t=e.target.closest('.qbtn'); if(!t||t.disabled) return; const v=t.dataset.v==='1', ok=v===l.a;
+    complete(l.id, ok); [...q.children].forEach(x=>x.disabled=true); t.classList.add(ok?'ok':'bad');
+    ans.innerHTML=`<div class="answer ${ok?'ok':'no'}" role="status">${ok?'딩동댕! ':'아쉬워요. '}${esc(l.w)}</div>`; nb.disabled=false;
+    if(last) nb.textContent = roomDone(r)?'다 배웠어요 🏅':'방 목록으로'; });
+}
+
+// ───── 화면: 회사 / 종목 ─────
+let Q='';
+function tileHTML(e,s){ return `<a class="tile" href="#/co/${s.c}" style="text-decoration:none;color:inherit"><div class="t1"><span>${e.emoji}</span><span class="pct ${cls(s.ch)}">${pct(s.ch)}</span></div><b>${esc(e.brand)}</b><small>${esc(s.n)}</small><div class="p num">${L.share} 1${L.kid?'개':''} ${L.money(s.p)}</div></a>`; }
+function rowHTML(s){ const e=entry(s.c); return `<a class="item" href="#/co/${s.c}" style="text-decoration:none;color:inherit"><span class="emo">${e?e.emoji:'🏢'}</span><span class="sp"><b>${esc(e?e.brand:s.n)}</b><small>${esc(e?s.n:s.m)}</small></span><span class="right"><b class="num" style="font-size:14.5px">${L.money(s.p)}</b><small class="pct ${cls(s.ch)}">${pct(s.ch)}</small></span></a>`; }
+function vCompany(){
+  let b=`<label class="search"><span aria-hidden="true">🔎</span><input id="q" type="search" enterkeyhint="search" autocomplete="off" placeholder="${S.catalogOnly?'도감에서 찾기 (ㅅㅅㅈㅈ도 돼요)':'회사 이름 · 초성 · 코드'}" value="${esc(Q)}" aria-label="검색"></label><div id="res"></div>`;
+  page(L.company, b, {tab:'co'});
+  const inp=document.getElementById('q'), res=document.getElementById('res');
+  const draw=()=>{ Q=inp.value; if(Q.trim()){ const rs=search(Q).filter(s=>!S.catalogOnly||entry(s.c)); res.innerHTML = rs.length? `<div class="list">${rs.map(rowHTML).join('')}</div>` : `<p class="hint" style="padding:16px 4px">찾는 회사가 없어요</p>`; }
+    else { let h=`<p class="lead" style="margin-bottom:6px">${L.kid?'네가 만져 본 물건 뒤에 있는 회사들이에요. 추천이 아니라 정보예요.':`생활 속 브랜드 뒤의 회사들입니다. 검색으로 전 종목(${fmt(M.stocks.length)}개)을 볼 수 있어요. 추천이 아니라 정보입니다.`}</p>`;
+      CATS.forEach(c=>{ const es=CAT.filter(e=>e.cat===c&&stock(e.code)); if(!es.length) return; h+=`<div class="secT" style="margin-left:0;color:var(--paper);font-size:16px;font-weight:800">${c}</div><div class="grid2">${es.map(e=>tileHTML(e,stock(e.code))).join('')}</div>`; });
+      h+=`<p class="hint" style="margin-top:16px">회사가 다 주식시장에 있진 않아요. 다이소·BBQ·뽀로로처럼 조각을 팔지 않는 회사도 많아요.</p>`; res.innerHTML=h; } };
+  inp.addEventListener('input', draw); draw();
+}
+function vDetail(code){
+  const s=stock(code); if(!s) return go('#/co');
+  recordSeen([code]);
+  const e=entry(code), h=holding(code), pts=Object.entries(SEEN[code]||{}).sort((a,b)=>a[0]<b[0]?-1:1);
+  const mc = s.mc>=10000 ? (s.mc/10000).toFixed(1)+'조' : fmt(s.mc)+'억';
+  let b=`<div class="row"><span class="emo" style="width:68px;height:68px;font-size:40px;border-radius:18px">${e?e.emoji:'🏢'}</span><div class="sp"><div style="font-size:22px;font-weight:800;line-height:1.25">${esc(e?e.brand:s.n)}</div><div class="cap">${esc(s.n)} · ${s.m} · ${s.c}</div><div style="font-size:13.5px;color:var(--jadeDeep);margin-top:2px">${esc(e?e.makes:'이 회사가 무엇을 만드는지 부모님과 함께 찾아봐요')}</div></div></div>
+  <section class="card mint"><div class="cap">${L.kid?'조각 1개 값 (오늘 마지막 값 · 종가)':'현재가 ('+M.asof+' 종가 기준)'}</div><div class="big">${L.money(s.p)}</div><div style="margin-top:4px"><b class="${cls(s.ch)}">${L.change(s.ch)}</b> <span class="cap">(${pct(s.ch)})</span></div>
+  <div class="stats" style="grid-template-columns:1fr 1fr"><div><small>회사 전체 값 (시가총액)</small><b>${mc}</b></div><div><small>오늘 사고팔린 돈 (거래대금)</small><b>${fmt(s.a)}억</b></div></div></section>
+  <section class="card"><div class="cap">${L.kid?'네가 본 날들의 값':'내가 본 날들의 종가'}</div>${pts.length>=2? lineChart(pts)+`<p class="hint">${pts[0][0]} → ${pts[pts.length-1][0]} · ${pts.length}일 봤어요. 선이 오른쪽 위로 가면 올랐어요.</p>` : `<p class="lead" style="margin-top:6px">이 화면을 여는 날마다 그날의 값을 점으로 찍어요. 다른 날 또 오면 선이 생겨요.<br>그래프는 과거만 보여 줘요 — 미래는 아무도 몰라요.</p>`}</section>`;
+  if(h){ const cur=h.qty*s.p, d=cur-h.qty*h.avg;
+    b+=`<section class="card"><div class="cap">${L.kid?'내가 가진 조각':'보유'}</div><div class="h num">${fmt(h.qty)}${L.share} · ${L.kid?'지금':'평가'} ${L.money(cur)}</div><div class="${cls(d)}" style="font-size:13.5px;font-weight:700;margin-top:2px">${L.kid?'산 값 평균 ':'평균 매수가 '}${L.money(h.avg)} → ${L.kid?(d>=0?'아직 안 판 번 돈 +':'아직 안 판 잃은 돈 -')+kidMoney(Math.abs(d)):'평가손익 '+(d>=0?'+':'-')+won(Math.abs(d))}</div></section>`; }
+  b+=`<p class="foot" style="text-align:left">${L.kid?'연습이에요. 진짜 돈이 오가지 않아요. 이 앱은 어느 회사도 추천하지 않아요.':'모의투자입니다. 실제 주문이 나가지 않으며 어떤 종목도 추천하지 않습니다.'}</p>`;
+  let dock;
+  if(canTrade()) dock=`<button class="btn red" onclick="orderSheet('${code}','buy')">${L.buy}</button><button class="btn blue" ${h?'':'disabled'} onclick="orderSheet('${code}','sell')">${L.sell}</button>`;
+  else { b+=`<div class="card mint" style="font-weight:700;color:var(--jadeDeep);text-align:center">${L.kid?`오늘 연습 ${S.dailyLimit}회를 다 했어요. 저금통에 넣듯 내일 또 해요 🐷`:`오늘 거래 한도 ${S.dailyLimit}회를 채웠습니다. 잦은 매매는 비용만 확정합니다.`}</div>`; dock=''; }
+  page(e?e.brand:s.n, b, {back:true, dock, tab:'co'});
+}
+
+// ───── 주문 시트 ─────
+function sheet(html){ const bg=document.createElement('div'); bg.className='sheetBg'; bg.innerHTML=`<div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${html}</div>`; bg.addEventListener('click',e=>{ if(e.target===bg) bg.remove(); }); document.body.appendChild(bg); return bg; }
+function orderSheet(code, side){
+  const s=stock(code), e=entry(code), h=holding(code);
+  let amount=0, qty=1, knows=false;
+  const bg=sheet('<div id="os"></div>'), box=bg.querySelector('#os');
+  const close=()=>{ bg.remove(); route(); };
+  function draw(err){
+    let x=`<div class="row" style="margin-bottom:6px"><div class="sp"><div style="font-size:21px;font-weight:800">${L.kid?(side==='buy'?'얼마만큼 주인이 될까요?':'몇 조각을 팔까요?'):(side==='buy'?'얼마를 매수할까요?':'몇 주를 매도할까요?')}</div><div class="lead">${esc(e?e.brand:s.n)} · ${L.share} 1${L.kid?'개':''} ${L.money(s.p)}</div></div><button class="back" style="width:36px;height:36px;border-radius:12px;background:var(--panel)" aria-label="닫기" id="xb">✕</button></div>`;
+    let ok=false;
+    if(side==='buy'){
+      const q=Math.floor(amount/s.p), gross=q*s.p, fee=gross*FEE, share= gross>0 ? gross/equity()*100 : 0;
+      x+=`<div class="cap" style="margin-top:10px">${L.cash} ${L.money(PF.cash)}</div><div class="chips" style="margin-top:8px">${[0.1,0.25,0.5,1].map(f=>`<button class="chip ${amount===Math.floor(PF.cash*f)&&amount>0?'on':''}" data-f="${f}">${f===1?'전부':Math.round(f*100)+'%'}</button>`).join('')}</div>
+      <input class="field num" id="amt" inputmode="numeric" placeholder="금액 직접 입력 (원)" value="${amount?amount:''}" style="margin-top:10px">
+      <div class="card" style="margin-top:12px"><div class="h num">${q>=1? fmt(q)+L.share+' · '+L.money(gross) : (L.kid?'조각 1개 값보다 많이 골라야 해요':'1주 금액보다 커야 합니다')}</div>
+      <div class="hint">${L.kid?'사고팔 때 조금씩 떼어 가요: ':'수수료: '}${won(fee)}</div>
+      ${q>=1?`<div style="font-size:13.5px;font-weight:700;margin-top:6px;color:${share>50?'var(--warn)':'var(--jadeDeep)'}">${L.kid?`이 회사가 내 저금통의 ${share.toFixed(0)}%가 돼요`:`주문 후 이 종목이 자산의 ${share.toFixed(0)}%`}${share>50?(L.kid?' — 한 바구니에 너무 많아요':' — 한 종목 비중이 큽니다'):''}</div>`:''}</div>`;
+      if(S.pauseBeforeBuy) x+=`<button class="toggle" id="kn" style="width:100%;text-align:left"><span class="sp" style="font-weight:600">이 회사가 무엇을 만드는지 말할 수 있어요${e?`<br><span class="hint">힌트: ${esc(e.makes)}</span>`:''}</span><span class="sw ${knows?'on':''}"></span></button>`;
+      ok = q>=1 && (!S.pauseBeforeBuy || knows);
+    } else if(h){
+      const gross=qty*s.p, cost=gross*(FEE+TAX), realized=gross-cost-h.avg*qty;
+      x+=`<div class="cap" style="margin-top:10px">${L.kid?'가진 조각 '+fmt(h.qty)+'개':'보유 '+fmt(h.qty)+'주'}</div>
+      <div class="stepper" style="margin-top:10px"><button id="mn" aria-label="하나 빼기">−</button><input class="field num" id="qt" inputmode="numeric" value="${qty}" style="text-align:center;width:110px"><button id="pl" aria-label="하나 더하기">+</button><button class="chip" id="all">전부</button></div>
+      <div class="card" style="margin-top:12px"><div class="h num">${L.kid?'받는 돈 ':'매도 후 입금 '}${L.money(gross-cost)}</div>
+      <div class="${cls(realized)}" style="font-weight:700;font-size:14px">${L.kid?(realized>=0?'진짜 번 돈이 돼요: +':'진짜 잃은 돈이 돼요: -'):(realized>=0?'실현손익 +':'실현손익 -')}${L.money(Math.abs(realized))}</div>
+      <div class="hint">${L.kid?'사고팔 때 조금씩 떼어 가요: ':'수수료+거래세: '}${won(cost)}</div></div>`;
+      ok = qty>=1;
+    }
+    if(err) x+=`<div class="err">${esc(err)}</div>`;
+    x+=`<button class="btn ${side==='buy'?'red':'blue'}" id="go" style="width:100%;margin-top:16px" ${ok?'':'disabled'}>${side==='buy'?L.buy:L.sell}</button><p class="foot">모의 체결 · ${M.asof} 종가 기준 · 실제 주문이 나가지 않아요</p>`;
+    box.innerHTML=x;
+    box.querySelector('#xb').onclick=()=>bg.remove();
+    box.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{ amount=Math.floor(PF.cash*parseFloat(b.dataset.f)); draw(); });
+    const amt=box.querySelector('#amt'); if(amt) amt.onchange=()=>{ amount=parseInt(amt.value.replace(/[^0-9]/g,''))||0; draw(); };
+    const kn=box.querySelector('#kn'); if(kn) kn.onclick=()=>{ knows=!knows; draw(); };
+    const qt=box.querySelector('#qt'); if(qt){ const mx=h.qty;
+      qt.onchange=()=>{ qty=Math.max(1,Math.min(mx,parseInt(qt.value)||1)); draw(); };
+      box.querySelector('#mn').onclick=()=>{ qty=Math.max(1,qty-1); draw(); };
+      box.querySelector('#pl').onclick=()=>{ qty=Math.min(mx,qty+1); draw(); };
+      box.querySelector('#all').onclick=()=>{ qty=mx; draw(); }; }
+    box.querySelector('#go').onclick=()=>{ const m= side==='buy'? buy(s,amount) : sell(s,qty); if(m) return draw(m);
+      noteTrade(); recordSeen([code]);
+      box.innerHTML=`<div class="empty"><div class="e" style="font-size:56px">${side==='buy'?'🎉':'👋'}</div><p class="h" style="white-space:pre-line;margin-top:8px">${L.kid?(side==='buy'?`이제 ${esc(e?e.brand:s.n)}의 작은 주인이에요!\n저금통에 넣듯, 천천히 지켜봐요.`:'잘 팔았어요. 결과는 기록에 남겨 두었어요.\n다음엔 얼마나 들고 있었는지도 봐요.'):(side==='buy'?'매수 체결(모의).\n산 이유를 한 줄 적어 두면 좋습니다.':'매도 체결(모의).\n실현손익은 기록에 남았습니다.')}</p><button class="btn jade" style="width:100%;margin-top:20px" id="okb">확인</button></div>`;
+      box.querySelector('#okb').onclick=close; };
+  }
+  draw();
+}
+
+// ───── 화면: 리포트 / 기록 ─────
+function vReport(){
+  const eq=equity(), diff=eq-PF.seed, wk=PF.trades.filter(t=>t.date>Date.now()-7*864e5);
+  const sells=PF.trades.filter(t=>t.side==='매도'); let tot=0,n=0;
+  sells.forEach(sv=>{ const bt=PF.trades.find(t=>t.code===sv.code&&t.side==='매수'&&t.date<sv.date); if(bt){ tot+=(sv.date-bt.date)/864e5; n++; } });
+  const hold = n? Math.floor(tot/n) : null, fees=wk.reduce((a,t)=>a+t.fee,0);
+  const size = 30+Math.min(30,Math.max(-10,diff/Math.max(1,PF.seed)*200));
+  const bl = t => `<div class="row" style="align-items:flex-start;gap:8px;margin-top:6px"><span style="color:var(--jade)">•</span><span style="font-size:14.5px">${t}</span></div>`;
+  let b=`<section class="card mint"><div class="h">${L.kid?'이번 주 나의 저금통':'이번 주 요약'}</div><div class="row" style="margin-top:8px"><span style="font-size:${size}px;line-height:1">${L.kid?'🐷':'📊'}</span><div><div style="font-size:20px;font-weight:800" class="num">${L.money(eq)}</div><div class="${cls(diff)}" style="font-weight:700;font-size:13.5px">${L.diff(diff)}</div></div></div>
+  <hr style="border:0;border-top:1px solid var(--line);margin:12px 0 4px">
+  ${bl(L.kid?`이번 주 연습 ${wk.length}회 · 주인인 회사 ${PF.holdings.length}곳`:`이번 주 거래 ${wk.length}회 · 보유 ${PF.holdings.length}종목`)}
+  ${PF.holdings.length>=3?bl('여러 회사에 나눠 담았어요 — 잘한 선택 👍'):PF.holdings.length===1?bl('한 회사에만 담겨 있어요 — 다음엔 나눠 담아 봐요'):''}
+  ${hold!=null?bl(hold>=7?`평균 ${hold}일 들고 있었어요 — 저금처럼 오래, 잘했어요`:`평균 ${hold}일 만에 팔았어요 — 조금 더 오래 지켜봐요`):''}
+  ${fees>0?bl(`이번 주 떼어 간 돈 ${won(fees)} — 자주 바꾸면 늘어나요`):''}
+  ${bl(`배운 카드 ${LP.done.filter(id=>allLessons().some(l=>l.id===id)).length} / ${allLessons().length} · 퀴즈 ${LP.right}/${LP.total} 정답`)}
+  ${badges().length?`<div style="margin-top:8px"><span class="cap">배지</span> ${badges().map(r=>r.emoji).join(' ')}</div>`:''}</section>`;
+  const words=allLessons().filter(l=>isDone(l.id)&&l.term);
+  b+=`<div><div class="h" style="margin-bottom:8px">${L.kid?'내가 배운 말':'익힌 용어'}</div>${words.length?`<div class="list">${words.map(l=>`<div class="item" style="padding:10px 12px"><span class="sp"><b style="font-size:14.5px">${esc(l.t)}</b></span><span class="badge" style="font-weight:700">${esc(l.term)}</span></div>`).join('')}</div>`:`<p class="hint">${L.learn} 탭에서 카드를 열면 여기에 모여요</p>`}</div>`;
+  b+=`<div><div class="h" style="margin-bottom:8px">${L.kid?'연습 기록':'매매 기록'}</div>${PF.trades.length?`<div class="list">${PF.trades.slice(0,30).map(t=>{const e=entry(t.code); const d=new Date(t.date);
+    return `<div class="item" style="padding:10px 12px"><span style="width:36px;font-size:13px;font-weight:800;color:${t.side==='매수'?'var(--up)':'var(--down)'}">${t.side==='매수'?L.buy:L.sell}</span><span class="sp"><b style="font-size:14.5px">${esc(e?e.brand:t.name)}</b><small>${fmt(t.qty)}${L.share} · ${L.money(t.price)} · ${d.getMonth()+1}월 ${d.getDate()}일</small></span>${t.realized!=null?`<span class="pct ${cls(t.realized)}">${t.realized>=0?'+':'-'}${L.money(Math.abs(t.realized))}</span>`:''}</div>`;}).join('')}</div>`:'<p class="hint">아직 기록이 없어요</p>'}</div>`;
+  b+=`<button class="btn ghost" style="width:100%;margin-top:8px" onclick="openSettings()">⚙︎ ${L.settings}</button>
+  <p class="foot">iPhone 앱도 있어요 · <a href="${STORE_URL}" target="_blank" rel="noopener">App Store에서 보기</a><br>© A.P Holdings · <a href="/privacy.html">개인정보 처리방침</a></p>`;
+  page(L.report, b, {tab:'report'});
+}
+
+// ───── 부모 게이트 ─────
+function openSettings(){ if(!L.kid || gatePassed) return go('#/settings'); gateSheet(()=>{ gatePassed=true; go('#/settings'); }); }
+function gateSheet(onPass){
+  const a=6+Math.floor(Math.random()*4), b2=6+Math.floor(Math.random()*4), c=4+Math.floor(Math.random()*6), d=6+Math.floor(Math.random()*4);
+  let stage=0;
+  const bg=sheet('<div id="gs"></div>'), box=bg.querySelector('#gs');
+  function draw(err){
+    let x=`<div style="font-size:21px;font-weight:800">부모님 확인</div><p class="lead" style="margin:4px 0 14px">어른만 들어올 수 있는 곳이에요. 두 문제를 풀고 비밀번호를 넣어 주세요.</p>`;
+    if(stage===0) x+=`<div class="row" style="margin-bottom:10px"><b style="font-size:19px;width:110px">${a} × ${b2} = ?</b><input class="field" id="q1" inputmode="numeric" style="width:110px"></div><div class="row"><b style="font-size:19px;width:110px">${c} × ${d} = ?</b><input class="field" id="q2" inputmode="numeric" style="width:110px"></div><button class="btn jade" id="nx" style="width:100%;margin-top:16px">다음</button>`;
+    else if(S.pin) x+=`<input class="field" id="p1" type="password" inputmode="numeric" maxlength="4" placeholder="4자리 비밀번호"><button class="btn jade" id="nx" style="width:100%;margin-top:14px">들어가기</button>`;
+    else x+=`<p class="hint" style="color:var(--jadeDeep);margin-bottom:8px">처음이에요. 부모님 비밀번호 4자리를 만들어 주세요.</p><input class="field" id="p1" type="password" inputmode="numeric" maxlength="4" placeholder="새 비밀번호 4자리"><input class="field" id="p2" type="password" inputmode="numeric" maxlength="4" placeholder="한 번 더" style="margin-top:8px"><button class="btn jade" id="nx" style="width:100%;margin-top:14px">만들고 들어가기</button>`;
+    if(err) x+=`<div class="err">${err}</div>`;
+    box.innerHTML=x;
+    box.querySelector('#nx').onclick=async()=>{
+      if(stage===0){ if(+box.querySelector('#q1').value===a*b2 && +box.querySelector('#q2').value===c*d){ stage=1; draw(); } else draw('답이 달라요. 다시 풀어 주세요.'); return; }
+      const p=box.querySelector('#p1').value;
+      if(S.pin){ if(await hash(p)===S.pin){ bg.remove(); onPass(); } else draw('비밀번호가 달라요.'); }
+      else { const p2=box.querySelector('#p2').value; if(/^\d{4}$/.test(p)&&p===p2){ S.pin=await hash(p); saveS(); bg.remove(); onPass(); } else draw('4자리 숫자, 두 번 똑같이 넣어 주세요.'); }
+    };
+  }
+  draw();
+}
+
+// ───── 화면: 설정 ─────
+function vSettings(){
+  if(L.kid && !gatePassed) return go('#/report');
+  const seeds=[100000,300000,500000,1000000,3000000,10000000,30000000,100000000];
+  const tg=(k,label)=>`<button class="toggle" data-k="${k}" style="width:100%;text-align:left"><span class="sp" style="font-size:15px">${label}</span><span class="sw ${S[k]?'on':''}"></span></button>`;
+  const wk=PF.trades.filter(t=>t.date>Date.now()-7*864e5), fees=PF.trades.reduce((a,t)=>a+t.fee,0);
+  const nl=nextLesson();
+  const topic = LP.done.length<5 ? '용돈은 어디서 와서 어디로 갈까? — 방 1을 함께 읽어 보세요.' : PF.holdings.length===1 ? '한 바구니에 계란을 다 담으면? — 나눠 담기.' : nl ? `다음 카드 「${nl.l.t}」를 같이 열어 보세요.` : '배당이 무엇인지, 오래 들고 있으면 무엇이 좋은지 이야기해 보세요.';
+  let b=`<div class="secT">버전</div><div class="card" style="padding:4px 16px">${`<button class="toggle" id="kidT" style="width:100%;text-align:left"><span class="sp" style="font-size:15px">아이 버전 <span class="hint">(쉬운 말 · 도감 · 부모 잠금)</span></span><span class="sw ${S.kidMode?'on':''}"></span></button>`}<p class="hint" style="padding:0 0 12px">${S.kidMode?'지금은 아이 버전이에요. 어른 버전으로 돌아가면 가상 자금 1,000만·하루 10회·전체 종목·지침서가 열려요.':'지금은 어른 버전(첫투자 지침서)입니다. 아이 버전은 쉬운 말·도감 32곳·하루 1회·부모 잠금으로 바뀝니다.'}</p><div id="pinBox"></div></div>
+  <div class="secT">${S.kidMode?'아이':'사용자'}</div><div class="card list"><input class="field" id="nm" placeholder="${S.kidMode?'아이 이름 (선택)':'이름 (선택)'}" value="${esc(S.name)}" maxlength="12"><input class="field" id="nt" placeholder="${S.kidMode?'이번 주 한마디 — 홈 위에 보여요':'나에게 한마디 — 홈 위에 보여요'}" value="${esc(S.note)}" maxlength="40"></div>
+  <div class="secT">연습 규칙</div><div class="card" style="padding:4px 16px">
+   <div class="toggle"><span class="sp" style="font-size:15px">${S.kidMode?'가상 용돈':'가상 자금'}</span><select class="field" id="sc" style="width:150px;height:40px">${seeds.map(v=>`<option value="${v}" ${v===S.seedCash?'selected':''}>${kidMoney(v)}</option>`).join('')}</select></div>
+   <div class="toggle"><span class="sp" style="font-size:15px">하루 거래 <b id="dlv">${S.dailyLimit}</b>회</span><div class="stepper"><button id="dl-">−</button><button id="dl+">+</button></div></div>
+   ${tg('pauseBeforeBuy','사기 전 멈춤 — 「무엇을 만드는지 말할 수 있어요」 확인')}${tg('catalogOnly','도감 32곳만 열기')}${tg('roomsInOrder','배움 방은 순서대로')}</div>
+  <p class="hint" style="margin:6px 4px 0">가상 자금은 아래 「초기화」 때 적용돼요. 버전을 바꾸면 모의계좌가 새로 시작돼요(배움 진도는 그대로).</p>
+  <div class="secT">${S.kidMode?'부모 리포트':'요약'}</div><div class="card" style="padding:4px 16px">
+   <div class="kv"><span>총 가상자산</span><span>${kidMoney(equity())} (${pct(retPct())})</span></div><div class="kv"><span>시작 금액</span><span>${kidMoney(PF.seed)}</span></div><div class="kv"><span>이번 주 거래</span><span>${wk.length}회 · 전체 ${PF.trades.length}회</span></div>
+   <div class="kv"><span>보유 회사 수</span><span>${PF.holdings.length}곳${PF.holdings.length===1?' (분산 대화 추천)':''}</span></div><div class="kv"><span>거래비용 합계</span><span>${won(fees)}</span></div>
+   <div class="kv"><span>학습 진도</span><span>${LP.done.length}/${allLessons().length} 카드 · 배지 ${badges().length}/${rooms().length}</span></div><div class="kv"><span>퀴즈 정답률</span><span>${LP.total?Math.round(LP.right*100/LP.total)+'%':'—'}</span></div>
+   <p style="font-size:13.5px;color:var(--jadeDeep);padding:10px 0 12px">이번 주 대화 주제: ${esc(topic)}</p></div>
+  <div class="secT">데이터</div><div class="card" style="padding:4px 16px"><div class="kv"><span>시세 기준</span><span>${M.asof} ${M.basis}</span></div><div class="kv"><span>종목 수</span><span>${fmt(M.stocks.length)}개 (KOSPI·KOSDAQ)</span></div><div class="kv"><span>비용</span><span>수수료 0.015% + 매도 거래세 0.15%</span></div><div class="kv"><span>저장</span><span>이 브라우저에만</span></div>
+   <p class="hint" style="padding:10px 0 12px">모의투자 학습용 웹앱입니다. 추천·실주문·계정·광고가 없고 개인정보를 서버로 보내지 않아요. 기록은 이 기기 브라우저에만 남아요. 시세는 전일 종가 기준이며 실시간이 아니에요.</p></div>
+  <button class="btn ghost" id="rs" style="width:100%;margin-top:18px;color:var(--up)">${S.kidMode?'저금통과 배움 진도 초기화':'모의계좌와 학습 진도 초기화'}</button>`;
+  page(S.kidMode?'부모님 설정':'설정', b, {back:true, tab:'report'});
+  const pinBox=document.getElementById('pinBox');
+  document.getElementById('kidT').onclick=()=>{
+    if(!S.kidMode && !S.pin){ pinBox.innerHTML=`<p class="hint" style="color:var(--jadeDeep)">아이 버전은 부모 비밀번호가 있어야 켤 수 있어요. 4자리를 만들어 주세요.</p><input class="field" id="np1" type="password" inputmode="numeric" maxlength="4" placeholder="새 비밀번호 4자리" style="margin-top:8px"><input class="field" id="np2" type="password" inputmode="numeric" maxlength="4" placeholder="한 번 더" style="margin-top:8px"><button class="btn jade" id="npb" style="width:100%;margin:10px 0 14px">비밀번호 만들고 아이 버전 켜기</button><div class="err" id="npe"></div>`;
+      document.getElementById('npb').onclick=async()=>{ const p=document.getElementById('np1').value, p2=document.getElementById('np2').value; if(/^\d{4}$/.test(p)&&p===p2){ S.pin=await hash(p); switchMode(true); gatePassed=true; toast('아이 버전을 켰어요'); vSettings(); } else document.getElementById('npe').textContent='4자리 숫자, 두 번 똑같이 넣어 주세요.'; };
+      return; }
+    if(PF.trades.length && !confirm('버전을 바꾸면 모의계좌가 새로 시작돼요. 바꿀까요?')) return;
+    switchMode(!S.kidMode); gatePassed = S.kidMode; toast(S.kidMode?'아이 버전을 켰어요':'어른 버전으로 바꿨어요'); vSettings();
+  };
+  document.getElementById('nm').onchange=e=>{ S.name=e.target.value.trim(); saveS(); };
+  document.getElementById('nt').onchange=e=>{ S.note=e.target.value.trim(); saveS(); };
+  document.getElementById('sc').onchange=e=>{ S.seedCash=+e.target.value; saveS(); };
+  document.getElementById('dl-').onclick=()=>{ S.dailyLimit=Math.max(1,S.dailyLimit-1); saveS(); document.getElementById('dlv').textContent=S.dailyLimit; };
+  document.getElementById('dl+').onclick=()=>{ S.dailyLimit=Math.min(10,S.dailyLimit+1); saveS(); document.getElementById('dlv').textContent=S.dailyLimit; };
+  document.querySelectorAll('[data-k]').forEach(t=>t.onclick=()=>{ const k=t.dataset.k; S[k]=!S[k]; saveS(); t.querySelector('.sw').classList.toggle('on',S[k]); });
+  document.getElementById('rs').onclick=()=>{ if(!confirm('모두 지우고 처음부터 할까요?')) return; newPF(); LP={done:[],right:0,total:0}; saveLP(); toast('처음부터 시작해요'); vSettings(); };
+}
+
+// ───── 라우터 ─────
+function go(h, replace){ if(replace) location.replace(h); else location.hash=h; }
+function route(){
+  const p=(location.hash||'#/home').slice(2).split('/');
+  if(p[0]!=='settings' && L.kid) {} // 게이트 상태는 탭 이동 후에도 유지 (세션 동안)
+  switch(p[0]){
+    case 'learn': return p[1]!=null ? vLesson(+p[1], +(p[2]||0)) : vLearn();
+    case 'co': return p[1] ? vDetail(p[1]) : vCompany();
+    case 'report': return vReport();
+    case 'settings': return vSettings();
+    default: return vHome();
+  }
+}
+window.addEventListener('hashchange', ()=>{ document.querySelectorAll('.sheetBg').forEach(x=>x.remove()); route(); });
+(async()=>{
+  try{ await loadMarket(); }catch(e){ $app.innerHTML=`<div class="load">시세를 불러오지 못했어요.<br><button class="btn jade" style="margin:16px auto;width:160px" onclick="location.reload()">다시 시도</button></div>`; return; }
+  if(PF.trades.length===0 && PF.holdings.length===0 && PF.seed!==S.seedCash) newPF();
+  recordSeen(CAT.map(e=>e.code).concat(PF.holdings.map(h=>h.code)));
+  route();
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+})();
+</script>
+</body>
+</html>
