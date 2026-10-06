@@ -2,6 +2,8 @@
 'use strict';
 const root=document.querySelector('[data-rankings]'); if(!root)return;
 const ko=root.dataset.locale==='ko',cat=document.getElementById('rank-category'),period=document.getElementById('rank-period'),status=document.getElementById('rank-status'),rows=document.getElementById('rank-rows'),empty=document.getElementById('rank-empty'),refresh=document.getElementById('rank-refresh');
+const motion=document.getElementById('rank-motion'),page=document.querySelector('.rankers-page');
+if(motion&&page)motion.addEventListener('click',()=>{const paused=page.classList.toggle('motion-paused');motion.setAttribute('aria-pressed',String(paused));motion.textContent=ko?(paused?'효과 재생':'효과 멈추기'):(paused?'Play effects':'Pause effects');});
 let controller;
 const categories=new Set([...cat.options].map(o=>o.value));
 const initial=new URL(location.href);if(categories.has(initial.searchParams.get('category')))cat.value=initial.searchParams.get('category');if(['week','all'].includes(initial.searchParams.get('period')))period.value=initial.searchParams.get('period');
