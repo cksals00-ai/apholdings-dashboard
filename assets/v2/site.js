@@ -84,3 +84,12 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
   }, { threshold: 0.5 });
   document.querySelectorAll('.motion-once').forEach((element) => steps.observe(element));
 }
+
+// AP brand system v1: approved shared stencil-cut corporate mark.
+(function applyAPBrand(){
+ const replace=()=>{
+  document.querySelectorAll('a.brand').forEach(a=>{const img=document.createElement('img');img.src='/assets/brand/ap-holdings.svg';img.alt='AP HOLDINGS';img.width=230;img.height=33;img.className='ap-ci-logo';a.replaceChildren(img);});
+  const footer=document.querySelector('.footer-map');if(footer&&!footer.querySelector('[data-brand-guide]')){const link=document.createElement('a');link.href='/ko/brand/';link.textContent='CI · BI / Brand System';link.dataset.brandGuide='true';(footer.querySelector('div')||footer).append(link);}
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',replace);else replace();
+})();
