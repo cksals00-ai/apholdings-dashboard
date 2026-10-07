@@ -101,7 +101,11 @@ const lang=document.documentElement.lang==='ko'?'ko':'en';
 const links=[...map.querySelectorAll('a')];const lia=links.find(a=>/\/products\/lia\/$/.test(a.getAttribute('href')||''));
 if(lia){const group=document.createElement('div');const title=document.createElement('b');title.textContent='Entertainment';group.append(title,lia);map.append(group);}
 const groups=[...map.children];const play=groups.find(g=>g.querySelector('b')?.textContent.includes('Play'));
-if(play){[['RANKERS',/\/products\/rgrg\/$|\/rankers\//],['AP EDU',/edu\.apholdings|\/products\/cubs\/$/],['AP GAMES',/games\.apholdings|\/products\/lastwave\/$/]].forEach(([name,re])=>{let group=[...map.children].find(g=>g.querySelector('b')?.textContent===name);if(!group){group=document.createElement('div');const b=document.createElement('b');b.textContent=name;group.append(b);map.append(group);} [...play.querySelectorAll('a')].filter(a=>re.test(a.href)).forEach(a=>group.append(a));});if(!play.querySelector('a'))play.remove();}
+let games=groups.find(g=>g.querySelector('b')?.textContent==='AP GAMES');
+if(!games){games=document.createElement('div');const title=document.createElement('b');title.textContent='AP GAMES';games.append(title);map.append(games);}
+for(const group of groups){if(group===games)continue;const title=group.querySelector('b')?.textContent||'';if(title.includes('RANKERS')){[...group.querySelectorAll('a')].forEach(a=>games.append(a));group.remove();}}
+if(play){[['AP EDU',/edu\.apholdings|\/products\/cubs\/$/],['AP GAMES',/games\.apholdings|\/products\/lastwave\/$|\/products\/rgrg\/$|\/rankers\//]].forEach(([name,re])=>{let group=[...map.children].find(g=>g.querySelector('b')?.textContent===name);if(!group){group=document.createElement('div');const b=document.createElement('b');b.textContent=name;group.append(b);map.append(group);} [...play.querySelectorAll('a')].filter(a=>re.test(a.href)).forEach(a=>group.append(a));});if(!play.querySelector('a'))play.remove();}
+if(![...games.querySelectorAll('a')].some(a=>a.href==='https://games.apholdings.kr/ko/play/')){const a=document.createElement('a');a.href='https://games.apholdings.kr/ko/play/';a.textContent=lang==='ko'?'로그인 · 웹 게임':'Sign in · web games';games.append(a);}
 const first=map.querySelector('div');if(first&&!first.querySelector('[data-sitemap]')){const a=document.createElement('a');a.href='/ko/sitemap/';a.textContent=lang==='ko'?'전체 사이트맵':'Sitemap';a.dataset.sitemap='true';first.append(a);}
 };if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();
