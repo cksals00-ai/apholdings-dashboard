@@ -182,3 +182,6 @@ html[lang=en] figure.wide::after{content:'← swipe to see more'}
 }
 .ai-notice{background:#f4f1ea;border-bottom:1px solid #e3ddd0;font-size:13px;line-height:1.5;color:#5b554a;padding:9px 0}
 html[lang=ja] p,html[lang=ja] li,html[lang=ja] h1,html[lang=ja] h2,html[lang=ja] h3,html[lang=zh-cn] p,html[lang=zh-cn] li,html[lang=zh-cn] h1,html[lang=zh-cn] h2,html[lang=zh-cn] h3{word-break:normal;overflow-wrap:anywhere}
+
+/* AP brand system v1 */
+.ap-ci-logo{display:block!important;width:230px!important;height:auto!important;max-width:100%;object-fit:contain}.site-header .brand{min-width:190px}.site-footer .brand{background:transparent}.site-header{border-bottom-color:#C8A96A55}.button.primary{background:#111;color:#fff;border-bottom:3px solid #C8A96A}.brand-card{color:#111}@media(max-width:760px){.ap-ci-logo{width:184px!important}.site-header .brand{min-width:0}}
