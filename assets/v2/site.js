@@ -93,3 +93,15 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',replace);else replace();
 })();
+
+(function organizeAPSitemap(){
+const run=()=>{
+const map=document.querySelector('.footer-map');if(!map)return;
+const lang=document.documentElement.lang==='ko'?'ko':'en';
+const links=[...map.querySelectorAll('a')];const lia=links.find(a=>/\/products\/lia\/$/.test(a.getAttribute('href')||''));
+if(lia){const group=document.createElement('div');const title=document.createElement('b');title.textContent='Entertainment';group.append(title,lia);map.append(group);}
+const groups=[...map.children];const play=groups.find(g=>g.querySelector('b')?.textContent.includes('Play'));
+if(play){[['RANKERS',/\/products\/rgrg\/$|\/rankers\//],['AP EDU',/edu\.apholdings|\/products\/cubs\/$/],['AP GAMES',/games\.apholdings|\/products\/lastwave\/$/]].forEach(([name,re])=>{let group=[...map.children].find(g=>g.querySelector('b')?.textContent===name);if(!group){group=document.createElement('div');const b=document.createElement('b');b.textContent=name;group.append(b);map.append(group);} [...play.querySelectorAll('a')].filter(a=>re.test(a.href)).forEach(a=>group.append(a));});if(!play.querySelector('a'))play.remove();}
+const first=map.querySelector('div');if(first&&!first.querySelector('[data-sitemap]')){const a=document.createElement('a');a.href='/ko/sitemap/';a.textContent=lang==='ko'?'전체 사이트맵':'Sitemap';a.dataset.sitemap='true';first.append(a);}
+};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
