@@ -381,9 +381,17 @@ let currentSection = 'overview';
 function showSection(name) {
   if (name === 'board') { name = 'gantt'; setApView('board'); }
   currentSection = name;
+  const quizView = name === 'rgrg' || name === 'rgrg-settings';
+  $('#quizranker-tools').hidden = !quizView;
+  document.querySelectorAll('[data-quiz-view]').forEach(button => {
+    const selected = button.dataset.quizView === name;
+    button.setAttribute('aria-pressed', String(selected));
+    button.classList.toggle('primary', selected);
+    button.classList.toggle('secondary', !selected);
+  });
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'plan' ? '사업계획·기업가치' : name === 'rgrg' ? '알지알지 · 문제은행' : name === 'rgrg-settings' ? '알지알지 · 게임 설정' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'plan' ? '사업계획·기업가치' : name === 'rgrg' ? '퀴즈랭커' : name === 'rgrg-settings' ? '퀴즈랭커' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
@@ -399,10 +407,10 @@ function showSection(name) {
   $('.filters').hidden = ['assets','commerce','apps','content','grants','marketing','plan','rgrg','rgrg-settings'].includes(name);
   $('.top-actions').hidden = ['commerce','apps','content','grants','plan','rgrg','rgrg-settings'].includes(name);
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
-  document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name));
+  document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name || (quizView && item.dataset.section === 'rgrg')));
   // 지금 보고 있는 화면이 하위 항목이면 그 묶음은 열려 있어야 한다.
   // 안 그러면 「켜져 있는데 메뉴에서는 안 보이는」 상태가 된다.
-  const child = document.querySelector(`.nav-child[data-section="${name}"]`);
+  const child = document.querySelector(`.nav-child[data-section="${quizView ? 'rgrg' : name}"]`);
   if (child) setNavGroup(child.closest('.nav-group'), true);
   // 부모가 켜졌을 때 그 묶음에 하위가 있다는 표시(화살표)는 CSS 가 맡는다.
 }
@@ -1474,3 +1482,5 @@ function renderAppViz() { renderAppKpis(); renderAppPipeline(); renderAppBars();
     if ($('#app-f-app').value !== 'ALL') $('#app-log-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 })();
+
+document.querySelectorAll('[data-quiz-view]').forEach(button => button.addEventListener('click', () => showSection(button.dataset.quizView)));
