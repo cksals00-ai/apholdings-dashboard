@@ -56,8 +56,7 @@
         <div class="nav-group" data-navgroup="apps">
           <button class="nav-item nav-parent" data-section="apps" aria-expanded="false" aria-controls="nav-sub-apps">앱 현황<span class="nav-caret" aria-hidden="true"></span></button>
           <div class="nav-sub" id="nav-sub-apps" hidden>
-            <button class="nav-item nav-child" data-section="rgrg">알지알지 · 문제은행</button>
-            <button class="nav-item nav-child" data-section="rgrg-settings">알지알지 · 게임 설정</button>
+            <button class="nav-item nav-child" data-section="rgrg">퀴즈랭커</button>
           </div>
         </div>
         <button class="nav-item" data-section="content">YouTube·콘텐츠 현황</button>
@@ -162,8 +161,12 @@
 
       <section id="grants-section" class="view-section" hidden aria-label="지원사업"></section>
       <section id="marketing-section" class="view-section" hidden aria-label="홍보"></section>
-      <section id="rgrg-section" class="view-section" hidden aria-label="알지알지오알지"></section>
-      <section id="rgrg-settings-section" class="view-section" hidden aria-label="알지알지 게임 설정"></section>
+      <div id="quizranker-tools" class="app-actions" hidden aria-label="퀴즈랭커 관리" style="margin-bottom:20px">
+        <button type="button" class="secondary" data-quiz-view="rgrg">문제은행</button>
+        <button type="button" class="secondary" data-quiz-view="rgrg-settings">게임 설정</button>
+      </div>
+      <section id="rgrg-section" class="view-section" hidden aria-label="퀴즈랭커"></section>
+      <section id="rgrg-settings-section" class="view-section" hidden aria-label="퀴즈랭커 게임 설정"></section>
 
       <section id="assets-section" class="view-section" hidden>
         <div id="asset-cards" class="summary-grid"></div>
@@ -383,6 +386,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=1.26-settings"></script>
+  <script type="module" src="/admin/admin.js?v=20261007-quizranker-menu"></script>
 </body>
 </html>
