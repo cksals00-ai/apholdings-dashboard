@@ -55,7 +55,7 @@ def footer(l,social=False):
  col=lambda t,items:'<div><b>'+e(t)+'</b>'+''.join(link(u,n,'') for n,u in items)+'</div>'
  cols=col('AP Holdings' ,[(('회사 소개' if ko else c(l,'nav')[2]),f'/{l}/about/'),('IR / INVESTORS',f'/{l}/ir/'),('Founder’s Lab',f'/{l}/lab/'),]+[('AP News',f'/{l}/news/')]+[(('관리자' if ko else 'Admin'),'/admin/')])
  cols+=col('Decision Intelligence',[(prod(l,x)['name'],ph(l,x)) for x in ['safe','light','revenue','travel']])
- cols+=col('Commerce',[(prod(l,x)['name'],ph(l,x)) for x in ['select','commerce','liaselect','craft','lia']])
+ cols+=col('Commerce',[(prod(l,x)['name'],ph(l,x)) for x in ['select','commerce','liaselect','craft','lia']]+[('Lia Select Shop','https://shop.apholdings.kr/')])
  cols+=col('Play & Learn',[(prod(l,x)['name'],ph(l,x)) for x in ['rgrg','cubs','lastwave']]+[('AP Games','https://games.apholdings.kr/'+l+'/'),('AP Edu','https://edu.apholdings.kr/'+l+'/')])
  cols+=col(('커넥터' if ko else 'Connectors'),[(('세이프리스트 · 클로드' if ko else 'Safelist · Claude'),'/business/safelist-connect.html'),(('라이트리스트 · 클로드' if ko else 'Lightlist · Claude'),'/business/lightlist-connect.html')])
  contact_line=f'<div class="footer-contact" id="contact"><div><span class="eyebrow">CONTACT</span><h3>Build with AP.</h3><p>{c(l,"contact")}</p></div><div>{link("mailto:"+CFG["contact"],CFG["contact"],"contact-email")}{button(mail("Partnership enquiry"),c(l,"contactCta"),True)}</div></div>'
@@ -199,6 +199,9 @@ def product_page(l,p):
  if l=='ko' and p['id']=='revenue':
   return (ROOT/'site-source/pages/revenue-ko.html').read_text(encoding='utf-8')
  pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (알지알지 오알지)" if pid=="rgrg" and l=="ko" else "")}</h1>{"" if p.get("heroSplit") else f'<h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p>'}{(f'<div class="actions hero-actions">{link(p["link"],p["linkLabel"]+" →","button primary",True)}</div>') if (p.get("link") and (p.get("hideGeneric") or p.get("heroSplit"))) else ""}</div></section><section class="section"><div class="wrap">'
+ if pid in ['liaselect','select']:
+  shop_desc='리아의 K-뷰티 소개를 상품별로 살펴보세요. 싱가포르를 첫 시장으로 준비하고 있으며, 판매 준비가 완료된 상품은 쇼피에서 주문할 수 있습니다. 리아는 AI 캐릭터입니다.' if l=='ko' else 'Explore Korean beauty with Lia. Singapore is our first market. Ready products will link to Shopee for ordering. Lia is an AI-created character.'
+  body+='<aside class="product-body"><h2>Lia Select Shop</h2><p>'+shop_desc+'</p><div class="actions">'+button('https://shop.apholdings.kr/','쇼핑몰 살펴보기' if l=='ko' else 'Explore the shop',True)+'</div></aside>'
  if pid=='rgrg' and False:
   body+='<figure class="rgrg-detail"><img src="/media/games/qa_shot_01.jpg" alt="RGRG — existing quiz battle interface" width="1396" height="644"><figcaption class="note">'+HOME_COPY[l]['rgrgNote']+'</figcaption></figure>'
  if p.get('heroSplit') and p.get('image'):
