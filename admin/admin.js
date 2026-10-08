@@ -1,3 +1,4 @@
+import { createShop } from './shop.js?v=1';
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createContentOperations } from './content.js?v=1.2-series';
 import { createGrants } from './grants.js?v=2.0-strategy';
@@ -44,6 +45,7 @@ const $ = (selector) => document.querySelector(selector);
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (char) => ({ '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;' }[char]));
 const formatDate = (value) => value ? new Intl.DateTimeFormat('ko-KR', { month:'short', day:'numeric' }).format(new Date(`${value}T00:00:00`)) : '미정';
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+const shopOperations = createShop(supabase, () => currentUser);
 const contentOperations = createContentOperations(supabase, () => currentUser);
 const grants = createGrants(supabase, () => currentUser);
 const marketing = createMarketing(supabase, () => currentUser);
@@ -52,7 +54,7 @@ const rgrg = createRgrg(() => currentUser);
 const rgrgSettings = createRgrgSettings(() => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); contentOperations.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); rgrg.clear(); rgrgSettings.clear(); $('#ap-visual-row')?.remove(); }
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); shopOperations.clear(); contentOperations.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); rgrg.clear(); rgrgSettings.clear(); $('#ap-visual-row')?.remove(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -395,6 +397,7 @@ function showSection(name) {
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
+  if (name === 'shop') shopOperations.load();
   if (name === 'apps') loadApps();
   if (name === 'content') contentOperations.load();
   if (name === 'grants') grants.load();
@@ -404,8 +407,8 @@ function showSection(name) {
   if (name === 'rgrg-settings') rgrgSettings.load();
   if (name === 'plan') history.replaceState(null, '', '#plan');
   else if (location.hash === '#plan') history.replaceState(null, '', location.pathname + location.search);
-  $('.filters').hidden = ['assets','commerce','apps','content','grants','marketing','plan','rgrg','rgrg-settings'].includes(name);
-  $('.top-actions').hidden = ['commerce','apps','content','grants','plan','rgrg','rgrg-settings'].includes(name);
+  $('.filters').hidden = ['shop','assets','commerce','apps','content','grants','marketing','plan','rgrg','rgrg-settings'].includes(name);
+  $('.top-actions').hidden = ['shop','commerce','apps','content','grants','plan','rgrg','rgrg-settings'].includes(name);
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name || (quizView && item.dataset.section === 'rgrg')));
   // 지금 보고 있는 화면이 하위 항목이면 그 묶음은 열려 있어야 한다.
