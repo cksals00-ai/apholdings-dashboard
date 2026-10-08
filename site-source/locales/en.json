@@ -2056,11 +2056,11 @@
   {
    "id": "lastwave",
    "name": "LAST WAVE",
-   "tag": "Creating through play.",
+   "tag": "A game we are making together.",
    "status": "inDev",
    "role": "Creator-led Game & IP",
-   "desc": "A 3D FPS about surviving a Seoul torn open by the Rift. 50 waves.\nA young creator's imagination, built into a game by AP.",
-   "note": "A project in development. The young creator's personal information stays private.",
+   "desc": "A 3D action game shaped by a parent and child.\nWe are building it through tests of the current five-wave Gangnam preview.",
+   "note": "Development test version. Public web play is being prepared; the product is not released.",
    "flow": [
     "Imagine",
     "Build",
@@ -2074,22 +2074,22 @@
     {
      "id": "world",
      "label": "01",
-     "title": "From Gangnam into the Rift,\n50 waves.",
-     "desc": "Gangnam → Lotte Tower, Jamsil → inside the Rift. VOID TITAN waits at the end.",
+     "title": "Gangnam today,\nfive waves.",
+     "desc": "Current 3D preview: five heroes, five waves and a local AI companion.\nOther districts, bosses and the 50-wave concept are future plans.",
      "blocks": [
       {
        "type": "media",
        "src": "/media/gfx/lw_waves_en.jpg",
-       "alt": "Gangnam · Lotte Tower · inside the Rift — 50 waves"
+       "alt": "Future district and wave concepts — not the current playable screen"
       }
      ]
     },
     {
      "id": "roles",
      "label": "02",
-     "title": "A child's imagination\nbecomes a game.",
+     "title": "Parent and child,\nbuilding together.",
      "soft": true,
-     "desc": "World, characters, story and fun come from the young creator's crayon drafts. Engineering, safety, monetization and release are AP's. The creator's personal information is never disclosed.",
+     "desc": "A child imagines the heroes and story; a parent brings them to life with technology.\nWe play together, find the fun and improve awkward moments in the next version.\nThe young creator’s personal information is kept private.",
      "blocks": [
       {
        "type": "media",
@@ -2140,8 +2140,8 @@
     }
    ],
    "hideGeneric": true,
-   "link": "https://games.apholdings.kr/en/",
-   "linkLabel": "AP Games official site"
+   "link": "https://games.apholdings.kr/en/lastwave/",
+   "linkLabel": "Explore the LAST WAVE development test"
   },
   {
    "id": "liaselect",

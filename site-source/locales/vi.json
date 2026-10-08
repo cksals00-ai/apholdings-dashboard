@@ -2056,11 +2056,11 @@
   {
    "id": "lastwave",
    "name": "LAST WAVE",
-   "tag": "Sáng tạo qua trò chơi.",
+   "tag": "Trò chơi chúng tôi cùng nhau tạo nên.",
    "status": "inDev",
    "role": "Game & IP do nhà sáng tạo dẫn dắt",
-   "desc": "Game FPS 3D về việc sinh tồn tại một Seoul bị Rift xé toạc. 50 wave.\nTrí tưởng tượng của một nhà sáng tạo nhỏ tuổi, được AP xây dựng thành game.",
-   "note": "Dự án đang phát triển. Thông tin cá nhân của nhà sáng tạo nhỏ tuổi được giữ kín.",
+   "desc": "Trò chơi hành động 3D được cha mẹ và con cùng xây dựng.\nHiện chúng tôi đang thử bản phát triển Gangnam với năm đợt chiến đấu.",
+   "note": "Bản thử nghiệm đang phát triển. Chơi công khai trên trình duyệt đang được chuẩn bị.",
    "flow": [
     "Hình dung",
     "Xây dựng",
@@ -2074,22 +2074,22 @@
     {
      "id": "world",
      "label": "01",
-     "title": "Từ Gangnam vào Rift,\n50 wave.",
-     "desc": "Gangnam → Lotte Tower, Jamsil → bên trong Rift. VOID TITAN chờ ở cuối đường.",
+     "title": "Gangnam hiện tại,\nnăm đợt chiến đấu.",
+     "desc": "Bản 3D hiện tại: năm anh hùng, năm đợt và một đồng đội AI cục bộ.\nKhu vực khác, trùm và ý tưởng 50 đợt là kế hoạch tương lai.",
      "blocks": [
       {
        "type": "media",
        "src": "/media/gfx/lw_waves_en.jpg",
-       "alt": "Gangnam · Lotte Tower · bên trong Rift — 50 wave"
+       "alt": "Ý tưởng khu vực và đợt tương lai — không phải màn hình chơi hiện tại"
       }
      ]
     },
     {
      "id": "roles",
      "label": "02",
-     "title": "Trí tưởng tượng của một đứa trẻ\ntrở thành một trò chơi.",
+     "title": "Cha mẹ và con,\ncùng tạo trò chơi.",
      "soft": true,
-     "desc": "Thế giới, nhân vật, câu chuyện và niềm vui đều đến từ những bản phác thảo bằng sáp màu của nhà sáng tạo nhỏ tuổi. Kỹ thuật, an toàn, kiếm tiền và phát hành thuộc về AP. Thông tin cá nhân của nhà sáng tạo không bao giờ được tiết lộ.",
+     "desc": "Con tưởng tượng anh hùng và câu chuyện, cha mẹ hiện thực bằng công nghệ.\nChúng tôi cùng chơi và cải thiện những điểm chưa tự nhiên trong phiên bản tiếp theo.\nThông tin cá nhân của người sáng tạo nhỏ tuổi được giữ kín.",
      "blocks": [
       {
        "type": "media",
@@ -2140,8 +2140,8 @@
     }
    ],
    "hideGeneric": true,
-   "link": "https://games.apholdings.kr/en/",
-   "linkLabel": "Trang chính thức AP Games"
+   "link": "https://games.apholdings.kr/ko/lastwave/",
+   "linkLabel": "LAST WAVE →"
   },
   {
    "id": "liaselect",

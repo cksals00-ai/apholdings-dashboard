@@ -2056,11 +2056,11 @@
   {
    "id": "lastwave",
    "name": "LAST WAVE",
-   "tag": "在玩中创造。",
+   "tag": "亲子一起打造的游戏。",
    "status": "inDev",
    "role": "创作者主导的游戏与 IP",
-   "desc": "一款 3D FPS 游戏，讲述在被裂隙撕开的首尔中求生，共 50 波。\n一位年轻创作者的想象力，由 AP 做成游戏。",
-   "note": "开发中的项目。这位年轻创作者的个人信息不予公开。",
+   "desc": "亲子共同完善英雄与故事的3D动作游戏。\n目前正在测试江南五波开发版。",
+   "note": "开发测试版本。网页公开试玩正在准备中，尚未正式发布。",
    "flow": [
     "构想",
     "制作",
@@ -2074,22 +2074,22 @@
     {
      "id": "world",
      "label": "01",
-     "title": "从江南到裂隙之中，\n共 50 波。",
-     "desc": "江南 → 乐天塔、蚕室 → 裂隙内部。VOID TITAN 在终点等待。",
+     "title": "目前是江南，\n五波战斗。",
+     "desc": "当前3D开发版：五位英雄、五波战斗和本地AI队友。\n其他地区、首领和50波构想属于未来计划。",
      "blocks": [
       {
        "type": "media",
        "src": "/media/gfx/lw_waves_en.jpg",
-       "alt": "江南 · 乐天塔 · 裂隙内部——50 波"
+       "alt": "未来地区与波次构想 — 非当前可玩画面"
       }
      ]
     },
     {
      "id": "roles",
      "label": "02",
-     "title": "孩子的想象力，\n变成一款游戏。",
+     "title": "父母与孩子\n一起创造游戏。",
      "soft": true,
-     "desc": "世界观、角色、故事和乐趣，都来自这位年轻创作者的蜡笔草稿。工程开发、安全、变现和发布由 AP 负责。创作者的个人信息绝不公开。",
+     "desc": "孩子想象英雄和故事，父母用技术实现。\n一起试玩，发现有趣的时刻和需要改进的地方，并在下一版完善。\n不公开年轻创作者的个人信息。",
      "blocks": [
       {
        "type": "media",
@@ -2140,8 +2140,8 @@
     }
    ],
    "hideGeneric": true,
-   "link": "https://games.apholdings.kr/en/",
-   "linkLabel": "AP Games 官方网站"
+   "link": "https://games.apholdings.kr/ko/lastwave/",
+   "linkLabel": "LAST WAVE →"
   },
   {
    "id": "liaselect",

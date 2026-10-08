@@ -2349,11 +2349,11 @@
   {
    "id": "lastwave",
    "name": "LAST WAVE",
-   "tag": "Creating through play.",
+   "tag": "아이와 함께 만들어 가는 게임.",
    "status": "inDev",
    "role": "Creator-led Game & IP",
-   "desc": "균열이 열린 서울에서 살아남는 3D FPS. 50웨이브.\n어린 창작자의 상상을 AP가 게임으로 만듭니다.",
-   "note": "개발 중인 프로젝트. 어린 창작자의 불필요한 개인정보 비공개.",
+   "desc": "부모와 아이가 함께 영웅과 이야기를 다듬는 3D 액션 게임.\n현재 강남 다섯 웨이브 개발판을 테스트하며 만들어 가고 있습니다.",
+   "note": "개발 테스트 버전. 웹 공개 실행은 준비 중이며, 완성·출시된 제품이 아닙니다.",
    "flow": [
     "Imagine",
     "Build",
@@ -2367,22 +2367,22 @@
     {
      "id": "world",
      "label": "01",
-     "title": "강남에서 균열 내부까지,\n50웨이브.",
-     "desc": "강남 → 잠실 롯데타워 → 균열 내부.\n마지막에 VOID TITAN이 기다린다.",
+     "title": "지금은 강남,\n다섯 웨이브.",
+     "desc": "현재 3D 개발판: 다섯 영웅 · 다섯 웨이브 · 로컬 AI 동료.\n다른 구역·보스·50웨이브 구상은 앞으로 함께 만들어 갈 계획입니다.",
      "blocks": [
       {
        "type": "media",
        "src": "/media/gfx/lw_waves.jpg",
-       "alt": "강남 · 잠실 롯데타워 · 균열 내부 — 50웨이브 진행"
+       "alt": "향후 구역과 웨이브 구상 — 현재 실행 화면이 아님"
       }
      ]
     },
     {
      "id": "roles",
      "label": "02",
-     "title": "아이의 상상이\n게임이 된다.",
+     "title": "아이와 부모가\n함께 바꾸는 게임.",
      "soft": true,
-     "desc": "세계 · 캐릭터 · 스토리 · 재미는\n어린 창작자의 크레용 원안.\n기술 · 안전 · 수익화 관리 · 출시는 AP.\n창작자의 개인정보는 공개하지 않는다.",
+     "desc": "아이는 영웅과 이야기를 상상하고, 부모는 기술로 구현합니다.\n함께 플레이하고 재미있는 순간과 어색한 부분을 찾아 다음 버전에 반영해요.\n어린 창작자의 개인정보는 공개하지 않습니다.",
      "blocks": [
       {
        "type": "media",
@@ -2433,8 +2433,8 @@
     }
    ],
    "hideGeneric": true,
-   "link": "https://games.apholdings.kr/ko/",
-   "linkLabel": "AP Games 공식 사이트"
+   "link": "https://games.apholdings.kr/ko/lastwave/",
+   "linkLabel": "LAST WAVE 개발 테스트 보기"
   },
   {
    "id": "liaselect",

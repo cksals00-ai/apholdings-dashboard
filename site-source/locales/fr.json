@@ -2056,11 +2056,11 @@
   {
    "id": "lastwave",
    "name": "LAST WAVE",
-   "tag": "Créer en jouant.",
+   "tag": "Un jeu que nous créons ensemble.",
    "status": "inDev",
    "role": "Jeu et IP pilotés par un créateur",
-   "desc": "Un FPS en 3D où il faut survivre dans un Séoul déchiré par la Faille. 50 vagues.\nL'imagination d'un jeune créateur, transformée en jeu par AP.",
-   "note": "Un projet en cours de développement. Les informations personnelles du jeune créateur restent confidentielles.",
+   "desc": "Un jeu d’action 3D imaginé et amélioré par un parent et son enfant.\nNous testons la version de développement actuelle de Gangnam, en cinq vagues.",
+   "note": "Version de test en développement. Le test public dans le navigateur est en préparation.",
    "flow": [
     "Imaginer",
     "Construire",
@@ -2074,22 +2074,22 @@
     {
      "id": "world",
      "label": "01",
-     "title": "De Gangnam jusque dans la Faille,\n50 vagues.",
-     "desc": "Gangnam → Lotte Tower, Jamsil → à l'intérieur de la Faille. VOID TITAN attend au bout.",
+     "title": "Gangnam aujourd’hui,\ncinq vagues.",
+     "desc": "Version 3D actuelle : cinq héros, cinq vagues et un allié IA local.\nLes autres quartiers, boss et le concept de 50 vagues sont des projets futurs.",
      "blocks": [
       {
        "type": "media",
        "src": "/media/gfx/lw_waves_en.jpg",
-       "alt": "Gangnam · Lotte Tower · à l'intérieur de la Faille — 50 vagues"
+       "alt": "Concepts de futurs quartiers et vagues — pas une capture du jeu actuel"
       }
      ]
     },
     {
      "id": "roles",
      "label": "02",
-     "title": "L'imagination d'un enfant\ndevient un jeu.",
+     "title": "Parent et enfant,\ncréateurs ensemble.",
      "soft": true,
-     "desc": "Le monde, les personnages, l'histoire et le plaisir viennent des brouillons au crayon gras du jeune créateur. L'ingénierie, la sécurité, la monétisation et la sortie relèvent d'AP. Les informations personnelles du créateur ne sont jamais divulguées.",
+     "desc": "Un enfant imagine les héros et l’histoire, un parent les réalise avec la technologie.\nNous jouons ensemble et améliorons les moments qui fonctionnent moins bien.\nLes informations personnelles du jeune créateur restent privées.",
      "blocks": [
       {
        "type": "media",
@@ -2140,8 +2140,8 @@
     }
    ],
    "hideGeneric": true,
-   "link": "https://games.apholdings.kr/en/",
-   "linkLabel": "Site officiel AP Games"
+   "link": "https://games.apholdings.kr/ko/lastwave/",
+   "linkLabel": "LAST WAVE →"
   },
   {
    "id": "liaselect",
