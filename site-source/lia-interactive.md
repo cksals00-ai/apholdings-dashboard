@@ -6,7 +6,7 @@ Asset: `/media/lia/lia-interactive-atlas-v1.png`. Built-in image generation, bas
 
 Canonical renderer: `scripts/lia_showcase.py`; loaded only on LIA product pages in all six current locales. CSS/JS are separate and versioned. Content and links remain usable without JS. Existing content videos load only on demand, with controls and no autoplay.
 
-Run `python3 scripts/build_site.py`, then keep the LIA generated pages only if unrelated generated output would regress current manually refined pages. The existing full site checker expects retired `RGRG` copy on the KO/EN home pages; current home pages say QuizRanker. Preserve their current content rather than reverting them to satisfy this legacy check.
+Run `python3 scripts/build_site.py`, then keep the LIA generated pages only if unrelated generated output would regress current manually refined pages. The existing full site checker expects retired `QuizRanker` copy on the KO/EN home pages; current home pages say QuizRanker. Preserve their current content rather than reverting them to satisfy this legacy check.
 
 ## Identity correction
 

@@ -22,7 +22,7 @@ No application framework, npm installation, runtime API or build service is requ
 - VI, JA, ZH-CN and FR (updated 2026-10-03, owner instruction "all locales, no exceptions") are fully built from AI translations of `en.json` / `home-copy.json` (`status: ai_translated` in content.json). They show a localized AI-translation notice banner, stay `noindex`, and are excluded from the sitemap/hreflang until human/professional QA. Product-screen graphics under /media/gfx remain the English images (alt text and surrounding copy are translated). Short hardcoded UI strings are translated in `scripts/ui_strings.py`.
 - Complete translations, including professional boundaries, require human/professional QA before changing publication status. Future ZH-TW, ZH-HK and TH are configuration targets, not active routes.
 - Source/version/reviewer/approval metadata must be updated when translations are approved. No AI review is recorded as human approval.
-- Product names stay unchanged across locales; Korean pronunciation is supplemental to RGRG.
+- Product names stay unchanged across locales; Korean pronunciation is supplemental to QuizRanker.
 
 Canonical inputs: latest user Website v2.0 / IR v2.0 brief; Notion Website Canonical Guide; Living Master Plan; IR Standard; Global-by-Design Technical Standard; Market Pack Framework; Localization Standard. The latest user brief takes precedence where older document wording differs.
 
@@ -33,14 +33,14 @@ Canonical inputs: latest user Website v2.0 / IR v2.0 brief; Notion Website Canon
 - No employer/customer dataset, real dashboard, numerical demo, internal algorithm, schema, invention detail or credential is added.
 - The IR visual is a conceptual Priority → Human Action → Outcome workflow, not a data dashboard.
 - Existing public business-plan PDFs and the operational board state are retired from current serving. Prior Git history remains unchanged; removal from the current tree is not historical erasure.
-- Policy documents retain their contents and existing URLs. The RGRG policy display name is updated, with an additional `/rgrg/privacy.html` address.
-- Existing public project images remain unchanged. RGRG character assets are shown; old screenshots with the previous branding remain historical files and are not embedded.
+- Policy documents retain their contents and existing URLs. The QuizRanker policy display name is updated, with an additional `/rgrg/privacy.html` address.
+- Existing public project images remain unchanged. QuizRanker character assets are shown; old screenshots with the previous branding remain historical files and are not embedded.
 
 ## Asset and feature preservation
 
 - App Store destinations retained for Safelist, Hangeul Cubs, IRON GRADE, Dawn Grace, The Other Hours, K-Concert Trip and the first-investment learning app.
 - Existing Safelist/Lightlist connector URLs and copy controls retained.
-- AP mark, Hangeul Cubs product screens, RGRG character art, LAST WAVE art/characters/worlds, LIA image/videos and commerce product visuals retained.
+- AP mark, Hangeul Cubs product screens, QuizRanker character art, LAST WAVE art/characters/worlds, LIA image/videos and commerce product visuals retained.
 - Old corporate/product URLs are compatibility redirects to the new portfolio. No functioning checkout or contact backend existed; contact and investor CTAs open the established email address.
 - The old LAST WAVE page referenced several missing files, including an opening video. Those broken embeds are not carried forward. Existing valid art is reused.
 
@@ -78,6 +78,6 @@ AP SELECT uses a new Higgsfield concept image and eight-second silent film, iden
 
 ### 2.0.3 — Core engine and concrete business explanations
 
-Homepage order: brand → AP engine (data, context, decision/process, action, outcome) → three businesses → principles → global → about/IR/contact. The engine is a shared design model, not a claim that all products run on one deployed service. Decision cards explain inputs and outputs; Revenue remains an independently developed Working Proof. SELECT is under Commerce. Its original full 16:9 video is displayed without cropping and with play/pause controls below the picture. LIA explicitly identifies itself as an AI Influencer on home and product pages. RGRG reuses the existing `media/games/qa_shot_01.jpg` game interface in a blue/yellow stage composition; decorative motion respects reduced-motion preferences. No new operational demo data, metrics, or confidential data introduced. KO and EN updated; other locales remain review-pending.
+Homepage order: brand → AP engine (data, context, decision/process, action, outcome) → three businesses → principles → global → about/IR/contact. The engine is a shared design model, not a claim that all products run on one deployed service. Decision cards explain inputs and outputs; Revenue remains an independently developed Working Proof. SELECT is under Commerce. Its original full 16:9 video is displayed without cropping and with play/pause controls below the picture. LIA explicitly identifies itself as an AI Influencer on home and product pages. QuizRanker reuses the existing `media/games/qa_shot_01.jpg` game interface in a blue/yellow stage composition; decorative motion respects reduced-motion preferences. No new operational demo data, metrics, or confidential data introduced. KO and EN updated; other locales remain review-pending.
 
 Validation: static generation, 58-page link/SEO/privacy check, JavaScript syntax check. Native device QA and professionally reviewed additional locales remain pending.

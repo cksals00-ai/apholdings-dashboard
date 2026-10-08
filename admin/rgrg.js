@@ -1,4 +1,4 @@
-// 알지알지오알지 탭 — 문제은행 반입·탈락 관측 화면
+// 퀴즈랭커 탭 — 문제은행 반입·탈락 관측 화면
 //
 // 읽기 전용이다. 문항을 고치거나 내리는 일은 파이프라인(tools/bank/export_admin.py)에서 하고,
 // 이 화면은 그 결과물인 정적 JSON 하나(/admin/rgrg-bank.json)만 읽는다.
@@ -79,7 +79,7 @@ export function createRgrg(getUser) {
     const line = state === 'error'
       ? '자료를 불러오지 못했습니다. 잠시 뒤 다시 시도하거나 파이프라인 게시 상태를 확인하세요.'
       : '아직 올라온 자료가 없습니다.';
-    $('#rg-body').innerHTML = `<section class="panel"><div class="panel-head"><div><p class="eyebrow">RGRG · 문제은행</p><h2>알지알지오알지 문제은행</h2></div><button class="secondary" type="button" data-rg="refresh">↻ 다시 불러오기</button></div>
+    $('#rg-body').innerHTML = `<section class="panel"><div class="panel-head"><div><p class="eyebrow">QuizRanker · 문제은행</p><h2>퀴즈랭커 문제은행</h2></div><button class="secondary" type="button" data-rg="refresh">↻ 다시 불러오기</button></div>
       ${readOnlyNote()}<p class="empty">${esc(line)}</p>
       <p class="panel-note">파이프라인이 <code>/admin/rgrg-bank.json</code> 을 올리면 반입 현황·탈락 사유·은행 검색이 여기에 나타납니다.</p></section>`;
   }
@@ -121,7 +121,7 @@ export function createRgrg(getUser) {
     const rejDates = [...new Set(rejected().map(r => r.date).filter(Boolean))].sort().reverse();
 
     $('#rg-body').innerHTML = `
-      <div class="co-hero rg-hero"><div><p class="eyebrow">RGRG · QUESTION BANK</p><h2>알지알지오알지 문제은행</h2>
+      <div class="co-hero rg-hero"><div><p class="eyebrow">QuizRanker · QUESTION BANK</p><h2>퀴즈랭커 문제은행</h2>
         <p>파이프라인이 CSV를 읽어 은행에 넣은 결과입니다. 떨어진 문항과 그 사유를 보고 CSV 만드는 쪽을 고칩니다.</p>
         <p class="panel-note">자료 생성 ${esc(stamp(data.generatedAt) || '시각 미기재')}</p></div>
         <div class="co-toolbar"><button class="secondary" type="button" data-rg="refresh">↻ 새로고침</button></div></div>

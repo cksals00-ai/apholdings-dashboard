@@ -138,7 +138,7 @@
   "connectorNote": "The existing connection address is preserved. Available functions depend on the connector’s current status.",
   "connectHelp": "Enter the address below in your client’s remote-connector settings. Check that client for compatibility and authentication requirements.",
   "assetNote": "Existing project artwork. Features and release plans for products in development may change.",
-  "rgrgAssetNote": "Existing character assets preserved under the RGRG brand.",
+  "rgrgAssetNote": "Existing character assets preserved under the QuizRanker brand.",
   "termsBoundary": "Product, transaction and professional-service availability depends on launch status and applicable market policies.",
   "curationNote": "Existing product visuals for content. Confirm availability, price and delivery terms with the selling channel.",
   "aboutSections": [
@@ -220,7 +220,7 @@
        ],
        [
         "Play & Learn",
-        "RGRG · Hangeul Cubs · LAST WAVE",
+        "QuizRanker · Hangeul Cubs · LAST WAVE",
         "Compete by quiz, learn Hangeul with four tiger siblings, and watch a child's imagination become a game."
        ],
        [
@@ -342,7 +342,7 @@
        [
         "Play & Learn",
         "IAP · education B2B",
-        "Hangeul Cubs lesson packs, RGRG quiz packs for schools, academies and companies, LAST WAVE skins and passes (no pay-to-win)."
+        "Hangeul Cubs lesson packs, QuizRanker quiz packs for schools, academies and companies, LAST WAVE skins and passes (no pay-to-win)."
        ],
        [
         "Common",
@@ -400,7 +400,7 @@
         "type": "proof",
         "h3": "Games",
         "ol": [
-         "RGRG six-player live match build · preparing for release",
+         "QuizRanker six-player live match build · preparing for release",
          "LAST WAVE 5 heroes · 6 enemies · 3 Seoul zones",
          "Hangeul Cubs 42 lessons · EN · VI · FR"
         ]
@@ -1778,14 +1778,14 @@
   },
   {
    "id": "rgrg",
-   "name": "RGRG",
+   "name": "QuizRanker",
    "tag": "A live online quiz battle platform anyone, any age, can pick up and enjoy — where general knowledge grows naturally as you play.",
    "status": "inDev",
    "role": "Play first. Knowledge follows.",
    "desc": "Not an educational game — a game for everyone.\nLearning is one part of it.",
    "note": "iPhone, landscape · Games › Trivia · preparing for release.",
    "flow": [
-    "RGRG CORE",
+    "QuizRanker CORE",
     "Learner Locale",
     "Instruction Language",
     "Target Language / Subject",
@@ -1882,7 +1882,7 @@
          "primary"
         ],
         [
-         "mail:RGRG partnership inquiry",
+         "mail:QuizRanker partnership inquiry",
          "Partnership inquiry",
          "button"
         ]
@@ -2037,7 +2037,7 @@
         ],
         [
          "/ko/products/rgrg/",
-         "Live quiz battles in RGRG",
+         "Live quiz battles in QuizRanker",
          "button"
         ]
        ]
@@ -2126,7 +2126,7 @@
        "items": [
         [
          "/ko/products/rgrg/",
-         "RGRG — a live quiz battle for all ages",
+         "QuizRanker — a live quiz battle for all ages",
          "button"
         ],
         [

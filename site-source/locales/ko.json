@@ -138,7 +138,7 @@
   "connectorNote": "기존 연결 주소 유지 · 제공 기능은 커넥터 운영 상태 기준",
   "connectHelp": "클라이언트의 원격 커넥터 설정에 아래 주소 입력. 지원 여부·인증 조건은 해당 클라이언트 기준.",
   "assetNote": "기존 프로젝트 자산 · 개발 단계의 구성 및 출시 일정 변경 가능",
-  "rgrgAssetNote": "기존 캐릭터 자산 · RGRG 브랜드로 통합",
+  "rgrgAssetNote": "기존 캐릭터 자산 · QuizRanker 브랜드로 통합",
   "termsBoundary": "실제 출시 상태 및 시장별 정책에 따른 제품·거래·전문서비스 범위",
   "curationNote": "기존 콘텐츠용 제품 이미지 · 판매 여부·가격·배송 조건은 해당 판매 채널 기준",
   "aboutSections": [
@@ -220,7 +220,7 @@
        ],
        [
         "플레이 & 런",
-        "RGRG · Hangeul Cubs · LAST WAVE",
+        "QuizRanker · Hangeul Cubs · LAST WAVE",
         "퀴즈로 겨루고, 호랑이 4남매와 한글을 배우고, 아이의 상상이 게임이 된다."
        ],
        [
@@ -342,7 +342,7 @@
        [
         "플레이 & 런",
         "IAP · 교육 B2B",
-        "Hangeul Cubs 레슨팩, RGRG 학교 · 학원 · 기업 퀴즈 팩, LAST WAVE 스킨 · 패스 (Pay-to-win 없음)."
+        "Hangeul Cubs 레슨팩, QuizRanker 학교 · 학원 · 기업 퀴즈 팩, LAST WAVE 스킨 · 패스 (Pay-to-win 없음)."
        ],
        [
         "공통",
@@ -400,7 +400,7 @@
         "type": "proof",
         "h3": "게임",
         "ol": [
-         "RGRG 6인 실시간 대결 빌드 · 출시 준비",
+         "QuizRanker 6인 실시간 대결 빌드 · 출시 준비",
          "LAST WAVE 5 영웅 · 6 적 · 서울 3구간",
          "Hangeul Cubs 42레슨 · EN · VI · FR"
         ]
@@ -2071,14 +2071,14 @@
   },
   {
    "id": "rgrg",
-   "name": "RGRG",
+   "name": "QuizRanker",
    "tag": "남녀노소 누구나 쉽게 즐기고, 게임을 하면서 자연스럽게 상식을 넓혀가는 실시간 온라인 퀴즈 배틀 플랫폼.",
    "status": "inDev",
    "role": "놀이가 먼저, 상식은 결과.",
    "desc": "교육용 게임이 아닌, 누구나 즐기는 게임.\n배움은 그 안의 일부.",
    "note": "iPhone 가로 화면 · 게임 › 트리비아 · 출시 준비 중.",
    "flow": [
-    "RGRG CORE",
+    "QuizRanker CORE",
     "Learner Locale",
     "Instruction Language",
     "Target Language / Subject",
@@ -2175,7 +2175,7 @@
          "primary"
         ],
         [
-         "mail:알지알지 오알지 제휴 문의",
+         "mail:퀴즈랭커 제휴 문의",
          "제휴 문의",
          "button"
         ]
@@ -2330,7 +2330,7 @@
         ],
         [
          "/ko/products/rgrg/",
-         "남녀노소 퀴즈 배틀 RGRG",
+         "남녀노소 퀴즈 배틀 QuizRanker",
          "button"
         ]
        ]
@@ -2419,7 +2419,7 @@
        "items": [
         [
          "/ko/products/rgrg/",
-         "RGRG — 남녀노소 실시간 퀴즈 배틀",
+         "QuizRanker — 남녀노소 실시간 퀴즈 배틀",
          "button"
         ],
         [

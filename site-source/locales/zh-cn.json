@@ -138,7 +138,7 @@
   "connectorNote": "现有的连接地址予以保留。可用功能取决于连接器的当前状态。",
   "connectHelp": "请在客户端的远程连接器设置中输入下方地址。请自行确认该客户端的兼容性和认证要求。",
   "assetNote": "现有项目美术素材。开发中产品的功能和发布计划可能会有变动。",
-  "rgrgAssetNote": "在 RGRG 品牌下保留的现有角色素材。",
+  "rgrgAssetNote": "在 QuizRanker 品牌下保留的现有角色素材。",
   "termsBoundary": "产品、交易和专业服务的可用性取决于上线状态及适用的市场政策。",
   "curationNote": "内容所用的现有产品图片。请向销售渠道确认供货情况、价格和配送条款。",
   "aboutSections": [
@@ -220,7 +220,7 @@
        ],
        [
         "玩与学",
-        "RGRG · Hangeul Cubs · LAST WAVE",
+        "QuizRanker · Hangeul Cubs · LAST WAVE",
         "用问答竞赛,和四只虎兄妹一起学习韩文,并看着孩子的想象力变成游戏。"
        ],
        [
@@ -342,7 +342,7 @@
        [
         "玩与学",
         "IAP · 教育 B2B",
-        "Hangeul Cubs 课程包、面向学校、培训机构和企业的 RGRG 问答包、LAST WAVE 皮肤和通行证(不做付费变强)。"
+        "Hangeul Cubs 课程包、面向学校、培训机构和企业的 QuizRanker 问答包、LAST WAVE 皮肤和通行证(不做付费变强)。"
        ],
        [
         "通用",
@@ -400,7 +400,7 @@
         "type": "proof",
         "h3": "游戏",
         "ol": [
-         "RGRG 六人实时对战版本 · 发布准备中",
+         "QuizRanker 六人实时对战版本 · 发布准备中",
          "LAST WAVE 5 位英雄 · 6 种敌人 · 3 个首尔区域",
          "Hangeul Cubs 42 节课程 · EN · VI · FR"
         ]
@@ -1778,14 +1778,14 @@
   },
   {
    "id": "rgrg",
-   "name": "RGRG",
+   "name": "QuizRanker",
    "tag": "一个不分年龄、人人都能轻松上手的在线实时问答对战平台——在游戏中，常识自然而然地增长。",
    "status": "inDev",
    "role": "先玩起来，知识随之而来。",
    "desc": "这不是一款教育游戏，而是一款人人都能玩的游戏。\n学习只是其中的一部分。",
    "note": "iPhone，横屏 · 游戏 › 问答 · 发布筹备中。",
    "flow": [
-    "RGRG CORE",
+    "QuizRanker CORE",
     "学习者所在地区",
     "教学语言",
     "目标语言 / 学科",
@@ -1882,7 +1882,7 @@
          "primary"
         ],
         [
-         "mail:RGRG 合作咨询",
+         "mail:QuizRanker 合作咨询",
          "合作咨询",
          "button"
         ]
@@ -2037,7 +2037,7 @@
         ],
         [
          "/ko/products/rgrg/",
-         "在 RGRG 中进行实时问答对战",
+         "在 QuizRanker 中进行实时问答对战",
          "button"
         ]
        ]
@@ -2126,7 +2126,7 @@
        "items": [
         [
          "/ko/products/rgrg/",
-         "RGRG——适合所有年龄的实时问答对战",
+         "QuizRanker——适合所有年龄的实时问答对战",
          "button"
         ],
         [

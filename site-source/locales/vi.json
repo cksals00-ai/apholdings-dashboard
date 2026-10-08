@@ -138,7 +138,7 @@
   "connectorNote": "Địa chỉ kết nối hiện có được giữ nguyên. Các chức năng khả dụng phụ thuộc vào trạng thái hiện tại của trình kết nối.",
   "connectHelp": "Nhập địa chỉ bên dưới vào phần cài đặt trình kết nối từ xa của ứng dụng khách. Hãy kiểm tra khả năng tương thích và yêu cầu xác thực của ứng dụng đó.",
   "assetNote": "Hình ảnh dự án hiện có. Tính năng và kế hoạch phát hành của các sản phẩm đang phát triển có thể thay đổi.",
-  "rgrgAssetNote": "Các tài sản nhân vật hiện có được giữ nguyên dưới thương hiệu RGRG.",
+  "rgrgAssetNote": "Các tài sản nhân vật hiện có được giữ nguyên dưới thương hiệu QuizRanker.",
   "termsBoundary": "Tình trạng khả dụng của sản phẩm, giao dịch và dịch vụ chuyên môn phụ thuộc vào trạng thái ra mắt và chính sách thị trường áp dụng.",
   "curationNote": "Hình ảnh sản phẩm hiện có dùng cho nội dung. Hãy xác nhận tình trạng còn hàng, giá và điều kiện giao hàng với kênh bán hàng.",
   "aboutSections": [
@@ -220,7 +220,7 @@
        ],
        [
         "Chơi & Học",
-        "RGRG · Hangeul Cubs · LAST WAVE",
+        "QuizRanker · Hangeul Cubs · LAST WAVE",
         "Thi đấu bằng câu đố, học Hangeul cùng bốn anh em nhà hổ, và xem trí tưởng tượng của một đứa trẻ trở thành trò chơi."
        ],
        [
@@ -342,7 +342,7 @@
        [
         "Chơi & Học",
         "IAP · giáo dục B2B",
-        "Các gói bài học Hangeul Cubs, gói câu đố RGRG cho trường học, trung tâm và doanh nghiệp, skin và pass của LAST WAVE (không pay-to-win)."
+        "Các gói bài học Hangeul Cubs, gói câu đố QuizRanker cho trường học, trung tâm và doanh nghiệp, skin và pass của LAST WAVE (không pay-to-win)."
        ],
        [
         "Chung",
@@ -400,7 +400,7 @@
         "type": "proof",
         "h3": "Trò chơi",
         "ol": [
-         "RGRG bản dựng trận đấu trực tiếp sáu người chơi · đang chuẩn bị phát hành",
+         "QuizRanker bản dựng trận đấu trực tiếp sáu người chơi · đang chuẩn bị phát hành",
          "LAST WAVE 5 anh hùng · 6 kẻ địch · 3 khu vực Seoul",
          "Hangeul Cubs 42 bài học · EN · VI · FR"
         ]
@@ -1778,14 +1778,14 @@
   },
   {
    "id": "rgrg",
-   "name": "RGRG",
+   "name": "QuizRanker",
    "tag": "Nền tảng đấu quiz trực tuyến thời gian thực mà ai, ở mọi lứa tuổi, cũng có thể chơi và thích thú — kiến thức phổ thông tự nhiên lớn dần khi bạn chơi.",
    "status": "inDev",
    "role": "Chơi trước. Kiến thức theo sau.",
    "desc": "Không phải trò chơi giáo dục — mà là trò chơi cho mọi người.\nHọc hỏi chỉ là một phần trong đó.",
    "note": "iPhone, màn hình ngang · Trò chơi › Đố vui · đang chuẩn bị phát hành.",
    "flow": [
-    "RGRG CORE",
+    "QuizRanker CORE",
     "Learner Locale",
     "Instruction Language",
     "Target Language / Subject",
@@ -1882,7 +1882,7 @@
          "primary"
         ],
         [
-         "mail:Liên hệ hợp tác RGRG",
+         "mail:Liên hệ hợp tác QuizRanker",
          "Liên hệ hợp tác",
          "button"
         ]
@@ -2037,7 +2037,7 @@
         ],
         [
          "/ko/products/rgrg/",
-         "Đấu quiz trực tiếp trong RGRG",
+         "Đấu quiz trực tiếp trong QuizRanker",
          "button"
         ]
        ]
@@ -2126,7 +2126,7 @@
        "items": [
         [
          "/ko/products/rgrg/",
-         "RGRG — trận đấu quiz trực tiếp cho mọi lứa tuổi",
+         "QuizRanker — trận đấu quiz trực tiếp cho mọi lứa tuổi",
          "button"
         ],
         [

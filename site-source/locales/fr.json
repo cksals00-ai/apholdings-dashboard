@@ -138,7 +138,7 @@
   "connectorNote": "L’adresse de connexion existante est conservée. Les fonctions disponibles dépendent de l’état actuel du connecteur.",
   "connectHelp": "Saisissez l’adresse ci-dessous dans les paramètres de connecteur distant de votre client. Vérifiez la compatibilité de ce client et les exigences d’authentification.",
   "assetNote": "Illustrations existantes du projet. Les fonctionnalités et les plans de publication des produits en développement peuvent évoluer.",
-  "rgrgAssetNote": "Éléments de personnages existants conservés sous la marque RGRG.",
+  "rgrgAssetNote": "Éléments de personnages existants conservés sous la marque QuizRanker.",
   "termsBoundary": "La disponibilité des produits, des transactions et des services professionnels dépend du statut de lancement et des politiques applicables sur chaque marché.",
   "curationNote": "Visuels de produits existants à titre de contenu. Vérifiez la disponibilité, le prix et les conditions de livraison auprès du canal de vente.",
   "aboutSections": [
@@ -220,7 +220,7 @@
        ],
        [
         "Jouer et apprendre",
-        "RGRG · Hangeul Cubs · LAST WAVE",
+        "QuizRanker · Hangeul Cubs · LAST WAVE",
         "S’affronter par des quiz, apprendre le hangeul avec quatre frères et sœurs tigres, et voir l’imagination d’un enfant devenir un jeu."
        ],
        [
@@ -342,7 +342,7 @@
        [
         "Jouer et apprendre",
         "Achats intégrés · éducation B2B",
-        "Packs de leçons Hangeul Cubs, packs de quiz RGRG pour écoles, centres de formation et entreprises, skins et pass LAST WAVE (sans pay-to-win)."
+        "Packs de leçons Hangeul Cubs, packs de quiz QuizRanker pour écoles, centres de formation et entreprises, skins et pass LAST WAVE (sans pay-to-win)."
        ],
        [
         "Commun",
@@ -400,7 +400,7 @@
         "type": "proof",
         "h3": "Jeux",
         "ol": [
-         "RGRG, version de match en direct à six joueurs · préparation de la publication",
+         "QuizRanker, version de match en direct à six joueurs · préparation de la publication",
          "LAST WAVE : 5 héros · 6 ennemis · 3 zones de Séoul",
          "Hangeul Cubs : 42 leçons · EN · VI · FR"
         ]
@@ -1778,14 +1778,14 @@
   },
   {
    "id": "rgrg",
-   "name": "RGRG",
+   "name": "QuizRanker",
    "tag": "Une plateforme de quiz en direct en ligne que chacun, à tout âge, peut prendre en main et apprécier — où la culture générale se développe naturellement en jouant.",
    "status": "inDev",
    "role": "Jouer d'abord. Le savoir suit.",
    "desc": "Pas un jeu éducatif — un jeu pour tout le monde.\nApprendre n'en est qu'une partie.",
    "note": "iPhone, mode paysage · Jeux › Culture générale · sortie en préparation.",
    "flow": [
-    "RGRG CORE",
+    "QuizRanker CORE",
     "Learner Locale",
     "Instruction Language",
     "Target Language / Subject",
@@ -1882,7 +1882,7 @@
          "primary"
         ],
         [
-         "mail:Demande de partenariat RGRG",
+         "mail:Demande de partenariat QuizRanker",
          "Demande de partenariat",
          "button"
         ]
@@ -2037,7 +2037,7 @@
         ],
         [
          "/ko/products/rgrg/",
-         "Duels de quiz en direct dans RGRG",
+         "Duels de quiz en direct dans QuizRanker",
          "button"
         ]
        ]
@@ -2126,7 +2126,7 @@
        "items": [
         [
          "/ko/products/rgrg/",
-         "RGRG — un duel de quiz en direct pour tous les âges",
+         "QuizRanker — un duel de quiz en direct pour tous les âges",
          "button"
         ],
         [

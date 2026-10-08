@@ -19,7 +19,7 @@ FLOWS=['DATA','CONTEXT','DECISION / PROCESS','ACTION','OUTCOME']
 ASSETS=['Data','Process','Expert Knowledge','Software','IP','Customer Relationship']
 CAPABILITIES=['Commercial Operations','Global Sales','Tourism & International Business','Data Analysis','Product Building','Decision Workflow Design']
 MARKET=['Locale','Currency','Timezone','Policy','Evidence','Expert','Marketplace','Payment','Logistics','Partner','Pricing','CS','Terms','Analytics']
-POLICIES=[('Safelist','/safelist/privacy.html'),('LightList','/lightlist/privacy.html'),('Hangeul Cubs','/hangeulcubs_privacy.html'),('RGRG','/rgrg/privacy.html'),('IRON GRADE','/irongrade/privacy.html'),('The Other Hours','/theotherhours_privacy.html'),('K-Concert Trip','/kfan_privacy.html'),('나의 첫투자','/privacy.html'),('K-Scan','/kscan/privacy.html'),('Goyo','/goyo/privacy.html')]
+POLICIES=[('Safelist','/safelist/privacy.html'),('LightList','/lightlist/privacy.html'),('Hangeul Cubs','/hangeulcubs_privacy.html'),('QuizRanker','/rgrg/privacy.html'),('IRON GRADE','/irongrade/privacy.html'),('The Other Hours','/theotherhours_privacy.html'),('K-Concert Trip','/kfan_privacy.html'),('나의 첫투자','/privacy.html'),('K-Scan','/kscan/privacy.html'),('Goyo','/goyo/privacy.html')]
 def out(path,text):
  if path.split('/')[0] in ('vi','ja','zh-cn','fr') and path.endswith('.html'):
   from ui_strings import localize;text=localize(path.split('/')[0],text)
@@ -198,12 +198,12 @@ def product_page(l,p):
   return render(l,p,sections,mail)
  if l=='ko' and p['id']=='revenue':
   return (ROOT/'site-source/pages/revenue-ko.html').read_text(encoding='utf-8')
- pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (알지알지 오알지)" if pid=="rgrg" and l=="ko" else "")}</h1>{"" if p.get("heroSplit") else f'<h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p>'}{(f'<div class="actions hero-actions">{link(p["link"],p["linkLabel"]+" →","button primary",True)}</div>') if (p.get("link") and (p.get("hideGeneric") or p.get("heroSplit"))) else ""}</div></section><section class="section"><div class="wrap">'
+ pid=p['id'];body=f'<section class="page-hero"><div class="wrap"><div class="breadcrumb">{link(home(l)+"#portfolio",c(l,"nav")[1],"")} / {e(p["name"])}</div>{status(l,p["status"])}<h1 class="product-name">{e(p["name"])+( " (퀴즈랭커)" if pid=="rgrg" and l=="ko" else "")}</h1>{"" if p.get("heroSplit") else f'<h2>{e(p["tag"])}</h2><p class="lead">{e(p["desc"])}</p>'}{(f'<div class="actions hero-actions">{link(p["link"],p["linkLabel"]+" →","button primary",True)}</div>') if (p.get("link") and (p.get("hideGeneric") or p.get("heroSplit"))) else ""}</div></section><section class="section"><div class="wrap">'
  if pid in ['liaselect','select']:
   shop_desc='리아의 K-뷰티 소개를 상품별로 살펴보세요. 싱가포르를 첫 시장으로 준비하고 있으며, 판매 준비가 완료된 상품은 쇼피에서 주문할 수 있습니다. 리아는 AI 캐릭터입니다.' if l=='ko' else 'Explore Korean beauty with Lia. Singapore is our first market. Ready products will link to Shopee for ordering. Lia is an AI-created character.'
   body+='<aside class="product-body"><h2>Lia Select Shop</h2><p>'+shop_desc+'</p><div class="actions">'+button('https://shop.apholdings.kr/','쇼핑몰 살펴보기' if l=='ko' else 'Explore the shop',True)+'</div></aside>'
  if pid=='rgrg' and False:
-  body+='<figure class="rgrg-detail"><img src="/media/games/qa_shot_01.jpg" alt="RGRG — existing quiz battle interface" width="1396" height="644"><figcaption class="note">'+HOME_COPY[l]['rgrgNote']+'</figcaption></figure>'
+  body+='<figure class="rgrg-detail"><img src="/media/games/qa_shot_01.jpg" alt="QuizRanker — existing quiz battle interface" width="1396" height="644"><figcaption class="note">'+HOME_COPY[l]['rgrgNote']+'</figcaption></figure>'
  if p.get('heroSplit') and p.get('image'):
   body+=f'<article class="showcase-lia"><a class="showcase-lia-image" href="{p["image"]}"><img src="{p["image"]}" width="800" height="800" loading="lazy" alt="{e(p["name"])}"></a><div class="showcase-copy"><span class="eyebrow">{e(p["role"])}</span><h3>{e(p["tag"])}</h3><p>{e(p["desc"])}</p>'+(f'<div class="actions">'+''.join(button(u,l2) for u,l2 in p.get("heroLinks",[]))+'</div>' if p.get('heroLinks') else '')+'</div></article>'
  elif p.get('image'):
@@ -271,7 +271,7 @@ for l,cfg in CFG['locales'].items():
  out(f'{l}/index.html',text)
 # Preserve the policy terms and old App Store policy URL; change only the product's display name.
 policy=(ROOT/'quizarena_privacy.html').read_text()
-policy=re.sub(r'Quiz\s*Arena|퀴즈\s*아레나', 'RGRG', policy, flags=re.I)
+policy=re.sub(r'Quiz\s*Arena|퀴즈\s*아레나', 'QuizRanker', policy, flags=re.I)
 policy=re.sub(r'<link rel="canonical"[^>]*>', '', policy)
 policy=policy.replace('<head>','<head><link rel="canonical" href="'+ORIGIN+'/rgrg/privacy.html">',1)
 out('quizarena_privacy.html',policy)

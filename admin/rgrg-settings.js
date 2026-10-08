@@ -1,4 +1,4 @@
-// 알지알지 게임 설정 — 지금 게임이 실제로 쓰는 규칙을 한눈에. (2026-10-02 대표 지시)
+// 퀴즈랭커 게임 설정 — 지금 게임이 실제로 쓰는 규칙을 한눈에. (2026-10-02 대표 지시)
 //
 // 읽기 전용이다. 숫자는 이 파일에 없다 — QuizArena 의 tools/parity/export_admin_settings.mjs 가
 // **서버 함수(settle-match·start-match)를 그대로 불러** 낸 값을 /admin/rgrg-settings.json 으로 굽고,
