@@ -103,7 +103,7 @@
   "safeNote": "의료진단·절대적 안전보증 제외",
   "rgrgTag": "남녀노소 누구나, 놀다 보면 넓어지는 상식.",
   "rgrgPacks": "누구나 쉽게 즐기고, 게임을 하면서 자연스럽게 상식을 넓혀가는 실시간 온라인 퀴즈 배틀 플랫폼. 교육은 그 일부.",
-  "rgrgNote": "실제 게임 화면 · 2026.09",
+  "rgrgNote": "퀴즈랭커 실제 로비 화면",
   "proofLabels": {
    "safe": "운영 중 · 세이프리스트 앱 · AI 커넥터",
    "light": "운영 중 · 라이트리스트 AI 커넥터"
@@ -270,7 +270,7 @@
   "safeNote": "Not a medical diagnosis or an absolute guarantee of safety",
   "rgrgTag": "For all ages — knowledge that grows as you play.",
   "rgrgPacks": "A live online quiz battle platform anyone can enjoy, where general knowledge grows naturally. Education is one part of it.",
-  "rgrgNote": "Actual game screen · Sept 2026",
+  "rgrgNote": "QuizRanker actual lobby screen",
   "principleNames": [
    "01 · Safe by design",
    "02 · Evidence attached",
@@ -437,7 +437,7 @@
   "safeNote": "Không phải chẩn đoán y tế hay bảo đảm tuyệt đối về an toàn",
   "rgrgTag": "Cho mọi lứa tuổi — kiến thức lớn dần khi bạn chơi.",
   "rgrgPacks": "Nền tảng đấu quiz trực tuyến thời gian thực ai cũng có thể thích, nơi kiến thức phổ thông tự nhiên lớn dần. Giáo dục chỉ là một phần trong đó.",
-  "rgrgNote": "Màn hình game thực tế · tháng 9 năm 2026",
+  "rgrgNote": "Màn hình sảnh thực tế của QuizRanker",
   "principleNames": [
    "01 · An toàn từ thiết kế",
    "02 · Có bằng chứng kèm theo",
@@ -604,7 +604,7 @@
   "safeNote": "医学的な診断ではなく、絶対的な安全の保証でもありません",
   "rgrgTag": "全年齢向け — 遊ぶほどに育つ知識。",
   "rgrgPacks": "誰もが楽しめるライブオンラインのクイズ対戦プラットフォーム。一般常識が自然と身につきます。教育は、その一部です。",
-  "rgrgNote": "実際のゲーム画面 · 2026年9月",
+  "rgrgNote": "QuizRankerの実際のロビー画面",
   "principleNames": [
    "01 · 安全を前提に設計",
    "02 · 根拠を添付",
@@ -771,7 +771,7 @@
   "safeNote": "不是医疗诊断，也不是绝对安全的保证",
   "rgrgTag": "适合所有年龄——在玩中增长知识。",
   "rgrgPacks": "一个人人都能享受的在线实时问答对战平台，常识在其中自然增长。教育只是其中的一部分。",
-  "rgrgNote": "实际游戏画面 · 2026 年 9 月",
+  "rgrgNote": "QuizRanker 实际大厅画面",
   "principleNames": [
    "01 · 设计即安全",
    "02 · 附带依据",
@@ -938,7 +938,7 @@
   "safeNote": "Ni un diagnostic médical, ni une garantie absolue de sécurité",
   "rgrgTag": "Pour tous les âges — un savoir qui grandit en jouant.",
   "rgrgPacks": "Une plateforme de quiz en direct en ligne que chacun peut apprécier, où la culture générale se développe naturellement. L'éducation n'en est qu'une partie.",
-  "rgrgNote": "Écran de jeu réel · sept. 2026",
+  "rgrgNote": "Écran réel du lobby QuizRanker",
   "principleNames": [
    "01 · Sûr dès la conception",
    "02 · Preuve jointe",
