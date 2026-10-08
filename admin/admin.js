@@ -1,4 +1,4 @@
-import { createShop } from './shop.js?v=1';
+import { createShop } from './shop.js?v=research-20261009';
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createContentOperations } from './content.js?v=1.2-series';
 import { createGrants } from './grants.js?v=2.0-strategy';
