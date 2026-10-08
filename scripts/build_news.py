@@ -61,7 +61,10 @@ def md(body):
     out, lst, buf = [], None, []
     def close():
         nonlocal lst, buf
-        if lst == 'ul':
+        if lst == 'table':
+            rows = [x for x in buf if not re.match(r'^\|[ :|-]+\|$', x)]
+            out.append('<div class="news-table-wrap" tabindex="0"><table class="news-table">' + ''.join('<tr>' + ''.join(('<th scope="col">' if i == 0 else '<td>') + inline(c.strip()) + ('</th>' if i == 0 else '</td>') for c in row.strip('|').split('|')) + '</tr>' for i, row in enumerate(rows)) + '</table></div>')
+        elif lst == 'ul':
             ms = [REF.match('- ' + b) for b in buf]
             if buf and all(ms): out.append(refcard([m.groups() for m in ms]))
             else: out.append('<ul>' + ''.join(f'<li>{inline(b)}</li>' for b in buf) + '</ul>')
@@ -70,6 +73,9 @@ def md(body):
     for ln in body.strip().split('\n'):
         s = ln.rstrip()
         if not s.strip(): close(); continue
+        if s.startswith('|'):
+            if lst != 'table': close(); lst = 'table'
+            buf.append(s); continue
         if s.startswith('## '): close(); out.append(f'<h2>{inline(s[3:])}</h2>'); continue
         if s.startswith('> '): close(); out.append(f'<blockquote>{inline(s[2:])}</blockquote>'); continue
         m = re.match(r'^(\d+)\.\s+(.*)', s)
@@ -144,6 +150,12 @@ def view(lang, no):
     if t: return dict(t, missing=False, slug=k['slug'], date=k['date'], kcat=k['category'])
     return dict(k, missing=True, kcat=k['category'])
 
+def post_cover(p, big=False):
+    src = KO[p['no']].get('image')
+    if src:
+        return f'<img class="cover news-photo" src="{e(src, quote=True)}" alt="" width="1672" height="941" loading="{ "eager" if big else "lazy"}">'
+    return cover(p['no'], big)
+
 nos = sorted(KO, reverse=True)
 built = {}
 for lang in LANGS:
@@ -158,7 +170,7 @@ for lang in LANGS:
     note = f'<p class="news-notice">{e(ui["notice"])}</p>' if ui['notice'] else ''
     def card(p, big=False):
         cl = CATCLS.get(p["kcat"], 'launch')
-        return f'<li class="news-item cat-{cl}{" is-feature" if big else ""}" data-c="{e(p["kcat"], quote=True)}"><a href="/{lang}/news/{p["slug"]}/"><div class="news-thumb">{cover(p["no"], big)}<span class="news-badge">NO. {p["no"]:02d}</span></div><div class="news-txt"><div class="news-meta">{e(cname(p["kcat"]))} <span>· {e(p["tags"])} · {p["date"].replace("-", ".")}</span></div><h2>{e(p["title"])}</h2><p>{e(p["summary"])}</p></div></a></li>'
+        return f'<li class="news-item cat-{cl}{" is-feature" if big else ""}" data-c="{e(p["kcat"], quote=True)}"><a href="/{lang}/news/{p["slug"]}/"><div class="news-thumb">{post_cover(p, big)}<span class="news-badge">NO. {p["no"]:02d}</span></div><div class="news-txt"><div class="news-meta">{e(cname(p["kcat"]))} <span>· {e(p["tags"])} · {p["date"].replace("-", ".")}</span></div><h2>{e(p["title"])}</h2><p>{e(p["summary"])}</p></div></a></li>'
     items = ''.join(card(p, i == 0) for i, p in enumerate(posts))
     js = "<script>document.querySelectorAll('.news-filter button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.news-filter button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});var c=b.dataset.c;document.querySelectorAll('.news-item').forEach(function(li){li.hidden=c&&li.dataset.c!==c})})})</script>"
     main = f'<main id="main"><section class="news-hero"><div class="wrap news-hero-in"><div class="news-hero-txt"><span class="eyebrow">{ui["eyebrow"]}</span><h1>{e(ui["h1"])}</h1><p>{e(ui["lead"])}</p>{note}{filt}</div><div class="news-hero-art" aria-hidden="true">{cover(8, True)}</div></div></section><section><div class="wrap"><ul class="news-grid">{items}</ul></div></section>{js}</main>'
@@ -178,8 +190,8 @@ for lang in LANGS:
             gl = f'<aside class="glance"><div class="glance-h">{e(ux["glance"])}</div><ol>' + ''.join(f'<li><span>{i+1}</span><b>{e(h[:56] + ("…" if len(h) > 56 else ""))}</b></li>' for i, h in enumerate(hs[:7])) + '</ol></aside>'
         rel_src = [q for q in posts if q["no"] != p["no"]]
         rel_src.sort(key=lambda q: (q["kcat"] != p["kcat"], abs(q["no"] - p["no"])))
-        rel = ''.join(f'<li class="news-item cat-{CATCLS.get(q["kcat"], "launch")}"><a href="/{lang}/news/{q["slug"]}/"><div class="news-thumb">{cover(q["no"])}<span class="news-badge">NO. {q["no"]:02d}</span></div><div class="news-txt"><div class="news-meta">{e(cname(q["kcat"]))}</div><h2>{e(q["title"])}</h2></div></a></li>' for q in rel_src[:3])
-        main = f'<main id="main"><article class="post cat-{cl}"><div class="post-cover">{cover(p["no"], True)}</div><div class="wrap"><a class="post-back" href="/{lang}/news/">{e(ui["back"])}</a><div class="post-kicker">NO. {p["no"]:02d} · {e(cname(p["kcat"]))}</div><h1>{e(p["title"])}</h1><div class="post-meta">{e(p["tags"])} · {p["date"].replace("-", ".")} · {e(ui["byline"])} · {readmins(p["body"], lang)} {e(ux["mins"])}</div>{warn}<p class="post-lede">{e(p["summary"])}</p>{gl}<div class="post-body" lang="{body_lang}">{md(p["body"])}</div>{nav}<section class="related"><h3>{e(ux["related"])}</h3><ul class="news-grid three">{rel}</ul></section></div></article></main>'
+        rel = ''.join(f'<li class="news-item cat-{CATCLS.get(q["kcat"], "launch")}"><a href="/{lang}/news/{q["slug"]}/"><div class="news-thumb">{post_cover(q)}<span class="news-badge">NO. {q["no"]:02d}</span></div><div class="news-txt"><div class="news-meta">{e(cname(q["kcat"]))}</div><h2>{e(q["title"])}</h2></div></a></li>' for q in rel_src[:3])
+        main = f'<main id="main"><article class="post cat-{cl}"><div class="post-cover">{post_cover(p, True)}</div><div class="wrap"><a class="post-back" href="/{lang}/news/">{e(ui["back"])}</a><div class="post-kicker">NO. {p["no"]:02d} · {e(cname(p["kcat"]))}</div><h1>{e(p["title"])}</h1><div class="post-meta">{e(p["tags"])} · {p["date"].replace("-", ".")} · {e(ui["byline"])} · {readmins(p["body"], lang)} {e(ux["mins"])}</div>{warn}<p class="post-lede">{e(p["summary"])}</p>{gl}<div class="post-body" lang="{body_lang}">{md(p["body"])}</div>{nav}<section class="related"><h3>{e(ux["related"])}</h3><ul class="news-grid three">{rel}</ul></section></div></article></main>'
         out(f'{lang}/news/{p["slug"]}/index.html', shell(lang, f'{p["title"]} — {ui["suffix"]}', p['summary'], f'/{lang}/news/{p["slug"]}/', main, 'article'))
     built[lang] = sum(1 for p in posts if not p['missing'])
 

@@ -46,3 +46,7 @@ html[lang=ja] .post p,html[lang=ja] .post li,html[lang=ja] .post h1,html[lang=ja
 .post .wrap>:not(.related){max-width:760px;margin-left:auto;margin-right:auto}
 .post-back{display:block}
 .post .related{max-width:1040px;margin-left:auto;margin-right:auto}
+
+/* Article photography and readable comparison tables */
+.news-photo{object-fit:cover;object-position:center 45%}.news-thumb .news-photo{position:absolute;inset:0}.post-cover:has(.news-photo){height:clamp(220px,36vw,480px)}
+.news-table-wrap{overflow-x:auto;margin:24px 0 32px;border:1px solid var(--line);border-radius:12px}.news-table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px;line-height:1.65}.news-table th,.news-table td{text-align:left;padding:15px;border-bottom:1px solid var(--line);vertical-align:top}.news-table th{background:var(--cv-bg);color:var(--ink)}.news-table tr:last-child td{border-bottom:0}.news-table-wrap:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
