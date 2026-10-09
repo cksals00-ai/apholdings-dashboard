@@ -1,0 +1,4 @@
+/* Korean service description: retain the existing homepage visual. */
+html[lang="ko"] .hv6 h1{font-size:clamp(2rem,4.1vw,4rem);line-height:1.3;word-break:keep-all;overflow-wrap:anywhere}
+.hv6-description{margin-top:24px;font-size:clamp(1rem,1.4vw,1.2rem);line-height:1.8;color:#c9d6d1;word-break:keep-all}
+html[lang="ko"] .page-hero h1{word-break:keep-all;overflow-wrap:anywhere}

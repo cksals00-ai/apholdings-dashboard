@@ -54,4 +54,7 @@ def main():
         s=s.replace('<body','<body data-home="v6"',1) if 'data-home="v6"' not in s else s
         if s!=o: f.write_text(s); n+=1
     print({'home_v6':n})
-if __name__=='__main__': main()
+if __name__=='__main__':
+    main()
+    from apply_website_copy import main as apply_copy
+    apply_copy()

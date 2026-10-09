@@ -20,9 +20,11 @@ def hub_svg(l,d):
     for i,it in enumerate(its):
         x=pad+i*step if n>1 else W/2; pid=re.search(r'/products/([a-z]+)/',it.get('url',''))
         k=PROD[pid.group(1)][1] if pid and pid.group(1) in PROD else (st_key(it['status']) if it.get('status') else None); live=k in ('live',None)
+        if l=='ko' and it.get('status'):
+            k=st_key(it['status']); live=k=='live'
         g.append(f'<circle cx="{x:.0f}" cy="60" r="{12 if live else 9}" fill="{"#245548" if live else "#fff"}" stroke="#245548" stroke-width="2"/>')
         g.append(f'<text x="{x:.0f}" y="104" text-anchor="middle" font-size="19" font-weight="600" fill="#141716">{E(it["name"])}</text>')
-        lbl = E(CM[l][k]) if k else ''
+        lbl = E(it['status']) if l=='ko' and it.get('status') else (E(CM[l][k]) if k else '')
         g.append(f'<text x="{x:.0f}" y="130" text-anchor="middle" font-size="14" fill="#5b6260">{lbl}</text>')
     lab=' · '.join(E(i['name']) for i in its)
     return f'<section class="hub-graphic"><div class="wrap"><svg viewBox="0 0 {W} {H}" role="img" aria-label="{LABEL[d]}: {lab}" class="hub-svg">{"".join(g)}</svg></div></section>'
@@ -51,4 +53,7 @@ def main():
                 s=f.read_text(); t=do_prod(l,pid,s)
                 if t!=s: f.write_text(t); n+=1
     print({'pages_changed':n})
-if __name__=='__main__': main()
+if __name__=='__main__':
+    main()
+    from apply_website_copy import main as apply_copy
+    apply_copy()
