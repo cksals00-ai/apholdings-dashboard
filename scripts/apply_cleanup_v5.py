@@ -9,8 +9,8 @@ import re, json, html
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]; E=lambda s:html.escape(str(s),quote=True)
 D=json.loads((ROOT/'site-source/divisions.json').read_text()); LOCS=['ko','en','vi','ja','zh-cn','fr']
-DIVS=['intelligence','games','edu','hallyu','entertainment','shop']; LABEL={d:d.capitalize() for d in DIVS}
-H={'ko':'여섯 사업.','en':'Six businesses.','vi':'Sáu mảng.','ja':'6つの事業。','zh-cn':'六项业务。','fr':'Six activités.'}
+DIVS=['intelligence','games','edu','entertainment','shop']; LABEL={d:d.capitalize() for d in DIVS}
+H={'ko':'다섯 사업.','en':'Five businesses.','vi':'Năm mảng.','ja':'5つの事業。','zh-cn':'五项业务。','fr':'Cinq activités.'}
 MARK={'ko':'[피함]','en':'[avoid]','vi':'[tránh]','ja':'[回避]','zh-cn':'[避开]','fr':'[à éviter]'}
 def biz(l):
     rows=''.join(f'<li><a href="/{l}/{d}/"><b>{LABEL[d]}</b><span>{E(D["_sitemap"][l]["d"][d])}</span></a></li>' for d in DIVS)

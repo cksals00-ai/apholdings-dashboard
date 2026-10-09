@@ -12,7 +12,7 @@ import re, json, html
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LOCS = ['ko', 'en', 'vi', 'ja', 'zh-cn', 'fr']
-DIVS = ['intelligence', 'games', 'edu', 'hallyu', 'entertainment', 'shop']
+DIVS = ['intelligence', 'games', 'edu', 'entertainment', 'shop']
 LABEL = {'intelligence': 'Intelligence', 'games': 'Games', 'edu': 'Edu', 'hallyu': 'Hallyu', 'entertainment': 'Entertainment', 'shop': 'Shop'}
 E = lambda s: html.escape(str(s), quote=True)
 D = json.loads((ROOT / 'site-source' / 'divisions.json').read_text())
@@ -29,10 +29,9 @@ def fill(u, l): return u.replace('{l}', l).replace('{rankers}', rankers_url(l)).
 SECTION_OF = [
  ('intelligence', ['/intelligence/', '/products/safe/', '/products/light/', '/products/select/']),
  ('games', ['/games/', '/products/lastwave/', '/rankers/']),
- ('edu', ['/edu/', '/products/rgrg/']),
- ('hallyu', ['/hallyu/', '/products/cubs/', '/products/craft/']),
+ ('edu', ['/edu/', '/products/rgrg/', '/products/cubs/']),
  ('entertainment', ['/entertainment/', '/products/lia/']),
- ('shop', ['/shop/', '/products/commerce/', '/products/liaselect/']),
+ ('shop', ['/shop/', '/products/commerce/', '/products/liaselect/', '/products/craft/']),
  ('news', ['/news/']),
  ('about', ['/about/', '/brand/', '/ir/', '/lab/']),
  ('sitemap', ['/sitemap/']),
@@ -81,18 +80,19 @@ def footer_map(l):
      '<div><b>AP Holdings</b>' + a(f'/{l}/about/', t['about']) + a(brand_url(l), t['brand']) + a(f'/{l}/ir/', 'IR / INVESTORS') + a(f'/{l}/lab/', 'Founder’s Lab') + a(f'/{l}/news/', 'AP News') + a(f'/{l}/sitemap/', t['sitemap']) + '</div>',
      '<div>' + head('intelligence') + items('intelligence') + '</div>',
      '<div>' + head('games') + items('games') + '</div>',
-     '<div>' + head('edu') + items('edu') + '</div>',
-     '<div>' + head('hallyu') + items('hallyu', 4) + '</div>',
+     '<div>' + head('edu') + items('edu', 4) + '</div>',
      '<div>' + head('entertainment') + a(f'/{l}/products/lia/', 'LIA') + a(f'/{l}/entertainment/#cubs', 'Hangeul Cubs') + '</div>',
-     '<div>' + head('shop') + items('shop', 3) + '</div>',
+     '<div>' + head('shop') + items('shop', 4) + '</div>',
     ]
     return '<div class="footer-map footer-map-v3 footer-map-v4">' + ''.join(cols) + '</div>'
 
 # ---------- hub pages ----------
 def hub_main(l, d):
     c = D[d][l]; common = CM[l]
-    cards = []
+    cards = []; last_group = None
     for it in c['items']:
+        if it.get('group') and it['group'] != last_group:
+            cards.append(f'<h2 class="hub-group">{E(it["group"])}</h2>'); last_group = it['group']
         url = fill(it.get('url', ''), l); ext = url.startswith('http')
         st = f'<span class="status">{E(it["status"])}</span>' if it.get('status') else ''
         lk = (f'<a class="text-link" href="{E(url)}"' + (' target="_blank" rel="noopener noreferrer"' if ext else '') + f'>{E(it.get("cta", common["more"]))}{" ↗" if ext and not it.get("cta", "").endswith("↗") else ""}</a>') if url else ''
@@ -208,6 +208,7 @@ def transform(rel, s):
     if '<div class="footer-map' in s:
         s = re.sub(r'<div class="footer-map[^"]*">.*?</div>(?=</div><ul class="footer-policies")', lambda _: footer_map(l), s, count=1, flags=re.S)
     s = re.sub(r'href="/([a-z-]+)/media/"', r'href="/\1/entertainment/"', s)
+    s = re.sub(r'href="/([a-z-]+)/hallyu/(#[a-z-]+)?"', r'href="/\1/edu/"', s)
     s = re.sub(r'href="/([a-z-]+)/products/rankers/"', lambda mm: f'href="{rankers_url(mm.group(1))}"', s)
     s = re.sub(r'site\.css\?v=[0-9.]+', CSS_V, s)
     s = re.sub(r'site\.js\?v=[^"]+', JS_V, s)
@@ -244,6 +245,7 @@ CSS = '''
 .hub-hero .hub-who{margin-top:18px;color:var(--muted);font-size:15px;max-width:760px}.hub-hero .hub-who b{color:var(--accent);margin-right:6px}
 .hub-section{padding-top:20px}.hub-grid{gap:22px}.hub-card .text-link{margin-top:auto}.hub-card{position:relative}.hub-card .status{position:absolute;top:24px;right:24px}
 .hub-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:38px;padding-top:22px;border-top:1px solid var(--line)}
+.hub-group{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:34px 0 6px;padding-top:0}.hub-group:first-child{margin-top:0}
 .ent-section{padding:60px 0}.ent-lia{margin-top:0}.ent-lia .content h3{font-size:clamp(2.4rem,4vw,3.4rem)}.ent-links{margin-top:26px;padding-top:18px}
 .cubs-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:40px}.cub-card{background:#fcf3e7;border:1px solid var(--line);padding:18px 18px 22px;display:flex;flex-direction:column}.cub-card img{width:70%;height:auto;margin:0 auto 14px}.cub-card h3{font-size:22px}.cub-card .tag{font-size:13px;color:var(--accent);font-weight:600;margin-top:4px;letter-spacing:.02em}.cub-card .desc{font-size:14.5px;color:var(--muted);margin-top:12px;line-height:1.6}
 .co-tabs{display:flex;flex-wrap:wrap;gap:4px 26px;padding:14px 0 0;font-size:14px;border-bottom:1px solid var(--line)}.co-tabs a{padding:8px 0 12px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}.co-tabs a[aria-current=page]{color:var(--ink);font-weight:600;border-bottom-color:var(--ink)}.co-tabs a:hover{color:var(--ink)}
@@ -263,6 +265,8 @@ def main():
         if f.exists(): f.write_text(REDIRECT.replace('{l}', l).replace('{to}', f'/{l}/entertainment/'))
         f = ROOT / l / 'products' / 'rankers' / 'index.html'
         if f.exists(): f.write_text(REDIRECT.replace('{l}', l).replace('{to}', rankers_url(l)))
+        f = ROOT / l / 'hallyu' / 'index.html'
+        if f.exists(): f.write_text(REDIRECT.replace('{l}', l).replace('{to}', f'/{l}/edu/'))
     # pages
     for f in sorted(ROOT.glob('**/*.html')):
         rel = str(f.relative_to(ROOT))
@@ -280,14 +284,14 @@ def main():
         if n != t: f.write_text(n)
     # sitemap.xml
     sm = ROOT / 'sitemap.xml'; x = sm.read_text()
-    x = re.sub(r'<url><loc>https://www\.apholdings\.kr/[a-z-]+/(?:media|products/rankers|products/revenue|products/travel)/</loc>.*?</url>', '', x)
+    x = re.sub(r'<url><loc>https://www\.apholdings\.kr/[a-z-]+/(?:media|hallyu|products/rankers|products/revenue|products/travel)/</loc>.*?</url>', '', x)
     for l in ('ko', 'en'):
         for d in DIVS + ['sitemap']:
             u = f'https://www.apholdings.kr/{l}/{d}/'
             if u not in x: x = x.replace('</urlset>', f'<url><loc>{u}</loc><lastmod>2026-10-09</lastmod></url></urlset>')
     sm.write_text(x)
     gf = ROOT / 'site-source/generated-files.json'; g = json.loads(gf.read_text())
-    g = [p for p in g if not re.match(r'[a-z-]+/(media|products/rankers|products/revenue|products/travel)/index\.html$', p)]
+    g = [p for p in g if not re.match(r'[a-z-]+/(media|hallyu|products/rankers|products/revenue|products/travel)/index\.html$', p)]
     for h in hubs + sms:
         if h not in g: g.append(h)
     gf.write_text(json.dumps(g, ensure_ascii=False, indent=2) + '\n')

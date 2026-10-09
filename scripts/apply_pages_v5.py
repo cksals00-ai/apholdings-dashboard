@@ -6,9 +6,9 @@ import re, json, html
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]; E=lambda s:html.escape(str(s),quote=True)
 D=json.loads((ROOT/'site-source/divisions.json').read_text()); CM=D['_common']
-LOCS=['ko','en','vi','ja','zh-cn','fr']; DIVS=['intelligence','games','edu','hallyu','shop']
+LOCS=['ko','en','vi','ja','zh-cn','fr']; DIVS=['intelligence','games','edu','shop']
 LABEL={'intelligence':'Intelligence','games':'Games','edu':'Edu','hallyu':'Hallyu','entertainment':'Entertainment','shop':'Shop'}
-PROD={'safe':('intelligence','live'),'light':('intelligence','live'),'select':('intelligence','soon'),'lastwave':('games','soon'),'rgrg':('edu','live'),'cubs':('hallyu','live'),'craft':('hallyu','soon'),'lia':('entertainment','live'),'liaselect':('shop','live'),'commerce':('shop','soon')}
+PROD={'safe':('intelligence','live'),'light':('intelligence','live'),'select':('intelligence','soon'),'lastwave':('games','soon'),'rgrg':('edu','live'),'cubs':('edu','live'),'craft':('shop','soon'),'lia':('entertainment','live'),'liaselect':('shop','live'),'commerce':('shop','soon')}
 def st_key(s):
     s=(s or '')
     for k in ('live','review','soon'):

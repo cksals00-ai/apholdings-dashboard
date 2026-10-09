@@ -549,396 +549,376 @@
  },
  "edu": {
   "ko": {
-   "eyebrow": "EDU · 국내 교육",
-   "title": "교실과 집에서, 퀴즈로 배웁니다.",
-   "lead": "학교와 학원에는 실시간 퀴즈 배틀을, 집에는 아빠와 아이의 약속을. 한국의 아이들이 놀면서 배우는 도구를 만듭니다.",
-   "for": "학교 · 학원 선생님, 그리고 아이와 함께하는 부모",
-   "items": [
-    {
-     "name": "퀴즈랭커 (한국어판)",
-     "tag": "실시간 퀴즈 배틀",
-     "desc": "교실에서 다 같이 겨루는 실시간 퀴즈 앱이에요. 선생님이 문제를 고르고, 아이들이 손으로 답해요.",
-     "url": "/{l}/products/rgrg/"
-    },
-    {
-     "name": "학교 · 학원 퀴즈팩",
-     "tag": "교과 · 단원별 문제",
-     "desc": "수업에 바로 쓰는 문제 묶음을 준비하고 있어요.",
-     "status": "준비 중"
-    },
-    {
-     "name": "아빠와 아이 프로젝트",
-     "tag": "약속 하나, 100칸 도장판, 선물",
-     "desc": "아빠와 아이가 약속을 정하고, 워치로 자동 체크되는 달리기나 영어 책읽기로 도장판을 채우면 선물. 중간엔 룰렛과 응원.",
-     "status": "준비 중"
-    }
-   ]
-  },
-  "en": {
-   "eyebrow": "EDU · Education in Korea",
-   "title": "In the classroom and at home, learning by quiz.",
-   "lead": "Live quiz battles for schools and academies, and a dad-and-kid promise for home. Tools for Korean children to learn by playing.",
-   "for": "School and academy teachers, and parents doing it together with their child",
-   "items": [
-    {
-     "name": "QuizRanker (Korean edition)",
-     "tag": "Live quiz battles",
-     "desc": "A real-time quiz app for the whole classroom. The teacher picks the questions; the kids answer by hand.",
-     "url": "/{l}/products/rgrg/"
-    },
-    {
-     "name": "School & academy quiz packs",
-     "tag": "By subject and unit",
-     "desc": "Question sets ready to use in class.",
-     "status": "Coming soon"
-    },
-    {
-     "name": "Dad & Kid Project",
-     "tag": "One promise, a 100-stamp board, a present",
-     "desc": "Dad and child set a promise — a run auto-checked by the watch, or 20 minutes of English reading — and fill the board for a present. A roulette and cheers along the way.",
-     "status": "Coming soon"
-    }
-   ]
-  },
-  "vi": {
-   "eyebrow": "EDU · Giáo dục trong nước Hàn Quốc",
-   "title": "Ở lớp và ở nhà, học bằng đố vui.",
-   "lead": "Đấu đố vui trực tiếp cho trường học và trung tâm, và lời hứa bố-con cho gia đình. Công cụ để trẻ em Hàn Quốc vừa chơi vừa học.",
-   "for": "Giáo viên trường học · trung tâm, và phụ huynh học cùng con",
-   "items": [
-    {
-     "name": "QuizRanker (bản tiếng Hàn)",
-     "tag": "Đấu đố vui trực tiếp",
-     "desc": "Ứng dụng đố vui thời gian thực cho cả lớp. Giáo viên chọn câu hỏi, học sinh trả lời.",
-     "url": "/{l}/products/rgrg/"
-    },
-    {
-     "name": "Gói đố vui cho trường · trung tâm",
-     "tag": "Theo môn và bài",
-     "desc": "Bộ câu hỏi dùng ngay trong giờ học.",
-     "status": "Sắp ra mắt"
-    },
-    {
-     "name": "Dự án Bố & Con",
-     "tag": "Một lời hứa, bảng 100 dấu, một món quà",
-     "desc": "Bố và con đặt một lời hứa — chạy bộ được đồng hồ tự ghi nhận, hoặc 20 phút đọc sách tiếng Anh — lấp đầy bảng dấu để nhận quà. Có vòng quay và lời cổ vũ dọc đường.",
-     "status": "Sắp ra mắt"
-    }
-   ]
-  },
-  "ja": {
-   "eyebrow": "EDU · 韓国国内の教育",
-   "title": "教室でも家でも、クイズで学ぶ。",
-   "lead": "学校や塾にはリアルタイムのクイズ対戦を、家にはパパと子どもの約束を。韓国の子どもが遊びながら学ぶ道具をつくります。",
-   "for": "学校 · 塾の先生、そして子どもと一緒に取り組む保護者",
-   "items": [
-    {
-     "name": "QuizRanker(韓国語版)",
-     "tag": "リアルタイムのクイズ対戦",
-     "desc": "教室みんなで競うリアルタイムのクイズアプリ。先生が問題を選び、子どもが手で答えます。",
-     "url": "/{l}/products/rgrg/"
-    },
-    {
-     "name": "学校 · 塾向けクイズパック",
-     "tag": "教科 · 単元別",
-     "desc": "授業でそのまま使える問題セットを準備しています。",
-     "status": "準備中"
-    },
-    {
-     "name": "パパと子どもプロジェクト",
-     "tag": "約束ひとつ、100マスのスタンプ台、プレゼント",
-     "desc": "パパと子どもが約束を決め、ウォッチで自動チェックされるランニングや英語の読書20分でスタンプ台を埋めるとプレゼント。途中にはルーレットと応援。",
-     "status": "準備中"
-    }
-   ]
-  },
-  "zh-cn": {
-   "eyebrow": "EDU · 韩国国内教育",
-   "title": "在教室和家里，用答题学习。",
-   "lead": "给学校和培训机构的实时答题对战，给家庭的爸爸与孩子约定。让韩国的孩子边玩边学的工具。",
-   "for": "学校 · 培训机构的老师，以及与孩子一起的父母",
-   "items": [
-    {
-     "name": "QuizRanker（韩语版）",
-     "tag": "实时答题对战",
-     "desc": "全班一起比拼的实时答题应用。老师选题，孩子作答。",
-     "url": "/{l}/products/rgrg/"
-    },
-    {
-     "name": "学校 · 机构题库包",
-     "tag": "按学科与单元",
-     "desc": "课堂上直接可用的题目集，准备中。",
-     "status": "即将推出"
-    },
-    {
-     "name": "爸爸与孩子计划",
-     "tag": "一个约定、100 格印章板、一份礼物",
-     "desc": "爸爸和孩子定下约定——手表自动记录的跑步，或 20 分钟英语阅读——填满印章板就有礼物。中途还有转盘和加油。",
-     "status": "即将推出"
-    }
-   ]
-  },
-  "fr": {
-   "eyebrow": "EDU · L’éducation en Corée",
-   "title": "En classe et à la maison, apprendre par le quiz.",
-   "lead": "Des duels de quiz en direct pour les écoles et les académies, et une promesse papa-enfant pour la maison. Des outils pour que les enfants coréens apprennent en jouant.",
-   "for": "Les enseignants d’école et d’académie, et les parents qui s’y mettent avec leur enfant",
-   "items": [
-    {
-     "name": "QuizRanker (édition coréenne)",
-     "tag": "Duels de quiz en direct",
-     "desc": "Une application de quiz en temps réel pour toute la classe. L’enseignant choisit les questions ; les enfants répondent.",
-     "url": "/{l}/products/rgrg/"
-    },
-    {
-     "name": "Packs de quiz école · académie",
-     "tag": "Par matière et par chapitre",
-     "desc": "Des séries de questions prêtes pour la classe.",
-     "status": "Bientôt"
-    },
-    {
-     "name": "Projet Papa & Enfant",
-     "tag": "Une promesse, un tableau de 100 cases, un cadeau",
-     "desc": "Papa et enfant fixent une promesse — une course validée par la montre, ou 20 minutes de lecture en anglais — et remplissent le tableau pour un cadeau. Une roulette et des encouragements en chemin.",
-     "status": "Bientôt"
-    }
-   ]
-  }
- },
- "hallyu": {
-  "ko": {
-   "eyebrow": "HALLYU · 외국인을 위한 한국",
-   "title": "한국이 궁금한 사람에게, 놀면서 배우는 한국.",
-   "lead": "한글과 한국 문화를 퀴즈와 캐릭터로 배우고, 장인의 작품을 집으로 가져갑니다. 한국을 찾는 외국인을 위한 부문입니다.",
-   "for": "한국을 배우고 싶은 외국인 — 아이부터 어른까지, 그리고 한국을 찾는 여행자",
+   "eyebrow": "EDU · 놀면서 배우는 한국",
+   "title": "한글부터 한국 문화까지, 놀면서 배웁니다.",
+   "lead": "AP Edu는 한국이 궁금한 외국인을 위한 배움에서 시작했습니다. 호랑이 네 남매와 한글을 익히고, 퀴즈로 한국 문화를 겨룹니다. 같은 자리에서 한국의 교실과 가정을 위한 퀴즈와 약속도 만듭니다.",
+   "for": "한국을 배우고 싶은 외국인 — 아이부터 어른까지. 그리고 한국의 선생님과 부모",
    "items": [
     {
      "name": "K-Ranker",
      "tag": "외국인을 위한 한국 퀴즈 앱",
      "desc": "K-pop · K-food · 한국 문화를 퀴즈로 겨루며 배우는 앱이에요. 앱스토어 심사 중이에요.",
-     "status": "심사 중"
+     "status": "심사 중",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "Hangeul Cubs",
      "tag": "호랑이 네 남매와 한글 첫걸음",
      "desc": "받침과 글자를 놀이로 익히는 한글 앱이에요. 캐릭터 소개는 Entertainment에서.",
-     "url": "/{l}/products/cubs/"
+     "url": "/{l}/products/cubs/",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "한글 학습 사이트",
      "tag": "레슨 · 30일 챌린지 · 체험단",
      "desc": "한글컵스 수업과 챌린지를 한곳에서 안내해요.",
      "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "학습 사이트 열기"
-    },
-    {
-     "name": "K-Craft",
-     "tag": "장인의 항아리와 도자기",
-     "desc": "무형문화재 장인의 작품을 해외 구매자와 연결해요.",
-     "url": "/{l}/products/craft/"
+     "cta": "학습 사이트 열기",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "K-Food · K-Pop",
      "tag": "다음 주제",
      "desc": "한국 음식과 음악을 같은 방식으로 이어 갈 준비를 하고 있어요.",
-     "status": "준비 중"
+     "status": "준비 중",
+     "group": "For the world · Hallyu"
+    },
+    {
+     "name": "퀴즈랭커 (한국어판)",
+     "tag": "실시간 퀴즈 배틀",
+     "desc": "교실에서 다 같이 겨루는 실시간 퀴즈 앱이에요. 선생님이 문제를 고르고, 아이들이 손으로 답해요.",
+     "url": "/{l}/products/rgrg/",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "학교 · 학원 퀴즈팩",
+     "tag": "교과 · 단원별 문제",
+     "desc": "수업에 바로 쓰는 문제 묶음을 준비하고 있어요.",
+     "status": "준비 중",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "아빠와 아이 프로젝트",
+     "tag": "약속 하나, 100칸 도장판, 선물",
+     "desc": "아빠와 아이가 약속을 정하고, 워치로 자동 체크되는 달리기나 영어 책읽기로 도장판을 채우면 선물. 중간엔 룰렛과 응원.",
+     "status": "준비 중",
+     "group": "For Korean classrooms & homes"
     }
-   ]
+   ],
+   "primary": {
+    "label": "AP Edu 학습 사이트 열기 ↗",
+    "url": "https://edu.apholdings.kr/{edu}/"
+   }
   },
   "en": {
-   "eyebrow": "HALLYU · Korea for the world",
-   "title": "Curious about Korea? Learn it by playing.",
-   "lead": "Hangeul and Korean culture through quizzes and characters, and artisans’ work delivered to your home. This division is for people outside Korea.",
-   "for": "Anyone who wants to learn Korea — children and adults — and travellers coming to Korea",
+   "eyebrow": "EDU · Learn Korea by playing",
+   "title": "From Hangeul to Korean culture, learned by playing.",
+   "lead": "AP Edu began as learning for people outside Korea who are curious about it: Hangeul with four tiger siblings, Korean culture through quizzes. In the same place we build quizzes and promises for Korean classrooms and homes.",
+   "for": "Anyone who wants to learn Korea — children and adults — and Korean teachers and parents",
    "items": [
     {
      "name": "K-Ranker",
      "tag": "The Korea quiz app for international fans",
      "desc": "Learn K-pop, K-food and Korean culture by competing in quizzes. Now in App Store review.",
-     "status": "In review"
+     "status": "In review",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "Hangeul Cubs",
      "tag": "First steps in Hangeul with four tiger siblings",
      "desc": "A Hangeul app that teaches letters and bottom blocks through play. Meet the characters under Entertainment.",
-     "url": "/{l}/products/cubs/"
+     "url": "/{l}/products/cubs/",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "Hangeul learning site",
      "tag": "Lessons · 30-day challenge · reviewer programme",
      "desc": "All Hangeul Cubs lessons and challenges in one place.",
      "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "Open the learning site"
-    },
-    {
-     "name": "K-Craft",
-     "tag": "Artisans’ onggi jars and ceramics",
-     "desc": "Connecting the work of intangible-heritage artisans with buyers abroad.",
-     "url": "/{l}/products/craft/"
+     "cta": "Open the learning site",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "K-Food · K-Pop",
      "tag": "Next up",
      "desc": "Korean food and music, the same way.",
-     "status": "Coming soon"
+     "status": "Coming soon",
+     "group": "For the world · Hallyu"
+    },
+    {
+     "name": "QuizRanker (Korean edition)",
+     "tag": "Live quiz battles",
+     "desc": "A real-time quiz app for the whole classroom. The teacher picks the questions; the kids answer by hand.",
+     "url": "/{l}/products/rgrg/",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "School & academy quiz packs",
+     "tag": "By subject and unit",
+     "desc": "Question sets ready to use in class.",
+     "status": "Coming soon",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "Dad & Kid Project",
+     "tag": "One promise, a 100-stamp board, a present",
+     "desc": "Dad and child set a promise — a run auto-checked by the watch, or 20 minutes of English reading — and fill the board for a present. A roulette and cheers along the way.",
+     "status": "Coming soon",
+     "group": "For Korean classrooms & homes"
     }
-   ]
+   ],
+   "primary": {
+    "label": "Open the AP Edu learning site ↗",
+    "url": "https://edu.apholdings.kr/{edu}/"
+   }
   },
   "vi": {
-   "eyebrow": "HALLYU · Hàn Quốc cho thế giới",
-   "title": "Tò mò về Hàn Quốc? Học bằng cách chơi.",
-   "lead": "Hangeul và văn hóa Hàn Quốc qua đố vui và nhân vật, cùng tác phẩm nghệ nhân giao tận nhà. Mảng này dành cho người ngoài Hàn Quốc.",
-   "for": "Bất kỳ ai muốn học về Hàn Quốc — trẻ em và người lớn — và du khách đến Hàn Quốc",
+   "eyebrow": "EDU · Học Hàn Quốc bằng cách chơi",
+   "title": "Từ Hangeul đến văn hóa Hàn Quốc, học bằng cách chơi.",
+   "lead": "AP Edu bắt đầu từ việc học dành cho người ngoài Hàn Quốc tò mò về đất nước này: Hangeul cùng bốn anh em hổ, văn hóa Hàn Quốc qua đố vui. Cũng tại đây, chúng tôi làm đố vui và lời hứa cho lớp học và gia đình Hàn Quốc.",
+   "for": "Bất kỳ ai muốn học về Hàn Quốc — trẻ em và người lớn — cùng giáo viên và phụ huynh Hàn Quốc",
    "items": [
     {
      "name": "K-Ranker",
      "tag": "Ứng dụng đố vui Hàn Quốc cho fan quốc tế",
      "desc": "Học K-pop, K-food và văn hóa Hàn Quốc bằng cách thi đố vui. Đang xét duyệt trên App Store.",
-     "status": "Đang xét duyệt"
+     "status": "Đang xét duyệt",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "Hangeul Cubs",
      "tag": "Những bước đầu với Hangeul cùng bốn anh em hổ",
      "desc": "Ứng dụng Hangeul dạy chữ cái và phụ âm cuối qua trò chơi. Gặp các nhân vật ở mục Entertainment.",
-     "url": "/{l}/products/cubs/"
+     "url": "/{l}/products/cubs/",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "Trang học Hangeul",
      "tag": "Bài học · thử thách 30 ngày · nhóm trải nghiệm",
      "desc": "Tất cả bài học và thử thách Hangeul Cubs ở một nơi.",
      "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "Mở trang học"
-    },
-    {
-     "name": "K-Craft",
-     "tag": "Chum onggi và gốm của nghệ nhân",
-     "desc": "Kết nối tác phẩm của nghệ nhân di sản phi vật thể với người mua ở nước ngoài.",
-     "url": "/{l}/products/craft/"
+     "cta": "Mở trang học",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "K-Food · K-Pop",
      "tag": "Tiếp theo",
      "desc": "Ẩm thực và âm nhạc Hàn Quốc, theo cùng một cách.",
-     "status": "Sắp ra mắt"
+     "status": "Sắp ra mắt",
+     "group": "For the world · Hallyu"
+    },
+    {
+     "name": "QuizRanker (bản tiếng Hàn)",
+     "tag": "Đấu đố vui trực tiếp",
+     "desc": "Ứng dụng đố vui thời gian thực cho cả lớp. Giáo viên chọn câu hỏi, học sinh trả lời.",
+     "url": "/{l}/products/rgrg/",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "Gói đố vui cho trường · trung tâm",
+     "tag": "Theo môn và bài",
+     "desc": "Bộ câu hỏi dùng ngay trong giờ học.",
+     "status": "Sắp ra mắt",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "Dự án Bố & Con",
+     "tag": "Một lời hứa, bảng 100 dấu, một món quà",
+     "desc": "Bố và con đặt một lời hứa — chạy bộ được đồng hồ tự ghi nhận, hoặc 20 phút đọc sách tiếng Anh — lấp đầy bảng dấu để nhận quà. Có vòng quay và lời cổ vũ dọc đường.",
+     "status": "Sắp ra mắt",
+     "group": "For Korean classrooms & homes"
     }
-   ]
+   ],
+   "primary": {
+    "label": "Mở trang học AP Edu ↗",
+    "url": "https://edu.apholdings.kr/{edu}/"
+   }
   },
   "ja": {
-   "eyebrow": "HALLYU · 世界のための韓国",
-   "title": "韓国が気になる人に、遊びながら学ぶ韓国。",
-   "lead": "ハングルと韓国文化をクイズとキャラクターで学び、職人の作品を家まで届けます。韓国の外にいる人のための部門です。",
-   "for": "韓国を学びたい人 — 子どもから大人まで、そして韓国を訪れる旅行者",
+   "eyebrow": "EDU · 遊びながら学ぶ韓国",
+   "title": "ハングルから韓国文化まで、遊びながら学ぶ。",
+   "lead": "AP Edu は、韓国が気になる海外の人のための学びから始まりました。トラの4きょうだいとハングルを覚え、クイズで韓国文化を競います。同じ場所で、韓国の教室と家庭のためのクイズと約束もつくります。",
+   "for": "韓国を学びたい人 — 子どもから大人まで。そして韓国の先生と保護者",
    "items": [
     {
      "name": "K-Ranker",
      "tag": "海外ファンのための韓国クイズアプリ",
      "desc": "K-pop · K-food · 韓国文化をクイズで競いながら学びます。App Store 審査中。",
-     "status": "審査中"
+     "status": "審査中",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "Hangeul Cubs",
      "tag": "トラの4きょうだいとハングルの第一歩",
      "desc": "文字とパッチムを遊びで身につけるハングルアプリ。キャラクター紹介は Entertainment で。",
-     "url": "/{l}/products/cubs/"
+     "url": "/{l}/products/cubs/",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "ハングル学習サイト",
      "tag": "レッスン · 30日チャレンジ · 体験団",
      "desc": "ハングルカブスのレッスンとチャレンジをひとつの場所で案内します。",
      "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "学習サイトを開く"
-    },
-    {
-     "name": "K-Craft",
-     "tag": "職人の甕と陶磁器",
-     "desc": "無形文化財の職人の作品を海外の買い手につなぎます。",
-     "url": "/{l}/products/craft/"
+     "cta": "学習サイトを開く",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "K-Food · K-Pop",
      "tag": "次のテーマ",
      "desc": "韓国の食と音楽を、同じやり方でつないでいきます。",
-     "status": "準備中"
+     "status": "準備中",
+     "group": "For the world · Hallyu"
+    },
+    {
+     "name": "QuizRanker(韓国語版)",
+     "tag": "リアルタイムのクイズ対戦",
+     "desc": "教室みんなで競うリアルタイムのクイズアプリ。先生が問題を選び、子どもが手で答えます。",
+     "url": "/{l}/products/rgrg/",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "学校 · 塾向けクイズパック",
+     "tag": "教科 · 単元別",
+     "desc": "授業でそのまま使える問題セットを準備しています。",
+     "status": "準備中",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "パパと子どもプロジェクト",
+     "tag": "約束ひとつ、100マスのスタンプ台、プレゼント",
+     "desc": "パパと子どもが約束を決め、ウォッチで自動チェックされるランニングや英語の読書20分でスタンプ台を埋めるとプレゼント。途中にはルーレットと応援。",
+     "status": "準備中",
+     "group": "For Korean classrooms & homes"
     }
-   ]
+   ],
+   "primary": {
+    "label": "AP Edu 学習サイトを開く ↗",
+    "url": "https://edu.apholdings.kr/{edu}/"
+   }
   },
   "zh-cn": {
-   "eyebrow": "HALLYU · 面向世界的韩国",
-   "title": "对韩国好奇？边玩边学。",
-   "lead": "通过答题和角色学习韩文与韩国文化，把匠人的作品送到你家。这个板块面向韩国以外的人。",
-   "for": "想了解韩国的任何人——孩子和大人——以及来韩国的旅行者",
+   "eyebrow": "EDU · 边玩边学韩国",
+   "title": "从韩文到韩国文化，边玩边学。",
+   "lead": "AP Edu 从面向海外韩国爱好者的学习开始：和四只小老虎学韩文，用答题比拼了解韩国文化。在同一个地方，我们也为韩国的教室和家庭制作答题与约定。",
+   "for": "想了解韩国的任何人——孩子和大人——以及韩国的老师与父母",
    "items": [
     {
      "name": "K-Ranker",
      "tag": "面向海外粉丝的韩国答题应用",
      "desc": "通过答题比拼学习 K-pop、K-food 和韩国文化。App Store 审核中。",
-     "status": "审核中"
+     "status": "审核中",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "Hangeul Cubs",
      "tag": "和四只小老虎一起迈出韩文第一步",
      "desc": "用游戏学字母和收音的韩文应用。角色介绍见 Entertainment。",
-     "url": "/{l}/products/cubs/"
+     "url": "/{l}/products/cubs/",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "韩文学习网站",
      "tag": "课程 · 30 天挑战 · 体验团",
      "desc": "Hangeul Cubs 的课程与挑战都在这里。",
      "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "打开学习网站"
-    },
-    {
-     "name": "K-Craft",
-     "tag": "匠人的陶缸与陶瓷",
-     "desc": "把非物质文化遗产匠人的作品连接到海外买家。",
-     "url": "/{l}/products/craft/"
+     "cta": "打开学习网站",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "K-Food · K-Pop",
      "tag": "下一个主题",
      "desc": "用同样的方式延伸到韩国的饮食与音乐。",
-     "status": "即将推出"
+     "status": "即将推出",
+     "group": "For the world · Hallyu"
+    },
+    {
+     "name": "QuizRanker（韩语版）",
+     "tag": "实时答题对战",
+     "desc": "全班一起比拼的实时答题应用。老师选题，孩子作答。",
+     "url": "/{l}/products/rgrg/",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "学校 · 机构题库包",
+     "tag": "按学科与单元",
+     "desc": "课堂上直接可用的题目集，准备中。",
+     "status": "即将推出",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "爸爸与孩子计划",
+     "tag": "一个约定、100 格印章板、一份礼物",
+     "desc": "爸爸和孩子定下约定——手表自动记录的跑步，或 20 分钟英语阅读——填满印章板就有礼物。中途还有转盘和加油。",
+     "status": "即将推出",
+     "group": "For Korean classrooms & homes"
     }
-   ]
+   ],
+   "primary": {
+    "label": "打开 AP Edu 学习网站 ↗",
+    "url": "https://edu.apholdings.kr/{edu}/"
+   }
   },
   "fr": {
-   "eyebrow": "HALLYU · La Corée pour le monde",
-   "title": "Curieux de la Corée ? Apprenez-la en jouant.",
-   "lead": "Le hangeul et la culture coréenne par les quiz et les personnages, et le travail des artisans livré chez vous. Cette division s’adresse aux personnes hors de Corée.",
-   "for": "Toute personne qui veut apprendre la Corée — enfants et adultes — et les voyageurs qui s’y rendent",
+   "eyebrow": "EDU · Apprendre la Corée en jouant",
+   "title": "Du hangeul à la culture coréenne, appris en jouant.",
+   "lead": "AP Edu est né d’un apprentissage pour les curieux de la Corée hors de Corée : le hangeul avec quatre tigres, la culture coréenne par les quiz. Au même endroit, nous créons des quiz et des promesses pour les classes et les familles coréennes.",
+   "for": "Toute personne qui veut apprendre la Corée — enfants et adultes — et les enseignants et parents coréens",
    "items": [
     {
      "name": "K-Ranker",
      "tag": "L’application de quiz sur la Corée pour les fans du monde entier",
      "desc": "Apprenez la K-pop, la K-food et la culture coréenne en vous affrontant au quiz. En cours d’examen sur l’App Store.",
-     "status": "En cours d’examen"
+     "status": "En cours d’examen",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "Hangeul Cubs",
      "tag": "Premiers pas en hangeul avec quatre tigres",
      "desc": "Une application qui enseigne les lettres et les consonnes finales par le jeu. Les personnages sont présentés sous Entertainment.",
-     "url": "/{l}/products/cubs/"
+     "url": "/{l}/products/cubs/",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "Site d’apprentissage du hangeul",
      "tag": "Leçons · défi de 30 jours · programme testeurs",
      "desc": "Toutes les leçons et tous les défis Hangeul Cubs au même endroit.",
      "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "Ouvrir le site"
-    },
-    {
-     "name": "K-Craft",
-     "tag": "Jarres onggi et céramiques d’artisans",
-     "desc": "Relier le travail d’artisans du patrimoine immatériel aux acheteurs à l’étranger.",
-     "url": "/{l}/products/craft/"
+     "cta": "Ouvrir le site",
+     "group": "For the world · Hallyu"
     },
     {
      "name": "K-Food · K-Pop",
      "tag": "La suite",
      "desc": "La cuisine et la musique coréennes, de la même manière.",
-     "status": "Bientôt"
+     "status": "Bientôt",
+     "group": "For the world · Hallyu"
+    },
+    {
+     "name": "QuizRanker (édition coréenne)",
+     "tag": "Duels de quiz en direct",
+     "desc": "Une application de quiz en temps réel pour toute la classe. L’enseignant choisit les questions ; les enfants répondent.",
+     "url": "/{l}/products/rgrg/",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "Packs de quiz école · académie",
+     "tag": "Par matière et par chapitre",
+     "desc": "Des séries de questions prêtes pour la classe.",
+     "status": "Bientôt",
+     "group": "For Korean classrooms & homes"
+    },
+    {
+     "name": "Projet Papa & Enfant",
+     "tag": "Une promesse, un tableau de 100 cases, un cadeau",
+     "desc": "Papa et enfant fixent une promesse — une course validée par la montre, ou 20 minutes de lecture en anglais — et remplissent le tableau pour un cadeau. Une roulette et des encouragements en chemin.",
+     "status": "Bientôt",
+     "group": "For Korean classrooms & homes"
     }
-   ]
+   ],
+   "primary": {
+    "label": "Ouvrir le site AP Edu ↗",
+    "url": "https://edu.apholdings.kr/{edu}/"
+   }
   }
  },
  "shop": {
@@ -968,11 +948,10 @@
      "url": "/{l}/products/commerce/"
     },
     {
-     "name": "K-Craft 바로가기",
-     "tag": "장인의 작품은 Hallyu에서",
-     "desc": "항아리와 도자기 구매 안내는 Hallyu 부문에 있어요.",
-     "url": "/{l}/hallyu/",
-     "cta": "Hallyu로 이동"
+     "name": "K-Craft",
+     "tag": "장인의 항아리와 도자기",
+     "desc": "무형문화재 장인의 작품을 해외 구매자와 연결해요.",
+     "url": "/{l}/products/craft/"
     }
    ],
    "primary": {
@@ -1007,10 +986,9 @@
     },
     {
      "name": "K-Craft",
-     "tag": "Artisans’ work lives under Hallyu",
-     "desc": "Onggi jars and ceramics are presented in the Hallyu division.",
-     "url": "/{l}/hallyu/",
-     "cta": "Go to Hallyu"
+     "tag": "Artisans’ onggi jars and ceramics",
+     "desc": "Connecting the work of intangible-heritage artisans with buyers abroad.",
+     "url": "/{l}/products/craft/"
     }
    ],
    "primary": {
@@ -1045,10 +1023,9 @@
     },
     {
      "name": "K-Craft",
-     "tag": "Tác phẩm nghệ nhân nằm ở Hallyu",
-     "desc": "Chum onggi và gốm được giới thiệu ở mảng Hallyu.",
-     "url": "/{l}/hallyu/",
-     "cta": "Đến Hallyu"
+     "tag": "Chum onggi và gốm của nghệ nhân",
+     "desc": "Kết nối tác phẩm của nghệ nhân di sản phi vật thể với người mua ở nước ngoài.",
+     "url": "/{l}/products/craft/"
     }
    ],
    "primary": {
@@ -1083,10 +1060,9 @@
     },
     {
      "name": "K-Craft",
-     "tag": "職人の作品は Hallyu で",
-     "desc": "甕と陶磁器の購入案内は Hallyu 部門にあります。",
-     "url": "/{l}/hallyu/",
-     "cta": "Hallyu へ"
+     "tag": "職人の甕と陶磁器",
+     "desc": "無形文化財の職人の作品を海外の買い手につなぎます。",
+     "url": "/{l}/products/craft/"
     }
    ],
    "primary": {
@@ -1121,10 +1097,9 @@
     },
     {
      "name": "K-Craft",
-     "tag": "匠人作品在 Hallyu",
-     "desc": "陶缸与陶瓷的购买指引在 Hallyu 板块。",
-     "url": "/{l}/hallyu/",
-     "cta": "前往 Hallyu"
+     "tag": "匠人的陶缸与陶瓷",
+     "desc": "把非物质文化遗产匠人的作品连接到海外买家。",
+     "url": "/{l}/products/craft/"
     }
    ],
    "primary": {
@@ -1159,10 +1134,9 @@
     },
     {
      "name": "K-Craft",
-     "tag": "Le travail des artisans est sous Hallyu",
-     "desc": "Les jarres onggi et les céramiques sont présentées dans la division Hallyu.",
-     "url": "/{l}/hallyu/",
-     "cta": "Aller à Hallyu"
+     "tag": "Jarres onggi et céramiques d’artisans",
+     "desc": "Relier le travail d’artisans du patrimoine immatériel aux acheteurs à l’étranger.",
+     "url": "/{l}/products/craft/"
     }
    ],
    "primary": {
@@ -1203,7 +1177,7 @@
     "role": "호랑이 네 남매",
     "h": "다호 · 꼬비 · 아리 · 라미.",
     "p": "한글컵스 앱과 유튜브에서 한글을 가르치는 호랑이 남매예요. 받침 하나로 뜻이 바뀌는 한글을, 넷이 나눠 맡아 알려줍니다.",
-    "app": "한글컵스 앱은 Hallyu에서",
+    "app": "한글컵스 앱과 수업은 Edu에서",
     "chars": [
      [
       "다호",
@@ -1259,7 +1233,7 @@
     "role": "Four tiger siblings",
     "h": "Daho · Kkobi · Aari · Rami.",
     "p": "The tiger siblings who teach Hangeul in the Hangeul Cubs app and on YouTube. One bottom block changes a word’s meaning — the four of them split the lessons between them.",
-    "app": "The Hangeul Cubs app lives under Hallyu",
+    "app": "The Hangeul Cubs app and lessons live under Edu",
     "chars": [
      [
       "Daho",
@@ -1315,7 +1289,7 @@
     "role": "Bốn anh em hổ",
     "h": "Daho · Kkobi · Aari · Rami.",
     "p": "Bốn anh em hổ dạy Hangeul trong ứng dụng Hangeul Cubs và trên YouTube. Một phụ âm cuối làm đổi nghĩa cả từ — bốn bạn chia nhau các bài học.",
-    "app": "Ứng dụng Hangeul Cubs nằm ở Hallyu",
+    "app": "Ứng dụng và bài học Hangeul Cubs nằm ở Edu",
     "chars": [
      [
       "Daho",
@@ -1371,7 +1345,7 @@
     "role": "トラの4きょうだい",
     "h": "ダホ · コビ · アリ · ラミ。",
     "p": "ハングルカブスのアプリと YouTube でハングルを教えるトラのきょうだい。パッチムひとつで意味が変わるハングルを、4人で分担して教えます。",
-    "app": "ハングルカブスのアプリは Hallyu で",
+    "app": "ハングルカブスのアプリとレッスンは Edu で",
     "chars": [
      [
       "ダホ",
@@ -1427,7 +1401,7 @@
     "role": "四只小老虎",
     "h": "多浩 · 小飞 · 阿丽 · 拉美。",
     "p": "在 Hangeul Cubs 应用和 YouTube 上教韩文的老虎兄妹。一个收音就改变词义——四只小老虎分工讲解。",
-    "app": "Hangeul Cubs 应用在 Hallyu",
+    "app": "Hangeul Cubs 应用与课程在 Edu",
     "chars": [
      [
       "Daho",
@@ -1483,7 +1457,7 @@
     "role": "Quatre tigres, frères et sœurs",
     "h": "Daho · Kkobi · Aari · Rami.",
     "p": "Les tigres qui enseignent le hangeul dans l’application Hangeul Cubs et sur YouTube. Une seule consonne finale change le sens d’un mot — les quatre se partagent les leçons.",
-    "app": "L’application Hangeul Cubs est sous Hallyu",
+    "app": "L’application et les leçons Hangeul Cubs sont sous Edu",
     "chars": [
      [
       "Daho",
@@ -1580,14 +1554,13 @@
  "_sitemap": {
   "ko": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "하나의 AP.<br>여섯 개의 사업.",
-   "lead": "AI와 People을 연결하는 AP Holdings. Intelligence · Games · Edu · Hallyu · Entertainment · Shop 아래에 브랜드와 서비스를 모았습니다.",
+   "title": "하나의 AP.<br>다섯 개의 사업.",
+   "lead": "AI와 People을 연결하는 AP Holdings. Intelligence · Games · Edu · Entertainment · Shop 아래에 브랜드와 서비스를 모았습니다.",
    "company": "회사 · 공통 브랜드",
    "d": {
     "intelligence": "판단을 돕는 데이터 · 가맹",
     "games": "AP 세계의 랭킹 경쟁",
-    "edu": "국내 교육 · 학교와 가정",
-    "hallyu": "외국인을 위한 한국",
+    "edu": "놀면서 배우는 한국 · 학교와 가정",
     "entertainment": "캐릭터 소개",
     "shop": "외국인을 위한 K-셀렉트",
     "news": "AI 소식지 · 구독"
@@ -1595,14 +1568,13 @@
   },
   "en": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "One AP.<br>Six businesses.",
-   "lead": "AP Holdings connects AI and People. Brands and services are gathered under Intelligence · Games · Edu · Hallyu · Entertainment · Shop.",
+   "title": "One AP.<br>Five businesses.",
+   "lead": "AP Holdings connects AI and People. Brands and services are gathered under Intelligence · Games · Edu · Entertainment · Shop.",
    "company": "Company · shared brand",
    "d": {
     "intelligence": "Data for decisions · franchise",
     "games": "Ranked play in the AP world",
-    "edu": "Education in Korea · schools and homes",
-    "hallyu": "Korea for the world",
+    "edu": "Learn Korea by playing · schools and homes",
     "entertainment": "The characters",
     "shop": "K-select for the world",
     "news": "AI newsletter · subscribe"
@@ -1610,14 +1582,13 @@
   },
   "vi": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "Một AP.<br>Sáu mảng kinh doanh.",
-   "lead": "AP Holdings kết nối AI và Con người. Thương hiệu và dịch vụ được gom dưới Intelligence · Games · Edu · Hallyu · Entertainment · Shop.",
+   "title": "Một AP.<br>Năm mảng kinh doanh.",
+   "lead": "AP Holdings kết nối AI và Con người. Thương hiệu và dịch vụ được gom dưới Intelligence · Games · Edu · Entertainment · Shop.",
    "company": "Công ty · thương hiệu chung",
    "d": {
     "intelligence": "Dữ liệu để quyết định · nhượng quyền",
     "games": "Đua hạng trong thế giới AP",
-    "edu": "Giáo dục Hàn Quốc · trường và gia đình",
-    "hallyu": "Hàn Quốc cho thế giới",
+    "edu": "Học Hàn Quốc bằng cách chơi · trường và gia đình",
     "entertainment": "Các nhân vật",
     "shop": "K-select cho thế giới",
     "news": "Bản tin AI · đăng ký"
@@ -1625,14 +1596,13 @@
   },
   "ja": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "ひとつの AP。<br>六つの事業。",
-   "lead": "AI と People をつなぐ AP Holdings。Intelligence · Games · Edu · Hallyu · Entertainment · Shop の下にブランドとサービスを集めました。",
+   "title": "ひとつの AP。<br>五つの事業。",
+   "lead": "AI と People をつなぐ AP Holdings。Intelligence · Games · Edu · Entertainment · Shop の下にブランドとサービスを集めました。",
    "company": "会社 · 共通ブランド",
    "d": {
     "intelligence": "判断を助けるデータ · フランチャイズ",
     "games": "AP 世界のランキング競争",
-    "edu": "韓国国内の教育 · 学校と家庭",
-    "hallyu": "世界のための韓国",
+    "edu": "遊びながら学ぶ韓国 · 学校と家庭",
     "entertainment": "キャラクター紹介",
     "shop": "世界のための K-セレクト",
     "news": "AI ニュースレター · 購読"
@@ -1640,14 +1610,13 @@
   },
   "zh-cn": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "一个 AP。<br>六项事业。",
-   "lead": "连接 AI 与人的 AP Holdings。品牌与服务汇集在 Intelligence · Games · Edu · Hallyu · Entertainment · Shop 之下。",
+   "title": "一个 AP。<br>五项事业。",
+   "lead": "连接 AI 与人的 AP Holdings。品牌与服务汇集在 Intelligence · Games · Edu · Entertainment · Shop 之下。",
    "company": "公司 · 共用品牌",
    "d": {
     "intelligence": "辅助决策的数据 · 加盟",
     "games": "AP 世界的排名竞争",
-    "edu": "韩国国内教育 · 学校与家庭",
-    "hallyu": "面向世界的韩国",
+    "edu": "边玩边学韩国 · 学校与家庭",
     "entertainment": "角色介绍",
     "shop": "面向世界的 K-精选",
     "news": "AI 资讯 · 订阅"
@@ -1655,14 +1624,13 @@
   },
   "fr": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "Un seul AP.<br>Six activités.",
-   "lead": "AP Holdings relie l’IA et les personnes. Marques et services sont réunis sous Intelligence · Games · Edu · Hallyu · Entertainment · Shop.",
+   "title": "Un seul AP.<br>Cinq activités.",
+   "lead": "AP Holdings relie l’IA et les personnes. Marques et services sont réunis sous Intelligence · Games · Edu · Entertainment · Shop.",
    "company": "Entreprise · marque commune",
    "d": {
     "intelligence": "Des données pour décider · franchise",
     "games": "La compétition classée du monde AP",
-    "edu": "L’éducation en Corée · écoles et familles",
-    "hallyu": "La Corée pour le monde",
+    "edu": "Apprendre la Corée en jouant · écoles et familles",
     "entertainment": "Les personnages",
     "shop": "La K-sélection pour le monde",
     "news": "Lettre IA · abonnement"
