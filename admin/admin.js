@@ -1,3 +1,4 @@
+import { createNewsletter } from './newsletter.js?v=20261009';
 import { createShop } from './shop.js?v=research-20261009';
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createContentOperations } from './content.js?v=1.2-series';
@@ -47,6 +48,7 @@ const formatDate = (value) => value ? new Intl.DateTimeFormat('ko-KR', { month:'
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const shopOperations = createShop(supabase, () => currentUser);
 const contentOperations = createContentOperations(supabase, () => currentUser);
+const newsletter = createNewsletter(supabase, () => currentUser);
 const grants = createGrants(supabase, () => currentUser);
 const marketing = createMarketing(supabase, () => currentUser);
 const businessPlan = createBusinessPlan(supabase, () => currentUser);
@@ -54,7 +56,7 @@ const rgrg = createRgrg(() => currentUser);
 const rgrgSettings = createRgrgSettings(() => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); shopOperations.clear(); contentOperations.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); rgrg.clear(); rgrgSettings.clear(); $('#ap-visual-row')?.remove(); }
+  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); shopOperations.clear(); contentOperations.clear(); newsletter.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); rgrg.clear(); rgrgSettings.clear(); $('#ap-visual-row')?.remove(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -393,13 +395,14 @@ function showSection(name) {
   });
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'plan' ? '사업계획·기업가치' : name === 'rgrg' ? '퀴즈랭커' : name === 'rgrg-settings' ? '퀴즈랭커' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'newsletter' ? 'AP뉴스 구독·발송' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'plan' ? '사업계획·기업가치' : name === 'rgrg' ? '퀴즈랭커' : name === 'rgrg-settings' ? '퀴즈랭커' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
   if (name === 'shop') shopOperations.load();
   if (name === 'apps') loadApps();
   if (name === 'content') contentOperations.load();
+  if (name === 'newsletter') newsletter.load();
   if (name === 'grants') grants.load();
   if (name === 'marketing') { marketing.load(); loadApps(); }
   if (name === 'plan') businessPlan.load();
@@ -407,8 +410,8 @@ function showSection(name) {
   if (name === 'rgrg-settings') rgrgSettings.load();
   if (name === 'plan') history.replaceState(null, '', '#plan');
   else if (location.hash === '#plan') history.replaceState(null, '', location.pathname + location.search);
-  $('.filters').hidden = ['shop','assets','commerce','apps','content','grants','marketing','plan','rgrg','rgrg-settings'].includes(name);
-  $('.top-actions').hidden = ['shop','commerce','apps','content','grants','plan','rgrg','rgrg-settings'].includes(name);
+  $('.filters').hidden = ['shop','assets','commerce','apps','content','newsletter','grants','marketing','plan','rgrg','rgrg-settings'].includes(name);
+  $('.top-actions').hidden = ['shop','commerce','apps','content','newsletter','grants','plan','rgrg','rgrg-settings'].includes(name);
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name || (quizView && item.dataset.section === 'rgrg')));
   // 지금 보고 있는 화면이 하위 항목이면 그 묶음은 열려 있어야 한다.

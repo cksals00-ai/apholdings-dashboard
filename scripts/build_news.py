@@ -202,3 +202,7 @@ for lang in INDEXED:
     add += f'<url><loc>{ORIGIN}/{lang}/news/</loc><lastmod>{KO[nos[0]]["date"]}</lastmod></url>' + ''.join(f'<url><loc>{ORIGIN}/{lang}/news/{KO[n]["slug"]}/</loc><lastmod>{KO[n]["date"]}</lastmod></url>' for n in nos)
 (ROOT/'sitemap.xml').write_text(sm.replace('</urlset>', add + '</urlset>'))
 print('AP News 어권별 번역 반영:', built, '/ 원문', len(KO))
+
+# Preserve daily newsletter integration whenever the existing news is rebuilt.
+from newsletter import build_all
+build_all()
