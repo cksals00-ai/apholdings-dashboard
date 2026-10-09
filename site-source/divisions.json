@@ -1,10 +1,158 @@
 {
+ "_common": {
+  "ko": {
+   "for": "대상",
+   "more": "자세히 보기",
+   "ir": "이 사업의 숫자와 계획 → 투자자 (IR)",
+   "brand": "AP 브랜드 체계 → CI · BI",
+   "menu": "메뉴",
+   "business": "Business",
+   "soon": "준비 중",
+   "review": "심사 중",
+   "live": "운영 중",
+   "ext": "열기"
+  },
+  "en": {
+   "for": "For",
+   "more": "Learn more",
+   "ir": "Numbers and plans for this business → Investors (IR)",
+   "brand": "How the AP brands fit together → CI · BI",
+   "menu": "Menu",
+   "business": "Business",
+   "soon": "Coming soon",
+   "review": "In review",
+   "live": "Live",
+   "ext": "Open"
+  },
+  "vi": {
+   "for": "Dành cho",
+   "more": "Tìm hiểu thêm",
+   "ir": "Số liệu và kế hoạch của mảng này → Nhà đầu tư (IR)",
+   "brand": "Hệ thống thương hiệu AP → CI · BI",
+   "menu": "Menu",
+   "business": "Business",
+   "soon": "Sắp ra mắt",
+   "review": "Đang xét duyệt",
+   "live": "Đang hoạt động",
+   "ext": "Mở"
+  },
+  "ja": {
+   "for": "対象",
+   "more": "詳しく見る",
+   "ir": "この事業の数字と計画 → 投資家 (IR)",
+   "brand": "AP のブランド体系 → CI · BI",
+   "menu": "メニュー",
+   "business": "Business",
+   "soon": "準備中",
+   "review": "審査中",
+   "live": "運営中",
+   "ext": "開く"
+  },
+  "zh-cn": {
+   "for": "面向",
+   "more": "了解更多",
+   "ir": "该业务的数据与计划 → 投资者 (IR)",
+   "brand": "AP 品牌体系 → CI · BI",
+   "menu": "菜单",
+   "business": "Business",
+   "soon": "即将推出",
+   "review": "审核中",
+   "live": "运营中",
+   "ext": "打开"
+  },
+  "fr": {
+   "for": "Pour",
+   "more": "En savoir plus",
+   "ir": "Chiffres et plans de cette activité → Investisseurs (IR)",
+   "brand": "L’architecture des marques AP → CI · BI",
+   "menu": "Menu",
+   "business": "Business",
+   "soon": "Bientôt",
+   "review": "En cours d’examen",
+   "live": "En service",
+   "ext": "Ouvrir"
+  }
+ },
+ "_company": {
+  "ko": {
+   "about": "회사 소개",
+   "brand": "CI · BI",
+   "ir": "투자자 (IR)",
+   "lab": "Founder’s Lab",
+   "sitemap": "사이트맵",
+   "admin": "관리자",
+   "story": "창업자 이야기",
+   "home": "홈",
+   "news": "AP News",
+   "characters": "캐릭터"
+  },
+  "en": {
+   "about": "About",
+   "brand": "CI · BI",
+   "ir": "Investors (IR)",
+   "lab": "Founder’s Lab",
+   "sitemap": "Sitemap",
+   "admin": "Admin",
+   "story": "Founder’s story",
+   "home": "Home",
+   "news": "AP News",
+   "characters": "Characters"
+  },
+  "vi": {
+   "about": "Giới thiệu",
+   "brand": "CI · BI",
+   "ir": "Nhà đầu tư (IR)",
+   "lab": "Founder’s Lab",
+   "sitemap": "Sơ đồ trang",
+   "admin": "Quản trị",
+   "story": "Câu chuyện người sáng lập",
+   "home": "Trang chủ",
+   "news": "AP News",
+   "characters": "Nhân vật"
+  },
+  "ja": {
+   "about": "会社紹介",
+   "brand": "CI · BI",
+   "ir": "投資家 (IR)",
+   "lab": "Founder’s Lab",
+   "sitemap": "サイトマップ",
+   "admin": "管理者",
+   "story": "創業者の話",
+   "home": "ホーム",
+   "news": "AP News",
+   "characters": "キャラクター"
+  },
+  "zh-cn": {
+   "about": "关于我们",
+   "brand": "CI · BI",
+   "ir": "投资者 (IR)",
+   "lab": "Founder’s Lab",
+   "sitemap": "网站地图",
+   "admin": "管理",
+   "story": "创始人的故事",
+   "home": "首页",
+   "news": "AP News",
+   "characters": "角色"
+  },
+  "fr": {
+   "about": "À propos",
+   "brand": "CI · BI",
+   "ir": "Investisseurs (IR)",
+   "lab": "Founder’s Lab",
+   "sitemap": "Plan du site",
+   "admin": "Admin",
+   "story": "L’histoire du fondateur",
+   "home": "Accueil",
+   "news": "AP News",
+   "characters": "Personnages"
+  }
+ },
  "intelligence": {
   "ko": {
-   "eyebrow": "INTELLIGENCE · 판단을 돕는 데이터",
+   "eyebrow": "INTELLIGENCE · 판단을 돕는 데이터와 가맹",
    "title": "공개 원본에 대조해, 근거와 함께 답합니다.",
-   "lead": "식약처 공개 자료처럼 누구나 확인할 수 있는 원본에 대조해 답하고, 결정은 사람이 합니다. 앱과 AI 커넥터로 개인과 파트너가 함께 씁니다.",
-   "for": "앱을 쓰는 개인, 그리고 데이터를 자기 서비스에 붙이려는 파트너",
+   "lead": "식약처 공개 자료처럼 누구나 확인할 수 있는 원본에 대조해 답하고, 결정은 사람이 합니다. 앱과 AI 커넥터로 개인과 파트너가 쓰고, 같은 판단 구조를 AP SELECT 매장에 넣습니다.",
+   "for": "앱을 쓰는 개인, 데이터를 자기 서비스에 붙이려는 파트너, 매장을 함께 열 가맹 파트너",
    "items": [
     {
      "name": "AP Safe",
@@ -21,6 +169,12 @@
      "status": "운영 중"
     },
     {
+     "name": "AP SELECT",
+     "tag": "고르기 위한 매장 · 가맹",
+     "desc": "매장에서는 상담과 체험을, 주문은 온라인에서 하는 매장 모델이에요. 세이프리스트의 판단 구조를 그대로 매장에 넣어 가맹으로 넓혀요.",
+     "url": "/{l}/products/select/"
+    },
+    {
      "name": "AI 커넥터",
      "tag": "AI 비서에 바로 연결",
      "desc": "세이프리스트 · 라이트리스트를 Claude 같은 AI 비서에 붙여 대화로 조회해요.",
@@ -30,510 +184,195 @@
    ]
   },
   "en": {
-   "eyebrow": "INTELLIGENCE · DATA FOR DECISIONS",
-   "title": "Checked against public sources. Answered with evidence.",
-   "lead": "We answer by checking against sources anyone can verify, such as Korea’s MFDS open data, and people make the decision. Individuals and partners use it through apps and AI connectors.",
-   "for": "People using the apps, and partners who want to connect the data to their own services",
+   "eyebrow": "INTELLIGENCE · Data for decisions, and the stores built on it",
+   "title": "Checked against public sources, answered with evidence.",
+   "lead": "We check against sources anyone can verify, such as Korea’s MFDS public data, and leave the decision to people. Individuals and partners use it through apps and AI connectors; the same decision structure goes into AP SELECT stores.",
+   "for": "People using the apps, partners connecting the data to their own services, and franchise partners opening a store with us",
    "items": [
     {
      "name": "AP Safe",
-     "tag": "What to avoid, first",
-     "desc": "The Safelist app and AI connector. It checks public data to see whether the ingredients your child avoids appear in a product.",
+     "tag": "Ingredients to avoid, first",
+     "desc": "The Safelist app and AI connector. Checks public data for the ingredients your child must avoid.",
      "url": "/{l}/products/safe/",
      "status": "Live"
     },
     {
      "name": "AP Light",
-     "tag": "Calories per bag",
-     "desc": "The LightList app and AI connector. It shows calories per 100g next to calories for the bag you actually eat.",
+     "tag": "Calories per actual bag",
+     "desc": "The LightList app and AI connector. Shows per-100g and per-bag calories side by side.",
      "url": "/{l}/products/light/",
      "status": "Live"
     },
     {
+     "name": "AP SELECT",
+     "tag": "A store for choosing · franchise",
+     "desc": "Consult and try in store, order online. The Safelist decision structure, brought into a physical store and extended as a franchise.",
+     "url": "/{l}/products/select/"
+    },
+    {
      "name": "AI connectors",
-     "tag": "Plug into your AI assistant",
-     "desc": "Connect Safelist and LightList to AI assistants such as Claude and look things up in conversation.",
+     "tag": "Straight into your AI assistant",
+     "desc": "Connect Safelist and LightList to assistants like Claude and ask in plain language.",
      "url": "/business/safelist-connect.html",
      "cta": "See how to connect"
     }
    ]
   },
   "vi": {
-   "eyebrow": "INTELLIGENCE · DỮ LIỆU CHO QUYẾT ĐỊNH",
+   "eyebrow": "INTELLIGENCE · Dữ liệu để quyết định, và cửa hàng xây trên đó",
    "title": "Đối chiếu với nguồn công khai, trả lời kèm bằng chứng.",
-   "lead": "Chúng tôi trả lời bằng cách đối chiếu với nguồn ai cũng kiểm chứng được, như dữ liệu mở của MFDS Hàn Quốc, và con người đưa ra quyết định. Cá nhân và đối tác dùng qua ứng dụng và AI connector.",
-   "for": "Người dùng ứng dụng và đối tác muốn kết nối dữ liệu vào dịch vụ của mình",
+   "lead": "Chúng tôi đối chiếu với nguồn ai cũng kiểm chứng được, như dữ liệu công khai của MFDS Hàn Quốc, và để con người quyết định. Cá nhân và đối tác dùng qua ứng dụng và trình kết nối AI; cùng cấu trúc quyết định đó được đưa vào cửa hàng AP SELECT.",
+   "for": "Người dùng ứng dụng, đối tác muốn nối dữ liệu vào dịch vụ của mình, và đối tác nhượng quyền mở cửa hàng cùng chúng tôi",
    "items": [
     {
      "name": "AP Safe",
-     "tag": "Điều cần tránh, trước tiên",
-     "desc": "Ứng dụng Safelist và AI connector. Kiểm tra dữ liệu công khai xem thành phần con bạn cần tránh có xuất hiện trong sản phẩm không.",
+     "tag": "Thành phần cần tránh, trước tiên",
+     "desc": "Ứng dụng Safelist và trình kết nối AI. Kiểm tra trên dữ liệu công khai xem thành phần con bạn cần tránh có trong sản phẩm không.",
      "url": "/{l}/products/safe/",
-     "status": "Đang vận hành"
+     "status": "Đang hoạt động"
     },
     {
      "name": "AP Light",
-     "tag": "Calo theo từng túi",
-     "desc": "Ứng dụng LightList và AI connector. Hiển thị calo trên 100g cạnh calo của cả túi bạn thật sự ăn.",
+     "tag": "Calo theo cả gói thật",
+     "desc": "Ứng dụng LightList và trình kết nối AI. Hiển thị calo trên 100g và trên cả gói cạnh nhau.",
      "url": "/{l}/products/light/",
-     "status": "Đang vận hành"
+     "status": "Đang hoạt động"
     },
     {
-     "name": "AI connector",
-     "tag": "Kết nối với trợ lý AI",
-     "desc": "Kết nối Safelist và LightList với trợ lý AI như Claude để tra cứu ngay trong cuộc trò chuyện.",
+     "name": "AP SELECT",
+     "tag": "Cửa hàng để chọn · nhượng quyền",
+     "desc": "Tư vấn và trải nghiệm tại cửa hàng, đặt hàng trực tuyến. Cấu trúc quyết định của Safelist được đưa vào cửa hàng thật và mở rộng theo mô hình nhượng quyền.",
+     "url": "/{l}/products/select/"
+    },
+    {
+     "name": "Trình kết nối AI",
+     "tag": "Nối thẳng vào trợ lý AI",
+     "desc": "Kết nối Safelist và LightList với trợ lý như Claude và hỏi bằng lời thường.",
      "url": "/business/safelist-connect.html",
      "cta": "Xem cách kết nối"
     }
    ]
   },
   "ja": {
-   "eyebrow": "INTELLIGENCE · 判断を支えるデータ",
-   "title": "公開された原本と照合し、根拠とともに答えます。",
-   "lead": "韓国食品医薬品安全処の公開データのように、誰でも確かめられる原本と照合して答え、決めるのは人です。個人もパートナーも、アプリとAIコネクタで使えます。",
-   "for": "アプリを使う個人と、データを自社サービスにつなぎたいパートナー",
+   "eyebrow": "INTELLIGENCE · 判断を助けるデータと、その上に建つ店舗",
+   "title": "公開データと照合し、根拠つきで答えます。",
+   "lead": "韓国食品医薬品安全処の公開データのように誰でも確認できる原本と照合し、決めるのは人です。アプリと AI コネクタで個人とパートナーが使い、同じ判断の仕組みを AP SELECT の店舗に入れます。",
+   "for": "アプリを使う個人、データを自社サービスにつなぐパートナー、店舗を一緒に開く加盟パートナー",
    "items": [
     {
      "name": "AP Safe",
-     "tag": "避けたい成分を先に",
-     "desc": "Safelistアプリと AIコネクタ。お子さんが避けたい成分が原材料に見えるかを公開データで確認します。",
+     "tag": "避けたい成分を、まず",
+     "desc": "セーフリストのアプリと AI コネクタ。子どもが避けるべき成分が原材料にあるか、公開データで確かめます。",
      "url": "/{l}/products/safe/",
-     "status": "運用中"
+     "status": "運営中"
     },
     {
      "name": "AP Light",
      "tag": "1袋あたりのカロリー",
-     "desc": "LightListアプリとAIコネクタ。100gあたりと、実際に食べる1袋あたりのカロリーを並べて見せます。",
+     "desc": "ライトリストのアプリと AI コネクタ。100g あたりと実際の1袋あたりのカロリーを並べて見せます。",
      "url": "/{l}/products/light/",
-     "status": "運用中"
+     "status": "運営中"
     },
     {
-     "name": "AIコネクタ",
-     "tag": "AIアシスタントにそのまま接続",
-     "desc": "SafelistとLightListをClaudeなどのAIアシスタントにつなぎ、会話で調べられます。",
+     "name": "AP SELECT",
+     "tag": "選ぶための店舗 · フランチャイズ",
+     "desc": "店舗では相談と体験を、注文はオンラインで。セーフリストの判断の仕組みをそのまま店舗に入れ、加盟で広げます。",
+     "url": "/{l}/products/select/"
+    },
+    {
+     "name": "AI コネクタ",
+     "tag": "AI アシスタントに直結",
+     "desc": "セーフリスト · ライトリストを Claude のような AI アシスタントにつなぎ、会話で調べます。",
      "url": "/business/safelist-connect.html",
      "cta": "接続方法を見る"
     }
    ]
   },
   "zh-cn": {
-   "eyebrow": "INTELLIGENCE · 辅助判断的数据",
-   "title": "对照公开原始资料，附上依据作答。",
-   "lead": "我们对照韩国食药处公开数据等任何人都能核实的原始资料作答，决定由人来做。个人和合作伙伴都可以通过应用和 AI 连接器使用。",
-   "for": "使用应用的个人，以及希望把数据接入自身服务的合作伙伴",
+   "eyebrow": "INTELLIGENCE · 辅助决策的数据，以及建立其上的门店",
+   "title": "对照公开来源，带依据作答。",
+   "lead": "我们对照任何人都能核实的来源（如韩国食药处公开数据）作答，决定权交给人。个人与合作伙伴通过应用和 AI 连接器使用；同样的判断结构被放进 AP SELECT 门店。",
+   "for": "使用应用的个人、想把数据接入自家服务的伙伴，以及与我们共同开店的加盟伙伴",
    "items": [
     {
      "name": "AP Safe",
      "tag": "先看要避开的成分",
-     "desc": "Safelist 应用和 AI 连接器。用公开数据确认孩子要避开的成分是否出现在原料中。",
+     "desc": "Safelist 应用与 AI 连接器。用公开数据核对孩子要避开的成分是否出现在原料中。",
      "url": "/{l}/products/safe/",
      "status": "运营中"
     },
     {
      "name": "AP Light",
-     "tag": "按一袋计算的热量",
-     "desc": "LightList 应用和 AI 连接器。把每 100g 热量和实际吃下一袋的热量并排显示。",
+     "tag": "按整袋计算的热量",
+     "desc": "LightList 应用与 AI 连接器。并排显示每 100g 与实际一袋的热量。",
      "url": "/{l}/products/light/",
      "status": "运营中"
+    },
+    {
+     "name": "AP SELECT",
+     "tag": "用来“选”的门店 · 加盟",
+     "desc": "到店咨询体验，线上下单。把 Safelist 的判断结构原样放进实体门店，并以加盟方式扩展。",
+     "url": "/{l}/products/select/"
     },
     {
      "name": "AI 连接器",
      "tag": "直接接入 AI 助手",
-     "desc": "把 Safelist 和 LightList 接入 Claude 等 AI 助手，在对话中查询。",
+     "desc": "把 Safelist 与 LightList 接到 Claude 等 AI 助手，用对话查询。",
      "url": "/business/safelist-connect.html",
-     "cta": "查看连接方法"
+     "cta": "查看接入方式"
     }
    ]
   },
   "fr": {
-   "eyebrow": "INTELLIGENCE · DES DONNÉES POUR DÉCIDER",
-   "title": "Vérifié auprès de sources publiques, avec des preuves.",
-   "lead": "Nous répondons en vérifiant auprès de sources que chacun peut consulter, comme les données ouvertes du MFDS coréen, et la décision revient aux personnes. Particuliers et partenaires l’utilisent via des applications et des connecteurs IA.",
-   "for": "Les utilisateurs des applications et les partenaires qui veulent relier les données à leurs services",
+   "eyebrow": "INTELLIGENCE · Des données pour décider, et les magasins bâtis dessus",
+   "title": "Vérifié sur des sources publiques, répondu avec des preuves.",
+   "lead": "Nous vérifions sur des sources que chacun peut consulter, comme les données publiques du MFDS coréen, et laissons la décision aux personnes. Particuliers et partenaires y accèdent par les applications et les connecteurs IA ; la même structure de décision équipe les magasins AP SELECT.",
+   "for": "Les personnes qui utilisent les applications, les partenaires qui relient les données à leurs services, et les franchisés qui ouvrent un magasin avec nous",
    "items": [
     {
      "name": "AP Safe",
-     "tag": "D’abord ce qu’il faut éviter",
-     "desc": "L’application Safelist et son connecteur IA. Ils vérifient dans les données publiques si les ingrédients que votre enfant évite apparaissent dans un produit.",
+     "tag": "Les ingrédients à éviter, d’abord",
+     "desc": "L’application Safelist et son connecteur IA. Vérifie dans les données publiques si un ingrédient que votre enfant doit éviter est présent.",
      "url": "/{l}/products/safe/",
      "status": "En service"
     },
     {
      "name": "AP Light",
-     "tag": "Les calories par sachet",
-     "desc": "L’application LightList et son connecteur IA. Elle affiche les calories pour 100 g à côté de celles du sachet entier.",
+     "tag": "Les calories par vrai sachet",
+     "desc": "L’application LightList et son connecteur IA. Affiche côte à côte les calories pour 100 g et pour le sachet entier.",
      "url": "/{l}/products/light/",
      "status": "En service"
     },
     {
+     "name": "AP SELECT",
+     "tag": "Un magasin pour choisir · franchise",
+     "desc": "Conseil et essai en magasin, commande en ligne. La structure de décision de Safelist, portée dans un magasin physique et étendue en franchise.",
+     "url": "/{l}/products/select/"
+    },
+    {
      "name": "Connecteurs IA",
-     "tag": "À brancher sur votre assistant IA",
-     "desc": "Reliez Safelist et LightList à des assistants IA comme Claude pour les interroger en conversation.",
+     "tag": "Directement dans votre assistant IA",
+     "desc": "Reliez Safelist et LightList à des assistants comme Claude et posez vos questions en langage courant.",
      "url": "/business/safelist-connect.html",
      "cta": "Voir comment connecter"
     }
    ]
   }
  },
- "media": {
-  "ko": {
-   "eyebrow": "MEDIA · 알리는 채널",
-   "title": "AI와 한국을, 매주 소개합니다.",
-   "lead": "AI 홍보 배우 리아가 한국 브랜드와 문화를 세계에 소개하고, AP News는 AI 소식을 우리 일에 쓰는 법까지 정리합니다.",
-   "for": "한국과 AI 소식이 궁금한 해외·국내 독자",
-   "items": [
-    {
-     "name": "LIA",
-     "tag": "AI 홍보 배우",
-     "desc": "AI 인물임을 밝히고, 한국의 브랜드 · 장소 · 문화를 영어 숏폼으로 소개해요. Lia Select Shop도 리아가 알려요.",
-     "url": "/{l}/products/lia/"
-    },
-    {
-     "name": "AP News",
-     "tag": "AI 소식, 우리 일에 쓰는 법까지",
-     "desc": "공식 자료로 확인한 AI 소식을 사실 · 해석 · 우리라면으로 나눠 씁니다. 6개 언어로 읽을 수 있어요.",
-     "url": "/{l}/news/",
-     "cta": "AP News 읽기"
-    },
-    {
-     "name": "AP News 뉴스레터",
-     "tag": "이메일 · PDF 구독",
-     "desc": "매주 소식을 Lia Select 디자인의 뉴스레터와 PDF로 받아 보는 구독을 준비하고 있어요.",
-     "status": "준비 중"
-    }
-   ],
-   "primary": {
-    "label": "AP News 읽기",
-    "url": "/{l}/news/"
-   }
-  },
-  "en": {
-   "eyebrow": "MEDIA · OUR CHANNELS",
-   "title": "AI and Korea, introduced every week.",
-   "lead": "LIA, our AI promotional persona, introduces Korean brands and culture to the world, and AP News turns AI news into ways to use it at work.",
-   "for": "Readers in Korea and abroad who follow Korea and AI",
-   "items": [
-    {
-     "name": "LIA",
-     "tag": "AI promotional persona",
-     "desc": "Clearly labeled as AI, LIA introduces Korean brands, places and culture in short English videos, and promotes the Lia Select Shop.",
-     "url": "/{l}/products/lia/"
-    },
-    {
-     "name": "AP News",
-     "tag": "AI news, down to how we use it",
-     "desc": "AI news checked against official sources, written as fact, interpretation and what we would do. Available in six languages.",
-     "url": "/{l}/news/",
-     "cta": "Read AP News"
-    },
-    {
-     "name": "AP News newsletter",
-     "tag": "Email and PDF subscription",
-     "desc": "A weekly newsletter and PDF in the Lia Select design, delivered to subscribers. Coming soon.",
-     "status": "In preparation"
-    }
-   ],
-   "primary": {
-    "label": "Read AP News",
-    "url": "/{l}/news/"
-   }
-  },
-  "vi": {
-   "eyebrow": "MEDIA · KÊNH CỦA CHÚNG TÔI",
-   "title": "AI và Hàn Quốc, giới thiệu mỗi tuần.",
-   "lead": "LIA, gương mặt quảng bá AI của chúng tôi, giới thiệu thương hiệu và văn hóa Hàn Quốc với thế giới, còn AP News biến tin AI thành cách áp dụng vào công việc.",
-   "for": "Độc giả trong và ngoài Hàn Quốc quan tâm đến Hàn Quốc và AI",
-   "items": [
-    {
-     "name": "LIA",
-     "tag": "Gương mặt quảng bá AI",
-     "desc": "Được ghi rõ là AI, LIA giới thiệu thương hiệu, địa điểm và văn hóa Hàn Quốc qua video ngắn tiếng Anh, và quảng bá Lia Select Shop.",
-     "url": "/{l}/products/lia/"
-    },
-    {
-     "name": "AP News",
-     "tag": "Tin AI, đến cả cách áp dụng",
-     "desc": "Tin AI được kiểm chứng với nguồn chính thức, chia thành sự thật, diễn giải và điều chúng tôi sẽ làm. Có sáu ngôn ngữ.",
-     "url": "/{l}/news/",
-     "cta": "Đọc AP News"
-    },
-    {
-     "name": "Bản tin AP News",
-     "tag": "Đăng ký qua email và PDF",
-     "desc": "Bản tin và tệp PDF hằng tuần theo thiết kế Lia Select, gửi đến người đăng ký. Sắp ra mắt.",
-     "status": "Đang chuẩn bị"
-    }
-   ],
-   "primary": {
-    "label": "Đọc AP News",
-    "url": "/{l}/news/"
-   }
-  },
-  "ja": {
-   "eyebrow": "MEDIA · 伝えるチャンネル",
-   "title": "AIと韓国を、毎週紹介します。",
-   "lead": "AIプロモーション・ペルソナのLIAが韓国のブランドと文化を世界に紹介し、AP NewsはAIニュースを仕事での使い方までまとめます。",
-   "for": "韓国とAIの話題を追う国内外の読者",
-   "items": [
-    {
-     "name": "LIA",
-     "tag": "AIプロモーション・ペルソナ",
-     "desc": "AIであることを明示したうえで、韓国のブランド・場所・文化を英語のショート動画で紹介し、Lia Select Shopも案内します。",
-     "url": "/{l}/products/lia/"
-    },
-    {
-     "name": "AP News",
-     "tag": "AIニュースを、使い方まで",
-     "desc": "公式資料で確かめたAIニュースを、事実・解釈・私たちならに分けて書きます。6言語で読めます。",
-     "url": "/{l}/news/",
-     "cta": "AP Newsを読む"
-    },
-    {
-     "name": "AP News ニュースレター",
-     "tag": "メール・PDFで購読",
-     "desc": "Lia Selectのデザインで、毎週のニュースレターとPDFを購読者に届けます。準備中です。",
-     "status": "準備中"
-    }
-   ],
-   "primary": {
-    "label": "AP Newsを読む",
-    "url": "/{l}/news/"
-   }
-  },
-  "zh-cn": {
-   "eyebrow": "MEDIA · 传播渠道",
-   "title": "每周介绍 AI 与韩国。",
-   "lead": "AI 推广形象 LIA 向世界介绍韩国品牌与文化，AP News 则把 AI 新闻整理成工作中的用法。",
-   "for": "关注韩国与 AI 的国内外读者",
-   "items": [
-    {
-     "name": "LIA",
-     "tag": "AI 推广形象",
-     "desc": "明确标注为 AI，用英文短视频介绍韩国的品牌、地点与文化，也推广 Lia Select Shop。",
-     "url": "/{l}/products/lia/"
-    },
-    {
-     "name": "AP News",
-     "tag": "AI 新闻，连用法一起",
-     "desc": "用官方资料核实的 AI 新闻，分为事实、解读和“我们会怎么做”。提供 6 种语言。",
-     "url": "/{l}/news/",
-     "cta": "阅读 AP News"
-    },
-    {
-     "name": "AP News 简报",
-     "tag": "邮件与 PDF 订阅",
-     "desc": "以 Lia Select 设计的每周简报和 PDF，发送给订阅者。正在筹备。",
-     "status": "筹备中"
-    }
-   ],
-   "primary": {
-    "label": "阅读 AP News",
-    "url": "/{l}/news/"
-   }
-  },
-  "fr": {
-   "eyebrow": "MEDIA · NOS CANAUX",
-   "title": "L’IA et la Corée, présentées chaque semaine.",
-   "lead": "LIA, notre persona promotionnelle IA, présente les marques et la culture coréennes au monde, et AP News transforme l’actualité de l’IA en usages concrets pour le travail.",
-   "for": "Les lecteurs, en Corée et ailleurs, qui suivent la Corée et l’IA",
-   "items": [
-    {
-     "name": "LIA",
-     "tag": "Persona promotionnelle IA",
-     "desc": "Clairement identifiée comme IA, LIA présente marques, lieux et culture coréens en courtes vidéos en anglais, et fait connaître le Lia Select Shop.",
-     "url": "/{l}/products/lia/"
-    },
-    {
-     "name": "AP News",
-     "tag": "L’actu IA, jusqu’à son usage",
-     "desc": "Une actualité IA vérifiée auprès de sources officielles, découpée en faits, interprétation et ce que nous ferions. Disponible en six langues.",
-     "url": "/{l}/news/",
-     "cta": "Lire AP News"
-    },
-    {
-     "name": "Newsletter AP News",
-     "tag": "Abonnement e-mail et PDF",
-     "desc": "Une newsletter et un PDF hebdomadaires au design Lia Select, envoyés aux abonnés. Bientôt disponible.",
-     "status": "En préparation"
-    }
-   ],
-   "primary": {
-    "label": "Lire AP News",
-    "url": "/{l}/news/"
-   }
-  }
- },
- "edu": {
-  "ko": {
-   "eyebrow": "EDU · 놀면서 배우는 한국",
-   "title": "놀면서 배우는 한국.",
-   "lead": "한국어와 한글, 문화, K-pop, K-food까지. 한국이 궁금한 외국인을 위한 배움을 게임처럼 만듭니다.",
-   "for": "한국을 배우고 싶은 외국인 — 아이부터 어른까지",
-   "items": [
-    {
-     "name": "Hangeul Cubs",
-     "tag": "호랑이 네 남매와 한글 첫걸음",
-     "desc": "받침과 글자를 놀이로 익히는 한글 앱이에요.",
-     "url": "/{l}/products/cubs/"
-    },
-    {
-     "name": "AP Edu",
-     "tag": "학습 사이트",
-     "desc": "한글컵스 수업, 체험단과 챌린지를 한곳에서 안내해요.",
-     "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "AP Edu 열기"
-    },
-    {
-     "name": "한국 퀴즈 모드",
-     "tag": "퀴즈랭커와 연결",
-     "desc": "K-pop · K-food · 한국 문화를 퀴즈로 겨루며 배우는 모드를 준비하고 있어요.",
-     "status": "준비 중"
-    }
-   ]
-  },
-  "en": {
-   "eyebrow": "EDU · PLAY AND LEARN KOREA",
-   "title": "Play and learn Korea.",
-   "lead": "Korean and Hangeul, culture, K-pop and K-food. We make learning about Korea feel like a game for people around the world.",
-   "for": "People outside Korea who want to learn about it, from children to adults",
-   "items": [
-    {
-     "name": "Hangeul Cubs",
-     "tag": "First steps in Hangeul with four tiger siblings",
-     "desc": "A Hangeul app that teaches letters and final consonants through play.",
-     "url": "/{l}/products/cubs/"
-    },
-    {
-     "name": "AP Edu",
-     "tag": "Learning site",
-     "desc": "Hangeul Cubs lessons, trial programs and challenges, all in one place.",
-     "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "Open AP Edu"
-    },
-    {
-     "name": "Korea quiz mode",
-     "tag": "Linked with QuizRanker",
-     "desc": "A mode for learning K-pop, K-food and Korean culture by competing in quizzes. Coming soon.",
-     "status": "In preparation"
-    }
-   ]
-  },
-  "vi": {
-   "eyebrow": "EDU · VỪA CHƠI VỪA HỌC VỀ HÀN QUỐC",
-   "title": "Vừa chơi vừa học về Hàn Quốc.",
-   "lead": "Tiếng Hàn và Hangeul, văn hóa, K-pop và K-food. Chúng tôi biến việc học về Hàn Quốc thành trò chơi cho người nước ngoài.",
-   "for": "Người nước ngoài muốn tìm hiểu Hàn Quốc, từ trẻ em đến người lớn",
-   "items": [
-    {
-     "name": "Hangeul Cubs",
-     "tag": "Bước đầu học Hangeul cùng bốn anh em nhà hổ",
-     "desc": "Ứng dụng Hangeul giúp học chữ và phụ âm cuối qua trò chơi.",
-     "url": "/{l}/products/cubs/"
-    },
-    {
-     "name": "AP Edu",
-     "tag": "Trang học tập",
-     "desc": "Bài học Hangeul Cubs, chương trình trải nghiệm và thử thách ở cùng một nơi.",
-     "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "Mở AP Edu"
-    },
-    {
-     "name": "Chế độ quiz Hàn Quốc",
-     "tag": "Kết nối với QuizRanker",
-     "desc": "Chế độ học K-pop, K-food và văn hóa Hàn Quốc bằng cách thi đấu quiz. Sắp ra mắt.",
-     "status": "Đang chuẩn bị"
-    }
-   ]
-  },
-  "ja": {
-   "eyebrow": "EDU · 遊びながら学ぶ韓国",
-   "title": "遊びながら、韓国を学ぶ。",
-   "lead": "韓国語とハングル、文化、K-POP、Kフードまで。韓国に興味のある海外の人のために、学びをゲームのようにつくります。",
-   "for": "韓国を学びたい海外の人 — 子どもから大人まで",
-   "items": [
-    {
-     "name": "Hangeul Cubs",
-     "tag": "4きょうだいのトラとハングルの第一歩",
-     "desc": "文字とパッチムを遊びながら覚えるハングルアプリです。",
-     "url": "/{l}/products/cubs/"
-    },
-    {
-     "name": "AP Edu",
-     "tag": "学習サイト",
-     "desc": "Hangeul Cubsのレッスン、体験プログラム、チャレンジをまとめて案内します。",
-     "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "AP Eduを開く"
-    },
-    {
-     "name": "韓国クイズモード",
-     "tag": "QuizRankerと連携",
-     "desc": "K-POP・Kフード・韓国文化をクイズで競いながら学ぶモードを準備中です。",
-     "status": "準備中"
-    }
-   ]
-  },
-  "zh-cn": {
-   "eyebrow": "EDU · 边玩边学韩国",
-   "title": "边玩边学韩国。",
-   "lead": "从韩语和韩文，到文化、K-pop 和韩国美食。我们为对韩国感兴趣的外国人，把学习做成游戏。",
-   "for": "想了解韩国的外国人——从孩子到大人",
-   "items": [
-    {
-     "name": "Hangeul Cubs",
-     "tag": "和四只小老虎一起迈出韩文第一步",
-     "desc": "通过游戏学习字母和收音的韩文应用。",
-     "url": "/{l}/products/cubs/"
-    },
-    {
-     "name": "AP Edu",
-     "tag": "学习网站",
-     "desc": "集中介绍 Hangeul Cubs 课程、体验团和挑战活动。",
-     "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "打开 AP Edu"
-    },
-    {
-     "name": "韩国知识竞答模式",
-     "tag": "与 QuizRanker 联动",
-     "desc": "通过竞答学习 K-pop、韩国美食和韩国文化的模式，正在筹备。",
-     "status": "筹备中"
-    }
-   ]
-  },
-  "fr": {
-   "eyebrow": "EDU · APPRENDRE LA CORÉE EN JOUANT",
-   "title": "Apprendre la Corée en jouant.",
-   "lead": "Le coréen et le hangeul, la culture, la K-pop et la K-food. Nous transformons l’apprentissage de la Corée en jeu pour le public étranger.",
-   "for": "Les étrangers qui veulent découvrir la Corée, des enfants aux adultes",
-   "items": [
-    {
-     "name": "Hangeul Cubs",
-     "tag": "Premiers pas en hangeul avec quatre petits tigres",
-     "desc": "Une application de hangeul pour apprendre les lettres et les consonnes finales en jouant.",
-     "url": "/{l}/products/cubs/"
-    },
-    {
-     "name": "AP Edu",
-     "tag": "Site d’apprentissage",
-     "desc": "Les leçons Hangeul Cubs, les programmes d’essai et les défis, réunis au même endroit.",
-     "url": "https://edu.apholdings.kr/{edu}/",
-     "cta": "Ouvrir AP Edu"
-    },
-    {
-     "name": "Mode quiz Corée",
-     "tag": "Relié à QuizRanker",
-     "desc": "Un mode pour apprendre la K-pop, la K-food et la culture coréenne en s’affrontant en quiz. Bientôt disponible.",
-     "status": "En préparation"
-    }
-   ]
-  }
- },
  "games": {
   "ko": {
-   "eyebrow": "GAMES · 나의 티어",
+   "eyebrow": "GAMES · AP 세계의 랭킹 경쟁",
    "title": "게임은 달라도, 티어는 하나로.",
-   "lead": "퀴즈, 호텔, 투자 — 장르가 다른 게임을 하나의 티어로 잇습니다. 게임을 늘려 갈수록 내가 쌓은 티어가 더 의미 있어지도록 만듭니다.",
+   "lead": "퀴즈, 호텔, 투자 — 장르가 다른 게임을 하나의 티어로 잇습니다. AP 세계 안에서 순위를 겨루고, 게임이 늘어날수록 내가 쌓은 티어가 더 의미 있어지도록 만듭니다.",
    "for": "자기 기록과 티어를 키우고 싶은 개인 플레이어",
    "items": [
+    {
+     "name": "AP Games",
+     "tag": "로그인 · 웹 게임 · 순위표",
+     "desc": "한 계정으로 RANKERS 웹 게임을 바로 시작하고 세계 순위를 확인해요.",
+     "url": "https://games.apholdings.kr/{games}/",
+     "cta": "AP Games 열기"
+    },
     {
      "name": "RANKERS",
      "tag": "퀴즈랭커 · 호텔랭커 · 투자랭커",
@@ -541,188 +380,563 @@
      "url": "{rankers}"
     },
     {
-     "name": "AP Games",
-     "tag": "로그인 · 웹 게임",
-     "desc": "한 계정으로 RANKERS 웹 게임을 바로 시작해요.",
-     "url": "https://games.apholdings.kr/{games}/",
-     "cta": "AP Games 열기"
-    },
-    {
      "name": "LAST WAVE",
      "tag": "AI와 함께 만드는 게임 1호",
      "desc": "아이의 상상을 AI를 활용해 게임으로 만드는 과정을 공개하는 첫 프로젝트예요.",
      "url": "/{l}/products/lastwave/"
-    },
-    {
-     "name": "QuizRanker",
-     "tag": "실시간 퀴즈 배틀",
-     "desc": "누구나 함께 즐기는 실시간 퀴즈 대결이에요.",
-     "url": "/{l}/products/rgrg/"
     }
-   ]
+   ],
+   "primary": {
+    "label": "AP Games 열기 ↗",
+    "url": "https://games.apholdings.kr/{games}/"
+   }
   },
   "en": {
-   "eyebrow": "GAMES · YOUR TIER",
-   "title": "Different games. One tier.",
-   "lead": "Quiz, hotel, investing — games of different genres connect to one tier. As we add more games, the tier you build is meant to matter more.",
+   "eyebrow": "GAMES · Ranked play in the AP world",
+   "title": "Different games, one tier.",
+   "lead": "Quiz, hotel, investing — different genres joined by one tier. Compete for rank inside the AP world; the more games we add, the more the tier you earned means.",
    "for": "Individual players who want to grow their record and tier",
    "items": [
     {
-     "name": "RANKERS",
-     "tag": "QuizRanker · HotelRanker · InvestRanker",
-     "desc": "Compete in the field you love and put your name on the rankings.",
-     "url": "{rankers}"
-    },
-    {
      "name": "AP Games",
-     "tag": "Sign in and play on the web",
-     "desc": "Start the RANKERS web games with one account.",
+     "tag": "Sign in · web games · leaderboards",
+     "desc": "One account to start RANKERS web games and check world rankings.",
      "url": "https://games.apholdings.kr/{games}/",
      "cta": "Open AP Games"
     },
     {
-     "name": "LAST WAVE",
-     "tag": "Game No. 1 made with AI",
-     "desc": "Our first project showing, step by step, how a child’s imagination becomes a game with the help of AI.",
-     "url": "/{l}/products/lastwave/"
-    },
-    {
-     "name": "QuizRanker",
-     "tag": "Live quiz battles",
-     "desc": "Real-time quiz battles anyone can join.",
-     "url": "/{l}/products/rgrg/"
-    }
-   ]
-  },
-  "vi": {
-   "eyebrow": "GAMES · HẠNG CỦA BẠN",
-   "title": "Trò chơi khác nhau, một hạng duy nhất.",
-   "lead": "Quiz, khách sạn, đầu tư — các trò chơi khác thể loại được nối vào một hạng duy nhất. Càng thêm trò chơi, hạng bạn xây dựng càng có ý nghĩa.",
-   "for": "Người chơi cá nhân muốn nâng thành tích và hạng của mình",
-   "items": [
-    {
      "name": "RANKERS",
      "tag": "QuizRanker · HotelRanker · InvestRanker",
-     "desc": "Thi đấu trong lĩnh vực bạn yêu thích và ghi tên lên bảng xếp hạng.",
+     "desc": "Compete in the field you love and put your name on the board.",
      "url": "{rankers}"
     },
     {
+     "name": "LAST WAVE",
+     "tag": "Game No.1 built with AI",
+     "desc": "Our first project to show, in the open, a child turning imagination into a game with AI.",
+     "url": "/{l}/products/lastwave/"
+    }
+   ],
+   "primary": {
+    "label": "Open AP Games ↗",
+    "url": "https://games.apholdings.kr/{games}/"
+   }
+  },
+  "vi": {
+   "eyebrow": "GAMES · Đua hạng trong thế giới AP",
+   "title": "Nhiều trò chơi, một bậc hạng.",
+   "lead": "Đố vui, khách sạn, đầu tư — các thể loại khác nhau nối bằng một bậc hạng. Thi đấu xếp hạng trong thế giới AP; càng thêm trò chơi, bậc hạng bạn tích lũy càng có ý nghĩa.",
+   "for": "Người chơi cá nhân muốn nâng thành tích và bậc hạng của mình",
+   "items": [
+    {
      "name": "AP Games",
-     "tag": "Đăng nhập và chơi trên web",
-     "desc": "Bắt đầu các trò chơi web RANKERS với một tài khoản.",
+     "tag": "Đăng nhập · trò chơi web · bảng xếp hạng",
+     "desc": "Một tài khoản để chơi ngay các trò chơi web RANKERS và xem thứ hạng thế giới.",
      "url": "https://games.apholdings.kr/{games}/",
      "cta": "Mở AP Games"
     },
     {
-     "name": "LAST WAVE",
-     "tag": "Trò chơi số 1 làm cùng AI",
-     "desc": "Dự án đầu tiên công khai quá trình biến trí tưởng tượng của một đứa trẻ thành trò chơi nhờ AI.",
-     "url": "/{l}/products/lastwave/"
+     "name": "RANKERS",
+     "tag": "QuizRanker · HotelRanker · InvestRanker",
+     "desc": "Thi đấu ở lĩnh vực bạn thích và ghi tên lên bảng xếp hạng.",
+     "url": "{rankers}"
     },
     {
-     "name": "QuizRanker",
-     "tag": "Đấu quiz trực tiếp",
-     "desc": "Những trận đấu quiz thời gian thực mà ai cũng có thể tham gia.",
-     "url": "/{l}/products/rgrg/"
+     "name": "LAST WAVE",
+     "tag": "Trò chơi số 1 làm cùng AI",
+     "desc": "Dự án đầu tiên công khai quá trình một đứa trẻ biến trí tưởng tượng thành trò chơi bằng AI.",
+     "url": "/{l}/products/lastwave/"
     }
-   ]
+   ],
+   "primary": {
+    "label": "Mở AP Games ↗",
+    "url": "https://games.apholdings.kr/{games}/"
+   }
   },
   "ja": {
-   "eyebrow": "GAMES · わたしのティア",
+   "eyebrow": "GAMES · AP 世界のランキング競争",
    "title": "ゲームは違っても、ティアはひとつ。",
-   "lead": "クイズ、ホテル、投資 — ジャンルの違うゲームをひとつのティアでつなぎます。ゲームを増やすほど、積み上げたティアの意味が大きくなるようにします。",
+   "lead": "クイズ、ホテル、投資 — ジャンルの違うゲームをひとつのティアでつなぎます。AP 世界の中で順位を競い、ゲームが増えるほど積み上げたティアの意味が増すようにします。",
    "for": "自分の記録とティアを育てたい個人プレイヤー",
    "items": [
     {
-     "name": "RANKERS",
-     "tag": "クイズランカー・ホテルランカー・投資ランカー",
-     "desc": "好きな分野で競い、ランキングに名前を載せましょう。",
-     "url": "{rankers}"
-    },
-    {
      "name": "AP Games",
-     "tag": "ログイン・Webゲーム",
-     "desc": "ひとつのアカウントでRANKERSのWebゲームをすぐ始められます。",
+     "tag": "ログイン · ウェブゲーム · ランキング",
+     "desc": "ひとつのアカウントで RANKERS のウェブゲームをすぐ始め、世界ランキングを確認します。",
      "url": "https://games.apholdings.kr/{games}/",
-     "cta": "AP Gamesを開く"
+     "cta": "AP Games を開く"
     },
-    {
-     "name": "LAST WAVE",
-     "tag": "AIと一緒につくるゲーム第1号",
-     "desc": "子どもの想像をAIを使ってゲームにしていく過程を公開する、最初のプロジェクトです。",
-     "url": "/{l}/products/lastwave/"
-    },
-    {
-     "name": "QuizRanker",
-     "tag": "リアルタイム・クイズバトル",
-     "desc": "誰でも一緒に楽しめるリアルタイムのクイズ対決です。",
-     "url": "/{l}/products/rgrg/"
-    }
-   ]
-  },
-  "zh-cn": {
-   "eyebrow": "GAMES · 我的段位",
-   "title": "游戏不同，段位只有一个。",
-   "lead": "竞答、酒店、投资——不同类型的游戏连到同一个段位。游戏越多，你积累的段位就越有分量。",
-   "for": "想提升自己成绩和段位的个人玩家",
-   "items": [
     {
      "name": "RANKERS",
      "tag": "QuizRanker · HotelRanker · InvestRanker",
-     "desc": "在喜欢的领域一较高下，让名字登上排行榜。",
+     "desc": "好きな分野で競い、ランキングに名前を載せます。",
      "url": "{rankers}"
     },
     {
+     "name": "LAST WAVE",
+     "tag": "AI と一緒につくるゲーム第1号",
+     "desc": "子どもの想像を AI でゲームにする過程を公開する最初のプロジェクトです。",
+     "url": "/{l}/products/lastwave/"
+    }
+   ],
+   "primary": {
+    "label": "AP Games を開く ↗",
+    "url": "https://games.apholdings.kr/{games}/"
+   }
+  },
+  "zh-cn": {
+   "eyebrow": "GAMES · AP 世界的排名竞争",
+   "title": "游戏不同，段位唯一。",
+   "lead": "答题、酒店、投资——不同类型的游戏由同一个段位串联。在 AP 世界里争排名；游戏越多，你积累的段位越有分量。",
+   "for": "想提升自己纪录与段位的个人玩家",
+   "items": [
+    {
      "name": "AP Games",
-     "tag": "登录 · 网页游戏",
-     "desc": "一个账号即可开始 RANKERS 网页游戏。",
+     "tag": "登录 · 网页游戏 · 排行榜",
+     "desc": "一个账号即可开始 RANKERS 网页游戏并查看世界排名。",
      "url": "https://games.apholdings.kr/{games}/",
      "cta": "打开 AP Games"
     },
     {
-     "name": "LAST WAVE",
-     "tag": "与 AI 一起做的第 1 款游戏",
-     "desc": "公开展示如何借助 AI 把孩子的想象做成游戏的第一个项目。",
-     "url": "/{l}/products/lastwave/"
-    },
-    {
-     "name": "QuizRanker",
-     "tag": "实时竞答对战",
-     "desc": "人人都能参与的实时竞答对决。",
-     "url": "/{l}/products/rgrg/"
-    }
-   ]
-  },
-  "fr": {
-   "eyebrow": "GAMES · VOTRE RANG",
-   "title": "Des jeux différents, un seul rang.",
-   "lead": "Quiz, hôtel, investissement : des jeux de genres différents reliés à un seul rang. Plus nous ajoutons de jeux, plus le rang que vous construisez compte.",
-   "for": "Les joueurs qui veulent faire progresser leur score et leur rang",
-   "items": [
-    {
      "name": "RANKERS",
      "tag": "QuizRanker · HotelRanker · InvestRanker",
-     "desc": "Affrontez-vous dans votre domaine préféré et inscrivez votre nom au classement.",
+     "desc": "在喜欢的领域比拼，把名字写上排行榜。",
      "url": "{rankers}"
     },
     {
+     "name": "LAST WAVE",
+     "tag": "与 AI 一起做的第 1 号游戏",
+     "desc": "首个公开展示“孩子用 AI 把想象变成游戏”过程的项目。",
+     "url": "/{l}/products/lastwave/"
+    }
+   ],
+   "primary": {
+    "label": "打开 AP Games ↗",
+    "url": "https://games.apholdings.kr/{games}/"
+   }
+  },
+  "fr": {
+   "eyebrow": "GAMES · La compétition classée du monde AP",
+   "title": "Des jeux différents, un seul rang.",
+   "lead": "Quiz, hôtel, investissement — des genres différents reliés par un seul rang. On se mesure dans le monde AP ; plus il y a de jeux, plus le rang que vous avez gagné compte.",
+   "for": "Les joueurs qui veulent faire grandir leur record et leur rang",
+   "items": [
+    {
      "name": "AP Games",
-     "tag": "Connexion et jeux en ligne",
-     "desc": "Lancez les jeux web RANKERS avec un seul compte.",
+     "tag": "Connexion · jeux web · classements",
+     "desc": "Un seul compte pour lancer les jeux web RANKERS et consulter le classement mondial.",
      "url": "https://games.apholdings.kr/{games}/",
      "cta": "Ouvrir AP Games"
     },
     {
-     "name": "LAST WAVE",
-     "tag": "Le jeu n° 1 créé avec l’IA",
-     "desc": "Notre premier projet qui montre comment l’imagination d’un enfant devient un jeu grâce à l’IA.",
-     "url": "/{l}/products/lastwave/"
+     "name": "RANKERS",
+     "tag": "QuizRanker · HotelRanker · InvestRanker",
+     "desc": "Affrontez-vous dans le domaine que vous aimez et inscrivez votre nom au tableau.",
+     "url": "{rankers}"
     },
     {
-     "name": "QuizRanker",
-     "tag": "Batailles de quiz en direct",
-     "desc": "Des duels de quiz en temps réel ouverts à tous.",
+     "name": "LAST WAVE",
+     "tag": "Jeu n°1 créé avec l’IA",
+     "desc": "Notre premier projet à montrer, au grand jour, un enfant qui transforme son imagination en jeu avec l’IA.",
+     "url": "/{l}/products/lastwave/"
+    }
+   ],
+   "primary": {
+    "label": "Ouvrir AP Games ↗",
+    "url": "https://games.apholdings.kr/{games}/"
+   }
+  }
+ },
+ "edu": {
+  "ko": {
+   "eyebrow": "EDU · 국내 교육",
+   "title": "교실과 집에서, 퀴즈로 배웁니다.",
+   "lead": "학교와 학원에는 실시간 퀴즈 배틀을, 집에는 아빠와 아이의 약속을. 한국의 아이들이 놀면서 배우는 도구를 만듭니다.",
+   "for": "학교 · 학원 선생님, 그리고 아이와 함께하는 부모",
+   "items": [
+    {
+     "name": "퀴즈랭커 (한국어판)",
+     "tag": "실시간 퀴즈 배틀",
+     "desc": "교실에서 다 같이 겨루는 실시간 퀴즈 앱이에요. 선생님이 문제를 고르고, 아이들이 손으로 답해요.",
      "url": "/{l}/products/rgrg/"
+    },
+    {
+     "name": "학교 · 학원 퀴즈팩",
+     "tag": "교과 · 단원별 문제",
+     "desc": "수업에 바로 쓰는 문제 묶음을 준비하고 있어요.",
+     "status": "준비 중"
+    },
+    {
+     "name": "아빠와 아이 프로젝트",
+     "tag": "약속 하나, 100칸 도장판, 선물",
+     "desc": "아빠와 아이가 약속을 정하고, 워치로 자동 체크되는 달리기나 영어 책읽기로 도장판을 채우면 선물. 중간엔 룰렛과 응원.",
+     "status": "준비 중"
+    }
+   ]
+  },
+  "en": {
+   "eyebrow": "EDU · Education in Korea",
+   "title": "In the classroom and at home, learning by quiz.",
+   "lead": "Live quiz battles for schools and academies, and a dad-and-kid promise for home. Tools for Korean children to learn by playing.",
+   "for": "School and academy teachers, and parents doing it together with their child",
+   "items": [
+    {
+     "name": "QuizRanker (Korean edition)",
+     "tag": "Live quiz battles",
+     "desc": "A real-time quiz app for the whole classroom. The teacher picks the questions; the kids answer by hand.",
+     "url": "/{l}/products/rgrg/"
+    },
+    {
+     "name": "School & academy quiz packs",
+     "tag": "By subject and unit",
+     "desc": "Question sets ready to use in class.",
+     "status": "Coming soon"
+    },
+    {
+     "name": "Dad & Kid Project",
+     "tag": "One promise, a 100-stamp board, a present",
+     "desc": "Dad and child set a promise — a run auto-checked by the watch, or 20 minutes of English reading — and fill the board for a present. A roulette and cheers along the way.",
+     "status": "Coming soon"
+    }
+   ]
+  },
+  "vi": {
+   "eyebrow": "EDU · Giáo dục trong nước Hàn Quốc",
+   "title": "Ở lớp và ở nhà, học bằng đố vui.",
+   "lead": "Đấu đố vui trực tiếp cho trường học và trung tâm, và lời hứa bố-con cho gia đình. Công cụ để trẻ em Hàn Quốc vừa chơi vừa học.",
+   "for": "Giáo viên trường học · trung tâm, và phụ huynh học cùng con",
+   "items": [
+    {
+     "name": "QuizRanker (bản tiếng Hàn)",
+     "tag": "Đấu đố vui trực tiếp",
+     "desc": "Ứng dụng đố vui thời gian thực cho cả lớp. Giáo viên chọn câu hỏi, học sinh trả lời.",
+     "url": "/{l}/products/rgrg/"
+    },
+    {
+     "name": "Gói đố vui cho trường · trung tâm",
+     "tag": "Theo môn và bài",
+     "desc": "Bộ câu hỏi dùng ngay trong giờ học.",
+     "status": "Sắp ra mắt"
+    },
+    {
+     "name": "Dự án Bố & Con",
+     "tag": "Một lời hứa, bảng 100 dấu, một món quà",
+     "desc": "Bố và con đặt một lời hứa — chạy bộ được đồng hồ tự ghi nhận, hoặc 20 phút đọc sách tiếng Anh — lấp đầy bảng dấu để nhận quà. Có vòng quay và lời cổ vũ dọc đường.",
+     "status": "Sắp ra mắt"
+    }
+   ]
+  },
+  "ja": {
+   "eyebrow": "EDU · 韓国国内の教育",
+   "title": "教室でも家でも、クイズで学ぶ。",
+   "lead": "学校や塾にはリアルタイムのクイズ対戦を、家にはパパと子どもの約束を。韓国の子どもが遊びながら学ぶ道具をつくります。",
+   "for": "学校 · 塾の先生、そして子どもと一緒に取り組む保護者",
+   "items": [
+    {
+     "name": "QuizRanker(韓国語版)",
+     "tag": "リアルタイムのクイズ対戦",
+     "desc": "教室みんなで競うリアルタイムのクイズアプリ。先生が問題を選び、子どもが手で答えます。",
+     "url": "/{l}/products/rgrg/"
+    },
+    {
+     "name": "学校 · 塾向けクイズパック",
+     "tag": "教科 · 単元別",
+     "desc": "授業でそのまま使える問題セットを準備しています。",
+     "status": "準備中"
+    },
+    {
+     "name": "パパと子どもプロジェクト",
+     "tag": "約束ひとつ、100マスのスタンプ台、プレゼント",
+     "desc": "パパと子どもが約束を決め、ウォッチで自動チェックされるランニングや英語の読書20分でスタンプ台を埋めるとプレゼント。途中にはルーレットと応援。",
+     "status": "準備中"
+    }
+   ]
+  },
+  "zh-cn": {
+   "eyebrow": "EDU · 韩国国内教育",
+   "title": "在教室和家里，用答题学习。",
+   "lead": "给学校和培训机构的实时答题对战，给家庭的爸爸与孩子约定。让韩国的孩子边玩边学的工具。",
+   "for": "学校 · 培训机构的老师，以及与孩子一起的父母",
+   "items": [
+    {
+     "name": "QuizRanker（韩语版）",
+     "tag": "实时答题对战",
+     "desc": "全班一起比拼的实时答题应用。老师选题，孩子作答。",
+     "url": "/{l}/products/rgrg/"
+    },
+    {
+     "name": "学校 · 机构题库包",
+     "tag": "按学科与单元",
+     "desc": "课堂上直接可用的题目集，准备中。",
+     "status": "即将推出"
+    },
+    {
+     "name": "爸爸与孩子计划",
+     "tag": "一个约定、100 格印章板、一份礼物",
+     "desc": "爸爸和孩子定下约定——手表自动记录的跑步，或 20 分钟英语阅读——填满印章板就有礼物。中途还有转盘和加油。",
+     "status": "即将推出"
+    }
+   ]
+  },
+  "fr": {
+   "eyebrow": "EDU · L’éducation en Corée",
+   "title": "En classe et à la maison, apprendre par le quiz.",
+   "lead": "Des duels de quiz en direct pour les écoles et les académies, et une promesse papa-enfant pour la maison. Des outils pour que les enfants coréens apprennent en jouant.",
+   "for": "Les enseignants d’école et d’académie, et les parents qui s’y mettent avec leur enfant",
+   "items": [
+    {
+     "name": "QuizRanker (édition coréenne)",
+     "tag": "Duels de quiz en direct",
+     "desc": "Une application de quiz en temps réel pour toute la classe. L’enseignant choisit les questions ; les enfants répondent.",
+     "url": "/{l}/products/rgrg/"
+    },
+    {
+     "name": "Packs de quiz école · académie",
+     "tag": "Par matière et par chapitre",
+     "desc": "Des séries de questions prêtes pour la classe.",
+     "status": "Bientôt"
+    },
+    {
+     "name": "Projet Papa & Enfant",
+     "tag": "Une promesse, un tableau de 100 cases, un cadeau",
+     "desc": "Papa et enfant fixent une promesse — une course validée par la montre, ou 20 minutes de lecture en anglais — et remplissent le tableau pour un cadeau. Une roulette et des encouragements en chemin.",
+     "status": "Bientôt"
+    }
+   ]
+  }
+ },
+ "hallyu": {
+  "ko": {
+   "eyebrow": "HALLYU · 외국인을 위한 한국",
+   "title": "한국이 궁금한 사람에게, 놀면서 배우는 한국.",
+   "lead": "한글과 한국 문화를 퀴즈와 캐릭터로 배우고, 장인의 작품을 집으로 가져갑니다. 한국을 찾는 외국인을 위한 부문입니다.",
+   "for": "한국을 배우고 싶은 외국인 — 아이부터 어른까지, 그리고 한국을 찾는 여행자",
+   "items": [
+    {
+     "name": "K-Ranker",
+     "tag": "외국인을 위한 한국 퀴즈 앱",
+     "desc": "K-pop · K-food · 한국 문화를 퀴즈로 겨루며 배우는 앱이에요. 앱스토어 심사 중이에요.",
+     "status": "심사 중"
+    },
+    {
+     "name": "Hangeul Cubs",
+     "tag": "호랑이 네 남매와 한글 첫걸음",
+     "desc": "받침과 글자를 놀이로 익히는 한글 앱이에요. 캐릭터 소개는 Entertainment에서.",
+     "url": "/{l}/products/cubs/"
+    },
+    {
+     "name": "한글 학습 사이트",
+     "tag": "레슨 · 30일 챌린지 · 체험단",
+     "desc": "한글컵스 수업과 챌린지를 한곳에서 안내해요.",
+     "url": "https://edu.apholdings.kr/{edu}/",
+     "cta": "학습 사이트 열기"
+    },
+    {
+     "name": "K-Craft",
+     "tag": "장인의 항아리와 도자기",
+     "desc": "무형문화재 장인의 작품을 해외 구매자와 연결해요.",
+     "url": "/{l}/products/craft/"
+    },
+    {
+     "name": "K-Food · K-Pop",
+     "tag": "다음 주제",
+     "desc": "한국 음식과 음악을 같은 방식으로 이어 갈 준비를 하고 있어요.",
+     "status": "준비 중"
+    }
+   ]
+  },
+  "en": {
+   "eyebrow": "HALLYU · Korea for the world",
+   "title": "Curious about Korea? Learn it by playing.",
+   "lead": "Hangeul and Korean culture through quizzes and characters, and artisans’ work delivered to your home. This division is for people outside Korea.",
+   "for": "Anyone who wants to learn Korea — children and adults — and travellers coming to Korea",
+   "items": [
+    {
+     "name": "K-Ranker",
+     "tag": "The Korea quiz app for international fans",
+     "desc": "Learn K-pop, K-food and Korean culture by competing in quizzes. Now in App Store review.",
+     "status": "In review"
+    },
+    {
+     "name": "Hangeul Cubs",
+     "tag": "First steps in Hangeul with four tiger siblings",
+     "desc": "A Hangeul app that teaches letters and bottom blocks through play. Meet the characters under Entertainment.",
+     "url": "/{l}/products/cubs/"
+    },
+    {
+     "name": "Hangeul learning site",
+     "tag": "Lessons · 30-day challenge · reviewer programme",
+     "desc": "All Hangeul Cubs lessons and challenges in one place.",
+     "url": "https://edu.apholdings.kr/{edu}/",
+     "cta": "Open the learning site"
+    },
+    {
+     "name": "K-Craft",
+     "tag": "Artisans’ onggi jars and ceramics",
+     "desc": "Connecting the work of intangible-heritage artisans with buyers abroad.",
+     "url": "/{l}/products/craft/"
+    },
+    {
+     "name": "K-Food · K-Pop",
+     "tag": "Next up",
+     "desc": "Korean food and music, the same way.",
+     "status": "Coming soon"
+    }
+   ]
+  },
+  "vi": {
+   "eyebrow": "HALLYU · Hàn Quốc cho thế giới",
+   "title": "Tò mò về Hàn Quốc? Học bằng cách chơi.",
+   "lead": "Hangeul và văn hóa Hàn Quốc qua đố vui và nhân vật, cùng tác phẩm nghệ nhân giao tận nhà. Mảng này dành cho người ngoài Hàn Quốc.",
+   "for": "Bất kỳ ai muốn học về Hàn Quốc — trẻ em và người lớn — và du khách đến Hàn Quốc",
+   "items": [
+    {
+     "name": "K-Ranker",
+     "tag": "Ứng dụng đố vui Hàn Quốc cho fan quốc tế",
+     "desc": "Học K-pop, K-food và văn hóa Hàn Quốc bằng cách thi đố vui. Đang xét duyệt trên App Store.",
+     "status": "Đang xét duyệt"
+    },
+    {
+     "name": "Hangeul Cubs",
+     "tag": "Những bước đầu với Hangeul cùng bốn anh em hổ",
+     "desc": "Ứng dụng Hangeul dạy chữ cái và phụ âm cuối qua trò chơi. Gặp các nhân vật ở mục Entertainment.",
+     "url": "/{l}/products/cubs/"
+    },
+    {
+     "name": "Trang học Hangeul",
+     "tag": "Bài học · thử thách 30 ngày · nhóm trải nghiệm",
+     "desc": "Tất cả bài học và thử thách Hangeul Cubs ở một nơi.",
+     "url": "https://edu.apholdings.kr/{edu}/",
+     "cta": "Mở trang học"
+    },
+    {
+     "name": "K-Craft",
+     "tag": "Chum onggi và gốm của nghệ nhân",
+     "desc": "Kết nối tác phẩm của nghệ nhân di sản phi vật thể với người mua ở nước ngoài.",
+     "url": "/{l}/products/craft/"
+    },
+    {
+     "name": "K-Food · K-Pop",
+     "tag": "Tiếp theo",
+     "desc": "Ẩm thực và âm nhạc Hàn Quốc, theo cùng một cách.",
+     "status": "Sắp ra mắt"
+    }
+   ]
+  },
+  "ja": {
+   "eyebrow": "HALLYU · 世界のための韓国",
+   "title": "韓国が気になる人に、遊びながら学ぶ韓国。",
+   "lead": "ハングルと韓国文化をクイズとキャラクターで学び、職人の作品を家まで届けます。韓国の外にいる人のための部門です。",
+   "for": "韓国を学びたい人 — 子どもから大人まで、そして韓国を訪れる旅行者",
+   "items": [
+    {
+     "name": "K-Ranker",
+     "tag": "海外ファンのための韓国クイズアプリ",
+     "desc": "K-pop · K-food · 韓国文化をクイズで競いながら学びます。App Store 審査中。",
+     "status": "審査中"
+    },
+    {
+     "name": "Hangeul Cubs",
+     "tag": "トラの4きょうだいとハングルの第一歩",
+     "desc": "文字とパッチムを遊びで身につけるハングルアプリ。キャラクター紹介は Entertainment で。",
+     "url": "/{l}/products/cubs/"
+    },
+    {
+     "name": "ハングル学習サイト",
+     "tag": "レッスン · 30日チャレンジ · 体験団",
+     "desc": "ハングルカブスのレッスンとチャレンジをひとつの場所で案内します。",
+     "url": "https://edu.apholdings.kr/{edu}/",
+     "cta": "学習サイトを開く"
+    },
+    {
+     "name": "K-Craft",
+     "tag": "職人の甕と陶磁器",
+     "desc": "無形文化財の職人の作品を海外の買い手につなぎます。",
+     "url": "/{l}/products/craft/"
+    },
+    {
+     "name": "K-Food · K-Pop",
+     "tag": "次のテーマ",
+     "desc": "韓国の食と音楽を、同じやり方でつないでいきます。",
+     "status": "準備中"
+    }
+   ]
+  },
+  "zh-cn": {
+   "eyebrow": "HALLYU · 面向世界的韩国",
+   "title": "对韩国好奇？边玩边学。",
+   "lead": "通过答题和角色学习韩文与韩国文化，把匠人的作品送到你家。这个板块面向韩国以外的人。",
+   "for": "想了解韩国的任何人——孩子和大人——以及来韩国的旅行者",
+   "items": [
+    {
+     "name": "K-Ranker",
+     "tag": "面向海外粉丝的韩国答题应用",
+     "desc": "通过答题比拼学习 K-pop、K-food 和韩国文化。App Store 审核中。",
+     "status": "审核中"
+    },
+    {
+     "name": "Hangeul Cubs",
+     "tag": "和四只小老虎一起迈出韩文第一步",
+     "desc": "用游戏学字母和收音的韩文应用。角色介绍见 Entertainment。",
+     "url": "/{l}/products/cubs/"
+    },
+    {
+     "name": "韩文学习网站",
+     "tag": "课程 · 30 天挑战 · 体验团",
+     "desc": "Hangeul Cubs 的课程与挑战都在这里。",
+     "url": "https://edu.apholdings.kr/{edu}/",
+     "cta": "打开学习网站"
+    },
+    {
+     "name": "K-Craft",
+     "tag": "匠人的陶缸与陶瓷",
+     "desc": "把非物质文化遗产匠人的作品连接到海外买家。",
+     "url": "/{l}/products/craft/"
+    },
+    {
+     "name": "K-Food · K-Pop",
+     "tag": "下一个主题",
+     "desc": "用同样的方式延伸到韩国的饮食与音乐。",
+     "status": "即将推出"
+    }
+   ]
+  },
+  "fr": {
+   "eyebrow": "HALLYU · La Corée pour le monde",
+   "title": "Curieux de la Corée ? Apprenez-la en jouant.",
+   "lead": "Le hangeul et la culture coréenne par les quiz et les personnages, et le travail des artisans livré chez vous. Cette division s’adresse aux personnes hors de Corée.",
+   "for": "Toute personne qui veut apprendre la Corée — enfants et adultes — et les voyageurs qui s’y rendent",
+   "items": [
+    {
+     "name": "K-Ranker",
+     "tag": "L’application de quiz sur la Corée pour les fans du monde entier",
+     "desc": "Apprenez la K-pop, la K-food et la culture coréenne en vous affrontant au quiz. En cours d’examen sur l’App Store.",
+     "status": "En cours d’examen"
+    },
+    {
+     "name": "Hangeul Cubs",
+     "tag": "Premiers pas en hangeul avec quatre tigres",
+     "desc": "Une application qui enseigne les lettres et les consonnes finales par le jeu. Les personnages sont présentés sous Entertainment.",
+     "url": "/{l}/products/cubs/"
+    },
+    {
+     "name": "Site d’apprentissage du hangeul",
+     "tag": "Leçons · défi de 30 jours · programme testeurs",
+     "desc": "Toutes les leçons et tous les défis Hangeul Cubs au même endroit.",
+     "url": "https://edu.apholdings.kr/{edu}/",
+     "cta": "Ouvrir le site"
+    },
+    {
+     "name": "K-Craft",
+     "tag": "Jarres onggi et céramiques d’artisans",
+     "desc": "Relier le travail d’artisans du patrimoine immatériel aux acheteurs à l’étranger.",
+     "url": "/{l}/products/craft/"
+    },
+    {
+     "name": "K-Food · K-Pop",
+     "tag": "La suite",
+     "desc": "La cuisine et la musique coréennes, de la même manière.",
+     "status": "Bientôt"
     }
    ]
   }
@@ -731,20 +945,21 @@
   "ko": {
    "eyebrow": "SHOP · 외국인을 위한 K-셀렉트",
    "title": "리아가 고른 한국을, 해외로.",
-   "lead": "리아가 소개한 한국 상품을 외국인 고객이 Lia Select Shop에서 삽니다. 쇼피를 통해 판매를 준비하고 있고, 싱가포르 K-뷰티부터 시작합니다.",
+   "lead": "리아가 소개한 한국 상품을 외국인 고객이 Lia Select Shop에서 삽니다. 쇼피를 통해 판매하고, 싱가포르 K-뷰티부터 시작합니다.",
    "for": "한국 상품을 사고 싶은 해외 고객",
    "items": [
+    {
+     "name": "Lia Select Shop",
+     "tag": "쇼피 · 싱가포르 K-뷰티부터",
+     "desc": "리아가 소개한 상품을 바로 사는 해외 매장이에요. 상품을 소싱하고 있어요.",
+     "url": "https://shop.apholdings.kr/",
+     "cta": "Lia Select Shop 열기"
+    },
     {
      "name": "LIA Select",
      "tag": "리아가 고르는 기준",
      "desc": "리아가 소개하는 상품을 고르는 기준과 상품 구성을 안내해요.",
      "url": "/{l}/products/liaselect/"
-    },
-    {
-     "name": "AP SELECT",
-     "tag": "고르기 위한 매장",
-     "desc": "매장에서는 상담과 체험을, 주문은 온라인에서 하는 매장 모델이에요.",
-     "url": "/{l}/products/select/"
     },
     {
      "name": "Global K-Commerce",
@@ -753,10 +968,11 @@
      "url": "/{l}/products/commerce/"
     },
     {
-     "name": "K-Craft",
-     "tag": "장인의 작품을 해외 구매자에게",
-     "desc": "전통 공예 작품을 해외 구매자와 연결하는 흐름을 정리해요.",
-     "url": "/{l}/products/craft/"
+     "name": "K-Craft 바로가기",
+     "tag": "장인의 작품은 Hallyu에서",
+     "desc": "항아리와 도자기 구매 안내는 Hallyu 부문에 있어요.",
+     "url": "/{l}/hallyu/",
+     "cta": "Hallyu로 이동"
     }
    ],
    "primary": {
@@ -765,34 +981,36 @@
    }
   },
   "en": {
-   "eyebrow": "SHOP · K-SELECT FOR GLOBAL CUSTOMERS",
-   "title": "Korea, picked by LIA, shipped abroad.",
-   "lead": "Customers abroad buy the Korean products LIA introduces at the Lia Select Shop. Sales are being prepared through Shopee, starting with K-beauty in Singapore.",
-   "for": "Customers abroad who want to buy Korean products",
+   "eyebrow": "SHOP · K-select for the world",
+   "title": "What Lia picks from Korea, shipped abroad.",
+   "lead": "International customers buy the Korean products Lia introduces at Lia Select Shop. We sell through Shopee, starting with K-beauty in Singapore.",
+   "for": "Customers abroad who want Korean products",
    "items": [
     {
+     "name": "Lia Select Shop",
+     "tag": "Shopee · starting with K-beauty in Singapore",
+     "desc": "The overseas store where you buy what Lia introduced. Sourcing is under way.",
+     "url": "https://shop.apholdings.kr/",
+     "cta": "Open Lia Select Shop"
+    },
+    {
      "name": "LIA Select",
-     "tag": "How LIA selects",
-     "desc": "The criteria and line-up behind the products LIA introduces.",
+     "tag": "How Lia chooses",
+     "desc": "The criteria behind Lia’s picks, and the line-up.",
      "url": "/{l}/products/liaselect/"
     },
     {
-     "name": "AP SELECT",
-     "tag": "A store designed for choosing",
-     "desc": "A store model where you get advice and try products in store, and order online.",
-     "url": "/{l}/products/select/"
-    },
-    {
      "name": "Global K-Commerce",
-     "tag": "Found in Korea, reordered at home",
-     "desc": "Cross-border sales that let people buy again, back home, what they found in Korea.",
+     "tag": "Found in Korea, re-ordered from home",
+     "desc": "Overseas sales that let you buy again, after you fly home, what you found in Korea.",
      "url": "/{l}/products/commerce/"
     },
     {
      "name": "K-Craft",
-     "tag": "Artisan work for buyers abroad",
-     "desc": "Connecting traditional Korean craft with buyers abroad.",
-     "url": "/{l}/products/craft/"
+     "tag": "Artisans’ work lives under Hallyu",
+     "desc": "Onggi jars and ceramics are presented in the Hallyu division.",
+     "url": "/{l}/hallyu/",
+     "cta": "Go to Hallyu"
     }
    ],
    "primary": {
@@ -801,34 +1019,36 @@
    }
   },
   "vi": {
-   "eyebrow": "SHOP · K-SELECT CHO KHÁCH QUỐC TẾ",
-   "title": "Hàn Quốc do LIA chọn, gửi ra thế giới.",
-   "lead": "Khách hàng nước ngoài mua sản phẩm Hàn Quốc do LIA giới thiệu tại Lia Select Shop. Việc bán hàng qua Shopee đang được chuẩn bị, bắt đầu với K-beauty tại Singapore.",
-   "for": "Khách hàng nước ngoài muốn mua sản phẩm Hàn Quốc",
+   "eyebrow": "SHOP · K-select cho thế giới",
+   "title": "Những gì Lia chọn từ Hàn Quốc, gửi ra nước ngoài.",
+   "lead": "Khách hàng quốc tế mua các sản phẩm Hàn Quốc mà Lia giới thiệu tại Lia Select Shop. Chúng tôi bán qua Shopee, bắt đầu với K-beauty ở Singapore.",
+   "for": "Khách hàng ở nước ngoài muốn mua sản phẩm Hàn Quốc",
    "items": [
     {
+     "name": "Lia Select Shop",
+     "tag": "Shopee · bắt đầu với K-beauty ở Singapore",
+     "desc": "Cửa hàng ở nước ngoài để mua ngay những gì Lia giới thiệu. Đang tìm nguồn hàng.",
+     "url": "https://shop.apholdings.kr/",
+     "cta": "Mở Lia Select Shop"
+    },
+    {
      "name": "LIA Select",
-     "tag": "Cách LIA chọn lựa",
-     "desc": "Tiêu chí và danh mục đứng sau các sản phẩm LIA giới thiệu.",
+     "tag": "Cách Lia chọn",
+     "desc": "Tiêu chí đằng sau lựa chọn của Lia, và danh mục sản phẩm.",
      "url": "/{l}/products/liaselect/"
     },
     {
-     "name": "AP SELECT",
-     "tag": "Cửa hàng để chọn lựa",
-     "desc": "Mô hình cửa hàng: tư vấn và trải nghiệm tại chỗ, đặt hàng trực tuyến.",
-     "url": "/{l}/products/select/"
-    },
-    {
      "name": "Global K-Commerce",
-     "tag": "Khám phá ở Hàn Quốc, mua lại ở nhà",
-     "desc": "Bán hàng xuyên biên giới để khách mua lại sau khi về nước những gì đã gặp ở Hàn Quốc.",
+     "tag": "Thấy ở Hàn Quốc, đặt lại từ nhà",
+     "desc": "Bán hàng ra nước ngoài để bạn mua lại, sau khi về nước, những gì đã gặp ở Hàn Quốc.",
      "url": "/{l}/products/commerce/"
     },
     {
      "name": "K-Craft",
-     "tag": "Tác phẩm nghệ nhân đến người mua nước ngoài",
-     "desc": "Kết nối thủ công truyền thống Hàn Quốc với người mua nước ngoài.",
-     "url": "/{l}/products/craft/"
+     "tag": "Tác phẩm nghệ nhân nằm ở Hallyu",
+     "desc": "Chum onggi và gốm được giới thiệu ở mảng Hallyu.",
+     "url": "/{l}/hallyu/",
+     "cta": "Đến Hallyu"
     }
    ],
    "primary": {
@@ -837,70 +1057,74 @@
    }
   },
   "ja": {
-   "eyebrow": "SHOP · 海外のお客様へのKセレクト",
-   "title": "LIAが選んだ韓国を、海外へ。",
-   "lead": "LIAが紹介した韓国の商品を、海外のお客様がLia Select Shopで購入できます。Shopeeでの販売を準備中で、シンガポールのKビューティーから始めます。",
-   "for": "韓国の商品を買いたい海外のお客様",
+   "eyebrow": "SHOP · 世界のための K-セレクト",
+   "title": "リアが選んだ韓国を、海外へ。",
+   "lead": "リアが紹介した韓国の商品を、海外のお客さまが Lia Select Shop で買います。Shopee を通じて販売し、シンガポールの K-ビューティーから始めます。",
+   "for": "韓国の商品を買いたい海外のお客さま",
    "items": [
     {
+     "name": "Lia Select Shop",
+     "tag": "Shopee · シンガポールの K-ビューティーから",
+     "desc": "リアが紹介した商品をそのまま買える海外ストア。商品を仕入れ中です。",
+     "url": "https://shop.apholdings.kr/",
+     "cta": "Lia Select Shop を開く"
+    },
+    {
      "name": "LIA Select",
-     "tag": "LIAが選ぶ基準",
-     "desc": "LIAが紹介する商品を選ぶ基準と、商品構成を案内します。",
+     "tag": "リアが選ぶ基準",
+     "desc": "リアが紹介する商品を選ぶ基準と、ラインナップを案内します。",
      "url": "/{l}/products/liaselect/"
     },
     {
-     "name": "AP SELECT",
-     "tag": "選ぶための店",
-     "desc": "店舗で相談と体験をし、注文はオンラインで行う店舗モデルです。",
-     "url": "/{l}/products/select/"
-    },
-    {
      "name": "Global K-Commerce",
-     "tag": "韓国で見つけ、家で買い直す",
-     "desc": "韓国で出会った商品を、帰国後も買い直せるようにつなぐ越境販売です。",
+     "tag": "韓国で見つけて、家から再購入",
+     "desc": "韓国で出会った商品を、帰国後もまた買えるようにつなぐ海外販売です。",
      "url": "/{l}/products/commerce/"
     },
     {
      "name": "K-Craft",
-     "tag": "職人の作品を海外の買い手へ",
-     "desc": "韓国の伝統工芸作品を海外の買い手とつなぎます。",
-     "url": "/{l}/products/craft/"
+     "tag": "職人の作品は Hallyu で",
+     "desc": "甕と陶磁器の購入案内は Hallyu 部門にあります。",
+     "url": "/{l}/hallyu/",
+     "cta": "Hallyu へ"
     }
    ],
    "primary": {
-    "label": "Lia Select Shopを開く ↗",
+    "label": "Lia Select Shop を開く ↗",
     "url": "https://shop.apholdings.kr/"
    }
   },
   "zh-cn": {
-   "eyebrow": "SHOP · 面向海外顾客的 K-SELECT",
-   "title": "LIA 挑选的韩国好物，送往海外。",
-   "lead": "海外顾客可以在 Lia Select Shop 购买 LIA 介绍的韩国商品。正在通过 Shopee 筹备销售，从新加坡的韩国美妆开始。",
+   "eyebrow": "SHOP · 面向世界的 K-精选",
+   "title": "Lia 从韩国挑选的好物，送往海外。",
+   "lead": "海外顾客在 Lia Select Shop 购买 Lia 介绍的韩国商品。我们通过 Shopee 销售，从新加坡的 K-beauty 开始。",
    "for": "想购买韩国商品的海外顾客",
    "items": [
     {
+     "name": "Lia Select Shop",
+     "tag": "Shopee · 从新加坡 K-beauty 开始",
+     "desc": "直接购买 Lia 所介绍商品的海外店铺。正在选品中。",
+     "url": "https://shop.apholdings.kr/",
+     "cta": "打开 Lia Select Shop"
+    },
+    {
      "name": "LIA Select",
-     "tag": "LIA 的挑选标准",
-     "desc": "介绍 LIA 推荐商品的挑选标准与商品构成。",
+     "tag": "Lia 的挑选标准",
+     "desc": "介绍 Lia 挑选商品的标准与商品构成。",
      "url": "/{l}/products/liaselect/"
     },
     {
-     "name": "AP SELECT",
-     "tag": "为挑选而设计的门店",
-     "desc": "门店负责咨询和体验，下单在线完成的门店模式。",
-     "url": "/{l}/products/select/"
-    },
-    {
      "name": "Global K-Commerce",
-     "tag": "在韩国发现，回家再购",
-     "desc": "让顾客回国后也能再次买到在韩国遇见的商品的跨境销售。",
+     "tag": "在韩国发现，回家再买",
+     "desc": "让你回国后也能再次购买在韩国遇到的商品的海外销售。",
      "url": "/{l}/products/commerce/"
     },
     {
      "name": "K-Craft",
-     "tag": "把匠人作品带给海外买家",
-     "desc": "把韩国传统工艺作品与海外买家连接起来。",
-     "url": "/{l}/products/craft/"
+     "tag": "匠人作品在 Hallyu",
+     "desc": "陶缸与陶瓷的购买指引在 Hallyu 板块。",
+     "url": "/{l}/hallyu/",
+     "cta": "前往 Hallyu"
     }
    ],
    "primary": {
@@ -909,34 +1133,36 @@
    }
   },
   "fr": {
-   "eyebrow": "SHOP · LA SÉLECTION K POUR LE MONDE",
-   "title": "La Corée choisie par LIA, livrée à l’étranger.",
-   "lead": "Les clients à l’étranger achètent au Lia Select Shop les produits coréens présentés par LIA. La vente via Shopee est en préparation, en commençant par la K-beauté à Singapour.",
-   "for": "Les clients à l’étranger qui veulent acheter des produits coréens",
+   "eyebrow": "SHOP · La K-sélection pour le monde",
+   "title": "Ce que Lia choisit en Corée, expédié à l’étranger.",
+   "lead": "Les clients internationaux achètent chez Lia Select Shop les produits coréens que Lia présente. Nous vendons via Shopee, en commençant par la K-beauty à Singapour.",
+   "for": "Les clients à l’étranger qui veulent des produits coréens",
    "items": [
     {
+     "name": "Lia Select Shop",
+     "tag": "Shopee · à partir de la K-beauty à Singapour",
+     "desc": "La boutique à l’étranger où acheter ce que Lia a présenté. Le sourcing est en cours.",
+     "url": "https://shop.apholdings.kr/",
+     "cta": "Ouvrir Lia Select Shop"
+    },
+    {
      "name": "LIA Select",
-     "tag": "Comment LIA sélectionne",
-     "desc": "Les critères et la gamme derrière les produits présentés par LIA.",
+     "tag": "Comment Lia choisit",
+     "desc": "Les critères derrière les choix de Lia, et la gamme.",
      "url": "/{l}/products/liaselect/"
     },
     {
-     "name": "AP SELECT",
-     "tag": "Une boutique pensée pour choisir",
-     "desc": "Un modèle de boutique : conseils et essais sur place, commande en ligne.",
-     "url": "/{l}/products/select/"
-    },
-    {
      "name": "Global K-Commerce",
-     "tag": "Découvert en Corée, racheté chez soi",
-     "desc": "Une vente transfrontalière pour racheter, une fois rentré, ce que l’on a découvert en Corée.",
+     "tag": "Trouvé en Corée, recommandé depuis chez soi",
+     "desc": "La vente à l’étranger qui permet de racheter, une fois rentré, ce que l’on a trouvé en Corée.",
      "url": "/{l}/products/commerce/"
     },
     {
      "name": "K-Craft",
-     "tag": "Le travail des artisans pour les acheteurs étrangers",
-     "desc": "Relier l’artisanat traditionnel coréen aux acheteurs étrangers.",
-     "url": "/{l}/products/craft/"
+     "tag": "Le travail des artisans est sous Hallyu",
+     "desc": "Les jarres onggi et les céramiques sont présentées dans la division Hallyu.",
+     "url": "/{l}/hallyu/",
+     "cta": "Aller à Hallyu"
     }
    ],
    "primary": {
@@ -945,42 +1171,502 @@
    }
   }
  },
- "_common": {
+ "entertainment": {
   "ko": {
-   "more": "자세히 보기",
-   "for": "대상",
-   "ir": "이 사업의 숫자와 계획 → 투자자 (IR)",
-   "brand": "AP 브랜드 체계 → CI · BI"
+   "eyebrow": "ENTERTAINMENT · AP의 캐릭터",
+   "title": "AP의 얼굴들.",
+   "lead": "AI 홍보 배우 리아와 한글컵스의 호랑이 네 남매. AP의 사업을 세상에 알리는 캐릭터들을 소개합니다.",
+   "for": "AP를 처음 만난 사람, 그리고 리아와 호랑이들의 팬",
+   "lia": {
+    "name": "LIA",
+    "role": "대한민국 1호 AI 홍보 배우",
+    "h": "AI 인물임을 밝히고, 한국을 소개합니다.",
+    "p1": "리아는 AI로 만든 인물이라는 것을 숨기지 않습니다. 한국의 브랜드 · 장소 · 문화를 영어 숏폼으로 소개하고, Lia Select Shop의 상품을 고르고 알립니다.",
+    "p2": "인스타그램과 틱톡에서 활동하고, AP News의 소식도 리아가 전합니다.",
+    "links": [
+     [
+      "/{l}/products/lia/",
+      "리아 자세히 보기"
+     ],
+     [
+      "https://shop.apholdings.kr/",
+      "Lia Select Shop ↗"
+     ],
+     [
+      "/{l}/news/",
+      "AP News"
+     ]
+    ]
+   },
+   "cubs": {
+    "name": "Hangeul Cubs",
+    "role": "호랑이 네 남매",
+    "h": "다호 · 꼬비 · 아리 · 라미.",
+    "p": "한글컵스 앱과 유튜브에서 한글을 가르치는 호랑이 남매예요. 받침 하나로 뜻이 바뀌는 한글을, 넷이 나눠 맡아 알려줍니다.",
+    "app": "한글컵스 앱은 Hallyu에서",
+    "chars": [
+     [
+      "다호",
+      "큰형 · 진행과 정리",
+      "받침의 기본을 알려주는 큰형. 「아래에 블록 하나. 그게 전부야.」"
+     ],
+     [
+      "꼬비",
+      "둘째 · 단어와 소리",
+      "ㄴ과 ㄹ을 혀끝으로 가르는 둘째. 단어 먹보, 태권도 발차기."
+     ],
+     [
+      "아리",
+      "셋째 · 발음과 노래",
+      "ㅇ 받침이 종처럼 울리는 걸 들려주는 셋째. 발음 코치, 노래 담당."
+     ],
+     [
+      "라미",
+      "막내 · 쓰기와 응원",
+      "짧게 딱 끊어지는 끝소리를 맡은 막내. 쓰기와 응원 담당."
+     ]
+    ]
+   }
   },
   "en": {
-   "more": "Learn more",
-   "for": "For",
-   "ir": "Numbers and plans for this business → Investors (IR)",
-   "brand": "How the AP brands fit together → CI · BI"
+   "eyebrow": "ENTERTAINMENT · The AP characters",
+   "title": "The faces of AP.",
+   "lead": "Lia, the AI promotional actor, and the four tiger siblings of Hangeul Cubs. Meet the characters who carry AP’s businesses into the world.",
+   "for": "People meeting AP for the first time, and fans of Lia and the tigers",
+   "lia": {
+    "name": "LIA",
+    "role": "Korea’s first AI promotional actor",
+    "h": "Openly AI, and introducing Korea.",
+    "p1": "Lia never hides that she is an AI-made person. She introduces Korean brands, places and culture in English short-form video, and picks and promotes the products at Lia Select Shop.",
+    "p2": "She is active on Instagram and TikTok, and she also delivers AP News.",
+    "links": [
+     [
+      "/{l}/products/lia/",
+      "More about Lia"
+     ],
+     [
+      "https://shop.apholdings.kr/",
+      "Lia Select Shop ↗"
+     ],
+     [
+      "/{l}/news/",
+      "AP News"
+     ]
+    ]
+   },
+   "cubs": {
+    "name": "Hangeul Cubs",
+    "role": "Four tiger siblings",
+    "h": "Daho · Kkobi · Aari · Rami.",
+    "p": "The tiger siblings who teach Hangeul in the Hangeul Cubs app and on YouTube. One bottom block changes a word’s meaning — the four of them split the lessons between them.",
+    "app": "The Hangeul Cubs app lives under Hallyu",
+    "chars": [
+     [
+      "Daho",
+      "Eldest · host and wrap-up",
+      "The big brother who starts every lesson. “One block at the bottom — that’s all it takes.”"
+     ],
+     [
+      "Kkobi",
+      "Second · words and sounds",
+      "Splits ㄴ and ㄹ with the tip of the tongue. Loves words, snacks and a taekwondo kick."
+     ],
+     [
+      "Aari",
+      "Third · pronunciation and songs",
+      "Makes the ㅇ block ring like a bell. Pronunciation coach and singer."
+     ],
+     [
+      "Rami",
+      "Youngest · writing and cheering",
+      "In charge of the sounds that stop short. Writing and cheering."
+     ]
+    ]
+   }
   },
   "vi": {
-   "more": "Tìm hiểu thêm",
-   "for": "Dành cho",
-   "ir": "Số liệu và kế hoạch của mảng này → Nhà đầu tư (IR)",
-   "brand": "Hệ thống thương hiệu AP → CI · BI"
+   "eyebrow": "ENTERTAINMENT · Các nhân vật của AP",
+   "title": "Những gương mặt của AP.",
+   "lead": "Lia, diễn viên quảng bá AI, và bốn anh em hổ của Hangeul Cubs. Gặp các nhân vật mang hoạt động của AP ra thế giới.",
+   "for": "Người lần đầu biết đến AP, và fan của Lia cùng các chú hổ",
+   "lia": {
+    "name": "LIA",
+    "role": "Diễn viên quảng bá AI đầu tiên của Hàn Quốc",
+    "h": "Công khai là AI, và giới thiệu Hàn Quốc.",
+    "p1": "Lia không bao giờ che giấu việc mình là nhân vật do AI tạo ra. Cô giới thiệu thương hiệu, địa điểm và văn hóa Hàn Quốc bằng video ngắn tiếng Anh, đồng thời chọn và quảng bá sản phẩm tại Lia Select Shop.",
+    "p2": "Cô hoạt động trên Instagram và TikTok, và cũng là người đưa tin AP News.",
+    "links": [
+     [
+      "/{l}/products/lia/",
+      "Thêm về Lia"
+     ],
+     [
+      "https://shop.apholdings.kr/",
+      "Lia Select Shop ↗"
+     ],
+     [
+      "/{l}/news/",
+      "AP News"
+     ]
+    ]
+   },
+   "cubs": {
+    "name": "Hangeul Cubs",
+    "role": "Bốn anh em hổ",
+    "h": "Daho · Kkobi · Aari · Rami.",
+    "p": "Bốn anh em hổ dạy Hangeul trong ứng dụng Hangeul Cubs và trên YouTube. Một phụ âm cuối làm đổi nghĩa cả từ — bốn bạn chia nhau các bài học.",
+    "app": "Ứng dụng Hangeul Cubs nằm ở Hallyu",
+    "chars": [
+     [
+      "Daho",
+      "Anh cả · dẫn dắt và tổng kết",
+      "Người anh lớn mở đầu mọi bài học. “Một khối ở dưới — chỉ cần thế thôi.”"
+     ],
+     [
+      "Kkobi",
+      "Thứ hai · từ và âm",
+      "Phân biệt ㄴ và ㄹ bằng đầu lưỡi. Mê từ mới, mê đồ ăn vặt, mê cú đá taekwondo."
+     ],
+     [
+      "Aari",
+      "Thứ ba · phát âm và bài hát",
+      "Làm khối ㅇ ngân như chuông. Huấn luyện viên phát âm và ca sĩ."
+     ],
+     [
+      "Rami",
+      "Út · viết và cổ vũ",
+      "Phụ trách những âm dừng ngắn gọn. Viết chữ và cổ vũ."
+     ]
+    ]
+   }
   },
   "ja": {
-   "more": "詳しく見る",
-   "for": "対象",
-   "ir": "この事業の数字と計画 → 投資家 (IR)",
-   "brand": "AP のブランド体系 → CI · BI"
+   "eyebrow": "ENTERTAINMENT · AP のキャラクター",
+   "title": "AP の顔たち。",
+   "lead": "AI 広報俳優リアと、ハングルカブスのトラの4きょうだい。AP の事業を世界に伝えるキャラクターを紹介します。",
+   "for": "AP に初めて出会った人、そしてリアとトラたちのファン",
+   "lia": {
+    "name": "LIA",
+    "role": "韓国初の AI 広報俳優",
+    "h": "AI であることを明かし、韓国を紹介します。",
+    "p1": "リアは AI でつくられた人物であることを隠しません。韓国のブランド · 場所 · 文化を英語のショート動画で紹介し、Lia Select Shop の商品を選んで伝えます。",
+    "p2": "Instagram と TikTok で活動し、AP News のニュースもリアが届けます。",
+    "links": [
+     [
+      "/{l}/products/lia/",
+      "リアをもっと見る"
+     ],
+     [
+      "https://shop.apholdings.kr/",
+      "Lia Select Shop ↗"
+     ],
+     [
+      "/{l}/news/",
+      "AP News"
+     ]
+    ]
+   },
+   "cubs": {
+    "name": "Hangeul Cubs",
+    "role": "トラの4きょうだい",
+    "h": "ダホ · コビ · アリ · ラミ。",
+    "p": "ハングルカブスのアプリと YouTube でハングルを教えるトラのきょうだい。パッチムひとつで意味が変わるハングルを、4人で分担して教えます。",
+    "app": "ハングルカブスのアプリは Hallyu で",
+    "chars": [
+     [
+      "ダホ",
+      "長男 · 進行とまとめ",
+      "パッチムの基本を教える長男。「下にブロックひとつ。それだけ。」"
+     ],
+     [
+      "コビ",
+      "次男 · 単語と音",
+      "ㄴ と ㄹ を舌先で分ける次男。単語好き、おやつ好き、テコンドーのキック。"
+     ],
+     [
+      "アリ",
+      "三女 · 発音と歌",
+      "ㅇ パッチムが鐘のように響くのを聞かせる三女。発音コーチで歌担当。"
+     ],
+     [
+      "ラミ",
+      "末っ子 · 書くことと応援",
+      "短く切れる終わりの音を担当する末っ子。書くことと応援。"
+     ]
+    ]
+   }
   },
   "zh-cn": {
-   "more": "了解更多",
-   "for": "面向",
-   "ir": "该业务的数据与计划 → 投资者 (IR)",
-   "brand": "AP 品牌体系 → CI · BI"
+   "eyebrow": "ENTERTAINMENT · AP 的角色",
+   "title": "AP 的面孔。",
+   "lead": "AI 宣传演员 Lia，以及 Hangeul Cubs 的四只小老虎。认识把 AP 的事业带向世界的角色们。",
+   "for": "初次认识 AP 的人，以及 Lia 和小老虎们的粉丝",
+   "lia": {
+    "name": "LIA",
+    "role": "韩国首位 AI 宣传演员",
+    "h": "公开自己是 AI，介绍韩国。",
+    "p1": "Lia 从不隐瞒自己是 AI 创作的人物。她用英文短视频介绍韩国的品牌、地点和文化，并挑选、推荐 Lia Select Shop 的商品。",
+    "p2": "她活跃在 Instagram 和 TikTok，AP News 的消息也由 Lia 播报。",
+    "links": [
+     [
+      "/{l}/products/lia/",
+      "了解更多 Lia"
+     ],
+     [
+      "https://shop.apholdings.kr/",
+      "Lia Select Shop ↗"
+     ],
+     [
+      "/{l}/news/",
+      "AP News"
+     ]
+    ]
+   },
+   "cubs": {
+    "name": "Hangeul Cubs",
+    "role": "四只小老虎",
+    "h": "多浩 · 小飞 · 阿丽 · 拉美。",
+    "p": "在 Hangeul Cubs 应用和 YouTube 上教韩文的老虎兄妹。一个收音就改变词义——四只小老虎分工讲解。",
+    "app": "Hangeul Cubs 应用在 Hallyu",
+    "chars": [
+     [
+      "Daho",
+      "老大 · 主持与总结",
+      "讲收音基础的大哥。“下面放一块，就这么简单。”"
+     ],
+     [
+      "Kkobi",
+      "老二 · 词与音",
+      "用舌尖区分 ㄴ 和 ㄹ 的老二。爱单词、爱零食、爱跆拳道踢腿。"
+     ],
+     [
+      "Aari",
+      "老三 · 发音与歌",
+      "让 ㅇ 收音像钟一样回响的老三。发音教练兼歌手。"
+     ],
+     [
+      "Rami",
+      "老幺 · 书写与加油",
+      "负责短促收尾音的老幺。书写和加油。"
+     ]
+    ]
+   }
   },
   "fr": {
-   "more": "En savoir plus",
-   "for": "Pour",
-   "ir": "Chiffres et plans de cette activité → Investisseurs (IR)",
-   "brand": "L’architecture des marques AP → CI · BI"
+   "eyebrow": "ENTERTAINMENT · Les personnages d’AP",
+   "title": "Les visages d’AP.",
+   "lead": "Lia, l’actrice promotionnelle IA, et les quatre tigres de Hangeul Cubs. Rencontrez les personnages qui portent les activités d’AP dans le monde.",
+   "for": "Ceux qui découvrent AP, et les fans de Lia et des tigres",
+   "lia": {
+    "name": "LIA",
+    "role": "Première actrice promotionnelle IA de Corée",
+    "h": "Ouvertement IA, et elle présente la Corée.",
+    "p1": "Lia ne cache jamais qu’elle est un personnage créé par l’IA. Elle présente les marques, les lieux et la culture de Corée en vidéos courtes en anglais, et choisit et promeut les produits de Lia Select Shop.",
+    "p2": "Elle est active sur Instagram et TikTok, et c’est elle aussi qui présente AP News.",
+    "links": [
+     [
+      "/{l}/products/lia/",
+      "En savoir plus sur Lia"
+     ],
+     [
+      "https://shop.apholdings.kr/",
+      "Lia Select Shop ↗"
+     ],
+     [
+      "/{l}/news/",
+      "AP News"
+     ]
+    ]
+   },
+   "cubs": {
+    "name": "Hangeul Cubs",
+    "role": "Quatre tigres, frères et sœurs",
+    "h": "Daho · Kkobi · Aari · Rami.",
+    "p": "Les tigres qui enseignent le hangeul dans l’application Hangeul Cubs et sur YouTube. Une seule consonne finale change le sens d’un mot — les quatre se partagent les leçons.",
+    "app": "L’application Hangeul Cubs est sous Hallyu",
+    "chars": [
+     [
+      "Daho",
+      "L’aîné · animation et bilan",
+      "Le grand frère qui ouvre chaque leçon. « Un bloc en bas — c’est tout ce qu’il faut. »"
+     ],
+     [
+      "Kkobi",
+      "Le deuxième · mots et sons",
+      "Distingue ㄴ et ㄹ du bout de la langue. Aime les mots, les goûters et les coups de pied de taekwondo."
+     ],
+     [
+      "Aari",
+      "La troisième · prononciation et chansons",
+      "Fait sonner le bloc ㅇ comme une cloche. Coach de prononciation et chanteuse."
+     ],
+     [
+      "Rami",
+      "La cadette · écriture et encouragements",
+      "Responsable des sons qui s’arrêtent net. Écriture et encouragements."
+     ]
+    ]
+   }
+  }
+ },
+ "_story": {
+  "ko": {
+   "label": "창업자 이야기",
+   "title": "아이를 위해 만들기 시작했습니다.",
+   "paras": [
+    "A.P Holdings의 제품은 대부분 한 아이에게서 시작했습니다.",
+    "아토피가 있는 아이와 장을 보면 과자 봉지 뒷면부터 읽게 됩니다. 글씨는 작고, 피해야 할 성분은 이름을 바꿔 가며 숨어 있습니다. 매번 대신 읽어 주는 대신, 식약처 공개 자료에 대조해 「이 성분이 들어 있어요」라고 근거와 함께 답하는 도구를 만들었습니다. 그게 AP Safe(세이프리스트)입니다.",
+    "농구를 좋아하는 아이와는 운동 약속을 했습니다. 하루 30분씩 100번 달리면 선물. 워치만 차고 나가면 30분에 손목이 울리고, 집에 오면 도장판에 한 칸이 찍힙니다. 중간에 지루하지 않게 룰렛과 응원도 넣었습니다. 처음엔 우리 집에서만 쓰려고 만든 앱이었는데, 어느 집에나 비슷한 약속이 있다는 걸 알게 됐습니다. 그래서 「아빠와 아이 프로젝트」로 준비하고 있습니다.",
+    "한글컵스의 호랑이 네 남매도, 아이가 AI로 직접 게임을 만드는 과정을 보여 주는 LAST WAVE도 같은 자리에서 나왔습니다.",
+    "우리는 이 방식을 회사의 원칙으로 삼았습니다. 사람이 포기하던 자리에 AI를 두되, 근거는 공개 자료로, 결정은 사람이. 한 집에서 통한 것이 다른 집에서도 통할 때, 그게 사업이 됩니다."
+   ]
+  },
+  "en": {
+   "label": "Founder’s story",
+   "title": "It started with a child.",
+   "paras": [
+    "Most of what A.P Holdings builds began with one child.",
+    "Shopping with a child who has atopic dermatitis means reading the back of every snack bag first. The print is small, and the ingredients to avoid hide under different names. Instead of reading every label ourselves, we built a tool that checks against Korea’s MFDS public data and answers “this contains it”, with the evidence. That became AP Safe (Safelist).",
+    "With a child who loves basketball, we made an exercise promise: run 30 minutes, 100 times, and there is a present. Wear the watch and go out; at 30 minutes it taps your wrist, and when you get home a stamp appears on the board. A roulette and cheering messages keep the middle from getting dull. It was an app for one household — until we realized every home has a promise like this. So we are preparing it as the Dad & Kid Project.",
+    "The four tiger siblings of Hangeul Cubs, and LAST WAVE, which shows a child building a game with AI, came from the same place.",
+    "We made this our company’s principle. Put AI where people used to give up, keep the evidence public, and leave the decision to people. When something that worked in one home works in another, it becomes a business."
+   ]
+  },
+  "vi": {
+   "label": "Câu chuyện người sáng lập",
+   "title": "Mọi thứ bắt đầu từ một đứa trẻ.",
+   "paras": [
+    "Phần lớn sản phẩm của A.P Holdings bắt đầu từ một đứa trẻ.",
+    "Đi chợ cùng một đứa trẻ bị viêm da cơ địa nghĩa là phải đọc mặt sau của mọi gói bánh trước. Chữ thì nhỏ, còn thành phần cần tránh lại ẩn dưới nhiều tên khác nhau. Thay vì tự đọc từng nhãn, chúng tôi làm một công cụ đối chiếu với dữ liệu công khai của MFDS Hàn Quốc và trả lời “có chứa thành phần này”, kèm bằng chứng. Đó là AP Safe (Safelist).",
+    "Với một đứa trẻ mê bóng rổ, chúng tôi hẹn nhau một lời hứa tập luyện: chạy 30 phút, 100 lần, sẽ có quà. Chỉ cần đeo đồng hồ và ra ngoài; đến phút 30 cổ tay rung lên, về nhà là một ô trên bảng dấu được đóng. Vòng quay may mắn và lời cổ vũ giúp chặng giữa không nhàm chán. Ban đầu đó chỉ là ứng dụng cho một gia đình — cho đến khi chúng tôi nhận ra nhà nào cũng có một lời hứa như vậy. Vì thế chúng tôi đang chuẩn bị nó thành Dự án Bố & Con.",
+    "Bốn anh em hổ của Hangeul Cubs, và LAST WAVE — nơi một đứa trẻ tự làm game bằng AI — cũng ra đời từ chính chỗ đó.",
+    "Chúng tôi lấy cách làm này làm nguyên tắc của công ty. Đặt AI vào chỗ con người từng bỏ cuộc, giữ bằng chứng ở dữ liệu công khai, và để con người quyết định. Khi điều đã hiệu quả ở một nhà cũng hiệu quả ở nhà khác, nó trở thành một việc kinh doanh."
+   ]
+  },
+  "ja": {
+   "label": "創業者の話",
+   "title": "ひとりの子どもから始まりました。",
+   "paras": [
+    "A.P Holdings の製品の多くは、ひとりの子どもから始まりました。",
+    "アトピーのある子どもと買い物に行くと、まずお菓子の袋の裏から読むことになります。文字は小さく、避けたい成分は名前を変えて隠れています。毎回代わりに読むのではなく、韓国食品医薬品安全処の公開データと照らし合わせ、「この成分が入っています」と根拠つきで答える道具をつくりました。それが AP Safe(セーフリスト)です。",
+    "バスケットボールが好きな子どもとは、運動の約束をしました。1日30分、100回走ったらプレゼント。ウォッチだけ着けて出かければ30分で手首が震え、家に帰るとスタンプ台に1マス押されます。途中で飽きないように、ルーレットと応援も入れました。最初はわが家だけのアプリでしたが、どの家にも似た約束があると気づきました。そこで「パパと子どもプロジェクト」として準備しています。",
+    "ハングルカブスのトラの4きょうだいも、子どもが AI でゲームをつくる過程を見せる LAST WAVE も、同じ場所から生まれました。",
+    "私たちはこのやり方を会社の原則にしました。人があきらめていた場所に AI を置き、根拠は公開データで、決めるのは人。ひとつの家で通じたことが別の家でも通じたとき、それが事業になります。"
+   ]
+  },
+  "zh-cn": {
+   "label": "创始人的故事",
+   "title": "一切从一个孩子开始。",
+   "paras": [
+    "A.P Holdings 的大多数产品，都始于一个孩子。",
+    "带着有特应性皮炎的孩子去买东西，总要先读零食袋背面。字很小，要避开的成分换着名字藏在里面。与其每次替孩子读，我们做了一个工具：对照韩国食药处的公开数据，回答“含有这个成分”，并给出依据。这就是 AP Safe(Safelist)。",
+    "和喜欢篮球的孩子，我们定了一个运动约定：每天跑30分钟，跑满100次就有礼物。只戴手表出门，到30分钟手腕会震动，回到家印章板上就多一格。为了中途不无聊，还加了转盘和加油。起初只是自家用的应用，后来发现每个家庭都有类似的约定。于是我们把它做成“爸爸与孩子计划”来准备。",
+    "Hangeul Cubs 的四只小老虎，以及展示孩子用 AI 亲手做游戏的 LAST WAVE，都来自同一个地方。",
+    "我们把这种方式定为公司的原则：把 AI 放在人曾经放弃的地方，依据来自公开数据，决定权交给人。当在一个家庭行得通的事，在另一个家庭也行得通，它就成了一门生意。"
+   ]
+  },
+  "fr": {
+   "label": "L’histoire du fondateur",
+   "title": "Tout a commencé avec un enfant.",
+   "paras": [
+    "La plupart des produits d’A.P Holdings sont nés d’un seul enfant.",
+    "Faire les courses avec un enfant atteint de dermatite atopique, c’est lire d’abord le dos de chaque paquet de biscuits. L’écriture est petite, et les ingrédients à éviter se cachent sous d’autres noms. Plutôt que de lire chaque étiquette nous-mêmes, nous avons créé un outil qui compare avec les données publiques du MFDS coréen et répond « cet ingrédient est présent », preuve à l’appui. C’est devenu AP Safe (Safelist).",
+    "Avec un enfant qui adore le basket, nous avons conclu une promesse sportive : courir 30 minutes, 100 fois, et il y a un cadeau. On met la montre et on sort ; à 30 minutes, le poignet vibre, et en rentrant une case se remplit sur le tableau. Une roulette et des encouragements évitent l’ennui à mi-chemin. C’était une application pour une seule maison — jusqu’à ce que nous comprenions que chaque foyer a une promesse de ce genre. Nous la préparons donc comme le Projet Papa & Enfant.",
+    "Les quatre tigres de Hangeul Cubs, et LAST WAVE, qui montre un enfant créant un jeu avec l’IA, viennent du même endroit.",
+    "Nous en avons fait le principe de l’entreprise : mettre l’IA là où les gens abandonnaient, garder des preuves publiques, et laisser la décision aux personnes. Quand ce qui a marché dans une maison marche dans une autre, cela devient une activité."
+   ]
+  }
+ },
+ "_sitemap": {
+  "ko": {
+   "eyebrow": "AP HOLDINGS / SITEMAP",
+   "title": "하나의 AP.<br>여섯 개의 사업.",
+   "lead": "AI와 People을 연결하는 AP Holdings. Intelligence · Games · Edu · Hallyu · Entertainment · Shop 아래에 브랜드와 서비스를 모았습니다.",
+   "company": "회사 · 공통 브랜드",
+   "d": {
+    "intelligence": "판단을 돕는 데이터 · 가맹",
+    "games": "AP 세계의 랭킹 경쟁",
+    "edu": "국내 교육 · 학교와 가정",
+    "hallyu": "외국인을 위한 한국",
+    "entertainment": "캐릭터 소개",
+    "shop": "외국인을 위한 K-셀렉트",
+    "news": "AI 소식지 · 구독"
+   }
+  },
+  "en": {
+   "eyebrow": "AP HOLDINGS / SITEMAP",
+   "title": "One AP.<br>Six businesses.",
+   "lead": "AP Holdings connects AI and People. Brands and services are gathered under Intelligence · Games · Edu · Hallyu · Entertainment · Shop.",
+   "company": "Company · shared brand",
+   "d": {
+    "intelligence": "Data for decisions · franchise",
+    "games": "Ranked play in the AP world",
+    "edu": "Education in Korea · schools and homes",
+    "hallyu": "Korea for the world",
+    "entertainment": "The characters",
+    "shop": "K-select for the world",
+    "news": "AI newsletter · subscribe"
+   }
+  },
+  "vi": {
+   "eyebrow": "AP HOLDINGS / SITEMAP",
+   "title": "Một AP.<br>Sáu mảng kinh doanh.",
+   "lead": "AP Holdings kết nối AI và Con người. Thương hiệu và dịch vụ được gom dưới Intelligence · Games · Edu · Hallyu · Entertainment · Shop.",
+   "company": "Công ty · thương hiệu chung",
+   "d": {
+    "intelligence": "Dữ liệu để quyết định · nhượng quyền",
+    "games": "Đua hạng trong thế giới AP",
+    "edu": "Giáo dục Hàn Quốc · trường và gia đình",
+    "hallyu": "Hàn Quốc cho thế giới",
+    "entertainment": "Các nhân vật",
+    "shop": "K-select cho thế giới",
+    "news": "Bản tin AI · đăng ký"
+   }
+  },
+  "ja": {
+   "eyebrow": "AP HOLDINGS / SITEMAP",
+   "title": "ひとつの AP。<br>六つの事業。",
+   "lead": "AI と People をつなぐ AP Holdings。Intelligence · Games · Edu · Hallyu · Entertainment · Shop の下にブランドとサービスを集めました。",
+   "company": "会社 · 共通ブランド",
+   "d": {
+    "intelligence": "判断を助けるデータ · フランチャイズ",
+    "games": "AP 世界のランキング競争",
+    "edu": "韓国国内の教育 · 学校と家庭",
+    "hallyu": "世界のための韓国",
+    "entertainment": "キャラクター紹介",
+    "shop": "世界のための K-セレクト",
+    "news": "AI ニュースレター · 購読"
+   }
+  },
+  "zh-cn": {
+   "eyebrow": "AP HOLDINGS / SITEMAP",
+   "title": "一个 AP。<br>六项事业。",
+   "lead": "连接 AI 与人的 AP Holdings。品牌与服务汇集在 Intelligence · Games · Edu · Hallyu · Entertainment · Shop 之下。",
+   "company": "公司 · 共用品牌",
+   "d": {
+    "intelligence": "辅助决策的数据 · 加盟",
+    "games": "AP 世界的排名竞争",
+    "edu": "韩国国内教育 · 学校与家庭",
+    "hallyu": "面向世界的韩国",
+    "entertainment": "角色介绍",
+    "shop": "面向世界的 K-精选",
+    "news": "AI 资讯 · 订阅"
+   }
+  },
+  "fr": {
+   "eyebrow": "AP HOLDINGS / SITEMAP",
+   "title": "Un seul AP.<br>Six activités.",
+   "lead": "AP Holdings relie l’IA et les personnes. Marques et services sont réunis sous Intelligence · Games · Edu · Hallyu · Entertainment · Shop.",
+   "company": "Entreprise · marque commune",
+   "d": {
+    "intelligence": "Des données pour décider · franchise",
+    "games": "La compétition classée du monde AP",
+    "edu": "L’éducation en Corée · écoles et familles",
+    "hallyu": "La Corée pour le monde",
+    "entertainment": "Les personnages",
+    "shop": "La K-sélection pour le monde",
+    "news": "Lettre IA · abonnement"
+   }
   }
  }
 }
