@@ -1,0 +1,410 @@
+{
+ "ko": [
+  [
+   "세 사업.\n하나의 판단 엔진.",
+   "다섯 사업.\n하나의 AP."
+  ],
+  [
+   "앱 7개 출시 · AI 커넥터 2개 운영 · 호텔 매출 판단 엔진 1개 실서비스.\n같은 엔진이 고르는 순간, 사는 순간, 배우는 순간에 쓰인다.",
+   "앱 7개 출시 · AI 커넥터 2개 운영 · AI 홍보 채널과 AP News 운영 중.\nMedia가 사람을 데려오고, Edu와 Games가 머물게 하고, Shop이 매출을 만들고, Intelligence가 데이터로 받친다."
+  ],
+  [
+   "과자 하나를 고를 때도, 객실 가격을 정할 때도 같다.",
+   "과자 하나를 고를 때도, 해외에서 한국 상품을 살 때도 같다."
+  ],
+  [
+   "방한 전 — 한글 · 공연 · 여행 준비 (Cubs · K-Concert Trip · Travel)",
+   "방한 전 — 한글 · 문화 · 공연 준비 (Cubs · RANKERS · K-Concert Trip)"
+  ],
+  [
+   "03 · 세 사업과 수익",
+   "03 · 다섯 부문과 수익"
+  ],
+  [
+   "같은 엔진,\n세 개의 수익 구조.",
+   "다섯 부문,\n세 갈래의 수익."
+  ],
+  [
+   "결정 지능은 B2B 구독과 커넥터.\n커머스는 직접 판매 · 수수료 · 가맹.\n플레이 &amp; 런은 인앱 결제와 교육용 퀴즈 팩.",
+   "Intelligence는 파트너 구독과 커넥터.\nShop은 직접 판매 · 수수료 · 가맹.\nEdu · Games는 인앱 결제와 교육용 퀴즈 팩. Media는 이 모두로 사람을 데려오는 채널."
+  ],
+  [
+   "<span>근거 있는 선택</span><h3>B2B SaaS · 커넥터</h3><p>AP Revenue 호텔 구독. 세이프리스트 · 라이트리스트 커넥터는",
+   "<span>Intelligence</span><h3>파트너 구독 · 커넥터</h3><p>세이프리스트 · 라이트리스트 데이터를 파트너 서비스에 붙이는 구독. 커넥터는"
+  ],
+  [
+   "<span>커머스</span><h3>직접 판매",
+   "<span>Shop</span><h3>직접 판매"
+  ],
+  [
+   "<span>플레이 &amp; 런</span><h3>IAP",
+   "<span>Edu · Games</span><h3>IAP"
+  ],
+  [
+   "판단 엔진 하나를 세 사업에 재사용하고,",
+   "판단 구조 하나를 다섯 부문에 재사용하고,"
+  ],
+  [
+   "Safe에서 만든 대조 · 근거 · 사람 결정 구조를 Light · Revenue · Travel이 그대로 쓴다.",
+   "Safe에서 만든 대조 · 근거 · 사람 결정 구조를 Light와 AI 커넥터가 그대로 쓰고, 다음 제품도 같은 구조로 만든다."
+  ],
+  [
+   "호텔 매출 엔진과 인바운드 사업은 그 경험에서 나왔다.",
+   "인바운드 · 커머스 · 데이터 사업은 그 경험에서 나왔다."
+  ],
+  [
+   "앱 7개 · 커넥터 2개 · Revenue 실서비스 · 리아 채널 · 회사 구조와 홈페이지",
+   "앱 7개 · 커넥터 2개 · 리아 채널 · AP News 6개 언어 · 회사 구조와 홈페이지"
+  ],
+  [
+   "Revenue 파일럿 1곳 · Safe 사용자 테스트 · SELECT 팝업 1회 · 쇼피 입점 · 공예 거래 1~3건",
+   "Safe 사용자 테스트 · Lia Select Shop(쇼피) 첫 판매 · SELECT 팝업 1회 · 뉴스레터 첫 구독자 · 공예 거래 1~3건"
+  ]
+ ],
+ "en": [
+  [
+   "Three businesses.\nOne decision engine.",
+   "Five businesses.\nOne AP."
+  ],
+  [
+   "7 apps released · 2 AI connectors in operation · 1 hotel revenue decision engine in live service.\nThe same engine serves the moment of choosing, buying and learning.",
+   "7 apps released · 2 AI connectors in operation · an AI promotion channel and AP News running.\nMedia brings people in, Edu and Games keep them, Shop turns it into revenue, and Intelligence supports it all with data."
+  ],
+  [
+   "Choosing a snack or setting a room rate — it is the same.",
+   "Choosing a snack or buying a Korean product from abroad — it is the same."
+  ],
+  [
+   "Before the trip — Hangeul · concerts · planning (Cubs · K-Concert Trip · Travel)",
+   "Before the trip — Hangeul · culture · concerts (Cubs · RANKERS · K-Concert Trip)"
+  ],
+  [
+   "03 · Three businesses and revenue",
+   "03 · Five businesses and revenue"
+  ],
+  [
+   "Same engine,\nthree revenue structures.",
+   "Five businesses,\nthree revenue streams."
+  ],
+  [
+   "Decision intelligence: B2B subscriptions and connectors. Commerce: direct sales, commissions and franchising. Play &amp; Learn: in-app purchases and educational quiz packs.",
+   "Intelligence: partner subscriptions and connectors. Shop: direct sales, commissions and franchising. Edu · Games: in-app purchases and educational quiz packs. Media is the channel that brings people to all of them."
+  ],
+  [
+   "<span>Choices with evidence</span><h3>B2B SaaS · connectors</h3><p>AP Revenue hotel subscriptions. Safelist and LightList connectors are",
+   "<span>Intelligence</span><h3>Partner subscriptions · connectors</h3><p>Subscriptions that connect Safelist and LightList data to partner services. The connectors are"
+  ],
+  [
+   "<span>Commerce</span><h3>Direct sales",
+   "<span>Shop</span><h3>Direct sales"
+  ],
+  [
+   "<span>Play &amp; Learn</span><h3>IAP",
+   "<span>Edu · Games</span><h3>IAP"
+  ],
+  [
+   "One decision engine reused across three businesses,",
+   "One decision structure reused across five businesses,"
+  ],
+  [
+   "is used as is by Light, Revenue and Travel.",
+   "is used as is by Light and the AI connectors, and the next product is built the same way."
+  ],
+  [
+   "The hotel revenue engine and the inbound business came from that experience.",
+   "The inbound, commerce and data businesses came from that experience."
+  ],
+  [
+   "7 apps · 2 connectors · Revenue in live service · LIA&#x27;s channel · company structure and website",
+   "7 apps · 2 connectors · LIA&#x27;s channel · AP News in six languages · company structure and website"
+  ],
+  [
+   "1 Revenue pilot · Safe user test · 1 SELECT pop-up · Shopee listing · 1–3 craft transactions",
+   "Safe user test · first Lia Select Shop (Shopee) sales · 1 SELECT pop-up · first newsletter subscribers · 1–3 craft transactions"
+  ]
+ ],
+ "vi": [
+  [
+   "Ba mảng kinh doanh.\nMột bộ máy ra quyết định.",
+   "Năm mảng kinh doanh.\nMột AP."
+  ],
+  [
+   "7 ứng dụng đã phát hành · 2 trình kết nối AI đang vận hành · 1 bộ máy quyết định doanh thu khách sạn đang chạy thực tế.\nCùng một bộ máy phục vụ khoảnh khắc lựa chọn, mua sắm và học tập.",
+   "7 ứng dụng đã phát hành · 2 trình kết nối AI đang vận hành · kênh quảng bá AI và AP News đang hoạt động.\nMedia đưa người đến, Edu và Games giữ chân họ, Shop tạo doanh thu, và Intelligence hỗ trợ tất cả bằng dữ liệu."
+  ],
+  [
+   "Chọn một món ăn vặt hay định giá phòng — đều giống nhau.",
+   "Chọn một món ăn vặt hay mua sản phẩm Hàn Quốc từ nước ngoài — đều giống nhau."
+  ],
+  [
+   "Trước chuyến đi — Hangeul · concert · lập kế hoạch (Cubs · K-Concert Trip · Travel)",
+   "Trước chuyến đi — Hangeul · văn hóa · concert (Cubs · RANKERS · K-Concert Trip)"
+  ],
+  [
+   "03 · Ba mảng kinh doanh và doanh thu",
+   "03 · Năm mảng kinh doanh và doanh thu"
+  ],
+  [
+   "Cùng một bộ máy,\nba cấu trúc doanh thu.",
+   "Năm mảng kinh doanh,\nba nguồn doanh thu."
+  ],
+  [
+   "Decision intelligence: thuê bao B2B và trình kết nối. Thương mại: bán hàng trực tiếp, hoa hồng và nhượng quyền. Chơi &amp; Học: mua hàng trong ứng dụng và gói câu đố giáo dục.",
+   "Intelligence: thuê bao đối tác và trình kết nối. Shop: bán hàng trực tiếp, hoa hồng và nhượng quyền. Edu · Games: mua hàng trong ứng dụng và gói câu đố giáo dục. Media là kênh đưa người đến với tất cả các mảng."
+  ],
+  [
+   "<span>Lựa chọn có bằng chứng</span><h3>B2B SaaS · trình kết nối</h3><p>Thuê bao khách sạn AP Revenue. Các trình kết nối Safelist và LightList",
+   "<span>Intelligence</span><h3>Thuê bao đối tác · trình kết nối</h3><p>Thuê bao kết nối dữ liệu Safelist và LightList vào dịch vụ của đối tác. Các trình kết nối"
+  ],
+  [
+   "<span>Thương mại</span><h3>Bán trực tiếp",
+   "<span>Shop</span><h3>Bán trực tiếp"
+  ],
+  [
+   "<span>Chơi &amp; Học</span><h3>IAP",
+   "<span>Edu · Games</span><h3>IAP"
+  ],
+  [
+   "Một bộ máy quyết định được tái sử dụng cho ba mảng kinh doanh,",
+   "Một cấu trúc quyết định được tái sử dụng cho năm mảng kinh doanh,"
+  ],
+  [
+   "được Light, Revenue và Travel dùng nguyên trạng.",
+   "được Light và các trình kết nối AI dùng nguyên trạng, và sản phẩm tiếp theo cũng được xây dựng theo cách đó."
+  ],
+  [
+   "Bộ máy doanh thu khách sạn và mảng khách quốc tế đến đều xuất phát từ kinh nghiệm đó.",
+   "Các mảng khách quốc tế đến, thương mại và dữ liệu đều xuất phát từ kinh nghiệm đó."
+  ],
+  [
+   "7 ứng dụng · 2 trình kết nối · Revenue đang chạy thực tế · kênh của LIA · cấu trúc công ty và website",
+   "7 ứng dụng · 2 trình kết nối · kênh của LIA · AP News bằng sáu ngôn ngữ · cấu trúc công ty và website"
+  ],
+  [
+   "1 thí điểm Revenue · thử nghiệm người dùng Safe · 1 pop-up SELECT · niêm yết trên Shopee · 1–3 giao dịch hàng thủ công",
+   "thử nghiệm người dùng Safe · doanh số đầu tiên của Lia Select Shop (Shopee) · 1 pop-up SELECT · những người đăng ký bản tin đầu tiên · 1–3 giao dịch hàng thủ công"
+  ]
+ ],
+ "ja": [
+  [
+   "三つの事業。\nひとつの意思決定エンジン。",
+   "五つの事業。\nひとつのAP。"
+  ],
+  [
+   "リリース済みアプリ7本 · 運用中のAIコネクタ2つ · 稼働中のホテルレベニュー意思決定エンジン1つ。\n同じエンジンが、選ぶ・買う・学ぶという場面を支えます。",
+   "リリース済みアプリ7本 · 運用中のAIコネクタ2つ · AIプロモーションチャネルとAP Newsを運営中。\nMediaが人を連れてきて、EduとGamesが人をとどめ、Shopが売上をつくり、Intelligenceがデータで支えます。"
+  ],
+  [
+   "お菓子を選ぶことも、客室料金を決めることも、同じです。",
+   "お菓子を選ぶことも、海外から韓国の商品を買うことも、同じです。"
+  ],
+  [
+   "旅行前 — ハングル · コンサート · 計画(Cubs · K-Concert Trip · Travel)",
+   "旅行前 — ハングル · 文化 · コンサート(Cubs · RANKERS · K-Concert Trip)"
+  ],
+  [
+   "03 · 三つの事業と収益",
+   "03 · 五つの事業と収益"
+  ],
+  [
+   "同じエンジン、\n三つの収益構造。",
+   "五つの事業、\n三つの収益の柱。"
+  ],
+  [
+   "Decision Intelligence:B2Bサブスクリプションとコネクタ。コマース:直販、手数料、フランチャイズ。遊びと学び:アプリ内課金と教育用クイズパック。",
+   "Intelligence:パートナー向けサブスクリプションとコネクタ。Shop:直販、手数料、フランチャイズ。Edu · Games:アプリ内課金と教育用クイズパック。Mediaは、そのすべてに人を連れてくるチャネルです。"
+  ],
+  [
+   "<span>根拠のある選択</span><h3>B2B SaaS · コネクタ</h3><p>AP Revenueのホテル向けサブスクリプション。SafelistとLightListのコネクタは",
+   "<span>Intelligence</span><h3>パートナー向けサブスクリプション · コネクタ</h3><p>SafelistとLightListのデータをパートナーのサービスにつなぐサブスクリプション。コネクタは"
+  ],
+  [
+   "<span>コマース</span><h3>直販",
+   "<span>Shop</span><h3>直販"
+  ],
+  [
+   "<span>遊びと学び</span><h3>IAP",
+   "<span>Edu · Games</span><h3>IAP"
+  ],
+  [
+   "三つの事業で再利用されるひとつの意思決定エンジン、",
+   "五つの事業で再利用されるひとつの意思決定の構造、"
+  ],
+  [
+   "Light、Revenue、Travelがそのまま使います。",
+   "LightとAIコネクタがそのまま使い、次のプロダクトも同じ構造でつくります。"
+  ],
+  [
+   "ホテルのレベニューエンジンとインバウンド事業は、その経験から生まれました。",
+   "インバウンド・コマース・データの事業は、その経験から生まれました。"
+  ],
+  [
+   "アプリ7本 · コネクタ2つ · 稼働中のRevenue · LIAのチャネル · 会社の体制とウェブサイト",
+   "アプリ7本 · コネクタ2つ · LIAのチャネル · 6言語のAP News · 会社の体制とウェブサイト"
+  ],
+  [
+   "Revenueパイロット1件 · Safeのユーザーテスト · SELECTのポップアップ1回 · Shopeeへの出品 · クラフト取引1〜3件",
+   "Safeのユーザーテスト · Lia Select Shop(Shopee)の初売上 · SELECTのポップアップ1回 · ニュースレターの最初の購読者 · クラフト取引1〜3件"
+  ]
+ ],
+ "zh-cn": [
+  [
+   "三项业务,\n一个决策引擎。",
+   "五项业务,\n一个 AP。"
+  ],
+  [
+   "已发布 7 款应用 · 2 个 AI 连接器运营中 · 1 个酒店收益决策引擎在线运行。\n同一个引擎服务于选择、购买和学习的时刻。",
+   "已发布 7 款应用 · 2 个 AI 连接器运营中 · AI 推广渠道与 AP News 运营中。\nMedia 把人带来,Edu 和 Games 让人留下,Shop 创造收入,Intelligence 用数据支撑这一切。"
+  ],
+  [
+   "挑一包零食,或设定一个房价——道理相同。",
+   "挑一包零食,或从海外购买韩国商品——道理相同。"
+  ],
+  [
+   "出行前——韩文 · 演唱会 · 行程规划(Cubs · K-Concert Trip · Travel)",
+   "出行前——韩文 · 文化 · 演唱会(Cubs · RANKERS · K-Concert Trip)"
+  ],
+  [
+   "03 · 三项业务与收入",
+   "03 · 五项业务与收入"
+  ],
+  [
+   "同一个引擎,\n三种收入结构。",
+   "五项业务,\n三条收入来源。"
+  ],
+  [
+   "决策智能:B2B 订阅与连接器。商业:直销、佣金和特许经营。玩与学:应用内购买和教育类问答包。",
+   "Intelligence:合作伙伴订阅与连接器。Shop:直销、佣金和特许经营。Edu · Games:应用内购买和教育类问答包。Media 是为所有业务带来用户的渠道。"
+  ],
+  [
+   "<span>有依据的选择</span><h3>B2B SaaS · 连接器</h3><p>AP Revenue 酒店订阅。Safelist 和 LightList 连接器",
+   "<span>Intelligence</span><h3>合作伙伴订阅 · 连接器</h3><p>将 Safelist 和 LightList 数据接入合作伙伴服务的订阅。连接器"
+  ],
+  [
+   "<span>商业</span><h3>直销",
+   "<span>Shop</span><h3>直销"
+  ],
+  [
+   "<span>玩与学</span><h3>IAP",
+   "<span>Edu · Games</span><h3>IAP"
+  ],
+  [
+   "一个决策引擎复用于三项业务,",
+   "一个决策结构复用于五项业务,"
+  ],
+  [
+   "被 Light、Revenue 和 Travel 原样沿用。",
+   "被 Light 和 AI 连接器原样沿用,下一个产品也按同样的结构打造。"
+  ],
+  [
+   "酒店收益引擎和入境业务正源于这段经历。",
+   "入境、商业和数据业务正源于这段经历。"
+  ],
+  [
+   "7 款应用 · 2 个连接器 · Revenue 在线运行 · LIA 的渠道 · 公司架构与网站",
+   "7 款应用 · 2 个连接器 · LIA 的渠道 · 6 种语言的 AP News · 公司架构与网站"
+  ],
+  [
+   "1 个 Revenue 试点 · Safe 用户测试 · 1 场 SELECT 快闪店 · Shopee 上架 · 1–3 笔工艺品交易",
+   "Safe 用户测试 · Lia Select Shop(Shopee)首批销售 · 1 场 SELECT 快闪店 · 首批简报订阅者 · 1–3 笔工艺品交易"
+  ]
+ ],
+ "fr": [
+  [
+   "Trois activités.\nUn seul moteur de décision.",
+   "Cinq activités.\nUn seul AP."
+  ],
+  [
+   "7 applications publiées · 2 connecteurs IA en service · 1 moteur de décision de revenue management hôtelier en service réel.\nLe même moteur sert le moment où l’on choisit, achète et apprend.",
+   "7 applications publiées · 2 connecteurs IA en service · un canal de promotion IA et AP News en activité.\nMedia attire le public, Edu et Games le retiennent, Shop génère le chiffre d’affaires, et Intelligence soutient l’ensemble par les données."
+  ],
+  [
+   "Choisir un snack ou fixer un tarif de chambre, c’est la même chose.",
+   "Choisir un snack ou acheter un produit coréen depuis l’étranger, c’est la même chose."
+  ],
+  [
+   "Avant le voyage — hangeul · concerts · préparation (Cubs · K-Concert Trip · Travel)",
+   "Avant le voyage — hangeul · culture · concerts (Cubs · RANKERS · K-Concert Trip)"
+  ],
+  [
+   "03 · Trois activités et revenus",
+   "03 · Cinq activités et revenus"
+  ],
+  [
+   "Le même moteur,\ntrois structures de revenus.",
+   "Cinq activités,\ntrois sources de revenus."
+  ],
+  [
+   "Decision intelligence : abonnements B2B et connecteurs. Commerce : ventes directes, commissions et franchise. Jouer et apprendre : achats intégrés et packs de quiz éducatifs.",
+   "Intelligence : abonnements partenaires et connecteurs. Shop : ventes directes, commissions et franchise. Edu · Games : achats intégrés et packs de quiz éducatifs. Media est le canal qui amène le public vers toutes les activités."
+  ],
+  [
+   "<span>Des choix fondés sur des preuves</span><h3>SaaS B2B · connecteurs</h3><p>Abonnements hôteliers AP Revenue. Les connecteurs Safelist et LightList",
+   "<span>Intelligence</span><h3>Abonnements partenaires · connecteurs</h3><p>Des abonnements qui relient les données Safelist et LightList aux services des partenaires. Les connecteurs"
+  ],
+  [
+   "<span>Commerce</span><h3>Ventes directes",
+   "<span>Shop</span><h3>Ventes directes"
+  ],
+  [
+   "<span>Jouer et apprendre</span><h3>Achats intégrés",
+   "<span>Edu · Games</span><h3>Achats intégrés"
+  ],
+  [
+   "Un moteur de décision réutilisé dans trois activités,",
+   "Une structure de décision réutilisée dans cinq activités,"
+  ],
+  [
+   "est reprise telle quelle par Light, Revenue et Travel.",
+   "est reprise telle quelle par Light et les connecteurs IA, et le produit suivant est construit de la même façon."
+  ],
+  [
+   "Le moteur de revenue management hôtelier et l’activité d’arrivées internationales sont nés de cette expérience.",
+   "Les activités d’arrivées internationales, de commerce et de données sont nées de cette expérience."
+  ],
+  [
+   "7 applications · 2 connecteurs · Revenue en service réel · canal de LIA · structure de l’entreprise et site web",
+   "7 applications · 2 connecteurs · canal de LIA · AP News en six langues · structure de l’entreprise et site web"
+  ],
+  [
+   "1 pilote Revenue · test utilisateurs Safe · 1 pop-up SELECT · référencement Shopee · 1 à 3 transactions artisanales",
+   "test utilisateurs Safe · premières ventes du Lia Select Shop (Shopee) · 1 pop-up SELECT · premiers abonnés à la newsletter · 1 à 3 transactions artisanales"
+  ]
+ ],
+ "ko@about": [
+  [
+   "<h3>AP Safe · AP Light · AP Revenue · AP Travel</h3><p>25만 개 식품 성분, 31만 건 열량, 호텔 예약 데이터, 시장 신호.",
+   "<h3>AP Safe · AP Light · AI 커넥터</h3><p>25만 개 식품 성분, 31만 건 열량, 공개 자료 대조."
+  ]
+ ],
+ "en@about": [
+  [
+   "<h3>AP Safe · AP Light · AP Revenue · AP Travel</h3><p>250,000 food ingredient records, 317,000 calorie entries, hotel booking data, market signals.",
+   "<h3>AP Safe · AP Light · AI connectors</h3><p>250,000 food ingredient records, 317,000 calorie entries, checked against public data."
+  ]
+ ],
+ "vi@about": [
+  [
+   "<h3>AP Safe · AP Light · AP Revenue · AP Travel</h3><p>250.000 hồ sơ thành phần thực phẩm, 317.000 mục calo, dữ liệu đặt phòng khách sạn, tín hiệu thị trường.",
+   "<h3>AP Safe · AP Light · AI connector</h3><p>250.000 hồ sơ thành phần thực phẩm, 317.000 mục calo, đối chiếu với dữ liệu công khai."
+  ]
+ ],
+ "ja@about": [
+  [
+   "<h3>AP Safe · AP Light · AP Revenue · AP Travel</h3><p>食品成分の記録25万件、カロリー情報31万7千件、ホテルの予約データ、市場シグナル。",
+   "<h3>AP Safe · AP Light · AIコネクタ</h3><p>食品成分の記録25万件、カロリー情報31万7千件、公開データとの照合。"
+  ]
+ ],
+ "zh-cn@about": [
+  [
+   "<h3>AP Safe · AP Light · AP Revenue · AP Travel</h3><p>25 万条食品成分记录、31.7 万条热量条目、酒店预订数据、市场信号。",
+   "<h3>AP Safe · AP Light · AI 连接器</h3><p>25 万条食品成分记录、31.7 万条热量条目、对照公开数据。"
+  ]
+ ],
+ "fr@about": [
+  [
+   "<h3>AP Safe · AP Light · AP Revenue · AP Travel</h3><p>250 000 fiches d’ingrédients alimentaires, 317 000 entrées caloriques, données de réservation hôtelière, signaux de marché.",
+   "<h3>AP Safe · AP Light · connecteurs IA</h3><p>250 000 fiches d’ingrédients alimentaires, 317 000 entrées caloriques, vérifiées auprès de données publiques."
+  ]
+ ]
+}
