@@ -185,3 +185,19 @@ html[lang=ja] p,html[lang=ja] li,html[lang=ja] h1,html[lang=ja] h2,html[lang=ja]
 
 /* AP brand system v1 */
 .ap-ci-logo{display:block!important;width:230px!important;height:auto!important;max-width:100%;object-fit:contain}.site-header .brand{min-width:190px}.site-footer .brand{background:transparent}.site-header{border-bottom-color:#C8A96A55}.button.primary{background:#111;color:#fff;border-bottom:3px solid #C8A96A}.brand-card{color:#111}@media(max-width:760px){.ap-ci-logo{width:184px!important}.site-header .brand{min-width:0}}
+
+/* IA v3 (2026-10-09): 사업 5부문 메뉴 · Company 드롭다운 · 부문 허브 */
+.desktop-nav{gap:26px}.desktop-nav>a[aria-current=page]{border-bottom:1px solid var(--ink)}
+.nav-group{position:relative}.nav-group summary{cursor:pointer;list-style:none;padding:12px 0}.nav-group summary::after{content:'⌄';margin-left:6px}
+.nav-group.is-current summary{border-bottom:1px solid var(--ink)}
+.nav-group ul{position:absolute;top:100%;right:-12px;padding:8px;list-style:none;margin:0;width:200px;background:var(--paper);border:1px solid var(--line);box-shadow:0 15px 35px #0000000d;z-index:40}
+.nav-group ul a{display:block;padding:9px 12px}.nav-group ul a:hover{background:var(--soft)}
+.mobile-menu .m-label{font-size:11px;letter-spacing:.14em;color:var(--muted);padding:16px 0 4px;font-weight:700}
+.footer-map-v3{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px}
+.footer-map-v3 b a{color:inherit}
+.hub-hero .hub-who{margin-top:18px;color:var(--muted);font-size:15px;max-width:760px}.hub-hero .hub-who b{color:var(--accent);margin-right:6px}
+.hub-section{padding-top:20px}.hub-grid{gap:22px}.hub-card .text-link{margin-top:auto}
+.hub-card{position:relative}.hub-card .status{position:absolute;top:24px;right:24px}
+.hub-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:38px;padding-top:22px;border-top:1px solid var(--line)}
+@media(max-width:1100px){.footer-map-v3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:800px){.footer-map-v3{grid-template-columns:repeat(2,minmax(0,1fr))}.hub-grid{grid-template-columns:1fr}}
