@@ -69,7 +69,7 @@ def render_pdf(i):
     if not font_path.exists(): raise RuntimeError(f'Newsletter font missing: {font_path}')
     if 'APKR' not in pdfmetrics.getRegisteredFontNames(): pdfmetrics.registerFont(TTFont('APKR',str(font_path)))
     dest=ROOT/pdf_path(i).lstrip('/');dest.parent.mkdir(parents=True,exist_ok=True)
-    c=canvas.Canvas(str(dest),pagesize=A4);c.setTitle(f'AP News {i["date"]} | {i["title"]}');c.setAuthor('AP Holdings')
+    c=canvas.Canvas(str(dest),pagesize=A4,invariant=1);c.setTitle(f'AP News {i["date"]} | {i["title"]}');c.setAuthor('AP Holdings')
     W,H=A4; M=45; ink='#172338';gold='#9b7950'; muted='#526075'
     style=ParagraphStyle('body',fontName='APKR',fontSize=10.2,leading=18,textColor=HexColor(ink),wordWrap='CJK')
     def p(text,x,y,w=W-2*M,size=10.2,color=ink,leading=None):
