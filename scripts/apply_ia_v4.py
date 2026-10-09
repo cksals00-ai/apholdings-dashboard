@@ -17,7 +17,7 @@ LABEL = {'intelligence': 'Intelligence', 'games': 'Games', 'edu': 'Edu', 'hallyu
 E = lambda s: html.escape(str(s), quote=True)
 D = json.loads((ROOT / 'site-source' / 'divisions.json').read_text())
 CO = D['_company']; CM = D['_common']
-CSS_V = 'site.css?v=2.30'
+CSS_V = 'site.css?v=2.31'
 JS_V = 'site.js?v=20261009-ia4'
 
 def exists(l, p): return (ROOT / l / p / 'index.html').exists()
@@ -257,8 +257,12 @@ CSS = '''
 def main():
     changed = []
     css = ROOT / 'assets/v2/site.css'; cs = css.read_text()
-    cs = cs.split('\n/* IA v4 (2026-10-09)')[0]
-    css.write_text(cs + CSS)
+    head, sep, rest = cs.partition('\n/* IA v4 (2026-10-09)')
+    tail = ''
+    if sep:
+        i = rest.find('\n/* STYLE v5')
+        tail = rest[i:] if i >= 0 else ''
+    css.write_text(head + CSS + tail)
     # redirects: media → entertainment, products/rankers → rankers
     for l in LOCS:
         f = ROOT / l / 'media' / 'index.html'
