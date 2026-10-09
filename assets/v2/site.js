@@ -89,14 +89,14 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
 (function applyAPBrand(){
  const replace=()=>{
   document.querySelectorAll('a.brand').forEach(a=>{const img=document.createElement('img');img.src='/assets/brand/ap-holdings.svg';img.alt='AP HOLDINGS';img.width=230;img.height=33;img.className='ap-ci-logo';a.replaceChildren(img);});
-  const footer=document.querySelector('.footer-map');if(footer&&!footer.querySelector('[data-brand-guide]')){const link=document.createElement('a');link.href='/ko/brand/';link.textContent='CI · BI / Brand System';link.dataset.brandGuide='true';(footer.querySelector('div')||footer).append(link);}
+  const footer=document.querySelector('.footer-map');if(footer&&!footer.classList.contains('footer-map-v3')&&!footer.querySelector('[data-brand-guide]')){const link=document.createElement('a');link.href='/ko/brand/';link.textContent='CI · BI / Brand System';link.dataset.brandGuide='true';(footer.querySelector('div')||footer).append(link);}
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',replace);else replace();
 })();
 
 (function organizeAPSitemap(){
 const run=()=>{
-const map=document.querySelector('.footer-map');if(!map)return;
+const map=document.querySelector('.footer-map');if(!map||map.classList.contains('footer-map-v3'))return; // IA v3 footer is already grouped
 const lang=document.documentElement.lang==='ko'?'ko':'en';
 const links=[...map.querySelectorAll('a')];const lia=links.find(a=>/\/products\/lia\/$/.test(a.getAttribute('href')||''));
 if(lia){const group=document.createElement('div');const title=document.createElement('b');title.textContent='Entertainment';group.append(title,lia);map.append(group);}
