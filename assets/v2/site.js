@@ -8,8 +8,11 @@ document.querySelectorAll('details').forEach((detail) => {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') document.querySelectorAll('details[open]').forEach((detail) => { detail.open = false; detail.querySelector('summary')?.focus(); });
 });
-document.addEventListener('click', (event) => {
+// pointerdown (not click): iOS Safari does not deliver document-level clicks for taps on plain text/background.
+document.addEventListener('pointerdown', (event) => {
   document.querySelectorAll('details[open]').forEach((detail) => { if (!detail.contains(event.target)) detail.open = false; });
+}, { passive: true });
+document.addEventListener('click', (event) => {
   if (event.target.closest('.mobile-menu a')) document.querySelector('.mobile-menu').open = false;
 });
 document.querySelectorAll('[data-copy-target]').forEach((button) => {
