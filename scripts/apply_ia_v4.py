@@ -52,7 +52,8 @@ def nav_items(l):
     return ([('home', f'/{l}/', 'Home')] + [(d, f'/{l}/{d}/', LABEL[d]) for d in DIVS] +
             [('news', f'/{l}/news/', 'News'), ('about', f'/{l}/about/', 'About'), ('admin', '/admin/', 'Admin'), ('sitemap', f'/{l}/sitemap/', 'Sitemap')])
 
-def nav_html(l, sec):
+LANG_NAME = {'ko': '한국어', 'en': 'English', 'vi': 'Tiếng Việt', 'ja': '日本語', 'zh-cn': '简体中文', 'fr': 'Français'}
+def nav_html(l, sec, lang_items=''):
     cur = lambda s: ' aria-current="page"' if sec == s else ''
     desk = ''.join('<a href="%s"%s%s>%s</a>' % (u, cur(k), ' class="nav-admin"' if k == 'admin' else '', t) for k, u, t in nav_items(l))
     desktop = f'<nav class="desktop-nav nav-v4" aria-label="Main">{desk}</nav>'
@@ -61,7 +62,8 @@ def nav_html(l, sec):
     mobile = (f'<nav aria-label="Mobile" class="m-nav-v4"><a href="/{l}/"{cur("home")}>Home</a>'
               f'<details class="m-group"{g_open}><summary>{CM[l]["business"]}</summary><div>{divs}</div></details>'
               f'<a href="/{l}/news/"{cur("news")}>News</a><a href="/{l}/about/"{cur("about")}>About</a>'
-              f'<a href="/admin/" class="nav-admin">Admin</a><a href="/{l}/sitemap/" class="m-sitemap"{cur("sitemap")}>Sitemap</a></nav>')
+              f'<a href="/admin/" class="nav-admin">Admin</a><div class="m-foot"><a href="/{l}/sitemap/" class="m-sitemap"{cur("sitemap")}>Sitemap</a>'
+              f'<details class="m-lang"><summary>{LANG_NAME[l]} ⌄</summary><div>{lang_items}</div></details></div></nav>')
     return desktop, mobile
 
 # ---------- footer ----------
@@ -198,7 +200,9 @@ def transform(rel, s):
     l = m.group(1) if m else 'ko'
     if '<header class="site-header">' in s:
         sec = section_for(rel) if m else None
-        desk, mob = nav_html(l, sec)
+        lm = re.search(r'<details class="language">.*?<ul>(.*?)</ul>', s, re.S)
+        lang_items = re.sub(r'</?li>', '', lm.group(1)) if lm else ''
+        desk, mob = nav_html(l, sec, lang_items)
         s = re.sub(r'<nav class="desktop-nav[^"]*" aria-label="Main">.*?</nav>(?=<details class="language">)', lambda _: desk, s, count=1, flags=re.S)
         s = re.sub(r'(<details class="mobile-menu"><summary>[^<]*</summary>)<nav aria-label="Mobile"[^>]*>.*?</nav>', lambda mm: mm.group(1) + mob, s, count=1, flags=re.S)
     if '<div class="footer-map' in s:
@@ -207,7 +211,8 @@ def transform(rel, s):
     s = re.sub(r'href="/([a-z-]+)/products/rankers/"', lambda mm: f'href="{rankers_url(mm.group(1))}"', s)
     s = re.sub(r'site\.css\?v=[0-9.]+', CSS_V, s)
     s = re.sub(r'site\.js\?v=[^"]+', JS_V, s)
-    # company tabs
+    # company tabs (remove the earlier company-tabs block; keep one tab row)
+    s = re.sub(r'<nav class="company-tabs"[^>]*>.*?</nav>', '', s, count=1, flags=re.S)
     page = re.match(r'(?:ko|en|vi|ja|zh-cn|fr)/(about|brand|ir|lab)/index\.html$', rel)
     if page and m:
         tabs = co_tabs(l, page.group(1))
@@ -233,6 +238,7 @@ CSS = '''
 @media(max-width:1180px){.desktop-nav.nav-v4{display:none}.language{margin-left:auto}.mobile-menu{display:block}.mobile-menu summary{cursor:pointer;font-size:14px;padding:12px 0;list-style:none}.mobile-menu nav{position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);padding:16px 20px 20px;box-shadow:0 20px 35px #0000000d;display:grid;max-height:calc(100vh - 80px);overflow:auto}.mobile-menu nav a{padding:12px 0;font-size:16px;border-bottom:1px solid var(--line)}.mobile-menu nav a:last-child{border-bottom:0}}
 .m-nav-v4 .m-group summary{cursor:pointer;list-style:none;padding:12px 0;font-size:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.m-nav-v4 .m-group summary::after{content:'⌄';color:var(--muted)}.m-nav-v4 .m-group[open] summary::after{content:'⌃'}
 .m-nav-v4 .m-group div{display:grid;border-left:2px solid var(--accent);margin:4px 0 6px 6px;padding-left:14px}.m-nav-v4 .m-group div a{font-size:15px;padding:10px 0}.m-nav-v4 .m-group div a:last-child{border-bottom:0}
+.m-nav-v4 .m-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:12px}.m-nav-v4 .m-foot a{border:0;padding:6px 0}.m-nav-v4 .m-lang summary{cursor:pointer;list-style:none;font-size:14px;color:var(--muted);padding:6px 0}.m-nav-v4 .m-lang div{display:grid;gap:2px;padding:6px 0 0}.m-nav-v4 .m-lang div a{font-size:14px;padding:6px 0;border:0}.m-nav-v4 .m-lang div a[aria-current=page]{font-weight:700}
 .m-nav-v4 a[aria-current=page]{font-weight:700}.m-nav-v4 .nav-admin{color:var(--muted)}.m-nav-v4 .m-sitemap{font-size:13px;color:var(--muted);padding-top:14px}
 .footer-map-v4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px 18px}.footer-map-v4 b a{color:inherit}.footer-map-v4 .f-soon{display:block;font-size:13.5px;padding:5px 0;color:var(--muted)}
 .hub-hero .hub-who{margin-top:18px;color:var(--muted);font-size:15px;max-width:760px}.hub-hero .hub-who b{color:var(--accent);margin-right:6px}
@@ -269,6 +275,9 @@ def main():
     hubs = [make_hub(l, d) for l in LOCS for d in DIVS]
     # sitemap pages (ko first: template, then others from it)
     sms = [make_sitemap('ko')] + [make_sitemap(l) for l in LOCS if l != 'ko']
+    for rel in hubs + sms:
+        f = ROOT / rel; t = f.read_text(); n = transform(rel, t)
+        if n != t: f.write_text(n)
     # sitemap.xml
     sm = ROOT / 'sitemap.xml'; x = sm.read_text()
     x = re.sub(r'<url><loc>https://www\.apholdings\.kr/[a-z-]+/(?:media|products/rankers|products/revenue|products/travel)/</loc>.*?</url>', '', x)
