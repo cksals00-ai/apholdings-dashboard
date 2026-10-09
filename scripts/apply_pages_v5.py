@@ -28,6 +28,7 @@ def hub_svg(l,d):
     return f'<section class="hub-graphic"><div class="wrap"><svg viewBox="0 0 {W} {H}" role="img" aria-label="{LABEL[d]}: {lab}" class="hub-svg">{"".join(g)}</svg></div></section>'
 def do_hub(l,d,s):
     s=re.sub(r'<section class="hub-graphic">.*?</section>','',s,flags=re.S)
+    s=re.sub(r'<section class="page-hero hub-hero"(?: data-div="[^"]*")?>',f'<section class="page-hero hub-hero" data-div="{LABEL[d]}">',s,count=1)
     return s.replace('</section><section class="section hub-section">','</section>'+hub_svg(l,d)+'<section class="section hub-section">',1)
 def do_prod(l,pid,s):
     d,k=PROD[pid]
