@@ -59,8 +59,10 @@ for name in files:
    if unquote(u.fragment) not in destp.ids:errors.append(f'{name}: missing fragment {url}')
 for l in ['ko','en']:
  s=(ROOT/f'{l}/index.html').read_text()
- for name in ['Global-by-Design','AP SELECT','LIA','QuizRanker','Founder’s Lab','IR / INVESTORS','A store designed','Expert Collaboration']:
+ for name in ['Global-by-Design','AP SELECT','LIA','QuizRanker','Founder’s Lab','IR / INVESTORS','Intelligence','Games','Edu','Hallyu','Entertainment','Shop']:
   if name not in s:errors.append(f'{l}: missing {name}')
+ for d in ['intelligence','games','edu','hallyu','entertainment','shop']:
+  if f'href="/{l}/{d}/"' not in s:errors.append(f'{l}: missing IA v4 division {d}')
  ir=(ROOT/f'{l}/ir/index.html').read_text()
  for name in ['PUBLIC','INVESTOR SHARE','NDA / DATA ROOM','Working Proof','Request','mailto:','FOUNDER-PROVIDED']:
   if name not in ir:errors.append(f'{l}/ir: missing {name}')
