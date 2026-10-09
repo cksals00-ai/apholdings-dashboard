@@ -23,7 +23,7 @@ for l in LOCS:
  H['intelligence'][l]['items'].insert(2,select)
  H['games'][l]['items']=[x for x in H['games'][l]['items'] if x['name']!='QuizRanker']
  oldedu=H['edu'][l]
- craft=next(x for x in H['shop'][l]['items'] if x['name']=='K-Craft')
+ craft=copy.deepcopy(next(x for x in H['shop'][l]['items'] if x['name']=='K-Craft'));craft['url']='/{l}/products/craft/'
  H.setdefault('hallyu',{})[l]={'eyebrow':'HALLYU','title':c[6],'lead':c[7],'for':c[8],'items':[{'name':'K-Ranker','tag':c[9],'desc':c[10],'status':c[10]},oldedu['items'][0],{'name':c[11],'tag':'Hangeul Cubs','desc':c[12],'url':'https://hallyu.apholdings.kr/{edu}/'},craft,{'name':'K-Food · K-Pop','tag':c[5],'desc':c[13],'status':c[5]}]}
  H['edu'][l]={'eyebrow':'EDU','title':c[0],'lead':c[1],'for':c[2],'items':[{'name':'QuizRanker','tag':c[1],'desc':c[2],'url':'/{l}/products/rgrg/'},{'name':c[3],'tag':c[5],'desc':c[4],'status':c[5]}]}
  H.setdefault('entertainment',{})[l]={'eyebrow':'ENTERTAINMENT','title':c[14],'lead':c[15],'for':c[16],'items':[{'name':'LIA','tag':c[17],'desc':c[18],'url':'/{l}/products/lia/'},{'name':'Hangeul Cubs','tag':c[19],'desc':c[20],'url':'/{l}/hallyu/'}]}
@@ -104,7 +104,7 @@ def main():
    p.write_text(s)
   # Editorial weighting: dominant LIA feature, compact four-cub section, no LEO.
   cast=''.join(f'<article><img src="https://hallyu.apholdings.kr/assets/art/{id}_3d.png" alt="{name}" width="628" height="840" loading="lazy"><h3>{name}</h3><p>{E(c[28+i])}</p></article>' for i,(id,name) in enumerate(zip(['daho','kkobi','aari','rami'],['다호','꼬비','아리','라미'] if l=='ko' else ['Daho','Kkobi','Aari','Rami'])))
-  body=f'<section class="page-hero hub-hero"><div class="wrap"><span class="eyebrow">ENTERTAINMENT</span><h1>{E(c[14])}</h1><p class="lead">{E(c[15])}</p><div class="character-feature"><img src="/media/lia/lia_hero_sq.jpg" alt="LIA" width="800" height="800"><div><span class="eyebrow">AI CHARACTER</span><h2>LIA</h2><p class="lead">{E(c[17])}</p><p>{E(c[18])}</p><div class="actions">{a(f"/{l}/products/lia/",c[23])}{a("https://ent.apholdings.kr/","Entertainment ↗")}{a("https://shop.apholdings.kr/","Lia Select Shop ↗")}</div></div></div></div></section><section class="section soft"><div class="wrap"><span class="eyebrow">HANGEUL CUBS</span><h2>{E(c[19])}</h2><p>{E(c[20])}</p><div class="cubs-cast">{cast}</div><div class="actions">{a(f"/{l}/hallyu/","Hallyu →")}{a("https://www.youtube.com/@APHoldings",c[27])}</div></div></section>'
+  body=f'<section class="page-hero hub-hero"><div class="wrap"><span class="eyebrow">ENTERTAINMENT</span><h1>{E(c[14])}</h1><p class="lead">{E(c[15])}</p><div class="character-feature"><img src="/media/lia/lia_hero_sq.jpg" alt="LIA" width="800" height="800"><div><span class="eyebrow">AI CHARACTER</span><h2>LIA</h2><p class="lead">{E(c[17])}</p><p>{E(c[18])}</p><div class="actions">{a(f"/{l}/products/lia/",c[23])}{a("https://ent.apholdings.kr/","Entertainment ↗")}{a("https://shop.apholdings.kr/","Lia Select Shop ↗")}</div></div></div></div></section><section class="section soft"><div class="wrap"><span class="eyebrow">HANGEUL CUBS</span><h2>{E(c[19])}</h2><p>{E(c[20])}</p><div class="cubs-cast">{cast}</div><div class="actions">{a(f"/{l}/hallyu/","Hallyu →")}{a("https://www.youtube.com/@hangeulcubs",c[27])}</div></div></section>'
   write_page(l,'entertainment','Entertainment',c[15],body)
   # Replace only old home business blocks; preserve why/global/about and existing hero.
   p=ROOT/l/'index.html';s=p.read_text()
