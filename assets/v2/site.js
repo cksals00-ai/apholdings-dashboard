@@ -2,7 +2,7 @@
 // Navigation and clipboard enhancement; the complete content is available without JS.
 document.querySelectorAll('details').forEach((detail) => {
   detail.addEventListener('toggle', () => {
-    if (detail.open) document.querySelectorAll('details[open]').forEach((other) => { if (other !== detail) other.open = false; });
+    if (detail.open) document.querySelectorAll('details[open]').forEach((other) => { if (other !== detail && !other.contains(detail) && !detail.contains(other)) other.open = false; });
   });
 });
 document.addEventListener('keydown', (event) => {
