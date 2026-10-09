@@ -1,3 +1,4 @@
+import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?v=20261009-1';
 import { createNewsletter } from './newsletter.js?v=20261009';
 import { createShop } from './shop.js?v=research-20261009';
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
@@ -56,7 +57,7 @@ const rgrg = createRgrg(() => currentUser);
 const rgrgSettings = createRgrgSettings(() => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { clearTradingDocument(); investment.clear(); clearCommerce(); shopOperations.clear(); contentOperations.clear(); newsletter.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); rgrg.clear(); rgrgSettings.clear(); $('#ap-visual-row')?.remove(); }
+  if (!loggedIn) { stopRankerActivity(); clearTradingDocument(); investment.clear(); clearCommerce(); shopOperations.clear(); contentOperations.clear(); newsletter.clear(); grants.clear(); marketing.clear(); businessPlan.clear(); rgrg.clear(); rgrgSettings.clear(); $('#ap-visual-row')?.remove(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -1021,6 +1022,7 @@ const byNewest = (a, b) => (b.event_date || '').localeCompare(a.event_date || ''
 async function loadApps(force = false) {
   if (!currentUser || (appsLoaded && !force)) { renderApps(); return; }
   $('#app-message').textContent = '불러오는 중입니다…';
+  refreshRankerActivity(supabase);
   const since = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10);
   const [a, e, m, rt, iap, ads] = await Promise.all([
     supabase.from('admin_apps').select('*').order('sort_order').order('name'),
