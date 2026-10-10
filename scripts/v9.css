@@ -22,7 +22,7 @@
 .hub-hero[data-div="Entertainment"]{--hub-img:url(/media/ap/hub-entertainment.jpg)}
 .hub-hero[data-div="Shop"]{--hub-img:url(/media/ap/hub-shop.jpg)}
 /* 창업자 띠 배경 */
-.story-band{background:linear-gradient(#0d1211d9,#0d1211d9),url(/media/ap/about.jpg) center/cover no-repeat;color:#fff}
+.story-band{background:linear-gradient(#0d1211b8,#0d1211b8),url(/media/ap/about_wide.jpg) center/cover no-repeat;color:#fff}
 .story-band p{color:#fff}.story-band .text-link{color:#8fd0b5}
 @media(max-width:800px){.hub-hero::before{opacity:.5;background-position:center}.hero-visual img{box-shadow:0 18px 40px #00000040}}
 @media(prefers-reduced-motion:reduce){.hero-visual img{animation:none}}
