@@ -26,14 +26,19 @@ T={
  lines={'intelligence':'Des apps qui lisent les étiquettes — AP Safe · AP Light · AP SELECT','games':'Un seul rang, plusieurs jeux — AP Games · RANKERS · LAST WAVE','edu':'Apprendre la Corée en jouant, quiz en direct en classe — K-Ranker · Hangeul Cubs · QuizRanker','entertainment':'Lia, l’actrice IA, et quatre tigreaux','shop':'Produits coréens à l’étranger — Lia Select Shop · K-Craft'},stat=['Activités','Langues','Services en service']),
 }
 def orbit(l):
-    L=[];Dd=[];N=[]
+    """AP를 중심으로 다섯 사업이 도는 궤도 — 각 노드는 실제 제품 사진 + 이름, 허브로 링크"""
+    L=[];Dd=[];N=[];C=[]
     for i,d in enumerate(DIVS):
-        a=-math.pi/2+i*2*math.pi/len(DIVS); x=300+210*math.cos(a); y=300+210*math.sin(a)
+        a=-math.pi/2+i*2*math.pi/len(DIVS); x=300+205*math.cos(a); y=300+205*math.sin(a)
         L.append(f'<line class="ob-l" style="--i:{i}" x1="300" y1="300" x2="{x:.0f}" y2="{y:.0f}"/>')
         Dd.append(f'<circle class="ob-dot" r="4"><animateMotion dur="3.2s" begin="{1.6+i*0.35:.2f}s" repeatCount="indefinite" path="M{x:.0f},{y:.0f} L300,300"/></circle>')
-        N.append(f'<a href="/{l}/{d}/" class="ob-n" style="--i:{i}"><circle cx="{x:.0f}" cy="{y:.0f}" r="9"/><text x="{x:.0f}" y="{y+(34 if y>300 else -22):.0f}" text-anchor="middle">{d.capitalize()}</text></a>')
-    return ('<svg class="hv6-orbit" viewBox="0 0 600 600" role="img" aria-label="AP: '+' · '.join(d.capitalize() for d in DIVS)+'">'
-      '<circle class="ob-ring" cx="300" cy="300" r="210"/><circle class="ob-ring r2" cx="300" cy="300" r="120"/>'+''.join(L)+''.join(Dd)+
+        C.append(f'<clipPath id="obc{i}"><circle cx="{x:.0f}" cy="{y:.0f}" r="46"/></clipPath>')
+        ty=y+74 if y>=300 else y-58
+        N.append(f'<a href="/{l}/{d}/" class="ob-n" style="--i:{i}"><circle class="ob-halo" cx="{x:.0f}" cy="{y:.0f}" r="50"/>'
+                 f'<image href="{IMG[d]}" x="{x-46:.0f}" y="{y-46:.0f}" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#obc{i})"/>'
+                 f'<circle class="ob-rim" cx="{x:.0f}" cy="{y:.0f}" r="46"/><text x="{x:.0f}" y="{ty:.0f}" text-anchor="middle">{LABEL[d]}</text></a>')
+    return ('<svg class="hv6-orbit hv9-orbit" viewBox="-20 -10 640 640" role="img" aria-label="AP: '+' · '.join(LABEL[d] for d in DIVS)+'"><defs>'+''.join(C)+'</defs>'
+      '<circle class="ob-ring" cx="300" cy="300" r="205"/><circle class="ob-ring r2" cx="300" cy="300" r="120"/>'+''.join(L)+''.join(Dd)+
       '<circle class="ob-pulse" cx="300" cy="300" r="56"/><circle class="ob-core" cx="300" cy="300" r="56"/><text class="ob-ap" x="300" y="312" text-anchor="middle">AP</text>'+''.join(N)+'</svg>')
 def news(l):
     f=ROOT/l/'news'/'index.html'
@@ -57,9 +62,8 @@ def build(l):
       f'<section class="hv6" aria-label="AP Holdings"><div class="wrap hv6-in"><div class="hv6-copy">'
       f'<span class="eyebrow">AP HOLDINGS · AI PEOPLE</span><h1>{words}</h1><p class="hv7-sub">{E(t["sub"])}</p>'
       f'<div class="actions"><a class="button primary" href="/{l}/about/">{E(t["about"])}</a><a class="button ghost" href="/{l}/ir/">IR / INVESTORS</a></div></div>'
-      f'<div class="hv6-art"><figure class="hero-visual"><img src="/media/ap/hero.jpg" alt="" width="1376" height="768"></figure></div></div>'
+      f'<div class="hv6-art">{orbit(l)}</div></div>'
       f'<div class="hv6-live"><div class="wrap"><span>{E(t["live"])}</span>{live}</div></div></section>'
-      f'<section class="stat-band"><div class="wrap stats">{stats}</div></section>'
       f'<section class="section svc" id="businesses"><div class="wrap"><h2 class="svc-h">{E(t["svc"])}</h2><div class="svc-cards">{tiles}</div></div></section>'
       f'<section class="char-band" id="characters"><div class="wrap cb-in"><div class="cb-img"><img src="/media/lia/lia_hero_sq.jpg" alt="LIA" width="600" height="600" loading="lazy">{cubs}</div>'
       f'<div class="cb-copy"><h2>{E(t["charh"])}</h2><a class="button ghost-dark" href="/{l}/entertainment/">{E(t["meet"])} →</a></div></div></section>'

@@ -27,3 +27,13 @@
 @media(max-width:800px){.hub-hero::before{opacity:.5;background-position:center}.hero-visual img{box-shadow:0 18px 40px #00000040}}
 @media(prefers-reduced-motion:reduce){.hero-visual img{animation:none}}
 /* /V9 */
+/* V9.1 (2026-10-10): 히어로 — 육각 그래픽 대신 다섯 사업 궤도(제품 사진 노드) */
+.hv9-orbit{max-width:620px}
+.hv9-orbit .ob-halo{fill:var(--glow);fill-opacity:.12;transition:fill-opacity .2s}
+.hv9-orbit .ob-rim{fill:none;stroke:#ffffffcc;stroke-width:2;transition:stroke .2s}
+.hv9-orbit .ob-n text{font-size:20px;font-weight:700}
+.hv9-orbit .ob-n:hover .ob-halo,.hv9-orbit .ob-n:focus .ob-halo{fill-opacity:.35}
+.hv9-orbit .ob-n:hover .ob-rim{stroke:var(--glow)}
+.hv9-orbit image{transition:transform .25s;transform-box:fill-box;transform-origin:center}
+.hv9-orbit .ob-n:hover image{transform:scale(1.06)}
+@media(max-width:800px){.hv9-orbit .ob-n text{font-size:24px}}

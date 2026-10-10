@@ -1500,7 +1500,7 @@
    "label": "창업자 이야기",
    "title": "아이를 위해 만들기 시작했습니다.",
    "paras": [
-    "A.P Holdings의 제품은 대부분 한 아이에게서 시작했습니다.",
+    "A.P Holdings의 제품은 대부분 아이에게서 시작했습니다.",
     "아토피가 있는 아이와 장을 보면 과자 봉지 뒷면부터 읽게 됩니다. 글씨는 작고, 피해야 할 성분은 이름을 바꿔 가며 숨어 있습니다. 매번 대신 읽어 주는 대신, 식약처 공개 자료에 대조해 「이 성분이 들어 있어요」라고 근거와 함께 답하는 도구를 만들었습니다. 그게 AP Safe(세이프리스트)입니다.",
     "농구를 좋아하는 아이와는 운동 약속을 했습니다. 하루 30분씩 100번 달리면 선물. 워치만 차고 나가면 30분에 손목이 울리고, 집에 오면 도장판에 한 칸이 찍힙니다. 중간에 지루하지 않게 룰렛과 응원도 넣었습니다. 처음엔 우리 집에서만 쓰려고 만든 앱이었는데, 어느 집에나 비슷한 약속이 있다는 걸 알게 됐습니다. 그래서 「아빠와 아이 프로젝트」로 준비하고 있습니다.",
     "한글컵스의 호랑이 네 남매도, 아이가 AI로 직접 게임을 만드는 과정을 보여 주는 LAST WAVE도 같은 자리에서 나왔습니다.",
@@ -1509,9 +1509,9 @@
   },
   "en": {
    "label": "Founder’s story",
-   "title": "It started with a child.",
+   "title": "It started with the kids.",
    "paras": [
-    "Most of what A.P Holdings builds began with one child.",
+    "Most of what A.P Holdings builds began with the kids at home.",
     "Shopping with a child who has atopic dermatitis means reading the back of every snack bag first. The print is small, and the ingredients to avoid hide under different names. Instead of reading every label ourselves, we built a tool that checks against Korea’s MFDS public data and answers “this contains it”, with the evidence. That became AP Safe (Safelist).",
     "With a child who loves basketball, we made an exercise promise: run 30 minutes, 100 times, and there is a present. Wear the watch and go out; at 30 minutes it taps your wrist, and when you get home a stamp appears on the board. A roulette and cheering messages keep the middle from getting dull. It was an app for one household — until we realized every home has a promise like this. So we are preparing it as the Dad & Kid Project.",
     "The four tiger siblings of Hangeul Cubs, and LAST WAVE, which shows a child building a game with AI, came from the same place.",
@@ -1520,9 +1520,9 @@
   },
   "vi": {
    "label": "Câu chuyện người sáng lập",
-   "title": "Mọi thứ bắt đầu từ một đứa trẻ.",
+   "title": "Mọi thứ bắt đầu từ các con.",
    "paras": [
-    "Phần lớn sản phẩm của A.P Holdings bắt đầu từ một đứa trẻ.",
+    "Phần lớn sản phẩm của A.P Holdings bắt đầu từ các con ở nhà.",
     "Đi chợ cùng một đứa trẻ bị viêm da cơ địa nghĩa là phải đọc mặt sau của mọi gói bánh trước. Chữ thì nhỏ, còn thành phần cần tránh lại ẩn dưới nhiều tên khác nhau. Thay vì tự đọc từng nhãn, chúng tôi làm một công cụ đối chiếu với dữ liệu công khai của MFDS Hàn Quốc và trả lời “có chứa thành phần này”, kèm bằng chứng. Đó là AP Safe (Safelist).",
     "Với một đứa trẻ mê bóng rổ, chúng tôi hẹn nhau một lời hứa tập luyện: chạy 30 phút, 100 lần, sẽ có quà. Chỉ cần đeo đồng hồ và ra ngoài; đến phút 30 cổ tay rung lên, về nhà là một ô trên bảng dấu được đóng. Vòng quay may mắn và lời cổ vũ giúp chặng giữa không nhàm chán. Ban đầu đó chỉ là ứng dụng cho một gia đình — cho đến khi chúng tôi nhận ra nhà nào cũng có một lời hứa như vậy. Vì thế chúng tôi đang chuẩn bị nó thành Dự án Bố & Con.",
     "Bốn anh em hổ của Hangeul Cubs, và LAST WAVE — nơi một đứa trẻ tự làm game bằng AI — cũng ra đời từ chính chỗ đó.",
@@ -1531,9 +1531,9 @@
   },
   "ja": {
    "label": "創業者の話",
-   "title": "ひとりの子どもから始まりました。",
+   "title": "子どもたちから始まりました。",
    "paras": [
-    "A.P Holdings の製品の多くは、ひとりの子どもから始まりました。",
+    "A.P Holdings の製品の多くは、子どもたちから始まりました。",
     "アトピーのある子どもと買い物に行くと、まずお菓子の袋の裏から読むことになります。文字は小さく、避けたい成分は名前を変えて隠れています。毎回代わりに読むのではなく、韓国食品医薬品安全処の公開データと照らし合わせ、「この成分が入っています」と根拠つきで答える道具をつくりました。それが AP Safe(セーフリスト)です。",
     "バスケットボールが好きな子どもとは、運動の約束をしました。1日30分、100回走ったらプレゼント。ウォッチだけ着けて出かければ30分で手首が震え、家に帰るとスタンプ台に1マス押されます。途中で飽きないように、ルーレットと応援も入れました。最初はわが家だけのアプリでしたが、どの家にも似た約束があると気づきました。そこで「パパと子どもプロジェクト」として準備しています。",
     "ハングルカブスのトラの4きょうだいも、子どもが AI でゲームをつくる過程を見せる LAST WAVE も、同じ場所から生まれました。",
@@ -1542,9 +1542,9 @@
   },
   "zh-cn": {
    "label": "创始人的故事",
-   "title": "一切从一个孩子开始。",
+   "title": "一切从孩子开始。",
    "paras": [
-    "A.P Holdings 的大多数产品，都始于一个孩子。",
+    "A.P Holdings 的大多数产品，都始于家里的孩子。",
     "带着有特应性皮炎的孩子去买东西，总要先读零食袋背面。字很小，要避开的成分换着名字藏在里面。与其每次替孩子读，我们做了一个工具：对照韩国食药处的公开数据，回答“含有这个成分”，并给出依据。这就是 AP Safe(Safelist)。",
     "和喜欢篮球的孩子，我们定了一个运动约定：每天跑30分钟，跑满100次就有礼物。只戴手表出门，到30分钟手腕会震动，回到家印章板上就多一格。为了中途不无聊，还加了转盘和加油。起初只是自家用的应用，后来发现每个家庭都有类似的约定。于是我们把它做成“爸爸与孩子计划”来准备。",
     "Hangeul Cubs 的四只小老虎，以及展示孩子用 AI 亲手做游戏的 LAST WAVE，都来自同一个地方。",
@@ -1553,9 +1553,9 @@
   },
   "fr": {
    "label": "L’histoire du fondateur",
-   "title": "Tout a commencé avec un enfant.",
+   "title": "Tout a commencé avec les enfants.",
    "paras": [
-    "La plupart des produits d’A.P Holdings sont nés d’un seul enfant.",
+    "La plupart des produits d’A.P Holdings sont nés à la maison, avec les enfants.",
     "Faire les courses avec un enfant atteint de dermatite atopique, c’est lire d’abord le dos de chaque paquet de biscuits. L’écriture est petite, et les ingrédients à éviter se cachent sous d’autres noms. Plutôt que de lire chaque étiquette nous-mêmes, nous avons créé un outil qui compare avec les données publiques du MFDS coréen et répond « cet ingrédient est présent », preuve à l’appui. C’est devenu AP Safe (Safelist).",
     "Avec un enfant qui adore le basket, nous avons conclu une promesse sportive : courir 30 minutes, 100 fois, et il y a un cadeau. On met la montre et on sort ; à 30 minutes, le poignet vibre, et en rentrant une case se remplit sur le tableau. Une roulette et des encouragements évitent l’ennui à mi-chemin. C’était une application pour une seule maison — jusqu’à ce que nous comprenions que chaque foyer a une promesse de ce genre. Nous la préparons donc comme le Projet Papa & Enfant.",
     "Les quatre tigres de Hangeul Cubs, et LAST WAVE, qui montre un enfant créant un jeu avec l’IA, viennent du même endroit.",
