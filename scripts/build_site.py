@@ -19,7 +19,7 @@ FLOWS=['DATA','CONTEXT','DECISION / PROCESS','ACTION','OUTCOME']
 ASSETS=['Data','Process','Expert Knowledge','Software','IP','Customer Relationship']
 CAPABILITIES=['Commercial Operations','Global Sales','Tourism & International Business','Data Analysis','Product Building','Decision Workflow Design']
 MARKET=['Locale','Currency','Timezone','Policy','Evidence','Expert','Marketplace','Payment','Logistics','Partner','Pricing','CS','Terms','Analytics']
-POLICIES=[('Safelist','/safelist/privacy.html'),('LightList','/lightlist/privacy.html'),('Hangeul Cubs','/hangeulcubs_privacy.html'),('QuizRanker','/rgrg/privacy.html'),('IRON GRADE','/irongrade/privacy.html'),('The Other Hours','/theotherhours_privacy.html'),('K-Concert Trip','/kfan_privacy.html'),('나의 첫투자','/privacy.html'),('K-Scan','/kscan/privacy.html')]
+POLICIES=[('Safelist','/safelist/privacy.html'),('LightList','/lightlist/privacy.html'),('Hangeul Cubs','/hangeulcubs_privacy.html'),('QuizRanker','/rgrg/privacy.html'),('IRON GRADE','/irongrade/privacy.html'),('The Other Hours','/theotherhours_privacy.html'),('K-Concert Trip','/kfan_privacy.html'),('나의 첫투자','/privacy.html'),('K-Scan','/kscan/privacy.html'),('Dad & Me','/dadandme_privacy.html')]
 def out(path,text):
  if path.split('/')[0] in ('vi','ja','zh-cn','fr') and path.endswith('.html'):
   from ui_strings import localize;text=localize(path.split('/')[0],text)
