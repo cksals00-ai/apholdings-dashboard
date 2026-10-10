@@ -77,7 +77,7 @@ html[lang="ko"] .page-hero h1{word-break:keep-all;overflow-wrap:anywhere}
         s=p.read_text()
         if p in targets:s=rewrite(s)
         for old,new in labels.items():s=re.sub(r'(<a\b[^>]*>)'+old+r'(</a>)',lambda m:m[1]+new+m[2],s)
-        for div,label in [('intelligence','식품 정보'),('games','온라인 게임'),('edu','한국어 학습'),('entertainment','AI 콘텐츠'),('shop','해외 판매')]:
+        for div,label in [('intelligence','식품 정보'),('games','온라인 게임'),('edu','한국어 학습'),('entertainment','AI 콘텐츠'),('shop','해외 판매'),('sports','유소년 스포츠')]:
             s=re.sub(r'(<b><a href="/ko/'+div+r'/">)'+ia.LABEL[div]+r'(</a></b>)',lambda m:m[1]+ia.LABEL[div]+' · '+label+m[2],s)
         s=s.replace('Build with AP.</h3>','서비스·사업 협력 문의</h3>')
         if p in targets or p.parent.name in ia.DIVS:

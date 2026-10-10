@@ -1566,8 +1566,8 @@
  "_sitemap": {
   "ko": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "하나의 AP.<br>다섯 개의 사업.",
-   "lead": "AP Holdings의 사업과 서비스를 확인할 수 있습니다. 식품 정보, 온라인 게임, 한국어 학습, AI 콘텐츠와 한국 상품 해외 판매로 구성됩니다.",
+   "title": "하나의 AP.<br>여섯 개의 사업.",
+   "lead": "AP Holdings의 사업과 서비스를 확인할 수 있습니다. 식품 정보, 온라인 게임, 한국어 학습, AI 콘텐츠, 한국 상품 해외 판매, 유소년 스포츠로 구성됩니다.",
    "company": "회사 · 공통 브랜드",
    "d": {
     "intelligence": "식품 정보·AI 연결 서비스",
@@ -1575,13 +1575,14 @@
     "edu": "한국어·문화 학습",
     "entertainment": "AI 캐릭터·콘텐츠",
     "shop": "한국 상품 해외 판매",
-    "news": "AI 뉴스·일일 웹·PDF 뉴스레터"
+    "news": "AI 뉴스·일일 웹·PDF 뉴스레터",
+    "sports": "유소년 스포츠"
    }
   },
   "en": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "One AP.<br>Five businesses.",
-   "lead": "AP Holdings connects AI and People. Brands and services are gathered under Intelligence · Games · Edu · Entertainment · Shop.",
+   "title": "One AP.<br>Six businesses.",
+   "lead": "AP Holdings connects AI and People. Brands and services are gathered under Intelligence · Games · Edu · Entertainment · Shop · Sports.",
    "company": "Company · shared brand",
    "d": {
     "intelligence": "Data for decisions · franchise",
@@ -1589,13 +1590,14 @@
     "edu": "Learn Korea by playing · schools and homes",
     "entertainment": "The characters",
     "shop": "K-select for the world",
-    "news": "AI newsletter · subscribe"
+    "news": "AI newsletter · subscribe",
+    "sports": "Youth sports"
    }
   },
   "vi": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "Một AP.<br>Năm mảng kinh doanh.",
-   "lead": "AP Holdings kết nối AI và Con người. Thương hiệu và dịch vụ được gom dưới Intelligence · Games · Edu · Entertainment · Shop.",
+   "title": "Một AP.<br>Sáu mảng kinh doanh.",
+   "lead": "AP Holdings kết nối AI và Con người. Thương hiệu và dịch vụ được gom dưới Intelligence · Games · Edu · Entertainment · Shop · Sports.",
    "company": "Công ty · thương hiệu chung",
    "d": {
     "intelligence": "Dữ liệu để quyết định · nhượng quyền",
@@ -1603,13 +1605,14 @@
     "edu": "Học Hàn Quốc bằng cách chơi · trường và gia đình",
     "entertainment": "Các nhân vật",
     "shop": "K-select cho thế giới",
-    "news": "Bản tin AI · đăng ký"
+    "news": "Bản tin AI · đăng ký",
+    "sports": "Thể thao thiếu niên"
    }
   },
   "ja": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "ひとつの AP。<br>五つの事業。",
-   "lead": "AI と People をつなぐ AP Holdings。Intelligence · Games · Edu · Entertainment · Shop の下にブランドとサービスを集めました。",
+   "title": "ひとつの AP。<br>六つの事業。",
+   "lead": "AI と People をつなぐ AP Holdings。Intelligence · Games · Edu · Entertainment · Shop · Sports の下にブランドとサービスを集めました。",
    "company": "会社 · 共通ブランド",
    "d": {
     "intelligence": "判断を助けるデータ · フランチャイズ",
@@ -1617,13 +1620,14 @@
     "edu": "遊びながら学ぶ韓国 · 学校と家庭",
     "entertainment": "キャラクター紹介",
     "shop": "世界のための K-セレクト",
-    "news": "AI ニュースレター · 購読"
+    "news": "AI ニュースレター · 購読",
+    "sports": "ユーススポーツ"
    }
   },
   "zh-cn": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "一个 AP。<br>五项事业。",
-   "lead": "连接 AI 与人的 AP Holdings。品牌与服务汇集在 Intelligence · Games · Edu · Entertainment · Shop 之下。",
+   "title": "一个 AP。<br>六项事业。",
+   "lead": "连接 AI 与人的 AP Holdings。品牌与服务汇集在 Intelligence · Games · Edu · Entertainment · Shop · Sports 之下。",
    "company": "公司 · 共用品牌",
    "d": {
     "intelligence": "辅助决策的数据 · 加盟",
@@ -1631,13 +1635,14 @@
     "edu": "边玩边学韩国 · 学校与家庭",
     "entertainment": "角色介绍",
     "shop": "面向世界的 K-精选",
-    "news": "AI 资讯 · 订阅"
+    "news": "AI 资讯 · 订阅",
+    "sports": "青少年体育"
    }
   },
   "fr": {
    "eyebrow": "AP HOLDINGS / SITEMAP",
-   "title": "Un seul AP.<br>Cinq activités.",
-   "lead": "AP Holdings relie l’IA et les personnes. Marques et services sont réunis sous Intelligence · Games · Edu · Entertainment · Shop.",
+   "title": "Un seul AP.<br>Six activités.",
+   "lead": "AP Holdings relie l’IA et les personnes. Marques et services sont réunis sous Intelligence · Games · Edu · Entertainment · Shop · Sports.",
    "company": "Entreprise · marque commune",
    "d": {
     "intelligence": "Des données pour décider · franchise",
@@ -1645,7 +1650,256 @@
     "edu": "Apprendre la Corée en jouant · écoles et familles",
     "entertainment": "Les personnages",
     "shop": "La K-sélection pour le monde",
-    "news": "Lettre IA · abonnement"
+    "news": "Lettre IA · abonnement",
+    "sports": "Sport jeunes"
+   }
+  }
+ },
+ "sports": {
+  "ko": {
+   "eyebrow": "SPORTS · 유소년 농구",
+   "title": "농구하는 아이와 부모를 위한 장을 학부모와 함께 만듭니다.",
+   "lead": "코트메이트는 유소년 농구 정보를 한곳에 모으는 사이트입니다. 클럽·대회·질문을 학부모가 직접 올리고, 운영팀이 확인해 게시합니다. 훈련 앱 The Other Hours와 함께 팀 훈련 밖의 시간을 돕습니다.",
+   "for": "농구 클럽·스포츠클럽에 다니는 초등·중등 아이의 부모, 유소년 농구 지도자",
+   "items": [
+    {
+     "name": "CourtMate",
+     "tag": "유소년 농구 정보·질문·제보",
+     "desc": "클럽 찾기, 대회 캘린더, 학부모 질문과 답. 학부모가 올리고 운영팀이 확인해 게시하는 장입니다.",
+     "url": "https://sports.apholdings.kr/",
+     "cta": "CourtMate 열기",
+     "status": "베타 운영 중"
+    },
+    {
+     "name": "The Other Hours",
+     "tag": "유소년 농구 가정 훈련 앱",
+     "desc": "팀 훈련 밖의 시간을 위한 훈련 32개와 주간 상한, 월간 측정, 보호자 리포트. App Store 출시.",
+     "url": "https://apps.apple.com/kr/app/id6803709958",
+     "cta": "App Store ↗",
+     "status": "운영 중"
+    },
+    {
+     "name": "Dad & Me",
+     "tag": "부모와 아이의 약속 앱",
+     "desc": "약속 하나, 도장판 하나, 선물 하나. 달리기는 Apple Watch로 자동 체크. 농구 훈련 약속과 연결할 예정입니다.",
+     "status": "심사 준비 중"
+    },
+    {
+     "name": "KBL 퀴즈",
+     "tag": "알지알지오알지 농구 문제",
+     "desc": "KBL 구단·레전드·기록·규칙 문제 900여 개. 아이가 농구를 아는 재미.",
+     "url": "/{l}/products/rgrg/",
+     "status": "운영 중"
+    }
+   ],
+   "primary": {
+    "label": "CourtMate 열기 ↗",
+    "url": "https://sports.apholdings.kr/"
+   }
+  },
+  "en": {
+   "eyebrow": "SPORTS · Youth basketball",
+   "title": "A place for kids who play basketball and their parents — built together with parents.",
+   "lead": "CourtMate gathers youth basketball information in one place: clubs, tournaments and parents’ questions, posted by parents and checked by our team before publishing. The training app The Other Hours covers the hours outside team practice.",
+   "for": "Parents of elementary and middle-school kids in basketball clubs, and youth coaches",
+   "items": [
+    {
+     "name": "CourtMate",
+     "tag": "Youth basketball info · Q&A · submissions",
+     "desc": "Club finder, tournament calendar, parents’ questions and answers. Parents post, our team checks, then it goes live.",
+     "url": "https://sports.apholdings.kr/",
+     "cta": "Open CourtMate",
+     "status": "Beta"
+    },
+    {
+     "name": "The Other Hours",
+     "tag": "Home training app for youth basketball",
+     "desc": "32 drills for the hours outside team practice, weekly caps, monthly measurements and a guardian report. On the App Store.",
+     "url": "https://apps.apple.com/kr/app/id6803709958",
+     "cta": "App Store ↗",
+     "status": "Live"
+    },
+    {
+     "name": "Dad & Me",
+     "tag": "A promise app for a parent and a child",
+     "desc": "One promise, one stamp board, one gift. Runs count automatically with Apple Watch. Basketball practice promises are coming.",
+     "status": "Preparing for review"
+    },
+    {
+     "name": "KBL Quiz",
+     "tag": "Basketball questions in RGRG",
+     "desc": "About 900 questions on KBL teams, legends, records and rules.",
+     "url": "/{l}/products/rgrg/",
+     "status": "Live"
+    }
+   ],
+   "primary": {
+    "label": "Open CourtMate ↗",
+    "url": "https://sports.apholdings.kr/"
+   }
+  },
+  "vi": {
+   "eyebrow": "SPORTS · Bóng rổ thiếu niên",
+   "title": "Một nơi cho trẻ chơi bóng rổ và phụ huynh — cùng phụ huynh xây dựng.",
+   "lead": "CourtMate gom thông tin bóng rổ thiếu niên về một chỗ: câu lạc bộ, giải đấu và câu hỏi của phụ huynh, do phụ huynh đăng và đội ngũ kiểm tra trước khi công bố. Ứng dụng luyện tập The Other Hours dành cho thời gian ngoài buổi tập của đội.",
+   "for": "Phụ huynh có con học tiểu học, trung học cơ sở đang chơi ở câu lạc bộ bóng rổ, và huấn luyện viên trẻ",
+   "items": [
+    {
+     "name": "CourtMate",
+     "tag": "Thông tin · hỏi đáp · đóng góp",
+     "desc": "Tìm câu lạc bộ, lịch giải đấu, hỏi đáp của phụ huynh. Phụ huynh đăng, đội ngũ kiểm tra, rồi công bố.",
+     "url": "https://sports.apholdings.kr/",
+     "cta": "Mở CourtMate",
+     "status": "Beta"
+    },
+    {
+     "name": "The Other Hours",
+     "tag": "Ứng dụng luyện tập tại nhà",
+     "desc": "32 bài tập cho thời gian ngoài buổi tập của đội, giới hạn tuần, đo lường hàng tháng, báo cáo cho người giám hộ. Có trên App Store.",
+     "url": "https://apps.apple.com/kr/app/id6803709958",
+     "cta": "App Store ↗",
+     "status": "Đang hoạt động"
+    },
+    {
+     "name": "Dad & Me",
+     "tag": "Ứng dụng lời hứa giữa cha mẹ và con",
+     "desc": "Một lời hứa, một bảng dấu, một món quà. Chạy bộ được tính tự động với Apple Watch.",
+     "status": "Chuẩn bị xét duyệt"
+    },
+    {
+     "name": "KBL Quiz",
+     "tag": "Câu hỏi bóng rổ trong RGRG",
+     "desc": "Khoảng 900 câu hỏi về các đội KBL, huyền thoại, kỷ lục và luật.",
+     "url": "/{l}/products/rgrg/",
+     "status": "Đang hoạt động"
+    }
+   ],
+   "primary": {
+    "label": "Mở CourtMate ↗",
+    "url": "https://sports.apholdings.kr/"
+   }
+  },
+  "ja": {
+   "eyebrow": "SPORTS · ユース・バスケットボール",
+   "title": "バスケをする子どもと保護者のための場を、保護者と一緒につくります。",
+   "lead": "CourtMate はユース・バスケの情報を一か所に集めるサイトです。クラブ・大会・質問を保護者が投稿し、運営チームが確認して掲載します。トレーニングアプリ The Other Hours はチーム練習以外の時間を支えます。",
+   "for": "バスケクラブに通う小中学生の保護者、ユース指導者",
+   "items": [
+    {
+     "name": "CourtMate",
+     "tag": "情報・Q&A・投稿",
+     "desc": "クラブ検索、大会カレンダー、保護者の質問と回答。保護者が投稿し、運営が確認して掲載します。",
+     "url": "https://sports.apholdings.kr/",
+     "cta": "CourtMate を開く",
+     "status": "ベータ運営中"
+    },
+    {
+     "name": "The Other Hours",
+     "tag": "家庭トレーニングアプリ",
+     "desc": "チーム練習以外の時間のための32のドリル、週間上限、月次測定、保護者レポート。App Store で配信中。",
+     "url": "https://apps.apple.com/kr/app/id6803709958",
+     "cta": "App Store ↗",
+     "status": "運営中"
+    },
+    {
+     "name": "Dad & Me",
+     "tag": "親子の約束アプリ",
+     "desc": "約束ひとつ、スタンプ台紙ひとつ、ごほうびひとつ。ランニングは Apple Watch で自動チェック。",
+     "status": "審査準備中"
+    },
+    {
+     "name": "KBL クイズ",
+     "tag": "RGRG のバスケ問題",
+     "desc": "KBL の球団・レジェンド・記録・ルールの問題約900問。",
+     "url": "/{l}/products/rgrg/",
+     "status": "運営中"
+    }
+   ],
+   "primary": {
+    "label": "CourtMate を開く ↗",
+    "url": "https://sports.apholdings.kr/"
+   }
+  },
+  "zh-cn": {
+   "eyebrow": "SPORTS · 青少年篮球",
+   "title": "与家长一起，为打篮球的孩子和家长建一个园地。",
+   "lead": "CourtMate 把青少年篮球信息汇集到一处：俱乐部、赛事和家长提问，由家长发布、运营团队核对后上线。训练应用 The Other Hours 负责球队训练之外的时间。",
+   "for": "在篮球俱乐部打球的小学、初中孩子的家长，以及青少年教练",
+   "items": [
+    {
+     "name": "CourtMate",
+     "tag": "信息 · 问答 · 投稿",
+     "desc": "找俱乐部、赛事日历、家长问答。家长发布，团队核对，然后上线。",
+     "url": "https://sports.apholdings.kr/",
+     "cta": "打开 CourtMate",
+     "status": "测试运营中"
+    },
+    {
+     "name": "The Other Hours",
+     "tag": "青少年篮球家庭训练应用",
+     "desc": "32 个训练项目、每周上限、每月测量、监护人报告。已上架 App Store。",
+     "url": "https://apps.apple.com/kr/app/id6803709958",
+     "cta": "App Store ↗",
+     "status": "运营中"
+    },
+    {
+     "name": "Dad & Me",
+     "tag": "父母与孩子的约定应用",
+     "desc": "一个约定、一张印章板、一份礼物。跑步由 Apple Watch 自动记录。",
+     "status": "准备审核"
+    },
+    {
+     "name": "KBL 测验",
+     "tag": "RGRG 中的篮球题",
+     "desc": "约 900 道关于 KBL 球队、传奇、纪录和规则的题目。",
+     "url": "/{l}/products/rgrg/",
+     "status": "运营中"
+    }
+   ],
+   "primary": {
+    "label": "打开 CourtMate ↗",
+    "url": "https://sports.apholdings.kr/"
+   }
+  },
+  "fr": {
+   "eyebrow": "SPORTS · Basket jeunes",
+   "title": "Un lieu pour les enfants qui jouent au basket et leurs parents — construit avec les parents.",
+   "lead": "CourtMate rassemble l’information du basket jeunes en un seul endroit : clubs, tournois et questions des parents, publiés par les parents et vérifiés par notre équipe. L’app d’entraînement The Other Hours couvre les heures hors entraînement d’équipe.",
+   "for": "Parents d’enfants du primaire et du collège inscrits en club de basket, et entraîneurs de jeunes",
+   "items": [
+    {
+     "name": "CourtMate",
+     "tag": "Infos · questions-réponses · contributions",
+     "desc": "Trouver un club, calendrier des tournois, questions et réponses des parents. Les parents publient, l’équipe vérifie, puis c’est en ligne.",
+     "url": "https://sports.apholdings.kr/",
+     "cta": "Ouvrir CourtMate",
+     "status": "Bêta"
+    },
+    {
+     "name": "The Other Hours",
+     "tag": "App d’entraînement à la maison",
+     "desc": "32 exercices pour les heures hors entraînement, plafonds hebdomadaires, mesures mensuelles, rapport pour le tuteur. Sur l’App Store.",
+     "url": "https://apps.apple.com/kr/app/id6803709958",
+     "cta": "App Store ↗",
+     "status": "En service"
+    },
+    {
+     "name": "Dad & Me",
+     "tag": "Une app de promesse parent-enfant",
+     "desc": "Une promesse, un tableau de tampons, un cadeau. La course est comptée automatiquement avec l’Apple Watch.",
+     "status": "En préparation"
+    },
+    {
+     "name": "Quiz KBL",
+     "tag": "Questions de basket dans RGRG",
+     "desc": "Environ 900 questions sur les équipes KBL, les légendes, les records et les règles.",
+     "url": "/{l}/products/rgrg/",
+     "status": "En service"
+    }
+   ],
+   "primary": {
+    "label": "Ouvrir CourtMate ↗",
+    "url": "https://sports.apholdings.kr/"
    }
   }
  }

@@ -12,12 +12,12 @@ import re, json, html
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LOCS = ['ko', 'en', 'vi', 'ja', 'zh-cn', 'fr']
-DIVS = ['intelligence', 'games', 'edu', 'entertainment', 'shop']
-LABEL = {'intelligence': 'Intelligence', 'games': 'Games', 'edu': 'Edu', 'hallyu': 'Hallyu', 'entertainment': 'Entertainment', 'shop': 'Shop'}
+DIVS = ['intelligence', 'games', 'edu', 'entertainment', 'shop', 'sports']
+LABEL = {'intelligence': 'Intelligence', 'games': 'Games', 'edu': 'Edu', 'hallyu': 'Hallyu', 'entertainment': 'Entertainment', 'shop': 'Shop', 'sports': 'Sports'}
 E = lambda s: html.escape(str(s), quote=True)
 D = json.loads((ROOT / 'site-source' / 'divisions.json').read_text())
 CO = D['_company']; CM = D['_common']
-CSS_V = 'site.css?v=2.36'
+CSS_V = 'site.css?v=2.37'
 JS_V = 'site.js?v=20261009-v6c'
 
 def exists(l, p): return (ROOT / l / p / 'index.html').exists()
@@ -32,6 +32,7 @@ SECTION_OF = [
  ('edu', ['/edu/', '/products/rgrg/', '/products/cubs/']),
  ('entertainment', ['/entertainment/', '/products/lia/']),
  ('shop', ['/shop/', '/products/commerce/', '/products/liaselect/', '/products/craft/']),
+ ('sports', ['/sports/']),
  ('news', ['/news/']),
  ('about', ['/about/', '/brand/', '/ir/', '/lab/']),
  ('sitemap', ['/sitemap/']),
@@ -83,6 +84,7 @@ def footer_map(l):
      '<div>' + head('edu') + items('edu', 4) + '</div>',
      '<div>' + head('entertainment') + a(f'/{l}/products/lia/', 'LIA') + a(f'/{l}/entertainment/#cubs', 'Hangeul Cubs') + '</div>',
      '<div>' + head('shop') + items('shop', 4) + '</div>',
+     '<div>' + head('sports') + items('sports', 4) + '</div>',
     ]
     return '<div class="footer-map footer-map-v3 footer-map-v4">' + ''.join(cols) + '</div>'
 

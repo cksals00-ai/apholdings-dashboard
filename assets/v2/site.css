@@ -493,6 +493,7 @@ body[data-home=v6] .fl-node b{font-size:clamp(1.5rem,2.2vw,2rem)}body[data-home=
 .hub-hero[data-div="Edu"]{--hub-img:url(/media/ap/hub-edu.jpg)}
 .hub-hero[data-div="Entertainment"]{--hub-img:url(/media/ap/hub-entertainment.jpg)}
 .hub-hero[data-div="Shop"]{--hub-img:url(/media/ap/hub-shop.jpg)}
+.hub-hero[data-div="Sports"]{--hub-img:url(/media/ap/hub-sports.jpg)}
 /* 창업자 띠 배경 */
 .story-band{background:linear-gradient(#0d1211b8,#0d1211b8),url(/media/ap/about_wide.jpg) center/cover no-repeat;color:#fff}
 .story-band p{color:#fff}.story-band .text-link{color:#8fd0b5}
