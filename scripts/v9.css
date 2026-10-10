@@ -1,0 +1,29 @@
+/* V9 (2026-10-09): 브랜드 그래픽 적용 — 히어로 비주얼 · 허브 배경 · 창업자 띠 */
+.hero-visual{margin:0}
+.hero-visual img{width:100%;height:auto;border-radius:20px;box-shadow:0 30px 70px #00000059;animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hv6-copy h1{font-size:clamp(2.6rem,5.4vw,4.6rem);max-width:15ch;line-height:1.06}
+/* 허브 배경 그래픽 — 어두운 무대 */
+.hub-hero{background:linear-gradient(90deg,#0d1211f5 38%,#0d121166 62%,#0d12110f),var(--hub-img) right center/cover no-repeat;color:#fff;border-bottom:0}
+.hub-hero[data-div]{--hub-img:none}
+.hub-hero .eyebrow{color:#7fd1b0}
+.hub-hero h1{color:#fff}
+.hub-hero .lead{color:#cbd8d2}
+.hub-hero .hub-who{color:#a9b8b2;border-left-color:#7fd1b0}
+.hub-hero .hub-who b{color:#7fd1b0}
+.hub-hero .button{border-color:#ffffff59;color:#fff;background:transparent}
+.hub-hero .button.primary{background:#fff;color:var(--night);border-color:#fff}
+.hub-hero .button:hover{background:#7fd1b0;border-color:#7fd1b0;color:var(--night)}
+.hub-hero::after{display:none}
+.hub-hero .status{color:#7fd1b0}
+.hub-hero[data-div="Intelligence"]{--hub-img:url(/media/ap/hub-intelligence.jpg)}
+.hub-hero[data-div="Games"]{--hub-img:url(/media/ap/hub-games.jpg)}
+.hub-hero[data-div="Edu"]{--hub-img:url(/media/ap/hub-edu.jpg)}
+.hub-hero[data-div="Entertainment"]{--hub-img:url(/media/ap/hub-entertainment.jpg)}
+.hub-hero[data-div="Shop"]{--hub-img:url(/media/ap/hub-shop.jpg)}
+/* 창업자 띠 배경 */
+.story-band{background:linear-gradient(#0d1211d9,#0d1211d9),url(/media/ap/about.jpg) center/cover no-repeat;color:#fff}
+.story-band p{color:#fff}.story-band .text-link{color:#8fd0b5}
+@media(max-width:800px){.hub-hero::before{opacity:.5;background-position:center}.hero-visual img{box-shadow:0 18px 40px #00000040}}
+@media(prefers-reduced-motion:reduce){.hero-visual img{animation:none}}
+/* /V9 */

@@ -1,0 +1,38 @@
+/* V7 (2026-10-09): 추상 문구 제거 · 서비스가 보이는 홈 · 세련 + 애니메이션 */
+.hv7-sub{margin-top:var(--s3);font-size:clamp(1.05rem,1.7vw,1.35rem);line-height:1.55;color:#c9d6d1;max-width:44ch;opacity:0;animation:w-in .8s .7s forwards}
+.svc{padding:var(--s6) 0}
+.svc-h{font-size:clamp(2rem,4vw,3.4rem);font-weight:700;letter-spacing:-.04em;margin-bottom:var(--s5)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--ink)}
+.svc-tile{padding:var(--s4) var(--s4) var(--s4) 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.svc-tile+.svc-tile:not(:nth-child(3n+1)){padding-left:var(--s4);border-left:1px solid var(--line)}
+.svc-tile h3{font-size:clamp(1.4rem,2.2vw,1.95rem);font-weight:600;letter-spacing:-.03em;margin-top:var(--s2)}
+.svc-tile p{color:var(--muted);font-size:16px;margin-top:6px;flex:1}
+.svc-tile .text-link{margin-top:var(--s3);font-size:14px}
+.svc-tile:hover h3{color:var(--accent)}
+.mock-wrap{display:block;background:linear-gradient(180deg,#f7f9f8,#fff);border:1px solid var(--line);border-radius:10px;padding:12px}
+.mock{width:100%;max-width:300px;height:auto;display:block;margin:0 auto}
+.mock *{transform-box:fill-box}
+.mk-card,.mk-phone,.mk-block,.mk-prod{fill:#fff;stroke:var(--line);stroke-width:1.5}
+.mk-bar,.mk-q,.mk-line,.mk-cap,.mk-chip,.mk-col,.mk-cub,.mk-ear{fill:var(--soft);stroke:var(--line);stroke-width:1.5}
+.mk-base{fill:var(--line)}
+.mk-scan{fill:var(--accent);animation:scan 3.4s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateY(0)}50%{transform:translateY(112px)}}
+.mk-dot{fill:var(--accent);animation:blip 3.4s ease-in-out infinite}
+@keyframes blip{0%,45%,100%{opacity:.2}58%{opacity:1}}
+.mk-col{transform-origin:bottom;animation:grow 2.8s ease-in-out infinite}
+.mk-col.top{fill:var(--accent-soft);stroke:var(--accent)}
+@keyframes grow{0%,100%{transform:scaleY(.8)}50%{transform:scaleY(1)}}
+.mk-badge{fill:var(--accent);animation:blip 2.8s ease-in-out infinite}
+.mk-chip.on{fill:var(--accent-soft);stroke:var(--accent);animation:blip 2.8s ease-in-out infinite}
+.mk-timer{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-dasharray:76;stroke-dashoffset:76;animation:tick 3s linear infinite}
+@keyframes tick{to{stroke-dashoffset:0}}
+.mk-draw{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-dasharray:130;stroke-dashoffset:130;animation:draw 2.8s ease-in-out infinite alternate}
+.mk-play{fill:var(--accent);animation:blip 2.2s ease-in-out infinite}
+.mk-prog{fill:var(--accent);transform-origin:left;animation:prog 3.2s ease-in-out infinite}
+@keyframes prog{0%{transform:scaleX(.12)}60%,100%{transform:scaleX(1)}}
+.mk-btn{fill:var(--accent);animation:pop 3s ease-in-out infinite}
+@keyframes pop{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(max-width:1000px){.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.svc-tile+.svc-tile:not(:nth-child(3n+1)){padding-left:0;border-left:0}.svc-tile:nth-child(2n){padding-left:var(--s4);border-left:1px solid var(--line)}}
+@media(max-width:800px){.svc-grid{grid-template-columns:1fr}.svc-tile{padding:var(--s3) 0!important;border-left:0!important}.svc-h{margin-bottom:var(--s3)}}
+@media(prefers-reduced-motion:reduce){.mock *,.svc-tile,.hv7-sub{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}.mk-scan{display:none}}
+/* /V7 */

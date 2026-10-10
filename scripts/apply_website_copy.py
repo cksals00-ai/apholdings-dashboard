@@ -42,15 +42,17 @@ def main():
     for p in targets:
         s=rewrite(p.read_text())
         if p==ROOT/'ko/index.html':
-            s=re.sub(r'(<div class="hv6-copy">.*?<h1>).*?</h1>',lambda m:m[1]+'AI 기반 정보 서비스부터<br>교육·게임·한국 상품 판매까지</h1>',s,count=1,flags=re.S)
-            s=re.sub(r'<p class="hv6-rot">.*?</p>','<p class="hv6-description">'+E(DESCRIPTION)+'</p>',s,count=1,flags=re.S)
+            if 'data-home="v9"' not in s:
+                # v6 히어로일 때만 제목·문장 교체 (v9 히어로의 제목·부제는 apply_home_v9.py가 관리)
+                s=re.sub(r'(<div class="hv6-copy">.*?<h1>).*?</h1>',lambda m:m[1]+'AI 기반 정보 서비스부터<br>교육·게임·한국 상품 판매까지</h1>',s,count=1,flags=re.S)
+                s=re.sub(r'<p class="hv6-rot">.*?</p>','<p class="hv6-description">'+E(DESCRIPTION)+'</p>',s,count=1,flags=re.S)
             s=s.replace('지금 운영 중','앱·게임 이용 및 상품 안내')
             s=re.sub(r'<li><span class="status">운영 중</span><h3>Lia Select Shop</h3>', '<li><span class="status">판매 준비 중</span><h3>Lia Select Shop</h3>',s)
             s=s.replace('>쇼핑하기 ↗</a>','>상품 안내 ↗</a>')
             steps=[('식품 정보 조회','AP Safe·AP Light로 원재료와 열량을 확인합니다.'),('교육·게임·AI 콘텐츠','한글 학습, 온라인 게임과 캐릭터 콘텐츠를 제공합니다.'),('한국 상품 해외 판매','Lia Select Shop을 중심으로 상품을 소개하고 판매를 준비합니다.')]
             for i,(h,d) in enumerate(steps):
                 s=re.sub(r'(<li class="rv" style="--i:'+str(i)+r'">.*?<h3>).*?</h3><p>.*?</p>',lambda m:m[1]+h+'</h3><p>'+d+'</p>',s,count=1,flags=re.S)
-            s=ia.retitle(s,'AP Holdings — 식품 정보·교육·게임·AI 콘텐츠·해외 판매',DESCRIPTION)
+            s=ia.retitle(s,'AP Holdings — Built with AI. Made for people.' if 'data-home="v9"' in s else 'AP Holdings — 식품 정보·교육·게임·AI 콘텐츠·해외 판매',DESCRIPTION)
         if p==ROOT/'ko/products/rgrg/index.html':
             s=re.sub(r'(<section class="page-hero">.*?)<span class="status">운영 중</span>',r'\1<span class="status">iOS 출시 준비 중</span>',s,count=1,flags=re.S)
         if p==ROOT/'ko/products/liaselect/index.html':
