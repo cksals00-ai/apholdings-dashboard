@@ -56,3 +56,13 @@
 @media(max-width:1000px){.cast-row{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.cast figcaption{font-size:11px;padding:4px 9px;left:8px;bottom:8px}}
 @media(max-width:640px){.cast-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.cast:first-child{grid-column:span 1}}
 @media(prefers-reduced-motion:reduce){.cast,.cast img,.cast::after{animation:none!important;opacity:1;transform:none}}
+/* V9.4 hub cards: stack inside each card (v7's 3-column card grid collided with the 3-column .hub-grid) */
+.hub-grid .hub-card{grid-template-columns:1fr!important;grid-template-areas:none!important;row-gap:8px;align-content:start;margin-bottom:0}
+.hub-grid .hub-card>*{grid-area:auto!important}
+.hub-grid .hub-card .status{justify-self:start;margin-bottom:4px}
+.hub-grid .hub-card h3{font-size:22px;margin:0}
+.hub-grid .hub-card .tag{font-size:15px}
+.hub-grid .hub-card .desc{font-size:15px;max-width:none}
+.hub-grid .hub-card .text-link{justify-self:start;align-self:end;margin-top:10px;white-space:normal}
+@media(max-width:1100px){.hub-grid{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:800px){.hub-grid{grid-template-columns:1fr!important}}
