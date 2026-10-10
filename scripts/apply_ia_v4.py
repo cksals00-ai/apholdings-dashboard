@@ -17,7 +17,7 @@ LABEL = {'intelligence': 'Intelligence', 'games': 'Games', 'edu': 'Edu', 'hallyu
 E = lambda s: html.escape(str(s), quote=True)
 D = json.loads((ROOT / 'site-source' / 'divisions.json').read_text())
 CO = D['_company']; CM = D['_common']
-CSS_V = 'site.css?v=2.34'
+CSS_V = 'site.css?v=2.35'
 JS_V = 'site.js?v=20261009-v6c'
 
 def exists(l, p): return (ROOT / l / p / 'index.html').exists()

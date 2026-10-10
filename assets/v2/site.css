@@ -509,3 +509,21 @@ body[data-home=v6] .fl-node b{font-size:clamp(1.5rem,2.2vw,2rem)}body[data-home=
 .hv9-orbit image{transition:transform .25s;transform-box:fill-box;transform-origin:center}
 .hv9-orbit .ob-n:hover image{transform:scale(1.06)}
 @media(max-width:800px){.hv9-orbit .ob-n text{font-size:24px}}
+/* V9.2 (2026-10-10): AI Cast 띠 — 리아·호랑이 네 남매 같은 크기, 등장·둥실 애니메이션 */
+.cast-band .wrap{display:flex;flex-direction:column;gap:var(--s4);align-items:flex-start}
+.cast-band .cb-copy{max-width:720px}
+.cast-band .eyebrow{color:#7fd1b0}
+.cast-band .cb-copy h2{margin-bottom:10px}
+.cast-band .cb-copy p{color:#b8c7c1;font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6}
+.cast-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;width:100%}
+.cast{margin:0;position:relative;opacity:0;transform:translateY(28px) scale(.96);animation:cast-in .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(.15s + var(--i)*.12s)}
+.cast img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;background:#13211c;box-shadow:0 18px 40px #00000066;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.cast figcaption{position:absolute;left:12px;bottom:12px;padding:6px 12px;border-radius:999px;background:#0d1211cc;color:#fff;font-size:13px;font-weight:700;letter-spacing:.04em;backdrop-filter:blur(6px)}
+.cast::after{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;animation:cast-float 6s ease-in-out infinite;animation-delay:calc(var(--i)*-.9s)}
+.cast img{animation:cast-float 6s ease-in-out infinite;animation-delay:calc(var(--i)*-.9s)}
+.cast:hover img{transform:translateY(-8px) scale(1.03);box-shadow:0 28px 56px #00000080}
+@keyframes cast-in{to{opacity:1;transform:none}}
+@keyframes cast-float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@media(max-width:1000px){.cast-row{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.cast figcaption{font-size:11px;padding:4px 9px;left:8px;bottom:8px}}
+@media(max-width:640px){.cast-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.cast:first-child{grid-column:span 1}}
+@media(prefers-reduced-motion:reduce){.cast,.cast img,.cast::after{animation:none!important;opacity:1;transform:none}}
