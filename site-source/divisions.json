@@ -1686,8 +1686,8 @@
     },
     {
      "name": "KBL 퀴즈",
-     "tag": "알지알지오알지 농구 문제",
-     "desc": "KBL 구단·레전드·기록·규칙 문제 900여 개. 아이가 농구를 아는 재미.",
+     "tag": "QuizRanker 농구 문제",
+     "desc": "KBL 구단·레전드·기록·규칙 문제 900여 개. 퀴즈랭커에서 아이가 농구를 아는 재미.",
      "url": "/{l}/products/rgrg/",
      "status": "운영 중"
     }
@@ -1727,7 +1727,7 @@
     },
     {
      "name": "KBL Quiz",
-     "tag": "Basketball questions in RGRG",
+     "tag": "Basketball questions in QuizRanker",
      "desc": "About 900 questions on KBL teams, legends, records and rules.",
      "url": "/{l}/products/rgrg/",
      "status": "Live"
@@ -1768,7 +1768,7 @@
     },
     {
      "name": "KBL Quiz",
-     "tag": "Câu hỏi bóng rổ trong RGRG",
+     "tag": "Câu hỏi bóng rổ trong QuizRanker",
      "desc": "Khoảng 900 câu hỏi về các đội KBL, huyền thoại, kỷ lục và luật.",
      "url": "/{l}/products/rgrg/",
      "status": "Đang hoạt động"
@@ -1809,7 +1809,7 @@
     },
     {
      "name": "KBL クイズ",
-     "tag": "RGRG のバスケ問題",
+     "tag": "QuizRanker のバスケ問題",
      "desc": "KBL の球団・レジェンド・記録・ルールの問題約900問。",
      "url": "/{l}/products/rgrg/",
      "status": "運営中"
@@ -1850,7 +1850,7 @@
     },
     {
      "name": "KBL 测验",
-     "tag": "RGRG 中的篮球题",
+     "tag": "QuizRanker 中的篮球题",
      "desc": "约 900 道关于 KBL 球队、传奇、纪录和规则的题目。",
      "url": "/{l}/products/rgrg/",
      "status": "运营中"
@@ -1891,7 +1891,7 @@
     },
     {
      "name": "Quiz KBL",
-     "tag": "Questions de basket dans RGRG",
+     "tag": "Questions de basket dans QuizRanker",
      "desc": "Environ 900 questions sur les équipes KBL, les légendes, les records et les règles.",
      "url": "/{l}/products/rgrg/",
      "status": "En service"
