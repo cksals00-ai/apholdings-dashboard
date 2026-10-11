@@ -5,7 +5,7 @@
 ## 발행 절차
 1. 공식 원문을 확인하고 issues/YYYY-MM-DD.json 한 파일 작성. date, number, title, intro, edition_note, takeaway 및 stories 5~7개. 기사마다 title, source, url(HTTPS 원문), published(발표일), fact, insight, action을 기록.
 2. 불확실한 내용이면 status=draft, verified=false로 보존하고 발행하지 않는다. 완료된 원문 검증 후 status=published, verified=true. 사람의 검수를 받지 않았다면 AI 작성·원문 확인이라고 표시.
-3. Python 런타임에 requirements-newsletter.txt 설치 후 `python scripts/build_news.py` 실행. 기존 뉴스와 함께 일일 웹·메일·PDF·최신호 링크를 생성.
+3. Python 런타임에 requirements-newsletter.txt 설치 후 `python scripts/newsletter.py` 실행. 기존 뉴스와 함께 일일 웹·메일·PDF·최신호 링크를 생성.
 4. `python scripts/test_newsletter.py`, `node --test supabase/functions/ap-news/core.test.mjs`, 기존 `python scripts/check_site.py` 실행. PDF를 페이지별 렌더해 실제 확인.
 5. 다른 홈페이지 작업과 충돌하지 않도록 최신 main을 확인하고 변경 파일만 적용. 기존 public GitHub Pages가 배포한다. 공개 웹·PDF가 해당 원본으로 제공되는지 확인한 뒤 ap_news_issues에 등록한다. 검증되지 않은 URL은 DB 발행으로 등록하지 않는다.
 6. DB에는 issue_date, number, title, status, verified, web_url, pdf_url, email_html(생성본), source_data(JSON), publish_at(날짜 08:00+09:00)을 등록. pg_cron의 5분 큐가 활성 구독자에게 해당 날짜의 호만 보낸다.
@@ -29,3 +29,11 @@ Resend에서 apholdings.kr 도메인 인증. Supabase Edge Function Secrets에 R
 리뷰 보완: 준비 기간에 시도하지 않은 만료 확인 메일은 발송 연결 후 새 토큰을 발급한다. 이미 발송·실패한 메일을 자동 반복하지 않는다. 해지와 큐 취소를 한 트랜잭션으로 처리하고, 제공사 요청을 최초 시점에 저장해 재시도 때 같은 본문을 사용한다. 발송 직전 현재 구독·큐 상태를 다시 검사하고, 이미 제출된 요청은 처리 중으로 간주하며 취소 상태를 완료·재시도로 되돌리지 않는다.
 
 일일 예약: Codex heartbeat ap-ai, 이 채팅에서 매일 07:00 Asia/Seoul 실행(08:00 발행 목표). 메일 큐 ap-news-mail-queue는 5분마다, 보관 정책 ap-news-retention은 03:15 KST에 실행한다.
+
+## 이미지와 편집 품질 (2026-10-11 개편)
+- 최신 호는 기사별 summary 한 줄과 AP 서비스에 연결되는 insight를 작성한다. 사실과 해석은 분리하고 제공 국가·실험 단계·신청 자격을 생략하지 않는다.
+- 기사별 image는 path(`/img/newsletter/파일명.png` 등), alt, caption을 가진다. 파일은 저장소에 보관하며 원문 이미지 권리가 명확하지 않으면 독창적인 편집 일러스트를 사용한다.
+- AI 생성 이미지는 `AI 제작 · 편집 일러스트 · 실제 제품 화면 아님`으로 표시한다. 실제 발표 사진이나 제품 화면처럼 소개하지 않는다. AP 로고를 새로 생성하지 않는다.
+- 웹·PDF·HTML 이메일은 같은 JSON의 summary, fact, insight, action, image를 사용한다. PDF는 표지와 기사별 지면으로 구성한다. 이미지 없는 이전 호도 빌드할 수 있다.
+- 이미지 제작 기록은 docs/newsletter-image-prompts-2026-10-11.md에 보관한다. 이후 매일 해당 기사 주제에 맞는 새 이미지를 준비하고 재사용 시 기사와 관련 있는지 확인한다.
+- 이미 발행한 호를 수정해도 새 번호·새 발송을 만들지 않는다. DB 갱신 전 공개 웹과 PDF를 검증하고, 기존 발송의 고정 본문과 재시도 기록을 변경하지 않는다.

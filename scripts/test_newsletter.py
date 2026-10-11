@@ -21,6 +21,34 @@ class IssueTests(unittest.TestCase):
         self.assertIn('AP-News-2026-10-09.pdf',web)
         self.assertIn('AP-News-2026-10-09.pdf',mail)
         self.assertIn('{{unsubscribe_url}}',mail)
+    def test_editorial_content_shared_by_web_and_email(self):
+        story=self.issue['stories'][0]
+        story.update(summary='미국 성인 대상 실험', image={'path':'/img/newsletter/test.png','alt':'게임 세계 편집 일러스트','caption':'AI 제작 · 편집 일러스트'})
+        from unittest.mock import patch
+        with patch('pathlib.Path.is_file', return_value=True):
+            for output in (render_issue(self.issue), render_email(self.issue)):
+                for value in (story['summary'],story['image']['path'],story['image']['alt'],story['image']['caption'],story['action']):
+                    self.assertIn(value,output)
+    def test_image_paths_cannot_escape_asset_directory(self):
+        for path in ('/img/newsletter/../../secret.png','https://example.com/a.png','/img/ap_mark.png'):
+            self.issue['stories'][0]['image']={'path':path,'alt':'이미지','caption':'편집 일러스트'}
+            with self.assertRaises(ValueError): validate_issue(self.issue)
+
+    def test_pdf_supports_image_after_text_only_first_story(self):
+        import json, tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        import newsletter
+        issue=json.loads((newsletter.ISSUES/'2026-10-11.json').read_text())
+        del issue['stories'][0]['image']
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            for folder in ('img','site-source'):
+                (root/folder).symlink_to(newsletter.ROOT/folder,target_is_directory=True)
+            with patch.object(newsletter,'ROOT',root):
+                output=newsletter.render_pdf(issue)
+                self.assertTrue(output.is_file())
+
     def test_unverified_issue_cannot_publish(self):
         broken=deepcopy(self.issue);broken['verified']=False
         with self.assertRaises(ValueError): validate_issue(broken)

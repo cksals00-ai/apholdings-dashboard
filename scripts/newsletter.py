@@ -24,6 +24,13 @@ def validate_issue(issue):
         for s in issue['stories']:
             for key in ('title','source','url','published','fact','insight','action'):
                 if not isinstance(s[key], str) or not s[key].strip(): raise ValueError(key)
+            if 'summary' in s and (not isinstance(s['summary'], str) or not s['summary'].strip()): raise ValueError('Invalid summary')
+            if 'image' in s:
+                im=s['image']
+                if not isinstance(im,dict) or not re.fullmatch(r'/img/newsletter/[a-zA-Z0-9_-]+\.(?:png|jpg|jpeg|webp)', im.get('path','')): raise ValueError('Invalid editorial image path')
+                for key in ('alt','caption'):
+                    if not isinstance(im.get(key),str) or not im[key].strip(): raise ValueError('Image description required')
+                if not (ROOT/im['path'].lstrip('/')).is_file(): raise ValueError('Editorial image missing')
             u=urlsplit(s['url'])
             if u.scheme != 'https' or not u.hostname or u.username or u.password or any(c in s['url'] for c in '\r\n'): raise ValueError('Invalid source URL')
             if s['url'] in urls: raise ValueError('Duplicate source')
@@ -43,21 +50,35 @@ def subscribe_block():
     return f'''<section class="subscribe" id="subscribe"><div><p class="eyebrow">YOUR DAILY AI PERSPECTIVE</p><h2>좋은 판단은,<br>좋은 소식에서.</h2><p>주요 AI 뉴스와 AP의 관점, 읽기 좋은 PDF까지.<br>매일 오전 8시 발행을 목표로 준비합니다.</p><a class="quiet-link" href="mailto:alfred.park@apholdings.kr?subject=AP%20News%20구독%20문의">구독·제휴 문의 ↗</a></div><form id="subscribe-form" data-api="{API}"><label for="reader-email">이메일 주소</label><input id="reader-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required><div class="trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div><label class="consent"><input name="consent" type="checkbox" required><span><a href="/ko/news/daily/privacy/">개인정보 수집·이용</a>에 동의하고 AP News 수신을 신청합니다.</span></label><button type="submit">무료 구독 신청 <span aria-hidden="true">→</span></button><p class="form-state" id="subscribe-state" role="status" aria-live="polite">이메일 확인 후 구독이 시작됩니다. 언제든 해지할 수 있습니다.</p></form></section>'''
 
 def shell(title, desc, path, body, noindex=False):
-    return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} · AP News</title><meta name="description" content="{esc(desc)}"><meta name="robots" content="{'noindex,follow' if noindex else 'index,follow'}"><meta name="referrer" content="no-referrer"><link rel="canonical" href="{ORIGIN}{path}"><meta property="og:title" content="{esc(title)} · AP News"><meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{ORIGIN}{path}"><meta property="og:image" content="{ORIGIN}/img/ap_mark.png"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/assets/v2/newsletter.css?v=20261009"><script defer src="/assets/v2/newsletter.js?v=20261009"></script></head><body><a class="skip" href="#main">본문으로 이동</a><header><a class="ap-brand" href="/ko/"><img src="/img/ap_mark.png" width="44" height="22" alt="AP"> <span>AP HOLDINGS</span></a><nav aria-label="뉴스레터 메뉴"><a href="/ko/news/">AP뉴스</a><a href="/ko/news/daily/">지난 호</a><a href="#subscribe">구독 신청</a></nav></header><main id="main">{body}{subscribe_block()}</main><footer><a class="footer-wordmark" href="/ko/news/">AP <i>News</i></a><p>AI 소식을 오늘의 판단으로.<br>발행 AP Holdings · AI 작성 및 원문 확인</p><div><a href="/ko/news/daily/privacy/">개인정보 안내</a><a href="mailto:alfred.park@apholdings.kr">alfred.park@apholdings.kr</a></div><small>© 2026 AP Holdings · Seoul, Korea</small></footer></body></html>'''
+    return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} · AP News</title><meta name="description" content="{esc(desc)}"><meta name="robots" content="{'noindex,follow' if noindex else 'index,follow'}"><meta name="referrer" content="no-referrer"><link rel="canonical" href="{ORIGIN}{path}"><meta property="og:title" content="{esc(title)} · AP News"><meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{ORIGIN}{path}"><meta property="og:image" content="{ORIGIN}/img/ap_mark.png"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/assets/v2/newsletter.css?v=20261011-editorial"><script defer src="/assets/v2/newsletter.js?v=20261009"></script></head><body><a class="skip" href="#main">본문으로 이동</a><header><a class="ap-brand" href="/ko/"><img src="/img/ap_mark.png" width="44" height="22" alt="AP"> <span>AP HOLDINGS</span></a><nav aria-label="뉴스레터 메뉴"><a href="/ko/news/">AP뉴스</a><a href="/ko/news/daily/">지난 호</a><a href="#subscribe">구독 신청</a></nav></header><main id="main">{body}{subscribe_block()}</main><footer><a class="footer-wordmark" href="/ko/news/">AP <i>News</i></a><p>AI 소식을 오늘의 판단으로.<br>발행 AP Holdings · AI 작성 및 원문 확인</p><div><a href="/ko/news/daily/privacy/">개인정보 안내</a><a href="mailto:alfred.park@apholdings.kr">alfred.park@apholdings.kr</a></div><small>© 2026 AP Holdings · Seoul, Korea</small></footer></body></html>'''
+
+def figure(story, email=False):
+    im=story.get('image')
+    if not im:return ''
+    src=(ORIGIN if email else '')+im['path']
+    if email:
+        return f'<img src="{esc(src)}" alt="{esc(im["alt"])}" width="592" style="display:block;width:100%;height:auto;border-radius:6px;margin:0 0 8px"><p style="font-size:11px;color:#657083">{esc(im["caption"])}</p>'
+    return f'<figure class="editorial-figure"><img src="{esc(src)}" alt="{esc(im["alt"])}" width="1536" height="1024" loading="lazy"><figcaption>{esc(im["caption"])}</figcaption></figure>'
 
 def render_issue(i):
     validate_issue(i)
-    stories=''.join(f'''<article class="story" id="story-{n}"><div class="story-no">{n:02d}</div><div><p class="eyebrow">{esc(s.get('category','AI NEWS'))}</p><h2>{esc(s['title'])}</h2><p class="source">{esc(s['source'])} · 발표 {esc(s['published'])}</p><p>{esc(s['fact'])}</p><aside><b>AP의 관점</b><p>{esc(s['insight'])}</p></aside><p class="action"><b>오늘 해볼 일</b> {esc(s['action'])}</p><a class="quiet-link" href="{esc(s['url'])}" target="_blank" rel="noopener noreferrer">공식 원문 읽기 ↗</a></div></article>''' for n,s in enumerate(i['stories'],1))
+    stories=''.join(f'''<article class="story" id="story-{n}"><div class="story-no">{n:02d}</div><div><p class="eyebrow">{esc(s.get('category','AI NEWS'))}</p><h2>{esc(s['title'])}</h2><p class="source">{esc(s['source'])} · 발표 {esc(s['published'])}</p>{figure(s)}<p class="story-summary">{esc(s.get('summary',''))}</p><p>{esc(s['fact'])}</p><aside><b>AP의 관점</b><p>{esc(s['insight'])}</p></aside><p class="action"><b>오늘 해볼 일</b> {esc(s['action'])}</p><a class="quiet-link" href="{esc(s['url'])}" target="_blank" rel="noopener noreferrer">공식 원문 읽기 ↗</a></div></article>''' for n,s in enumerate(i['stories'],1))
     toc=''.join(f'<a href="#story-{n}"><span>{n:02d}</span>{esc(s["title"])}</a>' for n,s in enumerate(i['stories'],1))
-    body=f'''<section class="masthead"><div class="edition">DAILY EDITION · NO. {i['number']:03d}<span>{esc(i['date'].replace('-','.'))}</span></div><p class="name">AP <i>News</i><span>AI & BUSINESS DAILY</span></p><div class="hero"><div><p class="eyebrow">TODAY'S PERSPECTIVE</p><h1>{esc(i['title'])}</h1><p class="lead">{esc(i['intro'])}</p><a class="pdf-link" href="{pdf_path(i)}" download>브랜드 PDF 다운로드 <span>↓</span></a></div><div class="hero-art" aria-hidden="true"><span>Ideas.</span><span>Context.</span><i>Perspective.</i><div class="orbit"></div></div></div><p class="edition-note">{esc(i['edition_note'])}</p></section><div class="reading"><aside class="toc"><p class="eyebrow">IN THIS EDITION</p>{toc}<p>핵심 뉴스 {len(i['stories'])}개<br>약 5분 읽기</p></aside><section class="stories">{stories}<section class="takeaway"><p class="eyebrow">ONE THING TO TAKE AWAY</p><h2>오늘, 하나만 해본다면.</h2><p>{esc(i['takeaway'])}</p></section></section></div><a class="back-link" href="/ko/news/daily/">← 지난 뉴스레터 보기</a>'''
-    return shell(i['title'],i['intro'],page_path(i),body,i['status']=='draft')
+    cover=figure(i['stories'][0])
+    digest=''.join(f'<li><a href="#story-{n}">{esc(st.get("summary",st["title"]))}</a></li>' for n,st in enumerate(i['stories'],1))
+    body=f'''<section class="masthead"><div class="edition">DAILY EDITION · NO. {i['number']:03d}<span>{esc(i['date'].replace('-','.'))}</span></div><p class="name">AP <i>News</i><span>AI & BUSINESS DAILY</span></p><div class="hero"><div><p class="eyebrow">TODAY'S PERSPECTIVE</p><h1>{esc(i['title'])}</h1><p class="lead">{esc(i['intro'])}</p><a class="pdf-link" href="{pdf_path(i)}" download>브랜드 PDF 다운로드 <span>↓</span></a></div>{cover or '<div class="hero-art" aria-hidden="true"><span>Ideas.</span><span>Context.</span><i>Perspective.</i><div class="orbit"></div></div>'}</div><p class="edition-note">{esc(i['edition_note'])}</p><section class="edition-digest"><p class="eyebrow">THE DAILY BRIEF</p><h2>오늘의 핵심</h2><ul>{digest}</ul></section></section><div class="reading"><aside class="toc"><p class="eyebrow">IN THIS EDITION</p>{toc}<p>핵심 뉴스 {len(i['stories'])}개<br>약 5분 읽기</p></aside><section class="stories">{stories}<section class="takeaway"><p class="eyebrow">ONE THING TO TAKE AWAY</p><h2>오늘, 하나만 해본다면.</h2><p>{esc(i['takeaway'])}</p></section></section></div><a class="back-link" href="/ko/news/daily/">← 지난 뉴스레터 보기</a>'''
+    result=shell(i['title'],i['intro'],page_path(i),body,i['status']=='draft')
+    if i['stories'][0].get('image'):result=result.replace(ORIGIN+'/img/ap_mark.png',ORIGIN+i['stories'][0]['image']['path'])
+    return result
 
 def render_email(i):
     validate_issue(i)
-    rows=''.join(f'''<tr><td style="padding:24px 0;border-bottom:1px solid #ddd5c7"><p style="color:#9b7950;font-size:12px;margin:0 0 10px">{n:02d} · {esc(s['source'])} · {esc(s['published'])}</p><h2 style="font-size:21px;line-height:1.5;margin:0 0 12px">{esc(s['title'])}</h2><p style="font-size:15px;line-height:1.9;margin:0">{esc(s['fact'])}</p><p style="font-size:14px;line-height:1.9;color:#526075"><b>AP의 관점</b> · {esc(s['insight'])}</p><a style="color:#9b7950" href="{esc(s['url'])}">공식 원문 ↗</a></td></tr>''' for n,s in enumerate(i['stories'],1))
+    rows=''.join(f'''<tr><td style="padding:24px 0;border-bottom:1px solid #ddd5c7"><p style="color:#9b7950;font-size:12px;margin:0 0 10px">{n:02d} · {esc(s['source'])} · {esc(s['published'])}</p><h2 style="font-size:21px;line-height:1.5;margin:0 0 12px">{esc(s['title'])}</h2>{figure(s,True)}<p style="font-size:17px;font-weight:bold;line-height:1.6">{esc(s.get('summary',''))}</p><p style="font-size:15px;line-height:1.9;margin:0">{esc(s['fact'])}</p><p style="font-size:14px;line-height:1.9;color:#526075"><b>AP의 관점</b> · {esc(s['insight'])}</p><p style="font-size:14px;line-height:1.9"><b>오늘 해볼 일</b> · {esc(s['action'])}</p><a style="color:#9b7950" href="{esc(s['url'])}">공식 원문 ↗</a></td></tr>''' for n,s in enumerate(i['stories'],1))
     return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"></head><body style="margin:0;background:#f7f4ed;color:#172338;font-family:Arial,'Apple SD Gothic Neo',sans-serif"><table role="presentation" style="max-width:640px;width:100%;margin:auto;padding:32px 24px"><tr><td><img src="{ORIGIN}/img/ap_mark.png" width="44" style="background:#172338;padding:8px" alt="AP Holdings"><p style="font-size:11px;letter-spacing:2px">DAILY EDITION · NO. {i['number']:03d} · {i['date']}</p><p style="font-size:52px;font-family:Georgia,serif;margin:20px 0">AP <i>News</i></p><h1 style="font-size:28px;line-height:1.5">{esc(i['title'])}</h1><p style="line-height:1.9">{esc(i['intro'])}</p><p><a style="color:#172338" href="{ORIGIN}{page_path(i)}">웹에서 읽기 ↗</a> &nbsp; <a style="color:#9b7950" href="{ORIGIN}{pdf_path(i)}">PDF 다운로드 ↓</a></p></td></tr>{rows}<tr><td style="padding:28px 0"><b>오늘, 하나만 해본다면.</b><p style="line-height:1.9">{esc(i['takeaway'])}</p><p style="font-size:12px;color:#657083;line-height:1.8">{esc(i['edition_note'])}<br>AP Holdings · 문의 alfred.park@apholdings.kr<br>수신을 원하지 않으면 <a href="{{{{unsubscribe_url}}}}">구독 해지</a>를 선택하세요.</p></td></tr></table></body></html>'''
 
 def render_pdf(i):
+    validate_issue(i)
+    from reportlab.lib.utils import ImageReader
     from reportlab.pdfgen import canvas
     from reportlab.platypus import Paragraph
     from reportlab.lib.styles import ParagraphStyle
@@ -87,28 +108,50 @@ def render_pdf(i):
     c.setFillColor(HexColor(ink));c.setFont('Times-Roman',70);c.drawString(M,H-183,'AP');c.setFont('Times-Italic',70);c.drawString(M+115,H-183,'News')
     y=p(esc(i['title']),M,H-225,size=25,leading=38)
     y=p(esc(i['intro']),M,y-22,size=12,color=muted)
-    y=p('IN THIS EDITION',M,y-40,size=9,color=gold)
-    for n,s in enumerate(i['stories'],1): y=p(f'{n:02d} &nbsp; {esc(s["title"])}',M,y-14,size=11)
+    illustrated=any(st.get('image') for st in i['stories'])
+    if illustrated:
+        im=i['stories'][0].get('image')
+        if im:
+            reader=ImageReader(str(ROOT/im['path'].lstrip('/')));iw,ih=reader.getSize()
+            height=(W-2*M)*ih/iw
+            if y-height-45<120: raise ValueError('PDF illustrated cover overflow')
+            c.drawImage(reader,M,y-height-16,width=W-2*M,height=height)
+            y=p(esc(im['caption']),M,y-height-24,size=8,color=muted)
+        y=p('THE DAILY BRIEF · '+str(len(i['stories']))+' STORIES',M,y-22,size=9,color=gold)
+    else:
+        y=p('IN THIS EDITION',M,y-40,size=9,color=gold)
+    if not illustrated:
+        for n,s in enumerate(i['stories'],1): y=p(f'{n:02d} &nbsp; {esc(s["title"])}',M,y-14,size=11)
     y=p(esc(i['edition_note']),M,90,size=8,color=muted,leading=13)
     if y<52: raise ValueError('PDF cover overflow')
     c.showPage()
     page=2; base(page);y=H-92
     for n,s in enumerate(i['stories'],1):
+        if illustrated:
+            if n>1:c.showPage();page+=1;base(page);y=H-92
+            if s.get('image'):
+                im=s['image'];reader=ImageReader(str(ROOT/im['path'].lstrip('/')));iw,ih=reader.getSize()
+                image_height=min(195,(W-2*M)*ih/iw);image_width=image_height*iw/ih
+                c.drawImage(reader,M,y-image_height,width=image_width,height=image_height)
+                y=p(esc(im['caption']),M,y-image_height-8,size=8,color=muted)-16
         # Measure each complete story before drawing, so page breaks never clip it.
         blocks=[(f'{n:02d} · {esc(s.get("category","AI NEWS"))}',9,gold),(esc(s['title']),17,ink),(f'{esc(s["source"])} · 발표 {s["published"]}',8,muted),(esc(s['fact']),10.2,ink),(f'AP의 관점 · {esc(s["insight"])}',10.2,muted),(f'오늘 해볼 일 · {esc(s["action"])}',10.2,ink),(f'<link href="{esc(s["url"])}" color="{gold}">공식 원문 읽기 ↗</link>',9,gold)]
+        if s.get('summary'):blocks.insert(3,(esc(s['summary']),12,gold))
         height=22
         for text,size,color in blocks:
             st=ParagraphStyle('measure',parent=style,fontSize=size,leading=size*1.75)
             height+=Paragraph(text,st).wrap(W-2*M,H)[1]+8
-        if y-height<75: c.showPage();page+=1;base(page);y=H-92
+        if y-height<75:
+            if illustrated:raise ValueError('Illustrated story overflows its page')
+            c.showPage();page+=1;base(page);y=H-92
         if height>H-170: raise ValueError('Story exceeds one PDF page')
         for text,size,color in blocks: y=p(text,M,y,size=size,color=color)-8
         c.setStrokeColor(HexColor('#ddd5c7'));c.line(M,y,W-M,y);y-=22
-    extra=Paragraph(esc(i['takeaway']),style).wrap(W-2*M,H)[1]+95
+    extra=Paragraph(esc(i['takeaway']),style).wrap(W-2*M,H)[1]+(65 if illustrated else 95)
     if y-extra<75:c.showPage();page+=1;base(page);y=H-92
     y=p('ONE THING TO TAKE AWAY',M,y,size=9,color=gold)
-    y=p('오늘, 하나만 해본다면.',M,y-12,size=18)
-    y=p(esc(i['takeaway']),M,y-12,size=11)
+    y=p('오늘, 하나만 해본다면.',M,y-(8 if illustrated else 12),size=14 if illustrated else 18)
+    y=p(esc(i['takeaway']),M,y-(8 if illustrated else 12),size=10 if illustrated else 11)
     if y<65: raise ValueError('PDF final page overflow')
     c.save();return dest
 
@@ -120,7 +163,7 @@ def build_all():
         issues.append(i);write(page_path(i)+'index.html',render_issue(i));write(f'/newsletters/email/{i["date"]}.html',render_email(i));render_pdf(i)
     if not issues:return
     newest=issues[0]
-    cards=''.join(f'<a class="archive-card" href="{page_path(i)}"><p class="eyebrow">NO. {i["number"]:03d} · {i["date"]}</p><h2>{esc(i["title"])}</h2><p>{esc(i["intro"])}</p><span>읽기 ↗</span></a>' for i in issues)
+    cards=''.join(f'<a class="archive-card" href="{page_path(i)}"><p class="eyebrow">NO. {i["number"]:03d} · {i["date"]}</p>{figure(i['stories'][0])}<h2>{esc(i["title"])}</h2><p>{esc(i["intro"])}</p><span>읽기 ↗</span></a>' for i in issues)
     write('/ko/news/daily/index.html',shell('AP News Daily','매일 읽는 AI 뉴스와 AP의 관점. 브랜드 PDF와 이메일 구독.','/ko/news/daily/',f'<section class="masthead"><p class="name">AP <i>News</i><span>AI & BUSINESS DAILY</span></p><h1>AI 소식을,<br>오늘의 판단으로.</h1><p class="lead">공식 발표를 선별하고, 우리 일에 필요한 맥락을 더합니다.</p></section><div class="archive-grid">{cards}</div>'))
     privacy='<section class="legal"><p class="eyebrow">AP NEWS · PRIVACY</p><h1>구독 개인정보 안내</h1><p>운영 주체: AP Holdings · 문의 alfred.park@apholdings.kr</p><h2>수집 항목과 목적</h2><p>이메일 주소, 신청 시각, 수신 동의 기록, 이메일 확인·해지 및 발송 상태를 수집합니다. 뉴스레터 발송, 구독 확인, 해지 처리, 발송 오류 대응에 사용합니다. 이름은 입력한 경우에만 보관합니다.</p><h2>보관과 철회</h2><p>구독 중에는 서비스 제공을 위해 보관합니다. 해지하면 즉시 발송 대상에서 제외하고 이메일·동의 기록은 30일 내 삭제합니다. 미확인 신청은 30일 후 삭제합니다. 요청 제한 기록은 7일 내 삭제합니다. 동의는 선택 사항이며, 동의하지 않으면 이메일 구독이 제공되지 않습니다.</p><h2>처리 서비스</h2><p>구독 데이터는 Supabase 서울 리전의 데이터베이스에서 관리하며, 이메일 전송에는 Resend를 사용합니다. 발송 준비를 위해 이메일 주소와 해당 메일 내용이 전송 서비스에 전달될 수 있습니다. 상세한 처리 지역·약관·보관 정책은 각 서비스 안내를 확인할 수 있습니다.</p><p><a href="https://supabase.com/privacy">Supabase 개인정보 안내 ↗</a> · <a href="https://resend.com/legal/privacy-policy">Resend 개인정보 안내 ↗</a></p><h2>문의·열람·삭제</h2><p>이메일의 구독 해지 링크 또는 회사 메일로 요청할 수 있습니다. 처리 과정에서 주소 소유 여부를 확인할 수 있습니다.</p><p>시행일: 2026년 10월 9일</p></section>'
     write('/ko/news/daily/privacy/index.html',shell('구독 개인정보 안내','AP News 구독 개인정보 처리 안내','/ko/news/daily/privacy/',privacy))
