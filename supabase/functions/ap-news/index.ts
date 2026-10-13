@@ -97,11 +97,18 @@ Deno.serve(async req=>{
     if(req.method==='GET'&&action==='admin') {
       if(!await isOwner(req))return reply({message:'관리자 로그인이 필요합니다.'},401);
       const [subscribers,issues,deliveries,runtime]=await Promise.all([
-        db('ap_news_subscribers?select=id,status,consent_at,confirmed_at,unsubscribed_at'),
+        db('ap_news_subscribers?select=id,email,name,status,consent_at,confirmed_at,unsubscribed_at,created_at&order=created_at.desc'),
         db('ap_news_issues?select=issue_date,number,title,status,verified,web_url,pdf_url&order=issue_date.desc&limit=30'),
-        db('ap_news_deliveries?select=id,issue_date,kind,state,attempts,last_error,created_at&order=created_at.desc&limit=100'),
+        db('ap_news_deliveries?select=id,subscriber_id,issue_date,kind,state,attempts,last_error,created_at&order=created_at.desc&limit=100'),
         db('ap_news_runtime?id=eq.mail&select=*')]);
-      return reply({mail_ready:READY(),counts:{active:subscribers.filter((s:any)=>s.status==='active').length,pending:subscribers.filter((s:any)=>s.status==='pending').length,unsubscribed:subscribers.filter((s:any)=>s.status==='unsubscribed').length},issues,deliveries,runtime:runtime[0]});
+      return reply({mail_ready:READY(),counts:{active:subscribers.filter((s:any)=>s.status==='active').length,pending:subscribers.filter((s:any)=>s.status==='pending').length,unsubscribed:subscribers.filter((s:any)=>s.status==='unsubscribed').length},subscribers,issues,deliveries,runtime:runtime[0]});
+    }
+    if(req.method==='GET'&&action==='admin-history') {
+      if(!await isOwner(req))return reply({message:'관리자 로그인이 필요합니다.'},401);
+      const id=new globalThis.URL(req.url).searchParams.get('id')||'';
+      if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id))return reply({message:'올바른 신청자 ID가 필요합니다.'},400);
+      const deliveries=await db(`ap_news_deliveries?subscriber_id=eq.${id}&select=id,issue_date,kind,state,attempts,last_error,created_at&order=created_at.desc&limit=30`);
+      return reply({deliveries});
     }
     if(req.method!=='POST')return reply({message:'지원하지 않는 요청입니다.'},405);
     if(action==='dispatch') {if(!await scheduler(req)&&!await isOwner(req))return reply({message:'인증이 필요합니다.'},401);return reply(await dispatch());}

@@ -1,5 +1,5 @@
 import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?v=20261009-1';
-import { createNewsletter } from './newsletter.js?v=20261009';
+import { createNewsletter } from './newsletter.js?v=20261013-admin';
 import { createShop } from './shop.js?v=research-20261009';
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createContentOperations } from './content.js?v=1.2-series';
