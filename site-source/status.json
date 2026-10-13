@@ -1,51 +1,68 @@
 {
- "_readme": "제품 진행 현황. scripts/update_status.py 가 facts 를 매일 갱신하고, build_site.py 가 제품 페이지 「지금」 섹션과 카드 상태에 반영한다. manual 은 사람(클레어)이 사실 확인 후 고친다.",
- "checked": "2026-10-09",
- "products": {
-  "safe": {
-   "stage": "live",
-   "appId": "6805684034",
-   "health": "https://safelist-mcp.onrender.com/health",
-   "facts": {
-    "appVersion": "1.10",
-    "appDate": "2026-10-02",
-    "appLive": true,
-    "connector": "ok",
-    "count": 666993
-   },
-   "manual": [
-    {
-     "ko": "Siri · 1.5부터",
-     "en": "Siri · from 1.5"
+  "_readme": "제품 진행 현황. scripts/update_status.py 가 facts 를 매일 갱신하고, build_site.py 가 제품 페이지 「지금」 섹션과 카드 상태에 반영한다. manual 은 사람(클레어)이 사실 확인 후 고친다.",
+  "checked": "2026-10-09",
+  "products": {
+    "safe": {
+      "stage": "live",
+      "appId": "6805684034",
+      "health": "https://safelist-mcp.onrender.com/health",
+      "facts": {
+        "appVersion": "1.10",
+        "appDate": "2026-10-02",
+        "appLive": true,
+        "connector": "ok",
+        "count": 666993
+      },
+      "manual": [
+        {
+          "ko": "Siri · 1.5부터",
+          "en": "Siri · from 1.5"
+        },
+        {
+          "ko": "ChatGPT · 등록 준비",
+          "en": "ChatGPT · listing in preparation"
+        },
+        {
+          "ko": "Android · 추후",
+          "en": "Android · later"
+        }
+      ]
     },
-    {
-     "ko": "ChatGPT · 등록 준비",
-     "en": "ChatGPT · listing in preparation"
+    "light": {
+      "stage": "live",
+      "appId": "6815295026",
+      "health": "https://lightlist-mcp.onrender.com/health",
+      "facts": {
+        "appVersion": "1.0",
+        "appDate": "2026-09-25",
+        "appLive": true,
+        "connector": "ok",
+        "count": 307049,
+        "asOf": "2026년 9월"
+      },
+      "manual": [
+        {
+          "ko": "ChatGPT · Gemini · 추후",
+          "en": "ChatGPT · Gemini · later"
+        }
+      ]
     },
-    {
-     "ko": "Android · 추후",
-     "en": "Android · later"
+    "dadandme": {
+      "stage": "in_review",
+      "appId": "6821352092",
+      "checked": "2026-10-13T15:24:00+09:00",
+      "facts": {
+        "appVersion": "1.0",
+        "build": "1",
+        "appLive": false,
+        "submissionId": "57d3ec9f-1f50-4849-b1ec-c73c29d32abf"
+      },
+      "manual": [
+        {
+          "ko": "앱과 Family Pass 함께 심사 대기",
+          "en": "App and Family Pass waiting for review"
+        }
+      ]
     }
-   ]
-  },
-  "light": {
-   "stage": "live",
-   "appId": "6815295026",
-   "health": "https://lightlist-mcp.onrender.com/health",
-   "facts": {
-    "appVersion": "1.0",
-    "appDate": "2026-09-25",
-    "appLive": true,
-    "connector": "ok",
-    "count": 307049,
-    "asOf": "2026년 9월"
-   },
-   "manual": [
-    {
-     "ko": "ChatGPT · Gemini · 추후",
-     "en": "ChatGPT · Gemini · later"
-    }
-   ]
   }
- }
 }

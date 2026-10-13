@@ -289,3 +289,7 @@ print(f'Built {len(GENERATED)} static files; published locales: {", ".join(PUBLI
 _rankers_ko=(ROOT/"site-source/pages/rankers-ko.html").read_text(encoding="utf-8")
 out("ko/rankers/index.html",_rankers_ko)
 out("ko/products/rankers/index.html",_rankers_ko)
+
+# Preserve the approved Dad & Me landing and Edu registration during regeneration.
+from apply_dadandme import apply as _dadandme_apply
+_dadandme_apply()
