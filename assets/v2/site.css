@@ -543,3 +543,5 @@ body[data-home=v6] .fl-node b{font-size:clamp(1.5rem,2.2vw,2rem)}body[data-home=
 @media(min-width:801px){#decision .showcase-lia{grid-template-columns:1fr 1fr;min-height:340px}#decision .showcase-lia .showcase-copy{padding:40px 48px}}
 /* release v11 (2026-10-15): 한국어 제목·리드 낱말 단위 줄바꿈 */
 html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] .lead,html[lang="ko"] .intro-side p{word-break:keep-all;overflow-wrap:break-word}
+/* ir v12: 세 칸 카드 */
+@media(min-width:801px){.milestones.m3{grid-template-columns:repeat(3,1fr)}}
