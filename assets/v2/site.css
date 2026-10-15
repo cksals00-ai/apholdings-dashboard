@@ -538,3 +538,6 @@ body[data-home=v6] .fl-node b{font-size:clamp(1.5rem,2.2vw,2rem)}body[data-home=
 .hub-grid .hub-card .text-link{justify-self:start;align-self:end;margin-top:10px;white-space:normal}
 @media(max-width:1100px){.hub-grid{grid-template-columns:repeat(2,1fr)!important}}
 @media(max-width:800px){.hub-grid{grid-template-columns:1fr!important}}
+/* cleanup v10 (2026-10-15): Decision — AP Light full row */
+#decision .commerce-extras{grid-template-columns:1fr}
+@media(min-width:801px){#decision .showcase-lia{grid-template-columns:1fr 1fr;min-height:340px}#decision .showcase-lia .showcase-copy{padding:40px 48px}}
