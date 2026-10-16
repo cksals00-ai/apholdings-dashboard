@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-17",
+  "number": 9,
+  "status": "published",
+  "verified": true,
+  "title": "AI를 업무로 연결하는 조건, 자료·권한·검증",
+  "intro": "학습 자료의 재구성부터 코딩 모델 운영, 에이전트 통제와 문서 검증까지. AI를 실제 업무에 연결할 때 필요한 조건을 공식 발표 5건으로 살펴봅니다.",
+  "edition_note": "2026년 10월 17일 편집 · 전날 발표를 우선 확인한 뒤 10월 14~16일 공식 자료로 확대 · 출시·활용 안내·설계 제안·구현 예제 구분 · AI 작성 및 원문 확인",
+  "takeaway": "AI 활용의 다음 단계는 자료와 권한, 결과 검증을 연결하는 일입니다. 기능 소개와 실제 제공 범위를 구분하고, 자동화의 성과는 자신의 업무 자료로 확인하십시오.",
+  "source_checked_at": "2026-10-17T07:00:59+09:00",
+  "stories": [
+    {
+      "category": "AI LEARNING",
+      "title": "Gemini Notebook, 학습 기능 3가지 소개",
+      "source": "Google 공식 블로그",
+      "published": "2026-10-16",
+      "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/three-tips-study-gemini-notebook/",
+      "summary": "강의 자료를 짧은 영상·학습 개요·다양한 퀴즈로 다시 살펴볼 수 있습니다.",
+      "fact": "Google은 최근 추가한 Gemini Notebook 학습 기능의 활용법을 소개했습니다. 60초 영상 개요, 자료 기반의 대화형 학습 개요, 단답형·복수 선택·빈칸 채우기 퀴즈와 피드백을 설명했습니다. 10월 16일은 활용 안내 게시일이며 모든 기능의 출시일을 뜻하지 않습니다. 원문은 국가별·요금제별 이용 범위를 구체적으로 밝히지 않았습니다.",
+      "insight": "AP의 AI 교육에서는 같은 자료를 설명·복습·이해도 확인으로 연결하는 수업 구성을 검토할 수 있습니다. 생성된 요약과 퀴즈가 원문 내용을 정확히 반영하는지 확인하는 과정도 교육에 포함할 필요가 있습니다.",
+      "action": "공유 권한이 있는 교육 자료 한 건을 골라 생성된 요약과 퀴즈의 근거가 원문에 있는지 비교하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-17-study-tools.jpg",
+        "alt": "학습 노트와 영상 카드·플래시카드·퀴즈를 연결한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "OPEN MODELS",
+      "title": "AWS, Reflection Beam 배포 경로 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-16",
+      "url": "https://aws.amazon.com/blogs/machine-learning/introducing-reflection-beam-an-open-weight-model-for-agentic-coding-on-aws/",
+      "summary": "코딩 모델의 공개 가중치와 실제 운영에 필요한 컴퓨팅 조건을 함께 살펴봐야 합니다.",
+      "fact": "AWS는 코드 수정·도구 호출·여러 단계 작업을 위한 공개 가중치 모델 Reflection Beam의 배포 방법을 소개했습니다. SageMaker JumpStart 또는 HyperPod에서 운영하는 경로를 설명하며, 출시 시 JumpStart 제공 리전은 미국 버지니아 북부와 오하이오라고 밝혔습니다. 가중치는 Apache 2.0으로 공개되지만 다중 GPU 용량과 사용 비용이 필요합니다.",
+      "insight": "AP의 AI 활용 교육과 홈페이지·서비스 운영에서는 모델을 직접 운영할 때 얻는 통제권과 인프라 부담을 함께 비교해야 합니다. 공개 가중치라는 이유만으로 무료 운영이나 기존 도구보다 높은 성능을 기대해서는 안 됩니다.",
+      "action": "코딩 업무 한 가지를 기준으로 필요한 데이터 접근 범위·운영 비용·응답 품질을 비교할 평가표를 만드십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-17-beam-coding.jpg",
+        "alt": "공개 모델을 상징하는 컴퓨팅 코어와 대형 서버 모듈",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AGENT GOVERNANCE",
+      "title": "AWS, 에이전트 신뢰 설계 원칙 제안",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-15",
+      "url": "https://aws.amazon.com/blogs/machine-learning/trust-in-depth-giving-agents-more-autonomy-without-losing-control/",
+      "summary": "자동 실행 범위를 넓히려면 권한·경계·실행 기록을 먼저 정의해야 합니다.",
+      "fact": "AWS는 Trust in Depth라는 접근을 제안하며 업무 범위, 실행 주체, 권한 경계, 관측과 검증을 여러 층으로 구성하도록 설명했습니다. 자동 추론으로 확인할 수 있는 것은 명확히 표현한 규칙과 가정이 적용되는 범위이며, 맥락 판단까지 모두 증명한다는 뜻은 아닙니다. 새로운 만능 안전 인증이나 모든 오류 방지 보장 발표가 아닙니다.",
+      "insight": "AP의 뉴스 발행·구독 운영처럼 외부 공개와 메일 발송이 연결된 업무는 실행 조건과 중복 방지, 결과 기록이 중요합니다. AI 교육에서도 도구 사용법과 함께 누가 어떤 권한으로 실행하는지 설명할 필요가 있습니다.",
+      "action": "자동 실행 중인 업무 하나의 허용 동작·중단 조건·승인 담당자·실행 기록 위치를 정리하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-17-agent-trust.jpg",
+        "alt": "권한 토큰과 여러 검증 관문을 통과하는 자동화 장치",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "DOCUMENT AI",
+      "title": "AWS, 문서 추출·검증 자동화 예제 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-14",
+      "url": "https://aws.amazon.com/blogs/machine-learning/build-self-improving-document-processing-using-amazon-bedrock-agentcore/",
+      "summary": "문서 형식별 추출 지침을 저장하고 검증 실패를 반영하는 구조를 제시합니다.",
+      "fact": "AWS는 Bedrock AgentCore 기반으로 문서를 분류하고 데이터를 추출·검증하는 구현 예제를 공개했습니다. 새 형식은 추출 지침을 만들고, 검증 후 저장해 유사 문서에 재사용하는 방식입니다. 합성 구매 주문 데이터로 제시한 예제이며 실제 업무에는 자체 스키마와 검증 규칙이 필요합니다. 모델·관련 서비스의 지원 리전과 계정 권한도 별도 확인해야 합니다.",
+      "insight": "AP의 커머스 운영에서 주문서·공급사 자료를 정리할 때는 추출값을 상품·거래처 기준 정보와 대조하는 구조를 검토할 수 있습니다. 예제의 처리 시간이나 비용을 AP의 실제 성과로 그대로 적용해서는 안 됩니다.",
+      "action": "민감정보를 제거한 문서 샘플에서 필수 항목·금액 검산·거래처 대조 기준을 먼저 정의하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-17-document-workflow.jpg",
+        "alt": "서로 다른 주문서를 검증해 정돈된 데이터로 바꾸는 흐름",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI FOR SCIENCE",
+      "title": "Google, 유럽 연구자 AI·컴퓨팅 지원 발표",
+      "source": "Google DeepMind 공식 블로그",
+      "published": "2026-10-14",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/were-powering-european-scientific-discovery-with-advanced-ai-compute-and-frontier-models/",
+      "summary": "과학 AI 도구 접근권과 연구용 계산 자원을 함께 지원합니다.",
+      "fact": "Google DeepMind와 Google Cloud는 유럽의 과학 연구자 최대 200명에게 프런티어 모델 접근과 총 300만 달러의 컴퓨팅 크레딧을 제공하겠다고 발표했습니다. AlphaFold 3·WeatherNext 등 과학 도구를 EU의 RAISE 이니셔티브를 통해 지원한다는 내용입니다. 한국 이용자 전체에 제공하는 무료 크레딧이나 확정된 연구 성과 발표가 아닙니다.",
+      "insight": "AP의 AI 교육·정보 서비스는 모델의 성능뿐 아니라 실제 접근 자격과 필요한 계산 자원을 함께 설명해야 합니다. 연구 지원 소식을 소개할 때는 지원 대상과 신청 조건을 국내 일반 이용 가능성과 구분하는 것이 중요합니다.",
+      "action": "AI 지원 프로그램을 소개하는 자료에 대상 지역·자격·지원 자원·공식 안내 링크가 함께 있는지 확인하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-17-science-compute.jpg",
+        "alt": "연구실과 분자·기상 모형에 연결된 공동 컴퓨팅 자원",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}
