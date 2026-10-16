@@ -4,7 +4,7 @@
 
 data/lia_daily_queue.json 의 순서대로, 아직 안 올라간 첫 편을 인스타 릴로 게시한다.
   · 이미 올라갔는지는 최근 게시물 캡션 첫 줄로 판정(상태 파일을 고치지 않음)
-  · 최근 6시간 안에 게시물이 있으면 건너뜀(하루 1건 원칙)
+  · 이 시리즈가 최근 18시간 안에 올라갔으면 건너뜀(다른 시리즈 게시물은 무시)
   · 토큰은 절대 출력하지 않는다. API 원본 응답도 출력하지 않는다.
 """
 import os, sys, json, time, datetime, urllib.request, urllib.parse, urllib.error
@@ -33,10 +33,12 @@ def first_line(s):
 def main():
     queue = json.load(open(QUEUE, encoding="utf-8"))
     recent = call("me/media", fields="timestamp,caption", limit=40).get("data", [])
-    if recent:
-        last = datetime.datetime.strptime(recent[0]["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
-        if (datetime.datetime.now(datetime.timezone.utc) - last).total_seconds() < 6 * 3600:
-            print("최근 6시간 안에 게시물 있음 — 오늘은 건너뜀"); return 0
+    ours = {first_line(x["caption"]) for x in queue}
+    now = datetime.datetime.now(datetime.timezone.utc)
+    for m in recent:   # 다른 시리즈 게시물은 상관하지 않는다 — 이 시리즈가 최근 18시간 안에 올라갔을 때만 건너뜀
+        t = datetime.datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
+        if first_line(m.get("caption")) in ours and (now - t).total_seconds() < 18 * 3600:
+            print("이 시리즈 오늘 편 이미 게시됨 — 건너뜀"); return 0
     posted = {first_line(m.get("caption")) for m in recent}
     it = next((x for x in queue if first_line(x["caption"]) not in posted), None)
     if not it:
