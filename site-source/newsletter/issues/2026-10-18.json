@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-18",
+  "number": 10,
+  "status": "published",
+  "verified": true,
+  "title": "AI 자동화의 현장, 제작부터 지원·결제까지",
+  "intro": "발표자료를 만들고, 모델을 비교하고, 보안 경고와 직원 문의를 처리하는 AI. 주말에는 최근 공식 구현 사례에서 업무 연결 방식과 운영 조건을 살펴봅니다.",
+  "edition_note": "2026년 10월 18일 편집 · 전날 신규 발표가 적어 최근 7일로 확인 범위 확대 · 10월 13~14일 AWS 공식 자료 중 미발행 5건 선정 · 신규 출시와 구현 예제·고객 사례 구분 · AI 작성 및 원문 확인",
+  "takeaway": "자동화할 업무를 고르면 먼저 근거 자료와 성공 기준을 정리하십시오. 생성·응답·변경·결제가 연결되는 지점마다 결과와 비용을 확인할 수 있어야 합니다.",
+  "source_checked_at": "2026-10-18T07:00:31+09:00",
+  "stories": [
+    {
+      "category": "AI CONTENT",
+      "title": "AWS, 문서 기반 발표자료 생성 예제 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-14",
+      "url": "https://aws.amazon.com/blogs/machine-learning/generate-presentations-with-amazon-bedrock-agentcore/",
+      "summary": "사내 자료 검색부터 슬라이드·이미지·파일 생성까지 연결하는 구현 방법입니다.",
+      "fact": "AWS는 Bedrock AgentCore와 Strands를 이용해 자료 검색·요약·PowerPoint 생성을 연결하는 예제를 공개했습니다. 검색 증강 생성으로 원문을 참조하고 Guardrails 등을 적용하는 구조입니다. 약 90초라는 수치는 AWS 내부 시험 결과이며 모든 문서에서 보장되는 시간이 아닙니다. AWS 계정·모델 접근 권한과 지원 리전 확인이 필요한 개발 예제입니다.",
+      "insight": "AP의 콘텐츠 제작과 AI 교육에서는 자료 수집·구성·초안 제작을 연결하는 참고가 됩니다. 원문을 검색했다는 사실만으로 수치와 결론의 정확성이 보장되지는 않으므로 출처 대조와 최종 지면 확인을 제작 과정에 포함해야 합니다.",
+      "action": "사용 권한이 있는 자료 한 건에서 슬라이드에 넣을 주장과 이를 뒷받침하는 원문 위치를 짝지어 정리하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-18-presentation.jpg",
+        "alt": "원문 문서에서 검토용 발표 카드로 이어지는 제작 흐름",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "MODEL EVALUATION",
+      "title": "AWS, 모델 배포·평가·정리 절차 소개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-14",
+      "url": "https://aws.amazon.com/blogs/machine-learning/deploy-and-evaluate-models-with-amazon-sagemaker-jumpstart/",
+      "summary": "같은 입력과 측정 조건으로 모델을 비교하고 시험 자원을 정리하는 방법입니다.",
+      "fact": "AWS는 SageMaker JumpStart 모델을 배포하고 샘플 요청을 실행한 뒤 엔드포인트를 삭제하는 반복 가능한 절차를 소개했습니다. 지연 시간·출력 길이·단일 요청 생성 속도를 측정하며, 모델별 요청 형식과 라이선스 동의 조건은 달라질 수 있습니다. 배포 시간과 사용 가능 여부는 리전·인스턴스·할당량 등에 영향을 받습니다.",
+      "insight": "AP의 AI 교육과 서비스 운영에서는 유명한 모델인지보다 실제 업무에서 필요한 품질·속도·비용의 균형을 확인해야 합니다. 예제의 단일 요청 속도를 여러 사용자가 동시에 접속하는 운영 성능으로 해석해서는 안 됩니다.",
+      "action": "대표 질문과 정답 기준을 고정하고 후보 도구의 결과 품질·응답 시간·실제 비용을 같은 조건에서 기록하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-18-model-evaluation.jpg",
+        "alt": "모델 세 개를 품질·속도·비용 기준으로 비교하는 정밀 저울",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "CLOUD SECURITY",
+      "title": "Tamnoon, AI 보안 대응 구조 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-14",
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-tamnoon-built-ai-powered-cloud-security-remediation-with-amazon-bedrock/",
+      "summary": "보안 경고를 조사·분류하고 실행 위험에 따라 자동 대응과 전문가 판단을 나눕니다.",
+      "fact": "AWS와 Tamnoon은 Bedrock 기반 Tami가 클라우드 보안 경고를 조사하고 수정안을 구성하는 고객 사례를 소개했습니다. 안전하다고 분류한 동작은 자동 실행하고, 정보가 부족하거나 위험한 경우 전문가에게 넘기는 구조입니다. 개선 성과는 해당 업체가 제시한 사례이며 모든 환경의 무사고 운영을 보장하는 결과가 아닙니다.",
+      "insight": "AP의 홈페이지·구독 서비스 운영에서도 오류 탐지와 실제 설정 변경은 구분할 필요가 있습니다. 서비스 영향을 확인할 수 있는 범위부터 자동화하고 변경 이력과 되돌릴 방법을 갖추는 것이 운영 품질에 도움이 됩니다.",
+      "action": "자동 변경 후보 한 가지의 영향 범위·실행 권한·실패 감지 기준·복구 절차를 먼저 정리하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-18-security-response.jpg",
+        "alt": "검증 장치와 승인 토큰으로 클라우드의 취약 부분을 살펴보는 모형",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "WORKPLACE AI",
+      "title": "ShipStation, Slack AI 지원 사례 소개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-13",
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-shipstation-global-built-an-ai-it-help-desk-on-amazon-bedrock-agentcore/",
+      "summary": "내부 지식을 찾아 답하고 해결이 어려운 요청은 맥락을 담은 티켓으로 넘깁니다.",
+      "fact": "AWS와 ShipStation Global은 Slack에서 동작하는 IT 지원 에이전트 Deckhand의 구현 사례를 공개했습니다. 정리된 내부 지식 기반으로 질문에 답하고 오류 화면을 읽으며 Jira Service Management 티켓을 생성·갱신합니다. 제시된 해결률과 만족도는 해당 조직의 초기 운영 자료이며 다른 회사에 그대로 적용되는 수치가 아닙니다.",
+      "insight": "AP의 AI 교육과 문의 운영에는 자주 묻는 질문의 근거 자료를 정리하고 담당자에게 넘기는 경로를 명확히 하는 방식이 참고가 됩니다. 내부 자료의 최신성·접근 권한과 답변의 근거를 함께 관리해야 합니다.",
+      "action": "반복 문의 세 가지의 공식 답변·갱신 담당자·직접 처리할 수 없는 경우의 전달 경로를 정리하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-18-it-helpdesk.jpg",
+        "alt": "내부 안내서와 대화·담당자 전달 티켓이 연결된 지원 데스크",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AGENT COMMERCE",
+      "title": "AWS, 에이전트 유료 자원 결제 사례 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-13",
+      "url": "https://aws.amazon.com/blogs/machine-learning/building-agents-that-transact-with-anchor-browser-and-agentcore-payments/",
+      "summary": "유료 API·웹 자료 접근을 예산과 결제 기록 안에서 처리하는 통합 방식입니다.",
+      "fact": "AWS는 Anchor Browser와 AgentCore payments를 연결해 x402 방식의 유료 웹·API 요청을 처리하는 사례를 소개했습니다. 결제 자격 증명을 에이전트 실행 환경과 분리하고 설정된 한도 안에서 결제를 수행합니다. 결제 기능은 기본 비활성이며 활성화하면 실제 비용이 발생할 수 있습니다. 일반 쇼핑몰 전체의 결제를 지원한다는 뜻은 아닙니다.",
+      "insight": "AP의 뉴스 수집·커머스 조사에서 유료 데이터가 필요하다면 자료별 예산·허용 공급자·사용 권한을 먼저 정의해야 합니다. 자동 결제 지원이 콘텐츠 재배포 권한까지 제공하는 것은 아니며 국내 이용 가능 조건도 별도로 확인해야 합니다.",
+      "action": "유료 데이터 후보의 이용 약관·재배포 범위·건별 한도·월 예산과 결제 중단 조건을 검토하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-18-agent-payments.jpg",
+        "alt": "보안 예산 상자를 통해 유료 데이터 관문을 통과하는 자동 브라우저 모형",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}
