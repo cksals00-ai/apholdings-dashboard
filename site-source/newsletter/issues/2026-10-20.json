@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-20",
+  "number": 12,
+  "status": "published",
+  "verified": true,
+  "title": "AI 제작의 흐름, 검토·시각화·영상과 음성",
+  "intro": "제작 전 구성 검토부터 스타일 제안, 영상 장면 찾기와 음성 전사까지. 전날 공식 자료에서 콘텐츠를 만드는 과정과 이를 뒷받침하는 실행 조건을 살펴봅니다.",
+  "edition_note": "2026년 10월 20일 편집 · 전날 10월 19일 공식 자료 5건 · 순차 적용·활용 사례·기술 설명 구분 · Pegasus의 최초 제공 발표일은 10월 9일 · AI 작성 및 원문 확인",
+  "takeaway": "AI 제작의 품질은 생성 속도만으로 정해지지 않습니다. 제작 전 구성을 검토하고, 결과를 원문·실제 상품·영상·음성과 대조하는 과정을 남기십시오.",
+  "source_checked_at": "2026-10-20T07:03:54+09:00",
+  "stories": [
+    {
+      "category": "AI CONTENT",
+      "title": "Gemini Notebook, 제작 전 검토 기능 확대",
+      "source": "Google 공식 블로그",
+      "published": "2026-10-19",
+      "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/co-create-slides-videos/",
+      "summary": "슬라이드·영상 개요를 완성하기 전에 구성과 연출 방향을 확인할 수 있습니다.",
+      "fact": "Google은 Gemini Notebook의 슬라이드·영상 개요 제작에서 원문 기반 주제를 제안받고 내용·스타일·형식을 조정하는 기능을 소개했습니다. Review를 켜면 개요·제작 노트를 확인하고 의견을 반영한 뒤 결과물을 생성합니다. 향후 일주일에 걸쳐 전 세계 이용자에게 순차 적용한다고 밝혔으며 모든 계정에서 당일 이용 가능하다는 뜻은 아닙니다.",
+      "insight": "AP의 콘텐츠 제작·AI 교육에서는 초안의 논리와 근거를 확인한 뒤 시각물을 만드는 과정이 참고가 됩니다. 제작 전 검토가 가능하더라도 최종 결과의 수치·인용·이미지 표현은 별도로 확인해야 합니다.",
+      "action": "다음 발표자료의 개요에서 핵심 주장·원문 근거·장면 순서를 먼저 검토한 뒤 제작을 시작하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-20-review-before-render.jpg",
+        "alt": "원문 노트와 검토 연필·슬라이드 스토리보드·필름 모형",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI COMMERCE",
+      "title": "Google, Gemini 패션 시각화 활용법 소개",
+      "source": "Google 공식 블로그",
+      "published": "2026-10-19",
+      "url": "https://blog.google/products-and-platforms/products/gemini/stylist-outfit-tips-gemini/",
+      "summary": "의상 조합을 이미지로 비교하고 수정하며 고객과 아이디어를 공유하는 사례입니다.",
+      "fact": "Google은 스타일리스트 Sydney Bordonaro가 Gemini로 의상 조합을 시각화하고 개별 아이템을 바꿔보는 사례를 소개했습니다. 고객에게 완성된 스타일의 이미지를 공유하는 흐름과 생활 활용 팁을 제시한 글입니다. 새로운 치수 측정 제품 출시나 실제 착용감·색상·핏을 보장하는 발표가 아니며 국가별 제공 조건은 구체적으로 밝히지 않았습니다.",
+      "insight": "AP의 Lia Select에서는 상품 조합과 스타일 제안을 설명하는 보조 이미지에 활용 가능성을 검토할 수 있습니다. 판매 상품의 실제 사진·규격·소재 정보와 AI 시각화를 구분하고 인물·상품 이미지의 사용 권한을 확인해야 합니다.",
+      "action": "사용 권한이 있는 상품 사진으로 조합안을 만든다면 AI 제작 표시와 실제 제품 정보가 함께 보이는지 확인하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-20-fashion-visualization.jpg",
+        "alt": "의상 모형과 스타일 제안 카드·소재 견본으로 구성한 작은 아틀리에",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "VIDEO AI",
+      "title": "AWS, Pegasus 1.5 영상 분석 방법 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-19",
+      "url": "https://aws.amazon.com/blogs/machine-learning/pegasus-1-5-from-twelvelabs-is-now-available-in-amazon-bedrock/",
+      "summary": "찾고 싶은 장면을 정의하면 영상의 시간 구간과 항목을 구조화해 받는 방식입니다.",
+      "fact": "AWS는 TwelveLabs Pegasus 1.5로 영상에서 조건에 맞는 구간을 찾고 시작·종료 시각 등을 JSON으로 받는 방법을 설명했습니다. 최대 2시간 영상 처리, 참조 이미지와 텍스트를 결합한 요청 등을 소개했습니다. Bedrock 제공 발표는 10월 9일이며 이번 글은 19일 활용 설명입니다. 안내 리전은 미국 오리건이고 한국어는 부분 지원으로 명시했습니다.",
+      "insight": "AP의 콘텐츠 제작·교육에서는 긴 영상에서 필요한 장면을 찾거나 편집용 목록을 만드는 데 참고가 됩니다. 자동으로 찾은 시간 구간과 설명은 실제 영상을 대조하고, 한국어 콘텐츠의 정확도도 별도로 평가해야 합니다.",
+      "action": "사용 권한이 있는 짧은 영상에서 찾을 장면의 기준을 정하고 자동 목록을 실제 구간과 대조하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-20-video-segments.jpg",
+        "alt": "선택된 영상 프레임과 시간 구간을 정리하는 메타데이터 카드",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "VOICE AI",
+      "title": "Deepgram, Trainium2 음성 전사 최적화 소개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-19",
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-deepgram-optimized-voice-ai-at-scale-with-aws-trainium/",
+      "summary": "음성 파일을 모아 처리하는 전사 업무에서 정확도와 비용 효율을 함께 점검했습니다.",
+      "fact": "Deepgram과 AWS는 Nova-3 음성 인식 모델을 Trainium2로 옮기고 연산 커널·실행 환경을 조정한 사례를 공개했습니다. 오프라인 일괄 전사를 대상으로 처리량과 비용을 평가하고 단어 오류율 등을 기준 모델과 대조했다고 설명했습니다. 성과는 해당 배치 작업과 평가 당시 가격 조건의 결과이며 실시간 음성 응답이나 모든 언어의 정확도 향상을 보장하지 않습니다.",
+      "insight": "AP의 교육 영상·콘텐츠 제작에서는 음성 전사를 실시간 응답과 편집용 일괄 작업으로 구분할 필요가 있습니다. 전사 비용만이 아니라 고유명사·숫자·화자 구분의 오류와 수정 시간을 함께 평가해야 합니다.",
+      "action": "같은 음성 샘플에서 전사 결과의 고유명사·숫자 오류와 수정 시간, 처리 비용을 함께 기록하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-20-batch-transcription.jpg",
+        "alt": "음성 파형 묶음이 컴퓨팅 모듈을 거쳐 전사 카드로 정리되는 흐름",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI INFRASTRUCTURE",
+      "title": "AWS, vLLM 메모리 전송 개선 방식 소개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-19",
+      "url": "https://aws.amazon.com/blogs/machine-learning/push-based-kv-transfer-to-improve-ttft-and-tpot-for-disaggregated-inference-in-vllm/",
+      "summary": "입력 처리와 출력 생성 사이의 메모리 전송 준비를 겹쳐 대기 시간을 줄입니다.",
+      "fact": "AWS는 vLLM의 분리형 추론에서 KV 캐시를 보내는 push 기반 NIXL 커넥터를 소개했습니다. 받는 쪽 메모리 준비와 입력 연산을 겹치는 구조이며 Qwen3-32B·EC2 P5en·EFA 환경에서 성능을 비교했습니다. 결과는 작업·구성에 따라 달라집니다. 양방향 캐시 전송이나 입력 처리 후 서버 선택이 필요한 경우 기존 pull 방식이 더 적합할 수 있다고 설명했습니다.",
+      "insight": "AP의 AI 서비스 운영에서는 첫 응답 대기 시간과 전체 답변 완료 시간을 구분해 보는 것이 중요합니다. 고급 인프라 구성은 실제 병목과 운영 부담을 확인한 뒤 검토하고 모든 기능의 속도 개선으로 확대 해석하지 않아야 합니다.",
+      "action": "느린 AI 기능 하나의 첫 응답 시간·전체 완료 시간·동시 요청 수를 함께 기록해 병목 위치를 확인하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-20-inference-transfer.jpg",
+        "alt": "준비된 수신 모듈로 메모리 타일을 미리 전달하는 병렬 컴퓨팅 모형",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}
