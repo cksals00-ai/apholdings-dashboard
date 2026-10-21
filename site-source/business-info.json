@@ -1,0 +1,11 @@
+{
+ "_note": "사업자 표시 정보 (2026-10-21 대표 지시: 통신판매업 신고번호 홈페이지 노출). scripts/apply_bizinfo.py 가 모든 페이지 푸터에 넣는다. 주소·전화는 대표 확인 전이라 넣지 않음.",
+ "name_ko": "에이피홀딩스(A.P Holdings)",
+ "name_en": "A.P Holdings",
+ "ceo_ko": "박찬민",
+ "ceo_en": "Chanmin Park",
+ "biz_no": "277-43-01488",
+ "mailorder_ko": "제2026-서울동작-1252호",
+ "mailorder_en": "2026-Seoul Dongjak-1252",
+ "verify_url": "https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2774301488"
+}
