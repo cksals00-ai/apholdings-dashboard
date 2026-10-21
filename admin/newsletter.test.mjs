@@ -15,3 +15,27 @@ test('신청자와 최신호를 축약하고 더보기 안에 목록을 표시�
  assert.match(host.innerHTML,/data-news-history/);
  module.clear();assert.equal(host.innerHTML,'');
 });
+
+test('구독자 추가·수정·재발송·삭제 요청이 관리자 API로 전달된다',async()=>{
+ const listeners={},calls=[];
+ const els={'[data-add="name"]':{value:'홍길동'},'[data-add="email"]':{value:'new@example.com'}};
+ const stub={addEventListener(){},innerHTML:'',textContent:'',dataset:{}};
+ const host={innerHTML:'',querySelector:sel=>els[sel]||stub,addEventListener:(t,f)=>{listeners[t]=f;},removeEventListener(){}};
+ globalThis.document={querySelector:()=>host};
+ globalThis.confirm=()=>true;
+ const admin={mail_ready:true,counts:{pending:1,active:0,unsubscribed:0},subscribers:[{id:'s',email:'p@example.com',name:'',status:'pending',created_at:'2026-10-13T00:00:00Z'}],issues:[],deliveries:[],runtime:{}};
+ globalThis.fetch=async(url,init={})=>{calls.push({url:String(url).split('/ap-news/')[1],method:init.method||'GET',body:init.body?JSON.parse(init.body):null});return {ok:true,json:async()=>init.method==='POST'?{message:'ok'}:admin};};
+ const module=createNewsletter({auth:{getSession:async()=>({data:{session:{access_token:'t'}}})}},()=>({id:'owner'}));
+ await module.load();
+ assert.match(host.innerHTML,/<table/);
+ assert.match(host.innerHTML,/data-act="resend"/);
+ const click=(act,id)=>listeners.click({target:{closest:()=>({dataset:{act},matches:()=>false,disabled:false,closest:()=>id?{dataset:{id},querySelector:sel=>sel==='[data-f="name"]'?{value:'새 이름'}:sel==='[data-f="email"]'?{value:'fix@example.com'}:null}:null})}});
+ await click('add');
+ await click('resend','s');
+ await click('save','s');
+ await click('delete','s');
+ const posts=calls.filter(c=>c.method==='POST');
+ assert.deepEqual(posts.map(c=>c.url),['admin-add','admin-resend','admin-update','admin-delete']);
+ assert.deepEqual(posts[0].body,{name:'홍길동',email:'new@example.com'});
+ assert.deepEqual(posts[2].body,{id:'s',name:'새 이름',email:'fix@example.com'});
+});

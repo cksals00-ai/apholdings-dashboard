@@ -115,6 +115,50 @@ Deno.serve(async req=>{
     if(Number(req.headers.get('content-length')||0)>4096)return reply({message:'요청이 너무 큽니다.'},413);
     const raw=await req.text();if(raw.length>4096)return reply({message:'요청이 너무 큽니다.'},413);
     let body;try{body=JSON.parse(raw);}catch{return reply({message:'요청 형식을 확인해주세요.'},400);}
+    if(action.startsWith('admin-')) {
+      if(!await isOwner(req))return reply({message:'관리자 로그인이 필요합니다.'},401);
+      const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      const past=()=>new Date(Date.now()-1000).toISOString();
+      if(action==='admin-add') {
+        let input;try{input=validateSubscription({email:body.email,name:body.name,consent:true});}catch(e){return reply({message:(e as Error).message},400);}
+        const found=(await db(`ap_news_subscribers?email=eq.${encodeURIComponent(input.email)}&select=status`))?.[0];
+        if(found?.status==='active')return reply({message:'이미 구독 중인 주소예요.'},409);
+        await rpc('ap_news_request_subscription',{p_email:input.email,p_name:input.name});
+        return reply({message:'추가했어요. 확인 메일은 약 5분 안에 도착합니다.'});
+      }
+      const id=String(body.id||'');if(!UUID.test(id))return reply({message:'올바른 구독자 ID가 필요합니다.'},400);
+      const cur=(await db(`ap_news_subscribers?id=eq.${id}&select=id,email,name,status`))?.[0];
+      if(!cur)return reply({message:'구독자를 찾지 못했습니다.'},404);
+      if(action==='admin-update') {
+        const patch:Record<string,unknown>={};let emailChanged=false;
+        if(typeof body.name==='string')patch.name=body.name.trim().slice(0,60);
+        if(typeof body.email==='string') {
+          let email;try{email=validateSubscription({email:body.email,consent:true}).email;}catch(e){return reply({message:(e as Error).message},400);}
+          if(email!==cur.email) {
+            if(cur.status==='active')return reply({message:'구독 중인 주소는 바꿀 수 없어요. 해지한 뒤 새 주소를 추가해주세요.'},409);
+            if((await db(`ap_news_subscribers?email=eq.${encodeURIComponent(email)}&select=id`)).length)return reply({message:'이미 등록된 이메일이에요.'},409);
+            patch.email=email;emailChanged=true;
+            if(cur.status==='pending')patch.confirmation_expires=past();
+          }
+        }
+        if(Object.keys(patch).length)await db(`ap_news_subscribers?id=eq.${id}`,'PATCH',patch);
+        if(emailChanged&&cur.status==='pending')await rpc('ap_news_request_subscription',{p_email:patch.email,p_name:(patch.name??cur.name) as string});
+        return reply({message:emailChanged&&cur.status==='pending'?'저장했어요. 새 주소로 확인 메일을 보냅니다(약 5분).':'저장했어요.'});
+      }
+      if(action==='admin-resend') {
+        if(cur.status!=='pending')return reply({message:'이메일 확인 대기 중인 구독자만 다시 보낼 수 있어요.'},409);
+        await db(`ap_news_subscribers?id=eq.${id}`,'PATCH',{confirmation_expires:past()});
+        await rpc('ap_news_request_subscription',{p_email:cur.email,p_name:cur.name});
+        return reply({message:'확인 메일을 다시 보냅니다. 약 5분 안에 도착해요.'});
+      }
+      if(action==='admin-unsubscribe') {await rpc('ap_news_unsubscribe',{p_id:id});return reply({message:'해지 처리했어요. 앞으로 뉴스레터를 보내지 않습니다.'});}
+      if(action==='admin-delete') {
+        if(cur.status==='active')return reply({message:'구독 중인 사람은 먼저 해지해주세요.'},409);
+        await db(`ap_news_subscribers?id=eq.${id}`,'DELETE');
+        return reply({message:'삭제했어요.'});
+      }
+      return reply({message:'지원하지 않는 요청입니다.'},404);
+    }
     if(action==='subscribe') {
       if(body.website)return reply({message:'신청을 접수했습니다.'},202);
       let input;try{input=validateSubscription(body);}catch(e){return reply({message:(e as Error).message},400);}
