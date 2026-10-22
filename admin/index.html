@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b1220">
   <title>AP Holdings Admin</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261007">
-  <link rel="stylesheet" href="/admin/admin.css?v=1.24-news-admin">
+  <link rel="stylesheet" href="/admin/admin.css?v=1.25-collect-log">
   <link rel="stylesheet" href="/admin/auth.css?v=1.2">
   <link rel="stylesheet" href="/admin/content.css?v=1.2-icon-center">
   <link rel="stylesheet" href="/admin/business-plan.css?v=1.0.0">
@@ -183,6 +183,17 @@
           </div>
           <p id="asset-message" class="form-message" role="status"></p>
           <div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>기준일</th><th>제품</th><th>구분</th><th>자산</th><th class="num">규모</th><th>출처</th><th>갱신</th></tr></thead><tbody id="asset-rows"></tbody></table></div>
+        </section>
+        <section class="panel panel-wide">
+          <div class="panel-head"><div><p class="eyebrow">COLLECTION LOG</p><h2>수집 기록</h2></div><div class="top-actions"><button id="collect-export" class="secondary" type="button">CSV 내보내기</button></div></div>
+          <p class="panel-note">언제 무엇을 얼마나 모았는지 회차마다 남깁니다. 주간 증분 · 전량 수집 · 논문 검색 · 새 출처 조사 · 씨드 빌드. 건너뛴 회차도 「건너뜀」으로 남깁니다.</p>
+          <div class="asset-filters">
+            <label>제품<select id="collect-product"><option value="ALL">전체</option><option value="safe">세이프리스트</option><option value="light">라이트리스트</option><option value="common">공통</option></select></label>
+            <label>작업<select id="collect-task"><option value="ALL">전체</option></select></label>
+            <label>결과<select id="collect-result"><option value="ALL">전체</option></select></label>
+          </div>
+          <p id="collect-message" class="form-message" role="status"></p>
+          <div class="asset-table-wrap"><table class="asset-table collect-table"><thead><tr><th>일자</th><th>제품</th><th>작업</th><th>결과</th><th>내용</th><th class="num">받은 행</th><th>출처</th></tr></thead><tbody id="collect-rows"></tbody></table></div>
         </section>
       </section>
 
@@ -388,6 +399,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=20261013-news-admin"></script>
+  <script type="module" src="/admin/admin.js?v=20261022-collect-log"></script>
 </body>
 </html>

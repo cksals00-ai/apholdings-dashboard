@@ -694,6 +694,7 @@ async function loadAssets(force = false) {
   const { data, error } = await supabase.from('admin_data_assets').select('*').order('collected_on', { ascending: false, nullsFirst: false }).order('created_at', { ascending: false });
   if (error) { $('#asset-message').textContent = '데이터 자산을 불러오지 못했습니다. 다시 로그인해 주세요.'; return; }
   assets = data || []; assetsLoaded = true;
+  loadCollections();
   $('#asset-message').textContent = '';
   renderAssets();
 }
@@ -792,6 +793,45 @@ function assetsToCsv(list) {
     const { error } = await supabase.from('admin_data_assets').delete().eq('id', id);
     if (error) { $('#asset-form-message').textContent = '삭제하지 못했습니다.'; return; }
     $('#asset-dialog').close(); await loadAssets(true);
+  });
+})();
+
+
+// ── 수집 기록 (2026-10-22) — admin_data_collections, 소유자만 읽는다 ──
+const COLLECT_TASKS = { weekly_increment: '주간 증분', full_refetch: '전량 수집', paper_search: '논문·통계 검색', source_research: '새 출처 조사', seed_build: '씨드 빌드', manual: '수동' };
+const COLLECT_RESULTS = { ok: '완료', partial: '일부', skipped: '건너뜀', failed: '실패', running: '진행 중' };
+let collections = [];
+async function loadCollections() {
+  const { data, error } = await supabase.from('admin_data_collections').select('*').order('run_on', { ascending: false }).order('created_at', { ascending: false }).limit(500);
+  if (error) { $('#collect-message').textContent = '수집 기록을 불러오지 못했습니다.'; return; }
+  collections = data || []; $('#collect-message').textContent = ''; renderCollections();
+}
+function visibleCollections() {
+  const p = $('#collect-product').value, t = $('#collect-task').value, r = $('#collect-result').value;
+  return collections.filter((c) => (p === 'ALL' || c.product === p) && (t === 'ALL' || c.task === t) && (r === 'ALL' || c.result === r));
+}
+function renderCollections() {
+  const rows = visibleCollections();
+  $('#collect-rows').innerHTML = rows.length ? rows.map((c) => `<tr class="collect-${c.result}">
+    <td class="date">${c.run_on}</td>
+    <td>${ASSET_PRODUCTS[c.product] || c.product}</td>
+    <td>${COLLECT_TASKS[c.task] || c.task}</td>
+    <td><span class="collect-result" data-result="${c.result}">${COLLECT_RESULTS[c.result] || c.result}</span></td>
+    <td class="title"><b>${c.link ? `<a href="${escapeHtml(c.link)}" target="_blank" rel="noopener">${escapeHtml(c.summary)}</a>` : escapeHtml(c.summary)}</b>${c.detail ? `<small>${escapeHtml(c.detail)}</small>` : ''}</td>
+    <td class="num">${fmtNum(c.rows_in)}</td>
+    <td>${escapeHtml(c.source || '')}</td>
+  </tr>`).join('') : '<tr><td colspan="7" class="empty">조건에 맞는 수집 기록이 없습니다.</td></tr>';
+}
+(function initCollections() {
+  $('#collect-task').insertAdjacentHTML('beforeend', Object.entries(COLLECT_TASKS).map(([v, l]) => `<option value="${v}">${l}</option>`).join(''));
+  $('#collect-result').insertAdjacentHTML('beforeend', Object.entries(COLLECT_RESULTS).map(([v, l]) => `<option value="${v}">${l}</option>`).join(''));
+  ['#collect-product', '#collect-task', '#collect-result'].forEach((s) => $(s).addEventListener('input', renderCollections));
+  $('#collect-export').addEventListener('click', () => {
+    const cols = ['run_on', 'product', 'task', 'result', 'summary', 'detail', 'rows_in', 'source', 'link'];
+    const cell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const csv = '\ufeff' + [cols.join(','), ...visibleCollections().map((c) => cols.map((k) => cell(k === 'task' ? COLLECT_TASKS[c[k]] : k === 'result' ? COLLECT_RESULTS[c[k]] : k === 'product' ? ASSET_PRODUCTS[c[k]] : c[k])).join(','))].join('\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); a.download = `ap_data_collections_${new Date().toISOString().slice(0, 10)}.csv`; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   });
 })();
 
