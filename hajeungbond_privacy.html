@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>하자증권 관리대장 — 개인정보 처리방침</title>
+<style>
+  body { font-family: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; max-width: 720px;
+         margin: 0 auto; padding: 40px 20px 80px; line-height: 1.7; color: #1c1c1e; word-break: keep-all; }
+  h1 { font-size: 26px; } h2 { font-size: 18px; margin-top: 32px; }
+  hr { margin: 48px 0; border: none; border-top: 1px solid #ddd; }
+  .date { color: #666; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; margin: 8px 0; }
+  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: top; }
+  th { background: #f5f5f7; }
+  @media (prefers-color-scheme: dark) {
+    body { background: #000; color: #f2f2f7; } th { background: #1c1c1e; } th, td, hr { border-color: #3a3a3c; } .date { color: #98989d; }
+  }
+</style>
+</head>
+<body>
+
+<h1>하자증권 관리대장 — 개인정보 처리방침</h1>
+<p class="date">시행일: 2026년 10월 22일</p>
+
+<p>「하자증권 관리대장」(이하 "앱")은 에이피홀딩스(A.P Holdings, 이하 "회사")가 운영하는 업무용 앱입니다. 건설 공사의 하자보수보증증권을 등록·관리하고, 보증 종료가 가까워지면 시공사 담당자에게 안내 메일을 보내는 데 쓰입니다. 앱은 <strong>관리자가 초대한 사람만</strong> 쓸 수 있으며, 회원가입·광고·추적 기능이 없습니다.</p>
+
+<h2>1. 처리하는 개인정보와 목적</h2>
+<table>
+  <tr><th>대상</th><th>항목</th><th>목적</th></tr>
+  <tr><td>앱 사용자(초대받은 직원)</td><td>회사 이메일, 이름, 직급, 부서, 전화번호, 역할(관리자·담당자·조회자), 로그인 기록(일시, 기기 이름)</td><td>로그인과 권한 확인, 메일 서명 작성, 작업 기록(누가 무엇을 바꿨는지) 보관</td></tr>
+  <tr><td>시공사(업체) 담당자</td><td>담당자 이름, 업무용 이메일, 업무용 전화번호, 사업자등록번호</td><td>보증 종료 안내 메일 발송과 회신 관리</td></tr>
+  <tr><td>증권 원본</td><td>사용자가 촬영하거나 첨부한 보증서 이미지·PDF</td><td>원본 보관, 내용 자동 인식(AI)</td></tr>
+</table>
+<p>앱은 위치, 연락처 목록, 건강 정보, 광고 식별자를 수집하지 않습니다. 카메라와 사진은 사용자가 증권을 촬영·첨부할 때만 쓰며, Face ID는 iPhone이 직접 처리하므로 회사는 생체 정보에 접근하지 않습니다.</p>
+
+<h2>2. 보유 기간과 파기</h2>
+<ul>
+  <li>증권 정보와 원본: 증권 관리 업무가 끝날 때까지(보증 종료 후 관리자가 정리할 때까지). 삭제한 항목은 실수 복구를 위해 숨김 처리되며, 관리자가 영구 정리를 요청하면 파기합니다.</li>
+  <li>앱 사용자 정보: 사용 중지 후 1년, 또는 회사(고객사)와의 운영 계약이 끝나면 지체 없이 파기합니다.</li>
+  <li>로그인 세션: 30일이 지나면 만료됩니다.</li>
+  <li>전자 파일은 복구할 수 없는 방법으로 삭제합니다.</li>
+</ul>
+
+<h2>3. 처리 위탁과 국외 이전</h2>
+<p>서비스 운영을 위해 아래 업체에 처리를 맡깁니다. 이 업체들은 해외 법인이므로 「개인정보 보호법」에 따른 국외 이전에 해당할 수 있습니다.</p>
+<table>
+  <tr><th>업체(국가)</th><th>맡기는 일</th><th>이전 항목</th><th>시기·방법</th></tr>
+  <tr><td>Supabase Inc. (미국) — 데이터 저장 위치: 대한민국 서울 리전</td><td>데이터베이스·파일 저장, 서버 운영</td><td>1번의 모든 항목</td><td>앱 사용 시 암호화된 연결(HTTPS)로 저장</td></tr>
+  <tr><td>Anthropic PBC (미국)</td><td>증권 이미지·PDF 내용 자동 인식</td><td>사용자가 「AI로 채우기」를 선택한 증권 원본</td><td>인식할 때마다 HTTPS로 전송, 인식 결과만 돌려받음. API로 보낸 데이터는 Anthropic 약관상 모델 학습에 쓰이지 않습니다</td></tr>
+  <tr><td>Resend, Inc. (미국)</td><td>안내 메일 발송</td><td>받는 사람·참조 이메일, 메일 제목·본문(업체명, 공사명, 증권번호, 금액, 종료일, 보낸 사람 서명)</td><td>메일을 보낼 때 HTTPS로 전송</td></tr>
+</table>
+<p>위 경우 외에 개인정보를 제3자에게 제공하거나 판매하지 않습니다. 국외 이전을 원하지 않으면 관리자에게 알려 주세요. 이 경우 AI 인식과 메일 발송 기능을 쓸 수 없습니다.</p>
+
+<h2>4. 안전하게 지키는 방법</h2>
+<ul>
+  <li>데이터는 외부에서 직접 접근할 수 없는 별도 공간에 두고, 앱 서버를 통해서만 읽고 씁니다.</li>
+  <li>앱 코드와 로그인 토큰은 원문 대신 해시로만 저장합니다. 로그인 실패가 반복되면 잠깁니다.</li>
+  <li>증권 원본은 비공개 저장소에 두고, 볼 때마다 5분짜리 임시 링크로만 엽니다.</li>
+  <li>앱 안의 로그인 정보는 iPhone 키체인에, 오프라인용 사본은 기기 암호화 영역에 저장합니다. 앱을 1분 넘게 벗어나면 다시 잠기고, 앱 전환 화면에서는 내용이 가려집니다.</li>
+  <li>모든 변경은 누가 언제 했는지 기록합니다.</li>
+</ul>
+
+<h2>5. 이용자의 권리</h2>
+<p>본인의 개인정보를 열람·정정·삭제하거나 처리 정지를 요청할 수 있습니다. 메일 서명 정보는 앱의 「설정 &gt; 메일 서명」에서 직접 고칠 수 있고, 그 밖의 요청은 아래 연락처로 보내 주세요. 시공사 담당자도 안내 메일의 회신 또는 아래 연락처로 같은 요청을 할 수 있습니다.</p>
+
+<h2>6. 아동</h2>
+<p>이 앱은 업무용이며 만 14세 미만 아동의 개인정보를 처리하지 않습니다.</p>
+
+<h2>7. 개인정보 보호책임자</h2>
+<p>에이피홀딩스 · 대표 박찬민 · 사업자등록번호 277-43-01488<br>
+이메일 <strong>alfred.park@apholdings.kr</strong></p>
+
+<h2>8. 변경</h2>
+<p>이 방침이 바뀌면 이 페이지에 새 시행일과 함께 게시합니다.</p>
+
+<hr>
+
+<h1 lang="en">Hajeung Bond Ledger — Privacy Policy</h1>
+<p class="date">Effective date: October 22, 2026</p>
+
+<div lang="en">
+<p>Hajeung Bond Ledger ("the app") is a business app operated by A.P Holdings ("we"). It is used to register and manage construction defect-warranty bonds and to email contractors before a bond expires. Only people invited by an administrator can use it. There is no public sign-up, no advertising and no tracking.</p>
+
+<h2>What we process and why</h2>
+<ul>
+  <li><strong>App users (invited staff):</strong> work email, name, job title, department, phone number, role, and sign-in records (time, device name) — to sign you in, check permissions, build your email signature and keep an audit trail.</li>
+  <li><strong>Contractor contacts:</strong> contact name, work email, work phone and business registration number — to send expiry notices and track replies.</li>
+  <li><strong>Bond documents:</strong> images or PDFs you photograph or attach — to keep the original and, if you choose, read it automatically with AI.</li>
+</ul>
+<p>We do not collect location, contacts, health data or advertising identifiers. The camera and photo library are used only when you add a bond. Face ID is handled by iOS; we never access biometric data.</p>
+
+<h2>Retention</h2>
+<p>Bond records are kept while the bond is being managed; deleted items are hidden for recovery and permanently erased on an administrator's request. User accounts are erased one year after deactivation or when the service agreement ends. Sign-in sessions expire after 30 days.</p>
+
+<h2>Service providers (processing outside Korea)</h2>
+<ul>
+  <li><strong>Supabase Inc. (USA)</strong> — database and file storage, hosted in the Seoul region.</li>
+  <li><strong>Anthropic PBC (USA)</strong> — reads bond images/PDFs when you choose AI fill. Under Anthropic's terms, API data is not used to train models.</li>
+  <li><strong>Resend, Inc. (USA)</strong> — delivers notice emails (recipient addresses and the email content).</li>
+</ul>
+<p>We do not sell or share personal data with anyone else.</p>
+
+<h2>Security</h2>
+<p>Data sits in an isolated space reachable only through the app's server. Sign-in codes and tokens are stored as hashes. Bond files are private and open only through 5-minute links. On the device, credentials are kept in the Keychain and the offline copy uses iOS data protection.</p>
+
+<h2>Your rights and contact</h2>
+<p>You may ask to access, correct, delete or stop processing your data. Contact <strong>alfred.park@apholdings.kr</strong> (A.P Holdings, CEO Chanmin Park, business registration 277-43-01488).</p>
+</div>
+
+</body>
+</html>
