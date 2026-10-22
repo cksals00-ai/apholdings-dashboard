@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
+<link rel="canonical" href="https://www.apholdings.kr/hajeungbond_privacy.html">
 <title>하자증권 관리대장 — 개인정보 처리방침</title>
 <style>
   body { font-family: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; max-width: 720px;
@@ -43,16 +44,20 @@
   <li>전자 파일은 복구할 수 없는 방법으로 삭제합니다.</li>
 </ul>
 
+<p>계정·증권·원본·메일·감사 기록의 영구 파기는 운영자가 처리합니다. 앱 삭제·로그아웃·증권 숨김 삭제·세션 만료만으로 서버 기록이 모두 파기되지는 않습니다. 보관 기간은 자동 파기 기능의 동작을 뜻하지 않으며, 삭제 요청은 아래 담당자에게 보내 주세요.</p>
 <h2>3. 처리 위탁과 국외 이전</h2>
 <p>서비스 운영을 위해 아래 업체에 처리를 맡깁니다. 이 업체들은 해외 법인이므로 「개인정보 보호법」에 따른 국외 이전에 해당할 수 있습니다.</p>
 <table>
   <tr><th>업체(국가)</th><th>맡기는 일</th><th>이전 항목</th><th>시기·방법</th></tr>
   <tr><td>Supabase Inc. (미국) — 데이터 저장 위치: 대한민국 서울 리전</td><td>데이터베이스·파일 저장, 서버 운영</td><td>1번의 모든 항목</td><td>앱 사용 시 암호화된 연결(HTTPS)로 저장</td></tr>
-  <tr><td>Anthropic PBC (미국)</td><td>증권 이미지·PDF 내용 자동 인식</td><td>사용자가 「AI로 채우기」를 선택한 증권 원본</td><td>인식할 때마다 HTTPS로 전송, 인식 결과만 돌려받음. API로 보낸 데이터는 Anthropic 약관상 모델 학습에 쓰이지 않습니다</td></tr>
-  <tr><td>Resend, Inc. (미국)</td><td>안내 메일 발송</td><td>받는 사람·참조 이메일, 메일 제목·본문(업체명, 공사명, 증권번호, 금액, 종료일, 보낸 사람 서명)</td><td>메일을 보낼 때 HTTPS로 전송</td></tr>
+  <tr><td>Anthropic PBC (미국)</td><td>증권 이미지·PDF 내용 자동 인식</td><td>AI 인식이 설정된 상태에서 사용자가 업로드한 증권 이미지·PDF 원본</td><td>인식할 때마다 HTTPS로 전송, 인식 결과만 돌려받음. API로 보낸 데이터는 Anthropic 약관상 모델 학습에 쓰이지 않습니다</td></tr>
+  <tr><td>Resend (Plus Five Five, Inc., 미국)</td><td>안내 메일 발송</td><td>받는 사람·참조 이메일, 메일 제목·본문(업체명, 공사명, 증권번호, 금액, 종료일, 보낸 사람 서명)</td><td>메일을 보낼 때 HTTPS로 전송</td></tr>
 </table>
-<p>위 경우 외에 개인정보를 제3자에게 제공하거나 판매하지 않습니다. 국외 이전을 원하지 않으면 관리자에게 알려 주세요. 이 경우 AI 인식과 메일 발송 기능을 쓸 수 없습니다.</p>
+<p>AI 인식이 설정된 경우 원본 첨부 시 인식 요청이 함께 이루어집니다. 현재 앱에는 첨부만 하고 AI 전송을 끄는 별도 선택이 없습니다. AI 처리를 원하지 않으면 원본 첨부 없이 직접 입력을 이용해 주세요. 문서에 불필요한 개인정보가 포함되면 가린 뒤 사용하세요.</p>
+<p>Anthropic 일반 API 입력·출력은 통상 30일 이내 삭제되며 별도 계약·보안·법령상 예외가 있을 수 있습니다. 무보관 계약 적용을 보장하지 않습니다. Resend의 일반 Free·Pro·Scale 요금제는 미국에서 메일·로그를 30일 보관하며, 계약 종료 후 잔여 자료는 공급자 정책에 따라 삭제합니다. 이전 시기는 해당 기능 실행 시이며 방법은 HTTPS 통신입니다. 공급자 정책: <a href="https://privacy.anthropic.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data">Anthropic API 보관</a>, <a href="https://resend.com/security">Resend 보관·보안</a>, <a href="https://supabase.com/privacy">Supabase 개인정보</a>.</p>
+<p>업무 사용자가 지정한 수신자에게 메일을 발송하면 해당 메일 내용이 전달됩니다. 발송 전에 수신자와 내용을 확인해 주세요. 위 경우 외에 개인정보를 제3자에게 제공하거나 판매하지 않습니다. 국외 이전을 원하지 않으면 관리자에게 알려 주세요. 이 경우 AI 인식과 메일 발송 기능을 쓸 수 없습니다.</p>
 
+<p>TestFlight 테스트에는 가상 증권·가상 담당자 정보 및 시험 수신함을 사용해 주세요. 이 페이지 게시만으로 정보주체 동의가 수집되지는 않습니다. 실제 업무자료 처리 전에는 업무 관리자가 위탁·국외 처리에 필요한 안내·동의 등 적용 근거를 확인해야 합니다.</p>
 <h2>4. 안전하게 지키는 방법</h2>
 <ul>
   <li>데이터는 외부에서 직접 접근할 수 없는 별도 공간에 두고, 앱 서버를 통해서만 읽고 씁니다.</li>
@@ -87,7 +92,7 @@
 <ul>
   <li><strong>App users (invited staff):</strong> work email, name, job title, department, phone number, role, and sign-in records (time, device name) — to sign you in, check permissions, build your email signature and keep an audit trail.</li>
   <li><strong>Contractor contacts:</strong> contact name, work email, work phone and business registration number — to send expiry notices and track replies.</li>
-  <li><strong>Bond documents:</strong> images or PDFs you photograph or attach — to keep the original and, if you choose, read it automatically with AI.</li>
+  <li><strong>Bond documents:</strong> images or PDFs you photograph or attach — to keep the original and, when AI is configured, read it automatically upon upload.</li>
 </ul>
 <p>We do not collect location, contacts, health data or advertising identifiers. The camera and photo library are used only when you add a bond. Face ID is handled by iOS; we never access biometric data.</p>
 
@@ -97,11 +102,12 @@
 <h2>Service providers (processing outside Korea)</h2>
 <ul>
   <li><strong>Supabase Inc. (USA)</strong> — database and file storage, hosted in the Seoul region.</li>
-  <li><strong>Anthropic PBC (USA)</strong> — reads bond images/PDFs when you choose AI fill. Under Anthropic's terms, API data is not used to train models.</li>
-  <li><strong>Resend, Inc. (USA)</strong> — delivers notice emails (recipient addresses and the email content).</li>
+  <li><strong>Anthropic PBC (USA)</strong> — receives uploaded bond images/PDFs for extraction when AI is configured; the current app has no attachment-only AI opt-out. Use manual entry without attachments if you do not want AI processing. Under Anthropic's terms, API data is not used to train models.</li>
+  <li><strong>Resend (Plus Five Five, Inc., USA)</strong> — delivers notice emails (recipient addresses and the email content).</li>
 </ul>
 <p>We do not sell or share personal data with anyone else.</p>
 
+<p>Anthropic ordinary API inputs/outputs are normally deleted within 30 days, subject to contractual, safety and legal exceptions; zero retention is not promised. Resend stores ordinary-plan email/log data in the USA for 30 days. Administrator action is required for permanent erasure; app removal, logout, soft deletion and session expiry do not themselves erase all server records. Use synthetic documents and test mailboxes during TestFlight. Publication of this policy does not collect consent. Your organization must confirm applicable notices, permissions and processing arrangements before using real business data.</p>
 <h2>Security</h2>
 <p>Data sits in an isolated space reachable only through the app's server. Sign-in codes and tokens are stored as hashes. Bond files are private and open only through 5-minute links. On the device, credentials are kept in the Keychain and the offline copy uses iOS data protection.</p>
 
