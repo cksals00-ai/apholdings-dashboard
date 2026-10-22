@@ -50,10 +50,10 @@
 <table>
   <tr><th>업체(국가)</th><th>맡기는 일</th><th>이전 항목</th><th>시기·방법</th></tr>
   <tr><td>Supabase Inc. (미국) — 데이터 저장 위치: 대한민국 서울 리전</td><td>데이터베이스·파일 저장, 서버 운영</td><td>1번의 모든 항목</td><td>앱 사용 시 암호화된 연결(HTTPS)로 저장</td></tr>
-  <tr><td>Anthropic PBC (미국)</td><td>증권 이미지·PDF 내용 자동 인식</td><td>AI 인식이 설정된 상태에서 사용자가 업로드한 증권 이미지·PDF 원본</td><td>인식할 때마다 HTTPS로 전송, 인식 결과만 돌려받음. API로 보낸 데이터는 Anthropic 약관상 모델 학습에 쓰이지 않습니다</td></tr>
+  <tr><td>Anthropic PBC (미국)</td><td>증권 이미지·PDF 내용 자동 인식</td><td>최신 안내에 동의하고 AI 인식을 선택한 증권 이미지·PDF 원본</td><td>인식할 때마다 HTTPS로 전송, 인식 결과만 돌려받음. API로 보낸 데이터는 Anthropic 약관상 모델 학습에 쓰이지 않습니다</td></tr>
   <tr><td>Resend (Plus Five Five, Inc., 미국)</td><td>안내 메일 발송</td><td>받는 사람·참조 이메일, 메일 제목·본문(업체명, 공사명, 증권번호, 금액, 종료일, 보낸 사람 서명)</td><td>메일을 보낼 때 HTTPS로 전송</td></tr>
 </table>
-<p>AI 인식이 설정된 경우 원본 첨부 시 인식 요청이 함께 이루어집니다. 현재 앱에는 첨부만 하고 AI 전송을 끄는 별도 선택이 없습니다. AI 처리를 원하지 않으면 원본 첨부 없이 직접 입력을 이용해 주세요. 문서에 불필요한 개인정보가 포함되면 가린 뒤 사용하세요.</p>
+<p>Android 테스트 앱은 파일마다 AI 인식 동의, 원본만 첨부, 취소를 선택할 수 있습니다. AI를 선택하면 원본과 문서에 포함된 업체·사업자번호·금액·날짜 등이 Anthropic으로 전송됩니다. 서버는 최신 안내에 대한 명시적 동의가 없는 AI 요청을 거부합니다. 기존 iOS 1.0(1)은 새 동의 화면을 지원하지 않아 원본의 AI 업로드가 제한되며, 새 iOS 빌드 적용 전에는 직접 입력을 이용해 주세요. 문서에 불필요한 개인정보가 포함되면 가린 뒤 사용하세요.</p>
 <p>Anthropic 일반 API 입력·출력은 통상 30일 이내 삭제되며 별도 계약·보안·법령상 예외가 있을 수 있습니다. 무보관 계약 적용을 보장하지 않습니다. Resend의 일반 Free·Pro·Scale 요금제는 미국에서 메일·로그를 30일 보관하며, 계약 종료 후 잔여 자료는 공급자 정책에 따라 삭제합니다. 이전 시기는 해당 기능 실행 시이며 방법은 HTTPS 통신입니다. 공급자 정책: <a href="https://privacy.anthropic.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data">Anthropic API 보관</a>, <a href="https://resend.com/security">Resend 보관·보안</a>, <a href="https://supabase.com/privacy">Supabase 개인정보</a>.</p>
 <p>업무 사용자가 지정한 수신자에게 메일을 발송하면 해당 메일 내용이 전달됩니다. 발송 전에 수신자와 내용을 확인해 주세요. 위 경우 외에 개인정보를 제3자에게 제공하거나 판매하지 않습니다. 국외 이전을 원하지 않으면 관리자에게 알려 주세요. 이 경우 AI 인식과 메일 발송 기능을 쓸 수 없습니다.</p>
 
@@ -63,7 +63,7 @@
   <li>데이터는 외부에서 직접 접근할 수 없는 별도 공간에 두고, 앱 서버를 통해서만 읽고 씁니다.</li>
   <li>앱 코드와 로그인 토큰은 원문 대신 해시로만 저장합니다. 로그인 실패가 반복되면 잠깁니다.</li>
   <li>증권 원본은 비공개 저장소에 두고, 볼 때마다 5분짜리 임시 링크로만 엽니다.</li>
-  <li>앱 안의 로그인 정보는 iPhone 키체인에, 오프라인용 사본은 기기 암호화 영역에 저장합니다. 앱을 1분 넘게 벗어나면 다시 잠기고, 앱 전환 화면에서는 내용이 가려집니다.</li>
+  <li>iPhone 로그인 정보는 키체인에, 오프라인용 사본은 iOS 보호 영역에 저장합니다. iPhone 앱의 자동 잠금·화면 가리기와 달리 Android 테스트 앱에는 별도 생체 잠금이 없으며, Android Keystore 기반 AES-GCM으로 로그인 정보와 캐시를 암호화합니다. 기기 화면 잠금을 사용해 주세요.</li>
   <li>모든 변경은 누가 언제 했는지 기록합니다.</li>
 </ul>
 
@@ -102,14 +102,14 @@
 <h2>Service providers (processing outside Korea)</h2>
 <ul>
   <li><strong>Supabase Inc. (USA)</strong> — database and file storage, hosted in the Seoul region.</li>
-  <li><strong>Anthropic PBC (USA)</strong> — receives uploaded bond images/PDFs for extraction when AI is configured; the current app has no attachment-only AI opt-out. Use manual entry without attachments if you do not want AI processing. Under Anthropic's terms, API data is not used to train models.</li>
+  <li><strong>Anthropic PBC (USA)</strong> — receives bond images/PDFs and document data only when you explicitly choose AI extraction for that file under the current notice. Android offers AI extraction, attachment-only without AI, and cancellation. The server rejects AI requests lacking explicit current consent. Legacy iOS 1.0(1) lacks this choice and its AI uploads are restricted until an updated iOS build is installed; manual entry remains available. Under Anthropic's terms, API data is not used to train models.</li>
   <li><strong>Resend (Plus Five Five, Inc., USA)</strong> — delivers notice emails (recipient addresses and the email content).</li>
 </ul>
 <p>We do not sell or share personal data with anyone else.</p>
 
 <p>Anthropic ordinary API inputs/outputs are normally deleted within 30 days, subject to contractual, safety and legal exceptions; zero retention is not promised. Resend stores ordinary-plan email/log data in the USA for 30 days. Administrator action is required for permanent erasure; app removal, logout, soft deletion and session expiry do not themselves erase all server records. Use synthetic documents and test mailboxes during TestFlight. Publication of this policy does not collect consent. Your organization must confirm applicable notices, permissions and processing arrangements before using real business data.</p>
 <h2>Security</h2>
-<p>Data sits in an isolated space reachable only through the app's server. Sign-in codes and tokens are stored as hashes. Bond files are private and open only through 5-minute links. On the device, credentials are kept in the Keychain and the offline copy uses iOS data protection.</p>
+<p>Data sits in an isolated space reachable only through the app's server. Sign-in codes and tokens are stored as hashes. Bond files are private and open only through 5-minute links. iPhone credentials use Keychain and cached data uses iOS data protection. The Android test app encrypts credentials and cached records with Android Keystore-backed AES-GCM; it does not include a separate biometric app lock. Use device screen locking.</p>
 
 <h2>Your rights and contact</h2>
 <p>You may ask to access, correct, delete or stop processing your data. Contact <strong>alfred.park@apholdings.kr</strong> (A.P Holdings, CEO Chanmin Park, business registration 277-43-01488).</p>
