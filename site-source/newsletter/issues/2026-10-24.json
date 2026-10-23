@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-24",
+  "number": 16,
+  "status": "published",
+  "verified": true,
+  "title": "만드는 AI에서, 끝까지 확인하는 AI로",
+  "intro": "인터랙티브 시제품과 기업 지식 검색, 음성 응답부터 여러 단계의 학습까지. AI의 결과를 실제 업무로 연결할 때 필요한 출처·권한·완료 기준을 살펴봅니다.",
+  "edition_note": "2026년 10월 24일 편집 · 전날 발표 우선 확인 후 최근 72시간 범위 보완 · 10월 22~23일 공식 자료 5건 · 제작 시연·고객 운영 사례·기술 실습 구분 · AI 작성 및 원문 확인",
+  "takeaway": "시연이 작동하는 것과 실제 업무가 끝나는 것은 다릅니다. AI 기능을 검토할 때 결과의 근거, 이용 권한, 오류 복구, 최종 완료 기준을 함께 확인하십시오.",
+  "source_checked_at": "2026-10-24T07:03:42+09:00",
+  "stories": [
+    {
+      "category": "AI CREATION",
+      "title": "Google, Gemini 4 Argon으로 만든 인터랙티브 작품 소개",
+      "source": "Google 공식 블로그",
+      "published": "2026-10-23",
+      "url": "https://blog.google/products-and-platforms/products/gemini/gemini-4-argon-builders/",
+      "summary": "3D 시뮬레이션부터 브라우저 게임까지, AI 제작의 가능성을 보여주는 시연입니다.",
+      "fact": "Google은 Gemini 4 Argon을 활용한 제작자 사례 다섯 건을 소개했습니다. 수상비행기 시뮬레이션, 산불·지진 데이터 지구본, 제트엔진 모형, 이미지 기반 마차, 다중 사용자 게임을 다룹니다. 모델 자체는 앞서 공개됐으며 이번 글은 활용 사례 모음입니다. 제작 시연이 공학적 정확성이나 실제 서비스의 안전·성능을 검증했다는 뜻은 아닙니다.",
+      "insight": "AP의 홈페이지·콘텐츠 제작에서도 인터랙티브 시제품으로 아이디어를 구체화할 수 있습니다. 공개 전에는 데이터 출처와 갱신 시점, 모바일 조작, 로딩 속도, 잘못된 동작을 별도로 확인해야 합니다.",
+      "action": "시제품 한 건에 핵심 사용자 흐름·데이터 출처·모바일 완료 기준을 정하고 실제 브라우저에서 대조하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-24-creative-builds.jpg",
+        "alt": "지구본과 수상비행기·게임 공간을 작은 제작 모형으로 배치한 작업대",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI OPERATIONS",
+      "title": "Bayer, 분석 결과와 오류를 추적하는 AI 운영 사례 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-23",
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-bayer-crop-science-built-an-agentic-decision-engine-on-amazon-bedrock-agentcore-with-aws-unified-operations/",
+      "summary": "AI가 답했는지뿐 아니라 어떤 근거와 도구로 문제를 해결했는지 확인합니다.",
+      "fact": "AWS는 Bayer Crop Science가 기존 분석 플랫폼 CDE 위에 자연어 질의 계층 ADE를 구축한 사례를 소개했습니다. 전문 에이전트가 모델 문서·실행 상태·오류 기록을 조회하며 세션 격리, 역할별 읽기 권한, 작업 실패 지표 등을 적용했습니다. 제한된 사용자 그룹으로 시작한 고객 사례이며 AI가 육종 결정을 자율 집행하거나 모든 질문을 해결한다는 발표는 아닙니다.",
+      "insight": "AP의 뉴스 발행·문의 운영도 서버 응답 성공과 실제 업무 완료를 나눠 봐야 합니다. 결과의 원본·실행 이력·실패 위치를 연결하면 자동화가 어디까지 처리했고 어디서 확인이 필요한지 설명할 수 있습니다.",
+      "action": "자동화 한 건의 접수·처리·공개·발송 상태를 구분하고 오류가 난 단계로 돌아갈 수 있는 기록을 점검하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-24-decision-trace.jpg",
+        "alt": "작물 연구 카드에서 분석 기록과 근거 노트로 이어지는 추적 경로 모형",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI KNOWLEDGE",
+      "title": "IskayPet, 권한과 출처를 반영한 사내 지식 검색 구축",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-22",
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-iskaypet-unified-corporate-knowledge-with-amazon-bedrock-managed-knowledge-bases/",
+      "summary": "여러 나라의 업무 문서를 검색하되 직원별 열람 범위와 원문을 함께 연결합니다.",
+      "fact": "AWS는 IskayPet이 SharePoint 문서를 Amazon Bedrock Managed Knowledge Bases에 연결해 사내 질의응답을 구축한 사례를 소개했습니다. 스페인·포르투갈·프랑스의 네 언어 업무 자료를 다루며 사용자 신원에 따른 문서 권한, 검색 결과의 출처, 근거가 없을 때 답하지 않는 지침을 적용합니다. 문서 갱신은 동기화를 거치며 한국어 제공이나 모든 회사의 동일 성과를 입증한 자료는 아닙니다.",
+      "insight": "AP의 콘텐츠·커머스 운영 지식도 정책·국가·업무별 문서를 구분하고 최신 버전을 관리해야 합니다. 반품 규정처럼 고객에게 영향을 주는 답변은 원문과 적용일을 보여 주고 담당자가 확인할 수 있도록 해야 합니다.",
+      "action": "자주 받는 운영 질문 한 건에 최신 원문·적용 국가·열람 권한·동기화 시각·담당자를 연결하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-24-knowledge-search.jpg",
+        "alt": "분리된 문서 서가와 열람 열쇠·원문을 비추는 검색 렌즈",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "VOICE AI",
+      "title": "AWS, 문장별로 말하기를 시작하는 음성 AI 구현법 소개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-22",
+      "url": "https://aws.amazon.com/blogs/machine-learning/stream-low-latency-speech-from-ai-agents-using-kokoro-tts-on-amazon-sagemaker-ai/",
+      "summary": "답변 전체가 완성되기 전에 문장 단위로 합성과 재생을 이어 붙이는 방식입니다.",
+      "fact": "AWS는 SageMaker AI에 배치한 Kokoro-82M 음성 합성 모델로 에이전트의 문장을 순차 처리하는 구현법을 공개했습니다. 브라우저 전달에는 SSE 기반 방식과 오디오·제어 메시지를 함께 전송하는 방식을 비교합니다. 별도 구축이 필요한 기술 예제이며 원문은 샘플의 오래된 PyTorch 의존성을 운영 적용 전에 검토·갱신하라고 명시합니다. 한국어 지원이나 모든 환경의 같은 지연 시간은 보장하지 않습니다.",
+      "insight": "AP의 AI 교육에서 음성 서비스를 설명할 때는 첫 소리가 나오는 시간, 말의 정확성, 중단·재시작 경험을 나눠 평가할 수 있습니다. 빠른 재생과 고객 안내의 정확성은 각각 검증해야 합니다.",
+      "action": "음성 시제품 한 건의 첫 재생 시간·문장 순서·중단 처리·의존성 상태를 확인하고 민감한 안내는 검토 경로를 두십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-24-streaming-voice.jpg",
+        "alt": "대기 중인 문장 카드가 스피커로 순차 연결되어 음파로 퍼지는 모형",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI TRAINING",
+      "title": "AWS, 여러 단계의 최종 성과로 모델을 학습하는 방법 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-23",
+      "url": "https://aws.amazon.com/blogs/machine-learning/multi-turn-reinforcement-learning-on-amazon-sagemaker-ai-a-hands-on-guide/",
+      "summary": "한 번의 답변 대신 전체 작업의 성공을 보상으로 삼는 학습 예제입니다.",
+      "fact": "AWS는 SageMaker AI의 다중 턴 강화학습을 Wordle 게임으로 설명하는 실습을 공개했습니다. 에이전트가 여러 번 행동한 뒤 최종 결과를 점수화해 모델을 조정합니다. 원문은 지원 모델별로 미국 버지니아·오리건 리전을 안내하며 서울 리전은 목록에 없습니다. 게임 실험의 개선을 실제 비용 정산·고객 지원 업무의 성능이나 총운영비로 그대로 확대할 수는 없습니다.",
+      "insight": "AP의 커머스 조사와 콘텐츠 자동화에서는 빠른 답변 하나보다 전체 결과의 정확성·원문 근거·완료 여부를 함께 평가해야 합니다. 추가 학습을 검토하기 전에 실패 사례와 성공 기준을 모아 현재 방식과 비교할 필요가 있습니다.",
+      "action": "반복 업무 한 건의 성공·실패 기준과 검증용 사례를 정리하고 학습 도입 전 현재 처리 방식의 결과를 먼저 측정하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-24-multi-step-learning.jpg",
+        "alt": "피드백 관문을 지나 최종 목표로 이동하는 토큰과 여러 단계의 학습 경로",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}
