@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import { financeRows, renderFinance } from '../admin/app-finance.mjs';
+const apps=[{id:'one',name:'<script>bad</script>',status:'live'}];
+assert.equal(financeRows({apps,metrics:[]})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:0}],today:'2026-10-26'})[0].revenue,0);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:null}],today:'2026-10-26'})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:200,environment:'Sandbox'}],today:'2026-10-26'})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',platform:'google',day:'2026-10-26',proceeds_krw:200}],today:'2026-10-26'})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:200}],today:'2026-10-26',platform:'google'})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-01',proceeds_krw:250}],today:'2026-10-26',days:7})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:250}],today:'2026-10-26',metricsError:true})[0].revenue,null);
+const html=renderFinance({apps,metrics:[],today:'2026-10-26'});
+assert.ok(!html.includes('<script>bad'));
+assert.ok(html.includes('확인 필요'));
+assert.ok(html.includes('계정 단위'));
+console.log('app finance: all assertions passed');

@@ -282,3 +282,8 @@ select:disabled,input:disabled{background:#f2f4f7;color:#667085}
 .collect-result[data-result="partial"],.collect-result[data-result="skipped"]{background:rgba(232,160,40,.16);color:#9a5b00}
 .collect-result[data-result="failed"]{background:rgba(184,67,61,.14);color:#b8433d}
 tr.collect-skipped td,tr.collect-failed td{background:rgba(232,160,40,.05)}
+
+/* App finance: distinguish report coverage and settlement from sales. */
+.app-finance small { display:block; margin-top:4px; color:var(--muted,#64748b); line-height:1.5; }
+.app-finance { margin-bottom:24px; }
+.app-finance td { vertical-align:top; }

@@ -1,3 +1,5 @@
+import { renderFinance } from './app-finance.mjs?v=1';
+import { androidApps } from './android-app-registry.mjs?v=1';
 import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?v=20261009-1';
 import { createNewsletter } from './newsletter.js?v=20261022-table';
 import { createShop } from './shop.js?v=research-20261009';
@@ -1053,6 +1055,7 @@ let appRuntime = [];
 let appIap = [];
 let appAds = [];
 let appsLoaded = false;
+let appFinancePlatform = 'apple', appFinanceDays = 30, appMetricsError = false;
 const appName = (id) => apps.find((a) => a.id === id)?.name?.split(/ [—:] /)[0] || id;
 const appDay = (d) => d ? new Intl.DateTimeFormat('ko-KR', { year: '2-digit', month: 'numeric', day: 'numeric' }).format(new Date(`${d}T00:00:00`)) : '—';
 const appSafeURL = (u) => /^https:\/\//.test(u || '') ? u : '';
@@ -1074,6 +1077,7 @@ async function loadApps(force = false) {
   ]);
   appRuntime = rt.error ? [] : (rt.data || []); appIap = iap.error ? [] : (iap.data || []); appAds = ads.error ? [] : (ads.data || []);
   if (a.error || e.error) { $('#app-message').textContent = '앱 현황을 불러오지 못했습니다. 다시 로그인해 주세요.'; return; }
+  appMetricsError = Boolean(m.error);
   apps = a.data || []; appEvents = (e.data || []).sort(byNewest); appMetrics = m.error ? [] : (m.data || []);
   appsLoaded = true; $('#app-message').textContent = '';
   const keep = $('#app-f-app').value;
@@ -1146,8 +1150,8 @@ function renderAppSales() {
   $('#app-sales-state').dataset.state = rs?.status || '';
   const stamp = (t) => t ? new Intl.DateTimeFormat('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(t)) : '—';
   const status = `<div class="app-sync">
-    <div><b>일별 판매 보고서</b><span>매일 01:40 · 08:40 자동 · 다음 날 반영</span><p>${escapeHtml(rs?.detail || '아직 연결 전입니다.')}${rs?.last_report_day ? ` · 최신 보고서 ${escapeHtml(rs.last_report_day)}` : ''} <em>${stamp(rs?.checked_at)} 확인</em></p></div>
-    <div><b>실시간 결제 알림</b><span>인앱 결제 · 구독 · 환불 즉시</span><p>${escapeHtml(rn?.detail || '아직 연결 전입니다.')} <em>${stamp(rn?.checked_at)}</em></p></div>
+    <div><b>Apple 일별 판매 보고서</b><span>매일 01:40 · 08:40 자동 · 다음 날 반영</span><p>${escapeHtml(rs?.detail || '아직 연결 전입니다.')}${rs?.last_report_day ? ` · 최신 보고서 ${escapeHtml(rs.last_report_day)}` : ''} <em>${stamp(rs?.checked_at)} 확인</em></p></div>
+    <div><b>Apple 결제 알림</b><span>인앱 결제 · 구독 · 환불 즉시</span><p>${escapeHtml(rn?.detail || '아직 연결 전입니다.')} <em>${stamp(rn?.checked_at)}</em></p></div>
     <button id="app-sales-sync" class="secondary" type="button">지금 가져오기</button>
   </div>`;
   let table = '';
@@ -1161,7 +1165,10 @@ function renderAppSales() {
   }
   const money = (e) => e.price_milli != null && e.currency ? `${(e.price_milli / 1000).toLocaleString('ko-KR')} ${escapeHtml(e.currency)}` : '';
   const live = appIap.length ? `<h3 class="app-sub">실시간 결제 알림 · 최근 ${appIap.length}건</h3><div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>시각</th><th>앱</th><th>종류</th><th>상품</th><th class="num">금액</th></tr></thead><tbody>${appIap.map((e) => `<tr><td class="date">${stamp(e.event_at || e.received_at)}</td><td>${escapeHtml(e.app_id ? appName(e.app_id) : (e.bundle_id || '—'))}</td><td><span class="app-kind" data-kind="${/REFUND|REVOKE|EXPIRED/.test(e.notification_type) ? 'rejected' : 'approved'}">${escapeHtml(e.notification_type)}${e.subtype ? ` · ${escapeHtml(e.subtype)}` : ''}</span>${e.environment === 'Sandbox' ? '<div class="asset-growth">테스트</div>' : ''}</td><td>${escapeHtml(e.product_id || '—')}</td><td class="num">${money(e)}</td></tr>`).join('')}</tbody></table></div>` : '';
-  $('#app-sales').innerHTML = status + (has ? salesViz() + `<details class="app-more viz-table"><summary>표로 보기</summary>${table}</details>` : table) + live;
+  const finance = renderFinance({ apps: appFinancePlatform === 'google' ? androidApps : apps, metrics: appMetrics, runtime: appRuntime, platform: appFinancePlatform, days: appFinanceDays, metricsError: appFinancePlatform === 'apple' && appMetricsError });
+  $('#app-sales').innerHTML = finance + status + (has ? salesViz() + `<details class="app-more viz-table"><summary>표로 보기</summary>${table}</details>` : table) + live;
+  $('#app-sales [data-finance-platform]').addEventListener('change', (ev) => { appFinancePlatform = ev.target.value; renderAppSales(); });
+  $('#app-sales [data-finance-days]').addEventListener('change', (ev) => { appFinanceDays = Number(ev.target.value); renderAppSales(); });
   $('#app-sales-sync').addEventListener('click', async (ev) => {
     const b = ev.currentTarget; b.disabled = true; b.textContent = '가져오는 중…';
     const { data, error } = await supabase.functions.invoke('asc-sales-sync', { body: { days: 7 } });
