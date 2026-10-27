@@ -236,6 +236,23 @@ def make_image(prompt, path):
     temporary.replace(path)
 
 
+def collect_sources(draft_stories, day, previous, excluded):
+    candidates, sources = [], []
+    accepted = set()
+    for candidate in draft_stories:
+        if candidate['url'] in accepted:
+            continue
+        try:
+            check_sources({'date': day, 'stories': [candidate]}, previous + excluded)
+            original = fetch_source(candidate)
+            sources.append(original)
+            candidates.append(candidate)
+            accepted.add(candidate['url'])
+        except (ValueError, HTTPError, URLError, TimeoutError):
+            excluded.append(candidate['url'])
+    return candidates, sources
+
+
 def generate(day):
     folder = STATE / day
     checkpoint = folder / 'verified.json'
@@ -250,14 +267,7 @@ def generate(day):
             draft_path = folder / f'research-{attempt}.json'
             draft = load_json(draft_path) if draft_path.exists() else research(day, previous, excluded)
             save_json(draft_path, draft)
-            candidates, sources = [], []
-            for candidate in draft['stories']:
-                try:
-                    check_sources({'date': day, 'stories': [candidate]}, previous + excluded)
-                    sources.append(fetch_source(candidate))
-                    candidates.append(candidate)
-                except (ValueError, HTTPError, URLError, TimeoutError):
-                    excluded.append(candidate['url'])
+            candidates, sources = collect_sources(draft['stories'], day, previous, excluded)
             if len(candidates) < 5:
                 continue
             verdict_schema = object_schema({'checks': {'type': 'array', 'items': object_schema({

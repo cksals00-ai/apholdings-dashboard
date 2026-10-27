@@ -65,6 +65,19 @@ class ServerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.server.check_sources(self.issue, [self.issue['stories'][0]['url']])
 
+    def test_duplicate_candidates_do_not_poison_five_distinct_valid_stories(self):
+        self.assertTrue(hasattr(self.server, 'collect_sources'), 'Candidate deduplication is missing')
+        candidates = [self.issue['stories'][0], self.issue['stories'][0]] + self.issue['stories'][1:]
+        fetched = []
+        def fetch(story):
+            fetched.append(story['url'])
+            return {'url': story['url'], 'body': 'verified original'}
+        with patch.object(self.server, 'fetch_source', fetch):
+            selected, sources = self.server.collect_sources(candidates, '2026-10-27', [], [])
+        self.assertEqual(len(selected), 5)
+        self.assertEqual(len(set(fetched)), 5)
+        self.assertEqual(len(sources), 5)
+
     def test_each_fact_and_publication_date_require_independent_support(self):
         rows = [{'url': s['url'], 'supported': True,
                  'publication_date': s['published'], 'reason': 'visible source'}
