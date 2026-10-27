@@ -1,0 +1,5 @@
+-r requirements-newsletter.txt
+beautifulsoup4==4.14.3
+Pillow==12.3.0
+pypdf==6.10.0
+playwright==1.55.0

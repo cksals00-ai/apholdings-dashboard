@@ -28,7 +28,19 @@ Resend에서 apholdings.kr 도메인 인증. Supabase Edge Function Secrets에 R
 
 리뷰 보완: 준비 기간에 시도하지 않은 만료 확인 메일은 발송 연결 후 새 토큰을 발급한다. 이미 발송·실패한 메일을 자동 반복하지 않는다. 해지와 큐 취소를 한 트랜잭션으로 처리하고, 제공사 요청을 최초 시점에 저장해 재시도 때 같은 본문을 사용한다. 발송 직전 현재 구독·큐 상태를 다시 검사하고, 이미 제출된 요청은 처리 중으로 간주하며 취소 상태를 완료·재시도로 되돌리지 않는다.
 
-일일 예약: Codex heartbeat ap-ai, 이 채팅에서 매일 07:00 Asia/Seoul 실행(08:00 발행 목표). 메일 큐 ap-news-mail-queue는 5분마다, 보관 정책 ap-news-retention은 03:15 KST에 실행한다.
+메일 큐 ap-news-mail-queue는 5분마다, 보관 정책 ap-news-retention은 03:15 KST에 실행한다.
+
+## 컴퓨터가 꺼져 있어도 실행하는 서버 발행 (2026-10-27)
+- GitHub Actions `AP News server daily`가 Ubuntu 서버에서 KST 06:00~09:45, 15분 간격으로 실행한다. 08:00 이전에는 검증한 초안·이미지·미리보기를 Actions artifact로 저장하고 공개 커밋과 메일 등록은 하지 않는다. 08:00 이후 최초 성공 실행이 발행·배포·등록한다. GitHub 예약은 지연될 수 있으므로 08:00은 목표이며 초 단위 정시 보장은 아니다.
+- `OPENAI_API_KEY`는 저장소 Actions secret, `SUPABASE_SERVICE_KEY`는 기존 서버 secret을 사용한다. 로컬 PC와 Codex 실행이 필요 없다. API 사용료는 해당 OpenAI API 프로젝트에 청구된다. 키 값·구독자 주소·발송 본문은 작업 로그나 artifact에 저장하지 않는다.
+- `scripts/newsletter_server.py`: 공식 도메인 실시간 검색 → 원문 직접 확인 → 발표일·수치·제공 국가·실험 단계 독립 AI 검증 → 기사 5개 선택 → 원본 편집 이미지 생성 → 기존 `scripts/newsletter.py` 빌드 → PDF 내용·링크·모바일·모든 지면 AI 시각 검증. 사람 검수를 주장하지 않는다.
+- HTTP 408/429/5xx와 연결 오류는 제한된 지수 간격으로 재시도한다. 완료한 원문 검증과 이미지는 같은 날짜의 checkpoint artifact에서 복구한다. 검증이 실패하면 초안을 보존하고 공개/발송을 보류한다. checkpoint는 7일 보관한다.
+- 하나의 concurrency 그룹이 발행 중복을 막는다. 오늘 발행 JSON이 있으면 다시 생성하지 않는다. 최신 main에 안전하게 rebase하고 뉴스 관련 파일만 커밋하며 충돌 시 멈춘다. 다른 홈페이지 생성기는 실행하지 않는다.
+- `Publish existing AP Holdings site`는 기존 main의 정적 파일을 기존 도메인에 배포한다. 홈페이지의 다른 main 변경도 이 workflow로 배포한다. GITHUB_TOKEN으로 만든 뉴스 커밋은 별도 push workflow를 유발하지 않으므로 발행 workflow가 Pages 배포를 명시적으로 호출한다.
+- 공개 웹·PDF·이메일 HTML·모든 기사 이미지가 저장소의 검증된 바이트와 같아야 Supabase에 등록한다. 이미 등록한 호는 수정하거나 재발송하지 않는다. 기존 확인 완료 active 구독자 큐만 사용하며 발신은 `alfred.park@apholdings.kr`다. `publish_at`은 해당 날짜 08:00+09:00이며 큐는 이후 처리한다.
+- 수동 복구: Actions → `AP News server daily` → Run workflow. `connection_test=true`는 텍스트·이미지 API를 시험하며 구독자에게 별도 시험 메일을 보내지 않는다. 발행/등록도 같은 안전 절차로 확인한다.
+- 운영 확인: Actions 실행 결과와 artifact, 관리자 뉴스 메뉴의 호·발송 상태를 확인한다. `sent` 및 provider ID는 전송 서비스 접수를 의미하며 받은편지함 도착을 보장하지 않는다. 인증·결제 오류는 자동 재시도로 해결되지 않으므로 해당 계정 설정이 필요하다.
+- 로컬 heartbeat `ap-ai`는 서버 실운영 검증에 성공한 후 중복 실행을 피하도록 중지한다. 서버 연결 검증 전에는 대체 수단으로 유지한다.
 
 ## 이미지와 편집 품질 (2026-10-11 개편)
 - 최신 호는 기사별 summary 한 줄과 AP 서비스에 연결되는 insight를 작성한다. 사실과 해석은 분리하고 제공 국가·실험 단계·신청 자격을 생략하지 않는다.
