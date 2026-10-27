@@ -48,6 +48,12 @@ class ServerTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 self.server.check_sources(issue, [])
 
+    def test_additional_verified_official_publishers_and_impostors(self):
+        for domain in ('oracle.com','microsoft.ai','mitre.org'):
+            self.assertEqual(self.server.official_url(f'https://www.{domain}/news'),f'https://www.{domain}/news')
+            for url in (f'https://{domain}.evil.example/news',f'https://{domain}@evil.example/news'):
+                with self.assertRaises(ValueError):self.server.official_url(url)
+
     def test_repeated_source_blocks_generation(self):
         with self.assertRaises(ValueError):
             self.server.check_sources(self.issue, [self.issue['stories'][0]['url']])

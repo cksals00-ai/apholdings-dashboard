@@ -28,7 +28,8 @@ SUPABASE = 'https://cgijpcimixaregbpvqbf.supabase.co'
 DOMAINS = ('openai.com', 'anthropic.com', 'blog.google', 'deepmind.google',
            'blogs.microsoft.com', 'news.microsoft.com', 'microsoft.com',
            'aws.amazon.com', 'aboutamazon.com', 'blogs.nvidia.com',
-           'nvidianews.nvidia.com', 'ai.meta.com', 'about.fb.com', 'huggingface.co')
+           'nvidianews.nvidia.com', 'ai.meta.com', 'about.fb.com', 'huggingface.co',
+           'oracle.com', 'microsoft.ai', 'mitre.org')
 CAPTION = 'AI 제작 · 편집 일러스트 · 실제 제품 화면 아님'
 
 
