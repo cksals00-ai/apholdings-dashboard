@@ -89,6 +89,9 @@ class HandoffTests(unittest.TestCase):
             self.assertEqual(commands[1][:4],['gh','workflow','run','ap-news-daily.yml'])
             self.assertIn('record_handoff=true',commands[1])
             self.assertIn('edition_date=2026-10-27',commands[1])
+            self.assertEqual(len(commands),3)
+            self.assertIn('reserve_publication=true',commands[2])
+            self.assertIn('edition_date=2026-10-27',commands[2])
 
     def test_changed_editorial_intro_cannot_reuse_an_old_pdf(self):
         import hashlib

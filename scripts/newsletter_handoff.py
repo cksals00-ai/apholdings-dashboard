@@ -184,6 +184,14 @@ def upload_bundle(path, day):
     subprocess.run(['gh', 'release', 'upload', tag, str(path), '--repo', REPO, '--clobber'], check=True)
     print(f'Completed handoff uploaded for {day}; homepage and email unchanged')
     report_handoff(day)
+    reserve_publication(day)
+
+
+def reserve_publication(day):
+    date.fromisoformat(day)
+    subprocess.run(['gh','workflow','run','ap-news-daily.yml','--repo',REPO,
+                    '-f','reserve_publication=true','-f',f'edition_date={day}'],check=True)
+    print('Server publication reservation requested; waits until08:00 KST before publishing')
 
 
 def report_handoff(day):
@@ -195,14 +203,15 @@ def report_handoff(day):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('stage', choices=['package', 'upload', 'report'])
+    parser.add_argument('stage', choices=['package', 'upload', 'report', 'reserve'])
     parser.add_argument('--date', required=True)
     parser.add_argument('--file', type=Path)
     parser.add_argument('--reviewed', action='store_true', help='Assistant has checked originals, all PDF pages, mobile and images; does not mean human review')
     args = parser.parse_args()
-    if args.stage!='report' and args.file is None: parser.error('--file is required for package/upload')
+    if args.stage not in ('report','reserve') and args.file is None: parser.error('--file is required for package/upload')
     if args.stage == 'package': create_bundle(args.date, args.file, args.reviewed)
     elif args.stage=='upload': upload_bundle(args.file, args.date)
+    elif args.stage=='reserve': reserve_publication(args.date)
     else: report_handoff(args.date)
 
 

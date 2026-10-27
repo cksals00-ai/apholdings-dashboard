@@ -15,6 +15,10 @@ on:
         description: Record server receipt of a completed bundle in the admin page (no publication)
         type: boolean
         default: false
+      reserve_publication:
+        description: Validate completed bundle now and reserve publication at08:00 KST
+        type: boolean
+        default: false
       edition_date:
         description: Optional edition date YYYY-MM-DD (defaults to today in Korea)
         type: string
@@ -30,7 +34,7 @@ permissions:
 jobs:
   prepare:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: ${{ inputs.reserve_publication == true && 360 || 15 }}
     permissions:
       contents: write
     outputs:
@@ -57,13 +61,13 @@ jobs:
           python -c 'import datetime,sys; datetime.date.fromisoformat(sys.argv[1])' "$day"
           echo "day=$day" >> "$GITHUB_OUTPUT"
       - name: Verify uploaded completed bundle
-        if: ${{ inputs.verify_ready == true || inputs.record_handoff == true }}
+        if: ${{ inputs.verify_ready == true || inputs.record_handoff == true || inputs.reserve_publication == true }}
         env:
           GH_TOKEN: ${{ github.token }}
           EDITION_DAY: ${{ steps.clock.outputs.day }}
         run: python scripts/newsletter_server.py verify-ready --date "$EDITION_DAY"
       - name: Record server receipt (no publication or email)
-        if: ${{ inputs.record_handoff == true && inputs.verify_ready != true }}
+        if: ${{ (inputs.record_handoff == true || inputs.reserve_publication == true) && inputs.verify_ready != true }}
         env:
           GH_TOKEN: ${{ github.token }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
@@ -75,8 +79,14 @@ jobs:
           python scripts/test_newsletter_server.py
           python scripts/test_newsletter_status.py
           python scripts/test_newsletter_editorial.py
+          python scripts/test_newsletter_reservation.py
           python scripts/test_newsletter.py
           node --test supabase/functions/ap-news/core.test.mjs
+      - name: Keep verified reservation until08:00 KST
+        if: ${{ inputs.reserve_publication == true && inputs.verify_ready != true && inputs.record_handoff != true }}
+        env:
+          EDITION_DAY: ${{ steps.clock.outputs.day }}
+        run: python scripts/newsletter_server.py wait-until-due --date "$EDITION_DAY"
       - name: Accept today's completed edition after08:00 KST
         id: prepare
         if: ${{ inputs.verify_ready != true && inputs.record_handoff != true }}

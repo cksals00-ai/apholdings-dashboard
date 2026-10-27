@@ -120,6 +120,18 @@ def check_verdict(issue, rows):
             raise ValueError('Fact or actual announcement date is unsupported')
 
 
+def wait_for_publication(day, now=lambda: datetime.now(KST), sleep=time.sleep):
+    current=now().astimezone(KST)
+    target=datetime.combine(date.fromisoformat(day),datetime.min.time(),tzinfo=KST).replace(hour=8)
+    if current.date()!=target.date() or (target-current).total_seconds()>5*3600:
+        raise ValueError('Reservation must be for today and within five hours of08:00 KST')
+    while current<target:
+        sleep(min(60,(target-current).total_seconds()))
+        current=now().astimezone(KST)
+        if current.date()!=target.date():raise ValueError('Reservation date expired')
+    print('Publication reservation due; source and duplicate checks still apply',flush=True)
+
+
 def publication_due(now=None):
     return (now or datetime.now(KST)).astimezone(KST).hour >= 8
 
@@ -256,11 +268,13 @@ def prepare(day, now=None):
 
 def main():
     parser = argparse.ArgumentParser(description='Publish completed AP News without AI API calls')
-    parser.add_argument('stage', choices=['prepare', 'register', 'mail-status', 'verify-ready'])
+    parser.add_argument('stage', choices=['prepare', 'register', 'mail-status', 'verify-ready', 'wait-until-due'])
     parser.add_argument('--date', default=datetime.now(KST).date().isoformat())
     args = parser.parse_args()
     date.fromisoformat(args.date)
-    if args.stage == 'prepare':
+    if args.stage == 'wait-until-due':
+        wait_for_publication(args.date)
+    elif args.stage == 'prepare':
         prepare(args.date)
     elif args.stage == 'verify-ready':
         import newsletter_handoff as handoff
