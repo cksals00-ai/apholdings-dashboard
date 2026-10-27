@@ -1,3 +1,4 @@
+import { createYouTubeAdsPanel } from './youtube-ads.mjs?v=20261027-1';
 const STAGES = {idea:'기획',script:'대본 준비',production:'제작 중',review:'검수',scheduled:'예약 게시',published:'게시 완료',hold:'보류',archived:'보관'};
 const PLATFORMS = ['YouTube','Instagram','TikTok','Blog','Website','Other'];
 const AUDIENCES = {unknown:'미확인',general:'일반',kids:'아동용'};
@@ -15,6 +16,7 @@ export function createContentOperations(db,getUser) {
   const root=document.querySelector('#content-section');
   let channels=[],items=[],metrics=[],resources=[],loaded=false,generation=0,saving=false;
   root.innerHTML=`<div class="co-hero"><div><p class="eyebrow">CONTENT COMMAND CENTER</p><h2>콘텐츠가 성과로 이어지는 곳</h2><p>브랜드별 제작부터 게시, 시청 반응까지 한눈에.</p></div><div class="co-toolbar"><button class="secondary" data-co="refresh">↻ 현황 새로고침</button><button class="primary" data-co="item">+ 콘텐츠</button></div></div>
+    <div id="co-youtube-ads"></div>
     <p id="co-message" class="form-message co-message" role="status" aria-live="polite"></p>
     <div class="co-filters" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))"><label>브랜드<select id="co-brand"><option value="">전체 브랜드</option></select></label><label>채널<select id="co-channel"><option value="">전체 채널</option></select></label><label>시리즈<select id="co-series"><option value="">전체 시리즈</option></select></label><label>단계<select id="co-stage"><option value="">전체 단계</option>${options(STAGES)}</select></label><label>검색<input id="co-search" type="search" placeholder="제목 · 시리즈 · 다음 할 일"></label></div>
     <div id="co-summary" class="summary-grid"></div>
@@ -23,17 +25,18 @@ export function createContentOperations(db,getUser) {
     <section class="panel"><div class="panel-head"><div><p class="eyebrow">NEXT UP</p><h2>다음으로 진행할 콘텐츠</h2></div><span class="panel-note">카드를 눌러 진행 상태 편집</span></div><div id="co-next" class="co-next-grid"></div></section>
     <section class="panel"><div class="panel-head"><div><p class="eyebrow">BRANDS & CHANNELS</p><h2>운영 채널</h2></div><button class="secondary" data-co="channel">+ 브랜드·채널</button></div><div id="co-channels" class="co-channels"></div></section>
     <details class="panel co-details"><summary>콘텐츠 상세 내역 <span>실적 기록 · 링크 · CSV</span></summary><div class="co-toolbar"><button class="secondary" data-co="export">CSV 내보내기</button></div><div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>콘텐츠 · 채널</th><th>단계 · 일정</th><th>다음 할 일 · 장애</th><th>최근 실적</th><th>앱 · 전환 링크</th></tr></thead><tbody id="co-rows"></tbody></table></div></details>
-    <section class="panel"><div class="panel-head"><div><p class="eyebrow">RESOURCES</p><h2>제작 자원 · 연결 상태</h2></div></div><div id="co-resources" class="co-resources"></div><p class="panel-note">실적·잔액은 표시된 확인 시점 기준입니다. YouTube 자동 수집은 연결 전이며 새로고침은 저장된 기록을 불러옵니다.</p></section>`;
+    <section class="panel"><div class="panel-head"><div><p class="eyebrow">RESOURCES</p><h2>제작 자원 · 연결 상태</h2></div></div><div id="co-resources" class="co-resources"></div><p class="panel-note">실적·잔액은 표시된 확인 시점 기준입니다. 일반 콘텐츠 실적은 저장된 관측값입니다. 광고 점검 기록은 위 카드에서 출처와 시각을 구분해 표시합니다. 새로고침은 저장된 기록을 불러옵니다.</p></section>`;
+  const youtubeAds=createYouTubeAdsPanel(db,getUser,root.querySelector('#co-youtube-ads'));
   const dialog=document.createElement('dialog'); dialog.className='co-dialog'; dialog.setAttribute('aria-label','콘텐츠 운영 편집'); document.body.append(dialog);
   const $=s=>root.querySelector(s), field=n=>dialog.querySelector(`[name="${n}"]`);
   const setMessage=s=>{$('#co-message').textContent=s;};
   async function readAll(table,order) { const out=[]; for(let offset=0;;offset+=500){const {data,error}=await db.from(table).select('*').order(order).order('id').range(offset,offset+499);if(error)throw error;out.push(...data);if(data.length<500)return out;} }
   async function load(force=false){
-    if(!getUser())return false; if(loaded&&!force){render();return true;} const token=++generation;setMessage('콘텐츠 현황을 불러오는 중…');
+    if(!getUser())return false; await youtubeAds.load(force); if(!getUser())return false; if(loaded&&!force){render();return true;} const token=++generation;setMessage('콘텐츠 현황을 불러오는 중…');
     try{const result=await Promise.all([readAll('admin_media_channels','created_at'),readAll('admin_media_items','created_at'),readAll('admin_media_metrics','observed_at'),readAll('admin_media_resources','name')]);if(token!==generation||!getUser())return false;[channels,items,metrics,resources]=result;loaded=true;render();setMessage('저장된 현황을 불러왔습니다. 실적 확인 시점은 각 기록을 참고하세요.');return true;}
     catch{if(token===generation)setMessage('현황을 불러오지 못했습니다. 로그인과 연결 상태를 확인한 후 새로고침하세요.');return false;}
   }
-  function clear(){generation++;channels=[];items=[];metrics=[];resources=[];loaded=false;dialog.close();dialog.innerHTML='';for(const s of ['#co-summary','#co-series-summary','#co-channels','#co-rows','#co-resources','#co-pipeline','#co-performance','#co-next'])$(s).innerHTML='';$('#co-brand').innerHTML='<option value="">전체 브랜드</option>';$('#co-channel').innerHTML='<option value="">전체 채널</option>';$('#co-series').innerHTML='<option value="">전체 시리즈</option>';$('#co-stage').value='';$('#co-search').value='';setMessage('');}
+  function clear(){youtubeAds.clear();generation++;channels=[];items=[];metrics=[];resources=[];loaded=false;dialog.close();dialog.innerHTML='';for(const s of ['#co-summary','#co-series-summary','#co-channels','#co-rows','#co-resources','#co-pipeline','#co-performance','#co-next'])$(s).innerHTML='';$('#co-brand').innerHTML='<option value="">전체 브랜드</option>';$('#co-channel').innerHTML='<option value="">전체 채널</option>';$('#co-series').innerHTML='<option value="">전체 시리즈</option>';$('#co-stage').value='';$('#co-search').value='';setMessage('');}
   function channel(id){return channels.find(c=>c.id===id)||{};}
   function filtered(){const brand=$('#co-brand').value,ch=$('#co-channel').value,stage=$('#co-stage').value,series=$('#co-series').value,q=$('#co-search').value.trim().toLowerCase();return items.filter(i=>(!brand||channel(i.channel_id).brand===brand)&&(!ch||i.channel_id===ch)&&(!series||i.series===series)&&(stage?i.stage===stage:i.stage!=='archived')&&[i.title,i.series,i.next_action,i.blocker,channel(i.channel_id).brand].join(' ').toLowerCase().includes(q));}
   function fillFilters(){for(const [id,obj,label] of [['#co-brand',Object.fromEntries(channels.map(c=>[c.brand,c.brand])),'전체 브랜드'],['#co-channel',Object.fromEntries(channels.map(c=>[c.id,`${c.name} · ${c.platform}`])),'전체 채널'],['#co-series',Object.fromEntries(items.filter(i=>i.series&&i.stage!=='archived').map(i=>[i.series,i.series])),'전체 시리즈']]){const old=$(id).value;$(id).innerHTML=`<option value="">${label}</option>${options(obj,old)}`;}}

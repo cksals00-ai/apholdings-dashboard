@@ -4,7 +4,7 @@ import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?
 import { createNewsletter } from './newsletter.js?v=20261027-pipeline';
 import { createShop } from './shop.js?v=research-20261009';
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
-import { createContentOperations } from './content.js?v=1.2-series';
+import { createContentOperations } from './content.js?v=20261027-ads';
 import { createGrants } from './grants.js?v=2.0-strategy';
 import { createMarketing } from './marketing.js?v=1.3';
 import { createSales } from './sales.js?v=20261027';
