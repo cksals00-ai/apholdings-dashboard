@@ -11,6 +11,14 @@ on:
         description: Verify today's completed draft-release bundle without creating content
         type: boolean
         default: false
+      record_handoff:
+        description: Record server receipt of a completed bundle in the admin page (no publication)
+        type: boolean
+        default: false
+      edition_date:
+        description: Optional edition date YYYY-MM-DD (defaults to today in Korea)
+        type: string
+        default: ''
 
 concurrency:
   group: ap-news-daily
@@ -27,7 +35,7 @@ jobs:
       contents: write
     outputs:
       due: ${{ steps.prepare.outputs.due }}
-      day: ${{ steps.prepare.outputs.day }}
+      day: ${{ steps.clock.outputs.day }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -40,25 +48,60 @@ jobs:
           cache-dependency-path: requirements-newsletter*.txt
       - name: Install document validators (no AI API)
         run: pip install -r requirements-newsletter-server.txt
+      - name: Determine edition date
+        id: clock
+        env:
+          REQUESTED_DATE: ${{ inputs.edition_date }}
+        run: |
+          day=${REQUESTED_DATE:-$(TZ=Asia/Seoul date +%F)}
+          python -c 'import datetime,sys; datetime.date.fromisoformat(sys.argv[1])' "$day"
+          echo "day=$day" >> "$GITHUB_OUTPUT"
       - name: Verify uploaded completed bundle
-        if: ${{ inputs.verify_ready == true }}
+        if: ${{ inputs.verify_ready == true || inputs.record_handoff == true }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python scripts/newsletter_server.py verify-ready
+          EDITION_DAY: ${{ steps.clock.outputs.day }}
+        run: python scripts/newsletter_server.py verify-ready --date "$EDITION_DAY"
+      - name: Record server receipt (no publication or email)
+        if: ${{ inputs.record_handoff == true && inputs.verify_ready != true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          EDITION_DAY: ${{ steps.clock.outputs.day }}
+        run: python scripts/newsletter_status.py handoff --date "$EDITION_DAY"
       - name: Test safety gates
         run: |
           python scripts/test_newsletter_handoff.py
           python scripts/test_newsletter_server.py
+          python scripts/test_newsletter_status.py
           python scripts/test_newsletter.py
           node --test supabase/functions/ap-news/core.test.mjs
       - name: Accept today's completed edition after08:00 KST
         id: prepare
-        if: ${{ inputs.verify_ready != true }}
+        if: ${{ inputs.verify_ready != true && inputs.record_handoff != true }}
         env:
           GH_TOKEN: ${{ github.token }}
+          EDITION_DAY: ${{ steps.clock.outputs.day }}
         run: |
-          python scripts/newsletter_server.py prepare
+          python scripts/newsletter_server.py prepare --date "$EDITION_DAY"
           python scripts/check_site.py
+      - name: Record publication readiness
+        if: ${{ inputs.verify_ready != true && inputs.record_handoff != true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          EDITION_DAY: ${{ steps.clock.outputs.day }}
+          EDITION_STATE: ${{ steps.prepare.outputs.state }}
+          EDITION_DUE: ${{ steps.prepare.outputs.due }}
+        run: |
+          if [ "$EDITION_STATE" = ready ]; then
+            python scripts/newsletter_status.py handoff --date "$EDITION_DAY"
+          fi
+          if [ "$EDITION_DUE" = true ]; then
+            python scripts/newsletter_status.py started --date "$EDITION_DAY"
+          elif [ "$EDITION_STATE" = awaiting_ready ]; then
+            python scripts/newsletter_status.py waiting --date "$EDITION_DAY"
+          fi
       - name: Commit only completed newsletter files
         if: ${{ steps.prepare.outputs.due == 'true' }}
         env:
@@ -112,9 +155,31 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           EDITION_DAY: ${{ needs.prepare.outputs.day }}
         run: |
+          python scripts/newsletter_status.py deployed --date "$EDITION_DAY"
           for attempt in 1 2 3 4; do
             if python scripts/newsletter_server.py register --date "$EDITION_DAY"; then break; fi
             if [ "$attempt" = 4 ]; then exit 1; fi
             sleep 30
           done
+          python scripts/newsletter_status.py published --date "$EDITION_DAY"
           python scripts/newsletter_server.py mail-status --date "$EDITION_DAY"
+
+  report_failure:
+    needs: [prepare, deploy, register]
+    if: ${{ always() && inputs.verify_ready != true && (needs.prepare.result == 'failure' || needs.deploy.result == 'failure' || needs.register.result == 'failure') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Record failed server processing without sending mail
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          REQUESTED_DATE: ${{ needs.prepare.outputs.day }}
+        run: |
+          day=${REQUESTED_DATE:-$(TZ=Asia/Seoul date +%F)}
+          python scripts/newsletter_status.py error --date "$day" --error '서버 처리에 실패했습니다. 상세 실행 기록을 확인하세요.'

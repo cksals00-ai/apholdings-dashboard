@@ -221,7 +221,8 @@ def mail_status(issue):
 def prepare(day, now=None):
     import newsletter_handoff as handoff
     result = {'day': day, 'due': False, 'state': 'not_due'}
-    if publication_due(now):
+    current=(now or datetime.now(KST)).astimezone(KST)
+    if day==current.date().isoformat() and publication_due(current):
         path = builder.ISSUES / f'{day}.json'
         if path.exists() and load_json(path).get('status') == 'published':
             issue = builder.validate_issue(load_json(path))

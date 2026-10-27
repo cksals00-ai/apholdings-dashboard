@@ -76,6 +76,20 @@ class HandoffTests(unittest.TestCase):
             with patch.object(self.h.subprocess,'check_output',side_effect=AssertionError('No upload allowed')):
                 with self.assertRaises(ValueError): self.h.upload_bundle(path,'2026-10-27')
 
+    def test_upload_records_handoff_only_after_the_asset_is_saved(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path=Path(folder)/'AP-News-2026-10-27-ready.zip'
+            self.h.create_bundle('2026-10-27',path,reviewed=True)
+            commands=[]
+            def run(args,**kwargs): commands.append(args)
+            with patch.object(self.h.subprocess,'check_output',return_value=b'[{"tag_name":"ap-news-ready-2026-10-27","draft":true}]'), \
+                 patch.object(self.h.subprocess,'run',run):
+                self.h.upload_bundle(path,'2026-10-27')
+            self.assertEqual(commands[0][:3],['gh','release','upload'])
+            self.assertEqual(commands[1][:4],['gh','workflow','run','ap-news-daily.yml'])
+            self.assertIn('record_handoff=true',commands[1])
+            self.assertIn('edition_date=2026-10-27',commands[1])
+
     def test_changed_editorial_intro_cannot_reuse_an_old_pdf(self):
         import hashlib
         import newsletter as b
@@ -126,5 +140,12 @@ class HandoffTests(unittest.TestCase):
             result=s.prepare('2026-10-28',now=datetime.fromisoformat('2026-10-28T07:59:59+09:00'))
         self.assertEqual(result['state'],'not_due')
         self.assertFalse(result['due'])
+
+    def test_future_bundle_cannot_publish_early_through_manual_date_input(self):
+        import newsletter_server as s
+        with patch.object(self.h,'download_bundle',side_effect=AssertionError('Future edition accessed')):
+            result=s.prepare('2026-10-28',now=datetime.fromisoformat('2026-10-27T14:00:00+09:00'))
+        self.assertFalse(result['due'])
+        self.assertEqual(result['state'],'not_due')
 
 if __name__=='__main__': unittest.main()

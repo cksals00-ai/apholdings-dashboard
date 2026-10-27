@@ -182,17 +182,27 @@ def upload_bundle(path, day):
         raise ValueError('Refusing to modify a public release')
     subprocess.run(['gh', 'release', 'upload', tag, str(path), '--repo', REPO, '--clobber'], check=True)
     print(f'Completed handoff uploaded for {day}; homepage and email unchanged')
+    report_handoff(day)
+
+
+def report_handoff(day):
+    date.fromisoformat(day)
+    subprocess.run(['gh','workflow','run','ap-news-daily.yml','--repo',REPO,
+                    '-f','record_handoff=true','-f',f'edition_date={day}'],check=True)
+    print('Server receipt verification requested; admin status updates after server verification')
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('stage', choices=['package', 'upload'])
+    parser.add_argument('stage', choices=['package', 'upload', 'report'])
     parser.add_argument('--date', required=True)
-    parser.add_argument('--file', type=Path, required=True)
+    parser.add_argument('--file', type=Path)
     parser.add_argument('--reviewed', action='store_true', help='Assistant has checked originals, all PDF pages, mobile and images; does not mean human review')
     args = parser.parse_args()
+    if args.stage!='report' and args.file is None: parser.error('--file is required for package/upload')
     if args.stage == 'package': create_bundle(args.date, args.file, args.reviewed)
-    else: upload_bundle(args.file, args.date)
+    elif args.stage=='upload': upload_bundle(args.file, args.date)
+    else: report_handoff(args.date)
 
 
 if __name__ == '__main__':

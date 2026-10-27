@@ -86,7 +86,7 @@ Deno.serve(async req=>{
   const allowed=new Set([ORIGIN,'https://apholdings.kr','https://cksals00-ai.github.io']);
   const cors={'Access-Control-Allow-Origin':origin&&allowed.has(origin)?origin:ORIGIN,'Access-Control-Allow-Headers':'authorization,content-type','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Vary':'Origin'};
   const reply=(data:unknown,status=200)=>new Response(JSON.stringify(data),{status,headers:{...cors,'Content-Type':'application/json','Cache-Control':'no-store'}});
-  const action=new globalThis.URL(req.url).pathname.split('/').filter(Boolean).at(-1);
+  const action=new globalThis.URL(req.url).pathname.split('/').filter(Boolean).at(-1)||'';
   if(origin&&!allowed.has(origin))return reply({message:'허용되지 않은 요청입니다.'},403);
   if(req.method==='OPTIONS')return new Response(null,{status:204,headers:cors});
   try {
@@ -96,12 +96,12 @@ Deno.serve(async req=>{
     }
     if(req.method==='GET'&&action==='admin') {
       if(!await isOwner(req))return reply({message:'관리자 로그인이 필요합니다.'},401);
-      const [subscribers,issues,deliveries,runtime]=await Promise.all([
+      const [subscribers,issues,deliveries,runtime,pipeline]=await Promise.all([
         db('ap_news_subscribers?select=id,email,name,status,consent_at,confirmed_at,unsubscribed_at,created_at&order=created_at.desc'),
-        db('ap_news_issues?select=issue_date,number,title,status,verified,web_url,pdf_url&order=issue_date.desc&limit=30'),
+        db('ap_news_issues?select=issue_date,number,title,status,verified,web_url,pdf_url,publish_at,created_at&order=issue_date.desc&limit=30'),
         db('ap_news_deliveries?select=id,subscriber_id,issue_date,kind,state,attempts,last_error,created_at&order=created_at.desc&limit=100'),
-        db('ap_news_runtime?id=eq.mail&select=*')]);
-      return reply({mail_ready:READY(),counts:{active:subscribers.filter((s:any)=>s.status==='active').length,pending:subscribers.filter((s:any)=>s.status==='pending').length,unsubscribed:subscribers.filter((s:any)=>s.status==='unsubscribed').length},subscribers,issues,deliveries,runtime:runtime[0]});
+        db('ap_news_runtime?id=eq.mail&select=*'),rpc('ap_news_admin_pipeline')]);
+      return reply({mail_ready:READY(),counts:{confirmed_active:subscribers.filter((s:any)=>s.status==='active'&&s.confirmed_at).length,active:subscribers.filter((s:any)=>s.status==='active').length,pending:subscribers.filter((s:any)=>s.status==='pending').length,unsubscribed:subscribers.filter((s:any)=>s.status==='unsubscribed').length},subscribers,issues,deliveries,runtime:runtime[0],pipeline});
     }
     if(req.method==='GET'&&action==='admin-history') {
       if(!await isOwner(req))return reply({message:'관리자 로그인이 필요합니다.'},401);

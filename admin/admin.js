@@ -1,7 +1,7 @@
 import { renderFinance } from './app-finance.mjs?v=1';
 import { androidApps } from './android-app-registry.mjs?v=1';
 import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?v=20261009-1';
-import { createNewsletter } from './newsletter.js?v=20261022-table';
+import { createNewsletter } from './newsletter.js?v=20261027-pipeline';
 import { createShop } from './shop.js?v=research-20261009';
 import { createInvestment } from './investment.js?v=1.7-investment-ai';
 import { createContentOperations } from './content.js?v=1.2-series';
