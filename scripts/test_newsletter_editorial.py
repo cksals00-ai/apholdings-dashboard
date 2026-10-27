@@ -46,6 +46,11 @@ class EditorialTests(unittest.TestCase):
         for key in ('path','poster'):
             i=self.issue(); i['hero'][key]='/img/newsletter/../../secret.gif'
             with self.assertRaises(ValueError): b.validate_issue(i)
+    def test_future_email_brand_has_explicit_table_text_color(self):
+        i=self.issue();i['date']='2026-10-29'
+        self.assertIn('font:36px Georgia,serif;color:#f7f4ed',b.render_email(i))
+        self.assertIn('letter-spacing:1px;color:#f7f4ed',b.render_email(i))
+
     def test_legacy_unchanged(self):
         i=self.issue();del i['layout'];del i['hero']
         self.assertIn('오늘 해볼 일',b.render_issue(i))
