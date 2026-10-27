@@ -3,3 +3,5 @@ __pycache__/
 .qa/
 .ap-news-state/
 .pages-site/
+/tests/node_modules
+/hajeung-preview-local.html

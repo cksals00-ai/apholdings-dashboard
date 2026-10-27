@@ -1,4 +1,4 @@
-import{test}from'node:test';import assert from'node:assert/strict';import{readFile}from'node:fs/promises';import{PGlite}from'../../hajeung-server-safe/node_modules/@electric-sql/pglite/dist/index.js';
+import{test}from'node:test';import assert from'node:assert/strict';import{readFile}from'node:fs/promises';import{PGlite}from'@electric-sql/pglite';
 test('unconfirmed email cannot apply; existing operating identity cannot be overwritten',async()=>{
 const db=new PGlite();await db.exec(`create role anon;create role authenticated;create schema auth;create schema storage;create schema hajeung;
 create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz);create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('test.uid',true),'')::uuid$$;

@@ -1,5 +1,5 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
-import {PGlite} from '../../hajeung-server-safe/node_modules/@electric-sql/pglite/dist/index.js';
+import {PGlite} from '@electric-sql/pglite';
 const ids={a:'11111111-1111-4111-8111-111111111111',b:'22222222-2222-4222-8222-222222222222',admin:'94f18e51-cc1e-46c5-b2e0-235bf9221761'};
 test('real SQL: private ownership, admin only approval, append-only replies and photo isolation',async()=>{
  const db=new PGlite();await db.exec(`create role anon; create role authenticated; create role service_role bypassrls; create schema auth; create schema storage; create schema hajeung;
