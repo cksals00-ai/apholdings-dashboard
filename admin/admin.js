@@ -1,3 +1,4 @@
+import { createB2BSupport } from './b2b-support.mjs?v=20261027';
 import { renderFinance } from './app-finance.mjs?v=1';
 import { androidApps } from './android-app-registry.mjs?v=1';
 import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?v=20261009-1';
@@ -53,6 +54,7 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const shopOperations = createShop(supabase, () => currentUser);
 const contentOperations = createContentOperations(supabase, () => currentUser);
 const newsletter = createNewsletter(supabase, () => currentUser);
+const b2bSupport = createB2BSupport(supabase, () => currentUser);
 const grants = createGrants(supabase, () => currentUser);
 const marketing = createMarketing(supabase, () => currentUser);
 const sales = createSales(supabase, () => currentUser);
@@ -61,7 +63,7 @@ const rgrg = createRgrg(() => currentUser);
 const rgrgSettings = createRgrgSettings(() => currentUser);
 
 function setAuthView(loggedIn) {
-  if (!loggedIn) { stopRankerActivity(); clearTradingDocument(); investment.clear(); clearCommerce(); shopOperations.clear(); contentOperations.clear(); newsletter.clear(); grants.clear(); marketing.clear(); sales.clear(); businessPlan.clear(); rgrg.clear(); rgrgSettings.clear(); $('#ap-visual-row')?.remove(); }
+  if (!loggedIn) { stopRankerActivity(); clearTradingDocument(); investment.clear(); clearCommerce(); shopOperations.clear(); contentOperations.clear(); newsletter.clear(); b2bSupport.clear(); grants.clear(); marketing.clear(); sales.clear(); businessPlan.clear(); rgrg.clear(); rgrgSettings.clear(); $('#ap-visual-row')?.remove(); }
   $('#login-view').hidden = loggedIn;
   $('#app-view').hidden = !loggedIn;
 }
@@ -400,7 +402,7 @@ function showSection(name) {
   });
   const investing = name === 'trading';
   document.querySelector('.workspace').classList.toggle('investment-mode', investing);
-  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'newsletter' ? 'AP뉴스 구독·발송' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'sales' ? '매출 만들기' : name === 'plan' ? '사업계획·기업가치' : name === 'rgrg' ? '퀴즈랭커' : name === 'rgrg-settings' ? '퀴즈랭커' : 'Portfolio Control Room';
+  document.querySelector('.topbar h1').textContent = investing ? '투자운용' : name === 'b2b' ? 'B2B 고객 지원' : name === 'commerce' ? '커머스' : name === 'apps' ? '앱 현황' : name === 'newsletter' ? 'AP뉴스 구독·발송' : name === 'content' ? 'YouTube·콘텐츠 현황' : name === 'grants' ? '지원사업' : name === 'marketing' ? '홍보' : name === 'sales' ? '매출 만들기' : name === 'plan' ? '사업계획·기업가치' : name === 'rgrg' ? '퀴즈랭커' : name === 'rgrg-settings' ? '퀴즈랭커' : 'Portfolio Control Room';
   if (investing) investment.load();
   if (name === 'assets') loadAssets();
   if (name === 'commerce') loadCommerce();
@@ -408,6 +410,7 @@ function showSection(name) {
   if (name === 'apps') loadApps();
   if (name === 'content') contentOperations.load();
   if (name === 'newsletter') newsletter.load();
+  if (name === 'b2b') b2bSupport.load();
   if (name === 'grants') grants.load();
   if (name === 'sales') sales.load();
   if (name === 'marketing') { marketing.load(); loadApps(); }
@@ -416,8 +419,8 @@ function showSection(name) {
   if (name === 'rgrg-settings') rgrgSettings.load();
   if (name === 'plan') history.replaceState(null, '', '#plan');
   else if (location.hash === '#plan') history.replaceState(null, '', location.pathname + location.search);
-  $('.filters').hidden = ['sales','shop','assets','commerce','apps','content','newsletter','grants','marketing','plan','rgrg','rgrg-settings'].includes(name);
-  $('.top-actions').hidden = ['sales','shop','commerce','apps','content','newsletter','grants','plan','rgrg','rgrg-settings'].includes(name);
+  $('.filters').hidden = ['b2b','sales','shop','assets','commerce','apps','content','newsletter','grants','marketing','plan','rgrg','rgrg-settings'].includes(name);
+  $('.top-actions').hidden = ['b2b','sales','shop','commerce','apps','content','newsletter','grants','plan','rgrg','rgrg-settings'].includes(name);
   document.querySelectorAll('.view-section').forEach((section) => { section.hidden = section.id !== `${name}-section`; });
   document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('active', item.dataset.section === name || (quizView && item.dataset.section === 'rgrg')));
   // 지금 보고 있는 화면이 하위 항목이면 그 묶음은 열려 있어야 한다.

@@ -1,0 +1,4 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{readFile}from'node:fs/promises';
+const read=p=>readFile(new URL('../'+p,import.meta.url),'utf8');
+test('public guide has truthful links and individual forms without exposed app credentials',async()=>{const s=await read('hajeung/index.html');assert.match(s,/pMfCHanN/);assert.match(s,/출시 준비 중/);assert.match(s,/name="photo"/);assert.match(s,/name="consent"/);assert.doesNotMatch(s,/play\.google\.com\/store\/apps/);assert.doesNotMatch(s,/service_role/);});
+test('existing admin actually initializes, loads and clears new support module',async()=>{const s=await read('admin/admin.js');assert.match(s,/createB2BSupport/);assert.match(s,/b2bSupport\.load\(\)/);assert.match(s,/b2bSupport\.clear\(\)/);assert.match(await read('admin/index.html'),/id="b2b-section"/);});
