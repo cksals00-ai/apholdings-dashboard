@@ -4,3 +4,5 @@
 @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 
 .guide-links{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 28px}.guide-links a{background:#e7eee2;border-radius:8px;padding:12px 14px;font-size:13px;min-height:44px}.guide-detail{scroll-margin-top:20px}.guide-detail summary{font-weight:600;line-height:1.8;min-height:32px}.guide-detail ol{padding-left:24px;color:#5e736d;font-size:14px;line-height:1.9}.guide-detail li{padding:7px 0}.guide-example{background:#edf2e9;padding:16px;border-radius:8px;overflow-wrap:anywhere}
+
+.guide-detail ul,.guide-detail dl{color:#5e736d;font-size:14px;line-height:1.9}.guide-detail ul{padding-left:24px}.guide-detail dt{margin-top:20px}.guide-detail dd{margin:8px 0 20px}.guide-detail .card{margin:20px 0}
