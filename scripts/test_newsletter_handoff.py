@@ -76,6 +76,28 @@ class HandoffTests(unittest.TestCase):
             with patch.object(self.h.subprocess,'check_output',side_effect=AssertionError('No upload allowed')):
                 with self.assertRaises(ValueError): self.h.upload_bundle(path,'2026-10-27')
 
+    def test_changed_editorial_intro_cannot_reuse_an_old_pdf(self):
+        import hashlib
+        import newsletter as b
+        with tempfile.TemporaryDirectory() as folder:
+            path=self.bundle(folder)
+            with zipfile.ZipFile(path) as z:
+                files={name:z.read(name) for name in z.namelist()}
+            changed=copy.deepcopy(self.issue)
+            changed['intro']='원본 PDF에 없는 교체된 도입문입니다.'
+            day=changed['date']
+            files[f'site-source/newsletter/issues/{day}.json']=json.dumps(changed,ensure_ascii=False).encode()
+            files[f'ko/news/daily/{day}/index.html']=b.render_issue(changed).encode()
+            files[f'newsletters/email/{day}.html']=b.render_email(changed).encode()
+            manifest=json.loads(files['manifest.json'])
+            for name in manifest['files']:
+                manifest['files'][name]=hashlib.sha256(files[name]).hexdigest()
+            files['manifest.json']=json.dumps(manifest).encode()
+            bad=Path(folder)/'mismatch.zip'
+            with zipfile.ZipFile(bad,'w') as z:
+                for name,data in files.items(): z.writestr(name,data)
+            with self.assertRaises(ValueError): self.h.validate_bundle(bad,day)
+
     def test_server_copies_finished_pdf_without_calling_pdf_generator(self):
         import newsletter as b
         import newsletter_server as s

@@ -133,6 +133,12 @@ def verify_documents(issue):
     links = {a.get_object().get('/A', {}).get('/URI') for p in pdf.pages for a in p.get('/Annots', [])}
     if len(pdf.pages) < 2 or '{{unsubscribe_url}}' not in mail:
         raise ValueError('Incomplete PDF or missing unsubscribe placeholder')
+    if (pdf.metadata or {}).get('/Title') != f'AP News {issue["date"]} | {issue["title"]}':
+        raise ValueError('PDF edition date or title mismatch')
+    for key in ('title', 'intro', 'takeaway', 'edition_note'):
+        value = issue[key]
+        if value not in web or value not in mail or compact(value) not in text:
+            raise ValueError(f'Web/email/PDF editorial mismatch: {key}')
     for story in issue['stories']:
         for key in ('title', 'summary', 'fact', 'insight', 'action'):
             value = story[key]
