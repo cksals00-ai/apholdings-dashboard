@@ -37,7 +37,7 @@ revoke all on public.b2b_applications,public.b2b_requests,public.b2b_replies fro
 grant select on public.b2b_applications,public.b2b_requests,public.b2b_replies to authenticated;
 create policy b2b_app_read on public.b2b_applications for select to authenticated using(user_id=(select auth.uid()) or (select b2b_private.is_owner()));
 create policy b2b_request_read on public.b2b_requests for select to authenticated using(user_id=(select auth.uid()) or (select b2b_private.is_owner()));
-create policy b2b_reply_read on public.b2b_replies for select to authenticated using(exists(select 1 from public.b2b_requests r where r.id=request_id));
+create policy b2b_reply_read on public.b2b_replies for select to authenticated using(exists(select 1 from public.b2b_requests r where r.id=request_id and (r.user_id=(select auth.uid()) or (select b2b_private.is_owner()))));
 
 create function public.b2b_apply(p_name text,p_company text,p_device text) returns uuid language plpgsql security definer set search_path='' as $$
 declare e text;out_id uuid;begin
