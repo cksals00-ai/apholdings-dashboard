@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/admin/content.css?v=1.2-icon-center">
   <link rel="stylesheet" href="/admin/business-plan.css?v=1.0.0">
   <link rel="stylesheet" href="/admin/rgrg.css?v=1.2-settings">
+  <link rel="stylesheet" href="/admin/sales.css?v=20261027">
 </head>
 <body>
   <div id="login-view" class="auth-shell">
@@ -53,6 +54,7 @@
         <button class="nav-item active" data-section="overview">Overview</button>
         <button class="nav-item" data-section="plan">사업계획·기업가치</button>
         <button class="nav-item" data-section="gantt">Action Plan</button>
+        <button class="nav-item nav-sales" data-section="sales">매출 만들기</button>
         <div class="nav-group" data-navgroup="apps">
           <button class="nav-item nav-parent" data-section="apps" aria-expanded="false" aria-controls="nav-sub-apps">앱 현황<span class="nav-caret" aria-hidden="true"></span></button>
           <div class="nav-sub" id="nav-sub-apps" hidden>
@@ -211,6 +213,7 @@
         </details>
       </section>
 
+      <section id="sales-section" class="view-section" hidden aria-label="매출 만들기"></section>
       <section id="commerce-section" class="view-section" hidden>
         <div class="commerce-toolbar"><button id="commerce-refresh" class="secondary" type="button">새로고침</button></div>
         <p id="commerce-message" class="form-message" role="status" aria-live="polite"></p>
@@ -399,6 +402,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="/admin/admin.js?v=20261026-finance"></script>
+  <script type="module" src="/admin/admin.js?v=20261027-sales"></script>
 </body>
 </html>
