@@ -40,7 +40,10 @@ def retry(operation, sleep=time.sleep):
         try:
             return operation()
         except (HTTPError, URLError, TimeoutError, ConnectionError) as exc:
-            if getattr(exc, 'api_code', '') in ('insufficient_quota', 'billing_hard_limit_reached'):
+            if getattr(exc, 'api_code', '') in (
+                    'insufficient_quota', 'billing_hard_limit_reached', 'credit_balance_exhausted',
+                    'organization_spend_limit_exceeded', 'project_spend_limit_exceeded',
+                    'organization_usage_limit_exceeded'):
                 exc.close()
                 raise
             if isinstance(exc, HTTPError) and exc.code not in (408, 429, 500, 502, 503, 504):

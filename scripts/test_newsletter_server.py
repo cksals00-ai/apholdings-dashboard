@@ -37,18 +37,22 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(len(attempts), 1)
 
     def test_exhausted_billing_quota_is_reported_without_retrying_or_leaking_body(self):
-        attempts = []
-        def exhausted(*args, **kwargs):
-            attempts.append(1)
-            raise HTTPError('https://api.openai.com/v1/responses', 429, 'quota', {},
-                io.BytesIO(b'{"error":{"code":"insufficient_quota","message":"private account details"}}'))
-        real_retry = self.server.retry
-        with patch.object(self.server, 'urlopen', exhausted), \
-             patch.object(self.server, 'retry', lambda operation: real_retry(operation, sleep=lambda _: None)):
-            with self.assertRaises(HTTPError) as caught:
-                self.server.request_json('https://api.openai.com/v1/responses')
-        self.assertEqual(getattr(caught.exception, 'api_code', None), 'insufficient_quota')
-        self.assertEqual(len(attempts), 1)
+        for code in ('insufficient_quota', 'credit_balance_exhausted',
+                     'organization_spend_limit_exceeded', 'project_spend_limit_exceeded',
+                     'organization_usage_limit_exceeded'):
+            with self.subTest(code=code):
+                attempts = []
+                def exhausted(*args, **kwargs):
+                    attempts.append(1)
+                    body = json.dumps({'error': {'code': code, 'message': 'private account details'}}).encode()
+                    raise HTTPError('https://api.openai.com/v1/responses', 429, 'quota', {}, io.BytesIO(body))
+                real_retry = self.server.retry
+                with patch.object(self.server, 'urlopen', exhausted), \
+                     patch.object(self.server, 'retry', lambda operation: real_retry(operation, sleep=lambda _: None)):
+                    with self.assertRaises(HTTPError) as caught:
+                        self.server.request_json('https://api.openai.com/v1/responses')
+                self.assertEqual(getattr(caught.exception, 'api_code', None), code)
+                self.assertEqual(len(attempts), 1)
 
     def test_source_rejects_stale_future_and_impostor_domains(self):
         self.server.check_sources(self.issue, [])
