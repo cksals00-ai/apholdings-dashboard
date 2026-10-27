@@ -20,6 +20,14 @@ def validate_issue(issue):
             if not isinstance(issue[key], str) or not issue[key].strip(): raise ValueError(key)
         if issue['status'] == 'published' and issue.get('verified') is not True: raise ValueError('Source verification required')
         if not 5 <= len(issue['stories']) <= 7: raise ValueError('Select 5 to 7 stories')
+        if issue.get('layout') == 'editorial-v2':
+            hero=issue.get('hero',{})
+            for key,ext in (('path','gif'),('poster','png')):
+                if not re.fullmatch(r'/img/newsletter/[a-zA-Z0-9_-]+\.'+ext,hero.get(key,'')): raise ValueError('Invalid cover path')
+                if not (ROOT/hero[key].lstrip('/')).is_file(): raise ValueError('Cover asset missing')
+            for key in ('alt','caption'):
+                if not isinstance(hero.get(key),str) or not hero[key].strip(): raise ValueError('Cover description required')
+            if any(not st.get('summary') for st in issue['stories']): raise ValueError('Story summary required')
         urls=set()
         for s in issue['stories']:
             for key in ('title','source','url','published','fact','insight','action'):
@@ -62,6 +70,9 @@ def figure(story, email=False):
 
 def render_issue(i):
     validate_issue(i)
+    if i.get('layout') == 'editorial-v2':
+        import newsletter_editorial, sys
+        return newsletter_editorial.web(i,sys.modules[__name__])
     stories=''.join(f'''<article class="story" id="story-{n}"><div class="story-no">{n:02d}</div><div><p class="eyebrow">{esc(s.get('category','AI NEWS'))}</p><h2>{esc(s['title'])}</h2><p class="source">{esc(s['source'])} · 발표 {esc(s['published'])}</p>{figure(s)}<p class="story-summary">{esc(s.get('summary',''))}</p><p>{esc(s['fact'])}</p><aside><b>AP의 관점</b><p>{esc(s['insight'])}</p></aside><p class="action"><b>오늘 해볼 일</b> {esc(s['action'])}</p><a class="quiet-link" href="{esc(s['url'])}" target="_blank" rel="noopener noreferrer">공식 원문 읽기 ↗</a></div></article>''' for n,s in enumerate(i['stories'],1))
     toc=''.join(f'<a href="#story-{n}"><span>{n:02d}</span>{esc(s["title"])}</a>' for n,s in enumerate(i['stories'],1))
     cover=figure(i['stories'][0])
@@ -73,6 +84,9 @@ def render_issue(i):
 
 def render_email(i):
     validate_issue(i)
+    if i.get('layout') == 'editorial-v2':
+        import newsletter_editorial, sys
+        return newsletter_editorial.email(i,sys.modules[__name__])
     rows=''.join(f'''<tr><td style="padding:24px 0;border-bottom:1px solid #ddd5c7"><p style="color:#9b7950;font-size:12px;margin:0 0 10px">{n:02d} · {esc(s['source'])} · {esc(s['published'])}</p><h2 style="font-size:21px;line-height:1.5;margin:0 0 12px">{esc(s['title'])}</h2>{figure(s,True)}<p style="font-size:17px;font-weight:bold;line-height:1.6">{esc(s.get('summary',''))}</p><p style="font-size:15px;line-height:1.9;margin:0">{esc(s['fact'])}</p><p style="font-size:14px;line-height:1.9;color:#526075"><b>AP의 관점</b> · {esc(s['insight'])}</p><p style="font-size:14px;line-height:1.9"><b>오늘 해볼 일</b> · {esc(s['action'])}</p><a style="color:#9b7950" href="{esc(s['url'])}">공식 원문 ↗</a></td></tr>''' for n,s in enumerate(i['stories'],1))
     return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"></head><body style="margin:0;background:#f7f4ed;color:#172338;font-family:Arial,'Apple SD Gothic Neo',sans-serif"><table role="presentation" style="max-width:640px;width:100%;margin:auto;padding:32px 24px"><tr><td><img src="{ORIGIN}/img/ap_mark.png" width="44" style="background:#172338;padding:8px" alt="AP Holdings"><p style="font-size:11px;letter-spacing:2px">DAILY EDITION · NO. {i['number']:03d} · {i['date']}</p><p style="font-size:52px;font-family:Georgia,serif;margin:20px 0">AP <i>News</i></p><h1 style="font-size:28px;line-height:1.5">{esc(i['title'])}</h1><p style="line-height:1.9">{esc(i['intro'])}</p><p><a style="color:#172338" href="{ORIGIN}{page_path(i)}">웹에서 읽기 ↗</a> &nbsp; <a style="color:#9b7950" href="{ORIGIN}{pdf_path(i)}">PDF 다운로드 ↓</a></p></td></tr>{rows}<tr><td style="padding:28px 0"><b>오늘, 하나만 해본다면.</b><p style="line-height:1.9">{esc(i['takeaway'])}</p><p style="font-size:12px;color:#657083;line-height:1.8">{esc(i['edition_note'])}<br>AP Holdings · 문의 alfred.park@apholdings.kr<br>수신을 원하지 않으면 <a href="{{{{unsubscribe_url}}}}">구독 해지</a>를 선택하세요.</p></td></tr></table></body></html>'''
 
@@ -110,7 +124,7 @@ def render_pdf(i):
     y=p(esc(i['intro']),M,y-22,size=12,color=muted)
     illustrated=any(st.get('image') for st in i['stories'])
     if illustrated:
-        im=i['stories'][0].get('image')
+        im=({'path':i['hero']['poster'],'caption':i['hero']['caption']} if i.get('layout')=='editorial-v2' else i['stories'][0].get('image'))
         if im:
             reader=ImageReader(str(ROOT/im['path'].lstrip('/')));iw,ih=reader.getSize()
             height=(W-2*M)*ih/iw
@@ -136,6 +150,7 @@ def render_pdf(i):
                 y=p(esc(im['caption']),M,y-image_height-8,size=8,color=muted)-16
         # Measure each complete story before drawing, so page breaks never clip it.
         blocks=[(f'{n:02d} · {esc(s.get("category","AI NEWS"))}',9,gold),(esc(s['title']),17,ink),(f'{esc(s["source"])} · 발표 {s["published"]}',8,muted),(esc(s['fact']),10.2,ink),(f'AP의 관점 · {esc(s["insight"])}',10.2,muted),(f'오늘 해볼 일 · {esc(s["action"])}',10.2,ink),(f'<link href="{esc(s["url"])}" color="{gold}">공식 원문 읽기 ↗</link>',9,gold)]
+        if i.get('layout')=='editorial-v2': blocks=[block for block in blocks if not block[0].startswith('오늘 해볼 일') ]
         if s.get('summary'):blocks.insert(3,(esc(s['summary']),12,gold))
         height=22
         for text,size,color in blocks:
@@ -150,7 +165,7 @@ def render_pdf(i):
     extra=Paragraph(esc(i['takeaway']),style).wrap(W-2*M,H)[1]+(65 if illustrated else 95)
     if y-extra<75:c.showPage();page+=1;base(page);y=H-92
     y=p('ONE THING TO TAKE AWAY',M,y,size=9,color=gold)
-    y=p('오늘, 하나만 해본다면.',M,y-(8 if illustrated else 12),size=14 if illustrated else 18)
+    y=p('AP의 시선' if i.get('layout')=='editorial-v2' else '오늘, 하나만 해본다면.',M,y-(8 if illustrated else 12),size=14 if illustrated else 18)
     y=p(esc(i['takeaway']),M,y-(8 if illustrated else 12),size=10 if illustrated else 11)
     if y<65: raise ValueError('PDF final page overflow')
     c.save();return dest

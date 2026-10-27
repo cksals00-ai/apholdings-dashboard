@@ -74,6 +74,7 @@ jobs:
           python scripts/test_newsletter_handoff.py
           python scripts/test_newsletter_server.py
           python scripts/test_newsletter_status.py
+          python scripts/test_newsletter_editorial.py
           python scripts/test_newsletter.py
           node --test supabase/functions/ap-news/core.test.mjs
       - name: Accept today's completed edition after08:00 KST

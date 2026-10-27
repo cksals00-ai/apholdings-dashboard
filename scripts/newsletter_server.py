@@ -140,7 +140,7 @@ def verify_documents(issue):
         if value not in web or value not in mail or compact(value) not in text:
             raise ValueError(f'Web/email/PDF editorial mismatch: {key}')
     for story in issue['stories']:
-        for key in ('title', 'summary', 'fact', 'insight', 'action'):
+        for key in (('title', 'summary', 'fact', 'insight') if issue.get('layout')=='editorial-v2' else ('title', 'summary', 'fact', 'insight', 'action')):
             value = story[key]
             if value not in web or value not in mail or compact(value) not in text:
                 raise ValueError(f'Web/email/PDF content mismatch: {key}')
@@ -148,6 +148,14 @@ def verify_documents(issue):
             raise ValueError('PDF original-source link missing')
         if story['image']['path'] not in web or story['image']['path'] not in mail:
             raise ValueError('Shared editorial image missing')
+    if issue.get('layout')=='editorial-v2':
+        if issue['hero']['path'] not in web or issue['hero']['path'] not in mail:
+            raise ValueError('Shared motion cover missing')
+        from PIL import Image
+        with Image.open(ROOT/issue['hero']['path'].lstrip('/')) as animation:
+            if animation.n_frames<2 or animation.info.get('loop')!=0: raise ValueError('Cover must loop')
+            for frame in range(animation.n_frames): animation.seek(frame); animation.load()
+        with Image.open(ROOT/issue['hero']['poster'].lstrip('/')) as poster: poster.verify()
     return len(pdf.pages)
 
 
@@ -155,6 +163,7 @@ def verify_public(issue):
     paths = [f'ko/news/daily/{issue["date"]}/index.html',
              builder.pdf_path(issue).lstrip('/'), f'newsletters/email/{issue["date"]}.html']
     paths += [s['image']['path'].lstrip('/') for s in issue['stories']]
+    if issue.get('layout')=='editorial-v2': paths += [issue['hero'][key].lstrip('/') for key in ('path','poster')]
     for path in paths:
         url_path = path[:-10] if path.endswith('index.html') else path
         request = Request(builder.ORIGIN + '/' + url_path,

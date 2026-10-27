@@ -41,3 +41,17 @@
     });
   }
 })();
+
+// Static by default until JS can respect the reader's reduced-motion setting.
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('[data-motion-toggle]').forEach(button => {
+    const image=button.closest('figure').querySelector('.motion-image');
+    button.hidden=false;
+    let paused=reduced.matches;
+    const update=()=>{image.src=paused?image.dataset.posterSrc:image.dataset.motionSrc;button.textContent=paused?'움직임 재생':'움직임 정지';button.setAttribute('aria-pressed',String(paused));};
+    button.addEventListener('click',()=>{paused=!paused;update();});
+    reduced.addEventListener('change',()=>{paused=reduced.matches;update();});
+    update();
+  });
+})();

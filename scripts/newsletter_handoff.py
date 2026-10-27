@@ -25,7 +25,8 @@ def paths_for(issue):
             f'ko/news/daily/{day}/index.html',
             f'newsletters/AP-News-{day}.pdf',
             f'newsletters/email/{day}.html',
-            *(s['image']['path'].lstrip('/') for s in issue['stories'])}
+            *(s['image']['path'].lstrip('/') for s in issue['stories']),
+            *(issue['hero'][key].lstrip('/') for key in ('path','poster') if issue.get('layout')=='editorial-v2')}
 
 
 @contextmanager

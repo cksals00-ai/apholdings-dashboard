@@ -65,3 +65,9 @@ Resend에서 apholdings.kr 도메인 인증. Supabase Edge Function Secrets에 R
 - 공개 확인은 실제 공개 파일과 JSON/웹/PDF/이메일/이미지 일치 및 ap_news_issues 등록을 확인한 결과다. URL이나 DB 행만으로 공개 완료를 주장하지 않는다.
 - 메일 요약은 최근100행 목록이 아닌 서버의 전체 호별 집계를 사용한다. 접수·대기·실패·결과 불명은 구분하고 받은편지함 도착으로 표현하지 않는다. 본문·수신자 상세는 기존 관리자 인증을 그대로 사용한다.
 - 발행 기록과 집계는 service_role만 접근하며 기존 owner 인증 Edge admin endpoint를 통해서만 관리자 브라우저에 전달한다. 브라우저에 서비스 키를 넣지 않는다. 유료 AI API는 사용하지 않는다.
+
+## 2026-10-28: editorial motion edition
+
+New editions use `layout: "editorial-v2"` and `hero` with `path: "/img/newsletter/ap-signal-v1.gif"`, `poster: "/img/newsletter/ap-signal-v1.png"`, Korean `alt`, and caption `AP 브랜드 모션 그래픽 · 실제 제품 화면 아님`. The original abstract signal graphic is reproducible with `python scripts/newsletter_motion.py` (Pillow only; no API). Keep the existing AP logo unchanged.
+
+Web uses a looping GIF with pause control and reduced-motion static poster; email uses a 600px presentation table and GIF with meaningful first frame (some email readers show only that frame). PDF uses the corresponding PNG poster. Every bundle includes both assets, and public verification checks their bytes. Story summary, fact, insight and source remain shared; action is retained in JSON for compatibility but is omitted in v2 outputs. `takeaway` provides the final **AP의 시선**, a synthesis of business implications rather than repeated instructions. Existing editions retain legacy rendering. Run `scripts/test_newsletter_editorial.py` alongside existing checks; inspect all PDF pages, GIF frames and mobile/desktop before upload. No paid AI API is used.
