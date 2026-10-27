@@ -40,6 +40,9 @@ def retry(operation, sleep=time.sleep):
         try:
             return operation()
         except (HTTPError, URLError, TimeoutError, ConnectionError) as exc:
+            if getattr(exc, 'api_code', '') in ('insufficient_quota', 'billing_hard_limit_reached'):
+                exc.close()
+                raise
             if isinstance(exc, HTTPError) and exc.code not in (408, 429, 500, 502, 503, 504):
                 exc.close()
                 raise
@@ -67,9 +70,19 @@ def request_json(url, method='GET', body=None, headers=None, timeout=300):
         'Content-Type': 'application/json', 'User-Agent': 'AP-News-Publisher/1.0',
         **(headers or {})})
     def send():
-        with urlopen(request, timeout=timeout) as response:
-            raw = response.read()
-            return json.loads(raw) if raw else None
+        try:
+            with urlopen(request, timeout=timeout) as response:
+                raw = response.read()
+                return json.loads(raw) if raw else None
+        except HTTPError as exc:
+            # Only a short machine error code is retained, never account details/body.
+            try:
+                code = json.loads(exc.read(65536)).get('error', {}).get('code')
+                if isinstance(code, str) and re.fullmatch(r'[a-zA-Z0-9_-]{1,80}', code):
+                    exc.api_code = code
+            except (ValueError, AttributeError):
+                pass
+            raise
     return retry(send)
 
 
@@ -492,7 +505,8 @@ if __name__ == '__main__':
         main()
     except HTTPError as exc:
         # Do not dump request headers, URLs with tokens, or provider response bodies.
-        print(f'::error::Upstream HTTP {exc.code}; credentials/billing/domain access may need attention', file=sys.stderr)
+        print(f'::error::Upstream HTTP {exc.code}; code={getattr(exc, "api_code", "unavailable")}; '
+              'credentials/billing/domain access may need attention', file=sys.stderr)
         sys.exit(1)
     except (ValueError, URLError, TimeoutError) as exc:
         print(f'::error::{str(exc)[:300]}', file=sys.stderr)

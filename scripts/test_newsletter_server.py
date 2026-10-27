@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 import json
+import io
 import tempfile
 import unittest
 from datetime import datetime
@@ -33,6 +34,20 @@ class ServerTests(unittest.TestCase):
             raise HTTPError('https://api.openai.com', 401, 'bad key', {}, None)
         with self.assertRaises(HTTPError):
             self.server.retry(forbidden, sleep=lambda _: None)
+        self.assertEqual(len(attempts), 1)
+
+    def test_exhausted_billing_quota_is_reported_without_retrying_or_leaking_body(self):
+        attempts = []
+        def exhausted(*args, **kwargs):
+            attempts.append(1)
+            raise HTTPError('https://api.openai.com/v1/responses', 429, 'quota', {},
+                io.BytesIO(b'{"error":{"code":"insufficient_quota","message":"private account details"}}'))
+        real_retry = self.server.retry
+        with patch.object(self.server, 'urlopen', exhausted), \
+             patch.object(self.server, 'retry', lambda operation: real_retry(operation, sleep=lambda _: None)):
+            with self.assertRaises(HTTPError) as caught:
+                self.server.request_json('https://api.openai.com/v1/responses')
+        self.assertEqual(getattr(caught.exception, 'api_code', None), 'insufficient_quota')
         self.assertEqual(len(attempts), 1)
 
     def test_source_rejects_stale_future_and_impostor_domains(self):
