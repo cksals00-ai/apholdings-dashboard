@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-28",
+  "number": 20,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "더 깊이 연결되는 AI, 더 분명해져야 할 기준",
+  "intro": "업무 시스템을 잇는 AI와 소리까지 생성하는 가상세계, 정밀한 이미지 편집이 확장되고 있습니다. 가능성이 커질수록 권한·이용 조건·정보 검증을 함께 살펴야 합니다.",
+  "edition_note": "2026년 10월 28일 편집 · 10월 27일 공식 발표 5건 · 원문 확인 2026-10-28T08:12:41+09:00 · 연구·미리보기·향후 출시 계획 구분 · AI 작성 및 원문 확인",
+  "source_checked_at": "2026-10-28T08:12:41+09:00",
+  "takeaway": "AI의 가치는 생성 결과의 화려함에서 업무에 연결되는 신뢰성으로 넓어지고 있습니다. AP의 교육은 판단 역량을, 콘텐츠는 원본과 표현의 구분을, 서비스 구현은 권한과 승인 구조를 함께 제공해야 합니다. 새 기능의 가능성과 지금 실제로 이용할 수 있는 범위를 구분하는 설명이 고객의 의사결정 품질을 높입니다.",
+  "hero": {
+    "path": "/img/newsletter/ap-signal-v1.gif",
+    "poster": "/img/newsletter/ap-signal-v1.png",
+    "alt": "AP의 AI 신호와 연결을 표현한 추상 그래픽",
+    "caption": "AP 브랜드 모션 그래픽 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "category": "ENTERPRISE AI",
+      "title": "Oracle·OpenAI, 기업 시스템을 연결하는 AI 업무 환경 발표",
+      "source": "Oracle 공식 발표",
+      "published": "2026-10-27",
+      "url": "https://www.oracle.com/news/announcement/ai-world-oracle-reinvents-enterprise-computing-for-the-ai-era-with-openai-2026-10-27/",
+      "summary": "기업 AI의 경쟁이 답변 생성에서 권한을 지키며 업무를 실행하는 연결 구조로 옮겨갑니다.",
+      "fact": "Oracle은 OpenAI와의 협력을 확대하고 Oracle AI Workspace, App Composer 등 기업용 제품 방향을 발표했습니다. Workspace는 ChatGPT에서 Oracle의 업무 애플리케이션·데이터·클라우드 서비스를 연결하며 승인·권한·통제를 유지하도록 설계됐습니다. 발표는 향후 제품 방향을 포함하며 기능·출시 시기·가격은 변경될 수 있습니다. 국내 이용 가능 범위와 계약 조건을 확정한 발표로 읽어서는 안 됩니다.",
+      "insight": "AP의 웹·서비스 구현에서도 챗봇 화면보다 고객 데이터의 접근 권한, 승인 단계, 실행 기록을 먼저 설계하는 가치가 커집니다. 업무를 대신 처리하는 기능은 조회 권한과 실행 권한을 나누어 제안할 필요가 있습니다.",
+      "action": "고객 업무 한 개의 조회·승인·실행 권한을 구분해 설계합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-10-28-enterprise.png",
+        "alt": "업무 장부와 기업 건물 모형이 하나의 허브에 연결된 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "WORLD MODELS",
+      "title": "DeepMind, 소리와 상호작용을 함께 생성하는 Genie 4 공개",
+      "source": "Google DeepMind 공식 블로그",
+      "published": "2026-10-27",
+      "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+      "summary": "가상 공간을 보고 듣고 바꾸는 생성 모델이 연구 미리보기 단계에 들어섰습니다.",
+      "fact": "DeepMind는 환경음·음악·대화를 가상세계와 함께 생성하고 자연어로 장면을 바꿀 수 있는 Genie 4를 발표했습니다. 현재 신뢰할 수 있는 테스터를 대상으로 한 연구 미리보기이며 Google AI Ultra의 Project Genie와 일부 API·AI Studio 조기 접근 파트너로의 확대는 향후 계획입니다. 긴 세션의 일관성, 공간 정확도와 복잡한 물리 상호작용에는 한계가 있다고 밝혔습니다.",
+      "insight": "AP의 AI 교육·콘텐츠에서는 정적인 결과물과 상호작용형 시뮬레이션의 차이를 설명할 좋은 사례입니다. 고객에게 즉시 구현 가능한 체험 상품처럼 제안하기보다 접근 자격과 장면 일관성의 한계를 함께 전달해야 합니다.",
+      "action": "연구 미리보기와 현재 사용할 수 있는 상용 서비스를 구분합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-10-28-world.png",
+        "alt": "소리의 파형과 길이 있는 작은 풍경을 액자 안에 배치한 가상세계 개념 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "CREATIVE TOOLS",
+      "title": "Microsoft, 이미지 편집 모델 MAI Image 2.7 미리보기 소개",
+      "source": "Microsoft AI 공식 블로그",
+      "published": "2026-10-27",
+      "url": "https://microsoft.ai/news/mai-image-2-7-debut/",
+      "summary": "새 그림을 만드는 것만큼 기존 이미지의 조명·배경·세부 요소를 보존하며 바꾸는 능력이 중요해집니다.",
+      "fact": "Microsoft AI는 MAI Image 2.7의 이미지 편집 기능을 미리보기로 소개했습니다. 장면의 스타일·조명 변경, 문자·기호 편집, 기존 이미지의 복원·개선을 주요 활용 예로 제시하며 Arena, Artificial Analysis, MAI Playground에서 체험할 수 있다고 안내했습니다. 이번 안내는 편집 기능부터 시작하며 텍스트로 새 이미지를 만드는 기능은 향후 제공 예정입니다.",
+      "insight": "AP의 뉴스레터·콘텐츠 제작과 Lia Select 상품 소개에서도 원본 특징을 유지하는 편집 기준이 중요합니다. 상품 색상·재질·형태를 바꾸는 편집은 실제 상품 정보와 혼동될 수 있으므로 표현 변경 범위와 검수 기준을 분명히 해야 합니다.",
+      "action": "상품 이미지 편집 시 실제 특징을 보존하는 기준을 먼저 정합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-10-28-editing.png",
+        "alt": "같은 도자기 제품을 유지하며 배경과 조명을 바꾸는 투명 패널이 놓인 개념 스튜디오",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI LITERACY",
+      "title": "Microsoft·Cyberlite, 검증과 비판적 사고를 강화한 AI 수업 자료 공개",
+      "source": "Microsoft On the Issues",
+      "published": "2026-10-27",
+      "url": "https://blogs.microsoft.com/on-the-issues/2026/10/27/in-an-age-of-ai-deciding-what-to-trust-is-a-foundational-skill-heres-how-were-helping-educators-teach-it/",
+      "summary": "AI를 쓰는 방법에서 한 걸음 더 나아가 무엇을 믿을지 판단하는 교육을 강조합니다.",
+      "fact": "Microsoft와 Cyberlite는 AI Classroom Toolkit을 확장해 비판적 사고·정보 검증·미디어와 AI 리터러시 활동을 강화했습니다. 실제와 AI 제작 게시물을 비교하거나 챗봇의 잘못된 주장과 개인정보 수집을 살펴보는 시나리오를 포함합니다. 교사나 학생이 AI 도구를 직접 보유하지 않아도 시작할 수 있으며 추가 언어와 현지화 콘텐츠는 2027년까지 확대할 계획입니다. 이번 발표만으로 한국어 신규 자료의 제공을 단정할 수는 없습니다.",
+      "insight": "AP의 AI 교육에서도 도구 사용 실습과 별도로 출처 추적, 개인정보 판단, 결과 공유 책임을 다룰 수 있습니다. 자료를 그대로 번역하기보다 수강생의 실제 업무와 국내 맥락에 맞춘 사례로 학습 결과를 평가하는 편이 유용합니다.",
+      "action": "교육 사례에 원문 확인과 개인정보 판단 과정을 포함합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-10-28-literacy.png",
+        "alt": "책과 출처 카드 위에 돋보기와 저울을 배치한 AI 정보 검증 학습 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI SECURITY",
+      "title": "MITRE, ATT&CK Enterprise에 AI 플랫폼 추가 계획 발표",
+      "source": "MITRE 공식 발표",
+      "published": "2026-10-27",
+      "url": "https://www.mitre.org/news-insights/news-release/mitre-attck-enterprise-add-ai-platform",
+      "summary": "프롬프트 주입과 결과 오염을 기업 보안 체계 안에서 다룰 공통 기준이 확장됩니다.",
+      "fact": "MITRE는 ATT&CK Enterprise에 AI 기반 시스템을 새 플랫폼으로 추가할 계획을 발표했습니다. 결과 오염과 프롬프트 주입 등 AI 시스템을 겨냥한 공격 기법을 다루며 MITRE ATLAS의 내용과 전담 인력이 일부 개발에 참여합니다. 공개 시점은 2027년 초 예정으로, 발표 당일 완성된 플랫폼이 출시된 것은 아닙니다.",
+      "insight": "AP가 구축하는 고객 응대·자료 검색·뉴스레터 자동화에서도 외부 문서의 지시를 실행 권한과 분리하는 설계가 필요합니다. 새 기준의 출시를 기다리기보다 기존 ATLAS와 현재 운영 로그를 바탕으로 서비스별 위협과 승인 지점을 정리할 수 있습니다.",
+      "action": "외부 문서 입력과 실행 권한 사이의 승인 지점을 점검합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-10-28-security.png",
+        "alt": "보호된 데이터 블록과 권한 관문을 겹친 방패 형태로 표현한 AI 보안 개념 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}
