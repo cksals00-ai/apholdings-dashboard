@@ -7,7 +7,7 @@
 2. 불확실한 내용이면 status=draft, verified=false로 보존하고 발행하지 않는다. 완료된 원문 검증 후 status=published, verified=true. 사람의 검수를 받지 않았다면 AI 작성·원문 확인이라고 표시.
 3. Python 런타임에 requirements-newsletter.txt 설치 후 `python scripts/newsletter.py` 실행. 기존 뉴스와 함께 일일 웹·메일·PDF·최신호 링크를 생성.
 4. `python scripts/test_newsletter.py`, `node --test supabase/functions/ap-news/core.test.mjs`, 기존 `python scripts/check_site.py` 실행. PDF를 페이지별 렌더해 실제 확인.
-5. 다른 홈페이지 작업과 충돌하지 않도록 최신 main을 확인하고 변경 파일만 적용. 기존 public GitHub Pages가 배포한다. 공개 웹·PDF가 해당 원본으로 제공되는지 확인한 뒤 ap_news_issues에 등록한다. 검증되지 않은 URL은 DB 발행으로 등록하지 않는다.
+5. 로컬 제작은 아래 완성본 전달 절차를 따른다. 준비 커밋을 main에 push하지 않는다. 서버가08시 이후 공개·파일 일치 확인·DB 큐 등록을 담당한다.
 6. DB에는 issue_date, number, title, status, verified, web_url, pdf_url, email_html(생성본), source_data(JSON), publish_at(날짜 08:00+09:00)을 등록. pg_cron의 5분 큐가 활성 구독자에게 해당 날짜의 호만 보낸다.
 
 ## 회사 메일 연결
@@ -30,17 +30,25 @@ Resend에서 apholdings.kr 도메인 인증. Supabase Edge Function Secrets에 R
 
 메일 큐 ap-news-mail-queue는 5분마다, 보관 정책 ap-news-retention은 03:15 KST에 실행한다.
 
-## 컴퓨터가 꺼져 있어도 실행하는 서버 발행 (2026-10-27)
-- GitHub Actions `AP News server daily`가 Ubuntu 서버에서 KST 06:00~09:45, 15분 간격으로 실행한다. 08:00 이전에는 검증한 초안·이미지·미리보기를 Actions artifact로 저장하고 공개 커밋과 메일 등록은 하지 않는다. 08:00 이후 최초 성공 실행이 발행·배포·등록한다. GitHub 예약은 지연될 수 있으므로 08:00은 목표이며 초 단위 정시 보장은 아니다.
-- `OPENAI_API_KEY`는 저장소 Actions secret, `SUPABASE_SERVICE_KEY`는 기존 서버 secret을 사용한다. 로컬 PC와 Codex 실행이 필요 없다. API 사용료는 해당 OpenAI API 프로젝트에 청구된다. 키 값·구독자 주소·발송 본문은 작업 로그나 artifact에 저장하지 않는다.
-- `scripts/newsletter_server.py`: 공식 도메인 실시간 검색 → 원문 직접 확인 → 발표일·수치·제공 국가·실험 단계 독립 AI 검증 → 기사 5개 선택 → 원본 편집 이미지 생성 → 기존 `scripts/newsletter.py` 빌드 → PDF 내용·링크·모바일·모든 지면 AI 시각 검증. 사람 검수를 주장하지 않는다.
-- HTTP 408/429/5xx와 연결 오류는 제한된 지수 간격으로 재시도한다. 완료한 원문 검증과 이미지는 같은 날짜의 checkpoint artifact에서 복구한다. 검증이 실패하면 초안을 보존하고 공개/발송을 보류한다. checkpoint는 7일 보관한다.
-- 하나의 concurrency 그룹이 발행 중복을 막는다. 오늘 발행 JSON이 있으면 다시 생성하지 않는다. 최신 main에 안전하게 rebase하고 뉴스 관련 파일만 커밋하며 충돌 시 멈춘다. 다른 홈페이지 생성기는 실행하지 않는다.
-- `Publish existing AP Holdings site`는 기존 main의 정적 파일을 기존 도메인에 배포한다. 홈페이지의 다른 main 변경도 이 workflow로 배포한다. GITHUB_TOKEN으로 만든 뉴스 커밋은 별도 push workflow를 유발하지 않으므로 발행 workflow가 Pages 배포를 명시적으로 호출한다.
-- 공개 웹·PDF·이메일 HTML·모든 기사 이미지가 저장소의 검증된 바이트와 같아야 Supabase에 등록한다. 이미 등록한 호는 수정하거나 재발송하지 않는다. 기존 확인 완료 active 구독자 큐만 사용하며 발신은 `alfred.park@apholdings.kr`다. `publish_at`은 해당 날짜 08:00+09:00이며 큐는 이후 처리한다.
-- 수동 복구: Actions → `AP News server daily` → Run workflow. `connection_test=true`는 텍스트·이미지 API를 시험하며 구독자에게 별도 시험 메일을 보내지 않는다. 발행/등록도 같은 안전 절차로 확인한다.
-- 운영 확인: Actions 실행 결과와 artifact, 관리자 뉴스 메뉴의 호·발송 상태를 확인한다. `sent` 및 provider ID는 전송 서비스 접수를 의미하며 받은편지함 도착을 보장하지 않는다. 인증·결제 오류는 자동 재시도로 해결되지 않으므로 해당 계정 설정이 필요하다.
-- 로컬 heartbeat `ap-ai`는 서버 실운영 검증에 성공한 후 중복 실행을 피하도록 중지한다. 서버 연결 검증 전에는 대체 수단으로 유지한다.
+## 유료 AI API 없는 제작·예약 발행 (2026-10-27 전환)
+사용자 승인: 이 채팅에서 assistant가 뉴스 조사·편집, 이미지, 웹·PDF·메일 제작과 검증을 수행한다. 서버는 완성본을 받아 오전08시 발행·메일 큐 등록만 담당한다. OpenAI API를 호출하거나 API 키를 작업에 전달하지 않는다. 이전 API 제작 구조는 폐기했다.
+
+### 로컬 제작·검증·전달
+1. 로컬 자동화 `ap-ai`는 KST06:00/06:30/07:00/07:30에 준비를 확인한다. 이 제작 단계에는 컴퓨터와 앱이 켜져 있어야 하며 구독의 사용 한도가 적용된다. 이미 서버에 전달한 완성본의 예약 발행·메일은 PC가 꺼져도 진행한다. PC가 꺼져 있으면 새 호 제작을 보장하지 않는다.
+2. 최신 origin/main, 당일 공개 호와 준비용 draft release를 먼저 확인한다. 이미 전달한 완성본은 반복 제작하지 않는다. sources/와 다른 채팅의 체크아웃은 수정하지 않는다.
+3. 원고·출력물은 최신 main에서 만든 로컬 준비 브랜치(예: prep/ap-news-YYYY-MM-DD)에서 다루고 로컬 커밋으로 보존한다. 준비 커밋을 main에 push하지 않는다. 다른 홈페이지 변경을 취소하지 않는다.
+4. 기존 imagegen·PDF 스킬과 scripts/newsletter.py로 완성본을 만든다. 공식 원문·실제 발표일·모든 PDF 페이지·모바일·이미지·원문 링크를 확인한다. 유료 API로 대체하지 않고 사람 검수를 임의로 주장하지 않는다.
+5. 검증 완료 후 `python scripts/newsletter_handoff.py package --date YYYY-MM-DD --file /absolute/output/AP-News-YYYY-MM-DD-ready.zip --reviewed`, 이어 `python scripts/newsletter_handoff.py upload --date YYYY-MM-DD --file /absolute/output/AP-News-YYYY-MM-DD-ready.zip`을 실행한다. --reviewed는 실제 확인이 끝났을 때만 사용한다.
+6. 전달함은 사용자 회사 저장소 cksals00-ai/apholdings-dashboard의 인증된 GitHub draft release `ap-news-ready-YYYY-MM-DD`다. 공개 릴리스로 전환하지 않는다. 완성 ZIP은 해당 날짜 JSON·웹·PDF·이메일·기사 이미지·SHA256 및 AI 검증 기록만 포함한다. 키나 구독자 정보는 넣지 않는다. 업로드 후 draft 상태와 첨부파일 존재를 확인하고 로컬 진행 기록을 보존한다. 승인 검토가 차단하면 초안을 보존하고 사유를 알린다.
+
+### 서버 발행·메일
+- AP News server daily는 GitHub 서버에서 KST08:00 및 이후09:45까지 복구 점검을 실행한다. GitHub 예약 자체는 지연될 수 있으므로08:00은 목표이며 초 단위 정시를 보장하지 않는다.
+- 당일 완성본의 날짜·번호·SHA256·허용 경로·원문 날짜 범위·이미지 디코딩·웹/메일/JSON 일치·PDF 내용/원문 링크를 확인한다. 변조·번호 충돌이면 보류한다. 완성본이 없으면 awaiting_ready로 종료하며 이전 호를 다시 보내지 않는다.
+- 기존 발행 호는 바꾸지 않는다. 새 호는 받은 파일을 그대로 복사하고 기존 newsletter.py의 인덱스 전용 모드로 아카이브·최신호·뉴스 안내 링크만 갱신한다. 서버에서 PDF·이미지·원고를 생성하지 않는다.
+- 최신 main 안전 통합 → 기존 회사 Pages 배포 → 공개 웹·PDF·이메일·이미지 바이트 확인 → Supabase 일회 등록 순서다. 제작용 API 키는 사용하지 않는다. 기존 SUPABASE_SERVICE_KEY는 큐 등록 단계만 사용한다.
+- 기존 확인 완료 active 구독자 큐와 발신 alfred.park@apholdings.kr를 유지한다. publish_at=해당 날짜08:00+09:00, 큐는5분 간격이다. 이미 등록·제공사 접수된 건은 재발송하지 않는다. 제공사 접수와 받은편지함 도착은 구분한다.
+- 수동 전달 검증: Actions → AP News server daily → Run workflow → verify_ready=true. 이 모드는 읽기 전용이며 공개·DB 등록·발송하지 않는다. 일반 Run workflow는 당일 발행/복구 절차다.
+- 제작·전송·검증 오류는 초안과 완성 ZIP을 보존하고 알린다. 유료 AI API를 자동 복구 수단으로 사용하지 않는다.
 
 ## 이미지와 편집 품질 (2026-10-11 개편)
 - 최신 호는 기사별 summary 한 줄과 AP 서비스에 연결되는 insight를 작성한다. 사실과 해석은 분리하고 제공 국가·실험 단계·신청 자격을 생략하지 않는다.

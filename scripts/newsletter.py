@@ -155,12 +155,16 @@ def render_pdf(i):
     if y<65: raise ValueError('PDF final page overflow')
     c.save();return dest
 
-def build_all():
+def build_all(render_documents=True):
     issues=[]
     for path in sorted(ISSUES.glob('*.json'),reverse=True):
         i=validate_issue(json.loads(path.read_text()))
         if i['status']!='published': continue
-        issues.append(i);write(page_path(i)+'index.html',render_issue(i));write(f'/newsletters/email/{i["date"]}.html',render_email(i));render_pdf(i)
+        issues.append(i)
+        if render_documents:
+            write(page_path(i)+'index.html',render_issue(i))
+            write(f'/newsletters/email/{i["date"]}.html',render_email(i))
+            render_pdf(i)
     if not issues:return
     newest=issues[0]
     cards=''.join(f'<a class="archive-card" href="{page_path(i)}"><p class="eyebrow">NO. {i["number"]:03d} · {i["date"]}</p>{figure(i['stories'][0])}<h2>{esc(i["title"])}</h2><p>{esc(i["intro"])}</p><span>읽기 ↗</span></a>' for i in issues)
@@ -181,6 +185,6 @@ def build_all():
         text=re.sub(r'<url><loc>[^<]*/news/daily/[^<]*</loc><lastmod>[^<]*</lastmod></url>','',sm.read_text())
         routes=['/ko/news/daily/']+[page_path(i) for i in issues]
         text=text.replace('</urlset>',''.join(f'<url><loc>{ORIGIN}{r}</loc><lastmod>{newest["date"]}</lastmod></url>' for r in routes)+'</urlset>');sm.write_text(text)
-    print(f'AP Daily: {len(issues)} editions, web/email/PDF generated')
+    print(f'AP Daily: {len(issues)} editions, ' + ('web/email/PDF generated' if render_documents else 'archive/latest links updated; completed documents preserved'))
 
 if __name__=='__main__':build_all()
