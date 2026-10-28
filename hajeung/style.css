@@ -12,3 +12,5 @@
 
 /* Public-link installation and private app-login code distinction */
 .install-code-cards{align-items:start}.install-code-cards li{margin:12px 0;line-height:1.8}.install-shot{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #dae5e2;margin:18px auto}.app-login-shot{max-width:220px}.install-code-cards h3{line-height:1.5}
+
+.install-code-cards{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.install-code-cards>.card{min-width:0}@media(max-width:700px){.install-code-cards{grid-template-columns:minmax(0,1fr)}}
