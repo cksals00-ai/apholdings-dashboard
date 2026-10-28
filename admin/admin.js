@@ -1,5 +1,5 @@
 import { createB2BSupport } from './b2b-support.mjs?v=20261027';
-import { renderFinance } from './app-finance.mjs?v=1';
+import { renderFinance, metricSummary } from './app-finance.mjs?v=2';
 import { androidApps } from './android-app-registry.mjs?v=1';
 import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?v=20261009-1';
 import { createNewsletter } from './newsletter.js?v=20261027-pipeline';
@@ -1096,7 +1096,8 @@ async function loadApps(force = false) {
 function appSales(id, days = 30) {
   const since = new Date(Date.now() - days * 864e5).toISOString().slice(0, 10);
   const rows = appMetrics.filter((r) => (!id || r.app_id === id) && r.day >= since);
-  return rows.length ? rows.reduce((s, r) => ({ units: s.units + (r.units || 0) + (r.iap_units || 0), krw: s.krw + Number(r.proceeds_krw || 0), dl: s.dl + (r.downloads || 0) }), { units: 0, krw: 0, dl: 0 }) : null;
+  if (!rows.length || appMetricsError) return null;
+  const v=metricSummary(rows);return {units:v.units,krw:v.revenue,dl:v.downloads};
 }
 
 function renderApps() {
@@ -1117,7 +1118,7 @@ function renderApps() {
       ${last ? `<div class="app-line"><span>최근</span><p>${appDay(last.event_date)} · ${escapeHtml(last.title)}</p></div>` : ''}
       ${a.next_action ? `<div class="app-line"><span>다음</span><p>${escapeHtml(a.next_action)}${a.next_owner ? ` <em>${escapeHtml(a.next_owner)}</em>` : ''}</p></div>` : ''}
       ${issues.map((e) => `<div class="app-line app-issue"><span>이슈</span><p>${escapeHtml(e.issue || e.title)}</p></div>`).join('')}
-      <div class="app-card-foot"><span class="app-sales-mini">${a.status === 'excluded' ? escapeHtml(a.notes || '') : s ? `30일 ${s.units.toLocaleString('ko-KR')}건 · ₩${Math.round(s.krw).toLocaleString('ko-KR')}` : '판매 · 매출 연결 예정'}</span><span class="app-links">${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">스토어</a>` : ''}<button class="text-button" type="button" data-app-edit="${escapeHtml(a.id)}">편집</button></span></div>
+      <div class="app-card-foot"><span class="app-sales-mini">${a.status === 'excluded' ? escapeHtml(a.notes || '') : s ? `30일 ${s.units===null?'미수집':s.units.toLocaleString('ko-KR')+'건'} · ${s.krw===null?'미수집':'₩'+Math.round(s.krw).toLocaleString('ko-KR')}` : '판매 · 매출 미수집'}</span><span class="app-links">${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">스토어</a>` : ''}<button class="text-button" type="button" data-app-edit="${escapeHtml(a.id)}">편집</button></span></div>
     </article>`;
   }).join('');
   renderAppEvents(); renderAppSales(); renderAppAds(); renderAppViz();
@@ -1163,9 +1164,9 @@ function renderAppSales() {
   let table = '';
   if (has) {
     const list = apps.filter((a) => a.status !== 'excluded').map((a) => ({ a, w: appSales(a.id, 7), m: appSales(a.id, 30) }));
-    const cell = (s) => s ? `${s.units.toLocaleString('ko-KR')}건<div class="asset-growth">₩${Math.round(s.krw).toLocaleString('ko-KR')}</div>` : '—';
+    const cell = (s) => s ? `${s.units===null?'미수집':s.units.toLocaleString('ko-KR')+'건'}<div class="asset-growth">${s.krw===null?'미수집':'₩'+Math.round(s.krw).toLocaleString('ko-KR')}</div>` : '미수집';
     const fx = appMetrics.some((r) => r.fx_note);
-    table = `<div class="asset-table-wrap"><table class="asset-table app-sales-table"><thead><tr><th>앱</th><th class="num">7일 판매 · 수익</th><th class="num">30일 판매 · 수익</th><th class="num">30일 다운로드</th></tr></thead><tbody>${list.map(({ a, w, m }) => `<tr><td><b>${escapeHtml(appName(a.id))}</b></td><td class="num">${cell(w)}</td><td class="num">${cell(m)}</td><td class="num">${m ? m.dl.toLocaleString('ko-KR') : '—'}</td></tr>`).join('')}</tbody></table></div><p class="panel-note">판매 = 유료 다운로드 + 인앱 결제 · 수익 = Apple 수수료를 뺀 개발자 수익${fx ? ' · 외화는 환율 환산 추정치' : ''}</p>`;
+    table = `<div class="asset-table-wrap"><table class="asset-table app-sales-table"><thead><tr><th>앱</th><th class="num">7일 판매 · 수익</th><th class="num">30일 판매 · 수익</th><th class="num">30일 다운로드</th></tr></thead><tbody>${list.map(({ a, w, m }) => `<tr><td><b>${escapeHtml(appName(a.id))}</b></td><td class="num">${cell(w)}</td><td class="num">${cell(m)}</td><td class="num">${m?.dl!=null ? m.dl.toLocaleString('ko-KR') : '미수집'}</td></tr>`).join('')}</tbody></table></div><p class="panel-note">판매 = 유료 다운로드 + 인앱 결제 · 수익 = Apple 수수료를 뺀 개발자 수익${fx ? ' · 외화는 환율 환산 추정치' : ''}</p>`;
   } else {
     table = '<p class="panel-note app-sales-empty">보고서가 들어오면 이 자리에 앱별 7일 · 30일 판매, 수익, 다운로드가 나타납니다.</p>';
   }
@@ -1340,6 +1341,7 @@ function vizMetrics30() {
 function renderAppKpis() {
   const m = vizMetrics30();
   const sum = (k) => m.reduce((s, r) => s + (Number(r[k]) || 0), 0);
+  const summary=metricSummary(m);
   const count = (s) => apps.filter((a) => a.status === s).length;
   const open = appEvents.filter((e) => e.issue_status === 'open');
   const since = vizAddDays(kstToday(), -30);
@@ -1349,8 +1351,8 @@ function renderAppKpis() {
   const top = Object.entries(byApp).sort((a, b) => b[1] - a[1])[0];
   const tiles = [
     ['스토어 출시', `${count('live') + count('in_review')}`, '개', `심사 중 ${count('in_review')} · 준비 중 ${count('preparing')}`, ''],
-    ['30일 다운로드', sum('downloads').toLocaleString('ko-KR'), '건', top ? `최다 ${appName(top[0])} ${top[1]}건` : '판매 보고서 대기', ''],
-    ['30일 수익', vizWon(sum('proceeds_krw')), '', `유료 ${sum('units')}건 · 인앱 ${sum('iap_units')}건 · 수수료 뺀 금액`, ''],
+    ['30일 다운로드 · 수집분', summary.downloads===null?'미수집':summary.downloads.toLocaleString('ko-KR'), '건', top ? `최다 ${appName(top[0])} ${top[1]}건` : '판매 보고서 대기', ''],
+    ['30일 수익 · 수집분', summary.revenue===null?'미수집':vizWon(summary.revenue), '', `유료 ${sum('units')}건 · 인앱 ${sum('iap_units')}건 · 수수료 뺀 금액`, ''],
     ['열린 이슈', `${open.length}`, '건', open.map((e) => appName(e.app_id)).join(' · ') || '없음', open.length ? 'alert' : ''],
     ['30일 심사 승인', `${ok}`, '건', `반려 ${no}건 · 제출 ${rev.filter((e) => e.kind === 'submitted').length}건`, '']
   ];
@@ -1381,15 +1383,15 @@ function renderAppPipeline() {
 function renderAppBars() {
   const m = vizMetrics30();
   const rows = apps.filter((a) => a.status !== 'excluded').map((a) => {
-    const seg = { KR: 0, FR: 0, US: 0, ETC: 0 }; let krw = 0;
+    const seg = { KR: 0, FR: 0, US: 0, ETC: 0 }; let krw = 0; const summary=metricSummary(m.filter(r=>r.app_id===a.id));
     m.filter((r) => r.app_id === a.id).forEach((r) => { const k = seg[r.country] !== undefined ? r.country : 'ETC'; seg[k] += r.downloads || 0; krw += Number(r.proceeds_krw) || 0; });
-    return { a, seg, total: seg.KR + seg.FR + seg.US + seg.ETC, krw };
+    return { a, seg, total: summary.downloads, krw };
   }).sort((x, y) => y.total - x.total);
   const max = Math.max(1, ...rows.map((r) => r.total));
   $('#app-bars-legend').innerHTML = VIZ_COUNTRY.map(([k, l], i) => `<span><i class="sw s${i + 1}"></i>${l}</span>`).join('');
   $('#app-bars').innerHTML = rows.map(({ a, seg, total, krw }) => {
     const parts = VIZ_COUNTRY.map(([k, l], i) => seg[k] ? `<i class="seg s${i + 1}" style="width:${(seg[k] / max) * 100}%" ${vizTip(`${seg[k]}건`, `${appName(a.id)} · ${l}`)}></i>` : '').join('');
-    return `<div class="bar-row"><span class="bar-name">${vizEsc(appName(a.id))}</span><div class="bar-track">${parts}<b class="bar-total">${total}${krw ? `<em>${vizWon(krw)}</em>` : ''}</b></div></div>`;
+    return `<div class="bar-row"><span class="bar-name">${vizEsc(appName(a.id))}</span><div class="bar-track">${parts}<b class="bar-total">${total===null?'미수집':total}${krw ? `<em>${vizWon(krw)}</em>` : ''}</b></div></div>`;
   }).join('') || '<p class="panel-note">판매 보고서가 들어오면 표시됩니다.</p>';
 }
 
@@ -1401,8 +1403,8 @@ function renderAppDaily() {
   const top = Math.ceil(max / 2) * 2;
   const lastReport = appRuntime.find((r) => r.id === 'asc_sales')?.last_report_day;
   $('#app-daily').innerHTML = `<div class="col-plot"><div class="col-grid"><span style="bottom:100%"><em>${top}</em></span><span style="bottom:50%"><em>${top / 2}</em></span><span style="bottom:0"><em>0</em></span></div><div class="col-bars">${days.map((d) => {
-    const v = by[d] || { dl: 0, up: 0, paid: 0, krw: 0 }; const pending = lastReport && d > lastReport;
-    return `<div class="col-hit${pending ? ' pending' : ''}" ${vizTip(pending ? '보고서 대기' : `다운로드 ${v.dl}건`, `${vizMD(d)} · 업데이트 ${v.up} · 판매 ${v.paid}${v.krw ? ` · ${vizWon(v.krw)}` : ''}`)}><i style="height:${(v.dl / top) * 100}%"></i>${v.paid ? '<em class="col-sale" aria-hidden="true"></em>' : ''}</div>`;
+    const v = by[d] || { dl: 0, up: 0, paid: 0, krw: 0 }; const pending = !by[d] || (lastReport && d > lastReport);
+    return `<div class="col-hit${pending ? ' pending' : ''}" ${vizTip(pending ? '미수집 · 보고서 확인 필요' : `다운로드 ${v.dl}건 · 수집분`, pending ? `${vizMD(d)} · 미수집은 0건이 아닙니다` : `${vizMD(d)} · 업데이트 ${v.up} · 판매 ${v.paid}${v.krw ? ` · ${vizWon(v.krw)}` : ''}`)}><i style="height:${(v.dl / top) * 100}%"></i>${v.paid ? '<em class="col-sale" aria-hidden="true"></em>' : ''}</div>`;
   }).join('')}</div></div><div class="col-axis"><span>${vizMD(days[0])}</span><span>${vizMD(days[15])}</span><span>${vizMD(days[29])}</span></div>`;
 }
 
@@ -1436,27 +1438,28 @@ function salesViz() {
   const m30 = vizMetrics30(), since7 = vizAddDays(kstToday(), -7);
   const krw = (r) => Number(r.proceeds_krw) || 0, paid = (r) => (r.units || 0) + (r.iap_units || 0), dl = (r) => r.downloads || 0;
   const sum = (rows, f) => rows.reduce((t, r) => t + f(r), 0);
+  const summary=metricSummary(m30);
   const tot30 = sum(m30, krw), tot7 = sum(m30.filter((r) => r.day >= since7), krw), paid30 = sum(m30, paid), dl30 = sum(m30, dl);
   const sales = m30.filter((r) => paid(r) > 0).sort((a, b) => b.day.localeCompare(a.day));
   const last = sales[0];
   const ago = last ? Math.round((Date.parse(kstToday()) - Date.parse(last.day)) / 864e5) : 0;
   const kpis = vizKpis([
-    ['30일 수익', vizWon(tot30), '', `7일 ${vizWon(tot7)} · 수수료 뺀 금액`],
-    ['30일 판매', `${paid30}`, '건', `유료 ${sum(m30, (r) => r.units || 0)} · 인앱 ${sum(m30, (r) => r.iap_units || 0)}`],
+    ['30일 수익 · 수집분', summary.revenue===null?'미수집':vizWon(summary.revenue), '', `7일 수집분 ${metricSummary(m30.filter(r=>r.day>=since7)).revenue===null?'미수집':vizWon(tot7)} · 누락일 미확정`],
+    ['30일 판매 · 수집분', summary.units===null?'미수집':`${summary.units}`, '건', `유료 ${sum(m30, (r) => r.units || 0)} · 인앱 ${sum(m30, (r) => r.iap_units || 0)}`],
     ['판매 전환', dl30 ? (paid30 / dl30 * 100).toFixed(1) : '—', dl30 ? '%' : '', `다운로드 ${dl30.toLocaleString('ko-KR')}건 중 판매`],
-    ['마지막 판매', last ? vizMD(last.day) : '—', '', last ? `${appName(last.app_id)} · ${ago}일 전` : '30일 안 판매 없음', last && ago >= 14 ? 'alert' : '']
+    ['마지막 판매', last ? vizMD(last.day) : '—', '', last ? `${appName(last.app_id)} · ${ago}일 전` : '수집된 보고서에 판매 없음 · 누락일 미확정', last && ago >= 14 ? 'alert' : '']
   ]);
   // 앱별 — 다운로드와 수익은 단위가 달라 두 줄 막대로 나눈다
   const rows = apps.filter((a) => a.status !== 'excluded').map((a) => {
     const r = m30.filter((x) => x.app_id === a.id);
-    return { a, has: appMetrics.some((x) => x.app_id === a.id), d: sum(r, dl), p: sum(r, paid), k: sum(r, krw) };
+    const summary=metricSummary(r);return { a, has: r.length > 0, d: summary.downloads, p: summary.units, k: summary.revenue };
   });
   const shown = rows.filter((r) => r.has).sort((x, y) => y.k - x.k || y.d - x.d);
   const none = rows.filter((r) => !r.has).map((r) => appName(r.a.id));
   const maxD = Math.max(1, ...shown.map((r) => r.d)), maxK = Math.max(1, ...shown.map((r) => r.k));
   const byApp = `<div class="sv-row sv-head"><span></span><span>다운로드</span><span>수익 · 판매</span></div>${shown.map(({ a, d, p, k }) => `<div class="sv-row"><span class="bar-name">${vizEsc(appName(a.id))}</span>
-    <div class="bar-track">${d ? `<i class="seg s1" style="width:${d / maxD * 82}%" ${vizTip(`${d}건`, `${appName(a.id)} · 30일 다운로드`)}></i>` : ''}<b class="bar-total">${d || '0'}</b></div>
-    <div class="bar-track">${k ? `<i class="seg s2" style="width:${k / maxK * 70}%" ${vizTip(vizWon(k), `${appName(a.id)} · 30일 판매 ${p}건`)}></i>` : ''}<b class="bar-total${k ? '' : ' muted'}">${k ? vizWon(k) : '₩0'}${p ? `<em>${p}건</em>` : ''}</b></div></div>`).join('')}${none.length ? `<p class="panel-note sv-none">보고서 없음 · ${vizEsc(none.join(', '))}</p>` : ''}`;
+    <div class="bar-track">${d ? `<i class="seg s1" style="width:${d / maxD * 82}%" ${vizTip(`${d}건`, `${appName(a.id)} · 30일 다운로드`)}></i>` : ''}<b class="bar-total">${d===null?'미수집':d}</b></div>
+    <div class="bar-track">${k ? `<i class="seg s2" style="width:${k / maxK * 70}%" ${vizTip(vizWon(k), `${appName(a.id)} · 30일 판매 ${p}건`)}></i>` : ''}<b class="bar-total${k ? '' : ' muted'}">${k===null?'미수집':vizWon(k)}${p ? `<em>${p}건</em>` : ''}</b></div></div>`).join('')}${none.length ? `<p class="panel-note sv-none">보고서 없음 · ${vizEsc(none.join(', '))}</p>` : ''}`;
   // 30일 누적 수익 (계단선)
   const end = kstToday(), days = []; for (let i = 30; i >= 1; i--) days.push(vizAddDays(end, -i));
   const lastReport = appRuntime.find((r) => r.id === 'asc_sales')?.last_report_day;
@@ -1470,7 +1473,7 @@ function salesViz() {
     <b class="cum-end" style="bottom:${100 - Y(cum)}%">${vizWon(cum)}</b>
     <div class="col-bars">${pts.map((pt) => `<div class="col-hit${pt.pending ? ' pending' : ''}" ${vizTip(pt.pending ? '보고서 대기' : `누적 ${vizWon(pt.cum)}`, `${vizMD(pt.d)} · ${pt.k ? `그날 ${vizWon(pt.k)} · 판매 ${pt.p}건 (${pt.who})` : '판매 없음'}`)}></div>`).join('')}</div></div>
     <div class="col-axis cum-axis"><span>${vizMD(days[0])}</span><span>${vizMD(days[15])}</span><span>${vizMD(days[29])}</span></div>`;
-  return `${kpis}<div class="app-viz-two viz-pair"><div><h3 class="app-sub">앱별 30일 · 다운로드와 수익</h3>${byApp}</div><div><h3 class="app-sub">30일 누적 수익</h3>${cumChart}</div></div>`;
+  return `${kpis}<div class="app-viz-two viz-pair"><div><h3 class="app-sub">앱별 30일 · 다운로드와 수익</h3>${byApp}</div><div><h3 class="app-sub">30일 누적 수익</h3>${new Set(m30.map(r=>r.day)).size<30?'<p class="panel-note">기간 일부만 수집되어 누적 그래프를 표시하지 않습니다. 누락일은 0원으로 간주하지 않습니다.</p>':cumChart}</div></div>`;
 }
 
 function adsViz(list) {
