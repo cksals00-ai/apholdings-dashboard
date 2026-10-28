@@ -1,5 +1,5 @@
 import { createB2BSupport } from './b2b-support.mjs?v=20261027';
-import { renderFinance, metricSummary } from './app-finance.mjs?v=2';
+import { renderFinance, metricSummary } from './app-finance.mjs?v=3';
 import { androidApps } from './android-app-registry.mjs?v=1';
 import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?v=20261009-1';
 import { createNewsletter } from './newsletter.js?v=20261027-pipeline';

@@ -32,3 +32,13 @@ assert.ok(renderFinance({apps,runtime:[{id:'asc_finance',detail:'bad json'}]}).i
 console.log('finance evidence and missingness checks passed');
 
 assert.ok(renderFinance({apps,runtime:[{id:'asc_finance',status:'ready',detail:'null'}]}).includes('검증 필요'));
+
+const blocked=[{id:'google_sales',status:'blocked',detail:'Google Payments 판매자 계정 설정 필요',checked_at:'2026-10-28T04:00:00Z'},{id:'google_finance',status:'blocked',detail:'재무 보고서 접근 불가 · 결제 프로필 설정 필요',checked_at:'2026-10-28T04:00:00Z'}];
+const googleBlocked=renderFinance({apps,platform:'google',runtime:blocked});
+assert.ok(googleBlocked.includes('Google Payments 판매자 계정 설정 필요'));
+assert.ok(googleBlocked.includes('재무 보고서 접근 불가'));
+assert.ok(googleBlocked.includes('판매·정산 연결 대기'));
+assert.ok(googleBlocked.includes('연결 상태 확인:'));
+assert.ok(!googleBlocked.includes('계정 인증 및 앱 등록 후 연결'));
+assert.ok(googleBlocked.includes('미수집'));
+assert.ok(!googleBlocked.includes('0 KRW'));
