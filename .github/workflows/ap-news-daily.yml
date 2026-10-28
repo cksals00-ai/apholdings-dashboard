@@ -81,6 +81,7 @@ jobs:
           python scripts/test_newsletter_editorial.py
           python scripts/test_newsletter_reservation.py
           python scripts/test_newsletter.py
+          python scripts/test_newsletter_unattended.py
           node --test supabase/functions/ap-news/core.test.mjs
       - name: Keep verified reservation until08:00 KST
         if: ${{ inputs.reserve_publication == true && inputs.verify_ready != true && inputs.record_handoff != true }}
@@ -153,7 +154,7 @@ jobs:
   register:
     needs: [prepare, deploy]
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 18
     steps:
       - uses: actions/checkout@v7
         with:
@@ -173,7 +174,7 @@ jobs:
             sleep 30
           done
           python scripts/newsletter_status.py published --date "$EDITION_DAY"
-          python scripts/newsletter_server.py mail-status --date "$EDITION_DAY"
+          python scripts/newsletter_server.py wait-mail --date "$EDITION_DAY"
 
   report_failure:
     needs: [prepare, deploy, register]

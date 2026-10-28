@@ -30,7 +30,15 @@ def build_preview():
  if int(os.environ.get('GITHUB_RUN_ATTEMPT','1'))==1:
   print('Intentional first publication failure; automatic recovery workflow must rerun this job',flush=True)
   raise ValueError('INJECTED_PUBLICATION_FAILURE')
- issue=json.loads(sorted(b.ISSUES.glob('*.json'))[-1].read_text());issue['title']='AP News 자동화 테스트호'
+ issue=json.loads(sorted(b.ISSUES.glob('*.json'))[-1].read_text())
+ # Reproduce today's unsupported-source blocker without touching production policy.
+ from newsletter_preflight import select_candidates
+ candidates=[{'url':'https://unapproved.example.invalid/news','published':issue['date']}]+issue['stories']
+ eligibility=select_candidates(candidates,issue['date'],[])
+ if not eligibility['ready'] or len(eligibility['rejected'])!=1:raise ValueError('Source preflight recovery failed')
+ issue['stories']=eligibility['selected']
+ print('Injected unsupported source excluded; supported official candidates retained; no code change or user approval',flush=True)
+ issue['title']='AP News 자동화 테스트호'
  issue.update(layout='editorial-v2',hero={'path':'/img/newsletter/ap-editorial-v2.gif','poster':'/img/newsletter/ap-editorial-v2.png','alt':'AP 편집 지면 모션','caption':'AP 브랜드 모션 그래픽 · 실제 제품 화면 아님'})
  issue['intro']='이미 발행된 기사를 사용한 자동 공개·메일·복구 검증입니다. 정규 발행과 구분한 테스트호입니다.'
  webpath=f'/ko/news/daily/preview/automation-{run}/';pdfpath=f'/newsletters/previews/AP-News-test-{run}.pdf'

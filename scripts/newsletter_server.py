@@ -240,6 +240,18 @@ def mail_status(issue):
     return counts
 
 
+def wait_mail(day, attempts=20):
+    """Read-only queue completion gate; existing scheduler owns all sends."""
+    for attempt in range(attempts):
+        state = database('POST', 'rpc/ap_news_delivery_health', {'p_day': day})
+        pending = sum(state.get(k, 0) for k in ('pending','processing','retry','failed','uncertain','unconfirmed'))
+        if state.get('accepted',0) >= state['active'] and not pending:
+            print('All eligible mail accepted by provider: '+json.dumps(state))
+            return state
+        if attempt + 1 < attempts: time.sleep(30)
+    raise ValueError('Mail provider acceptance incomplete: '+json.dumps(state))
+
+
 def prepare(day, now=None):
     import newsletter_handoff as handoff
     result = {'day': day, 'due': False, 'state': 'not_due'}
@@ -268,11 +280,13 @@ def prepare(day, now=None):
 
 def main():
     parser = argparse.ArgumentParser(description='Publish completed AP News without AI API calls')
-    parser.add_argument('stage', choices=['prepare', 'register', 'mail-status', 'verify-ready', 'wait-until-due'])
+    parser.add_argument('stage', choices=['prepare', 'register', 'mail-status', 'verify-ready', 'wait-until-due', 'wait-mail'])
     parser.add_argument('--date', default=datetime.now(KST).date().isoformat())
     args = parser.parse_args()
     date.fromisoformat(args.date)
-    if args.stage == 'wait-until-due':
+    if args.stage == 'wait-mail':
+        wait_mail(args.date)
+    elif args.stage == 'wait-until-due':
         wait_for_publication(args.date)
     elif args.stage == 'prepare':
         prepare(args.date)
