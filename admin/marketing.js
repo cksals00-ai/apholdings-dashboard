@@ -1,3 +1,4 @@
+import { dailyView, renderDailyReport } from './marketing-daily.mjs?v=20261028';
 // 홍보 탭 — AP 애드렌즈 벤치마크·훅 분석 일일 보고 + 전략 계층(일/주/월/년/5년) + 사업계획 연결
 // admin_marketing_reports(일별) · admin_marketing_strategy(1행) · admin_marketing_benchmarks(계정)
 const esc = (s = '') => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -11,7 +12,7 @@ export function createMarketing(db, getUser) {
   const root = document.querySelector('#marketing-section');
   let strategy = null, reports = [], benchmarks = [], nsrc = [], nitems = [], loaded = false, gen = 0, idx = 0, horizon = 'daily';
   root.innerHTML = `<p id="mk-message" class="form-message" role="status" aria-live="polite"></p><div id="mk-body"></div>
-    <section class="panel panel-wide" id="mk-ads-panel"><div class="panel-head"><div><p class="eyebrow">PAID · APPLE ADS (중단 · 기록 보존)</p><h2>검색 광고 성과 — 앱 현황에서 이관</h2></div><span id="app-ads-state" class="status-pill">연결 예정</span></div><p class="panel-note" style="margin:-8px 0 14px">유료 광고는 2026-09-29 전부 중단(재개는 대표 판단). 캠페인 기록과 동기화는 그대로 유지해 무료 채널 성과와 비교하는 기준선으로 쓴다.</p><div id="app-ads"></div></section>`;
+    <details class="panel panel-wide mk-reference" id="mk-ads-panel"><summary>중단한 검색 광고 기록</summary><div class="panel-head"><div><p class="eyebrow">PAID · APPLE ADS (중단 · 기록 보존)</p><h2>검색 광고 성과 — 앱 현황에서 이관</h2></div><span id="app-ads-state" class="status-pill">연결 예정</span></div><p class="panel-note" style="margin:-8px 0 14px">유료 광고는 2026-09-29 전부 중단(재개는 대표 판단). 캠페인 기록과 동기화는 그대로 유지해 무료 채널 성과와 비교하는 기준선으로 쓴다.</p><div id="app-ads"></div></details>`;
   const $ = s => root.querySelector(s), msg = s => { $('#mk-message').textContent = s; };
 
   async function load(force = false) {
@@ -32,25 +33,13 @@ export function createMarketing(db, getUser) {
   function clear() { gen++; strategy = null; reports = []; benchmarks = []; nsrc = []; nitems = []; loaded = false; $('#mk-body').innerHTML = ''; msg(''); }
 
   function render() {
-    const r = reports[idx], h = strategy?.horizons || {}, ad = strategy?.adlens || {};
+    const r = reports[idx], h = strategy?.horizons || {};
     const bench = benchmarks.filter(b => !String(b.note || '').startsWith('제외'));
-    const kpis = r ? [
-      ['벤치 계정', r.sources?.instagram?.accounts, '인스타 · 유튜브 ' + (r.sources?.youtube?.status ? '연결 전' : '연결'), 'blue'],
-      ['분석 릴스', r.sources?.instagram?.reels_with_views, `수집 ${num(r.sources?.instagram?.posts)}편 중 조회수 공개분`, 'purple'],
-      ['상위 훅', r.hook_types?.[0]?.type, `${r.hook_types?.[0]?.median_ratio ?? '—'}배 (조회수÷팔로워)`, 'green'],
-      ['오늘 지시', r.directives?.length, '리아 · 한글컵스', 'amber'],
-    ] : [];
     $('#mk-body').innerHTML = `
-      <div class="co-hero"><div><p class="eyebrow">MARKETING INTELLIGENCE · AP ADLENS</p><h2>${esc(ad.title || '홍보 — 벤치마크·훅 분석')}</h2><p>${esc(ad.pitch || '')}</p><p class="panel-note">${esc(ad.status || '')} · ${link(ad.url, '애드렌즈 포털 열기')}</p></div><div class="co-toolbar"><button class="secondary" data-mk="refresh">↻ 새로고침</button><button class="secondary" data-mk="plan">사업계획 시트 →</button></div></div>
-      ${r ? `<div class="summary-grid" style="grid-template-columns:repeat(4,minmax(0,1fr))">${kpis.map(([l, v, d, c]) => `<article class="summary-card co-kpi ${c}"><span>${esc(l)}</span><b style="font-size:${typeof v === 'string' && v.length > 4 ? '1.2rem' : '2rem'}">${esc(typeof v === 'number' ? num(v) : v ?? '—')}</b><small>${esc(d)}</small></article>`).join('')}</div>` : ''}
-      <section class="panel"><div class="panel-head"><div><p class="eyebrow">DAILY REPORT</p><h2>${r ? esc(r.title) : '아직 보고가 없습니다'}</h2></div><div class="co-toolbar"><select id="mk-date">${reports.map((x, i) => `<option value="${i}" ${i === idx ? 'selected' : ''}>${esc(x.report_date)} ${day(x.report_date)}</option>`).join('')}</select></div></div>
-        ${r ? `<p style="line-height:1.75;margin:0 0 18px">${esc(r.summary)}</p>
-        <div style="display:grid;gap:18px">
-          <div><p class="eyebrow">DIRECTIVES · 오늘 내리는 지시</p><div class="priority-list" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">${(r.directives || []).map(d => `<div class="priority-item" style="cursor:default"><div class="meta"><span class="tag" data-status="${d.target === '리아' ? 'IN_PROGRESS' : d.target === '한글컵스' ? 'DONE' : 'WAITING'}">${esc(d.target)}</span></div><h3>${esc(d.action)}</h3><p>근거 — ${esc(d.why)}</p></div>`).join('') || '<p class="empty">지시 없음</p>'}</div></div>
-          <div><p class="eyebrow">HOOK TYPES · 무엇이 터지나</p><div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>훅 유형</th><th>편</th><th>조회÷팔로워</th><th>대표</th></tr></thead><tbody>${(r.hook_types || []).map(t => `<tr><td><b>${esc(t.type)}</b></td><td>${num(t.n)}</td><td>${esc(t.median_ratio)}배</td><td class="co-small">${esc(t.example)}</td></tr>`).join('')}</tbody></table></div></div>
-        </div>
-        <details class="panel co-details" style="margin-top:18px"><summary>상위 릴스 ${(r.top_reels || []).length}편 <span>조회수÷팔로워 순 · 링크</span></summary><div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>계정</th><th>훅</th><th>조회수</th><th>배수</th><th>날짜</th><th>유형</th></tr></thead><tbody>${(r.top_reels || []).map(x => `<tr><td>@${esc(x.handle)}</td><td>${link(x.permalink, x.caption)}</td><td>${num(x.views)}</td><td>${esc(x.ratio)}</td><td>${esc(x.date)}</td><td>${esc(x.type)}</td></tr>`).join('')}</tbody></table></div></details>` : '<p class="empty">일일 보고가 쌓이면 여기에 표시됩니다.</p>'}
-      </section>
+      <div class="co-hero"><div><p class="eyebrow">홍보 운영</p><h2>오늘 홍보 현황</h2><p class="panel-note">대표 결정 · 게시 일정 · 성과 · 막힘</p></div><div class="co-toolbar"><button class="secondary" data-mk="refresh">↻ 새로고침</button><button class="secondary" data-mk="plan">사업계획 시트 →</button></div></div>
+      <section class="panel mk-report"><div class="panel-head"><div><h2>일일 보고</h2><p class="panel-note">${r ? esc(r.report_date) + ' 기준' : '보고 대기'}</p></div><label>보고 날짜 <select id="mk-date">${reports.map((x, i) => `<option value="${i}" ${i === idx ? 'selected' : ''}>${esc(x.report_date)} ${day(x.report_date)}</option>`).join('')}</select></label></div>
+      ${r ? renderDailyReport(r) : '<p class="empty">일일 보고가 쌓이면 여기에 표시됩니다.</p>'}</section>
+      <details class="panel mk-reference"><summary>전략·계정·뉴스·광고 참고 자료</summary>
       ${(() => { const m = strategy?.master; if (!m?.title) return ''; const kinds = { Owned: 'DONE', Earned: 'IN_PROGRESS', Community: 'WAITING', Engine: 'ON_HOLD' };
         return `<section class="panel"><div class="panel-head"><div><p class="eyebrow">MASTER PLAN · 광고 0원</p><h2>${esc(m.title)}</h2></div><span class="panel-note">${esc(m.updated || '')}</span></div>
         <p style="line-height:1.8;margin:0 0 18px;font-size:1.02rem">${esc(m.thesis)}</p>
@@ -79,11 +68,18 @@ export function createMarketing(db, getUser) {
         <div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>소스</th><th>종류</th><th>상태</th><th>점검 주기</th><th>마지막 점검</th><th>메모</th></tr></thead><tbody>${nsrc.map(x => `<tr><td>${link(x.list_url || x.url, x.name)}</td><td>${esc(x.kind)}</td><td>${esc(x.status)}</td><td>${x.check_every_days}일</td><td>${x.last_checked ? esc(String(x.last_checked).slice(0, 10)) : '—'}</td><td>${esc(x.notes || '')}</td></tr>`).join('') || '<tr><td colspan="6">소스가 없습니다.</td></tr>'}</tbody></table></div>
         <div class="asset-table-wrap" style="margin-top:14px"><table class="asset-table"><thead><tr><th>날짜</th><th>참고 글</th><th>상태</th><th>우리 글</th></tr></thead><tbody>${nitems.map(i => `<tr><td>${esc(String(i.published || '').slice(0, 10))}</td><td>${link(i.url, i.title)}</td><td>${esc(i.status)}</td><td>${i.our_slug ? link('https://www.apholdings.kr/ko/news/' + i.our_slug + '/', i.our_slug) : '—'}</td></tr>`).join('') || '<tr><td colspan="4">수집된 글이 없습니다.</td></tr>'}</tbody></table></div>
       </section>
-      `;
+      </details>`;
   }
 
-  root.addEventListener('click', e => {
+  root.addEventListener('click', async e => {
     const b = e.target.closest('[data-mk]'); if (!b) return;
+    if (b.dataset.mk === 'copy-script') {
+      const script = dailyView(reports[idx]).posts[Number(b.dataset.post)]?.post_script;
+      const message = $('.mk-copy-message');
+      if (!script || !message) return;
+      try { await navigator.clipboard.writeText(String(script)); message.textContent = '대본을 복사했습니다.'; }
+      catch { message.textContent = '복사하지 못했습니다. 펼쳐진 대본을 선택해 복사해 주세요.'; }
+    }
     if (b.dataset.mk === 'refresh') load(true);
     if (b.dataset.mk === 'horizon') { horizon = b.dataset.h; render(); }
     if (b.dataset.mk === 'plan') document.querySelector('.nav-item[data-section="plan"]')?.click();
