@@ -35,7 +35,7 @@ jobs:
           git config user.name 'AP News Publisher'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add "ko/news/daily/preview/automation-$GITHUB_RUN_ID/index.html" "newsletters/previews/AP-News-test-$GITHUB_RUN_ID.pdf"
-          git commit -m "test(news): publish isolated automation preview"
+          if ! git diff --cached --quiet; then git commit -m "test(news): publish isolated automation preview"; fi
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main

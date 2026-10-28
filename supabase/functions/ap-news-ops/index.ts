@@ -24,6 +24,8 @@ async function send(key:string,event:string,detail:Record<string,unknown>,html?:
  }catch(e){await patch({state:'retry',last_error:String(e).slice(0,120),updated_at:new Date().toISOString()});throw e;}
 }
 async function watch(){
+ const pending=await db('ap_news_ops_events?state=in.(retry,processing)&attempts=lt.5&event=in.(ops_alert,ops_recovery)&created_at=gt.'+new Date(Date.now()-23*3600000).toISOString()+'&select=event_key,event,detail');
+ for(const row of pending){try{await send(row.event_key,row.event,row.detail);}catch{/* Next server tick retries bounded operational alerts. */}}
  const now=new Date(),kst=new Date(now.getTime()+9*3600000),day=kst.toISOString().slice(0,10),h=kst.getUTCHours(),m=kst.getUTCMinutes();
  if(h<7||h>10)return {status:'outside_window'};
  const issues=await db(`ap_news_issues?issue_date=eq.${day}&select=status,verified`);
@@ -36,8 +38,8 @@ async function watch(){
  if((h>8||h===8&&m>=5)&&(!issues?.[0]?.verified||!runs?.[0]?.public_verified_at))problem='08:05까지 오늘자 공개 검증이 완료되지 않았습니다.';
  if((h>8||h===8&&m>=10)&&issues?.[0]?.verified&&(!mail||mail.accepted<active.length||mail.failed||mail.uncertain))problem='오늘자 메일 접수가 완료되지 않았거나 발송 오류가 있습니다.';
  if(problem)return await send(day+':ops-alert','ops_alert',{subject:'[AP News 운영 경보] '+day,message:problem,run_url:runs?.[0]?.workflow_url});
- const previous=await db(`ap_news_ops_events?event_key=eq.${day}%3Aops-alert&select=provider_id`);
- if(previous?.[0]?.provider_id&&runs?.[0]?.public_verified_at&&mail?.accepted>=active.length&&!mail.pending&&!mail.retry&&!mail.failed&&!mail.uncertain)return await send(day+':ops-recovery','ops_recovery',{subject:'[AP News 복구 확인] '+day,message:`공개 검증 완료, 메일 접수${mail.accepted}건·대기0·실패0. 받은편지함 도착을 의미하지는 않습니다.`});
+ const previous=await db(`ap_news_ops_events?event_key=like.${day}*&event=eq.ops_alert&select=provider_id`);
+ if(previous?.some((r:{provider_id?:string})=>r.provider_id)&&runs?.[0]?.public_verified_at&&mail?.accepted>=active.length&&!mail.pending&&!mail.retry&&!mail.failed&&!mail.uncertain)return await send(day+':ops-recovery','ops_recovery',{subject:'[AP News 복구 확인] '+day,message:`공개 검증 완료, 메일 접수${mail.accepted}건·대기0·실패0. 받은편지함 도착을 의미하지는 않습니다.`});
  return {status:'healthy_or_preparing'};
 }
 Deno.serve(async req=>{
