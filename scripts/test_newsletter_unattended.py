@@ -16,8 +16,12 @@ class UnattendedTests(unittest.TestCase):
    result=s.wait_mail('2026-10-29',attempts=2)
   self.assertEqual(result['accepted'],3);sleep.assert_called_once_with(30)
  def test_mail_wait_never_reports_success_on_partial_or_uncertain(self):
-  for state in ({'active':3,'accepted':2},{'active':3,'accepted':3,'uncertain':1},{'active':0,'accepted':0,'processing':1}):
+  for state in ({'active':3,'accepted':2},{'active':3,'accepted':3,'eligible_missing':1},{'active':3,'accepted':3,'uncertain':1},{'active':0,'accepted':0,'processing':1}):
    with patch.object(s,'database',return_value=state),self.assertRaises(ValueError):s.wait_mail('2026-10-29',attempts=1)
  def test_zero_active_is_valid_only_with_no_remaining_mail(self):
   with patch.object(s,'database',return_value={'active':0,'accepted':0}):self.assertEqual(s.wait_mail('2026-10-29',attempts=1)['active'],0)
+ def test_larger_queue_scales_completion_deadline(self):
+  with patch.object(s,'database',return_value={'active':30,'accepted':0,'pending':30}),patch.object(s.time,'sleep') as sleep:
+   with self.assertRaises(ValueError):s.wait_mail('2026-10-29')
+  self.assertEqual(sleep.call_count,39)
 if __name__=='__main__':unittest.main()

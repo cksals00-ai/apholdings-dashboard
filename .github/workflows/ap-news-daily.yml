@@ -154,7 +154,7 @@ jobs:
   register:
     needs: [prepare, deploy]
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v7
         with:

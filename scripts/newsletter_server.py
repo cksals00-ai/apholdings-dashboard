@@ -240,15 +240,19 @@ def mail_status(issue):
     return counts
 
 
-def wait_mail(day, attempts=20):
+def wait_mail(day, attempts=None):
     """Read-only queue completion gate; existing scheduler owns all sends."""
-    for attempt in range(attempts):
+    limit = attempts or 120
+    for attempt in range(limit):
         state = database('POST', 'rpc/ap_news_delivery_health', {'p_day': day})
-        pending = sum(state.get(k, 0) for k in ('pending','processing','retry','failed','uncertain','unconfirmed'))
+        pending = sum(state.get(k, 0) for k in ('pending','processing','retry','failed','uncertain','unconfirmed','eligible_missing'))
         if state.get('accepted',0) >= state['active'] and not pending:
             print('All eligible mail accepted by provider: '+json.dumps(state))
             return state
-        if attempt + 1 < attempts: time.sleep(30)
+        if attempts is None:
+            limit = min(120, max(20, ((state['active'] + 9) // 10) * 10 + 10))
+        if attempt + 1 >= limit: break
+        time.sleep(30)
     raise ValueError('Mail provider acceptance incomplete: '+json.dumps(state))
 
 
