@@ -26,6 +26,7 @@ export function metricSummary(rows=[]) {
 }
 function accountEvidence(runtime,platform) {
   const r=runtime.find(r=>r.id=== (platform==='apple'?'asc_finance':'google_finance'));
+  if(platform==='google' && r?.status==='waiting_report') return `<p>정산·지급 내역 미수집 · ${esc(r.detail)}</p><p>공식 화면 직접 확인: ${esc(r.checked_at)} · 재무 보고서 접근 가능 · 사용 가능한 월별 보고서 없음</p><p>공식 결제 화면의 계정 잔액 0원·거래 없음은 앱별 매출·정산 0원 확정값으로 사용하지 않습니다.</p><a href="https://play.google.com/console/u/0/developers/7870440470636306408/download-reports/financial" target="_blank" rel="noopener">Google 재무 보고서 확인 ↗</a><p>지급 계좌 확인 대기 중 · 은행 입금 미확인 · 은행 거래내역 연결 없음</p><p>자동 보고서 수집은 아직 미연결입니다. 보고서 생성 후 공식 읽기 연결과 금액 대조가 필요합니다.</p>`;
   if(platform==='google' && r?.status==='blocked') return `<p>정산·지급 내역 미수집 · ${esc(r.detail)}</p><p>공식 화면 확인: ${esc(r.checked_at)} · 금액과 지급 상태는 확인되지 않았습니다.</p><a href="https://play.google.com/console/u/0/developers/7870440470636306408/paymentssettings" target="_blank" rel="noopener">Google 판매자 결제 프로필 설정 ↗</a><p>은행 입금 미확인 · 은행 거래내역 연결 없음</p>`;
   if(!r || r.status!=='ready') return '<p>정산·지급 내역 미연결 · 앱별 입금으로 배분하지 않습니다.</p><p>은행 입금 미확인 · 확인 필요 · 은행 거래내역 연결 없음</p>';
   let e;try{e=JSON.parse(r.detail);}catch{return '<p>정산·지급 내역 미연결 · 자료 형식 확인 필요</p>';}

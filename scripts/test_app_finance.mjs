@@ -42,3 +42,10 @@ assert.ok(googleBlocked.includes('연결 상태 확인:'));
 assert.ok(!googleBlocked.includes('계정 인증 및 앱 등록 후 연결'));
 assert.ok(googleBlocked.includes('미수집'));
 assert.ok(!googleBlocked.includes('0 KRW'));
+
+const waiting=renderFinance({apps,platform:'google',runtime:[{id:'google_sales',status:'waiting_report',detail:'판매자 프로필 제출 반영 · 예상 판매실적 보고서 없음',checked_at:'2026-10-28T04:30:00Z'},{id:'google_finance',status:'waiting_report',detail:'수익 보고서 없음 · 지급 계좌 확인 대기 중',checked_at:'2026-10-28T04:30:00Z'}]});
+assert.ok(waiting.includes('수익 보고서 없음 · 지급 계좌 확인 대기 중'));
+assert.ok(waiting.includes('Google 재무 보고서 확인'));
+assert.ok(waiting.includes('미수집'));
+assert.ok(!waiting.includes('0 KRW'));
+assert.ok(!waiting.includes('결제 프로필 설정 필요'));
