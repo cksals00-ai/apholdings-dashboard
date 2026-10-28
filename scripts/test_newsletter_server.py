@@ -49,7 +49,7 @@ class ServerTests(unittest.TestCase):
                 self.server.check_sources(issue, [])
 
     def test_additional_verified_official_publishers_and_impostors(self):
-        for domain in ('oracle.com','microsoft.ai','mitre.org'):
+        for domain in ('oracle.com','microsoft.ai','mitre.org','claude.com','github.blog'):
             self.assertEqual(self.server.official_url(f'https://www.{domain}/news'),f'https://www.{domain}/news')
             for url in (f'https://{domain}.evil.example/news',f'https://{domain}@evil.example/news'):
                 with self.assertRaises(ValueError):self.server.official_url(url)
