@@ -1,35 +1,27 @@
-// Verified setup snapshot; this card does not query GA4 or install a tracking tag.
+// Installation snapshot and authenticated aggregate reports are intentionally separate.
 export function renderWebAnalytics() {
-  const sites = [
-    ['AP 메인', 'www.apholdings.kr', '공개 페이지 설치 확인'],
-    ['교육', 'edu.apholdings.kr', '공개 페이지 설치 확인'],
-    ['게임', 'games.apholdings.kr', '공개 페이지 설치 확인'],
-    ['Lia Select 쇼핑', 'shop.apholdings.kr', '공개 페이지 설치 확인'],
-    ['코트메이트', 'sports.apholdings.kr', '공개 페이지 설치 확인'],
-    ['엔터테인먼트', 'ent.apholdings.kr', '공개 페이지 설치 확인'],
-  ];
-  return `<section class="panel panel-wide" id="mk-web-analytics" aria-label="홈페이지 성과 분석">
-    <div class="panel-head"><div><p class="eyebrow">WEBSITE ANALYTICS · GA4</p><h2>홈페이지 성과 분석</h2></div><span class="status-pill">6개 사이트 설치 확인</span></div>
-    <p class="panel-note">2026-10-29 확인한 설정 현황입니다. 설치 상태는 확인 시점 기준이며, 아래 통계는 서버 연결 후 자동 갱신합니다.</p>
-    <p>AP Holdings 계정과 ‘AP Holdings 웹사이트’ 속성 생성 완료. 한국 시간·원화 기준이며 추가 데이터 공유와 향상된 측정을 껐습니다. 6개 사이트의 공개 페이지에서 쿠키 없는 측정 코드와 Google 태그 로딩을 확인했습니다. 아래 통계 연결 결과와 실제 수신 여부를 구분해 확인합니다.</p>
-    <div class="co-toolbar" style="margin:14px 0"><a class="secondary" href="https://analytics.google.com/analytics/web/#/a413956552p561381925/reports/intelligenthome" target="_blank" rel="noopener noreferrer">GA4 보고서 열기 ↗</a><a class="secondary" href="https://blog.naver.com/cksals00/224457592380" target="_blank" rel="noopener noreferrer">코트메이트 소개 글 ↗</a></div>
-    <div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>사이트</th><th>주소</th><th>설치 상태</th><th>방문·조회</th></tr></thead><tbody>${sites.map(([name, host, status]) => `<tr><td>${name}</td><td>${host}</td><td>${status}</td><td>수신 집계 확인 대기</td></tr>`).join('')}</tbody></table></div>
-    <div id="mk-ga4-live" aria-live="polite"><p>Google 통계 연결 확인 중…</p></div><details style="margin-top:16px"><summary>소개 글 유입 측정 준비</summary><p>전용 링크 적용 완료 · 집계 시작 이후 유입만 확인합니다. 캠페인: <code>courtmate_intro_20261029</code> · 출처: naver · 매체: blog · 글 번호: 224457592380.</p><p>2026-10-29 소개 글의 홈페이지·게시판 링크에 모두 적용했습니다. Google 통계 읽기 권한 연결 후 이 화면에서 자동 조회합니다. 블로그 조회수와 코트메이트 도착 수는 별개이며, 과거 유입을 소급해 계산하지 않습니다. 쿠키 없는 최소 수집 조건을 유지하고, 관리자·개인정보 입력 화면은 측정 대상에서 제외합니다.</p></details>
-    <p class="panel-note">페이지 조회와 전용 소개 링크 도착 이벤트만 집계합니다. 설치 테스트 이벤트는 이 보고서에서 제외합니다. 관리자·문의·제보·결제 화면은 측정하지 않습니다.</p>
-  </section>`;
+ const sites=[['AP 메인','www.apholdings.kr','AP'],['교육','edu.apholdings.kr','ED'],['게임','games.apholdings.kr','GM'],['코트메이트','sports.apholdings.kr','CM'],['Lia Select','shop.apholdings.kr','LS'],['엔터테인먼트','ent.apholdings.kr','EN']];
+ return `<section class="wa-dashboard" id="mk-web-analytics" aria-label="홈페이지 성과 분석">
+ <header class="wa-head"><div><p class="wa-eyebrow">MARKETING OVERVIEW</p><h2>홍보가 방문으로 이어지는 흐름</h2><p>설치는 끝났어요. 이제 실제 도착과 조회를 확인합니다.</p></div><a class="wa-link" href="https://analytics.google.com/analytics/web/#/a413956552p561381925/reports/intelligenthome" target="_blank" rel="noopener noreferrer">GA4 보고서 ↗</a></header>
+ <div class="wa-kpis"><article class="wa-kpi"><span>홈페이지 측정 설치</span><strong>6 <small>/ 6</small></strong><p><i class="wa-dot"></i>6개 사이트 설치 확인</p></article><article class="wa-kpi"><span>소개 글 전용 링크</span><strong>2 <small>개</small></strong><p><i class="wa-dot"></i>홈 · 게시판 링크 적용</p></article><article class="wa-kpi wa-kpi-pending"><span>통계 연결</span><strong class="wa-word" id="wa-connection">확인 중</strong><p>아래 서버 응답으로 확인</p></article></div>
+ <div class="wa-grid"><section class="wa-card wa-flow"><div class="wa-card-title"><h3>블로그에서 코트메이트까지</h3><span class="wa-badge">전용 링크 적용 완료</span></div><div class="wa-journey"><div><b>01</b><strong>소개 글</strong><span>네이버 블로그</span></div><span class="wa-arrow" aria-hidden="true">→</span><div><b>02</b><strong>전용 링크</strong><span>홈 · 게시판</span></div><span class="wa-arrow" aria-hidden="true">→</span><div><b>03</b><strong>사이트 도착</strong><span>실제 이벤트 집계</span></div></div><div class="wa-flow-foot"><p>글 조회수와 사이트 도착은 다른 지표예요.</p><a href="https://blog.naver.com/cksals00/224457592380" target="_blank" rel="noopener noreferrer">소개 글 보기 ↗</a></div></section>
+ <section class="wa-card"><div class="wa-card-title"><h3>사이트 연결 현황</h3><span class="wa-badge wa-badge-green">설치 6 / 6</span></div><div class="wa-sites">${sites.map(([name,host,initial])=>`<div class="wa-site"><span class="wa-site-icon">${initial}</span><div><strong>${name}</strong><small>${host}</small></div><span class="wa-check" aria-label="공개 페이지 설치 확인">✓</span></div>`).join('')}</div></section></div>
+ <section class="wa-card wa-live"><div class="wa-card-title"><h3>실제 성과</h3><span class="wa-muted">Google 통계 · 관리자 전용</span></div><div id="mk-ga4-live" aria-live="polite"><p>Google 통계 연결 확인 중…</p></div></section>
+ <details class="wa-details"><summary>측정 기준·설정 자세히 보기</summary><p>2026-10-29 확인 · AP Holdings 웹사이트 · 한국 시간·원화. 추가 데이터 공유와 향상된 측정을 껐습니다. 설치 상태는 확인 시점 기준입니다.</p><p>캠페인 <code>courtmate_intro_20261029</code> · 출처 naver · 매체 blog · 글 번호 224457592380. 홈페이지·게시판 전용 링크 적용 이후만 측정하며 과거 유입은 소급하지 않습니다.</p><p>쿠키 없는 페이지 조회·도착 건수이며 반복 조회가 포함됩니다. 사람 수·전환율로 해석하지 않습니다. 관리자·문의·제보·결제 화면과 설치 테스트 이벤트는 보고에서 제외합니다. 통계 미연결·처리 지연은 0건으로 표시하지 않습니다.</p></details></section>`;
 }
 
 const escapeMetric = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function renderLiveReport(report) {
   if (!report || !['connected','waiting_data'].includes(report.status)) {
     const states={credentials_required:'Google 통계 읽기 전용 인증 연결 대기',permission_required:'Google 통계 읽기 권한 또는 API 연결 확인 필요',upstream_error:'Google 통계 응답 확인 필요',connection_error:'통계 연결 오류 · 수치 미확인'};
-    return `<p>${states[report?.status] || '통계 연결 확인 필요 · 수치 미확인'}</p><p class="panel-note">미연결·오류를 조회 0회로 계산하지 않습니다.</p>`;
+    return `<div class="wa-empty"><span class="wa-empty-icon" aria-hidden="true">◷</span><div><strong>${states[report?.status] || '통계 연결 확인 필요 · 수치 미확인'}</strong><p>연결되면 사이트별 조회와 소개 글 도착 건수가 여기에 표시돼요.</p><small>미연결·오류를 조회 0회로 계산하지 않습니다.</small></div><span class="wa-badge">수치 미확인</span></div>`;
   }
   const n=value=>value==null?'집계 대기':`${Number(value).toLocaleString('ko-KR')}건`;
-  return `<p><b>최근 28일 전부터 오늘까지 · 한국 시간</b> · 오늘은 집계 중이며 Google 처리 지연이 있을 수 있습니다.</p><p>코트메이트 소개 글 도착: <strong>${n(report.blogArrivals)}</strong> · 반복 도착 포함, 사람 수 아님</p><div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>사이트</th><th>보고된 페이지 조회</th></tr></thead><tbody>${(report.sites||[]).map(s=>`<tr><td>${escapeMetric(s.host)}</td><td>${n(s.views)}</td></tr>`).join('')}</tbody></table></div><p class="panel-note">출처: Google Analytics Data API · 조회 시각 ${escapeMetric(report.checkedAt)} · 관리자 화면 열기·새로고침 및 활성 탭에서 5분마다 갱신. ${report.thresholded?'Google 임계값 적용 · 일부 데이터 제한.':''}${report.sampled?'표본 추정 포함.':''} 미표시 행은 집계 대기로 표시합니다.</p>`;
+  const max=Math.max(1,...(report.sites||[]).map(s=>Number(s.views)||0));
+  return `<div class="wa-live-summary"><div><span>코트메이트 소개 글 도착</span><strong>${n(report.blogArrivals)}</strong><small>반복 도착 포함 · 사람 수 아님</small></div><p>최근 28일 전부터 오늘까지 · 한국 시간<br><small>오늘은 집계 중 · Google 처리 지연 가능</small></p></div><div class="wa-bars" role="img" aria-label="사이트별 보고된 페이지 조회">${(report.sites||[]).map(s=>`<div class="wa-bar-row"><span>${escapeMetric(s.host)}</span><div class="wa-bar-track">${s.views==null?'<span class="wa-bar-missing">집계 대기</span>':`<span class="wa-bar-fill" style="width:${Math.max(0,Math.min(100,Number(s.views)/max*100))}%"></span>`}</div><b>${n(s.views)}</b></div>`).join('')}</div><p class="wa-muted wa-source">출처: Google Analytics Data API · 조회 시각 ${escapeMetric(report.checkedAt)} · 활성 탭에서 5분마다 갱신. ${report.thresholded?'Google 임계값 적용.':''}${report.sampled?'표본 추정 포함.':''} 미표시 행은 집계 대기입니다.</p>`;
 }
 export async function loadWebAnalytics(db, root) {
   const target=root.querySelector('#mk-ga4-live');if(!target)return;
-  try {const {data,error}=await db.functions.invoke('web-analytics',{body:{}});target.innerHTML=renderLiveReport(error?{status:'connection_error'}:data);}
+  try {const {data,error}=await db.functions.invoke('web-analytics',{body:{}});target.innerHTML=renderLiveReport(error?{status:'connection_error'}:data);const state=root.querySelector('#wa-connection');if(state)state.textContent=error?'연결 확인':({connected:'연결됨',waiting_data:'집계 대기',credentials_required:'인증 대기'}[data?.status]||'연결 확인');}
   catch {target.innerHTML=renderLiveReport({status:'connection_error'});}
 }

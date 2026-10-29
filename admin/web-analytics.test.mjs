@@ -21,3 +21,9 @@ test('계정 보고서와 실제 소개 글로 연결하고 관리자에게 비�
 });
 
 test('연결 실패를 0회로 바꾸지 않고 API 출처와 도착 건수를 구분한다',()=>{assert.ok(!renderLiveReport({status:'credentials_required'}).includes('0건'));const html=renderLiveReport({status:'connected',sites:[{host:'sports.apholdings.kr',views:4}],blogArrivals:2,checkedAt:'2026-10-29'});assert.ok(html.includes('2건'));assert.ok(html.includes('사람 수 아님'));assert.ok(html.includes('Google Analytics Data API'));});
+
+test('준비 상태와 실제 성과를 구분하며, 없는 수치를 그래프로 그리지 않는다',()=>{
+ const setup=renderWebAnalytics();assert.ok(setup.includes('wa-journey'));assert.ok(setup.includes('설치 6 / 6'));assert.ok(setup.includes('wa-sites'));
+ const missing=renderLiveReport({status:'credentials_required'});assert.ok(missing.includes('wa-empty'));assert.ok(!missing.includes('wa-bar-fill'));
+ const live=renderLiveReport({status:'connected',sites:[{host:'sports.apholdings.kr',views:12},{host:'edu.apholdings.kr',views:null}],blogArrivals:3,checkedAt:'2026-10-29'});assert.ok(live.includes('wa-bar-fill'));assert.ok(live.includes('집계 대기'));assert.ok(live.includes('12건'));
+});
