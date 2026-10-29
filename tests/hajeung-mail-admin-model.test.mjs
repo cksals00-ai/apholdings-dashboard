@@ -1,0 +1,3 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{mailDraft,mailExample}from'../hajeung/mail-admin-model.mjs';
+const base={days:'60',recipient:'manager@example.test',name:'매니저',mode:'자동',subject:'{기준일수}일 안내',body:'{수신자}님 {기준일수}일 이내 {서명}',revision:'r'};
+test('mail form bounds day count and replaces policy day consistently',()=>{assert.equal(mailDraft(base).days,60);for(const days of ['0','366','1.5','',null])assert.throws(()=>mailDraft({...base,days}));for(const patch of [{recipient:'broken'},{subject:''},{body:'plain text',subject:'plain'},{mode:'other'}])assert.throws(()=>mailDraft({...base,...patch}));const d=mailDraft({...base,days:'90'}),p=mailExample(d);assert.match(p.subject,/90일/);assert.match(p.body,/매니저님 90일/);});

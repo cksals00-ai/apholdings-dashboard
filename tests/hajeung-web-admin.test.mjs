@@ -1,0 +1,28 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{readFile}from'node:fs/promises';import{PGlite}from'@electric-sql/pglite';
+const owner='94f18e51-cc1e-46c5-b2e0-235bf9221761',customer='11111111-1111-4111-8111-111111111111';
+test('web admin: verified owner only, bounded atomic settings, optimistic conflict and audit',async()=>{
+ const db=new PGlite();await db.exec(`create role anon;create role authenticated;create schema auth;create schema b2b_private;create schema hajeung;
+ create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz);create function auth.uid()returns uuid language sql stable as $$select nullif(current_setting('test.uid',true),'')::uuid$$;grant usage on schema auth to authenticated;
+ create function b2b_private.is_owner()returns boolean language sql stable as $$select auth.uid()='${owner}'::uuid$$;
+ create function b2b_private.verified_email()returns text language plpgsql as $$declare e text;begin select email into e from auth.users where id=auth.uid() and email_confirmed_at is not null;if e is null then raise exception 'verify';end if;return e;end$$;
+ create table hajeung.settings(key text primary key,value text,description text);
+ create table hajeung.mail_rules(key text primary key,name text,days int,active boolean,subject text,body text);
+ create table hajeung.audit_log(id bigserial,at timestamptz default now(),actor text,action text,detail jsonb);
+ insert into auth.users values('${owner}','owner@example.test',now()),('${customer}','customer@example.test',now());
+ insert into hajeung.settings values('default_mail_to','manager@example.test',''),('default_mail_name','김재윤 매니저',''),('send_mode','자동','');
+ insert into hajeung.mail_rules values('D60','2개월',60,true,'종료 {기준일수}일 안내','{수신자}님 {종료일} {기준일수}일 이내'),('D30','1개월',30,false,'old','old'),('REMIND','재안내',0,false,'old','old');`);
+ await db.exec(await readFile(new URL('../supabase/hajeung_web_admin.sql',import.meta.url),'utf8'));
+ const as=async(id,role='authenticated')=>{await db.exec('reset role');await db.query("select set_config('test.uid',$1,false)",[id]);await db.exec('set role '+role);};
+ const read=async()=>(await db.query('select public.hajeung_web_settings() as x')).rows[0].x;
+ const save=async(x)=>db.query('select public.hajeung_web_save($1::jsonb) as x',[JSON.stringify(x)]);
+ await as(customer);assert.equal((await db.query('select public.hajeung_web_context() as x')).rows[0].x.admin,false);await assert.rejects(read());await assert.rejects(save({days:90}));
+ await as('', 'anon');await assert.rejects(read());
+ await as(owner);let x=await read();assert.equal(x.days,60);assert.equal(x.mode,'자동');assert.equal((await db.query('select public.hajeung_web_context() as x')).rows[0].x.admin,true);
+ for(const patch of [{days:0},{days:366},{days:1.2},{recipient:'broken'},{subject:''},{mode:'unsafe'},{body:'{알수없는변수}'},{days:null}])await assert.rejects(save({...x,...patch}));
+ assert.equal((await read()).days,60,'invalid request must not partially update');
+ const changed=(await save({...x,days:90,recipient:'next@example.test'})).rows[0].x;assert.equal(changed.days,90);assert.equal(changed.recipient,'next@example.test');assert.equal(changed.history.length,1);
+ await assert.rejects(save({...x,days:120}),'stale revision must not overwrite');
+ await db.exec('reset role');const audit=(await db.query("select detail from hajeung.audit_log where action='웹 메일 설정 저장'")).rows;assert.equal(audit.length,1);assert.equal(audit[0].detail.before.days,60);assert.equal(audit[0].detail.after.days,90);
+ const rules=(await db.query("select key,active from hajeung.mail_rules where key in ('D30','REMIND')")).rows;assert.ok(rules.every(x=>!x.active));
+ await db.exec("update auth.users set email_confirmed_at=null where id='"+owner+"'");await as(owner);await assert.rejects(read());await db.close();
+});
