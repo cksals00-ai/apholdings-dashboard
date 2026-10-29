@@ -1,4 +1,4 @@
-import importlib.util, json, tempfile, unittest
+import importlib.util, json, tempfile, unittest, shutil
 from pathlib import Path
 from unittest.mock import patch
 
@@ -27,6 +27,16 @@ class StatusTests(unittest.TestCase):
         import newsletter_handoff as h
         import hashlib
         with tempfile.TemporaryDirectory() as folder:
+            original=h.ROOT
+            issue=json.loads((original/'site-source/newsletter/issues/2026-10-27.json').read_text())
+            fixture=Path(folder)/'fixture'
+            for name in h.paths_for(issue):
+                target=fixture/name;target.parent.mkdir(parents=True,exist_ok=True)
+                shutil.copyfile(original/name,target)
+            self.enterContext(h.document_root(fixture))
+            self.enterContext(patch.object(h,'ROOT',fixture))
+            (fixture/'ko/news/daily/2026-10-27/index.html').write_text(h.builder.render_issue(issue))
+            (fixture/'newsletters/email/2026-10-27.html').write_text(h.builder.render_email(issue))
             path=Path(folder)/'AP-News-2026-10-27-ready.zip'
             h.create_bundle('2026-10-27',path,reviewed=True)
             evidence=self.s.ready_metadata(path,'2026-10-27')

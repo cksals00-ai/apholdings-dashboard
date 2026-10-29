@@ -8,6 +8,8 @@ main=(ROOT/'CNAME').read_text().strip()=='www.apholdings.kr'
 count=0
 for p in ROOT.rglob('*.html'):
  rel=p.relative_to(ROOT)
+ # Completed issue/preview bytes are signed by newsletter handoff validation.
+ if re.match(r'^ko/news/daily/(?:[0-9]{4}-[0-9]{2}-[0-9]{2}|preview)(?:/|$)',rel.as_posix()): continue
  if any(x in BLOCK or x.startswith('_backup') for x in rel.parts): continue
  if main and rel.parts[0] not in {'ko','en','ja','vi','fr','zh-cn','index.html','play'}: continue
  s=p.read_text(encoding='utf-8')

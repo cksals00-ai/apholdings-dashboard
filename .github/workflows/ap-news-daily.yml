@@ -75,6 +75,7 @@ jobs:
         run: python scripts/newsletter_status.py handoff --date "$EDITION_DAY"
       - name: Test safety gates
         run: |
+          python scripts/test_newsletter_analytics_boundary.py
           python scripts/test_newsletter_handoff.py
           python scripts/test_newsletter_server.py
           python scripts/test_newsletter_status.py

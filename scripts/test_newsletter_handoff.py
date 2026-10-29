@@ -1,4 +1,4 @@
-import copy, importlib.util, json, tempfile, unittest, zipfile
+import copy, importlib.util, json, tempfile, unittest, zipfile, shutil
 from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
@@ -11,6 +11,16 @@ class HandoffTests(unittest.TestCase):
         import newsletter_handoff as handoff
         self.h=handoff
         self.issue=json.loads((ROOT/'site-source/newsletter/issues/2026-10-27.json').read_text())
+        # Build isolated canonical fixtures; historical public pages may carry site tags.
+        fixture=Path(self.enterContext(tempfile.TemporaryDirectory()))
+        for name in self.h.paths_for(self.issue):
+            target=fixture/name;target.parent.mkdir(parents=True,exist_ok=True)
+            shutil.copyfile(ROOT/name,target)
+        self.enterContext(self.h.document_root(fixture))
+        self.enterContext(patch.object(self.h,'ROOT',fixture))
+        (fixture/'ko/news/daily/2026-10-27/index.html').write_text(self.h.builder.render_issue(self.issue))
+        (fixture/'newsletters/email/2026-10-27.html').write_text(self.h.builder.render_email(self.issue))
+
 
     def bundle(self, folder):
         path=Path(folder)/'ready.zip'
