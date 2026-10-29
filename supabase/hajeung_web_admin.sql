@@ -34,7 +34,7 @@ begin
  if recipient='' or length(recipient)>500 or exists(select 1 from regexp_split_to_table(recipient,',') e where trim(e)!~'^[^@\s]+@[^@\s]+\.[^@\s]+$') then raise exception '수신 이메일을 확인해 주세요.';end if;
  if length(person)>100 or mode is null or mode not in ('자동','승인') or length(subject) not between 1 and 300 or length(body) not between 1 and 10000 then raise exception '이름·발송 방식·제목·본문을 확인해 주세요.';end if;
  for m in select regexp_matches(subject||body,'\{([^{}]+)\}','g') loop
- if m[1] not in ('수신자','담당자','업체','공사','현장','증권번호','발급기관','금액','종료일','D','비고','회신','발신부서','서명','기준일수') then raise exception '지원하지 않는 문구 변수입니다: %',m[1];end if;
+ if m[1] not in ('수신자','담당자','업체','공사','현장','증권번호','발급기관','금액','종료일','D','비고','회신','발신부서','서명','기준일수','잔여일') then raise exception '지원하지 않는 문구 변수입니다: %',m[1];end if;
  end loop;
  if position('{기준일수}' in subject||body)=0 then raise exception '날짜와 문구가 일치하도록 제목이나 본문에 {기준일수}를 넣어 주세요.';end if;
  perform 1 from hajeung.settings where key in ('default_mail_to','default_mail_name','send_mode') order by key for update;

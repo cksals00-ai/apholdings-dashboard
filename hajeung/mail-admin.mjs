@@ -15,7 +15,7 @@ export function createMailAdmin(root,client,isCurrent,{notify=()=>{}}={}){
  <label>수신자 표시 이름<input name="name" maxlength="100" autocomplete="off"><small>{수신자}에 들어갈 이름입니다. 예: 김재윤 매니저</small></label></div>
  <label>메일 제목<input name="subject" required maxlength="300"></label>
  <label>메일 본문<textarea name="body" required maxlength="10000" rows="12"></textarea></label>
- <p class="quiet">{기준일수}는 설정한 날짜 수, {수신자}·{업체}·{공사}·{증권번호}·{금액}·{종료일}·{D}는 각 자료로 바뀝니다. {서명}은 실제 발송 시 채워집니다.</p>
+ <p class="quiet">{기준일수}는 설정한 날짜 수, {수신자}·{업체}·{공사}·{증권번호}·{금액}·{종료일}·{D}·{잔여일}은 각 자료로 바뀝니다. {서명}은 실제 발송 시 채워집니다.</p>
  <div class="notice"><b>저장 전 꼭 확인해 주세요</b><p>변경은 이후 새로 생성하는 메일에 적용됩니다. 이미 대기 중이거나 발송된 메일은 자동으로 바뀌지 않습니다. 저장 버튼은 메일을 즉시 보내지 않습니다. 기존 발송 건은 반복 발송하지 않으며, 30일 추가 자동 안내와 미회신 재안내는 꺼진 상태로 유지합니다.</p></div>
  <p data-dirty class="quiet">현재 저장된 설정입니다.</p><div class="actions"><button class="button dark" type="submit">변경 내용 확인</button><button class="text-button" type="button" data-reload>저장된 설정 다시 불러오기</button></div>
  </form></article>
