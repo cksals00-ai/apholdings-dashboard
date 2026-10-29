@@ -1,0 +1,20 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {JSDOM} from 'jsdom';
+import {createMailAdmin} from '../hajeung/mail-admin.mjs';
+import {createResultNotice} from '../hajeung/navigation.mjs';
+test('mail settings confirm, cancel, save readback, error and result popup',async()=>{
+ const dom=new JSDOM('<main id="root"></main>',{url:'https://www.apholdings.kr/hajeung/'}),w=dom.window,d=w.document;
+ globalThis.document=d;globalThis.window=w;globalThis.FormData=w.FormData;
+ w.HTMLDialogElement.prototype.showModal=function(){this.open=true};w.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new w.Event('close'))};
+ let saved={days:60,recipient:'manager@example.test',name:'가상 담당자',mode:'자동',subject:'종료 {기준일수}일 안내',body:'{수신자}님 {기준일수}일 이내 안내',revision:'r1',history:[]},writes=0,fail=false;
+ const client={rpc:async(name,args)=>{if(name==='hajeung_web_settings')return{data:structuredClone(saved)};writes++;if(fail)return{error:{message:'서버 저장 실패'}};saved={...args.p,revision:'r2',history:[]};return{data:structuredClone(saved)}}};
+ const panel=createMailAdmin(d.querySelector('#root'),client,()=>true,{notify:createResultNotice(d)});await panel.load();const form=d.querySelector('form'),confirm=d.querySelector('[data-confirm]'),result=d.querySelector('.result-dialog');
+ form.elements.days.value='90';form.elements.recipient.value='other@example.test';form.elements.subject.value='검증 {기준일수}일';form.elements.body.value='{수신자}님 검증 {기준일수}일 안내';
+ form.dispatchEvent(new w.Event('submit',{cancelable:true}));assert.equal(confirm.open,true);assert.match(d.querySelector('[data-summary]').textContent,/60일 → 90일/);assert.match(d.querySelector('[data-example]').textContent,/검증 90일/);assert.equal(writes,0);
+ d.querySelector('[data-cancel]').click();assert.equal(confirm.open,false);assert.equal(writes,0);
+ form.dispatchEvent(new w.Event('submit',{cancelable:true}));await d.querySelector('[data-save]').onclick({target:d.querySelector('[data-save]')});assert.equal(writes,1);assert.equal(confirm.open,false);assert.equal(result.open,true);assert.match(result.textContent,/저장/);assert.equal(form.elements.days.value,'90');assert.equal(form.elements.recipient.value,'other@example.test');assert.equal(saved.subject,'검증 {기준일수}일');result.close();
+ fail=true;form.elements.days.value='91';form.dispatchEvent(new w.Event('submit',{cancelable:true}));await d.querySelector('[data-save]').onclick({target:d.querySelector('[data-save]')});assert.equal(confirm.open,true);assert.match(d.querySelector('[data-dialog-status]').textContent,/실패/);assert.equal(result.open,false);assert.equal(saved.days,90);confirm.close();
+ form.elements.days.value='0';form.dispatchEvent(new w.Event('submit',{cancelable:true}));assert.equal(result.open,true,'invalid input must show clear popup');assert.match(result.textContent,/1~365/);
+ panel.clear();dom.window.close();
+});
