@@ -1,10 +1,10 @@
-/* AP public-site aggregate analytics v20261029. No cookies or persistent identifiers. */
+/* AP public-site aggregate analytics v20261029b (play 추가). No cookies or persistent identifiers. */
 (() => {
   if (window.__apAnalyticsLoaded) return;
   const loc=window.location, host=loc.hostname, path=loc.pathname;
   const hosts=['www.apholdings.kr','apholdings.kr','edu.apholdings.kr','games.apholdings.kr','sports.apholdings.kr','shop.apholdings.kr','ent.apholdings.kr'];
   if (!hosts.includes(host) || window.navigator.globalPrivacyControl || /(?:^|\/)(?:admin|auth|login|account|checkout|cart|submit|qna|support|analytics)(?:\/|$)/i.test(path)) return;
-  if (['www.apholdings.kr','apholdings.kr'].includes(host) && path!=='/' && !/^\/(?:ko|en|ja|vi|fr|zh-cn)(?:\/|$)/.test(path)) return;
+  if (['www.apholdings.kr','apholdings.kr'].includes(host) && path!=='/' && !/^\/(?:ko|en|ja|vi|fr|zh-cn|play)(?:\/|$)/.test(path)) return;
   window.__apAnalyticsLoaded=true;
   const params=loc.searchParams || new URL(loc.href).searchParams;
   if(params.get('ap_analytics')==='off') return;
@@ -21,6 +21,12 @@
   const test=params.get('_ap_analytics_test')==='1';
   gtag('event',test?'ap_install_test':'page_view',page);
   if(!test && host==='sports.apholdings.kr' && params.get('utm_source')==='naver' && params.get('utm_medium')==='blog' && params.get('utm_campaign')==='courtmate_intro_20261029' && params.get('utm_content')==='224457592380') gtag('event','courtmate_blog_arrival',page);
+  // 머니 머지(/play) 도착 경로: 값은 고정 목록으로만 보낸다(검색어·입력값 없음). 2026-10-29
+  if(!test && ['www.apholdings.kr','apholdings.kr'].includes(host) && /^\/play\/?$/.test(path)){
+    const src=(params.get('utm_source')||'').toLowerCase(), med=(params.get('utm_medium')||'').toLowerCase();
+    const ch=src==='lia'?({instagram:'instagram',tiktok:'tiktok',youtube:'youtube'}[med]||'lia_other'):src==='share'?'share':src?'other':'';
+    if(ch) gtag('event','money_merge_arrival_'+ch,page);
+  }
   const tag=document.createElement('script');tag.async=true;tag.src='https://www.googletagmanager.com/gtag/js?id=G-GVD6KC9GKT';tag.referrerPolicy='no-referrer';document.head.appendChild(tag);
   // Visible disclosure on every measured page; no consent upgrade or cookie-writing path.
   const note=document.createElement('aside');note.setAttribute('aria-label','방문 통계 안내');note.style.cssText='font:12px/1.6 system-ui,sans-serif;padding:12px 20px;color:#657080;background:#f4f6f8;text-align:center';

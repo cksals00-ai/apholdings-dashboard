@@ -6,3 +6,8 @@ test('empty result stays pending; actual counts remain distinct from people',()=
 
 import {parseServiceAccount} from './core.mjs';
 test('server accepts raw JSON and quoted JSON without exposing credential contents',()=>{const sa={type:'service_account',client_email:'reader@example.test',private_key:'fake-key'};assert.equal(parseServiceAccount(JSON.stringify(sa)).client_email,sa.client_email);assert.equal(parseServiceAccount(JSON.stringify(JSON.stringify(sa))).client_email,sa.client_email);assert.throws(()=>parseServiceAccount('invalid'),/credential_format/);});
+test('머니 머지 이벤트를 요청에 포함하고 도착 경로·게임 단계를 null 기본으로 합산한다',()=>{const r=reportRequest();const names=r.dimensionFilter.andGroup.expressions[1].filter.inListFilter.values;assert.ok(names.includes('money_merge_arrival_instagram'));assert.ok(names.includes('mm_rank_submit'));
+ const row=(host,event,count)=>({dimensionValues:[{value:host},{value:event},{value:'20261029'}],metricValues:[{value:String(count)}]});
+ const s=summarize({rows:[row('www.apholdings.kr','money_merge_arrival_instagram',7),row('apholdings.kr','money_merge_arrival_instagram',1),row('www.apholdings.kr','mm_start',20),row('www.apholdings.kr','mm_rank_submit',3),row('sports.apholdings.kr','mm_start',99)]});
+ assert.equal(s.moneyMerge.arrivals.instagram,8);assert.equal(s.moneyMerge.arrivals.tiktok,null);assert.equal(s.moneyMerge.starts,20);assert.equal(s.moneyMerge.submits,3);assert.equal(s.moneyMerge.shares,null);
+ assert.equal(summarize({}).moneyMerge.arrivals.share,null);});

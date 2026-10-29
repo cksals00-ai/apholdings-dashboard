@@ -48,6 +48,12 @@ var store = {
   set: function (k, v) { try { localStorage.setItem('mm_' + k, JSON.stringify(v)); } catch (e) {} }
 };
 function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('on'); }, 2200); }
+/* 통계: 홈페이지 공용 ap-analytics(쿠키 없음)가 떠 있으면 GA4로 간다. 개인 식별값은 보내지 않는다. */
+function ga() { try { (window.dataLayer = window.dataLayer || []).push(arguments); } catch (e) {} }
+function scoreBucket(n) { return n >= 1e8 ? '1억+' : n >= 1e7 ? '1천만+' : n >= 1e6 ? '100만+' : n >= 1e5 ? '10만+' : n >= 1e4 ? '1만+' : '1만 미만'; }
+// 인스타그램·틱톡·페이스북·카톡 등 앱 안 브라우저 — 구글 로그인이 403(disallowed_useragent)으로 막힌다
+var IN_APP = /Instagram|FBAN|FBAV|FB_IAB|TikTok|musical_ly|Bytedance|KAKAOTALK|\bLine\//i.test(navigator.userAgent);
+var IS_IOS = /iPhone|iPad|iPod/i.test(navigator.userAgent), IS_ANDROID = /Android/i.test(navigator.userAgent);
 function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
 /* ---------- 그리기 ---------- */
@@ -352,6 +358,7 @@ function start() {
   $('ovStart').classList.remove('on'); $('ovOver').classList.remove('on');
   newGame();
   plays = store.get('plays', 0) + 1; store.set('plays', plays);
+  ga('event', 'mm_start', { logged_in: user ? 1 : 0 });
 }
 var plays = store.get('plays', 0);
 
@@ -369,6 +376,7 @@ function gameOver() {
   $('ovRank').innerHTML = '';
   setTimeout(function () { $('ovOver').classList.add('on'); }, 500);
   updHud();
+  ga('event', 'mm_game_over', { score_bucket: scoreBucket(score), top_level: maxLv, drops: drops, logged_in: user ? 1 : 0 });
   afterGame(lastResult, isBest);
 }
 
@@ -389,7 +397,20 @@ try {
 function login() {
   if (!sb) return toast('잠시 후 다시 시도해 주세요');
   if (lastResult) store.set('pending', lastResult);
+  if (IN_APP) { ga('event', 'mm_login_blocked_inapp'); $('ovInapp').classList.add('on'); return; }
+  ga('event', 'mm_login_click');
   sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + '/play/' } });
+}
+/* 앱 안 브라우저 → 기본 브라우저로 열기 (안드로이드: 크롬 intent, iOS: x-safari 스킴, 안 되면 주소 복사) */
+function openInBrowser() {
+  var url = 'https://www.apholdings.kr/play/';
+  if (IS_ANDROID) { location.href = 'intent://www.apholdings.kr/play/#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(url) + ';end'; return; }
+  if (IS_IOS) { location.href = 'x-safari-' + url; setTimeout(function () { copyUrl(url); }, 800); return; }
+  copyUrl(url);
+}
+function copyUrl(url) {
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { toast('주소를 복사했어요. 사파리·크롬에 붙여넣기!'); })
+    .catch(function () { prompt('이 주소를 사파리·크롬에서 열어 주세요', url); });
 }
 function logout() { if (sb) sb.auth.signOut().then(function () { user = null; me = null; renderSheets(); toast('로그아웃했어요'); }); }
 
@@ -425,6 +446,7 @@ function afterGame(res, isBest) {
     submit(res).then(function (r) {
       box.innerHTML = '<div class="ranknote"><p>오늘 <b>' + r.rank + '위</b> / ' + r.total + '명' + (r.tier ? ' · <b>' + esc(r.tier) + '</b>' : '') + ' · 연속 <b>' + r.streak + '일</b></p><small>' + esc(r.nickname) + ' · 오늘 최고 ' + won(r.best) + ' · 티어는 AP 게임 통합 등급에 반영돼요</small></div>';
       lastResult.rank = r.rank; lastResult.total = r.total;
+      ga('event', 'mm_rank_submit', { rank: r.rank, streak: r.streak });
       loadMe().then(loadBoard);
     }).catch(function () { box.innerHTML = '<div class="ranknote"><p>랭킹 서버에 연결하지 못했어요.</p><small>기록은 이 기기에 저장됐어요.</small></div>'; });
   } else {
@@ -486,7 +508,7 @@ function editNick() {
     .catch(function () { toast('2~12자로, 특수문자 없이 입력해 주세요'); });
 }
 
-$('openRank').onclick = function () { $('drawer').classList.add('on'); loadBoard(); };
+$('openRank').onclick = function () { $('drawer').classList.add('on'); ga('event', 'mm_rank_open'); loadBoard(); };
 $('seeRank').onclick = function () { if (window.innerWidth >= 900) { loadBoard(); return; } $('drawer').classList.add('on'); loadBoard(); };
 $('drawer').addEventListener('click', function (e) { if (e.target === this) this.classList.remove('on'); });
 
@@ -496,7 +518,8 @@ $('shareBtn').onclick = function () {
   var bar = ''; for (var i = 0; i <= r.top; i++) bar += i < 4 ? '🪙' : i < 8 ? '💵' : i === 8 ? '🥇' : i === 9 ? '🏢' : '👑';
   var txt = '머니 머지 #' + dayNo(r.day) + '\n' + bar + '\n자산 ' + won(r.score) + ' · ' + LV[r.top].k + '까지!' +
     (r.rank ? '\n오늘 ' + r.rank + '위 / ' + r.total + '명' : '') + '\n나보다 많이 벌 수 있어? 👉';
-  var url = 'https://www.apholdings.kr/play/';
+  var url = 'https://www.apholdings.kr/play/?utm_source=share&utm_medium=social';
+  ga('event', 'mm_share', { rank: r.rank || 0, top_level: r.top });
   if (navigator.share) { navigator.share({ title: '머니 머지', text: txt, url: url }).catch(function () {}); return; }
   var full = txt + ' ' + url;
   (navigator.clipboard ? navigator.clipboard.writeText(full) : Promise.reject()).then(function () { toast('결과를 복사했어요. 친구에게 붙여넣기!'); })
@@ -506,6 +529,17 @@ $('shareBtn').onclick = function () {
 $('startBtn').onclick = start;
 $('againBtn').onclick = start;
 $('mute').onclick = function () { muted = !muted; store.set('mute', muted); setMuteIcon(); };
+$('inappOpen').onclick = openInBrowser;
+$('inappCopy').onclick = function () { copyUrl('https://www.apholdings.kr/play/'); };
+$('inappClose').onclick = function () { $('ovInapp').classList.remove('on'); };
+// 홈페이지 공용 통계 안내문(본문 끝에 붙음)을 하단 한 줄 접이식으로 옮긴다 — 게임 화면을 가리지 않게
+(function moveNotice(n) {
+  var a = document.querySelector('body > aside[aria-label="방문 통계 안내"]');
+  if (!a) { if (n < 20) setTimeout(function () { moveNotice(n + 1); }, 500); return; }
+  var d = document.createElement('details'); d.className = 'stat-note';
+  var s = document.createElement('summary'); s.textContent = '페이지 조회 통계를 Google Analytics로 측정합니다 · 안내'; d.appendChild(s);
+  a.removeAttribute('style'); d.appendChild(a); $('foot').appendChild(d);
+})(0);
 
 /* ---------- 부팅 ---------- */
 window.addEventListener('resize', resize);
@@ -524,6 +558,8 @@ if (sb) {
   sb.auth.getSession().then(function (r) {
     user = r.data && r.data.session ? r.data.session.user : null;
     var pend = store.get('pending', null);
+    if (user && (pend || /[?&]code=/.test(location.search))) ga('event', 'mm_login_success', { had_pending: pend ? 1 : 0 });
+    if (/[?&](code|utm_source)=/.test(location.search) && history.replaceState) { try { history.replaceState(null, '', location.pathname); } catch (e) {} }
     if (user && pend) {
       store.set('pending', null);
       if (pend.day === kstDay() || pend.day === kstDay(Date.now() - 864e5)) {

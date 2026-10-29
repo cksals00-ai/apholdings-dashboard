@@ -27,3 +27,10 @@ test('준비 상태와 실제 성과를 구분하며, 없는 수치를 그래프
  const missing=renderLiveReport({status:'credentials_required'});assert.ok(missing.includes('wa-empty'));assert.ok(!missing.includes('wa-bar-fill'));
  const live=renderLiveReport({status:'connected',sites:[{host:'sports.apholdings.kr',views:12},{host:'edu.apholdings.kr',views:null}],blogArrivals:3,checkedAt:'2026-10-29'});assert.ok(live.includes('wa-bar-fill'));assert.ok(live.includes('집계 대기'));assert.ok(live.includes('12건'));
 });
+
+test('머니 머지 리아 캠페인 도착·시작·로그인·등록·공유를 구분해 보여주고, 없으면 그리지 않는다',()=>{
+ const live=renderLiveReport({status:'connected',sites:[{host:'www.apholdings.kr',views:40}],blogArrivals:null,checkedAt:'2026-10-29',moneyMerge:{arrivals:{instagram:12,tiktok:5,youtube:null,share:3,other:null},starts:30,gameOvers:25,loginClicks:6,loginBlocked:2,logins:4,submits:4,shares:7}});
+ assert.ok(live.includes('wa-mm'));assert.ok(live.includes('20건'));assert.ok(live.includes('인스타 12건'));assert.ok(live.includes('랭킹 등록 4건'));assert.ok(live.includes('집계 대기'));
+ const without=renderLiveReport({status:'connected',sites:[{host:'www.apholdings.kr',views:40}],blogArrivals:1,checkedAt:'2026-10-29'});assert.ok(!without.includes('wa-mm'));
+ assert.ok(renderWebAnalytics().includes('money_merge'));
+});

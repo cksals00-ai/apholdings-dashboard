@@ -9,7 +9,7 @@ count=0
 for p in ROOT.rglob('*.html'):
  rel=p.relative_to(ROOT)
  if any(x in BLOCK or x.startswith('_backup') for x in rel.parts): continue
- if main and rel.parts[0] not in {'ko','en','ja','vi','fr','zh-cn','index.html'}: continue
+ if main and rel.parts[0] not in {'ko','en','ja','vi','fr','zh-cn','index.html','play'}: continue
  s=p.read_text(encoding='utf-8')
  if 'data-ap-analytics' in s or not re.search('</head>',s,re.I): continue
  p.write_text(re.sub('</head>',TAG+'</head>',s,count=1,flags=re.I),encoding='utf-8');count+=1

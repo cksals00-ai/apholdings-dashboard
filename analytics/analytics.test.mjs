@@ -24,3 +24,13 @@ test('private, submission, unknown hosts, opt-out and install-test traffic do no
  for(const u of ['https://www.apholdings.kr/admin/','https://www.apholdings.kr/hajeung/','https://sports.apholdings.kr/submit/','https://sports.apholdings.kr/qna/','https://evil.example/']) assert.equal(run(u).scripts.length,0);
  const r=run('https://www.apholdings.kr/ko/?_ap_analytics_test=1');assert.equal(r.calls.filter(x=>x[1]==='page_view').length,0);assert.equal(r.calls.filter(x=>x[1]==='ap_install_test').length,1);
 });
+test('머니 머지(/play)는 공개 조회로 세고, 도착 경로는 고정 목록 이름으로만 보낸다',()=>{
+ const r=run('https://www.apholdings.kr/play/?utm_source=lia&utm_medium=instagram&utm_campaign=money_merge_launch');
+ assert.equal(r.calls.filter(x=>x[1]==='page_view').length,1);
+ assert.equal(r.calls.filter(x=>x[1]==='money_merge_arrival_instagram').length,1);
+ const pv=r.calls.find(x=>x[1]==='page_view');assert.equal(pv[2].page_location,'https://www.apholdings.kr/play/');
+ assert.equal(run('https://www.apholdings.kr/play/?utm_source=share&utm_medium=social').calls.filter(x=>x[1]==='money_merge_arrival_share').length,1);
+ assert.equal(run('https://www.apholdings.kr/play/?utm_source=<b>x</b>').calls.filter(x=>x[1]==='money_merge_arrival_other').length,1);
+ assert.equal(run('https://www.apholdings.kr/play/').calls.filter(x=>/money_merge_arrival/.test(x[1])).length,0);
+ assert.equal(run('https://www.apholdings.kr/playground/').calls.filter(x=>x[1]==='page_view').length,0);
+});

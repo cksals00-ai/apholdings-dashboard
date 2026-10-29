@@ -1,4 +1,4 @@
-import { renderWebAnalytics, loadWebAnalytics } from './web-analytics.mjs?v=20261029-visual1';
+import { renderWebAnalytics, loadWebAnalytics } from './web-analytics.mjs?v=20261029-mm1';
 import { dailyView, renderDailyReport } from './marketing-daily.mjs?v=20261028';
 // 홍보 탭 — AP 애드렌즈 벤치마크·훅 분석 일일 보고 + 전략 계층(일/주/월/년/5년) + 사업계획 연결
 // admin_marketing_reports(일별) · admin_marketing_strategy(1행) · admin_marketing_benchmarks(계정)

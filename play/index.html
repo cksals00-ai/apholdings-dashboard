@@ -19,6 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<script defer data-ap-analytics src="https://www.apholdings.kr/analytics/ap-analytics.js?v=20261029"></script>
 <style>
 :root{
   --bg:#0E1A2B; --bg2:#13233A; --panel:#172A45; --line:rgba(255,255,255,.09);
@@ -58,6 +59,12 @@ a{color:inherit;text-decoration:none}
 .dex canvas{width:calc((100% - 20px)/11);aspect-ratio:1}
 .foot{text-align:center;font-size:11px;color:var(--mute);margin-top:6px}
 .foot a{text-decoration:underline;text-underline-offset:2px}
+.stat-note{margin-top:4px;font-size:10px;color:var(--mute)}
+.stat-note summary{cursor:pointer;list-style:none;opacity:.8}
+.stat-note summary::-webkit-details-marker{display:none}
+.stat-note aside{font:10px/1.5 inherit;padding:6px 0 0;color:var(--mute);text-align:center}
+.inapp p{font-size:14px;line-height:1.55;color:var(--ink);margin-top:10px}
+.inapp small{display:block;color:var(--mute);font-size:12px;margin-top:8px;line-height:1.5}
 /* overlays */
 .ov{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(9,16,28,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:18px;z-index:5}
 .ov.on{display:flex}
@@ -159,9 +166,18 @@ a{color:inherit;text-decoration:none}
         <button class="btn gold" id="againBtn">↻ 다시 하기</button>
         <div class="row"><button class="btn ghost" id="shareBtn">공유하기</button><button class="btn ghost" id="seeRank">랭킹 보기</button></div>
       </div></div>
+
+      <div class="ov" id="ovInapp"><div class="card inapp">
+        <h2>브라우저에서<br>열어 주세요</h2>
+        <p>인스타그램·틱톡 안의 브라우저에서는<br>구글 로그인이 막혀 있어요.<br>사파리나 크롬으로 열면 바로 됩니다.</p>
+        <button class="btn gold" id="inappOpen">브라우저에서 열기</button>
+        <button class="btn ghost" id="inappCopy">주소 복사</button>
+        <small>안 열리면 오른쪽 위 ··· 메뉴 → 「브라우저에서 열기」<br>게임 기록은 그대로 남아 있어요.</small>
+        <button class="btn ghost" id="inappClose" style="margin-top:14px">닫기</button>
+      </div></div>
     </div>
     <div class="dex" id="dex"></div>
-    <div class="foot">매일 자정 새 판 · <a href="/ko/">AP Holdings 둘러보기</a></div>
+    <div class="foot" id="foot">매일 자정 새 판 · <a href="/ko/">AP Holdings 둘러보기</a></div>
   </main>
   <aside class="side" id="side"></aside>
 </div>
@@ -180,6 +196,6 @@ a{color:inherit;text-decoration:none}
 
 <script src="/play/matter.min.js"></script>
 <script src="/play/supabase.min.js"></script>
-<script src="/play/game.js?v=1"></script>
+<script src="/play/game.js?v=2"></script>
 </body>
 </html>
