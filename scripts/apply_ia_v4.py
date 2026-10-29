@@ -50,17 +50,19 @@ def section_for(rel):
 # ---------- header nav ----------
 def nav_items(l):
     return ([('home', f'/{l}/', 'Home')] + [(d, f'/{l}/{d}/', LABEL[d]) for d in DIVS] +
-            [('news', f'/{l}/news/', 'News'), ('about', f'/{l}/about/', 'About'), ('admin', '/admin/', 'Admin'), ('sitemap', f'/{l}/sitemap/', 'Sitemap')])
+            [('play', '/play/', 'Play'),  # 머니 머지 (2026-10-29)
+             ('news', f'/{l}/news/', 'News'), ('about', f'/{l}/about/', 'About'), ('admin', '/admin/', 'Admin'), ('sitemap', f'/{l}/sitemap/', 'Sitemap')])
 
 LANG_NAME = {'ko': '한국어', 'en': 'English', 'vi': 'Tiếng Việt', 'ja': '日本語', 'zh-cn': '简体中文', 'fr': 'Français'}
 def nav_html(l, sec, lang_items=''):
     cur = lambda s: ' aria-current="page"' if sec == s else ''
-    desk = ''.join('<a href="%s"%s%s>%s</a>' % (u, cur(k), ' class="nav-admin"' if k == 'admin' else '', t) for k, u, t in nav_items(l))
+    desk = ''.join('<a href="%s"%s%s>%s</a>' % (u, cur(k), ' class="nav-admin"' if k == 'admin' else (' class="nav-play"' if k == 'play' else ''), t) for k, u, t in nav_items(l))
     desktop = f'<nav class="desktop-nav nav-v4" aria-label="Main">{desk}</nav>'
     divs = ''.join(f'<a href="/{l}/{d}/"{cur(d)}>{LABEL[d]}</a>' for d in DIVS)
     g_open = ' open' if sec in DIVS else ''
     mobile = (f'<nav aria-label="Mobile" class="m-nav-v4"><a href="/{l}/"{cur("home")}>Home</a>'
               f'<details class="m-group"{g_open}><summary>{CM[l]["business"]}</summary><div>{divs}</div></details>'
+              f'<a href="/play/" class="nav-play">Play</a>'
               f'<a href="/{l}/news/"{cur("news")}>News</a><a href="/{l}/about/"{cur("about")}>About</a>'
               f'<a href="/admin/" class="nav-admin">Admin</a><div class="m-foot"><a href="/{l}/sitemap/" class="m-sitemap"{cur("sitemap")}>Sitemap</a>'
               f'<details class="m-lang"><summary>{LANG_NAME[l]} ⌄</summary><div>{lang_items}</div></details></div></nav>')
