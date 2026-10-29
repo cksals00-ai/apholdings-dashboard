@@ -545,3 +545,7 @@ body[data-home=v6] .fl-node b{font-size:clamp(1.5rem,2.2vw,2rem)}body[data-home=
 html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] .lead,html[lang="ko"] .intro-side p{word-break:keep-all;overflow-wrap:break-word}
 /* ir v12: 세 칸 카드 */
 @media(min-width:801px){.milestones.m3{grid-template-columns:repeat(3,1fr)}}
+
+/* Play (머니 머지) 2026-10-29 */
+.nav-play{position:relative}
+.desktop-nav .nav-play::after{content:"";position:absolute;top:50%;right:-2px;margin-top:-11px;width:6px;height:6px;border-radius:50%;background:#F5C542}

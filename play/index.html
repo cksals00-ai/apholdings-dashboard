@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>머니 머지 — 10원으로 빌딩까지 | AP Holdings</title>
+<meta name="description" content="같은 돈끼리 합쳐서 10원을 빌딩으로. 매일 자정 새 판, 모두 같은 순서. 오늘의 자산 랭킹 1위에 도전하세요.">
+<link rel="canonical" href="https://www.apholdings.kr/play/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AP Holdings">
+<meta property="og:title" content="머니 머지 — 10원으로 빌딩까지">
+<meta property="og:description" content="같은 돈끼리 합쳐서 빌딩을 지어보세요. 매일 새 판, 오늘의 자산 랭킹.">
+<meta property="og:url" content="https://www.apholdings.kr/play/">
+<meta property="og:image" content="https://www.apholdings.kr/play/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="/play/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/play/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E1A2B; --bg2:#13233A; --panel:#172A45; --line:rgba(255,255,255,.09);
+  --ink:#F5F1E8; --mute:#93A3B8; --gold:#F5C542; --gold2:#E3A51F; --red:#FF5A5F; --mint:#47D7AC;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;overflow:hidden;overscroll-behavior:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+.app{height:100dvh;display:flex;justify-content:center;gap:28px;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.col{width:min(100vw,480px);display:flex;flex-direction:column;height:100%;padding:10px 16px 12px}
+/* header */
+.top{display:flex;align-items:center;gap:10px;height:40px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:900;font-size:13px;letter-spacing:.04em;color:var(--mute)}
+.brand b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:7px;background:var(--ink);color:var(--bg);font-size:11px;letter-spacing:0}
+.top .sp{flex:1}
+.ib{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;color:var(--ink);opacity:.85}
+.ib:hover{background:var(--line)}
+.ib svg{width:20px;height:20px}
+.rankbtn{display:flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:99px;background:var(--panel);font-weight:700;font-size:13px}
+.rankbtn i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
+/* score */
+.hud{display:flex;align-items:flex-end;justify-content:space-between;margin:6px 2px 8px}
+.title{font-size:12px;color:var(--mute);font-weight:700;letter-spacing:.02em}
+.title em{font-style:normal;color:var(--gold)}
+.score{font-size:30px;font-weight:900;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums}
+.best{font-size:12px;color:var(--mute);margin-top:2px}
+.next{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--mute);font-weight:700}
+.next canvas{width:46px;height:46px}
+.combo{position:absolute;left:50%;top:18%;transform:translate(-50%,0) scale(.6);font-weight:900;font-size:28px;color:var(--gold);opacity:0;pointer-events:none;text-shadow:0 2px 0 #7a5200;transition:transform .15s,opacity .15s;white-space:nowrap}
+.combo.on{opacity:1;transform:translate(-50%,0) scale(1)}
+/* stage */
+.stage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+#cv{display:block;touch-action:none;border-radius:18px;cursor:pointer}
+/* dex */
+.dex{display:flex;justify-content:space-between;margin-top:8px;padding:6px 4px;border-radius:12px;background:var(--bg2)}
+.dex canvas{width:calc((100% - 20px)/11);aspect-ratio:1}
+.foot{text-align:center;font-size:11px;color:var(--mute);margin-top:6px}
+.foot a{text-decoration:underline;text-underline-offset:2px}
+/* overlays */
+.ov{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(9,16,28,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:18px;z-index:5}
+.ov.on{display:flex}
+.card{width:100%;max-width:360px;text-align:center}
+.card h2{font-size:26px;font-weight:900;letter-spacing:-.02em;line-height:1.25}
+.card .sub{color:var(--mute);font-size:14px;margin-top:6px;line-height:1.5}
+.big{font-size:38px;font-weight:900;color:var(--gold);margin:14px 0 2px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.meta{font-size:13px;color:var(--mute)}
+.meta b{color:var(--ink)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:54px;border-radius:14px;font-weight:900;font-size:17px;margin-top:10px}
+.btn.gold{background:linear-gradient(180deg,var(--gold),var(--gold2));color:#2A1C00;box-shadow:0 4px 0 #8a5d00}
+.btn.gold:active{transform:translateY(2px);box-shadow:0 2px 0 #8a5d00}
+.btn.white{background:#fff;color:#1f1f1f;font-size:16px}
+.btn.ghost{background:var(--panel);font-size:15px;height:46px}
+.btn svg{width:20px;height:20px}
+.row{display:flex;gap:8px}.row .btn{flex:1}
+.ranknote{margin-top:16px;padding:14px;border-radius:14px;background:rgba(245,197,66,.1);border:1px solid rgba(245,197,66,.35);text-align:left}
+.ranknote p{font-size:14px;line-height:1.45}
+.ranknote p b{color:var(--gold)}
+.ranknote small{display:block;color:var(--mute);font-size:11.5px;margin-top:4px}
+.how{display:flex;justify-content:center;gap:10px;margin:18px 0 6px}
+.how div{flex:1;background:var(--panel);border-radius:12px;padding:12px 6px;font-size:12.5px;line-height:1.35;color:var(--mute)}
+.how div b{display:block;font-size:20px;margin-bottom:4px}
+/* ranking panel */
+.side{width:340px;display:none;flex-direction:column;padding:58px 0 16px;height:100%}
+.sheet{display:flex;flex-direction:column;background:var(--bg2);border-radius:18px;overflow:hidden;min-height:0;flex:1}
+.sh-h{padding:16px 16px 10px}
+.sh-h h3{font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:space-between}
+.tabs{display:flex;gap:6px;margin-top:10px}
+.tabs button{flex:1;height:34px;border-radius:9px;background:var(--panel);font-size:13px;font-weight:700;color:var(--mute)}
+.tabs button.on{background:var(--ink);color:var(--bg)}
+.me{margin:0 16px 10px;padding:12px;border-radius:12px;background:var(--panel);font-size:13px;line-height:1.45}
+.me .btn{height:44px;font-size:15px;margin-top:8px}
+.me .nick{display:flex;align-items:center;gap:6px;font-weight:900;font-size:15px}
+.me .nick button{font-size:11px;color:var(--mute);text-decoration:underline}
+.list{overflow:auto;flex:1;padding:0 8px 12px}
+.it{display:grid;grid-template-columns:34px 1fr auto 26px;align-items:center;gap:8px;height:46px;padding:0 8px;border-bottom:1px solid var(--line);font-size:14px}
+.it .r{font-weight:900;color:var(--mute);text-align:center}
+.it:nth-child(1) .r{color:var(--gold)}.it:nth-child(2) .r{color:#d9dde3}.it:nth-child(3) .r{color:#d79b6a}
+.it .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.it .s{font-weight:900;font-variant-numeric:tabular-nums}
+.it canvas{width:24px;height:24px}
+.tier{font-style:normal;font-size:10.5px;font-weight:700;color:var(--gold);border:1px solid rgba(245,197,66,.45);border-radius:99px;padding:1px 6px;margin-left:4px;vertical-align:1px}
+.it.mine{background:rgba(245,197,66,.12);border-radius:10px;border-bottom-color:transparent}
+.empty{color:var(--mute);font-size:13px;text-align:center;padding:30px 10px;line-height:1.6}
+.logout{display:block;text-align:center;font-size:11px;color:var(--mute);padding:8px;text-decoration:underline}
+/* mobile sheet */
+.drawer{position:fixed;inset:0;z-index:20;display:none;background:rgba(5,10,18,.6)}
+.drawer.on{display:flex;align-items:flex-end}
+.drawer .sheet{width:100%;max-height:82dvh;border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom)}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);font-weight:700;font-size:14px;padding:12px 18px;border-radius:99px;opacity:0;transition:.25s;z-index:40;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (min-width:900px){
+  .side{display:flex}
+  .rankbtn{display:none}
+  .col{padding-top:16px}
+}
+@media (max-height:640px){.score{font-size:24px}.dex{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <main class="col">
+    <div class="top">
+      <a class="brand" href="/ko/" title="AP Holdings 홈"><b>AP</b>AP HOLDINGS</a>
+      <div class="sp"></div>
+      <button class="rankbtn" id="openRank"><i></i>오늘의 랭킹</button>
+      <button class="ib" id="mute" aria-label="소리"></button>
+    </div>
+    <div class="hud">
+      <div>
+        <div class="title">머니 머지 · <em id="dayNo">오늘의 판</em></div>
+        <div class="score" id="score">0원</div>
+        <div class="best" id="best">오늘 최고 —</div>
+      </div>
+      <div class="next">NEXT<canvas id="nextCv" width="92" height="92"></canvas></div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="cv"></canvas>
+      <div class="combo" id="combo"></div>
+
+      <div class="ov on" id="ovStart"><div class="card">
+        <h2>10원으로<br>빌딩까지</h2>
+        <p class="sub">같은 돈끼리 부딪히면 합쳐집니다.<br>금고가 넘치기 전에 최대한 키우세요.</p>
+        <div class="how">
+          <div><b>👆</b>원하는 곳을<br>탭·클릭</div>
+          <div><b>🪙+🪙</b>같은 돈끼리<br>합치기</div>
+          <div><b>🏆</b>매일 새 판<br>랭킹 도전</div>
+        </div>
+        <button class="btn gold" id="startBtn">시작하기</button>
+        <p class="sub" style="font-size:12px;margin-top:10px">오늘은 모두 같은 순서로 떨어집니다 · 횟수 무제한</p>
+      </div></div>
+
+      <div class="ov" id="ovOver"><div class="card">
+        <h2 id="ovTitle">금고가 넘쳤어요!</h2>
+        <div class="big" id="ovScore">0원</div>
+        <div class="meta" id="ovMeta"></div>
+        <div id="ovRank"></div>
+        <button class="btn gold" id="againBtn">↻ 다시 하기</button>
+        <div class="row"><button class="btn ghost" id="shareBtn">공유하기</button><button class="btn ghost" id="seeRank">랭킹 보기</button></div>
+      </div></div>
+    </div>
+    <div class="dex" id="dex"></div>
+    <div class="foot">매일 자정 새 판 · <a href="/ko/">AP Holdings 둘러보기</a></div>
+  </main>
+  <aside class="side" id="side"></aside>
+</div>
+<div class="drawer" id="drawer"></div>
+<div class="toast" id="toast"></div>
+
+<template id="tplSheet">
+  <div class="sheet">
+    <div class="sh-h"><h3><span>오늘의 자산 랭킹</span><button class="ib x" aria-label="닫기">✕</button></h3>
+      <div class="tabs"><button data-t="today" class="on">오늘</button><button data-t="all">명예의 전당</button></div>
+    </div>
+    <div class="me"></div>
+    <div class="list"></div>
+  </div>
+</template>
+
+<script src="/play/matter.min.js"></script>
+<script src="/play/supabase.min.js"></script>
+<script src="/play/game.js?v=1"></script>
+</body>
+</html>
