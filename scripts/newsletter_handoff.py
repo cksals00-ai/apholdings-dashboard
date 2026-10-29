@@ -140,7 +140,7 @@ def install_bundle(path, day, root):
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(data)
     with document_root(root):
-        builder.build_all(render_documents=False)
+        builder.build_all(render_documents=False, update_shared_pages=False)
         publisher.verify_documents(issue)
     return issue
 

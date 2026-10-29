@@ -171,7 +171,7 @@ def render_pdf(i):
     if y<65: raise ValueError('PDF final page overflow')
     c.save();return dest
 
-def build_all(render_documents=True):
+def build_all(render_documents=True, update_shared_pages=True):
     issues=[]
     for path in sorted(ISSUES.glob('*.json'),reverse=True):
         i=validate_issue(json.loads(path.read_text()))
@@ -188,16 +188,22 @@ def build_all(render_documents=True):
     privacy='<section class="legal"><p class="eyebrow">AP NEWS · PRIVACY</p><h1>구독 개인정보 안내</h1><p>운영 주체: AP Holdings · 문의 alfred.park@apholdings.kr</p><h2>수집 항목과 목적</h2><p>이메일 주소, 신청 시각, 수신 동의 기록, 이메일 확인·해지 및 발송 상태를 수집합니다. 뉴스레터 발송, 구독 확인, 해지 처리, 발송 오류 대응에 사용합니다. 이름은 입력한 경우에만 보관합니다.</p><h2>보관과 철회</h2><p>구독 중에는 서비스 제공을 위해 보관합니다. 해지하면 즉시 발송 대상에서 제외하고 이메일·동의 기록은 30일 내 삭제합니다. 미확인 신청은 30일 후 삭제합니다. 요청 제한 기록은 7일 내 삭제합니다. 동의는 선택 사항이며, 동의하지 않으면 이메일 구독이 제공되지 않습니다.</p><h2>처리 서비스</h2><p>구독 데이터는 Supabase 서울 리전의 데이터베이스에서 관리하며, 이메일 전송에는 Resend를 사용합니다. 발송 준비를 위해 이메일 주소와 해당 메일 내용이 전송 서비스에 전달될 수 있습니다. 상세한 처리 지역·약관·보관 정책은 각 서비스 안내를 확인할 수 있습니다.</p><p><a href="https://supabase.com/privacy">Supabase 개인정보 안내 ↗</a> · <a href="https://resend.com/legal/privacy-policy">Resend 개인정보 안내 ↗</a></p><h2>문의·열람·삭제</h2><p>이메일의 구독 해지 링크 또는 회사 메일로 요청할 수 있습니다. 처리 과정에서 주소 소유 여부를 확인할 수 있습니다.</p><p>시행일: 2026년 10월 9일</p></section>'
     write('/ko/news/daily/privacy/index.html',shell('구독 개인정보 안내','AP News 구독 개인정보 처리 안내','/ko/news/daily/privacy/',privacy))
     write('/ko/news/daily/manage/index.html',shell('구독 관리','AP News 이메일 확인 및 구독 해지','/ko/news/daily/manage/','<section class="legal"><p class="eyebrow">AP NEWS · SUBSCRIPTION</p><h1>구독 관리</h1><p id="manage-state" role="status">링크를 확인하고 있습니다.</p><button id="manage-action" hidden>확인</button></section>',True))
-    promo=f'<section id="apdaily-promo" style="max-width:1240px;margin:36px auto;padding:32px;background:#f7f4ed;border:1px solid #ddd5c7;color:#172338"><p style="font-size:11px;letter-spacing:2px;color:#9b7950">AP NEWS · DAILY EDITION</p><h2 style="font-family:Georgia,serif;font-size:32px;margin:12px 0">AP <i>News Daily</i></h2><p>AI 소식을 오늘의 판단으로. 주요 뉴스·AP의 관점·브랜드 PDF.</p><p><a href="{page_path(newest)}">최신호 읽기 ↗</a> &nbsp; <a href="{pdf_path(newest)}">PDF 다운로드 ↓</a> &nbsp; <a href="/ko/news/daily/#subscribe">무료 구독 신청 →</a></p></section>'
-    for lang in ('ko','en','vi','ja','zh-cn','fr'):
-        path=ROOT/f'{lang}/news/index.html'
-        if not path.exists():continue
-        s=path.read_text();s=re.sub(r'<section id="apdaily-promo".*?</section>','',s,flags=re.S)
-        block=promo if lang=='ko' else promo.replace('AI 소식을 오늘의 판단으로. 주요 뉴스·AP의 관점·브랜드 PDF.','Daily AI news, AP perspectives and branded PDF. Korean edition.').replace('최신호 읽기','Read the latest').replace('무료 구독 신청','Subscribe').replace('PDF 다운로드','Download PDF')
-        s=s.replace('<main id="main">','<main id="main">'+block,1);path.write_text(s)
+    promo=f'<section id="apdaily-promo" style="max-width:1240px;margin:36px auto;padding:32px;background:#f7f4ed;border:1px solid #ddd5c7;color:#172338"><p style="font-size:11px;letter-spacing:2px;color:#9b7950">AP NEWS · DAILY EDITION</p><h2 style="font-family:Georgia,serif;font-size:32px;margin:12px 0">AP <i>News Daily</i></h2><p>AI 소식을 오늘의 판단으로. 주요 뉴스·AP의 관점·브랜드 PDF.</p><p><a href="/ko/news/daily/latest/">최신호 읽기 ↗</a> &nbsp; <a href="/newsletters/AP-News-latest.pdf">PDF 다운로드 ↓</a> &nbsp; <a href="/ko/news/daily/#subscribe">무료 구독 신청 →</a></p></section>'
+    if update_shared_pages:
+        for lang in ('ko','en','vi','ja','zh-cn','fr'):
+            path=ROOT/f'{lang}/news/index.html'
+            if not path.exists():continue
+            s=path.read_text();s=re.sub(r'<section id="apdaily-promo".*?</section>','',s,flags=re.S)
+            block=promo if lang=='ko' else promo.replace('AI 소식을 오늘의 판단으로. 주요 뉴스·AP의 관점·브랜드 PDF.','Daily AI news, AP perspectives and branded PDF. Korean edition.').replace('최신호 읽기','Read the latest').replace('무료 구독 신청','Subscribe').replace('PDF 다운로드','Download PDF')
+            s=s.replace('<main id="main">','<main id="main">'+block,1);path.write_text(s)
     write('/newsletters/latest.json',json.dumps({'date':newest['date'],'title':newest['title'],'page':page_path(newest),'pdf':pdf_path(newest)},ensure_ascii=False))
+    latest=page_path(newest)
+    write('/ko/news/daily/latest/index.html',f'<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url={esc(latest)}"><link rel="canonical" href="{ORIGIN}{esc(latest)}"><title>AP News 최신호</title><a href="{esc(latest)}">AP News 최신호 읽기</a></html>')
+    completed_pdf=ROOT/pdf_path(newest).lstrip('/')
+    if completed_pdf.is_file():
+        (ROOT/'newsletters/AP-News-latest.pdf').write_bytes(completed_pdf.read_bytes())
     sm=ROOT/'sitemap.xml'
-    if sm.exists():
+    if update_shared_pages and sm.exists():
         text=re.sub(r'<url><loc>[^<]*/news/daily/[^<]*</loc><lastmod>[^<]*</lastmod></url>','',sm.read_text())
         routes=['/ko/news/daily/']+[page_path(i) for i in issues]
         text=text.replace('</urlset>',''.join(f'<url><loc>{ORIGIN}{r}</loc><lastmod>{newest["date"]}</lastmod></url>' for r in routes)+'</urlset>');sm.write_text(text)
