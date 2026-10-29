@@ -4,9 +4,9 @@ import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 const source=()=>readFileSync(new URL('./ap-analytics.js',import.meta.url),'utf8');
 function run(url,ref='https://blog.naver.com/cksals00/224457592380') {
- const scripts=[],nodes=[]; const doc={referrer:ref,head:{appendChild:x=>scripts.push(x)},body:{appendChild:x=>nodes.push(x)},createElement:()=>({setAttribute(){},appendChild(){},style:{}}),querySelector:()=>null};
- const w={URL,location:new URL(url),document:doc,navigator:{globalPrivacyControl:false},setTimeout:()=>{},addEventListener(){}};w.window=w;
- vm.runInNewContext(source(),w);return {w,scripts,nodes,calls:(w.dataLayer||[]).map(x=>Array.from(x))};
+ const scripts=[],nodes=[],counts=[]; const doc={referrer:ref,head:{appendChild:x=>scripts.push(x)},body:{appendChild:x=>nodes.push(x)},createElement:()=>({setAttribute(){},appendChild(){},style:{}}),querySelector:()=>null};
+ const w={URL,fetch:async (url,options)=>{counts.push({url,options});},location:new URL(url),document:doc,navigator:{globalPrivacyControl:false},setTimeout:()=>{},addEventListener(){}};w.window=w;
+ vm.runInNewContext(source(),w);return {w,scripts,nodes,counts,calls:(w.dataLayer||[]).map(x=>Array.from(x))};
 }
 test('consent denied is queued before loading the tag and no automatic page view',()=>{
  const r=run('https://www.apholdings.kr/ko/?email=private@example.com');
@@ -34,3 +34,5 @@ test('머니 머지(/play)는 공개 조회로 세고, 도착 경로는 고정 �
  assert.equal(run('https://www.apholdings.kr/play/').calls.filter(x=>/money_merge_arrival/.test(x[1])).length,0);
  assert.equal(run('https://www.apholdings.kr/playground/').calls.filter(x=>x[1]==='page_view').length,0);
 });
+
+test('own count payload has only a fixed host and event, never URL input or identifiers',()=>{const r=run('https://sports.apholdings.kr/?utm_source=naver&utm_medium=blog&utm_campaign=courtmate_intro_20261029&utm_content=224457592380&email=secret@example.com');assert.equal(r.counts.length,2);assert.deepEqual(Object.keys(JSON.parse(r.counts[0].options.body)).sort(),['event','host']);assert.equal(r.counts[0].options.credentials,'omit');assert.equal(r.counts[0].options.referrerPolicy,'no-referrer');assert.ok(!JSON.stringify(r.counts).includes('secret@example'));});

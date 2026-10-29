@@ -11,3 +11,6 @@ test('머니 머지 이벤트를 요청에 포함하고 도착 경로·게임 �
  const s=summarize({rows:[row('www.apholdings.kr','money_merge_arrival_instagram',7),row('apholdings.kr','money_merge_arrival_instagram',1),row('www.apholdings.kr','mm_start',20),row('www.apholdings.kr','mm_rank_submit',3),row('sports.apholdings.kr','mm_start',99)]});
  assert.equal(s.moneyMerge.arrivals.instagram,8);assert.equal(s.moneyMerge.arrivals.tiktok,null);assert.equal(s.moneyMerge.starts,20);assert.equal(s.moneyMerge.submits,3);assert.equal(s.moneyMerge.shares,null);
  assert.equal(summarize({}).moneyMerge.arrivals.share,null);});
+
+import {aggregateSummary} from './core.mjs';
+test('own aggregate excludes install tests and stays separate from Google data',()=>{const a=aggregateSummary([{day:'2026-10-29',host:'sports.apholdings.kr',event:'ap_install_test',count:4},{day:'2026-10-29',host:'sports.apholdings.kr',event:'page_view',count:2}]);assert.equal(a.source,'AP 일별 익명 집계');assert.equal(a.sites.find(s=>s.host==='sports.apholdings.kr').views,2);assert.equal(a.blogArrivals,0);assert.equal(a.sites.find(s=>s.host==='edu.apholdings.kr').views,null);});

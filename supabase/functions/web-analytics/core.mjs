@@ -20,3 +20,7 @@ export function summarize(report){
 export function parseServiceAccount(raw){
  try{let value=JSON.parse(raw);if(typeof value==='string')value=JSON.parse(value);if(value?.type!=='service_account'||typeof value.client_email!=='string'||typeof value.private_key!=='string')throw Error();return value;}catch{throw Error('credential_format');}
 }
+
+export function aggregateSummary(rows){
+ const data=summarize({rows:rows.filter(r=>['page_view','courtmate_blog_arrival'].includes(r.event)).map(r=>({dimensionValues:[{value:r.host},{value:r.event},{value:r.day.replace(/-/g,'')}],metricValues:[{value:String(r.count)}]}))});const healthy=new Set(rows.filter(r=>r.event==='ap_install_test').map(r=>r.host));for(const site of data.sites)if(site.views==null&&healthy.has(site.host))site.views=0;if(data.blogArrivals==null&&healthy.has('sports.apholdings.kr'))data.blogArrivals=0;return {...data,source:'AP 일별 익명 집계',installedDate:'2026-10-29'};
+}
