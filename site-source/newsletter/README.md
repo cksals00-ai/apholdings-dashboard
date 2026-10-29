@@ -128,3 +128,9 @@ these milestones have actually been observed.
 Daily handoff updates only newsletter-owned paths. The six homepage promo links
 use `/ko/news/daily/latest/` and `/newsletters/AP-News-latest.pdf`; homepage files
 and the root sitemap are not edited or staged by daily publication.
+
+The ordinary homepage Pages workflow defers deployments during07:40–08:25 KST
+and catches up at08:25. Its deployment mutex is acquired only after this guard,
+which reduces homepage competition in the target window. GitHub Pages is still a
+shared deployment service: its queue is not a strict priority/SLA mechanism. The
+newsletter dedicated delivery workflow bypasses this homepage guard.

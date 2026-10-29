@@ -1,6 +1,9 @@
 name: Publish existing AP Holdings site
 
 on:
+  schedule:
+    # Apply homepage-only changes deferred during AP News publication. KST08:25.
+    - cron: '25 23 * * *'
   push:
     branches: [main]
   workflow_dispatch:
@@ -11,12 +14,30 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: ap-holdings-pages
-  cancel-in-progress: false
-
 jobs:
+  publication_window:
+    runs-on: ubuntu-latest
+    outputs:
+      homepage_allowed: ${{ steps.window.outputs.homepage_allowed }}
+    steps:
+      - id: window
+        name: Give reserved newsletter delivery priority around08:00 KST
+        run: |
+          python3 - <<'PYTHON'
+          import datetime,os,zoneinfo
+          now=datetime.datetime.now(zoneinfo.ZoneInfo('Asia/Seoul'))
+          minute=now.hour*60+now.minute
+          allowed=not (7*60+40 <= minute < 8*60+25)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              out.write('homepage_allowed='+str(allowed).lower()+'\n')
+          print('Homepage delivery allowed:',allowed,'; reserved news window 07:40–08:25 KST')
+          PYTHON
   deploy:
+    needs: publication_window
+    if: ${{ needs.publication_window.outputs.homepage_allowed == 'true' }}
+    concurrency:
+      group: ap-holdings-pages
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:
