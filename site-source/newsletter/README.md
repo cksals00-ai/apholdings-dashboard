@@ -103,7 +103,7 @@ Fault rehearsal additionally inserts an unsupported source candidate and proves 
 ### Independent publication runtime (2026-10-30)
 
 The daily publisher and recovery notifier use reviewed runtime revision
-`e763748fd54c1e8e0887f997b3942e6be01d69d9`, not mutable homepage scripts on main.
+`f38cded5abffd43f49c4c3dc95191563b0bc0d6f`, not mutable homepage scripts on main.
 `AP_NEWS_SITE_ROOT` points that runtime at the current content/preparation checkout.
 Run safety tests in the runtime checkout with this variable unset; run source
 preflight, rendering, packaging and handoff against the preparation checkout with
@@ -124,3 +124,7 @@ A verified server reservation does not require the local computer to remain on.
 08:00 starts the reserved publication; Pages rollout and mail provider acceptance
 are separate measured milestones. Do not claim exact public/inbox timing before
 these milestones have actually been observed.
+
+Daily handoff updates only newsletter-owned paths. The six homepage promo links
+use `/ko/news/daily/latest/` and `/newsletters/AP-News-latest.pdf`; homepage files
+and the root sitemap are not edited or staged by daily publication.
