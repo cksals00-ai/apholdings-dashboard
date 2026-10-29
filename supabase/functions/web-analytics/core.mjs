@@ -7,3 +7,6 @@ export function summarize(report){
  const arrival=raw.filter(r=>r.host==='sports.apholdings.kr'&&r.event==='courtmate_blog_arrival');
  return {status:raw.length?'connected':'waiting_data',sites,blogArrivals:arrival.length?arrival.reduce((n,r)=>n+r.count,0):null,daily:raw,period:{start:'28daysAgo',end:'today',timezone:'Asia/Seoul',todayPartial:true},thresholded:Boolean(report.metadata?.subjectToThresholding),sampled:Boolean(report.metadata?.samplingMetadatas?.length),source:'Google Analytics Data API',checkedAt:new Date().toISOString()};
 }
+export function parseServiceAccount(raw){
+ try{let value=JSON.parse(raw);if(typeof value==='string')value=JSON.parse(value);if(value?.type!=='service_account'||typeof value.client_email!=='string'||typeof value.private_key!=='string')throw Error();return value;}catch{throw Error('credential_format');}
+}
