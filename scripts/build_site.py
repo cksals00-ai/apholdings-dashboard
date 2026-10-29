@@ -293,3 +293,7 @@ out("ko/products/rankers/index.html",_rankers_ko)
 # Preserve the approved Dad & Me landing and Edu registration during regeneration.
 from apply_dadandme import apply as _dadandme_apply
 _dadandme_apply()
+
+# Preserve FoldBlock introduction and Games registration.
+from apply_foldblock import apply as _foldblock_apply
+_foldblock_apply()
