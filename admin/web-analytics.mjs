@@ -1,20 +1,20 @@
 // Verified setup snapshot; this card does not query GA4 or install a tracking tag.
 export function renderWebAnalytics() {
   const sites = [
-    ['AP 메인', 'www.apholdings.kr', '설치 배포 진행 중'],
-    ['교육', 'edu.apholdings.kr', '설치 배포 진행 중'],
-    ['게임', 'games.apholdings.kr', '설치 배포 진행 중'],
-    ['Lia Select 쇼핑', 'shop.apholdings.kr', '설치 배포 진행 중'],
-    ['코트메이트', 'sports.apholdings.kr', '설치 배포 진행 중'],
-    ['엔터테인먼트', 'ent.apholdings.kr', '설치 배포 진행 중'],
+    ['AP 메인', 'www.apholdings.kr', '공개 페이지 설치 확인'],
+    ['교육', 'edu.apholdings.kr', '공개 페이지 설치 확인'],
+    ['게임', 'games.apholdings.kr', '공개 페이지 설치 확인'],
+    ['Lia Select 쇼핑', 'shop.apholdings.kr', '공개 페이지 설치 확인'],
+    ['코트메이트', 'sports.apholdings.kr', '공개 페이지 설치 확인'],
+    ['엔터테인먼트', 'ent.apholdings.kr', '공개 페이지 설치 확인'],
   ];
   return `<section class="panel panel-wide" id="mk-web-analytics" aria-label="홈페이지 성과 분석">
-    <div class="panel-head"><div><p class="eyebrow">WEBSITE ANALYTICS · GA4</p><h2>홈페이지 성과 분석</h2></div><span class="status-pill">사이트 설치 진행 중</span></div>
+    <div class="panel-head"><div><p class="eyebrow">WEBSITE ANALYTICS · GA4</p><h2>홈페이지 성과 분석</h2></div><span class="status-pill">6개 사이트 설치 확인</span></div>
     <p class="panel-note">2026-10-29 확인한 설정 현황입니다. 설치 상태는 확인 시점 기준이며, 아래 통계는 서버 연결 후 자동 갱신합니다.</p>
-    <p>AP Holdings 계정과 ‘AP Holdings 웹사이트’ 속성 생성 완료. 한국 시간·원화 기준이며 추가 데이터 공유와 향상된 측정을 껐습니다. 공개 페이지에 쿠키 없는 측정 코드를 설치하고 있습니다. 아래 통계 연결 결과와 실제 수신 여부를 구분해 확인합니다.</p>
+    <p>AP Holdings 계정과 ‘AP Holdings 웹사이트’ 속성 생성 완료. 한국 시간·원화 기준이며 추가 데이터 공유와 향상된 측정을 껐습니다. 6개 사이트의 공개 페이지에서 쿠키 없는 측정 코드와 Google 태그 로딩을 확인했습니다. 아래 통계 연결 결과와 실제 수신 여부를 구분해 확인합니다.</p>
     <div class="co-toolbar" style="margin:14px 0"><a class="secondary" href="https://analytics.google.com/analytics/web/#/a413956552p561381925/reports/intelligenthome" target="_blank" rel="noopener noreferrer">GA4 보고서 열기 ↗</a><a class="secondary" href="https://blog.naver.com/cksals00/224457592380" target="_blank" rel="noopener noreferrer">코트메이트 소개 글 ↗</a></div>
-    <div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>사이트</th><th>주소</th><th>설치 상태</th><th>방문·조회</th></tr></thead><tbody>${sites.map(([name, host, status]) => `<tr><td>${name}</td><td>${host}</td><td>${status}</td><td>수집 전 · 미확인</td></tr>`).join('')}</tbody></table></div>
-    <div id="mk-ga4-live" aria-live="polite"><p>Google 통계 연결 확인 중…</p></div><details style="margin-top:16px"><summary>소개 글 유입 측정 준비</summary><p>전용 링크 교체 전입니다. 예정 캠페인: <code>courtmate_intro_20261029</code> · 출처: naver · 매체: blog · 글 번호: 224457592380.</p><p>태그 설치·전용 링크 적용·테스트 유입 검증 후부터 집계합니다. 블로그 조회수와 코트메이트 도착 수는 별개이며, 과거 유입을 소급해 계산하지 않습니다. 쿠키 없는 최소 수집 조건을 유지하고, 관리자·개인정보 입력 화면은 측정 대상에서 제외합니다.</p></details>
+    <div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>사이트</th><th>주소</th><th>설치 상태</th><th>방문·조회</th></tr></thead><tbody>${sites.map(([name, host, status]) => `<tr><td>${name}</td><td>${host}</td><td>${status}</td><td>수신 집계 확인 대기</td></tr>`).join('')}</tbody></table></div>
+    <div id="mk-ga4-live" aria-live="polite"><p>Google 통계 연결 확인 중…</p></div><details style="margin-top:16px"><summary>소개 글 유입 측정 준비</summary><p>전용 링크 적용 완료 · 집계 시작 이후 유입만 확인합니다. 캠페인: <code>courtmate_intro_20261029</code> · 출처: naver · 매체: blog · 글 번호: 224457592380.</p><p>2026-10-29 소개 글의 홈페이지·게시판 링크에 모두 적용했습니다. Google 통계 읽기 권한 연결 후 이 화면에서 자동 조회합니다. 블로그 조회수와 코트메이트 도착 수는 별개이며, 과거 유입을 소급해 계산하지 않습니다. 쿠키 없는 최소 수집 조건을 유지하고, 관리자·개인정보 입력 화면은 측정 대상에서 제외합니다.</p></details>
     <p class="panel-note">페이지 조회와 전용 소개 링크 도착 이벤트만 집계합니다. 설치 테스트 이벤트는 이 보고서에서 제외합니다. 관리자·문의·제보·결제 화면은 측정하지 않습니다.</p>
   </section>`;
 }
