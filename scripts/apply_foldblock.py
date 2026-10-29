@@ -27,10 +27,10 @@ def apply():
   target=ROOT/route.strip('/')/'index.html';target.parent.mkdir(parents=True,exist_ok=True);target.write_text(page)
   card='<article class="product-card hub-card foldblock-card" data-foldblock><img src="/media/games/foldblock/feature.png" width="1024" height="500" alt="'+name+'"><span class="status">'+('출시 준비 중' if ko else 'Coming soon')+'</span><h3>'+name+'</h3><p>'+desc+'</p><a class="text-link" href="'+route+'">'+('게임 소개 보기 →' if ko else 'Discover FoldBlock →')+'</a></article>'
   for f in (hub,ROOT/f'{lang}/index.html'):
-   s=f.read_text();s=re.sub(r'<article[^>]*data-foldblock.*?</article>','',s,flags=re.S)
+   s=f.read_text();s=re.sub(r'<section class="section" data-foldblock-home>.*?</section>','',s,flags=re.S);s=re.sub(r'<article[^>]*data-foldblock.*?</article>','',s,flags=re.S)
    marker='<div class="grid-3 hub-grid">' if f==hub else '<div class="compact-grid games-grid">'
    if marker not in s and f!=hub:
-    s=s.replace('</main>','<section class="section"><div class="wrap"><h2>AP Games · FoldBlock</h2><div class="grid-3 hub-grid">'+card+'</div></div></section></main>');f.write_text(s);continue
+    s=s.replace('</main>','<section class="section" data-foldblock-home><div class="wrap"><h2>AP Games · FoldBlock</h2><div class="grid-3 hub-grid">'+card+'</div></div></section></main>');f.write_text(s);continue
    if marker not in s:raise RuntimeError(f'Missing Games insertion: {f}')
    s=s.replace(marker,marker+card,1);f.write_text(s)
  sitemap=ROOT/'sitemap.xml';s=sitemap.read_text()
