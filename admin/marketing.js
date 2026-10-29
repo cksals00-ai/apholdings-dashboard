@@ -1,3 +1,4 @@
+import { renderWebAnalytics } from './web-analytics.mjs?v=20261029';
 import { dailyView, renderDailyReport } from './marketing-daily.mjs?v=20261028';
 // 홍보 탭 — AP 애드렌즈 벤치마크·훅 분석 일일 보고 + 전략 계층(일/주/월/년/5년) + 사업계획 연결
 // admin_marketing_reports(일별) · admin_marketing_strategy(1행) · admin_marketing_benchmarks(계정)
@@ -11,7 +12,7 @@ const HORIZONS = [['daily', '오늘', '하루 한 편'], ['weekly', '이번 주'
 export function createMarketing(db, getUser) {
   const root = document.querySelector('#marketing-section');
   let strategy = null, reports = [], benchmarks = [], nsrc = [], nitems = [], loaded = false, gen = 0, idx = 0, horizon = 'daily';
-  root.innerHTML = `<p id="mk-message" class="form-message" role="status" aria-live="polite"></p><div id="mk-body"></div>
+  root.innerHTML = `${renderWebAnalytics()}<p id="mk-message" class="form-message" role="status" aria-live="polite"></p><div id="mk-body"></div>
     <details class="panel panel-wide mk-reference" id="mk-ads-panel"><summary>중단한 검색 광고 기록</summary><div class="panel-head"><div><p class="eyebrow">PAID · APPLE ADS (중단 · 기록 보존)</p><h2>검색 광고 성과 — 앱 현황에서 이관</h2></div><span id="app-ads-state" class="status-pill">연결 예정</span></div><p class="panel-note" style="margin:-8px 0 14px">유료 광고는 2026-09-29 전부 중단(재개는 대표 판단). 캠페인 기록과 동기화는 그대로 유지해 무료 채널 성과와 비교하는 기준선으로 쓴다.</p><div id="app-ads"></div></details>`;
   const $ = s => root.querySelector(s), msg = s => { $('#mk-message').textContent = s; };
 
