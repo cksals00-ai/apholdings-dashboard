@@ -99,3 +99,28 @@ Prepare from04:00 KST; aim for completed handoff by07:15, retaining later checks
 The server registration job now waits for whole-issue mail acceptance with `wait-mail`. The read-only service-role RPC `ap_news_delivery_health` returns confirmed-active count and aggregated delivery states, without recipient data. Pending/processing/retry/failed/uncertain/unconfirmed never count as completion. A bounded timeout fails the job, so the existing independent alert/recovery chain can detect incomplete mail. It never dispatches or resends itself. Provider acceptance is not inbox arrival.
 
 Fault rehearsal additionally inserts an unsupported source candidate and proves it is excluded without changing the allowlist. The existing deliberate first-publication failure and first-operational-test-mail failure still exercise real bot rerun, public byte verification, fixed-owner test mail and incident/recovery notices. This is isolated from the regular subscriber queue; it does not prove every provider failure mode or exact08:00 wall-clock delivery. GitHub Pages deployment and provider latency remain external dependencies.
+
+### Independent publication runtime (2026-10-30)
+
+The daily publisher and recovery notifier use reviewed runtime revision
+`e763748fd54c1e8e0887f997b3942e6be01d69d9`, not mutable homepage scripts on main.
+`AP_NEWS_SITE_ROOT` points that runtime at the current content/preparation checkout.
+Run safety tests in the runtime checkout with this variable unset; run source
+preflight, rendering, packaging and handoff against the preparation checkout with
+it set. The producer must use the same pinned renderer as the server. Changing
+this pin is a reviewed newsletter release, not an incidental homepage deployment.
+
+`ap-news-daily.yml` validates only newsletter safety gates and complete bundle
+checksums/documents; unrelated `check_site.py` does not gate newsletter publication.
+`ap-news-pages.yml` archives current main without executing homepage generators,
+analytics installers or checks. It shares the Pages deployment mutex, preserving
+latest homepage files while preventing simultaneous domain deployments.
+The rehearsal injects broken homepage tools in disposable checkouts, forces a first
+publication failure, and verifies recovery, actual public preview bytes and one
+owner-only test mail. Regular recipients are not included in that rehearsal.
+
+New content still requires the local producer and app to run at04:00 KST.
+A verified server reservation does not require the local computer to remain on.
+08:00 starts the reserved publication; Pages rollout and mail provider acceptance
+are separate measured milestones. Do not claim exact public/inbox timing before
+these milestones have actually been observed.

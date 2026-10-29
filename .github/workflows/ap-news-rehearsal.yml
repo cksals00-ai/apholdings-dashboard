@@ -14,6 +14,8 @@ concurrency:
 jobs:
   preview:
     runs-on: ubuntu-latest
+    env:
+      AP_NEWS_SITE_ROOT: ${{ github.workspace }}
     timeout-minutes: 20
     permissions:
       contents: write
@@ -22,20 +24,31 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+      - name: Checkout reviewed newsletter runtime
+        uses: actions/checkout@v7
+        with:
+          ref: e763748fd54c1e8e0887f997b3942e6be01d69d9
+          path: .ap-news-runtime
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
-      - run: pip install -r requirements-newsletter-server.txt
+      - run: pip install -r .ap-news-runtime/requirements-newsletter-server.txt
+      - name: Inject unrelated homepage tool failures (never committed)
+        run: |
+          printf 'raise RuntimeError("INJECTED_HOMEPAGE_FAILURE")\n' > scripts/check_site.py
+          printf 'raise RuntimeError("INJECTED_HOMEPAGE_FAILURE")\n' > scripts/newsletter.py
+          printf 'raise RuntimeError("INJECTED_HOMEPAGE_FAILURE")\n' > analytics/install.py
       - name: Await scheduled test and inject first publication failure
         env:
           REHEARSAL_DUE: ${{ inputs.due_at }}
-        run: python scripts/newsletter_ops.py build
+        run: python .ap-news-runtime/scripts/newsletter_ops.py build
       - name: Publish isolated preview files only
         run: |
           git config user.name 'AP News Publisher'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add "ko/news/daily/preview/automation-$GITHUB_RUN_ID/index.html" "newsletters/previews/AP-News-test-$GITHUB_RUN_ID.pdf"
           if ! git diff --cached --quiet; then git commit -m "test(news): publish isolated automation preview"; fi
+          git restore scripts/check_site.py scripts/newsletter.py analytics/install.py
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
@@ -50,15 +63,25 @@ jobs:
       contents: read
       pages: write
       id-token: write
-    uses: ./.github/workflows/pages.yml
+    uses: ./.github/workflows/ap-news-pages.yml
+    with:
+      test_homepage_failure: true
   verify_and_mail:
     needs: [preview,deploy]
     runs-on: ubuntu-latest
+    env:
+      AP_NEWS_SITE_ROOT: ${{ github.workspace }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
         with:
           ref: main
+          fetch-depth: 0
+      - name: Checkout reviewed newsletter runtime
+        uses: actions/checkout@v7
+        with:
+          ref: e763748fd54c1e8e0887f997b3942e6be01d69d9
+          path: .ap-news-runtime
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
@@ -70,4 +93,4 @@ jobs:
         env:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           RUN_URL: https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/${{ github.run_id }}
-        run: python scripts/newsletter_ops.py finish
+        run: python .ap-news-runtime/scripts/newsletter_ops.py finish

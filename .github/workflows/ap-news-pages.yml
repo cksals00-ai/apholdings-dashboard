@@ -1,0 +1,47 @@
+# Newsletter delivery must not invoke mutable homepage builders/checkers.
+name: AP News isolated site delivery
+on:
+  workflow_call:
+    inputs:
+      test_homepage_failure:
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: ap-holdings-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - name: Inject and confirm unrelated homepage failures in disposable checkout
+        if: ${{ inputs.test_homepage_failure }}
+        run: |
+          printf 'raise RuntimeError("INJECTED_HOMEPAGE_FAILURE")\n' > scripts/check_site.py
+          printf 'raise RuntimeError("INJECTED_HOMEPAGE_FAILURE")\n' > scripts/newsletter.py
+          printf 'raise RuntimeError("INJECTED_HOMEPAGE_FAILURE")\n' > analytics/install.py
+          if python3 scripts/check_site.py; then exit 1; fi
+          if python3 analytics/install.py; then exit 1; fi
+          echo 'Homepage failures confirmed; publication packages tracked bytes without executing homepage tools.'
+      - uses: actions/configure-pages@v6
+      - name: Package latest tracked site bytes (no homepage tools)
+        run: |
+          mkdir .pages-site
+          git archive HEAD | tar -x -C .pages-site
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .pages-site
+          include-hidden-files: true
+      - name: Deploy existing domain
+        id: deployment
+        uses: actions/deploy-pages@v5
