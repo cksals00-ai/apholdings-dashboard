@@ -6,7 +6,8 @@ from datetime import date
 from html import escape
 from urllib.parse import urlsplit
 
-ROOT = Path(__file__).resolve().parents[1]
+# Runtime comes from a reviewed immutable revision; content stays on current main.
+ROOT = Path(os.environ['AP_NEWS_SITE_ROOT']).resolve() if os.environ.get('AP_NEWS_SITE_ROOT') else Path(__file__).resolve().parents[1]
 ORIGIN = 'https://www.apholdings.kr'
 API = 'https://cgijpcimixaregbpvqbf.supabase.co/functions/v1/ap-news'
 ISSUES = ROOT / 'site-source/newsletter/issues'
