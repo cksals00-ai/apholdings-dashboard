@@ -31,11 +31,13 @@ Official source: Google announced on October 29, 2026 that people can create and
 finally:
  proc.terminate();proc.wait(timeout=30);log.close()
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers import StableDiffusionXLPipeline,LCMScheduler
 threads=min(2,os.cpu_count() or 2);torch.set_num_threads(threads)
 t=time.monotonic()
-pipe=StableDiffusionPipeline.from_pretrained('segmind/tiny-sd',revision='cad0bd7495fa6c4bcca01b19a723dc91627fe84f',torch_dtype=torch.float32,token=False)
+pipe=StableDiffusionXLPipeline.from_pretrained('segmind/SSD-1B',revision='60987f37e94cd59c36b1cba832b9f97b57395a10',variant='fp16',torch_dtype=torch.bfloat16,token=False)
+pipe.load_lora_weights('latent-consistency/lcm-lora-ssd-1b',revision='857c372dbe0edd8af6255638a68d0d7ccb7a3d76',token=False)
+pipe.scheduler=LCMScheduler.from_config(pipe.scheduler.config)
 pipe=pipe.to('cpu');pipe.enable_attention_slicing()
-image=pipe('Editorial gouache illustration, person thoughtfully editing floating document pages at an ivory desk, side view, deep navy and sage accents, refined brass detail, bold painterly brush marks, calm generous composition, conceptual illustration, no text, no logo, no photograph',negative_prompt='text, letters, watermark, logo, photorealistic, deformed hands, blurry',num_inference_steps=16,guidance_scale=7.5,width=768,height=512,generator=torch.Generator('cpu').manual_seed(311026)).images[0]
+image=pipe('Editorial gouache illustration, person thoughtfully editing floating document pages at an ivory desk, side view, deep navy and sage accents, refined brass detail, bold painterly brush marks, calm generous composition, conceptual illustration, no text, no logo, no photograph',negative_prompt='text, letters, watermark, logo, photorealistic, deformed hands, blurry',num_inference_steps=6,guidance_scale=1.5,width=768,height=512,generator=torch.Generator('cpu').manual_seed(311026)).images[0]
 image.save(out/'image.png');metrics['image_seconds']=time.monotonic()-t;metrics['total_seconds']=time.monotonic()-start
 (out/'metrics.json').write_text(json.dumps(metrics,indent=2));print(json.dumps(metrics),flush=True)
