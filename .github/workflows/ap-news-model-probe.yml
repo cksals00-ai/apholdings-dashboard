@@ -1,6 +1,9 @@
 name: AP News CPU model probe
 on:
   workflow_dispatch:
+  push:
+    branches: [feat/ap-news-server-producer]
+    paths: [.github/workflows/ap-news-model-probe.yml, scripts/newsletter_model_probe.py]
 permissions:
   contents: read
 jobs:
