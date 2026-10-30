@@ -1,0 +1,16 @@
+name: AP News server production
+# Manual qualification only; enable daily schedule after complete rehearsal passes.
+on:
+  workflow_dispatch:
+concurrency:
+  group: ap-news-server-production
+  cancel-in-progress: false
+permissions:
+  contents: write
+  actions: write
+jobs:
+  produce:
+    uses: ./.github/workflows/ap-news-produce.yml
+    with:
+      dry_run: false
+    secrets: inherit

@@ -8,9 +8,6 @@ on:
       inject_failure:
         type: boolean
         default: true
-  push:
-    branches: [feat/ap-news-server-producer]
-    paths: [.github/workflows/ap-news-production-rehearsal.yml]
 concurrency:
   group: ap-news-production-rehearsal
   cancel-in-progress: false
@@ -22,7 +19,7 @@ jobs:
     uses: ./.github/workflows/ap-news-produce.yml
     with:
       dry_run: true
-      resume_run: ${{ inputs.resume_run || '40989993440' }}
+      resume_run: ${{ inputs.resume_run || '' }}
       inject_failure: ${{ inputs.inject_failure == true }}
     secrets: inherit
   stage_preview:
