@@ -1,5 +1,5 @@
 """Keep private durable milestones while a credential-free producer runs."""
-import argparse,json,os,subprocess,time
+import argparse,hashlib,json,os,subprocess,time
 from pathlib import Path
 import newsletter_checkpoint as checkpoints
 SAFE_ENV=('PATH','HOME','LANG','LC_ALL','TMPDIR','CI','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_WORKSPACE','RUNNER_TEMP','RUNNER_TRACKING_ID','AP_NEWS_SITE_ROOT','HF_HUB_DISABLE_TELEMETRY','HF_HUB_DISABLE_IMPLICIT_TOKEN','DO_NOT_TRACK')
@@ -7,9 +7,9 @@ def child_environment():return {key:os.environ[key] for key in SAFE_ENV if key i
 def milestone(root,day):
  path=root/'.production-state/draft.json'
  if not path.is_file():return None
- state=json.loads(path.read_text())
+ raw=path.read_bytes();json.loads(raw)
  images=tuple(sorted(p.name for p in (root/'img/newsletter').glob(day+'*') if p.is_file() and p.suffix in ('.png','.gif')))
- return len(state.get('candidates',[])),len(state.get('stories',[])),images,state.get('stage')
+ return hashlib.sha256(raw).hexdigest(),images
 def supervise(command,root,day,mode,interval=60,poll=1):
  root=Path(root);process=subprocess.Popen(command,env=child_environment());last=None;last_saved=0;sequence=0
  def preserve():

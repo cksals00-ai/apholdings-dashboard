@@ -19,6 +19,12 @@ time.sleep(.15)
    env=json.loads((root/'child-env.json').read_text())
    self.assertEqual(env,{'GH_TOKEN':None,'SUPABASE_SERVICE_KEY':None,'PRIVATE_TEST_CREDENTIAL':None,'GITHUB_RUN_ID':'123'})
    self.assertIn(False,seen);self.assertTrue(seen[-1])
+ def test_existing_story_edits_and_editorial_plans_are_durable_milestones(self):
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);(root/'.production-state').mkdir();p=root/'.production-state/draft.json'
+   p.write_text(json.dumps({'stories':[{'title':'first'}]}));before=s.milestone(root,'2026-10-30')
+   p.write_text(json.dumps({'stories':[{'title':'corrected'}],'editorial':{'lead_index':0}}))
+   self.assertNotEqual(before,s.milestone(root,'2026-10-30'))
  def test_child_failure_is_not_hidden_by_backup(self):
   with tempfile.TemporaryDirectory() as folder,patch.object(s.checkpoints,'save'):
    self.assertEqual(s.supervise([sys.executable,'-c','raise SystemExit(7)'],Path(folder),'2026-10-30','test',poll=.01),7)
