@@ -9,6 +9,9 @@ ART_REV='530227a7d994db8eca5ab5ced2fb692b614357fd'
 TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen3-14B-Q4_K_M.gguf',8192)}
 IMAGE_REPO='segmind/SSD-1B'
 IMAGE_REV='60987f37e94cd59c36b1cba832b9f97b57395a10'
+def sampling_options(profile):
+ return {'temperature':0.7,'top_p':0.8,'top_k':20,'min_p':0.0,'presence_penalty':1.5} if profile=='art' else {'temperature':0.2}
+
 def completion_prompt(system,question,source_context=None):
  def data(text):return text.replace('<|','<\u200b|')
  prefix=''
@@ -47,7 +50,7 @@ class TextModel:
   self.log.close()
  def ask(self,system,question,tokens=1400,schema=None,source_context=None):
   prompt=completion_prompt(system,question,source_context)
-  data=json.dumps({'prompt':prompt,'n_predict':tokens,'temperature':0.2,'stop':['<|im_end|>'],'cache_prompt':True,'json_schema':schema or {'type':'object'}}).encode()
+  data=json.dumps({'prompt':prompt,'n_predict':tokens,**sampling_options(self.profile),'stop':['<|im_end|>'],'cache_prompt':True,'json_schema':schema or {'type':'object'}}).encode()
   request=urllib.request.Request('http://127.0.0.1:8080/completion',data=data,headers={'Content-Type':'application/json'})
   with urllib.request.urlopen(request,timeout=1500) as response:result=json.load(response)
   import hashlib

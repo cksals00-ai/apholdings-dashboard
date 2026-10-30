@@ -1,7 +1,7 @@
 import unittest,tempfile,types,sys,os
 from pathlib import Path
 from unittest.mock import Mock,patch
-from newsletter_cpu import completion_prompt,TextModel
+from newsletter_cpu import completion_prompt,TextModel,sampling_options
 class PromptTests(unittest.TestCase):
  def test_art_profile_is_pinned_public_14b_and_cpu_only_without_credentials(self):
   with tempfile.TemporaryDirectory() as temp:
@@ -14,6 +14,9 @@ class PromptTests(unittest.TestCase):
    self.assertTrue(str(download.call_args.kwargs['cache_dir']).endswith('/ap-news-text/art'))
    command=launch.call_args.args[0];self.assertEqual(command[command.index('-c')+1],'8192');self.assertEqual(command[command.index('-ngl')+1],'0')
    self.assertNotIn('GH_TOKEN',launch.call_args.kwargs['env']);self.assertNotIn('PRIVATE_TEST_CREDENTIAL',launch.call_args.kwargs['env'])
+ def test_art_sampler_uses_official_non_thinking_quantized_guidance(self):
+  self.assertEqual(sampling_options('art'),{'temperature':0.7,'top_p':0.8,'top_k':20,'min_p':0.0,'presence_penalty':1.5})
+  self.assertEqual(sampling_options('copy'),{'temperature':0.2})
  def test_full_source_prefix_reused_between_independent_roles(self):
   source={'text':'An exact official source body.','title':'Official announcement'}
   writer=completion_prompt('Write Korean copy.','Write draft.',source)

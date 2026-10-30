@@ -16,6 +16,8 @@ Pinned public weights under evaluation:
   revision530227a7d994db8eca5ab5ced2fb692b614357fd (Apache2.0).
   It runs after the copy model closes, with an8192-token CPU context, before diffusion.
   Its weights are downloaded anonymously into a separate uncached directory.
+  Art uses the model card's non-thinking sampler (temperature0.7/top-p0.8/top-k20/
+  min-p0/presence-penalty1.5); the factual copy profile is unchanged.
 - Segmind SSD-1B https://huggingface.co/segmind/SSD-1B
   revision60987f37e94cd59c36b1cba832b9f97b57395a10 (Apache2.0 model card).
 - LCM-LoRA SSD-1B https://huggingface.co/latent-consistency/lcm-lora-ssd-1b
