@@ -39,7 +39,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           CALLER_REVISION: ${{ github.sha }}
-        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 41024059320 --revision "$CALLER_REVISION" --runtime aafd02eed7faab6772c7d55b9dd00a93af281097
+        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 41024059320 --revision "$CALLER_REVISION" --runtime 58b3e8e23a8899eb8d7eab1320654dfa34fc664e
   produce:
     needs: qualification
     if: ${{ needs.qualification.outputs.qualified == 'true' && github.event_name != 'workflow_run' }}
