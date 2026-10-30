@@ -1,0 +1,110 @@
+name: AP News server production rehearsal
+on:
+  workflow_dispatch:
+    inputs:
+      resume_run:
+        type: string
+        default: ''
+      inject_failure:
+        type: boolean
+        default: true
+  push:
+    branches: [feat/ap-news-server-producer]
+    paths: [.github/workflows/ap-news-production-rehearsal.yml]
+concurrency:
+  group: ap-news-production-rehearsal
+  cancel-in-progress: false
+permissions:
+  contents: write
+  actions: write
+jobs:
+  produce:
+    uses: ./.github/workflows/ap-news-produce.yml
+    with:
+      dry_run: true
+      resume_run: ${{ inputs.resume_run || '' }}
+      inject_failure: ${{ inputs.inject_failure == true }}
+    secrets: inherit
+  stage_preview:
+    needs: produce
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      AP_NEWS_SITE_ROOT: ${{ github.workspace }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/checkout@v7
+        with:
+          ref: e8a75ec6c19934da51d910286ceb75bab2733d16
+          path: .production-runtime
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: pip install -r .production-runtime/requirements-newsletter-server.txt
+      - uses: actions/download-artifact@v8
+        with:
+          name: ${{ needs.produce.outputs.artifact }}
+          path: ${{ runner.temp }}/production-result
+      - name: Stage only new isolated preview and test-specific images
+        env:
+          EDITION_DAY: ${{ needs.produce.outputs.day }}
+        run: python .production-runtime/scripts/newsletter_production_preview.py stage --date "$EDITION_DAY" --bundle "$RUNNER_TEMP/production-result/.production-state/AP-News-$EDITION_DAY-test.zip"
+      - name: Publish preview paths without registering a regular issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name 'AP News Publisher'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          mapfile -t paths < <(python -c 'import json; print("\n".join(json.load(open(".ap-news-state/server-rehearsal/manifest.json"))["paths"]))')
+          git add -- "${paths[@]}"
+          if ! git diff --cached --quiet; then git commit -m "test(news): publish server-generated preview $GITHUB_RUN_ID"; fi
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 15
+          done
+          exit 1
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ap-server-preview-${{ github.run_id }}
+          path: .ap-news-state/server-rehearsal/
+          include-hidden-files: true
+  deploy:
+    needs: stage_preview
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/ap-news-pages.yml
+    with:
+      test_homepage_failure: true
+  verify_and_mail:
+    needs: [stage_preview,deploy]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      AP_NEWS_SITE_ROOT: ${{ github.workspace }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/checkout@v7
+        with:
+          ref: e8a75ec6c19934da51d910286ceb75bab2733d16
+          path: .production-runtime
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v8
+        with:
+          name: ap-server-preview-${{ github.run_id }}
+          path: .ap-news-state/server-rehearsal/
+      - name: Verify new public bytes and owner-only mail retry (no regular queue)
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          RUN_URL: https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/${{ github.run_id }}
+        run: python .production-runtime/scripts/newsletter_production_preview.py finish

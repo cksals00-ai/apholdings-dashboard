@@ -1,4 +1,5 @@
 name: AP News server daily
+run-name: AP News ${{ inputs.edition_date || 'today' }} ${{ inputs.reserve_publication && 'reservation' || inputs.record_handoff && 'receipt' || inputs.verify_ready && 'verification' || 'publication' }}
 
 on:
   schedule:

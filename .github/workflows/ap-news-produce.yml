@@ -1,0 +1,177 @@
+name: AP News isolated CPU production worker
+on:
+  workflow_call:
+    inputs:
+      dry_run:
+        type: boolean
+        default: false
+      resume_run:
+        type: string
+        default: ''
+      inject_failure:
+        type: boolean
+        default: false
+    outputs:
+      day:
+        value: ${{ jobs.produce.outputs.day }}
+      artifact:
+        value: ${{ jobs.produce.outputs.artifact }}
+permissions:
+  contents: write
+  actions: write
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HUB_DISABLE_IMPLICIT_TOKEN: '1'
+      DO_NOT_TRACK: '1'
+      AP_NEWS_SITE_ROOT: ${{ github.workspace }}/.production-content
+    outputs:
+      day: ${{ steps.gate.outputs.day }}
+      artifact: ap-news-production-${{ steps.gate.outputs.day }}-attempt-${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - name: Checkout reviewed producer runtime
+        uses: actions/checkout@v7
+        with:
+          ref: e8a75ec6c19934da51d910286ceb75bab2733d16
+          path: .production-runtime
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Check current Korean edition and existing completed handoff
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          python3 - <<'PY'
+          import datetime,json,os,pathlib,subprocess,zoneinfo
+          day=datetime.datetime.now(zoneinfo.ZoneInfo('Asia/Seoul')).date().isoformat()
+          dry=os.environ['DRY_RUN']=='true'
+          path=pathlib.Path('site-source/newsletter/issues')/(day+'.json')
+          published=path.exists() and json.loads(path.read_text()).get('status')=='published'
+          ready=False
+          if not dry and not published:
+              run=subprocess.run(['gh','api',f'repos/cksals00-ai/apholdings-dashboard/releases/tags/ap-news-ready-{day}'],capture_output=True,text=True)
+              if run.returncode==0:
+                  release=json.loads(run.stdout)
+                  ready=release['draft'] and any(a['name']==f'AP-News-{day}-ready.zip' and a['size']>1000 for a in release['assets'])
+              elif '404' not in run.stderr:raise RuntimeError('Cannot establish existing handoff state')
+          produce=dry or (not published and not ready)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              out.write(f'day={day}\nproduce={str(produce).lower()}\nexisting_ready={str(ready).lower()}\n')
+          print({'day':day,'produce':produce,'already_published':published,'existing_ready':ready})
+          PY
+      - name: Stage content independently of homepage tools
+        if: ${{ steps.gate.outputs.produce == 'true' }}
+        run: |
+          mkdir -p "$AP_NEWS_SITE_ROOT"
+          git archive HEAD | tar -x -C "$AP_NEWS_SITE_ROOT"
+      - name: Recover preceding attempt's public-source draft and completed images
+        if: ${{ steps.gate.outputs.produce == 'true' && github.run_attempt > 1 }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITION_DAY: ${{ steps.gate.outputs.day }}
+        run: |
+          gh api "repos/cksals00-ai/apholdings-dashboard/actions/runs/$GITHUB_RUN_ID/artifacts" > "$RUNNER_TEMP/prior-artifacts.json"
+          name=$(python -c 'import json,os; p="ap-news-production-"+os.environ["EDITION_DAY"]+"-attempt-"; a=[x["name"] for x in json.load(open(os.environ["RUNNER_TEMP"]+"/prior-artifacts.json"))["artifacts"] if x["name"].startswith(p) and not x["expired"] and int(x["name"].split("-attempt-")[-1])<int(os.environ["GITHUB_RUN_ATTEMPT"])]; print(max(a,key=lambda x:int(x.split("-attempt-")[-1])) if a else "")')
+          if [ -n "$name" ]; then
+            gh run download "$GITHUB_RUN_ID" --repo cksals00-ai/apholdings-dashboard --name "$name" --dir "$AP_NEWS_SITE_ROOT"
+          else
+            echo 'No preceding checkpoint exists; initial setup did not preserve content.'
+          fi
+      - name: Restore explicitly requested test checkpoint without regenerating completed assets
+        if: ${{ inputs.dry_run == true && inputs.resume_run != '' && steps.gate.outputs.produce == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RESUME_RUN: ${{ inputs.resume_run }}
+          EDITION_DAY: ${{ steps.gate.outputs.day }}
+        run: |
+          if [ -f "$AP_NEWS_SITE_ROOT/.production-state/draft.json" ]; then exit 0; fi
+          python -c 'import os; assert os.environ["RESUME_RUN"].isdigit()'
+          gh api "repos/cksals00-ai/apholdings-dashboard/actions/runs/$RESUME_RUN/artifacts" > "$RUNNER_TEMP/seed-artifacts.json"
+          name=$(python -c 'import json,os; p="ap-news-production-"+os.environ["EDITION_DAY"]+"-attempt-"; a=[x["name"] for x in json.load(open(os.environ["RUNNER_TEMP"]+"/seed-artifacts.json"))["artifacts"] if x["name"].startswith(p) and not x["expired"]]; assert a,"No matching test checkpoint"; print(max(a,key=lambda x:int(x.split("-attempt-")[-1])))')
+          gh run download "$RESUME_RUN" --repo cksals00-ai/apholdings-dashboard --name "$name" --dir "$AP_NEWS_SITE_ROOT"
+      - name: Install validators
+        if: ${{ steps.gate.outputs.produce == 'true' || steps.gate.outputs.existing_ready == 'true' }}
+        run: pip install -r .production-runtime/requirements-newsletter-server.txt
+      - uses: actions/cache@v5
+        if: ${{ steps.gate.outputs.produce == 'true' }}
+        with:
+          path: ~/.cache/huggingface/hub
+          key: ap-news-public-cpu-models-v3-production
+      - name: Install CPU-only public model libraries and browser validators
+        if: ${{ steps.gate.outputs.produce == 'true' }}
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y poppler-utils
+          pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install -r .production-runtime/requirements-newsletter-producer.txt
+          python -m playwright install --with-deps chromium
+          mkdir -p .cpu-runtime
+          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b5401/llama-b5401-bin-ubuntu-x64.zip -o "$RUNNER_TEMP/llama.zip"
+          unzip -q "$RUNNER_TEMP/llama.zip" -d .cpu-runtime
+      - name: Test reviewed producer and publisher gates
+        if: ${{ steps.gate.outputs.produce == 'true' }}
+        working-directory: .production-runtime
+        env:
+          AP_NEWS_SITE_ROOT: ''
+        run: |
+          python -m unittest discover -s scripts -p 'test_newsletter*.py'
+          node --test supabase/functions/ap-news/core.test.mjs
+      - name: Collect, source-check, write, illustrate and render (no AI API credentials)
+        if: ${{ steps.gate.outputs.produce == 'true' }}
+        env:
+          EDITION_DAY: ${{ steps.gate.outputs.day }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          args=()
+          if [ "$DRY_RUN" = true ]; then args+=(--dry-run); fi
+          python .production-runtime/scripts/newsletter_producer.py --date "$EDITION_DAY" --folder "$AP_NEWS_SITE_ROOT/.production-state" --runtime .cpu-runtime --produce-only "${args[@]}"
+      - name: Inject first-attempt failure after saving validated test bundle
+        if: ${{ inputs.dry_run == true && inputs.inject_failure == true && github.run_attempt == 1 }}
+        run: |
+          echo 'INJECTED_SERVER_PRODUCER_FAILURE: completed bundle and images preserved; automatic retry must reuse them.'
+          exit 1
+      - name: Transfer validated completed bundle and reserve server publication
+        if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run != true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          EDITION_DAY: ${{ steps.gate.outputs.day }}
+        run: python .production-runtime/scripts/newsletter_handoff.py upload --date "$EDITION_DAY" --file "$AP_NEWS_SITE_ROOT/.production-state/AP-News-$EDITION_DAY-ready.zip"
+      - name: Recover only missing reservation for an existing completed bundle
+        if: ${{ steps.gate.outputs.existing_ready == 'true' && inputs.dry_run != true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITION_DAY: ${{ steps.gate.outputs.day }}
+        run: |
+          python .production-runtime/scripts/newsletter_server.py verify-ready --date "$EDITION_DAY"
+          active=$(gh run list --repo cksals00-ai/apholdings-dashboard --workflow ap-news-daily.yml --limit 50 --json status,displayTitle,createdAt | python .production-runtime/scripts/newsletter_reservation_check.py --date "$EDITION_DAY")
+          if [ "$active" = false ]; then
+            python .production-runtime/scripts/newsletter_handoff.py reserve --date "$EDITION_DAY"
+          fi
+      - name: Notify failure before waiting for automatic recovery
+        if: failure()
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          FAILED_RUN_ID: ${{ github.run_id }}
+          FAILED_ATTEMPT: ${{ github.run_attempt }}
+          FAILED_NAME: ${{ github.workflow }}
+        run: python .production-runtime/scripts/newsletter_ops.py alert
+      - name: Preserve draft, original evidence, every generated image and rendered QA page
+        if: ${{ always() && steps.gate.outputs.produce == 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: ap-news-production-${{ steps.gate.outputs.day }}-attempt-${{ github.run_attempt }}
+          path: |
+            ${{ github.workspace }}/.production-content/.production-state/
+            ${{ github.workspace }}/.production-content/img/newsletter/${{ steps.gate.outputs.day }}*
+          include-hidden-files: true
+          retention-days: 7
+          if-no-files-found: warn
