@@ -1,12 +1,12 @@
 import unittest,tempfile,json
 from pathlib import Path
-from newsletter_art_direction import validate_plans,plan_art,reset_invalid_saved_art
+from newsletter_art_direction import validate_plans,plan_art,reset_invalid_saved_art,validate_scene,complete_plan
 from unittest.mock import Mock
 class ArtDirectionTests(unittest.TestCase):
  def plans(self):
   views=['cutaway','overhead','profile','macro','eye_level','wide']
   media=['ink','gouache','diagram','linocut','still_life','watercolor']
-  return [{'story_index':i,'prompt':f'{media[i]} illustration of visible object number {i}, {views[i]}, navy ivory accents, no text','subject':f'visible distinct object number {i}','approach':media[i]+' '+views[i],'viewpoint':views[i],'medium':media[i]} for i in range(6)]
+  return [complete_plan({'subject':f'visible distinct object number {i}','viewpoint':views[i],'medium':media[i],'scene':'A metal object and a ceramic plate arranged with unusual shapes and gentle shadows.'},i) for i in range(6)]
  def test_invalid_legacy_plan_is_archived_without_touching_copy_or_regular_images(self):
   with tempfile.TemporaryDirectory() as temp:
    root=Path(temp);images=root/'img/newsletter';images.mkdir(parents=True);folder=root/'.production-state';folder.mkdir()
@@ -52,11 +52,46 @@ class ArtDirectionTests(unittest.TestCase):
    else:
     for p in plans:p['viewpoint']='wide'
    with self.subTest(kind=kind),self.assertRaises(ValueError):validate_plans(plans,0)
+ def raw(self,plan):return {k:plan[k] for k in ('viewpoint','medium','subject','scene')}
  def test_invalid_plan_gets_bounded_english_correction(self):
-  valid=self.plans();bad=self.plans();bad[0]['prompt']='로봇 그림'
-  model=Mock();model.ask.side_effect=[{'plans':bad},{'plans':valid}]
-  self.assertEqual(plan_art(model,[{'title':'기사','summary':'요약','fact':'사실'}]*5,0),valid)
+  valid=self.plans();bad=self.raw(valid[0]);bad['scene']='로봇 그림'
+  model=Mock();model.ask.side_effect=[bad]+[self.raw(p) for p in valid]
+  result=plan_art(model,[{'title':'기사','summary':'요약','fact':'사실'}]*5,0)
+  validate_plans(result,0)
   self.assertIn('English',model.ask.call_args_list[0].args[0])
   self.assertIn('English',model.ask.call_args_list[1].args[0])
-  self.assertEqual(len(model.ask.call_args_list),2)
+  self.assertEqual(len(model.ask.call_args_list),7)
+ def test_views_and_media_are_constrained_by_content_choices_not_fixed_indices(self):
+  model=Mock();counter=0
+  def ask(*args,**kwargs):
+   nonlocal counter
+   counter+=1;props=kwargs['schema']['properties'];views=props['viewpoint']['enum'];media=props['medium']['enum']
+   return {'viewpoint':'cutaway' if 'cutaway' in views else views[0],'medium':'watercolor' if 'watercolor' in media else media[0],'subject':'metal pieces beside ceramic object '+str(counter),'scene':'A metal object and a ceramic plate arranged with gentle shadows.'}
+  model.ask.side_effect=ask
+  result=plan_art(model,[{'title':'기사','summary':'요약','fact':'사실'}]*5,0)
+  validate_plans(result,0)
+  self.assertGreaterEqual(len({p['viewpoint'] for p in result}),4)
+  self.assertGreaterEqual(len({p['medium'] for p in result}),3)
+ def test_saved_valid_partial_plans_resume_without_repeating_them(self):
+  plans=self.plans();model=Mock();model.ask.side_effect=[self.raw(p) for p in plans[2:]];progress=[]
+  result=plan_art(model,[{'title':'기사','summary':'요약','fact':'사실'}]*5,0,previous_plans=plans[:2],on_progress=lambda x:progress.append(len(x)))
+  self.assertEqual(result[:2],plans[:2]);self.assertEqual(model.ask.call_count,4);self.assertEqual(progress,[3,4,5,6])
+ def test_failure_preserves_completed_individual_plans_for_recovery(self):
+  first=self.raw(self.plans()[0]);bad={**first,'scene':'A doctor reviewing patient data.'};model=Mock();model.ask.side_effect=[first,bad,bad];progress=[]
+  with self.assertRaises(ValueError):plan_art(model,[{'title':'기사','summary':'요약','fact':'사실'}]*5,0,on_progress=lambda x:progress.append(x))
+  self.assertEqual(len(progress),1);self.assertEqual(len(progress[0]),1)
+ def test_normalized_duplicate_is_rejected_during_generation(self):
+  plans=self.plans();duplicate={**self.raw(plans[1]),'subject':plans[0]['subject'].replace(' ',' & ',1)}
+  model=Mock();model.ask.side_effect=[self.raw(plans[0]),duplicate]+[self.raw(p) for p in plans[1:]]
+  result=plan_art(model,[{'title':'기사','summary':'요약','fact':'사실'}]*5,0)
+  validate_plans(result,0);self.assertEqual(model.ask.call_count,7)
+ def test_saved_duplicate_suffix_replanned_without_losing_valid_prefix(self):
+  plans=self.plans();duplicate={**plans[1],'subject':plans[0]['subject'].replace(' ',' & ',1)}
+  model=Mock();model.ask.side_effect=[self.raw(p) for p in plans[1:]];progress=[]
+  result=plan_art(model,[{'title':'기사','summary':'요약','fact':'사실'}]*5,0,previous_plans=[plans[0],duplicate],on_progress=lambda x:progress.append(len(x)))
+  self.assertEqual(result[0],plans[0]);self.assertEqual(model.ask.call_count,5);self.assertEqual(progress,[1,2,3,4,5,6])
+ def test_patient_ai_and_product_interfaces_rejected_before_diffusion(self):
+  for scene in ('A doctor reviewing patient data with AI recommendations.','A laptop screen showing code and a product interface.'):
+   with self.subTest(scene=scene),self.assertRaises(ValueError):validate_scene('a person beside a tablet',scene)
+  validate_scene('hands and blank study cards','Hands arranging blank study cards beside a book, no text or logos.')
 if __name__=='__main__':unittest.main()

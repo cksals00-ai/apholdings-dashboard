@@ -151,7 +151,9 @@ def produce(day,folder,runtime,dry_run=False,produce_only=False):
     state['synthesis_review']=synthesis_review
     checkpoint(folder,state)
    if not state.get('art_plans'):
-    plans=plan_art(model,state['stories'],state['editorial']['lead_index'])
+    def art_progress(plans):
+     state['art_draft_plans']=plans;checkpoint(folder,state)
+    plans=plan_art(model,state['stories'],state['editorial']['lead_index'],previous_plans=state.get('art_draft_plans'),on_progress=art_progress)
     for plan in plans:
      for key,limit in (('prompt',650),('subject',120),('approach',100)):
       if not isinstance(plan.get(key),str) or not 1<=len(plan[key])<=limit:raise ValueError('Invalid visual editorial field')
@@ -159,7 +161,7 @@ def produce(day,folder,runtime,dry_run=False,produce_only=False):
       state['editorial'].update(hero_prompt=plan['prompt'],hero_subject=plan['subject'],hero_approach=plan['approach'])
      else:
       state['stories'][plan['story_index']].update(image_prompt=plan['prompt'],image_subject=plan['subject'],visual_approach=plan['approach'])
-    state['art_plans']=plans;checkpoint(folder,state)
+    state['art_plans']=plans;state.pop('art_draft_plans',None);checkpoint(folder,state)
  if state.get('art_plans'):
   for plan in state['art_plans']:
    if plan['story_index']==5:state['editorial'].update(hero_prompt=plan['prompt'],hero_subject=plan['subject'],hero_approach=plan['approach'])
