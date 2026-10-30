@@ -29,7 +29,7 @@ var STR = {
     title: '머니 머지 — 10원으로 빌딩까지 | AP Holdings', board: '오늘의 판 #', rankBtn: '오늘의 랭킹',
     best: '오늘 최고 ', bestNone: '오늘 최고 —', bestFirst: '오늘 첫 기록 도전 중',
     stTitle: '10원으로<br>빌딩까지', stSub: '같은 돈끼리 부딪히면 합쳐집니다.<br>금고가 넘치기 전에 최대한 키우세요.',
-    how1: '탭해서 자리 잡고<br>한 번 더 탭', how2: '같은 돈끼리<br>합치기', how3: '매일 새 판<br>랭킹 도전',
+    how1: '밀어서 자리 잡고<br>탭하면 떨어져요', how2: '같은 돈끼리<br>합치기', how3: '매일 새 판<br>랭킹 도전',
     start: '시작하기', startAgain: '오늘 기록 깨러 가기', stNote: '오늘은 모두 같은 순서로 떨어집니다 · 횟수 무제한',
     over: '금고가 넘쳤어요!', newBest: '오늘 최고 기록 경신!', meta: '최고 단계 <b>{lv}</b> · 오늘 최고 <b>{best}</b>',
     again: '↻ 다시 하기', share: '공유하기', seeRank: '랭킹 보기',
@@ -49,7 +49,7 @@ var STR = {
     copied: '결과를 복사했어요. 친구에게 붙여넣기!', copyPrompt: '복사해서 공유하세요', urlCopied: '주소를 복사했어요. 사파리·크롬에 붙여넣기!', urlPrompt: '이 주소를 사파리·크롬에서 열어 주세요',
     inTitle: '브라우저에서<br>열어 주세요', inP: '인스타그램·틱톡 안의 브라우저에서는<br>구글 로그인이 막혀 있어요.<br>사파리나 크롬으로 열면 바로 됩니다.',
     inOpen: '브라우저에서 열기', inCopy: '주소 복사', inKakao: '여기서 바로: 카카오로 시작하기', inSmall: '안 열리면 오른쪽 위 ··· 메뉴 → 「브라우저에서 열기」<br>게임 기록은 그대로 남아 있어요.', close: '닫기',
-    combo: '콤보 ×', first: '첫 {lv}!', jackpot: '+1,000억 잭팟!', tapDrop: '탭해서 떨어뜨리기',
+    combo: '콤보 ×', first: '첫 {lv}!', jackpot: '+1,000억 잭팟!', tapDrop: '밀어서 옮기고 · 탭하면 떨어져요',
     shareTitle: '머니 머지', shareText: '머니 머지 #{n}\n{bar}\n자산 {score} · {lv}까지!{rank}\n나보다 많이 벌 수 있어? 👉', shareRank: '\n오늘 {rank}위 / {total}명',
     foot: '매일 자정 새 판 · ', footLink: 'AP Holdings 둘러보기', statNote: '페이지 조회 통계를 Google Analytics로 측정합니다 · 안내', langBtn: 'EN',
     lv: ['10원', '50원', '100원', '500원', '천원', '오천원', '만원', '오만원', '금괴', '빌딩', 'AP'],
@@ -59,7 +59,7 @@ var STR = {
     title: 'Money Merge — ₩10 to a Building | AP Holdings', board: 'Board #', rankBtn: "Today's ranking",
     best: "Today's best ", bestNone: "Today's best —", bestFirst: "Going for today's first record",
     stTitle: '₩10 to<br>a Building', stSub: 'Same coins merge when they touch.<br>Grow it before the vault overflows.',
-    how1: 'Tap to place,<br>tap again to drop', how2: 'Merge<br>same money', how3: 'New board daily,<br>climb the ranks',
+    how1: 'Drag to place,<br>tap to drop', how2: 'Merge<br>same money', how3: 'New board daily,<br>climb the ranks',
     start: 'Start', startAgain: "Beat today's record", stNote: 'Same board for everyone today · unlimited tries',
     over: 'The vault overflowed!', newBest: 'New best today!', meta: "Top level <b>{lv}</b> · today's best <b>{best}</b>",
     again: '↻ Play again', share: 'Share', seeRank: 'Ranking',
@@ -79,7 +79,7 @@ var STR = {
     copied: 'Copied! Paste it to a friend', copyPrompt: 'Copy and share', urlCopied: 'Link copied — paste it into Safari or Chrome', urlPrompt: 'Open this link in Safari or Chrome',
     inTitle: 'Open in your<br>browser', inP: 'Google sign-in is blocked inside the<br>Instagram / TikTok browser.<br>Open in Safari or Chrome and it works.',
     inOpen: 'Open in browser', inCopy: 'Copy link', inKakao: 'Or right here: continue with Kakao', inSmall: "If nothing opens: tap ··· (top right) → “Open in browser”.<br>Your game record stays.", close: 'Close',
-    combo: 'Combo ×', first: 'First {lv}!', jackpot: '+₩100B JACKPOT!', tapDrop: 'Tap to drop',
+    combo: 'Combo ×', first: 'First {lv}!', jackpot: '+₩100B JACKPOT!', tapDrop: 'Drag to move · tap to drop',
     shareTitle: 'Money Merge', shareText: 'Money Merge #{n}\n{bar}\nWealth {score} · reached {lv}!{rank}\nCan you make more than me? 👉', shareRank: '\nToday #{rank} of {total}',
     foot: 'New board at midnight KST · ', footLink: 'Explore AP Holdings', statNote: 'Page views are measured with Google Analytics · details', langBtn: 'KO',
     lv: ['₩10', '₩50', '₩100', '₩500', '₩1,000', '₩5,000', '₩10,000', '₩50,000', 'Gold bar', 'Building', 'AP'],
@@ -396,7 +396,7 @@ function render(dt) {
       var pulse = .5 + .5 * Math.sin(now / 160), ay = DROP_Y + r + 10 + pulse * 4;
       c.fillStyle = 'rgba(245,197,66,' + (.55 + .35 * pulse) + ')';
       c.beginPath(); c.moveTo(ax - 7, ay); c.lineTo(ax + 7, ay); c.lineTo(ax, ay + 8); c.closePath(); c.fill();
-      if (hintCount < 3) { c.font = '700 12px "Noto Sans KR",sans-serif'; c.textAlign = 'center'; c.textBaseline = 'top'; c.fillText(t('tapDrop'), ax, ay + 12); }
+      if (hintCount < 3) { c.font = '700 12px "Noto Sans KR",sans-serif'; c.textAlign = 'center'; c.textBaseline = 'top'; c.fillText(t('tapDrop'), W / 2, ay + 12); }
     }
   }
   for (var i = 0; i < items.length; i++) {
@@ -427,28 +427,27 @@ function render(dt) {
 /* ---------- 입력 ---------- */
 function toX(clientX) { var rc = cv.getBoundingClientRect(); return (clientX - rc.left) / rc.width * W; }
 /* 마우스: 움직이면 동전이 따라오고, 클릭하면 떨어짐.
-   터치·펜: 탭·드래그로 자리를 잡고(안 떨어짐), 동전이 있는 자리를 다시 탭하면 떨어짐. */
+   터치·펜(한 손 기준): 아무 데나 대고 밀면 동전이 「지금 자리에서 민 만큼」 움직이고(손가락 위치로 점프하지 않음),
+   밀지 않고 탭하면 그 자리에 떨어짐. */
+var DRAG_SENS = 1.4; // 손가락 1px → 동전 1.4 (엄지 반경으로 판 끝까지 닿게)
 cv.addEventListener('pointerdown', function (e) {
   lastPtr = e.pointerType || 'mouse';
-  var x = toX(e.clientX);
-  ptrStart = { x: e.clientX, y: e.clientY, drag: false, onCoin: Math.abs(x - aimX) <= LV[cur].r + 14 };
-  if (lastPtr !== 'mouse' && !ptrStart.onCoin) aimTarget = x;
+  ptrStart = { x: e.clientX, y: e.clientY, drag: false, baseAim: clampAim(aimTarget), startGX: toX(e.clientX) };
   try { cv.setPointerCapture(e.pointerId); } catch (x2) {}
 });
 cv.addEventListener('pointermove', function (e) {
   var mouse = (e.pointerType || 'mouse') === 'mouse';
   if (mouse) { if (!ptrStart && e.buttons) return; aimTarget = toX(e.clientX); return; }
   if (!ptrStart) return;
-  if (!ptrStart.drag && Math.hypot(e.clientX - ptrStart.x, e.clientY - ptrStart.y) > 10) ptrStart.drag = true;
-  if (ptrStart.drag) aimTarget = toX(e.clientX);
+  if (!ptrStart.drag && Math.hypot(e.clientX - ptrStart.x, e.clientY - ptrStart.y) > 8) ptrStart.drag = true;
+  if (ptrStart.drag) aimTarget = clampAim(ptrStart.baseAim + (toX(e.clientX) - ptrStart.startGX) * DRAG_SENS);
 });
 cv.addEventListener('pointerup', function (e) {
   if (!ptrStart) return;
   var s = ptrStart, x = toX(e.clientX); ptrStart = null;
   if ((e.pointerType || 'mouse') === 'mouse') { aimTarget = x; aimX = clampAim(x); drop(); return; }
-  if (s.drag) { aimTarget = x; return; }
-  if (s.onCoin) { aimTarget = aimX; drop(); }
-  else aimTarget = x;
+  if (s.drag) { aimTarget = clampAim(s.baseAim + (x - s.startGX) * DRAG_SENS); return; }   // 밀기 끝 → 그 자리에 둠
+  aimTarget = aimX; drop();                                                                  // 탭 → 지금 자리에 떨어짐
 });
 cv.addEventListener('pointercancel', function () { ptrStart = null; });
 var keys = {};
