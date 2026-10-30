@@ -53,7 +53,7 @@ def check_browser(issue,folder):
    browser=p.chromium.launch(executable_path=os.environ.get('AP_NEWS_BROWSER_EXECUTABLE'))
    for width in (390,1440):
     page=browser.new_page(viewport={'width':width,'height':1000})
-    page.route('**/supabase.co/**',lambda route:route.abort())
+    page.route('**supabase.co/**',lambda route:route.abort())
     page.goto(f'http://127.0.0.1:{server.server_port}{b.page_path(issue)}',wait_until='networkidle')
     page.locator('img').evaluate_all("images => images.forEach(i => i.loading='eager')")
     page.evaluate('Promise.all(Array.from(document.images,i=>i.decode()))')
