@@ -21,3 +21,8 @@ test('failed/late stages are reported before recovery finishes',()=>{
  assert.equal(assess('2026-10-30',new Date('2026-10-29T23:05:00Z'),{},undefined,mail).code,'public_late');
  assert.equal(assess('2026-10-30',new Date('2026-10-29T23:10:00Z'),run,issue,{...mail,eligible_missing:1}).code,'mail_late');
 });
+
+test('absent delivery summary reports unknown health rather than crashing watcher',()=>{
+ const a=assess('2026-10-31',new Date('2026-10-30T22:15:00Z'),{},undefined,{active:3,accepted:0,eligible_missing:3});
+ assert.equal(a.kind,'alert');assert.equal(a.code,'mail_health_unknown');assert.match(a.message,/미확인/);
+});

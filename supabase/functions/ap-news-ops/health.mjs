@@ -5,7 +5,8 @@ export function complete(mail){
  return mail.accepted>=mail.active&&blockers.every(key=>mail[key]===0);
 }
 export function assess(day,now,run={},issue,mail){
- const done=complete(mail),kst=new Date(now.getTime()+9*3600000),h=kst.getUTCHours(),m=kst.getUTCMinutes();
+ const kst=new Date(now.getTime()+9*3600000),h=kst.getUTCHours(),m=kst.getUTCMinutes();
+ let done;try{done=complete(mail);}catch(error){return h>=7?{kind:'alert',code:'mail_health_unknown',message:`메일 접수 집계 미확인: ${error.message}. 완료로 표시하지 않으며 복구 완료 전에 먼저 알립니다.`}:{kind:'quiet'};}
  const published=issue?.status==='published'&&issue?.verified===true&&!!run?.public_verified_at;
  const counts=`메일 제공사 접수${mail.accepted}건·대기${mail.pending}·처리중${mail.processing}·재시도${mail.retry}·실패${mail.failed}·결과불명${mail.uncertain}·접수미확인${mail.unconfirmed}·미접수 대상${mail.eligible_missing}`;
  if(h>=8&&published&&done)return {kind:'complete',code:'complete',message:`${day} 공개 검증 기록${localTime(run.public_verified_at)}. 확인 시각${kst.toISOString().replace('Z','+09:00')}. ${counts}. 전체 확인완료 active 대상 접수를 확인했습니다. 받은편지함 도착 확인을 의미하지는 않습니다.`};
