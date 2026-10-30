@@ -22,7 +22,7 @@ jobs:
     uses: ./.github/workflows/ap-news-produce.yml
     with:
       dry_run: true
-      resume_run: ${{ inputs.resume_run || '' }}
+      resume_run: ${{ inputs.resume_run || '40989993440' }}
       inject_failure: ${{ inputs.inject_failure == true }}
     secrets: inherit
   stage_preview:
@@ -38,16 +38,17 @@ jobs:
           fetch-depth: 0
       - uses: actions/checkout@v7
         with:
-          ref: e8a75ec6c19934da51d910286ceb75bab2733d16
+          ref: 9ea53493e5751c4da81bcb814eada80a8460bb5d
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - run: pip install -r .production-runtime/requirements-newsletter-server.txt
-      - uses: actions/download-artifact@v8
-        with:
-          name: ${{ needs.produce.outputs.artifact }}
-          path: ${{ runner.temp }}/production-result
+      - name: Download private validated test checkpoint
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITION_DAY: ${{ needs.produce.outputs.day }}
+        run: python .production-runtime/scripts/newsletter_checkpoint.py restore --root "$RUNNER_TEMP/production-result" --date "$EDITION_DAY" --mode test --required
       - name: Stage only new isolated preview and test-specific images
         env:
           EDITION_DAY: ${{ needs.produce.outputs.day }}
@@ -94,7 +95,7 @@ jobs:
           ref: main
       - uses: actions/checkout@v7
         with:
-          ref: e8a75ec6c19934da51d910286ceb75bab2733d16
+          ref: 9ea53493e5751c4da81bcb814eada80a8460bb5d
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
