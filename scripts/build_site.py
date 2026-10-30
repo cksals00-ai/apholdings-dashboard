@@ -300,3 +300,6 @@ _foldblock_apply()
 
 from apply_cubs25 import apply as _cubs25_apply
 _cubs25_apply()
+
+from apply_b2b_apps import apply as _b2b_apps_apply
+_b2b_apps_apply()
