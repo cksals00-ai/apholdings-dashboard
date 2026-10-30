@@ -35,7 +35,7 @@ jobs:
       - name: Checkout reviewed producer runtime
         uses: actions/checkout@v7
         with:
-          ref: 9ea53493e5751c4da81bcb814eada80a8460bb5d
+          ref: 9a7f0d5b5c0982879165a683e16d3149bbea880c
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -113,15 +113,17 @@ jobs:
         run: |
           python -m unittest discover -s scripts -p 'test_newsletter*.py'
           node --test supabase/functions/ap-news/core.test.mjs
-      - name: Collect, source-check, write, illustrate and render (no AI API credentials)
+      - name: Supervise credential-free source, copy, art and document production
         if: ${{ steps.gate.outputs.produce == 'true' }}
         env:
           EDITION_DAY: ${{ steps.gate.outputs.day }}
           DRY_RUN: ${{ inputs.dry_run }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           args=()
-          if [ "$DRY_RUN" = true ]; then args+=(--dry-run); fi
-          python .production-runtime/scripts/newsletter_producer.py --date "$EDITION_DAY" --folder "$AP_NEWS_SITE_ROOT/.production-state" --runtime .cpu-runtime --produce-only "${args[@]}"
+          mode=production
+          if [ "$DRY_RUN" = true ]; then args+=(--dry-run); mode=test; fi
+          python .production-runtime/scripts/newsletter_supervisor.py --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --mode "$mode" -- python .production-runtime/scripts/newsletter_producer.py --date "$EDITION_DAY" --folder "$AP_NEWS_SITE_ROOT/.production-state" --runtime .cpu-runtime --produce-only "${args[@]}"
       - name: Notify generation failure before preserving/recovering the draft
         if: failure()
         env:
