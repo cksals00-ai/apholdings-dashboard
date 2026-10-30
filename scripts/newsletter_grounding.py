@@ -47,6 +47,10 @@ def resolve_evidence(draft,context):
  if not isinstance(ids,list) or not 1<=len(ids)<=4 or any(type(i) is not int or not 0<=i<len(segments) for i in ids) or len(ids)!=len(set(ids)) or 'evidence' in draft:raise ValueError('Choose1-4 distinct valid source evidence_ids')
  return {**{k:v for k,v in draft.items() if k!='evidence_ids'},'evidence':[segments[i]['text'] for i in ids]}
 
+def require_news_topic(source):
+ # A fresh publication date does not make a general how-to a new announcement.
+ if re.match(r'^how\s+to\b',source.get('title','').strip(),re.I):raise ValueError('Evergreen how-to guide is not a new announcement')
+
 def validate_grounding(story,source,review):
  for key in ('title','summary','fact','insight','action','image_prompt','image_subject','visual_approach'):
   value=story.get(key)

@@ -15,6 +15,9 @@ class GroundingTests(unittest.TestCase):
  def test_missing_number_error_identifies_field_and_value(self):
   story=self.story();story['fact']+=' 카테고리 1입니다.'
   with self.assertRaisesRegex(ValueError,'fact.*1'):g.validate_grounding(story,self.source(),{'supported':True,'unsupported_claims':[]})
+ def test_newly_dated_evergreen_how_to_cannot_become_an_announcement(self):
+  source=self.source();source['title']='How to use Gemini to update your resume'
+  with self.assertRaisesRegex(ValueError,'Evergreen'):g.require_news_topic(source)
  def test_real_quote_and_supported_review(self):
   g.validate_grounding(self.story(),self.source(),{'supported':True,'unsupported_claims':[]})
  def test_fabricated_quote_or_numbers_or_failed_review_block(self):

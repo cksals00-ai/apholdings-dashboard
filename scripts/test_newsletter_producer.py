@@ -5,6 +5,11 @@ from datetime import datetime
 import newsletter_producer as p
 
 class ProducerTests(unittest.TestCase):
+ def test_evergreen_guide_skipped_before_running_cpu_model(self):
+  from unittest.mock import Mock
+  model=Mock()
+  with self.assertRaisesRegex(ValueError,'Evergreen'):p.draft_story(model,{'title':'How to use Gemini to update your resume'})
+  model.ask.assert_not_called()
  def test_corrective_pass_keeps_korean_and_specific_reviewer_feedback(self):
   from unittest.mock import Mock
   from test_newsletter_grounding import GroundingTests

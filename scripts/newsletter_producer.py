@@ -7,7 +7,7 @@ import newsletter_server as server
 import newsletter_handoff as handoff
 from newsletter_sources import collect_candidates,fetch,parse_article,PARSER_REVISION
 from newsletter_preflight import select_candidates
-from newsletter_grounding import validate_grounding,numbers,normalized,indexed_source,resolve_evidence
+from newsletter_grounding import validate_grounding,numbers,normalized,indexed_source,resolve_evidence,require_news_topic
 import newsletter_schemas as shapes
 from newsletter_cpu import TextModel,ImageModel,ImageSubjectCheck
 from newsletter_art_checks import image_ok,cover_motion
@@ -19,6 +19,7 @@ def save(path,data):
  path.parent.mkdir(parents=True,exist_ok=True);temp=path.with_suffix('.tmp');temp.write_text(json.dumps(data,ensure_ascii=False,indent=2));temp.replace(path)
 def checkpoint(folder,state):save(folder/'draft.json',state)
 def draft_story(model,source,prior_titles=None):
+ require_news_topic(source)
  context=indexed_source(source)
  draft_schema=shapes.indexed_draft(len(context["source_segments"]))
  novelty=model.ask(SYSTEM,'Assess the BODY, not just the headline. Newly announced courses/certificates, newly reported deployment/case results, new research findings, model/product/feature releases, and new governance documents are eligible AI news. Evergreen how-to without a concrete new change/result is not. Exclude the same event/research already covered in prior_titles even if its URL differs. Do not confuse the same product/company with the same event; a distinct new result, feature or course is eligible. Return {"is_news":true/false,"is_duplicate":true/false,"novel_quote":"one EXACT body excerpt showing the concrete new change/result, empty if none","reason":"short reason"}.\n'+json.dumps({'prior_titles':prior_titles or []},ensure_ascii=False),tokens=400,schema=shapes.NOVELTY,source_context=context)
