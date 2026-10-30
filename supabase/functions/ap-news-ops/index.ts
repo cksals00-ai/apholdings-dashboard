@@ -1,3 +1,4 @@
+import {assess} from './health.mjs';
 // Operational mail only: fixed owner recipient, no subscriber queue mutation.
 const URL=Deno.env.get('SUPABASE_URL')!,KEY=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const FROM='AP News <alfred.park@apholdings.kr>',TO='cksals00@naver.com';
@@ -13,8 +14,8 @@ async function send(key:string,event:string,detail:Record<string,unknown>,html?:
  const patch=(data:unknown)=>db(`ap_news_ops_events?event_key=eq.${encodeURIComponent(key)}`,'PATCH',data);
  try{
   if(inject&&row.attempts===1)throw Error('injected_mail_failure');
-  const person=await db('ap_news_subscribers?email=eq.cksals00%40naver.com&select=status');
-  if(person?.[0]?.status!=='active')throw Error('owner_recipient_not_active');
+  const person=await db('ap_news_subscribers?email=eq.cksals00%40naver.com&select=status,confirmed_at');
+  if(person?.[0]?.status!=='active'||!person?.[0]?.confirmed_at)throw Error('owner_recipient_not_active');
   if(Deno.env.get('AP_NEWS_MAIL_ENABLED')!=='true')throw Error('mail_disabled');
   const subject=String(detail.subject||'[AP News 운영 알림]').slice(0,180);
   const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(key)))).map(v=>v.toString(16).padStart(2,'0')).join('');
@@ -24,22 +25,24 @@ async function send(key:string,event:string,detail:Record<string,unknown>,html?:
  }catch(e){await patch({state:'retry',last_error:String(e).slice(0,120),updated_at:new Date().toISOString()});throw e;}
 }
 async function watch(){
- const pending=await db('ap_news_ops_events?state=in.(retry,processing)&attempts=lt.5&event=in.(ops_alert,ops_recovery)&created_at=gt.'+new Date(Date.now()-23*3600000).toISOString()+'&select=event_key,event,detail');
+ const pending=await db('ap_news_ops_events?state=in.(retry,processing)&attempts=lt.5&event=in.(ops_alert,ops_recovery,ops_status)&created_at=gt.'+new Date(Date.now()-23*3600000).toISOString()+'&select=event_key,event,detail');
  for(const row of pending){try{await send(row.event_key,row.event,row.detail);}catch{/* Next server tick retries bounded operational alerts. */}}
  const now=new Date(),kst=new Date(now.getTime()+9*3600000),day=kst.toISOString().slice(0,10),h=kst.getUTCHours(),m=kst.getUTCMinutes();
  if(h<7||h>10)return {status:'outside_window'};
  const issues=await db(`ap_news_issues?issue_date=eq.${day}&select=status,verified`);
  const runs=await db(`ap_news_publication_runs?issue_date=eq.${day}&select=ready_verified_at,public_verified_at,last_error,workflow_url`);
- const mail=(await db(`ap_news_delivery_summary?issue_date=eq.${day}`))?.[0];
- const active=await db('ap_news_subscribers?status=eq.active&confirmed_at=not.is.null&select=id');
- let problem='';
- if((h===7&&m>=46)&&!runs?.[0]?.ready_verified_at)problem='준비 마감07:45 이후에도 완성본의 서버 검증 기록이 없습니다.';
- if(h>=8&&runs?.[0]?.last_error)problem=String(runs[0].last_error);
- if((h>8||h===8&&m>=5)&&(!issues?.[0]?.verified||!runs?.[0]?.public_verified_at))problem='08:05까지 오늘자 공개 검증이 완료되지 않았습니다.';
- if((h>8||h===8&&m>=10)&&issues?.[0]?.verified&&(!mail||mail.accepted<active.length||mail.failed||mail.uncertain))problem='오늘자 메일 접수가 완료되지 않았거나 발송 오류가 있습니다.';
- if(problem)return await send(day+':ops-alert','ops_alert',{subject:'[AP News 운영 경보] '+day,message:problem,run_url:runs?.[0]?.workflow_url});
- const previous=await db(`ap_news_ops_events?event_key=like.${day}*&event=eq.ops_alert&select=provider_id`);
- if(previous?.some((r:{provider_id?:string})=>r.provider_id)&&runs?.[0]?.public_verified_at&&mail?.accepted>=active.length&&!mail.pending&&!mail.retry&&!mail.failed&&!mail.uncertain)return await send(day+':ops-recovery','ops_recovery',{subject:'[AP News 복구 확인] '+day,message:`공개 검증 완료, 메일 접수${mail.accepted}건·대기0·실패0. 받은편지함 도착을 의미하지는 않습니다.`});
+ const mail=await db('rpc/ap_news_delivery_health','POST',{p_day:day});
+ const decision=assess(day,now,runs?.[0],issues?.[0],mail);
+ if(decision.kind==='alert'){
+  const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(decision.code==='server_error'?String(runs?.[0]?.last_error):decision.code)))).slice(0,6).map(v=>v.toString(16).padStart(2,'0')).join('');
+  return await send(day+':ops-'+decision.code+'-'+digest,'ops_alert',{subject:'[AP News 운영 경보] '+day,message:decision.message,run_url:runs?.[0]?.workflow_url});
+ }
+ if(decision.kind==='progress')return await send(day+':ops-0800-status','ops_status',{subject:'[AP News08:00 상태] '+day,message:decision.message,run_url:runs?.[0]?.workflow_url});
+ if(decision.kind==='complete'){
+  const previous=await db(`ap_news_ops_events?event_key=like.${day}*&event=eq.ops_alert&select=provider_id`);
+  const recovered=previous?.some((r:{provider_id?:string})=>r.provider_id);
+  return await send(day+':ops-complete','ops_status',{subject:(recovered?'[AP News 복구·발행·메일 결과] ':'[AP News 발행·메일 결과] ')+day,message:decision.message,run_url:runs?.[0]?.workflow_url});
+ }
  return {status:'healthy_or_preparing'};
 }
 Deno.serve(async req=>{

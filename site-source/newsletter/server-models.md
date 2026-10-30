@@ -8,9 +8,9 @@ enter generation. Model child processes receive a minimal environment.
 
 Pinned public weights under evaluation:
 
-- Qwen3-4B-Instruct-2507 Q4_K_M, quantized distribution
-  https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF
-  revision a06e946bb6b655725eafa393f4a9745d460374c9 (upstream Qwen Apache2.0).
+- Qwen3-8B Q4_K_M, official public quantized weights
+  https://huggingface.co/Qwen/Qwen3-8B-GGUF
+  revision7c41481f57cb95916b40956ab2f0b139b296d974 (Apache2.0).
 - Segmind SSD-1B https://huggingface.co/segmind/SSD-1B
   revision60987f37e94cd59c36b1cba832b9f97b57395a10 (Apache2.0 model card).
 - LCM-LoRA SSD-1B https://huggingface.co/latent-consistency/lcm-lora-ssd-1b
@@ -23,7 +23,7 @@ Pinned public weights under evaluation:
 The image/topic similarity check and second-pass text check are automated quality
 filters, not guarantees of semantic correctness or human review. Original quote
 receipts, source body hashes, model review output, image scores and all rendered
-PDF/browser pages remain in the checkpoint artifact for diagnosis. Publication
+PDF/browser pages remain in an authenticated private company draft-release checkpoint for diagnosis. Publication
 stops and sends a server alert if a gate fails.
 
 Do not enable the production schedule until an actual full server rehearsal has

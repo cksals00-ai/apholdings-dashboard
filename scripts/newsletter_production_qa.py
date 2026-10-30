@@ -73,11 +73,13 @@ def check_browser(issue,folder):
 
 def check_all(issue,folder,source_checks):
  folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
- from newsletter_grounding import validate_grounding
+ from newsletter_grounding import validate_grounding,normalized
  import hashlib
  if {story['url'] for story,source in source_checks}!={s['url'] for s in issue['stories']}:raise ValueError('Original source receipts do not match issue')
  for story,source in source_checks:
   validate_grounding(story,source,story['review'])
+  novelty=story.get('novelty',{})
+  if novelty.get('is_news') is not True or novelty.get('is_duplicate') is not False or len(novelty.get('novel_quote',''))<30 or normalized(novelty['novel_quote']) not in normalized(source['text']):raise ValueError('Original novelty receipt missing')
   if hashlib.sha256(source['text'].encode()).hexdigest()!=story['source_hash']:raise ValueError('Source evidence changed after review')
  publisher.verify_documents(issue)
  report={'method':'서버 자동 검증 · 원문 근거 대조 · PDF 전페이지 렌더·문자/경계 검사 · 브라우저 검사','pdf':check_pdf(issue,folder),'browser':check_browser(issue,folder)}

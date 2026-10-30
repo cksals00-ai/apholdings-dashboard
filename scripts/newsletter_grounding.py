@@ -1,5 +1,6 @@
 """Fail-closed structural and source-evidence checks for model-written copy."""
-import json,re
+import json,re,unicodedata
+from decimal import Decimal
 
 def parse_json(text):
  text=re.sub(r'^```(?:json)?\s*|\s*```$','',text.strip())
@@ -9,8 +10,16 @@ def parse_json(text):
   return result
  except (ValueError,TypeError) as exc:raise ValueError('Model did not return a JSON object') from exc
 
-def normalized(text):return ' '.join(text.split())
-def numbers(text):return set(re.findall(r'\d+(?:[.,]\d+)*(?:%|[BMK])?',text))
+def normalized(text):return ' '.join(unicodedata.normalize('NFKC',text).translate(str.maketrans({'’':"'",'‘':"'",'“':'"','”':'"','–':'-','—':'-'})).split())
+def numbers(text):
+ result=set()
+ for raw in re.findall(r'\d+(?:[.,]\d+)*(?:%|[BMK])?',text):
+  suffix=raw[-1] if raw[-1] in '%BMK' else '';value=raw[:-1] if suffix else raw
+  if re.fullmatch(r'\d{1,3}(?:,\d{3})+(?:\.\d+)?',value):value=value.replace(',','')
+  try:value=format(Decimal(value).normalize(),'f')
+  except Exception:pass
+  result.add(value+suffix)
+ return result
 def validate_grounding(story,source,review):
  for key in ('title','summary','fact','insight','action','image_prompt','image_subject','visual_approach'):
   value=story.get(key)
@@ -24,6 +33,9 @@ def validate_grounding(story,source,review):
  text=normalized(source['text'])
  for quote in quotes:
   if not isinstance(quote,str) or len(quote)<30 or len(quote)>900 or normalized(quote) not in text:raise ValueError('Evidence quote is not in official source')
+ copy=' '.join(story[k] for k in ('title','summary','fact'))
+ for name in ('Gemini','Notebook','Copilot','Claude','ChatGPT','AgentCore','Nemotron','Bedrock'):
+  if re.search(r'\b'+re.escape(name)+r'\b',source.get('title',''),re.I) and name.lower() not in copy.lower():raise ValueError('Keep original product name in Latin spelling: '+name)
  # Only verbatim evidence can authorize new factual figures; source date is displayed separately.
  evidence=' '.join(quotes)
  for key in ('title','summary','fact'):

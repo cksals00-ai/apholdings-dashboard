@@ -7,7 +7,8 @@ from urllib.error import HTTPError,URLError
 from bs4 import BeautifulSoup
 import newsletter_server as publisher
 
-FEEDS=(('Google','https://blog.google/rss/'),('AWS','https://aws.amazon.com/blogs/machine-learning/feed/'),('Microsoft','https://blogs.microsoft.com/feed/'),('NVIDIA','https://blogs.nvidia.com/feed/'),('Hugging Face','https://huggingface.co/blog/feed.xml'),('GitHub','https://github.blog/feed/'),('OpenAI','https://openai.com/news/rss.xml'))
+PARSER_REVISION=3
+FEEDS=(('Google','https://blog.google/rss/'),('AWS','https://aws.amazon.com/blogs/machine-learning/feed/'),('Microsoft','https://blogs.microsoft.com/feed/'),('Microsoft Foundry','https://devblogs.microsoft.com/foundry/feed/'),('Claude','https://claude.com/blog/rss.xml'),('Google DeepMind','https://deepmind.google/blog/rss.xml'),('NVIDIA','https://blogs.nvidia.com/feed/'),('Hugging Face','https://huggingface.co/blog/feed.xml'),('GitHub','https://github.blog/feed/'),('OpenAI','https://openai.com/news/rss.xml'))
 AI=re.compile(r'\b(ai|artificial intelligence|gemini|claude|copilot|llm|agents?|generative|machine learning|gpt|model|inference|diffusion)\b',re.I)
 class OfficialRedirect(HTTPRedirectHandler):
  def redirect_request(self,req,fp,code,msg,headers,newurl):
@@ -34,6 +35,12 @@ def iso_day(value):
  try:return datetime.fromisoformat(value.replace('Z','+00:00')).date().isoformat()
  except ValueError:return parsedate_to_datetime(value).date().isoformat()
 
+def published_instant(value):
+ try:stamp=datetime.fromisoformat(value.strip().replace('Z','+00:00'))
+ except ValueError:stamp=parsedate_to_datetime(value)
+ if stamp.tzinfo is None:stamp=stamp.replace(tzinfo=timezone.utc)
+ return stamp.astimezone(timezone.utc).isoformat()
+
 def parse_feed(data,source):
  root=ET.fromstring(data);rows=[];seen=set()
  for item in root.iter():
@@ -47,7 +54,7 @@ def parse_feed(data,source):
    if stamp is None:stamp=fields.get('updated')
    day=iso_day(stamp.text)
    if url in seen or not AI.search(title):continue
-   seen.add(url);rows.append({'url':url,'title':title,'published':day,'source':source})
+   seen.add(url);rows.append({'url':url,'title':title,'published':day,'published_at':published_instant(stamp.text),'source':source})
   except (KeyError,ValueError,AttributeError,TypeError):continue
  return rows
 
@@ -77,24 +84,34 @@ def parse_article(html,url,source,feed_day):
  title=title.get_text(' ',strip=True) if title else ''
  article=soup.find('article') or soup.find('main')
  if not article:raise ValueError('No official article body')
- for node in article.select('script,style,nav,footer,header,form,button,aside'):node.decompose()
+ for node in article.select('script,style,nav,footer,form,button,.related-posts,.recommended-stories,.newsletter-signup'):node.decompose()
  paragraphs=[p.get_text(' ',strip=True) for p in article.find_all(['p','li','h2','h3'])]
- paragraphs=[p for p in paragraphs if len(p)>35]
- text='\n'.join(dict.fromkeys(paragraphs))[:16000]
+ paragraphs=[p for p in paragraphs if len(p)>35 and p!='Your browser does not support the audio element.']
+ text='\n'.join(dict.fromkeys(paragraphs))
+ if len(text)>16000:raise ValueError('Original article exceeds full-context verification budget; do not silently truncate caveats')
  if len(text)<200 or not AI.search(title+' '+text):raise ValueError('Insufficient original AI article text')
- return {'url':url,'source':source,'title':title,'published':feed_day,'text':text,'checked_at':datetime.now(timezone.utc).isoformat(),'body_sha256':hashlib.sha256(text.encode()).hexdigest()}
+ return {'parser_revision':PARSER_REVISION,'url':url,'source':source,'title':title,'published':feed_day,'text':text,'checked_at':datetime.now(timezone.utc).isoformat(),'body_sha256':hashlib.sha256(text.encode()).hexdigest()}
 
 def collect_candidates(day,previous):
- today=date.fromisoformat(day);rows=[];errors=[]
+ today=date.fromisoformat(day);now=datetime.now(timezone.utc);rows=[];errors=[]
  for source,url in FEEDS:
   try:rows.extend(parse_feed(fetch(url),source))
   except Exception as exc:errors.append({'source':source,'stage':'feed','error':str(exc)[:180]})
- rows=sorted(rows,key=lambda x:x['published'],reverse=True);seen=set(previous);verified=[]
+ ordered=[]
+ for day_group in sorted({r['published'] for r in rows},reverse=True):
+  groups={}
+  for row in rows:
+   if row['published']==day_group:groups.setdefault(row['source'],[]).append(row)
+  while any(groups.values()):
+   for values in groups.values():
+    if values:ordered.append(values.pop(0))
+ rows=ordered;seen=set(previous);verified=[]
  for row in rows:
   if row['url'] in seen or not today-timedelta(days=7)<=date.fromisoformat(row['published'])<=today:continue
+  if row.get('published_at') and not now-timedelta(days=7)<=datetime.fromisoformat(row['published_at'])<=now:continue
   seen.add(row['url'])
   try:
-   verified.append(parse_article(fetch(row['url']),row['url'],row['source'],row['published']))
-   if len(verified)>=12:break
+   article=parse_article(fetch(row['url']),row['url'],row['source'],row['published']);article['published_at']=row['published_at'];verified.append(article)
+   if len(verified)>=24:break
   except Exception as exc:errors.append({'source':row['source'],'url':row['url'],'stage':'article','error':str(exc)[:180]})
  return verified,errors

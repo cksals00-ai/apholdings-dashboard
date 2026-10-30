@@ -2,20 +2,20 @@
 import json,os,subprocess,time,urllib.request
 from pathlib import Path
 from newsletter_grounding import parse_json
-TEXT_REPO='unsloth/Qwen3-4B-Instruct-2507-GGUF'
-TEXT_REV='a06e946bb6b655725eafa393f4a9745d460374c9'
+TEXT_REPO='Qwen/Qwen3-8B-GGUF'
+TEXT_REV='7c41481f57cb95916b40956ab2f0b139b296d974'
 IMAGE_REPO='segmind/SSD-1B'
 IMAGE_REV='60987f37e94cd59c36b1cba832b9f97b57395a10'
 class TextModel:
  def __init__(self,runtime,folder):self.runtime=Path(runtime);self.folder=Path(folder);self.proc=None
  def __enter__(self):
   from huggingface_hub import hf_hub_download
-  model=hf_hub_download(TEXT_REPO,'Qwen3-4B-Instruct-2507-Q4_K_M.gguf',revision=TEXT_REV,token=False)
+  model=hf_hub_download(TEXT_REPO,'Qwen3-8B-Q4_K_M.gguf',revision=TEXT_REV,token=False)
   executable=next(self.runtime.rglob('llama-server'))
   env={k:os.environ[k] for k in ('PATH','HOME','LANG','LC_ALL','TMPDIR') if k in os.environ}
   env['LD_LIBRARY_PATH']=':'.join(sorted({str(p.parent.resolve()) for p in self.runtime.rglob('*.so*')}))
   self.log=(self.folder/'text-runtime.log').open('a')
-  self.proc=subprocess.Popen([str(executable.resolve()),'-m',model,'-c','8192','-t','4','-ngl','0','--host','127.0.0.1','--port','8080'],stdout=self.log,stderr=self.log,env=env)
+  self.proc=subprocess.Popen([str(executable.resolve()),'-m',model,'-c','16384','-t','4','-ngl','0','--host','127.0.0.1','--port','8080'],stdout=self.log,stderr=self.log,env=env)
   try:
    for _ in range(180):
     try:
@@ -30,11 +30,15 @@ class TextModel:
   if self.proc:
    self.proc.terminate();self.proc.wait(timeout=30)
   self.log.close()
- def ask(self,system,question,tokens=1400):
-  prompt=f'<|im_start|>system\n{system}<|im_end|>\n<|im_start|>user\n{question}\n<|im_end|>\n<|im_start|>assistant\n'
-  data=json.dumps({'prompt':prompt,'n_predict':tokens,'temperature':0.2,'stop':['<|im_end|>'],'cache_prompt':False}).encode()
+ def ask(self,system,question,tokens=1400,schema=None):
+  question=question.replace('<|','<\u200b|')
+  prompt=f'<|im_start|>system\n{system}<|im_end|>\n<|im_start|>user\n{question}\n/no_think<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n'
+  data=json.dumps({'prompt':prompt,'n_predict':tokens,'temperature':0.2,'stop':['<|im_end|>'],'cache_prompt':False,'json_schema':schema or {'type':'object'}}).encode()
   request=urllib.request.Request('http://127.0.0.1:8080/completion',data=data,headers={'Content-Type':'application/json'})
   with urllib.request.urlopen(request,timeout=1500) as response:result=json.load(response)
+  import hashlib
+  output=self.folder/'model-outputs';output.mkdir(exist_ok=True)
+  (output/(hashlib.sha256(prompt.encode()).hexdigest()[:16]+'.json')).write_text(json.dumps(result,ensure_ascii=False,indent=2))
   if result.get('stopped_limit'):raise ValueError('Model generation reached token limit')
   return parse_json(result['content'])
 

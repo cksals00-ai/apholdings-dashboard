@@ -11,6 +11,10 @@ class GroundingTests(unittest.TestCase):
   a=self.story();a['fact']+=' 비용이 50% 줄었습니다.'
   with self.assertRaises(ValueError):g.validate_grounding(a,self.source(),{'supported':True,'unsupported_claims':[]})
   with self.assertRaises(ValueError):g.validate_grounding(self.story(),self.source(),{'supported':False,'unsupported_claims':['scope']})
+ def test_original_product_name_must_not_be_mistransliterated(self):
+  source=self.source();source['title']='Gemini feature update';source['text']='Gemini is available in preview for selected users.'
+  story=self.story();story['evidence']=[source['text']];story['fact']='기미는 선택된 사용자를 위한 미리보기로 제공됩니다.'
+  with self.assertRaises(ValueError):g.validate_grounding(story,source,{'supported':True,'unsupported_claims':[]})
  def test_untrusted_model_output_is_data_not_executable(self):
   with self.assertRaises(ValueError):g.parse_json('import os; os.system("bad")')
   self.assertEqual(g.parse_json('```json\n{"supported":true}\n```'),{'supported':True})
