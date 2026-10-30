@@ -128,7 +128,9 @@ function setMuteIcon() {
 var cv = $('cv'), ctx = cv.getContext('2d'), scale = 1, dpr = 1;
 var engine, world, items = [], particles = [], floats = [];
 var state = 'ready', score = 0, drops = 0, maxLv = 0, combo = 0, lastMerge = 0, startAt = 0, overT = 0, shake = 0;
-var aimX = W / 2, cur = 0, nxt = 0, canDropAt = 0, R = null, playDay = kstDay();
+var aimX = W / 2, aimTarget = W / 2, cur = 0, nxt = 0, canDropAt = 0, R = null, playDay = kstDay();
+// 조작: 먼저 자리를 잡고(탭·드래그·마우스 이동 → 동전이 미끄러져 감), 그 자리를 다시 탭/클릭하면 떨어진다
+var lastPtr = 'mouse', ptrStart = null, previewPop = 1, hintCount = store.get('hint', 0);
 var today = kstDay(), dex = store.get('dex', -1);
 
 function bestToday() { var b = store.get('best', {}); return b.day === today ? b : null; }
@@ -233,9 +235,11 @@ function drop() {
   var r = LV[cur].r, x = Math.max(r + 1, Math.min(W - r - 1, aimX));
   makeItem(cur, x, DROP_Y);
   drops++; sDrop();
-  cur = nxt; nxt = pickLv(); canDropAt = now + 420;
+  cur = nxt; nxt = pickLv(); canDropAt = now + 420; previewPop = 0;
+  if (lastPtr !== 'mouse' && hintCount < 3) { hintCount++; store.set('hint', hintCount); }
   drawNext();
 }
+function clampAim(x) { var r = LV[cur].r; return Math.max(r + 1, Math.min(W - r - 1, x)); }
 
 function updHud() {
   $('score').textContent = won(score);
@@ -296,10 +300,23 @@ function render(dt) {
   if (warn > 0) { c.fillStyle = 'rgba(255,90,95,' + warn * .18 + ')'; c.fillRect(0, 0, W, DANGER_Y); }
   // 조준
   if (state === 'play') {
-    var r = LV[cur].r, ax = Math.max(r + 1, Math.min(W - r - 1, aimX)), ready = now >= canDropAt;
+    // 목표 위치로 부드럽게 미끄러짐 (약 0.15초), 떨어뜨린 뒤 다음 동전은 살짝 커지며 등장
+    var tx = clampAim(aimTarget);
+    aimX += (tx - aimX) * Math.min(1, dt / 50);
+    if (Math.abs(tx - aimX) < .5) aimX = tx;
+    var settled = Math.abs(tx - aimX) < 1.5;
+    if (previewPop < 1) previewPop = Math.min(1, previewPop + dt / 160);
+    var r = LV[cur].r, ax = clampAim(aimX), ready = now >= canDropAt, pr = r * (.6 + .4 * previewPop);
     c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = 2; c.setLineDash([3, 6]);
     c.beginPath(); c.moveTo(ax, DROP_Y + r); c.lineTo(ax, H); c.stroke(); c.setLineDash([]);
-    drawItem(c, cur, ax, DROP_Y, r, 0, ready ? 1 : .45);
+    drawItem(c, cur, ax, DROP_Y, pr, 0, (ready ? 1 : .45) * (.4 + .6 * previewPop));
+    // 터치 조작: 자리가 잡히면 동전 아래에 「탭해서 떨어뜨리기」 표시 (처음 3번만 글자, 이후 화살표만)
+    if (lastPtr !== 'mouse' && settled && ready) {
+      var pulse = .5 + .5 * Math.sin(now / 160), ay = DROP_Y + r + 10 + pulse * 4;
+      c.fillStyle = 'rgba(245,197,66,' + (.55 + .35 * pulse) + ')';
+      c.beginPath(); c.moveTo(ax - 7, ay); c.lineTo(ax + 7, ay); c.lineTo(ax, ay + 8); c.closePath(); c.fill();
+      if (hintCount < 3) { c.font = '700 12px "Noto Sans KR",sans-serif'; c.textAlign = 'center'; c.textBaseline = 'top'; c.fillText('탭해서 떨어뜨리기', ax, ay + 12); }
+    }
   }
   // 아이템
   for (var i = 0; i < items.length; i++) {
@@ -331,11 +348,31 @@ function render(dt) {
 
 /* ---------- 입력 ---------- */
 function toX(clientX) { var rc = cv.getBoundingClientRect(); return (clientX - rc.left) / rc.width * W; }
-var pDown = false;
-cv.addEventListener('pointerdown', function (e) { pDown = true; aimX = toX(e.clientX); try { cv.setPointerCapture(e.pointerId); } catch (x) {} });
-cv.addEventListener('pointermove', function (e) { aimX = toX(e.clientX); });
-cv.addEventListener('pointerup', function (e) { if (!pDown) return; pDown = false; aimX = toX(e.clientX); drop(); });
-cv.addEventListener('pointercancel', function () { pDown = false; });
+/* 마우스: 움직이면 동전이 따라오고, 클릭하면 떨어짐.
+   터치·펜: 탭·드래그로 자리를 잡고(안 떨어짐), 동전이 있는 자리를 다시 탭하면 떨어짐. */
+cv.addEventListener('pointerdown', function (e) {
+  lastPtr = e.pointerType || 'mouse';
+  var x = toX(e.clientX);
+  ptrStart = { x: e.clientX, y: e.clientY, drag: false, onCoin: Math.abs(x - aimX) <= LV[cur].r + 14 };
+  if (lastPtr !== 'mouse' && !ptrStart.onCoin) aimTarget = x;   // 터치로 다른 곳을 짚으면 바로 미끄러지기 시작
+  try { cv.setPointerCapture(e.pointerId); } catch (x2) {}
+});
+cv.addEventListener('pointermove', function (e) {
+  var mouse = (e.pointerType || 'mouse') === 'mouse';
+  if (mouse) { if (!ptrStart && e.buttons) return; aimTarget = toX(e.clientX); return; }   // 마우스는 올려만 놔도 따라옴
+  if (!ptrStart) return;
+  if (!ptrStart.drag && Math.hypot(e.clientX - ptrStart.x, e.clientY - ptrStart.y) > 10) ptrStart.drag = true;
+  if (ptrStart.drag) aimTarget = toX(e.clientX);                 // 드래그 → 손가락 따라 이동
+});
+cv.addEventListener('pointerup', function (e) {
+  if (!ptrStart) return;
+  var s = ptrStart, x = toX(e.clientX); ptrStart = null;
+  if ((e.pointerType || 'mouse') === 'mouse') { aimTarget = x; aimX = clampAim(x); drop(); return; }   // 클릭 → 그 자리에 떨어짐
+  if (s.drag) { aimTarget = x; return; }                          // 드래그 끝 → 자리만 잡음
+  if (s.onCoin) { aimTarget = aimX; drop(); }                      // 동전 자리를 다시 탭 → 떨어짐
+  else aimTarget = x;                                              // 다른 곳 탭 → 그리로 이동
+});
+cv.addEventListener('pointercancel', function () { ptrStart = null; });
 var keys = {};
 window.addEventListener('keydown', function (e) {
   if (e.target.tagName === 'INPUT') return;
@@ -351,7 +388,7 @@ window.addEventListener('keyup', function (e) {
   if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.l = 0;
   if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.r = 0;
 });
-setInterval(function () { if (keys.l) aimX = Math.max(0, aimX - 6); if (keys.r) aimX = Math.min(W, aimX + 6); }, 16);
+setInterval(function () { if (keys.l) { aimTarget = Math.max(0, aimTarget - 6); lastPtr = 'mouse'; } if (keys.r) { aimTarget = Math.min(W, aimTarget + 6); lastPtr = 'mouse'; } }, 16);
 
 /* ---------- 시작·종료 ---------- */
 function start() {
@@ -577,5 +614,5 @@ if (sb) {
 } else { board.today = board.all = 'err'; renderSheets(); }
 
 // 테스트용 훅
-window.__mm = { get items() { return items; }, get state() { return state; }, get score() { return score; }, drop: function (x) { aimX = x; canDropAt = 0; drop(); }, over: function () { gameOver(); } };
+window.__mm = { get items() { return items; }, get state() { return state; }, get score() { return score; }, drop: function (x) { aimX = aimTarget = x; canDropAt = 0; drop(); }, over: function () { gameOver(); }, get aim() { return { x: aimX, target: aimTarget, ptr: lastPtr }; } };
 })();
