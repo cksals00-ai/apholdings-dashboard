@@ -1,0 +1,19 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>relay</title></head>
+<body style="font:14px system-ui;background:#0E1A2B;color:#F5F1E8;padding:20px">
+<p id="s">준비 중…</p>
+<script>
+// 운영용 소형 중계: 같은 출처(apholdings.kr)의 파일을 읽어 이 창을 연 창(window.opener)으로 전달한다.
+// 사용: /play/relay.html?f=/media/lia/mm/xxx.mp4&to=https://www.instagram.com
+(async () => {
+  const q = new URLSearchParams(location.search), f = q.get('f') || '', to = q.get('to') || '';
+  const s = document.getElementById('s');
+  if (!/^\/media\//.test(f) || !/^https:\/\/(www\.)?(instagram\.com|tiktok\.com)$/.test(to) || !window.opener) { s.textContent = '잘못된 요청'; return; }
+  try {
+    s.textContent = '읽는 중… ' + f;
+    const r = await fetch(f); if (!r.ok) throw new Error(r.status);
+    const buf = await r.arrayBuffer();
+    window.opener.postMessage({ relay: 'mp4', name: f.split('/').pop(), type: 'video/mp4', buf: buf }, to, [buf]);
+    s.textContent = '전달 완료 (' + Math.round(buf.byteLength / 1024) + ' KB). 이 창은 닫아도 됩니다.';
+  } catch (e) { s.textContent = '실패: ' + e; }
+})();
+</script></body></html>
