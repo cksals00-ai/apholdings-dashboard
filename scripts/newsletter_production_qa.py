@@ -5,6 +5,8 @@ from PIL import Image
 import newsletter as b
 import newsletter_server as publisher
 
+QA_REVISION=2
+
 def compact(value):return re.sub(r'\s+','',value)
 def check_pdf(issue,folder):
  import pdfplumber
@@ -18,16 +20,26 @@ def check_pdf(issue,folder):
    for char in page.chars:
     if char['x0'] < -1 or char['top'] < -1 or char['x1']>page.width+1 or char['bottom']>page.height+1:raise ValueError('PDF text clipping')
    links.update(link['uri'] for link in page.hyperlinks if link.get('uri'))
+   for image in page.images:
+    if image['x0'] < -1 or image['y0'] < -1 or image['x1']>page.width+1 or image['y1']>page.height+1:raise ValueError('PDF image clipping')
  for story in issue['stories']:
   for key in ('title','fact','insight'):
    if compact(story[key]) not in compact(alltext):raise ValueError('PDF dropped story text: '+key)
   if story['url'] not in links:raise ValueError('PDF original source link missing')
+ from pypdf import PdfReader
+ import hashlib
+ def pixels(image):
+  image=image.convert('RGB');return image.size,hashlib.sha256(image.tobytes()).hexdigest()
+ embedded={pixels(item.image) for page in PdfReader(path).pages for item in page.images}
+ for rel in [s['image']['path'] for s in issue['stories']]+[issue['hero']['poster']]:
+  with Image.open(b.ROOT/rel.lstrip('/')) as source:
+   if pixels(source) not in embedded:raise ValueError('PDF editorial image missing or changed')
  subprocess.run(['pdftoppm','-scale-to','1200','-png',str(path),str(folder/'pdf-page')],check=True,timeout=180,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
  rendered=list(folder.glob('pdf-page-*.png'))
  if len(rendered)!=pages:raise ValueError('Not every PDF page rendered')
  for image in rendered:
   with Image.open(image) as frame:frame.verify()
- return {'pages':pages,'source_links':len(links),'all_pages_rendered':True}
+ return {'pages':pages,'source_links':len(links),'all_pages_rendered':True,'all_editorial_images_embedded':True}
 
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
  def log_message(self,*_):pass
@@ -82,7 +94,7 @@ def check_all(issue,folder,source_checks):
   if novelty.get('is_news') is not True or novelty.get('is_duplicate') is not False or len(novelty.get('novel_quote',''))<30 or normalized(novelty['novel_quote']) not in normalized(source['text']):raise ValueError('Original novelty receipt missing')
   if hashlib.sha256(source['text'].encode()).hexdigest()!=story['source_hash']:raise ValueError('Source evidence changed after review')
  publisher.verify_documents(issue)
- report={'method':'서버 자동 검증 · 원문 근거 대조 · PDF 전페이지 렌더·문자/경계 검사 · 브라우저 검사','pdf':check_pdf(issue,folder),'browser':check_browser(issue,folder)}
+ report={'revision':QA_REVISION,'method':'서버 자동 검증 · 원문 근거 대조 · PDF 전페이지 렌더·문자/경계 검사 · 브라우저 검사','pdf':check_pdf(issue,folder),'browser':check_browser(issue,folder)}
  for im in [s['image']['path'] for s in issue['stories']]+[issue['hero']['path'],issue['hero']['poster']]:
   with Image.open(b.ROOT/im.lstrip('/')) as image:
    for n in range(getattr(image,'n_frames',1)):image.seek(n);image.load()
