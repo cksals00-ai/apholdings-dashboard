@@ -33,7 +33,7 @@ class TextModel:
  def ask(self,system,question,tokens=1400,schema=None):
   question=question.replace('<|','<\u200b|')
   prompt=f'<|im_start|>system\n{system}<|im_end|>\n<|im_start|>user\n{question}\n/no_think<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n'
-  data=json.dumps({'prompt':prompt,'n_predict':tokens,'temperature':0.2,'stop':['<|im_end|>'],'cache_prompt':False,'json_schema':schema or {'type':'object'}}).encode()
+  data=json.dumps({'prompt':prompt,'n_predict':tokens,'temperature':0.2,'stop':['<|im_end|>'],'cache_prompt':True,'json_schema':schema or {'type':'object'}}).encode()
   request=urllib.request.Request('http://127.0.0.1:8080/completion',data=data,headers={'Content-Type':'application/json'})
   with urllib.request.urlopen(request,timeout=1500) as response:result=json.load(response)
   import hashlib

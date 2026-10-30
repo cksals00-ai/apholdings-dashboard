@@ -5,6 +5,18 @@ from datetime import datetime
 import newsletter_producer as p
 
 class ProducerTests(unittest.TestCase):
+ def test_corrective_pass_keeps_korean_and_specific_reviewer_feedback(self):
+  from unittest.mock import Mock
+  from test_newsletter_grounding import GroundingTests
+  story=GroundingTests().story();source=GroundingTests().source();source.update(source='Google',body_sha256='hash')
+  novelty={'is_news':True,'is_duplicate':False,'novel_quote':source['text'][:70]}
+  review={'supported':False,'unsupported_claims':['Remove unsupported availability']}
+  model=Mock();model.ask.side_effect=[novelty,story,review,story,{'supported':True,'unsupported_claims':[]}]
+  p.draft_story(model,source)
+  correction=model.ask.call_args_list[3].args[1]
+  self.assertIn('in Korean',correction)
+  self.assertIn('Remove unsupported availability',correction)
+  self.assertIn('EXACT untranslated source excerpts',correction)
  def test_recovery_reuses_validated_bundle_even_after_local_published_json(self):
   day=datetime.now(p.server.KST).date().isoformat()
   with tempfile.TemporaryDirectory() as temp:

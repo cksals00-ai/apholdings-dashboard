@@ -31,7 +31,7 @@ def draft_story(model,source,prior_titles=None):
    validate_grounding(story,source,review);break
   except ValueError as exc:
    if attempt:raise
-   story=model.ask(SYSTEM,'Correct this rejected draft using only the original source. Keep the same exact JSON field schema, including evidence/image fields. Preserve original Latin product names. Do not erase rollout/qualification caveats or add claims. Return JSON only.\n'+json.dumps({'problem':str(exc),'source':source,'draft':story},ensure_ascii=False),tokens=2300,schema=shapes.DRAFT)
+   story=model.ask(SYSTEM,'Correct this rejected draft using only the original source. Keep the same exact JSON field schema, including evidence/image fields. Write title, summary, fact, insight and action in Korean; retain only company/product names in original Latin spelling. All evidence strings must be EXACT untranslated source excerpts, without Korean particles. Fix the specific error and independent_review problems. Remove any claim not supported by the quoted evidence; never invent a supporting quote. Do not erase rollout/qualification caveats or add claims. Return JSON only.\n'+json.dumps({'problem':str(exc),'independent_review':review,'source':source,'draft':story},ensure_ascii=False),tokens=2300,schema=shapes.DRAFT)
 
  story.update(is_news=True,novelty=novelty,source=source['source'],url=source['url'],published=source['published'],review=review,source_hash=source['body_sha256'])
  return story
