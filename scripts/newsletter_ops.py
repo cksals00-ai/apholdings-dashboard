@@ -75,7 +75,7 @@ def finish():
  emit(f'test-{run}:recovery','test_recovery',{'subject':'[AP News 자동검증 복구 완료] 발행·메일 접수 확인','message':f'테스트호 자동 공개 검증 완료. 첫 발행 오류는 자동 재실행으로 복구했고 첫 메일 오류는 자동 재시도로 복구했습니다. 테스트 메일은 지정한 한 주소로1건만 접수됐습니다. 테스트 URL: {b.ORIGIN}{m["web_path"]}','run_url':os.environ.get('RUN_URL')})
 
 def alert():
- run=os.environ['FAILED_RUN_ID'];attempt=int(os.environ['FAILED_ATTEMPT']);test=os.environ['FAILED_NAME']=='AP News automation rehearsal'
+ run=os.environ['FAILED_RUN_ID'];attempt=int(os.environ['FAILED_ATTEMPT']);test='rehearsal' in os.environ['FAILED_NAME'].lower()
  day=datetime.now(server.KST).date().isoformat();key=f'test-{run}:failure-{attempt}' if test else f'{day}:workflow-{run}-{attempt}'
  emit(key,'test_alert' if test else 'ops_alert',{'subject':'[AP News 자동검증 장애 감지]' if test else '[AP News 운영 장애 감지]','message':f'{"의도적으로 주입한 테스트 장애입니다. " if test else ""}서버 실행 {run}의 {attempt}차 시도가 실패했습니다. '+('자동 재실행을 시작합니다.' if attempt<3 else '재시도 한도에 도달했습니다. 관리자 확인이 필요합니다.'),'run_url':f'https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/{run}'})
 if __name__=='__main__':

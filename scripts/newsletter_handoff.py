@@ -40,7 +40,7 @@ def document_root(root):
         builder.ROOT, builder.ISSUES, publisher.ROOT = previous
 
 
-def create_bundle(day, output, reviewed=False):
+def create_bundle(day, output, reviewed=False, review_method=None):
     date.fromisoformat(day)
     if reviewed is not True:
         raise ValueError('Confirm original sources, every PDF page, mobile layout and images before handoff')
@@ -52,7 +52,7 @@ def create_bundle(day, output, reviewed=False):
     files = {path: (ROOT / path).read_bytes() for path in paths_for(issue)}
     manifest = {'version': 1, 'date': day, 'number': issue['number'],
         'prepared_at': datetime.now(publisher.KST).isoformat(),
-        'review': {'method': 'AI 작성 및 원문·지면 확인',
+        'review': {'method': review_method or 'AI 작성 및 원문·지면 확인',
                    'checks': {key: True for key in CHECKS}},
         'files': {path: hashlib.sha256(data).hexdigest() for path, data in files.items()}}
     output.parent.mkdir(parents=True, exist_ok=True)
