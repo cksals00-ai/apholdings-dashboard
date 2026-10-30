@@ -10,6 +10,6 @@ class QualificationTests(unittest.TestCase):
    run=proof();run[key]=value
    with self.subTest(key=key),self.assertRaises(ValueError):q.evaluate(run,WORKER,WORKER,PIN,40999503801)
  def test_runtime_change_or_unpinned_worker_cannot_reuse_old_proof(self):
-  for current,tested in [(WORKER.replace(PIN,'b'*40),WORKER),(WORKER,WORKER.replace(PIN,'c'*40)),('ref: main\npath: .production-runtime',WORKER),(WORKER+WORKER,WORKER)]:
+  for current,tested in [(WORKER.replace(PIN,'b'*40),WORKER),(WORKER,WORKER.replace(PIN,'c'*40)),('ref: main\npath: .production-runtime',WORKER),(WORKER+WORKER,WORKER),(WORKER+'# additional untested step\n',WORKER)]:
    with self.assertRaises(ValueError):q.evaluate(proof(),current,tested,PIN,40999503801)
 if __name__=='__main__':unittest.main()

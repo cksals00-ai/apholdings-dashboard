@@ -10,6 +10,7 @@ def runtime_pin(text):
 def evaluate(run,current_worker,tested_worker,expected,run_id):
  if (run.get('id')!=run_id or run.get('status')!='completed' or run.get('conclusion')!='success' or run.get('head_branch')!='main' or run.get('event')!='workflow_dispatch' or run.get('path','').split('@')[0]!=REHEARSAL or run.get('run_attempt',0)<2 or run.get('triggering_actor',{}).get('login')!='github-actions[bot]'):
   raise ValueError('Full server qualification is not yet successful with automatic recovery: '+str(run.get('status'))+'/'+str(run.get('conclusion')))
+ if current_worker!=tested_worker:raise ValueError('Producer workflow differs from the rehearsed workflow')
  if runtime_pin(current_worker)!=expected or runtime_pin(tested_worker)!=expected:raise ValueError('Current producer runtime differs from qualified runtime')
  return True
 def api(path):return json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/'+path],text=True))
