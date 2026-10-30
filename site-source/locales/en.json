@@ -1899,7 +1899,7 @@
    "tag": "Learn Hangeul\nwith four tiger siblings.",
    "status": "existing",
    "role": "HANGEUL CUBS · Hangeul learning app",
-   "desc": "For foreigners and children meeting Korean for the first time.\nOne batchim per episode. English · Vietnamese · French.",
+   "desc": "17 new free lessons introduce 10 vowels and 14 consonants with 68 new words. See letter shapes, combine syllables, listen to words, and choose the letter that matches a sound.",
    "note": "Released for iPhone · iPad · no ads · no accounts",
    "flow": [
     "APP",
@@ -1910,6 +1910,27 @@
    ],
    "image": "/media/cubs/family.jpg",
    "sections": [
+    {
+     "id": "first-letters-25",
+     "label": "NEW · 2.5",
+     "title": "Start with your very first letter.",
+     "desc": "17 new free lessons introduce 10 vowels and 14 consonants with 68 new words. See letter shapes, combine syllables, listen to words, and choose the letter that matches a sound.",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "71 free lessons in total",
+        "24 letters",
+        "17 new lessons",
+        "68 new words"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "The existing 18-lesson Batchim Master Pack remains a separate in-app purchase, unchanged."
+      }
+     ]
+    },
     {
      "id": "siblings",
      "label": "01 · Four siblings",
@@ -1958,7 +1979,7 @@
       {
        "type": "tags",
        "items": [
-        "42 lessons",
+        "71 lessons",
         "EN · VI · FR hints",
         "On-device pronunciation",
         "Fully offline",

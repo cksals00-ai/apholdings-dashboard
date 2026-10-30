@@ -297,3 +297,6 @@ _dadandme_apply()
 # Preserve FoldBlock introduction and Games registration.
 from apply_foldblock import apply as _foldblock_apply
 _foldblock_apply()
+
+from apply_cubs25 import apply as _cubs25_apply
+_cubs25_apply()

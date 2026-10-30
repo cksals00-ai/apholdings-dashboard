@@ -1899,7 +1899,7 @@
    "tag": "和四只虎兄妹\n一起学韩文。",
    "status": "existing",
    "role": "HANGEUL CUBS · 韩文学习应用",
-   "desc": "为初次接触韩语的外国人和孩子而做。\n每集学一个收音。英语 · 越南语 · 法语。",
+   "desc": "新增17节免费课程，学习10个元音、14个辅音和68个新单词。认识字形、组合音节、听单词，再通过听音选字练习。",
    "note": "已在 iPhone · iPad 上线 · 无广告 · 无需账号",
    "flow": [
     "APP",
@@ -1910,6 +1910,27 @@
    ],
    "image": "/media/cubs/family.jpg",
    "sections": [
+    {
+     "id": "first-letters-25",
+     "label": "NEW · 2.5",
+     "title": "从第一个字母开始。",
+     "desc": "新增17节免费课程，学习10个元音、14个辅音和68个新单词。认识字形、组合音节、听单词，再通过听音选字练习。",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "共71节免费课程",
+        "24 letters",
+        "17 new lessons",
+        "68 new words"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "原有18节Batchim Master课程仍为单独的应用内购买项目。"
+      }
+     ]
+    },
     {
      "id": "siblings",
      "label": "01 · 四兄妹",

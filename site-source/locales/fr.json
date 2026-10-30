@@ -1899,7 +1899,7 @@
    "tag": "Apprenez le hangeul\navec quatre tigreaux frères et sœurs.",
    "status": "existing",
    "role": "HANGEUL CUBS · Application d'apprentissage du hangeul",
-   "desc": "Pour les étrangers et les enfants qui découvrent le coréen.\nUn batchim par épisode. Anglais · vietnamien · français.",
+   "desc": "17 nouvelles leçons gratuites : 10 voyelles, 14 consonnes et 68 nouveaux mots. Découvrez les lettres, assemblez les syllabes et associez les sons aux lettres.",
    "note": "Disponible pour iPhone · iPad · sans publicité · sans compte",
    "flow": [
     "APP",
@@ -1910,6 +1910,27 @@
    ],
    "image": "/media/cubs/family.jpg",
    "sections": [
+    {
+     "id": "first-letters-25",
+     "label": "NEW · 2.5",
+     "title": "Commencez par votre première lettre.",
+     "desc": "17 nouvelles leçons gratuites : 10 voyelles, 14 consonnes et 68 nouveaux mots. Découvrez les lettres, assemblez les syllabes et associez les sons aux lettres.",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "71 leçons gratuites au total",
+        "24 letters",
+        "17 new lessons",
+        "68 new words"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Le pack Batchim Master de 18 leçons reste un achat intégré distinct, inchangé."
+      }
+     ]
+    },
     {
      "id": "siblings",
      "label": "01 · Quatre frères et sœurs",
@@ -1958,7 +1979,7 @@
       {
        "type": "tags",
        "items": [
-        "42 leçons",
+        "71 leçons",
         "Indices EN · VI · FR",
         "Prononciation sur l'appareil",
         "Entièrement hors ligne",

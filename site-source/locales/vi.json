@@ -1899,7 +1899,7 @@
    "tag": "Học Hangeul\ncùng bốn anh em nhà hổ.",
    "status": "existing",
    "role": "HANGEUL CUBS · Ứng dụng học Hangeul",
-   "desc": "Dành cho người nước ngoài và trẻ em lần đầu làm quen tiếng Hàn.\nMỗi tập một batchim. Tiếng Anh · tiếng Việt · tiếng Pháp.",
+   "desc": "17 bài học miễn phí mới: 10 nguyên âm, 14 phụ âm và 68 từ mới. Nhìn hình chữ, ghép âm tiết, nghe từ rồi chọn chữ phù hợp với âm thanh.",
    "note": "Đã phát hành cho iPhone · iPad · không quảng cáo · không tài khoản",
    "flow": [
     "APP",
@@ -1910,6 +1910,27 @@
    ],
    "image": "/media/cubs/family.jpg",
    "sections": [
+    {
+     "id": "first-letters-25",
+     "label": "NEW · 2.5",
+     "title": "Bắt đầu từ chữ cái đầu tiên.",
+     "desc": "17 bài học miễn phí mới: 10 nguyên âm, 14 phụ âm và 68 từ mới. Nhìn hình chữ, ghép âm tiết, nghe từ rồi chọn chữ phù hợp với âm thanh.",
+     "blocks": [
+      {
+       "type": "tags",
+       "items": [
+        "Tổng cộng 71 bài miễn phí",
+        "24 letters",
+        "17 new lessons",
+        "68 new words"
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Gói Batchim Master gồm 18 bài vẫn là giao dịch mua riêng trong ứng dụng."
+      }
+     ]
+    },
     {
      "id": "siblings",
      "label": "01 · Bốn anh em",
@@ -1958,7 +1979,7 @@
       {
        "type": "tags",
        "items": [
-        "42 bài học",
+        "71 bài học",
         "Gợi ý EN · VI · FR",
         "Phát âm ngay trên thiết bị",
         "Hoàn toàn ngoại tuyến",
