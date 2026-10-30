@@ -26,3 +26,9 @@ test('absent delivery summary reports unknown health rather than crashing watche
  const a=assess('2026-10-31',new Date('2026-10-30T22:15:00Z'),{},undefined,{active:3,accepted:0,eligible_missing:3});
  assert.equal(a.kind,'alert');assert.equal(a.code,'mail_health_unknown');assert.match(a.message,/미확인/);
 });
+
+test('late recovery remains a final report after the morning window',()=>{
+ const now=new Date('2026-10-30T03:30:00Z');
+ assert.equal(assess('2026-10-30',now,run,issue,mail).kind,'complete');
+ assert.equal(assess('2026-10-30',now,{},undefined,mail).code,'public_late');
+});

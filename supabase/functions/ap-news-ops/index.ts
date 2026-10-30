@@ -28,7 +28,7 @@ async function watch(){
  const pending=await db('ap_news_ops_events?state=in.(retry,processing)&attempts=lt.5&event=in.(ops_alert,ops_recovery,ops_status)&created_at=gt.'+new Date(Date.now()-23*3600000).toISOString()+'&select=event_key,event,detail');
  for(const row of pending){try{await send(row.event_key,row.event,row.detail);}catch{/* Next server tick retries bounded operational alerts. */}}
  const now=new Date(),kst=new Date(now.getTime()+9*3600000),day=kst.toISOString().slice(0,10),h=kst.getUTCHours(),m=kst.getUTCMinutes();
- if(h<7||h>10)return {status:'outside_window'};
+ if(h<7)return {status:'outside_window'};
  const issues=await db(`ap_news_issues?issue_date=eq.${day}&select=status,verified`);
  const runs=await db(`ap_news_publication_runs?issue_date=eq.${day}&select=ready_verified_at,public_verified_at,last_error,workflow_url`);
  const mail=await db('rpc/ap_news_delivery_health','POST',{p_day:day});
@@ -39,8 +39,9 @@ async function watch(){
  }
  if(decision.kind==='progress')return await send(day+':ops-0800-status','ops_status',{subject:'[AP News08:00 상태] '+day,message:decision.message,run_url:runs?.[0]?.workflow_url});
  if(decision.kind==='complete'){
-  const previous=await db(`ap_news_ops_events?event_key=like.${day}*&event=eq.ops_alert&select=provider_id`);
-  const recovered=previous?.some((r:{provider_id?:string})=>r.provider_id);
+  const previous=await db(`ap_news_ops_events?event_key=like.${day}*&event=in.(ops_alert,ops_recovery)&select=event,provider_id`);
+  if(previous?.some((r:{event:string;provider_id?:string})=>r.event==='ops_recovery'&&r.provider_id))return {status:'legacy_completion_already_reported'};
+  const recovered=previous?.some((r:{event:string;provider_id?:string})=>r.event==='ops_alert'&&r.provider_id);
   return await send(day+':ops-complete','ops_status',{subject:(recovered?'[AP News 복구·발행·메일 결과] ':'[AP News 발행·메일 결과] ')+day,message:decision.message,run_url:runs?.[0]?.workflow_url});
  }
  return {status:'healthy_or_preparing'};
