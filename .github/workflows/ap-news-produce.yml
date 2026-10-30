@@ -35,7 +35,7 @@ jobs:
       - name: Checkout reviewed producer runtime
         uses: actions/checkout@v7
         with:
-          ref: 6fc3007c63f79e9437dac89c4f1a56eef9a06e00
+          ref: aafd02eed7faab6772c7d55b9dd00a93af281097
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
