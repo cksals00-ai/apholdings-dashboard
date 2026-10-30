@@ -69,6 +69,7 @@ def validate_grounding(story,source,review):
   if re.search(r'\b'+re.escape(name)+r'\b',source.get('title',''),re.I) and name.lower() not in copy.lower():raise ValueError('Keep original product name in Latin spelling: '+name)
  # Only verbatim evidence can authorize new factual figures; source date is displayed separately.
  evidence=' '.join(quotes)
+ if re.search(r'협력|제휴|파트너십|공동(?:개발|발표|출시|연구|제작|구축)',copy) and not re.search(r'collaborat|partner|co[- ](?:develop|engineer|author)|work(?:ed|ing)? with|together|joined forces|jointly|agreement with|협력|제휴|공동',evidence,re.I):raise ValueError('No partnership/co-development evidence. Hosting or deployment is not collaboration; remove the unsupported relationship and describe actual availability/deployment.')
  for key in ('title','summary','fact'):
   missing=numbers(story[key])-numbers(evidence)
   if missing:raise ValueError('Unsupported numeric claim in '+key+': '+', '.join(sorted(missing))+'; remove the claim or quote exact supporting source text')

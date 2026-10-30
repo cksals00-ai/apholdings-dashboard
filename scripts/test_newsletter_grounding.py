@@ -18,6 +18,12 @@ class GroundingTests(unittest.TestCase):
  def test_newly_dated_evergreen_how_to_cannot_become_an_announcement(self):
   source=self.source();source['title']='How to use Gemini to update your resume'
   with self.assertRaisesRegex(ValueError,'Evergreen'):g.require_news_topic(source)
+ def test_cloud_availability_does_not_authorize_a_partnership_claim(self):
+  source=self.source();story=self.story();story['summary']='회사가 AWS와 협력해 새 기능을 발표했습니다.'
+  with self.assertRaisesRegex(ValueError,'partnership'):g.validate_grounding(story,source,{'supported':True,'unsupported_claims':[]})
+  source['text']='The company collaborated with AWS on the new preview feature for selected users.'
+  story['evidence']=[source['text']]
+  g.validate_grounding(story,source,{'supported':True,'unsupported_claims':[]})
  def test_real_quote_and_supported_review(self):
   g.validate_grounding(self.story(),self.source(),{'supported':True,'unsupported_claims':[]})
  def test_fabricated_quote_or_numbers_or_failed_review_block(self):
