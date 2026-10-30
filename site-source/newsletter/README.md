@@ -139,8 +139,8 @@ newsletter dedicated delivery workflow bypasses this homepage guard.
 
 The new `AP News server production` workflow has a fail-closed qualification
 job before its producer. Scheduled checks at KST03:05/03:35 and04:05–07:05 can
-start generation only after main rehearsal40999503801 succeeds after automatic
-bot recovery, with the exact same worker workflow and runtime2cd3090b. The
+start generation only after main rehearsal41008803730 succeeds after automatic
+bot recovery, with the exact same worker workflow and runtime9d59b76b. The
 rehearsal covers actual collection, grounded Korean copy, new public-model art,
 all-page PDF and browser QA, isolated public-byte checks and owner test-mail
 failure/recovery. A running model probe is not a completed migration. Arming the
