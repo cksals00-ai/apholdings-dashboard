@@ -71,7 +71,7 @@ def restore(root,day,mode,run,required=False):
  if release is None:
   if required:raise ValueError('Requested private test checkpoint not found')
   print('No earlier private checkpoint; begin fresh');return False
- assets=[a for a in release['assets'] if re.fullmatch(r'AP-News-work-\d{4}-\d{2}-\d{2}-\d+-attempt-\d+\.zip',a['name']) and a.get('state')=='uploaded' and a['size']>100]
+ assets=[a for a in release['assets'] if re.fullmatch(r'AP-News-work-\d{4}-\d{2}-\d{2}-\d+-attempt-\d+(?:-checkpoint-\d+)?\.zip',a['name']) and a.get('state')=='uploaded' and a['size']>100]
  if not assets:
   if required:raise ValueError('Requested private checkpoint has no archive')
   return False
