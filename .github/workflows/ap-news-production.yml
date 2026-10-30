@@ -17,7 +17,7 @@ permissions:
   actions: write
 jobs:
   qualification:
-    if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.html_url == 'https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/41026427233' && github.event.workflow_run.conclusion == 'success') }}
+    if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.html_url == 'https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/41031927070' && github.event.workflow_run.conclusion == 'success') }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -39,7 +39,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           CALLER_REVISION: ${{ github.sha }}
-        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 41026427233 --revision "$CALLER_REVISION" --runtime e31f34ddd49565cab7d366d7572a79842ca2f347
+        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 41031927070 --revision "$CALLER_REVISION" --runtime e31f34ddd49565cab7d366d7572a79842ca2f347
   produce:
     needs: qualification
     if: ${{ needs.qualification.outputs.qualified == 'true' && github.event_name != 'workflow_run' }}
