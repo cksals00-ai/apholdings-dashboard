@@ -82,6 +82,6 @@ def alert():
   error=json.loads(error_file.read_text())
   if error.get('run_id')==run and str(error.get('attempt'))==str(attempt):reason=' 원인: '+str(error.get('reason',''))[:240]
  day=datetime.now(server.KST).date().isoformat();key=f'test-{run}:failure-{attempt}' if test else f'{day}:workflow-{run}-{attempt}'
- emit(key,'test_alert' if test else 'ops_alert',{'subject':'[AP News 자동검증 장애 감지]' if test else '[AP News 운영 장애 감지]','message':f'{"의도적으로 주입한 테스트 장애입니다. " if test else ""}서버 실행 {run}의 {attempt}차 시도가 실패했습니다.{reason} '+('실패 작업 자동 재실행 대상으로 등록되어 있으며 복구 실행을 요청합니다.' if attempt<3 else '재시도 한도에 도달했습니다. 관리자 확인이 필요합니다.'),'run_url':f'https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/{run}'})
+ emit(key,'test_alert' if test else 'ops_alert',{'subject':'[AP News 자동검증 장애 감지]' if test else '[AP News 운영 장애 감지]','message':f'{"정규호와 분리된 테스트 실행에서 장애가 발생했습니다. " if test else ""}서버 실행 {run}의 {attempt}차 시도가 실패했습니다.{reason} '+('실패 작업 자동 재실행 대상으로 등록되어 있으며 복구 실행을 요청합니다.' if attempt<3 else '재시도 한도에 도달했습니다. 관리자 확인이 필요합니다.'),'run_url':f'https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/{run}'})
 if __name__=='__main__':
  {'build':build_preview,'finish':finish,'alert':alert}[sys.argv[1]]()
