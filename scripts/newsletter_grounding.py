@@ -26,6 +26,27 @@ def numbers(text):
   except Exception:pass
   result.add(value+suffix)
  return result
+def indexed_source(source):
+ # Preserve every source word; choose bounded excerpts in code, never by model copying.
+ text=' '.join(source['text'].split());parts=[]
+ while len(text)>700:
+  end=text.rfind(' ',0,700)
+  if end<30:end=text.find(' ',700,800)
+  if end<30:raise ValueError('Source contains an unbounded evidence token')
+  parts.append(text[:end]);text=text[end+1:]
+ if text:
+  if len(text)<30 and parts:parts[-1]+=' '+text
+  else:parts.append(text)
+ if not parts or any(not 30<=len(part)<=800 for part in parts):raise ValueError('Unusable source evidence segments')
+ result={k:v for k,v in source.items() if k!='text'}
+ result['source_segments']=[{'id':index,'text':part} for index,part in enumerate(parts)]
+ return result
+
+def resolve_evidence(draft,context):
+ ids=draft.get('evidence_ids');segments=context['source_segments']
+ if not isinstance(ids,list) or not 1<=len(ids)<=4 or any(type(i) is not int or not 0<=i<len(segments) for i in ids) or len(ids)!=len(set(ids)) or 'evidence' in draft:raise ValueError('Choose1-4 distinct valid source evidence_ids')
+ return {**{k:v for k,v in draft.items() if k!='evidence_ids'},'evidence':[segments[i]['text'] for i in ids]}
+
 def validate_grounding(story,source,review):
  for key in ('title','summary','fact','insight','action','image_prompt','image_subject','visual_approach'):
   value=story.get(key)

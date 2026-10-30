@@ -11,12 +11,13 @@ class ProducerTests(unittest.TestCase):
   story=GroundingTests().story();source=GroundingTests().source();source.update(source='Google',body_sha256='hash')
   novelty={'is_news':True,'is_duplicate':False,'novel_quote':source['text'][:70]}
   review={'supported':False,'unsupported_claims':['Remove unsupported availability']}
-  model=Mock();model.ask.side_effect=[novelty,story,review,story,{'supported':True,'unsupported_claims':[]}]
+  wire={**{k:v for k,v in story.items() if k!='evidence'},'evidence_ids':[0]}
+  model=Mock();model.ask.side_effect=[novelty,wire,review,wire,{'supported':True,'unsupported_claims':[]}]
   p.draft_story(model,source)
   correction=model.ask.call_args_list[3].args[1]
   self.assertIn('in Korean',correction)
   self.assertIn('Remove unsupported availability',correction)
-  self.assertIn('EXACT untranslated source excerpts',correction)
+  self.assertIn('Select evidence_ids',correction)
  def test_recovery_reuses_validated_bundle_even_after_local_published_json(self):
   day=datetime.now(p.server.KST).date().isoformat()
   with tempfile.TemporaryDirectory() as temp:
