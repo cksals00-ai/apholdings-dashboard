@@ -111,6 +111,9 @@ def render_pdf(i):
     def p(text,x,y,w=W-2*M,size=10.2,color=ink,leading=None):
         st=ParagraphStyle('p',parent=style,fontSize=size,leading=leading or size*1.75,textColor=HexColor(color))
         para=Paragraph(text,st);_,h=para.wrap(w,H);para.drawOn(c,x,y-h);return y-h
+    def measure(text,size=10.2,leading=None):
+        st=ParagraphStyle('measure',parent=style,fontSize=size,leading=leading or size*1.75)
+        return Paragraph(text,st).wrap(W-2*M,H)[1]
     def base(page):
         c.setFillColor(HexColor('#f7f4ed'));c.rect(0,0,W,H,fill=1,stroke=0)
         c.setFillColor(HexColor(ink));c.roundRect(M,H-54,44,28,4,fill=1,stroke=0)
@@ -118,29 +121,39 @@ def render_pdf(i):
         c.setFillColor(HexColor(ink));c.setFont('Helvetica',8);c.drawString(M+48,H-41,'AP HOLDINGS  /  AI & BUSINESS DAILY')
         c.setStrokeColor(HexColor('#ddd5c7'));c.line(M,47,W-M,47)
         c.setFont('Helvetica',8);c.setFillColor(HexColor(muted));c.drawString(M,30,f'AP NEWS  |  {i["date"]}  |  NO. {i["number"]:03d}');c.drawRightString(W-M,30,f'{page:02d}')
-    base(1)
+    cover_pages=1
+    base(cover_pages)
     c.setFillColor(HexColor(gold));c.setFont('Helvetica',10);c.drawString(M,H-100,'A DAILY PERSPECTIVE ON AI')
     c.setFillColor(HexColor(ink));c.setFont('Times-Roman',70);c.drawString(M,H-183,'AP');c.setFont('Times-Italic',70);c.drawString(M+115,H-183,'News')
     y=p(esc(i['title']),M,H-225,size=25,leading=38)
     y=p(esc(i['intro']),M,y-22,size=12,color=muted)
     illustrated=any(st.get('image') for st in i['stories'])
+    note_top=max(90,60+measure(esc(i['edition_note']),size=8,leading=13)) if illustrated else 90
     if illustrated:
         im=({'path':i['hero']['poster'],'caption':i['hero']['caption']} if i.get('layout')=='editorial-v2' else i['stories'][0].get('image'))
         if im:
             reader=ImageReader(str(ROOT/im['path'].lstrip('/')));iw,ih=reader.getSize()
-            height=(W-2*M)*ih/iw
-            if y-height-45<120: raise ValueError('PDF illustrated cover overflow')
-            c.drawImage(reader,M,y-height-16,width=W-2*M,height=height)
+            natural_height=(W-2*M)*ih/iw
+            reserve=24+measure(esc(im['caption']),size=8)+22+measure('THE DAILY BRIEF · '+str(len(i['stories']))+' STORIES',size=9)+note_top+18
+            available=y-reserve
+            if available<120:
+                # Keep the entire title/intro; continue the illustrated cover instead of clipping it.
+                if y<65:raise ValueError('PDF cover text exceeds one page')
+                c.showPage();cover_pages+=1;base(cover_pages);y=H-92;available=y-reserve
+            height=min(natural_height,available)
+            if height<120:raise ValueError('PDF cover metadata leaves no readable image space')
+            image_width=height*iw/ih
+            c.drawImage(reader,M+(W-2*M-image_width)/2,y-height-16,width=image_width,height=height)
             y=p(esc(im['caption']),M,y-height-24,size=8,color=muted)
         y=p('THE DAILY BRIEF · '+str(len(i['stories']))+' STORIES',M,y-22,size=9,color=gold)
     else:
         y=p('IN THIS EDITION',M,y-40,size=9,color=gold)
     if not illustrated:
         for n,s in enumerate(i['stories'],1): y=p(f'{n:02d} &nbsp; {esc(s["title"])}',M,y-14,size=11)
-    y=p(esc(i['edition_note']),M,90,size=8,color=muted,leading=13)
+    y=p(esc(i['edition_note']),M,note_top,size=8,color=muted,leading=13)
     if y<52: raise ValueError('PDF cover overflow')
     c.showPage()
-    page=2; base(page);y=H-92
+    page=cover_pages+1; base(page);y=H-92
     for n,s in enumerate(i['stories'],1):
         if illustrated:
             if n>1:c.showPage();page+=1;base(page);y=H-92
@@ -157,11 +170,16 @@ def render_pdf(i):
         for text,size,color in blocks:
             st=ParagraphStyle('measure',parent=style,fontSize=size,leading=size*1.75)
             height+=Paragraph(text,st).wrap(W-2*M,H)[1]+8
-        if y-height<75:
-            if illustrated:raise ValueError('Illustrated story overflows its page')
+        if y-height<75 and not illustrated:
             c.showPage();page+=1;base(page);y=H-92
-        if height>H-170: raise ValueError('Story exceeds one PDF page')
-        for text,size,color in blocks: y=p(text,M,y,size=size,color=color)-8
+        if not illustrated and height>H-170: raise ValueError('Story exceeds one PDF page')
+        for text,size,color in blocks:
+            block_height=measure(text,size=size)
+            if illustrated and y-block_height<75:
+                c.showPage();page+=1;base(page);y=H-112
+                c.setFont('Helvetica',8);c.setFillColor(HexColor(gold));c.drawString(M,H-91,f'AI NEWS / STORY {n:02d} / CONTINUED')
+            if y-block_height<65:raise ValueError('Single PDF paragraph exceeds available page')
+            y=p(text,M,y,size=size,color=color)-8
         c.setStrokeColor(HexColor('#ddd5c7'));c.line(M,y,W-M,y);y-=22
     extra=Paragraph(esc(i['takeaway']),style).wrap(W-2*M,H)[1]+(65 if illustrated else 95)
     if y-extra<75:c.showPage();page+=1;base(page);y=H-92
