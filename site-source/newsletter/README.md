@@ -134,3 +134,26 @@ and catches up at08:25. Its deployment mutex is acquired only after this guard,
 which reduces homepage competition in the target window. GitHub Pages is still a
 shared deployment service: its queue is not a strict priority/SLA mechanism. The
 newsletter dedicated delivery workflow bypasses this homepage guard.
+
+## Server-only production migration (qualification in progress, 2026-10-30)
+
+The new `AP News server production` workflow is currently manual-only. Its daily
+schedule must remain disabled until the complete `AP News server production
+rehearsal` passes actual collection, grounded Korean copy, new public-model art,
+all-page PDF and browser QA, isolated public-byte checks and owner test-mail
+failure/recovery. A running model probe is not a completed migration.
+
+Generation uses pinned public model weights on the standard CPU runner, with no
+hosted inference API, AI key or paid fallback. See `server-models.md`. Prompts and
+raw source evidence are kept in authenticated private draft-release checkpoints,
+not public Actions artifacts. Accepted copy/art and validated ZIPs survive retries.
+The pinned renderer/publisher and regular subscriber queue remain separate from
+homepage builders and homepage checks.
+
+The independent server watchdog now reports 07:15 readiness delay, 08:00 progress,
+explicit failures before recovery, and one final verified-publication/whole-active-
+audience provider-acceptance result. Unknown mail health is an alert, never zero.
+The local producer remains active until the measured server qualification passes;
+then it must be retired as a production dependency to avoid competing producers.
+Server email alerts work without the local app; this chat observer still requires
+an active app. Provider acceptance is not an inbox-delivery guarantee.
