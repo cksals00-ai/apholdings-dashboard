@@ -135,16 +135,27 @@ which reduces homepage competition in the target window. GitHub Pages is still a
 shared deployment service: its queue is not a strict priority/SLA mechanism. The
 newsletter dedicated delivery workflow bypasses this homepage guard.
 
-## Server-only production migration (qualification in progress, 2026-10-30)
+## Server-only production migration (qualified, 2026-10-30)
 
-The new `AP News server production` workflow has a fail-closed qualification
-job before its producer. Scheduled checks at KST03:05/03:35 and04:05–07:05 can
-start generation only after main rehearsal41031927070 succeeds after automatic
-bot recovery, with the exact same worker workflow and runtimee31f34dd. The
-rehearsal covers actual collection, grounded Korean copy, new public-model art,
-all-page PDF and browser QA, isolated public-byte checks and owner test-mail
-failure/recovery. A running model probe is not a completed migration. Arming the
-qualification check does not mark an unfinished rehearsal as qualified.
+The `AP News server production` workflow is qualified and scheduled at
+KST03:05/03:35 and04:05–07:05. Main rehearsal41031927070 completed successfully
+on attempt2 after an automatic `github-actions[bot]` recovery, using the immutable
+runtimee31f34ddd49565cab7d366d7572a79842ca2f347. It verified five grounded Korean
+stories, six new public-model illustrations, all21 GIF frames, all six PDF pages
+and five source links, mobile390px/desktop1440px and isolated public bytes.
+Deliberately failing unrelated homepage checks did not block the news deployment.
+
+The production failure alert was accepted at2026-10-30T09:18:16.800Z before bot
+recovery started at09:18:45Z. The owner-only test newsletter's injected first
+failure triggered an alert at09:25:44.943Z; its second attempt was accepted at
+09:26:07.626Z, followed by a recovery alert at09:26:09.489Z. The regular issue
+and subscriber queue were not resent by this rehearsal. Automatic rollout proof
+41033418749 passed without publishing another issue. Production remains gated on
+this successful proof and an exact worker-workflow/runtime match; changes to
+unrelated homepage code do not invalidate that comparison.
+
+Evidence: https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/41031927070
+and https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/41033418749.
 
 Generation uses pinned public model weights on the standard CPU runner, with no
 hosted inference API, AI key or paid fallback. See `server-models.md`. Prompts and
@@ -156,8 +167,9 @@ homepage builders and homepage checks.
 The independent server watchdog now reports 07:15 readiness delay, 08:00 progress,
 explicit failures before recovery, and one final verified-publication/whole-active-
 audience provider-acceptance result. Unknown mail health is an alert, never zero.
-Retire the local producer when this gated server cadence is armed, to avoid
-competing creators. Once the full rehearsal succeeds, activation is entirely
-server-side; it does not wait for the local computer or app to reconnect.
+The competing local producer is paused. Creation, checkpoint recovery, completed
+ZIP transfer,08:00 publication reservation, mail and independent server alerts
+operate without the local computer or app. Failed quality gates still stop unsafe
+publication and alert rather than fabricate a completed edition.
 Server email alerts work without the local app; this chat observer still requires
 an active app. Provider acceptance is not an inbox-delivery guarantee.

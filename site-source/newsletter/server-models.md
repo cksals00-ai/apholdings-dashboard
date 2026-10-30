@@ -6,12 +6,12 @@ standard GitHub-hosted CPU runner. Prompts contain only official public source
 material and AP editorial context. Subscriber records and mail credentials never
 enter generation. Model child processes receive a minimal environment.
 
-Pinned public weights under evaluation:
+Pinned public weights validated by full server rehearsal41031927070:
 
 - Qwen3-8B Q4_K_M, official public quantized weights
   https://huggingface.co/Qwen/Qwen3-8B-GGUF
   revision7c41481f57cb95916b40956ab2f0b139b296d974 (Apache2.0).
-- Qwen3-14B Q4_K_M for English visual direction (CPU trial in progress)
+- Qwen3-14B Q4_K_M for English visual direction (CPU rehearsal passed)
   https://huggingface.co/Qwen/Qwen3-14B-GGUF
   revision530227a7d994db8eca5ab5ced2fb692b614357fd (Apache2.0).
   It runs after the copy model closes, with an8192-token CPU context, before diffusion.
@@ -40,3 +40,7 @@ qualification check may be armed earlier; it cannot start generation until the
 fixed main-branch rehearsal succeeds after an automatic bot recovery. The whole
 producer workflow and its immutable runtime pin must match that tested version.
 This allows unattended activation after qualification without a local-app step.
+
+The full rehearsal passed on2026-10-30 after automatic bot recovery, including
+public preview bytes and one owner-only test newsletter acceptance. Automatic
+rollout verification41033418749 also passed. No hosted inference API was used.
