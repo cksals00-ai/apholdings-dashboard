@@ -4,6 +4,9 @@ from pathlib import Path
 from newsletter_grounding import parse_json
 TEXT_REPO='Qwen/Qwen3-8B-GGUF'
 TEXT_REV='7c41481f57cb95916b40956ab2f0b139b296d974'
+ART_REPO='Qwen/Qwen3-14B-GGUF'
+ART_REV='530227a7d994db8eca5ab5ced2fb692b614357fd'
+TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen3-14B-Q4_K_M.gguf',8192)}
 IMAGE_REPO='segmind/SSD-1B'
 IMAGE_REV='60987f37e94cd59c36b1cba832b9f97b57395a10'
 def completion_prompt(system,question,source_context=None):
@@ -16,15 +19,18 @@ def completion_prompt(system,question,source_context=None):
  return prefix+f'<|im_start|>system\n{system}<|im_end|>\n<|im_start|>user\n{data(question)}\n/no_think<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n'
 
 class TextModel:
- def __init__(self,runtime,folder):self.runtime=Path(runtime);self.folder=Path(folder);self.proc=None
+ def __init__(self,runtime,folder,profile='copy'):
+  if profile not in TEXT_PROFILES:raise ValueError('Unknown public CPU model profile')
+  self.runtime=Path(runtime);self.folder=Path(folder);self.proc=None;self.profile=profile
  def __enter__(self):
   from huggingface_hub import hf_hub_download
-  model=hf_hub_download(TEXT_REPO,'Qwen3-8B-Q4_K_M.gguf',revision=TEXT_REV,token=False)
+  repo,revision,filename,context=TEXT_PROFILES[self.profile]
+  model=hf_hub_download(repo,filename,revision=revision,token=False,cache_dir=Path.home()/'.cache/ap-news-text'/self.profile)
   executable=next(self.runtime.rglob('llama-server'))
   env={k:os.environ[k] for k in ('PATH','HOME','LANG','LC_ALL','TMPDIR') if k in os.environ}
   env['LD_LIBRARY_PATH']=':'.join(sorted({str(p.parent.resolve()) for p in self.runtime.rglob('*.so*')}))
   self.log=(self.folder/'text-runtime.log').open('a')
-  self.proc=subprocess.Popen([str(executable.resolve()),'-m',model,'-c','16384','-t','4','-ngl','0','--host','127.0.0.1','--port','8080'],stdout=self.log,stderr=self.log,env=env)
+  self.proc=subprocess.Popen([str(executable.resolve()),'-m',model,'-c',str(context),'-t','4','-ngl','0','--host','127.0.0.1','--port','8080'],stdout=self.log,stderr=self.log,env=env)
   try:
    for _ in range(180):
     try:
@@ -46,7 +52,8 @@ class TextModel:
   with urllib.request.urlopen(request,timeout=1500) as response:result=json.load(response)
   import hashlib
   output=self.folder/'model-outputs';output.mkdir(exist_ok=True)
-  (output/(hashlib.sha256(prompt.encode()).hexdigest()[:16]+'.json')).write_text(json.dumps(result,ensure_ascii=False,indent=2))
+  result['_ap_runtime']={'profile':self.profile,'repository':TEXT_PROFILES[self.profile][0],'revision':TEXT_PROFILES[self.profile][1]}
+  (output/(hashlib.sha256((self.profile+'\n'+prompt).encode()).hexdigest()[:16]+'.json')).write_text(json.dumps(result,ensure_ascii=False,indent=2))
   if result.get('stopped_limit'):raise ValueError('Model generation reached token limit')
   return parse_json(result['content'])
 

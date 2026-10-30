@@ -11,6 +11,11 @@ Pinned public weights under evaluation:
 - Qwen3-8B Q4_K_M, official public quantized weights
   https://huggingface.co/Qwen/Qwen3-8B-GGUF
   revision7c41481f57cb95916b40956ab2f0b139b296d974 (Apache2.0).
+- Qwen3-14B Q4_K_M for English visual direction (CPU trial in progress)
+  https://huggingface.co/Qwen/Qwen3-14B-GGUF
+  revision530227a7d994db8eca5ab5ced2fb692b614357fd (Apache2.0).
+  It runs after the copy model closes, with an8192-token CPU context, before diffusion.
+  Its weights are downloaded anonymously into a separate uncached directory.
 - Segmind SSD-1B https://huggingface.co/segmind/SSD-1B
   revision60987f37e94cd59c36b1cba832b9f97b57395a10 (Apache2.0 model card).
 - LCM-LoRA SSD-1B https://huggingface.co/latent-consistency/lcm-lora-ssd-1b

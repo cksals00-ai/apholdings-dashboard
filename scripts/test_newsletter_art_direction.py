@@ -90,6 +90,9 @@ class ArtDirectionTests(unittest.TestCase):
   model=Mock();model.ask.side_effect=[self.raw(p) for p in plans[1:]];progress=[]
   result=plan_art(model,[{'title':'기사','summary':'요약','fact':'사실'}]*5,0,previous_plans=[plans[0],duplicate],on_progress=lambda x:progress.append(len(x)))
   self.assertEqual(result[0],plans[0]);self.assertEqual(model.ask.call_count,5);self.assertEqual(progress,[1,2,3,4,5,6])
+ def test_wordy_labels_and_centered_hexagon_motifs_are_rejected(self):
+  for subject,scene in [('a long subject with far too many words that simply repeats a whole paragraph in the image caption','A book.'),('blank books','Books with publisher labels and handwritten notes.'),('metal tiles','A centered cluster of hexagonal tiles.')]:
+   with self.subTest(scene=scene),self.assertRaises(ValueError):validate_scene(subject,scene)
  def test_patient_ai_and_product_interfaces_rejected_before_diffusion(self):
   for scene in ('A doctor reviewing patient data with AI recommendations.','A laptop screen showing code and a product interface.'):
    with self.subTest(scene=scene),self.assertRaises(ValueError):validate_scene('a person beside a tablet',scene)

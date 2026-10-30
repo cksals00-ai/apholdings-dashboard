@@ -23,6 +23,15 @@ class ProducerTests(unittest.TestCase):
   self.assertIn('in Korean',correction)
   self.assertIn('Remove unsupported availability',correction)
   self.assertIn('Select evidence_ids',correction)
+ def test_art_only_recovery_does_not_restart_copy_model(self):
+  day=datetime.now(p.server.KST).date().isoformat();body='source evidence';digest=hashlib.sha256(body.encode()).hexdigest()
+  with tempfile.TemporaryDirectory() as temp:
+   root=Path(temp);state={'date':day,'mode':'test','stories':[{'url':f'https://blog.google/a{i}','review':{},'source_hash':digest} for i in range(5)],'candidates':[{'url':f'https://blog.google/a{i}','parser_revision':p.PARSER_REVISION,'text':body,'body_sha256':digest} for i in range(24)],'editorial':{'lead_index':0}}
+   (root/'draft.json').write_text(json.dumps(state))
+   def start(*args,**kwargs):
+    self.assertEqual(kwargs.get('profile'),'art');raise RuntimeError('art profile selected')
+   with patch.dict(os.environ,AP_NEWS_SITE_ROOT=temp),patch.object(p.b,'ROOT',root),patch.object(p,'previous_issues',return_value=[]),patch.object(p,'validate_grounding',return_value=True),patch.object(p,'TextModel',side_effect=start):
+    with self.assertRaisesRegex(RuntimeError,'art profile selected'):p.produce(day,root,root,True)
  def test_recovery_reuses_validated_bundle_even_after_local_published_json(self):
   day=datetime.now(p.server.KST).date().isoformat()
   with tempfile.TemporaryDirectory() as temp:
