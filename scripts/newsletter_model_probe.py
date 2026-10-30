@@ -7,7 +7,8 @@ start=time.monotonic()
 model=hf_hub_download('Qwen/Qwen3-4B-GGUF','Qwen3-4B-Q4_K_M.gguf',revision='bc640142c66e1fdd12af0bd68f40445458f3869b',token=False)
 server=next(Path('.cpu-runtime').rglob('llama-server'))
 log=(out/'text-runtime.log').open('w')
-proc=subprocess.Popen([str(server.resolve()),'-m',model,'-c','8192','-t','2','-ngl','0','--host','127.0.0.1','--port','8080'],stdout=log,stderr=log)
+runtime_env=dict(os.environ,LD_LIBRARY_PATH=':'.join(sorted({str(p.parent.resolve()) for p in Path('.cpu-runtime').rglob('*.so*')})))
+proc=subprocess.Popen([str(server.resolve()),'-m',model,'-c','8192','-t','2','-ngl','0','--host','127.0.0.1','--port','8080'],stdout=log,stderr=log,env=runtime_env)
 try:
  for _ in range(180):
   try:
