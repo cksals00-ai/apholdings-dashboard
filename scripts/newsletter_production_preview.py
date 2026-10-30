@@ -41,6 +41,8 @@ def finish():
    emit(f'test-{run}:newsletter','test_newsletter',{'subject':'[AP News 서버 자동 제작 테스트호] 유료 AI API 없이 제작·공개 검증','message':'공식 원문 수집부터 공개 모델 편집·이미지·PDF·자동 검수까지 서버에서 생성한 별도 테스트호입니다. 정규호 재발송이 아닙니다.','run_url':os.environ['RUN_URL']},(out/'email.html').read_text(),inject=True);break
   except (HTTPError,ValueError):
    if attempt==2:raise
+   try:emit(f'test-{run}:mail-failure','test_alert',{'subject':'[AP News 서버 자동검증] 테스트 메일 장애·자동 재시도 중','message':'테스트 메일의 첫 장애를 감지했습니다. 복구 완료를 기다리지 않고 먼저 알리며 기존 동일 요청으로20초 뒤 재시도합니다. 정규호 발송 상태는 바꾸지 않습니다.','run_url':os.environ['RUN_URL']})
+   except Exception as exc:print('Immediate test alert was not accepted:',type(exc).__name__,flush=True)
    time.sleep(20)
  emit(f'test-{run}:recovery','test_recovery',{'subject':'[AP News 서버 자동 제작 검증 완료] 공개·메일 접수 확인','message':'서버 제작 테스트호의 웹/PDF/모든 이미지 공개 바이트를 검증했고, 메일의 첫 주입 장애는 재시도로 복구해 제공사가1건 접수했습니다. 받은편지함 도착 확인과는 구분합니다. '+b.ORIGIN+manifest['page'],'run_url':os.environ['RUN_URL']})
  print('Server-generated preview public bytes verified; one owner test mail accepted')
