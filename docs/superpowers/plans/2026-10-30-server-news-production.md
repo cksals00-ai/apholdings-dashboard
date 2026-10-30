@@ -25,3 +25,19 @@ Limits: source verification is automated and never represented as human review.
 Invalid/insufficient source material or failed quality checks stop publication and
 trigger notification; no old issue or fabricated news is substituted. Infrastructure
 execution still uses the existing runner quotas; no new paid infrastructure is purchased.
+
+## Qualification evidence so far
+
+- Standard public CPU runner measured 4 CPUs / 15.6 GiB. Public SSD-1B/LCM
+  art probe completed in196 seconds; no hosted AI inference or billing used.
+- 68 newsletter unit tests, regular mail queue core tests, four watchdog health
+  tests and workflow/type validation pass. These do not qualify content quality.
+- Private draft checkpoint actually saved/restored; no raw drafts retained in
+  public Actions artifacts.
+- Operational Edge function v5 and minimal RPC migration deployed; unauthenticated
+  watch denied401; independent server minute-watch returns200. Today's original
+  regular queue remains accepted3 / blockers0; no resend.
+- Full 8B source-to-art/PDF rehearsal40995176898 in progress. Main recovery
+  rehearsal40995484330 queued with private resume and intentional first failure.
+- Daily server production schedule remains OFF; local producer is not retired
+  until successful end-to-end qualification and actual output review.
