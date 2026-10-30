@@ -1,7 +1,10 @@
 name: AP News server production
-# Manual qualification only; enable daily schedule after complete rehearsal passes.
 on:
   workflow_dispatch:
+  schedule:
+    # KST03:05/03:35 and04:05–07:05 recovery. Production is gated on full server proof.
+    - cron: '5,35 18 * * *'
+    - cron: '5 19-22 * * *'
 concurrency:
   group: ap-news-server-production
   cancel-in-progress: false
@@ -9,7 +12,32 @@ permissions:
   contents: write
   actions: write
 jobs:
+  qualification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      qualified: ${{ steps.proof.outputs.qualified }}
+    steps:
+      - name: Checkout immutable rollout verifier without homepage assets
+        uses: actions/checkout@v7
+        with:
+          ref: ca50124f3ed2ee86b401cf99823e3fe60002366c
+          sparse-checkout: scripts
+          path: .qualification-runtime
+      - name: Test fail-closed rollout conditions
+        run: python3 -m unittest discover -s .qualification-runtime/scripts -p 'test_newsletter_qualification.py'
+      - name: Require real recovered source-to-public-preview-and-mail server qualification
+        id: proof
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CALLER_REVISION: ${{ github.sha }}
+        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 40999503801 --revision "$CALLER_REVISION" --runtime 2cd3090b7bf585b9afebfc59094d9b771a853c83
   produce:
+    needs: qualification
+    if: ${{ needs.qualification.outputs.qualified == 'true' }}
     uses: ./.github/workflows/ap-news-produce.yml
     with:
       dry_run: false

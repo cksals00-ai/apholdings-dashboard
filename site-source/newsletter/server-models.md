@@ -26,6 +26,10 @@ receipts, source body hashes, model review output, image scores and all rendered
 PDF/browser pages remain in an authenticated private company draft-release checkpoint for diagnosis. Publication
 stops and sends a server alert if a gate fails.
 
-Do not enable the production schedule until an actual full server rehearsal has
-passed, including new source collection, copy and art, all PDF pages, mobile and
-desktop, isolated public preview bytes and owner-only test-mail acceptance.
+Production remains fail-closed until an actual full server rehearsal has passed,
+including new source collection, copy and art, all PDF pages, mobile and desktop,
+isolated public preview bytes and owner-only test-mail acceptance. A scheduled
+qualification check may be armed earlier; it cannot start generation until the
+fixed main-branch rehearsal succeeds after an automatic bot recovery. The whole
+producer workflow and its immutable runtime pin must match that tested version.
+This allows unattended activation after qualification without a local-app step.
