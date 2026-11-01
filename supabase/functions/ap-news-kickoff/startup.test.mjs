@@ -1,0 +1,14 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {decide} from './startup.mjs';
+const now='2026-11-01T18:05:00Z';
+test('independent03:05starts absent producer',()=>assert.equal(decide(now,[],null).kind,'start'));
+test('outsidewindowneverstarts',()=>assert.equal(decide('2026-11-01T17:59:00Z',[],null).kind,'outside'));
+test('active producer never duplicated',()=>assert.equal(decide(now,[{event:'schedule',head_branch:'main',created_at:now,status:'in_progress'}],null).kind,'observed'));
+test('success not repeated',()=>assert.equal(decide(now,[{event:'schedule',head_branch:'main',created_at:now,status:'completed',conclusion:'success'}],null).kind,'observed'));
+test('failed production delegates to automatic recovery',()=>assert.equal(decide(now,[{event:'schedule',head_branch:'main',created_at:now,status:'completed',conclusion:'failure'}],null).kind,'failure'));
+test('uncertain API does not mean empty runs',()=>assert.throws(()=>decide(now,null,null)));
+test('accepted dispatch cooldown avoids invisible-run duplicate',()=>assert.equal(decide(now,[],{updated_at:'2026-11-01T18:04:30Z',attempts:1}).kind,'waiting'));
+test('bounded attempts',()=>assert.equal(decide(now,[],{updated_at:'2026-11-01T17:50:00Z',attempts:3}).kind,'exhausted'));
+test('yesterday run cannot suppress new edition',()=>assert.equal(decide(now,[{event:'schedule',head_branch:'main',created_at:'2026-10-31T18:05:00Z',status:'completed',conclusion:'success'}],null).kind,'start'));
+test('queued request is not actual running production',()=>assert.equal(decide(now,[{event:'schedule',head_branch:'main',created_at:now,status:'queued'}],null).kind,'queued'));
+test('rollout qualification smoke never suppresses actual production',()=>assert.equal(decide(now,[{event:'schedule',head_branch:'main',created_at:now,status:'completed',conclusion:'success',event:'workflow_run',head_branch:'main'}],null).kind,'start'));
+test('non-main manual run never suppresses actual production',()=>assert.equal(decide(now,[{event:'schedule',head_branch:'main',created_at:now,status:'in_progress',event:'workflow_dispatch',head_branch:'test'}],null).kind,'start'));

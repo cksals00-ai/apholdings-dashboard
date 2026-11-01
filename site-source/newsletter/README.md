@@ -173,3 +173,35 @@ operate without the local computer or app. Failed quality gates still stop unsaf
 publication and alert rather than fabricate a completed edition.
 Server email alerts work without the local app; this chat observer still requires
 an active app. Provider acceptance is not an inbox-delivery guarantee.
+
+## Independent startup and delayed chat catch-up (2026-11-02)
+
+GitHub schedule configuration is not proof of on-time execution. The Nov2first
+actual production run was06:56KST despite03:05cron configuration. A separate
+Supabase `ap-news-independent-kickoff` cron now invokes authenticated
+`ap-news-kickoff` every minute during KST03:00–07:59. Its action window is
+03:05–07:00. It examines only real main-branch schedule/workflow_dispatch runs,
+not rollout smoke checks or another branch. Existing in-progress, queued or
+successful runs are never duplicated. Missing requests are atomically claimed
+with a15-minute cooldown and maximum3starts per Korean date. Accepted dispatch
+is not execution proof; unconfirmed/queued startup alerts begin03:10. API errors
+are alerts, never interpreted as an empty run list. Failed production remains
+with existing bounded automatic recovery rather than unlimited redispatch.
+
+The existing GitHub authentication was transferred to the server secret
+`AP_NEWS_GITHUB_DISPATCH_TOKEN` only after the user's explicit approval onNov2;
+no token value appears in source, logs or this document. It is used only against
+the fixed company repository and production workflow. The source-generation
+child still receives no GitHub/subscriber/mail credentials. No paid AI API used.
+
+The supplemental chat observer now checks every5minutes08:00–08:30, waits if a
+heartbeat arrives07:55–07:59, and catches up on missing reports if it fires late.
+It does not silently skip because the timer differs from an exact scheduled
+minute. Same-state reports remain deduplicated. The chat still requires the app;
+independent operating mail and startup do not.
+
+Validation:12startup regression tests, existing operational health tests,
+Deno type-check, transactional live claim/cooldown/retry-ceiling/RLS checks and
+an authenticated read-only server query of today's real runs. Tomorrow's actual
+03:05start must still be measured; today's in-progress/manual recovery is not
+proof of an unattended completed edition.
