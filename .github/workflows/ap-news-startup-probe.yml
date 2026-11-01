@@ -1,0 +1,13 @@
+name: AP News independent startup probe
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify_dispatch:
+    if: ${{ github.repository == 'cksals00-ai/apholdings-dashboard' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Confirm independent server dispatch without production or mail
+        run: python3 -c "print('Independent server dispatch executed. No generation, publication, database registration or mail.')"

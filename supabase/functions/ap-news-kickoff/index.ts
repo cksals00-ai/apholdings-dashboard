@@ -24,6 +24,7 @@ Deno.serve(async req=>{
   if(!token||!(token===KEY||(/^[a-f0-9]{64}$/.test(token)&&hash===expected)))return new Response('Unauthorized',{status:401});
   authenticated=true;
   const now=new Date(),day=new Date(+now+9*3600000).toISOString().slice(0,10),body=await req.json();
+  if(body.probe===true){await github('actions/workflows/ap-news-startup-probe.yml/dispatches','POST',{ref:'main'});return Response.json({probe_requested:true,production_started:false,execution_confirmed:false});}
   const minute=new Date(+now+9*3600000).getUTCHours()*60+new Date(+now+9*3600000).getUTCMinutes();
   if(!body.observe&&(minute<185||minute>420))return Response.json({status:'outside_window',day});
   const runs=await github('actions/workflows/'+WORKFLOW+'/runs?per_page=30');
