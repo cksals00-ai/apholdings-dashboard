@@ -205,3 +205,8 @@ Deno type-check, transactional live claim/cooldown/retry-ceiling/RLS checks and
 an authenticated read-only server query of today's real runs. Tomorrow's actual
 03:05start must still be measured; today's in-progress/manual recovery is not
 proof of an unattended completed edition.
+
+Independent dispatch was also exercised through the real Supabase endpoint: probe
+41361522696 completed successfully, with no generation/publication/registration/
+mail. Endpointversion4 includes this fixed, read-only diagnostic workflow; it
+does not accept arbitrary repository, workflow or ref targets.
