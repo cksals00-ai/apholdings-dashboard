@@ -29,17 +29,17 @@ jobs:
       - name: Checkout immutable rollout verifier without homepage assets
         uses: actions/checkout@v7
         with:
-          ref: ca50124f3ed2ee86b401cf99823e3fe60002366c
+          ref: 77f08d24631414587e1d5e20406d1aacb08826a0
           sparse-checkout: scripts
           path: .qualification-runtime
       - name: Test fail-closed rollout conditions
-        run: python3 -m unittest discover -s .qualification-runtime/scripts -p 'test_newsletter_qualification.py'
+        run: python3 -m unittest discover -s .qualification-runtime/scripts -p 'test_newsletter*qualification.py'
       - name: Require real recovered source-to-public-preview-and-mail server qualification
         id: proof
         env:
           GH_TOKEN: ${{ github.token }}
           CALLER_REVISION: ${{ github.sha }}
-        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 41031927070 --revision "$CALLER_REVISION" --runtime e31f34ddd49565cab7d366d7572a79842ca2f347
+        run: python3 .qualification-runtime/scripts/newsletter_environment_qualification.py --full 41031927070 --probe 41543046848 --revision "$CALLER_REVISION" --runtime e31f34ddd49565cab7d366d7572a79842ca2f347
   produce:
     needs: qualification
     if: ${{ needs.qualification.outputs.qualified == 'true' && github.event_name != 'workflow_run' }}
