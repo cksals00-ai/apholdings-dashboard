@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 import newsletter_environment_qualification as q
 class EnvironmentTests(unittest.TestCase):
  def setUp(self):
@@ -16,4 +17,10 @@ class EnvironmentTests(unittest.TestCase):
    with self.subTest(key=key),self.assertRaises(ValueError):q.evaluate(self.old,self.new,self.new,bad,123)
  def test_rejects_probe_of_different_worker(self):
   with self.assertRaises(ValueError):q.evaluate(self.old,self.new,self.new+'extra',self.run,123)
+ def test_probe_definition_tamper_is_rejected_before_qualification(self):
+  from base64 import b64encode
+  run=dict(self.run,head_sha='a'*40)
+  with patch.object(q.original,'api',side_effect=[run,run,{'encoding':'base64','content':b64encode(b'changed probe').decode()}]),patch.object(q.original,'worker_at',side_effect=[self.old,self.new,self.new]),patch.object(q.original,'evaluate',return_value=True):
+   with self.assertRaisesRegex(ValueError,'probe definition'):
+    q.qualify(123,123,'a'*40,'b'*40)
 if __name__=='__main__':unittest.main()
