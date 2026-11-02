@@ -1,5 +1,6 @@
 // Local release inventory; not a live Play Console status.
 export const androidApps = [
+  {id:"FoldBlock",name:"폴드블록",package_id:"com.apholdings.foldblock",status:"preparing"},
   {
     "id": "QuizRanker",
     "name": "퀴즈랭커",
@@ -86,7 +87,7 @@ export const androidApps = [
   },
   {
     "id": "SeunggyuAndMe",
-    "name": "SeunggyuAndMe",
+    "name": "아빠랑 나랑",
     "package_id": "com.apholdings.seunggyuandme",
     "status": "preparing"
   },

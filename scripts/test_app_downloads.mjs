@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {downloadSummary,renderDownloads} from '../admin/app-downloads.mjs';
+const apps=[{id:'one',name:'One',status:'live'}],androidApps=[{id:'one',name:'One',package_id:'com.one'}];
+const snap={schemaVersion:1,platform:'google',periodStart:'2026-10-07',periodEnd:'2026-11-03',observedAt:'2026-11-03T02:00:00Z',apps:[{packageId:'com.one',status:'production',installs:0,metric:'installed_users',complete:true}]};
+const metrics=Array.from({length:28},(_,i)=>({app_id:'one',day:new Date(Date.UTC(2026,9,7+i)).toISOString().slice(0,10),downloads:1}));
+const opts={apps,androidApps,metrics,today:'2026-11-03',runtime:[{id:'google_downloads',detail:JSON.stringify(snap)}]};
+assert.equal(downloadSummary(opts).total,28);
+assert.equal(downloadSummary({...opts,metrics:[]}).total,null);
+assert.equal(downloadSummary({...opts,metrics:[metrics[0]]}).apple,1);
+assert.equal(downloadSummary({...opts,metrics:[metrics[0]]}).total,null);
+assert.equal(downloadSummary({...opts,runtime:[]}).google,null);
+assert.equal(downloadSummary({...opts,runtime:[{id:'google_downloads',detail:JSON.stringify({...snap,periodEnd:'2026-11-02'})}]}).total,null);
+const missing=structuredClone(snap); missing.apps[0].installs=null;
+assert.equal(downloadSummary({...opts,runtime:[{id:'google_downloads',detail:JSON.stringify(missing)}]}).total,null);
+const duplicate=structuredClone(snap);duplicate.apps.push({...duplicate.apps[0]});
+assert.equal(downloadSummary({...opts,runtime:[{id:'google_downloads',detail:JSON.stringify(duplicate)}]}).google,null);
+assert.equal(downloadSummary({...opts,runtime:[{id:'google_downloads',detail:'null'}]}).total,null);
+assert.equal(downloadSummary({...opts,metricsError:true}).apple,null);
+assert.equal(downloadSummary({...opts,metrics:metrics.map(r=>({...r,platform:'google'}))}).apple,null);
+assert.ok(renderDownloads({...opts,runtime:[]}).includes('전체 합계 미확정'));
+assert.ok(renderDownloads(opts).includes('고유 사용자 수가 아닙니다'));
+const bad=structuredClone(snap);bad.apps[0].installs=-1;
+assert.equal(downloadSummary({...opts,runtime:[{id:'google_downloads',detail:JSON.stringify(bad)}]}).google,null);
+console.log('download aggregation and missingness assertions passed');
+
+assert.ok(!renderDownloads({...opts,androidApps:[{...androidApps[0],name:'<script>alert(1)</script>'}]}).includes('<script>'));

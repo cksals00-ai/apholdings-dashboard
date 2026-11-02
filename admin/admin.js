@@ -1,6 +1,7 @@
 import { createB2BSupport } from './b2b-support.mjs?v=20261027';
-import { renderFinance, metricSummary } from './app-finance.mjs?v=4';
-import { androidApps } from './android-app-registry.mjs?v=1';
+import { renderFinance, metricSummary } from './app-finance.mjs?v=20261103';
+import { renderDownloads } from './app-downloads.mjs?v=20261103-1';
+import { androidApps } from './android-app-registry.mjs?v=20261103';
 import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?v=20261009-1';
 import { createNewsletter } from './newsletter.js?v=20261027-pipeline';
 import { createShop } from './shop.js?v=research-20261009';
@@ -1172,7 +1173,8 @@ function renderAppSales() {
   }
   const money = (e) => e.price_milli != null && e.currency ? `${(e.price_milli / 1000).toLocaleString('ko-KR')} ${escapeHtml(e.currency)}` : '';
   const live = appIap.length ? `<h3 class="app-sub">실시간 결제 알림 · 최근 ${appIap.length}건</h3><div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>시각</th><th>앱</th><th>종류</th><th>상품</th><th class="num">금액</th></tr></thead><tbody>${appIap.map((e) => `<tr><td class="date">${stamp(e.event_at || e.received_at)}</td><td>${escapeHtml(e.app_id ? appName(e.app_id) : (e.bundle_id || '—'))}</td><td><span class="app-kind" data-kind="${/REFUND|REVOKE|EXPIRED/.test(e.notification_type) ? 'rejected' : 'approved'}">${escapeHtml(e.notification_type)}${e.subtype ? ` · ${escapeHtml(e.subtype)}` : ''}</span>${e.environment === 'Sandbox' ? '<div class="asset-growth">테스트</div>' : ''}</td><td>${escapeHtml(e.product_id || '—')}</td><td class="num">${money(e)}</td></tr>`).join('')}</tbody></table></div>` : '';
-  const finance = renderFinance({ apps: appFinancePlatform === 'google' ? androidApps : apps, metrics: appMetrics, runtime: appRuntime, platform: appFinancePlatform, days: appFinanceDays, metricsError: appFinancePlatform === 'apple' && appMetricsError });
+  const downloads = renderDownloads({ apps, androidApps, metrics: appMetrics, runtime: appRuntime, metricsError: appMetricsError });
+  const finance = downloads + renderFinance({ apps: appFinancePlatform === 'google' ? androidApps : apps, metrics: appMetrics, runtime: appRuntime, platform: appFinancePlatform, days: appFinanceDays, metricsError: appFinancePlatform === 'apple' && appMetricsError });
   $('#app-sales').innerHTML = finance + status + (has ? salesViz() + `<details class="app-more viz-table"><summary>표로 보기</summary>${table}</details>` : table) + live;
   $('#app-sales [data-finance-platform]').addEventListener('change', (ev) => { appFinancePlatform = ev.target.value; renderAppSales(); });
   $('#app-sales [data-finance-days]').addEventListener('change', (ev) => { appFinanceDays = Number(ev.target.value); renderAppSales(); });

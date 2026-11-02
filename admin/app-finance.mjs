@@ -1,7 +1,9 @@
+import { downloadSummary } from './app-downloads.mjs?v=20261103-1';
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const isoDay = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0,10);
 const money = (v) => v === null ? '미수집' : `${v.toLocaleString('ko-KR')} KRW`;
-export function financeRows({apps=[],metrics=[],today=isoDay(),days=30,platform='apple',metricsError=false}={}) {
+export function financeRows({apps=[],metrics=[],today=isoDay(),days=30,platform='apple',metricsError=false,runtime=[]}={}) {
+  const googleStatus=new Map(downloadSummary({androidApps:apps,runtime}).googleRows.map(a=>[a.id,({production:'정식 공개',in_review:'심사 중',internal:'내부 테스트',not_created:'미생성 · 주간 한도'}[a.releaseStatus] || '출시 상태 미연결')]));
   const n=[7,30,90].includes(Number(days)) ? Number(days) : 30;
   const start=new Date(`${today}T00:00:00Z`); start.setUTCDate(start.getUTCDate()-n+1);
   const since=start.toISOString().slice(0,10);
@@ -9,7 +11,7 @@ export function financeRows({apps=[],metrics=[],today=isoDay(),days=30,platform=
     // The existing collector is Apple-only; Google must never inherit its rows.
     const rows=platform==='apple' && !metricsError ? metrics.filter(r=>r.app_id===a.id && (!r.platform || r.platform==='apple') && r.day>=since && r.day<=today && !/sandbox|test/i.test(r.environment || '')) : [];
     const values=rows.filter(r=>r.proceeds_krw!==null && r.proceeds_krw!==undefined && r.proceeds_krw!=='' && Number.isFinite(Number(r.proceeds_krw)));
-    return {id:a.id,name:a.name,platform,status:platform==='apple' ? ({live:'출시',in_review:'심사 중',preparing:'준비 중',paused:'보류'}[a.status] || '확인 필요') : '출시 상태 미연결',revenue:values.length ? values.reduce((sum,r)=>sum+Number(r.proceeds_krw),0) : null,latest:rows.map(r=>r.day).sort().at(-1) || null,partial:rows.length<n,fx:rows.some(r=>r.fx_note),error:metricsError,since,today};
+    return {id:a.id,name:a.name,platform,status:platform==='apple' ? ({live:'출시',in_review:'심사 중',preparing:'준비 중',paused:'보류'}[a.status] || '확인 필요') : googleStatus.get(a.id),revenue:values.length ? values.reduce((sum,r)=>sum+Number(r.proceeds_krw),0) : null,latest:rows.map(r=>r.day).sort().at(-1) || null,partial:rows.length<n,fx:rows.some(r=>r.fx_note),error:metricsError,since,today};
   });
 }
 export function renderFinance(options={}) {
