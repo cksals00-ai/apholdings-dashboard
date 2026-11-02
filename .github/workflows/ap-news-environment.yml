@@ -1,0 +1,48 @@
+name: AP News pinned environment compatibility
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compatibility:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
+        with:
+          ref: e31f34ddd49565cab7d366d7572a79842ca2f347
+          path: .production-runtime
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Check runner pin and unchanged production runtime
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          text=Path('.github/workflows/ap-news-produce.yml').read_text()
+          assert 'runs-on: ubuntu-24.04' in text and 'runs-on: ubuntu-latest' not in text
+          assert 'ref: e31f34ddd49565cab7d366d7572a79842ca2f347' in text
+          assert 'VERSION_ID="24.04"' in Path('/etc/os-release').read_text()
+          PY
+          python3 -m unittest discover -s scripts -p 'test_newsletter*qualification.py'
+      - name: Install exact reviewed browser dependencies and launch real Chromium
+        run: |
+          pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install -r .production-runtime/requirements-newsletter-producer.txt
+          python -m playwright install --with-deps chromium
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              browser=p.chromium.launch()
+              page=browser.new_page(viewport={'width':390,'height':844})
+              page.set_content('<html lang="ko"><body>AP 뉴스 실행 환경 검증</body></html>')
+              assert page.locator('body').inner_text()=='AP 뉴스 실행 환경 검증'
+              page.screenshot(path='/tmp/ap-news-environment.png')
+              browser.close()
+          PY
+      - name: Run existing isolated news safety tests
+        working-directory: .production-runtime
+        run: |
+          python -m unittest discover -s scripts -p 'test_newsletter*.py'
+          node --test supabase/functions/ap-news/core.test.mjs

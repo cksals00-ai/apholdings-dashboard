@@ -19,7 +19,7 @@ permissions:
   actions: write
 jobs:
   produce:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 200
     env:
       HF_HUB_DISABLE_TELEMETRY: '1'
