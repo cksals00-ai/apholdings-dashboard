@@ -12,3 +12,11 @@ DRAFT_INDEXED=obj({**{k:v for k,v in DRAFT["properties"].items() if k!="evidence
 def indexed_draft(segment_count):
  if type(segment_count) is not int or segment_count<1:raise ValueError('Evidence segments required')
  return obj({**DRAFT_INDEXED['properties'],'evidence_ids':{'type':'array','items':{'type':'integer','minimum':0,'maximum':segment_count-1},'minItems':1,'maxItems':min(4,segment_count)}})
+
+
+def source_novelty(segments):
+ if not isinstance(segments,list) or not segments:raise ValueError('Original source segments required')
+ texts=[part.get('text') if isinstance(part,dict) else None for part in segments]
+ if any(not isinstance(text,str) or not 30<=len(text)<=800 for text in texts):raise ValueError('Unusable source novelty evidence')
+ # Constrain only evidence copying, never either semantic news/duplicate verdict.
+ return obj({**NOVELTY['properties'],'novel_quote':{'type':'string','enum':['',*dict.fromkeys(texts)]}})
