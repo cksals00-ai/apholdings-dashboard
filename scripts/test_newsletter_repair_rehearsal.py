@@ -83,11 +83,11 @@ class RehearsalTests(unittest.TestCase):
  def test_resumed_cache_rechecks_old_faults_without_redrafting_verified_work(self):
   state,sources=self.cache_fixture();saved=[]
   failures=[ValueError('Independent source review rejected draft: 학습 효과 입증 근거 없음'),ValueError('Independent source review rejected draft: 모든 학생에게 학습 효과가 입증됐다는 근거 없음')]
-  with patch.dict(os.environ,{'AP_NEWS_REPAIR_REHEARSAL':'1'}),patch('newsletter_copy_repair.verify',side_effect=failures) as verify:
+  with patch.dict(os.environ,{'AP_NEWS_REPAIR_REHEARSAL':'1'}),patch('newsletter_review_controls.verify_controls'),patch('newsletter_review_controls.valid',return_value=True),patch('newsletter_copy_repair.verify',side_effect=failures) as verify:
    r.verify_resumed_cache_challenges(object(),state,sources,[],lambda:saved.append(True))
    self.assertEqual(verify.call_count,2);self.assertEqual(len(saved),2)
    r.verify_resumed_cache_challenges(object(),state,sources,[],lambda:None);self.assertEqual(verify.call_count,2)
-  self.assertTrue(r.cache_challenge_receipts_valid(state,sources,[]))
+  with patch('newsletter_review_controls.valid',return_value=True):self.assertTrue(r.cache_challenge_receipts_valid(state,sources,[]))
  def test_resumed_cache_cannot_accept_fault_or_count_novelty_rejection(self):
   for answer in (None,ValueError('Independent novelty rejection: duplicate'),ValueError('Independent source review rejected draft: unrelated AP suggestion')):
    state,sources=self.cache_fixture()

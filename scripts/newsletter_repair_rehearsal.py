@@ -92,6 +92,8 @@ def cache_challenge_receipts_valid(state,sources,prior):
  from newsletter_cpu import PROMPT_CACHE_REVISION,ART_REV
  try:specs=cache_challenge_inputs(state,sources,prior)
  except ValueError:return False
+ from newsletter_review_controls import valid
+ if not valid(state,sources,prior):return False
  receipts=state.get('resumed_cache_checks',{})
  return all(receipts.get(label,{}).get('input_hash')==digest and receipts[label].get('cache_revision')==PROMPT_CACHE_REVISION and receipts[label].get('model_revision')==ART_REV and receipts[label].get('rejected') is True and cache_rejection_matches(label,draft,str(receipts[label].get('reason','')),state['rehearsal_faults']) for label,draft,source,digest in specs)
 
@@ -99,6 +101,8 @@ def verify_resumed_cache_challenges(model,state,sources,prior,save):
  from newsletter_copy_repair import verify
  from newsletter_cpu import PROMPT_CACHE_REVISION,ART_REV
  identity(state)
+ from newsletter_review_controls import verify_controls
+ verify_controls(model,state,sources,prior,save)
  for label,draft,source,digest in cache_challenge_inputs(state,sources,prior):
   receipt=state.get('resumed_cache_checks',{}).get(label,{})
   if receipt.get('input_hash')==digest and receipt.get('cache_revision')==PROMPT_CACHE_REVISION and receipt.get('model_revision')==ART_REV and receipt.get('rejected') is True and cache_rejection_matches(label,draft,str(receipt.get('reason','')),state['rehearsal_faults']):continue
@@ -134,7 +138,7 @@ def verify_receipts(folder):
  receipts=json.loads((folder/'notification-receipts.json').read_text())
  for stage in ('copy','art'):
   require(any(receipts.get(e['id'],{}).get('accepted') is True for e in state.get('recovery_events',[]) if e.get('stage')==stage),'Parent accepted '+stage+' notice required')
- proof={'date':day,'mode':'test','run':run,'asset_run':asset_run,'resume_history':state.get('resume_history',[]),'copy_rejected':True,'recommendation_premise_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_notices_accepted':['copy','art'],'resumed_cache_faults_rechecked':bool(state.get('resume_history'))}
+ proof={'date':day,'mode':'test','run':run,'asset_run':asset_run,'resume_history':state.get('resume_history',[]),'copy_rejected':True,'recommendation_premise_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_notices_accepted':['copy','art'],'resumed_cache_faults_rechecked':bool(state.get('resume_history')),'editorial_controls':state.get('editorial_control_receipts',{})}
  (folder/'recovery-proof.json').write_text(json.dumps(proof,indent=2)+'\n');return proof
 
 if __name__=='__main__':

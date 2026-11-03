@@ -20,3 +20,12 @@ def source_novelty(segments):
  if any(not isinstance(text,str) or not 30<=len(text)<=800 for text in texts):raise ValueError('Unusable source novelty evidence')
  # Constrain only evidence copying, never either semantic news/duplicate verdict.
  return obj({**NOVELTY['properties'],'novel_quote':{'type':'string','enum':['',*dict.fromkeys(texts)]}})
+
+
+# No independent boolean can contradict the precise rejection findings.
+STRONG_REVIEW=obj({'findings':{'type':'array','items':obj({
+ 'field':{'type':'string','enum':['title','summary','fact','insight','action']},
+ 'assertion':{'type':'string','minLength':2,'maxLength':1800},
+ 'factual_premise':{'type':'string','minLength':5,'maxLength':500},
+ 'source_mismatch':{'type':'string','minLength':10,'maxLength':600},
+ 'correction':{'type':'string','minLength':5,'maxLength':400}})}})

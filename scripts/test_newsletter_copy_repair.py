@@ -63,7 +63,7 @@ class CopyRepairTests(unittest.TestCase):
    def ask(self,system,question,**kw):
     self.calls.append((system,question,kw))
     if len(self.calls)==1:return {'is_news':True,'is_duplicate':False,'novel_quote':source['text'],'reason':'new feature'}
-    return {'supported':False,'unsupported_claims':['Feature availability does not demonstrate improved learning efficacy']}
+    return {'findings':[{'field':'fact','assertion':'학습 효과가 향상됐어요','factual_premise':'학습 효과가 향상됐다','source_mismatch':'Feature availability does not demonstrate improved learning efficacy','correction':'Remove unsupported learning efficacy conclusion'}]}
   model=Model();item={k:'학습 효과가 향상됐어요' for k in ('title','summary','fact','insight','action')};item.update(evidence=[source['text']],image_prompt='study book',image_subject='book',visual_approach='ink')
   with self.assertRaisesRegex(ValueError,'Independent source review'):verify(model,item,source,[])
   self.assertNotIn('학습 효과',model.calls[0][1])
