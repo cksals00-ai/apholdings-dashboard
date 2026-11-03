@@ -1,14 +1,14 @@
 """Automatic server QA. Never described as human inspection."""
 import functools,http.server,json,threading,re,os,subprocess
 from pathlib import Path
-from PIL import Image
 import newsletter as b
 import newsletter_server as publisher
 
-QA_REVISION=2
+QA_REVISION=3
 
 def compact(value):return re.sub(r'\s+','',value)
 def check_pdf(issue,folder):
+ from PIL import Image
  import pdfplumber
  path=b.ROOT/b.pdf_path(issue).lstrip('/');alltext='';links=set()
  with pdfplumber.open(path) as doc:
@@ -83,23 +83,35 @@ def check_browser(issue,folder):
  finally:server.shutdown();server.server_close()
  return {'mobile':390,'desktop':1440,'all_images_decoded':True,'motion_pause_and_reduced_motion':True}
 
-def check_all(issue,folder,source_checks):
- folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
+def check_copy_receipts(issue,source_checks,copy_prior=None):
  from newsletter_grounding import validate_grounding,normalized
  import hashlib
- if {story['url'] for story,source in source_checks}!={s['url'] for s in issue['stories']}:raise ValueError('Original source receipts do not match issue')
+ if len(source_checks)!=len(issue['stories']) or len({story['url'] for story,source in source_checks})!=len(source_checks) or {story['url'] for story,source in source_checks}!={s['url'] for s in issue['stories']}:raise ValueError('Original source receipts do not match issue')
+ public={s['url']:s for s in issue['stories']}
+ if copy_prior is None:raise ValueError('Independent copy prior context required for server QA')
+ from newsletter_copy_repair import receipt_valid,REVISION
+ peers=[]
  for story,source in source_checks:
+  if any(public[story['url']].get(key)!=story.get(key) for key in ('title','summary','fact','insight','action','source','published')):raise ValueError('Public issue copy differs from independently reviewed draft')
+  if not receipt_valid(story,source,copy_prior,peers):raise ValueError('Independent14B copy receipt missing or stale')
+  peers.append(story)
   validate_grounding(story,source,story['review'])
   novelty=story.get('novelty',{})
   if novelty.get('is_news') is not True or novelty.get('is_duplicate') is not False or len(novelty.get('novel_quote',''))<30 or normalized(novelty['novel_quote']) not in normalized(source['text']):raise ValueError('Original novelty receipt missing')
   if hashlib.sha256(source['text'].encode()).hexdigest()!=story['source_hash']:raise ValueError('Source evidence changed after review')
+ return {'revision':REVISION,'independent_public_14b':True,'prior_issue_context_verified':True,'ordered_peer_events_verified':True}
+
+def check_all(issue,folder,source_checks,copy_prior=None):
+ from PIL import Image
+ folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
+ copy_policy=check_copy_receipts(issue,source_checks,copy_prior)
  publisher.verify_documents(issue)
- report={'revision':QA_REVISION,'method':'서버 자동 검증 · 원문 근거 대조 · PDF 전페이지 렌더·문자/경계 검사 · 브라우저 검사','pdf':check_pdf(issue,folder),'browser':check_browser(issue,folder)}
+ report={'revision':QA_REVISION,'copy_policy':copy_policy,'method':'서버 자동 검증 · 원문 근거 대조 · PDF 전페이지 렌더·문자/경계 검사 · 브라우저 검사','pdf':check_pdf(issue,folder),'browser':check_browser(issue,folder)}
  for im in [s['image']['path'] for s in issue['stories']]+[issue['hero']['path'],issue['hero']['poster']]:
   with Image.open(b.ROOT/im.lstrip('/')) as image:
    for n in range(getattr(image,'n_frames',1)):image.seek(n);image.load()
  with Image.open(b.ROOT/issue['hero']['path'].lstrip('/')) as gif,Image.open(b.ROOT/issue['hero']['poster'].lstrip('/')) as png:
   if gif.convert('RGB').tobytes()!=png.convert('RGB').tobytes():raise ValueError('Hero first frame differs from PDF poster')
- report['checks']={key:True for key in ('original_sources','all_pdf_pages','mobile_layout','image_loading')}
+ report['checks']={key:True for key in ('independent_copy_review','original_sources','all_pdf_pages','mobile_layout','image_loading')}
  (folder/'quality.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
  return report

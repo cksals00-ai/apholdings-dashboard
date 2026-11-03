@@ -1,4 +1,5 @@
 import unittest
+import hashlib
 from unittest.mock import patch
 from contextlib import nullcontext
 from newsletter_copy_repair import ensure_copy,identity,REVISION,verify
@@ -18,6 +19,35 @@ class CopyRepairTests(unittest.TestCase):
   self.assertEqual(len(state['recovery_events']),2)
  def test_old_receipt_not_trusted(self):
   self.assertFalse(receipt_valid({'review':{'supported':True}}, {'body_sha256':'abc'}, []))
+ def test_server_qa_receipts_require_prior_and_ordered_peer_context(self):
+  from newsletter_production_qa import check_copy_receipts
+  text='An official publisher reports a concrete new implementation result today.'
+  source={'text':text,'body_sha256':hashlib.sha256(text.encode()).hexdigest()}
+  stories=[]
+  for i in range(2):
+   item={'url':str(i),'title':'제목','source_hash':source['body_sha256'],'review':{'supported':True},'novelty':{'is_news':True,'is_duplicate':False,'novel_quote':text}}
+   item['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(item,source,[],stories),'supported':True}
+   stories.append(item)
+  checks=[(item,source) for item in stories]
+  issue={'stories':list(reversed(stories))}
+  with patch('newsletter_grounding.validate_grounding'):
+   self.assertTrue(check_copy_receipts(issue,checks,[])['ordered_peer_events_verified'])
+   with self.assertRaisesRegex(ValueError,'prior context'):check_copy_receipts(issue,checks)
+   with self.assertRaisesRegex(ValueError,'stale'):check_copy_receipts(issue,list(reversed(checks)),[])
+   stories[0].pop('strong_review')
+   with self.assertRaisesRegex(ValueError,'stale'):check_copy_receipts(issue,checks,[])
+ def test_receipt_changes_when_peer_event_changes(self):
+  from newsletter_copy_repair import identity
+  story={'title':'제목'};source={'body_sha256':'hash'}
+  self.assertNotEqual(identity(story,source,[],[{'title':'first event'}]),identity(story,source,[],[{'title':'second event'}]))
+ def test_roundup_excluded_before_model_and_archived_once(self):
+  source={'url':'roundup','title':'October AI roundup','text':'Monthly recap','body_sha256':'hash'}
+  state={'stories':[]};opened=[]
+  def factory(profile):opened.append(profile);return nullcontext(None)
+  with self.assertRaises(ValueError):ensure_copy(state,[source],[],factory,lambda *a:None,lambda:None)
+  self.assertEqual(opened,[])
+  self.assertEqual(state['copy_attempts']['roundup'],1)
+  self.assertEqual(state['copy_history'][0]['source'],source)
  def test_independent_efficacy_rejection(self):
   source={'title':'New NotebookLM study guide','text':'NotebookLM now offers a new study guide for learners to organize their source material.','body_sha256':'abc'}
   class Model:
@@ -35,11 +65,11 @@ class CopyRepairTests(unittest.TestCase):
   sources=[{'url':str(i),'title':'New result','text':'A concrete implementation result has been reported today.','body_sha256':str(i)} for i in range(6)]
   def story(i):return {'url':str(i),'title':'제목','source_hash':str(i),'review':{'supported':True}}
   good=[story(i) for i in range(4)]
-  for item in good:item['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(item,sources[int(item['url'])],[]),'supported':True}
+  for index,item in enumerate(good):item['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(item,sources[int(item['url'])],[],good[:index]),'supported':True}
   state={'stories':good+[story(4)]};saved=[]
-  def check(model,item,source,prior):
+  def check(model,item,source,prior,peers=None):
    if item['url']=='4':raise ValueError('Unsupported learning efficacy')
-   item['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(item,source,prior),'supported':True}
+   item['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(item,source,prior,peers),'supported':True}
   def draft(model,source,prior,feedback):return story(int(source['url']))
   with patch('newsletter_copy_repair.validate_grounding'),patch('newsletter_copy_repair.verify',side_effect=check):
    ensure_copy(state,sources,[],lambda profile:nullcontext(object()),draft,lambda:saved.append(dict(state.get('copy_attempts',{}))))
