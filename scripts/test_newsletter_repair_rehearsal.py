@@ -31,6 +31,8 @@ class RehearsalTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,{'AP_NEWS_REPAIR_REHEARSAL':'1'}),patch.object(r.checkpoint,'restore',side_effect=restore) as download,patch.object(r.sources,'fetch',return_value=b'official') as fetch,patch.object(r.sources,'parse_article',side_effect=parse):
    state=r.seed(tmp,r.today(),'123',dry_run=True)
    self.assertEqual(fetch.call_count,5);self.assertEqual(len(state['candidates']),5)
+   self.assertTrue(state['rehearsal_faults']['advice_premise_injected'])
+   self.assertIn('모든 학생에게 입증',next(s for s in state['stories'] if s['url']==state['rehearsal_faults']['advice_url'])['action'])
    self.assertTrue(all('strong_review' not in s for s in state['stories']))
    self.assertEqual(state['issue_number'],old['issue_number']);self.assertNotIn('bundle',state)
    self.assertEqual(state['stories'][0]['review']['supported'],True)
@@ -44,7 +46,8 @@ class RehearsalTests(unittest.TestCase):
   for i,story in enumerate(state['stories']):story['strong_review']={'revision':REVISION,'model_revision':ART_REV,'supported':True,'input_hash':identity(story,state['candidates'][i],[],state['stories'][:i])}
   failed={'subject':'A red sports car','scene':'Yellow flowers'}
   state['rehearsal_faults'].update(art_injected=True,copy_url=state['stories'][0]['url'],art_failed_plan=failed)
-  state['copy_history']=[{'draft':state['stories'][0]}]
+  state['rehearsal_faults'].update(advice_premise_injected=True,advice_url=state['stories'][1]['url'])
+  state['copy_history']=[{'draft':state['stories'][0]},{'draft':{**state['stories'][1],'action':'AI 교육 효과가 모든 학생에게 입증됐으므로 전면 적용한다.'},'reason':'Independent source review rejected draft: AI 교육 효과가 모든 학생에게 입증됐다는 근거 없음'}]
   failure={'story_index':5,'reason':'subject','scores':{'matched':False},'failed_plan':failed}
   state['art_failures']=[failure];state['art_repair_history']=[{'failure':failure}]
   state['image_attempts']={state['asset_day']+'-hero-original.png':4}
@@ -55,6 +58,11 @@ class RehearsalTests(unittest.TestCase):
    (folder/'draft.json').write_text(json.dumps(state));(folder/'notification-receipts.json').write_text(json.dumps({k:{'accepted':True} for k in ['copy-notice','art-notice']}))
    result=r.verify_receipts(folder);self.assertEqual(result['strong_review_count'],5)
    self.assertNotIn('https://',(folder/'recovery-proof.json').read_text())
+ def test_advice_proof_requires_specific_factual_rejection(self):
+  fault={'advice_url':'u'};draft={'url':'u','action':'AI 교육 효과가 모든 학생에게 입증됐으므로 전면 적용한다.'}
+  self.assertFalse(r.advice_fault_rejected([{'draft':draft,'reason':'Independent novelty rejection: old source'}],fault))
+  self.assertFalse(r.advice_fault_rejected([{'draft':draft,'reason':'Independent source review rejected draft: unclear recommendation'}],fault))
+  self.assertTrue(r.advice_fault_rejected([{'draft':draft,'reason':'Independent source review rejected draft: AI 교육 효과가 모든 학생에게 입증됐다는 근거 없음'}],fault))
  def test_verify_rejects_missing_real_receipts(self):
   with tempfile.TemporaryDirectory() as tmp:
    Path(tmp,'draft.json').write_text(json.dumps(self.state()))

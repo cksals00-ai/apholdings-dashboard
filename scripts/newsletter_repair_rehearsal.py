@@ -42,8 +42,11 @@ def seed(root,day,run,dry_run=True):
  target['title']='AI 교육이 학습 효과를 높였다는 연구 결과'
  target['summary']='이번 발표는 AI 활용 교육이 학습자의 이해도와 학습 성과를 개선했음을 입증했습니다.'
  target['fact']='이 교육 및 연구는 AI 활용이 학습 효과를 높인다는 인과관계를 입증했습니다.'
+ advice=next((s for s in stories if s is not target and '연구' in s['title']),None)
+ if advice is None:raise ValueError('No second study story for controlled advice-premise fault')
+ advice['action']='AI 교육 효과가 모든 학생에게 입증됐으므로 AP 교육에 전면 적용한다.'
  target['review']={'supported':True,'unsupported_claims':[],'method':'rehearsal simulated weak verifier acceptance'}
- state={'date':day,'mode':'test','asset_day':f'{day}-test-{run}','input_published_today':True,'issue_number':old['issue_number'],'stories':stories,'candidates':fresh,'errors':[],'art_plans':copy.deepcopy(old['art_plans']),'editorial':copy.deepcopy(old['editorial']),'rehearsal_faults':{'copy_injected':True,'copy_url':target['url']},'stage':'rehearsal_seeded'}
+ state={'date':day,'mode':'test','asset_day':f'{day}-test-{run}','input_published_today':True,'issue_number':old['issue_number'],'stories':stories,'candidates':fresh,'errors':[],'art_plans':copy.deepcopy(old['art_plans']),'editorial':copy.deepcopy(old['editorial']),'rehearsal_faults':{'copy_injected':True,'copy_url':target['url'],'advice_premise_injected':True,'advice_url':advice['url']},'stage':'rehearsal_seeded'}
  validate_plans(state['art_plans'],state['editorial']['lead_index'])
  folder.mkdir(parents=True,exist_ok=True);(folder/'draft.json').write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n');return state
 
@@ -58,6 +61,15 @@ def inject_art_fault(state,dry_run,enabled):
  state['art_plans']=[faulty if p['story_index']==5 else p for p in state['art_plans']]
  validate_plans(state['art_plans'],state['editorial']['lead_index']);faults.update(art_injected=True,art_failed_plan=copy.deepcopy(faulty));return True
 
+def advice_fault_rejected(history,faults):
+ for item in history:
+  draft=item.get('draft') or {};reason=str(item.get('reason','')).casefold();compact=re.sub(r'\s+','',reason)
+  if draft.get('url')!=faults.get('advice_url') or '모든 학생에게 입증' not in draft.get('action','') or not reason.startswith('independent source review rejected draft:'):continue
+  universal=any(term in compact for term in ('모든학생','allstudents','alllearners','universal'))
+  efficacy=any(term in reason for term in ('효과','학습','efficacy','learning'))
+  if universal and efficacy:return True
+ return False
+
 def verify_receipts(folder):
  folder=Path(folder);state=json.loads((folder/'draft.json').read_text());day,run=identity(state);faults=state.get('rehearsal_faults',{})
  def require(ok,message):
@@ -68,6 +80,8 @@ def verify_receipts(folder):
  candidates={s['url']:s for s in state['candidates']};prior=state.get('copy_review_prior',[])
  require(len(state['stories'])==5 and all(receipt_valid(s,candidates[s['url']],prior,state['stories'][:i]) for i,s in enumerate(state['stories'])),'Five current independent strong review receipts required')
  require(any(h.get('draft',{}).get('url')==faults['copy_url'] for h in state.get('copy_history',[]) if h.get('draft')),'Injected copy rejection required')
+ require(faults.get('advice_premise_injected') and advice_fault_rejected(state.get('copy_history',[]),faults),'Unsupported factual premise in advice must be rejected')
+ require(all('모든 학생에게 입증' not in s.get('action','') for s in state['stories']),'Unsupported advice premise survived')
  failures=[f for f in state.get('art_failures',[]) if f.get('story_index')==5]
  history=[h for h in state.get('art_repair_history',[]) if h.get('failure',{}).get('story_index')==5]
  require(failures and history,'Actual hero failure and replan required')
@@ -80,7 +94,7 @@ def verify_receipts(folder):
  receipts=json.loads((folder/'notification-receipts.json').read_text())
  for stage in ('copy','art'):
   require(any(receipts.get(e['id'],{}).get('accepted') is True for e in state.get('recovery_events',[]) if e.get('stage')==stage),'Parent accepted '+stage+' notice required')
- proof={'date':day,'mode':'test','run':run,'copy_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_notices_accepted':['copy','art']}
+ proof={'date':day,'mode':'test','run':run,'copy_rejected':True,'recommendation_premise_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_notices_accepted':['copy','art']}
  (folder/'recovery-proof.json').write_text(json.dumps(proof,indent=2)+'\n');return proof
 
 if __name__=='__main__':
