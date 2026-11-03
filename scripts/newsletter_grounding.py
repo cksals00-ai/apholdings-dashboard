@@ -48,8 +48,16 @@ def resolve_evidence(draft,context):
  return {**{k:v for k,v in draft.items() if k!='evidence_ids'},'evidence':[segments[i]['text'] for i in ids]}
 
 def require_news_topic(source):
+ title=source.get('title','').strip()
+ body=source.get('text','')
+ if re.search(r'round[- ]?up|recap|(?:updates|news|announcements).{0,35}(?:from|in|for) (?:january|february|march|april|may|june|july|august|september|october|november|december)|(?:monthly|this month).{0,25}(?:news|updates|announcements)',title,re.I) or re.search(r'^(?:.{0,200})(?:recap of this month|roundup of.{0,30}(?:month|announcements))',body,re.I):raise ValueError('Monthly roundup is not a distinct new event')
  # A fresh publication date does not make a general how-to a new announcement.
  if re.match(r'^how\s+to\b',source.get('title','').strip(),re.I):raise ValueError('Evergreen how-to guide is not a new announcement')
+
+def validate_korean_copy(text):
+ if re.search(r'[가-힣][A-Za-z]{1,3}(?=[가-힣\s.,!?]|$)',text):raise ValueError('Broken mixed Korean/Latin word')
+ if re.search(r'[\u0400-\u052f\u0600-\u06ff]',text):raise ValueError('Unexpected foreign text in Korean copy')
+ return True
 
 def validate_grounding(story,source,review):
  for key in ('title','summary','fact','insight','action','image_prompt','image_subject','visual_approach'):
@@ -57,6 +65,7 @@ def validate_grounding(story,source,review):
   if not isinstance(value,str) or not value.strip() or len(value)>1800:raise ValueError('Invalid editorial field: '+key)
  if len(story['image_prompt'])>650 or len(story['image_subject'])>120:raise ValueError('Image plan too long')
  for key in ('title','summary','fact','insight','action'):
+  validate_korean_copy(story[key])
   if not re.search('[가-힣]',story[key]):raise ValueError('Korean copy required in '+key+'; keep only product/company names in Latin spelling')
  if len(story['title'])>90 or len(story['summary'])>180:raise ValueError('Unusable headline/summary length')
  quotes=story.get('evidence')

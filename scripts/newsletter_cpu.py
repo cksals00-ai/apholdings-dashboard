@@ -6,7 +6,7 @@ TEXT_REPO='Qwen/Qwen3-8B-GGUF'
 TEXT_REV='7c41481f57cb95916b40956ab2f0b139b296d974'
 ART_REPO='Qwen/Qwen3-14B-GGUF'
 ART_REV='530227a7d994db8eca5ab5ced2fb692b614357fd'
-TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen3-14B-Q4_K_M.gguf',8192)}
+TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'review':(ART_REPO,ART_REV,'Qwen3-14B-Q4_K_M.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen3-14B-Q4_K_M.gguf',8192)}
 IMAGE_REPO='segmind/SSD-1B'
 IMAGE_REV='60987f37e94cd59c36b1cba832b9f97b57395a10'
 def sampling_options(profile):
@@ -28,7 +28,7 @@ class TextModel:
  def __enter__(self):
   from huggingface_hub import hf_hub_download
   repo,revision,filename,context=TEXT_PROFILES[self.profile]
-  model=hf_hub_download(repo,filename,revision=revision,token=False,cache_dir=Path.home()/'.cache/ap-news-text'/self.profile)
+  model=hf_hub_download(repo,filename,revision=revision,token=False,cache_dir=Path.home()/'.cache/ap-news-text'/('art' if self.profile=='review' else self.profile))
   executable=next(self.runtime.rglob('llama-server'))
   env={k:os.environ[k] for k in ('PATH','HOME','LANG','LC_ALL','TMPDIR') if k in os.environ}
   env['LD_LIBRARY_PATH']=':'.join(sorted({str(p.parent.resolve()) for p in self.runtime.rglob('*.so*')}))
