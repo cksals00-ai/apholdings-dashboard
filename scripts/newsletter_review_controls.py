@@ -7,7 +7,7 @@ def inputs(state,sources,prior):
  from newsletter_copy_repair import identity
  by_url={s['url']:s for s in sources};result=[]
  for label,suffix,expected in SPECS:
-  draft=next((h['draft'] for h in state.get('copy_history',[]) if isinstance(h.get('draft'),dict) and h['draft'].get('url','').endswith(suffix) and (('설계한다면' in h['draft'].get('insight','')) if expected else ('기회를 얻었습니다' in h['draft'].get('insight','')))),None)
+  draft=next((h['draft'] for h in state.get('copy_history',[]) if isinstance(h.get('draft'),dict) and h['draft'].get('url','').endswith(suffix) and (('다면' in h['draft'].get('insight','')) if expected else ('기회를 얻었습니다' in h['draft'].get('insight','')))),None)
   if draft is None or draft['url'] not in by_url:raise ValueError('Missing immutable editorial control: '+label)
   source=by_url[draft['url']];result.append((label,draft,source,identity(draft,source,prior,[]),expected))
  return result

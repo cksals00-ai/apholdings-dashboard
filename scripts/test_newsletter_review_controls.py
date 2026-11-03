@@ -24,6 +24,13 @@ class ReviewControlsTests(unittest.TestCase):
   self.assertNotIn('copy_attempts',state)
   state['editorial_control_receipts']['agentcore_proposal']['cache_revision']-=1
   self.assertFalse(controls.valid(state,sources,[]))
+ def test_preserved_agentcore_check_proposal_is_found_verbatim(self):
+  state,sources=self.fixture()
+  original='AP가 고객 웹·서비스 시안을 검토한다면 편집 중인 화면과 정식 공개를 구분할 수 있다.'
+  state['copy_history'][1]['draft']['insight']=original
+  rows=controls.inputs(state,sources,[])
+  self.assertEqual(rows[1][1]['insight'],original)
+  self.assertEqual(state['copy_history'][1]['draft']['insight'],original)
  def test_positive_false_rejection_cannot_qualify(self):
   state,sources=self.fixture()
   with patch('newsletter_repair_rehearsal.identity'),patch('newsletter_copy_repair.verify',side_effect=ValueError('unsupported proposal')):
