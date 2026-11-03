@@ -47,6 +47,9 @@ def repair_pending(model,state,recent=None,on_progress=None):
    context['rejected_repair']={'proposal':raw,'reason':str(exc)}
    if attempt:raise
  state['art_plans']=candidate;state.setdefault('art_repair_history',[]).append({'failure':failure,'replacement':replacement})
- state.pop('pending_art_repair');state['stage']='art_repaired'
+ state.pop('pending_art_repair')
+ queue=state.get('art_repair_queue',[])
+ if queue:state['pending_art_repair']=queue.pop(0)
+ state['stage']='needs_art_repair' if queue or state.get('pending_art_repair') else 'art_repaired'
  if on_progress:on_progress()
  return True
