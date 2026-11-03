@@ -12,7 +12,7 @@ export function decide(timestamp,runs,receipt){
   if(!Array.isArray(r.jobs))throw Error('unknown_latest_attempt_jobs');
   if(r.jobs.some(j=>!Array.isArray(j.steps)))throw Error('unknown_job_steps');
  }
- const actual=today.filter(r=>r.jobs.some(j=>j.steps.some(s=>s.name==='Supervise credential-free source, copy, art and document production'&&Number.isFinite(+new Date(s.started_at))&&+new Date(s.started_at)<=+now&&(s.status==='in_progress'||(s.status==='completed'&&s.conclusion==='success')))));
+ const actual=today.filter(r=>r.jobs.some(j=>j.steps.some(s=>s.name==='Supervise credential-free source, copy, art and document production'&&typeof s.started_at==='string'&&Number.isFinite(+new Date(s.started_at))&&+new Date(s.started_at)<=+now&&(s.status==='in_progress'||(s.status==='completed'&&s.conclusion==='success')))));
  if(actual.some(r=>r.status==='in_progress'))return {kind:'generating',day};
  if(actual.some(r=>r.conclusion==='success'))return {kind:'observed',day};
  if(today.some(r=>r.status==='in_progress'))return {kind:'preparing',day};

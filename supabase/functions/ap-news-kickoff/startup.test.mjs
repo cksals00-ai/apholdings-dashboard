@@ -12,3 +12,5 @@ test('completed real generation counts',()=>assert.equal(decide(now,[run({status
 test('wrong branch and rollout smoke cannot suppress edition',()=>{for(const extra of [{head_branch:'test'},{event:'workflow_run'}])assert.equal(decide(now,[run(extra)],null).kind,'start')});
 test('unknown responses fail closed',()=>{assert.throws(()=>decide(now,null,null));assert.throws(()=>decide(now,[run({jobs:undefined})],null));assert.throws(()=>decide(now,[run({created_at:'broken'})],null))});
 test('claims preserve cooldown and attempt limit',()=>{assert.equal(decide(now,[],{attempts:1,updated_at:now}).kind,'waiting');assert.equal(decide(now,[],{attempts:3,updated_at:now}).kind,'exhausted')});
+
+test('missing actual start timestamp cannot prove generation',()=>assert.equal(decide(now,[run({jobs:[{steps:[step({started_at:null})]}]})],null).kind,'preparing'));
