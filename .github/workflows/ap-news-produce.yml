@@ -129,6 +129,8 @@ jobs:
           EDITION_DAY: ${{ steps.gate.outputs.day }}
           DRY_RUN: ${{ inputs.dry_run }}
           GH_TOKEN: ${{ github.token }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          AP_NEWS_ISOLATED_SOURCE_REUSE: ${{ inputs.dry_run == true && '1' || '' }}
         run: |
           args=()
           mode=production

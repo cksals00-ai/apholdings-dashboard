@@ -28,4 +28,19 @@ time.sleep(.15)
  def test_child_failure_is_not_hidden_by_backup(self):
   with tempfile.TemporaryDirectory() as folder,patch.object(s.checkpoints,'save'):
    self.assertEqual(s.supervise([sys.executable,'-c','raise SystemExit(7)'],Path(folder),'2026-10-30','test',poll=.01),7)
+ def test_recovery_notice_precedes_child_completion_and_does_not_leak_key(self):
+  import newsletter_recovery_notice as notices
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);seen=[]
+   code="""import os,json,time,pathlib
+p=pathlib.Path(os.environ['AP_NEWS_SITE_ROOT']);(p/'.production-state').mkdir()
+assert not os.getenv('SUPABASE_SERVICE_KEY')
+(p/'.production-state/draft.json').write_text(json.dumps({'recovery_events':[{'id':'failed-copy','stage':'copy','reason':'unsupported claim'}]}))
+time.sleep(.25)
+(p/'finished').touch()
+"""
+   def emit(*args):seen.append((root/'finished').exists());return {'accepted':True}
+   with patch.dict(os.environ,{'AP_NEWS_SITE_ROOT':str(root),'GITHUB_RUN_ID':'123','SUPABASE_SERVICE_KEY':'dummy'}),patch.object(s.checkpoints,'save'),patch.object(notices,'emit',side_effect=emit):
+    self.assertEqual(s.supervise([sys.executable,'-c',code],root,'2026-11-03','test',interval=0,poll=.01),0)
+   self.assertEqual(seen,[False])
 if __name__=='__main__':unittest.main()

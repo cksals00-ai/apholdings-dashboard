@@ -2,7 +2,8 @@
 import argparse,hashlib,json,os,subprocess,time
 from pathlib import Path
 import newsletter_checkpoint as checkpoints
-SAFE_ENV=('PATH','HOME','LANG','LC_ALL','TMPDIR','CI','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_WORKSPACE','RUNNER_TEMP','RUNNER_TRACKING_ID','AP_NEWS_SITE_ROOT','HF_HUB_DISABLE_TELEMETRY','HF_HUB_DISABLE_IMPLICIT_TOKEN','DO_NOT_TRACK')
+from newsletter_recovery_notice import notify_pending
+SAFE_ENV=('PATH','HOME','LANG','LC_ALL','TMPDIR','CI','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_WORKSPACE','RUNNER_TEMP','RUNNER_TRACKING_ID','AP_NEWS_SITE_ROOT','HF_HUB_DISABLE_TELEMETRY','HF_HUB_DISABLE_IMPLICIT_TOKEN','DO_NOT_TRACK','AP_NEWS_ISOLATED_SOURCE_REUSE')
 def child_environment():return {key:os.environ[key] for key in SAFE_ENV if key in os.environ}
 def milestone(root,day):
  path=root/'.production-state/draft.json'
@@ -12,6 +13,9 @@ def milestone(root,day):
  return hashlib.sha256(raw).hexdigest(),images
 def supervise(command,root,day,mode,interval=60,poll=1):
  root=Path(root);process=subprocess.Popen(command,env=child_environment());last=None;last_saved=0;sequence=0
+ def notices():
+  try:notify_pending(root,day,mode)
+  except Exception as exc:print("Recovery notice retry pending: "+type(exc).__name__,flush=True)
  def preserve():
   nonlocal sequence,last,last_saved
   current=milestone(root,day)
@@ -21,6 +25,7 @@ def supervise(command,root,day,mode,interval=60,poll=1):
   last=current;last_saved=time.monotonic()
  try:
   while process.poll() is None:
+   notices()
    current=milestone(root,day)
    if current is not None and current!=last and time.monotonic()-last_saved>=interval:
     try:preserve()
@@ -28,6 +33,7 @@ def supervise(command,root,day,mode,interval=60,poll=1):
      last_saved=time.monotonic()
      print('Private milestone backup failed; final backup will retry: '+type(exc).__name__,flush=True)
    time.sleep(poll)
+  notices()
   preserve()
   return process.returncode
  finally:
