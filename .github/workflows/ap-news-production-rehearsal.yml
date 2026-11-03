@@ -35,7 +35,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/checkout@v7
         with:
-          ref: e31f34ddd49565cab7d366d7572a79842ca2f347
+          ref: aa90e66ed38d6645cdcb7872d52c405ad29e1901
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -46,6 +46,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           EDITION_DAY: ${{ needs.produce.outputs.day }}
         run: python .production-runtime/scripts/newsletter_checkpoint.py restore --root "$RUNNER_TEMP/production-result" --date "$EDITION_DAY" --mode test --required
+      - name: Require actual copy correction and failed-image replan receipts
+        env:
+          AP_NEWS_REPAIR_REHEARSAL: '1'
+        run: python .production-runtime/scripts/newsletter_repair_rehearsal.py verify --folder "$RUNNER_TEMP/production-result/.production-state"
       - name: Stage only new isolated preview and test-specific images
         env:
           EDITION_DAY: ${{ needs.produce.outputs.day }}
@@ -92,7 +96,7 @@ jobs:
           ref: main
       - uses: actions/checkout@v7
         with:
-          ref: e31f34ddd49565cab7d366d7572a79842ca2f347
+          ref: aa90e66ed38d6645cdcb7872d52c405ad29e1901
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:

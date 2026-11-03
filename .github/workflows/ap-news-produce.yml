@@ -35,7 +35,7 @@ jobs:
       - name: Checkout reviewed producer runtime
         uses: actions/checkout@v7
         with:
-          ref: e31f34ddd49565cab7d366d7572a79842ca2f347
+          ref: aa90e66ed38d6645cdcb7872d52c405ad29e1901
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -77,6 +77,7 @@ jobs:
           EDITION_DAY: ${{ steps.gate.outputs.day }}
           DRY_RUN: ${{ inputs.dry_run }}
           RESUME_RUN: ${{ inputs.resume_run }}
+          AP_NEWS_REPAIR_REHEARSAL: ${{ inputs.dry_run == true && inputs.inject_failure == true && '1' || '' }}
         run: |
           mode=production
           if [ "$DRY_RUN" = true ]; then mode=test; fi
@@ -120,6 +121,13 @@ jobs:
         run: |
           python -m unittest discover -s scripts -p 'test_newsletter*.py'
           node --test supabase/functions/ap-news/core.test.mjs
+      - name: Seed isolated real repair rehearsal from verified current-day sources
+        if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run == true && inputs.inject_failure == true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITION_DAY: ${{ steps.gate.outputs.day }}
+          AP_NEWS_REPAIR_REHEARSAL: '1'
+        run: python .production-runtime/scripts/newsletter_repair_rehearsal.py seed --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --run "$GITHUB_RUN_ID" --dry-run
       - name: Wait for Korean 03:05 actual source work window
         if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run != true }}
         run: python .production-runtime/scripts/newsletter_start_window.py
@@ -131,6 +139,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           AP_NEWS_ISOLATED_SOURCE_REUSE: ${{ inputs.dry_run == true && '1' || '' }}
+          AP_NEWS_REPAIR_REHEARSAL: ${{ inputs.dry_run == true && inputs.inject_failure == true && '1' || '' }}
         run: |
           args=()
           mode=production
