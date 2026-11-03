@@ -18,7 +18,7 @@ permissions:
   actions: write
 jobs:
   qualification:
-    if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.html_url == 'https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/41611440786' && github.event.workflow_run.conclusion == 'success') }}
+    if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.html_url == 'https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/41618734726' && github.event.workflow_run.conclusion == 'success') }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -30,7 +30,7 @@ jobs:
       - name: Checkout immutable rollout verifier without homepage assets
         uses: actions/checkout@v7
         with:
-          ref: ffc6320ce709a3495e8d5e2b8a6d4e5c4c1d4f2d
+          ref: bc2b3d88c1035ac1c96aa22e9eae4f26c5623ffc
           sparse-checkout: scripts
           path: .qualification-runtime
       - name: Test fail-closed rollout conditions
@@ -40,7 +40,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           CALLER_REVISION: ${{ github.sha }}
-        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 41611440786 --revision "$CALLER_REVISION" --runtime ffc6320ce709a3495e8d5e2b8a6d4e5c4c1d4f2d
+        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 41618734726 --revision "$CALLER_REVISION" --runtime bc2b3d88c1035ac1c96aa22e9eae4f26c5623ffc
   produce:
     needs: qualification
     if: ${{ needs.qualification.outputs.qualified == 'true' && github.event_name != 'workflow_run' }}
