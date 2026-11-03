@@ -29,6 +29,11 @@ class RecoveryNoticeTests(unittest.TestCase):
     d['recovery_events'].append(dict(d['recovery_events'][0],id='copy-attempt-2'));p.write_text(json.dumps(d))
     n.notify_pending(root,'2026-11-03','production')
     self.assertEqual(emit.call_count,1)
+ def test_routine_candidate_exclusion_is_quiet(self):
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);self.state(root);p=root/'.production-state/draft.json';d=json.loads(p.read_text());d['recovery_events'][0]['notify']=False;p.write_text(json.dumps(d))
+   with patch.dict(os.environ,{'GITHUB_RUN_ID':'123','SUPABASE_SERVICE_KEY':'dummy'}),patch.object(n,'emit') as emit:
+    n.notify_pending(root,'2026-11-03','production');emit.assert_not_called()
  def test_no_key_or_unknown_event_cannot_send(self):
   with tempfile.TemporaryDirectory() as folder:
    root=Path(folder);self.state(root)

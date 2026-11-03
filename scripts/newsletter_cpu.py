@@ -81,9 +81,9 @@ class ImageSubjectCheck:
   revision='3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268'
   self.model=CLIPModel.from_pretrained('openai/clip-vit-base-patch32',revision=revision,token=False).eval()
   self.processor=CLIPProcessor.from_pretrained('openai/clip-vit-base-patch32',revision=revision,token=False)
- def check(self,image,subject):
+ def check(self,image,subject,avoid=None):
   import torch
-  unrelated=['flowers in a vase on an empty desk','a sports car on a road','a bowl of food','an empty chair and furniture','a mountain landscape','an unrelated generic circular orbit diagram']
+  unrelated=['flowers in a vase on an empty desk','a sports car on a road','a bowl of food','an empty chair and furniture','a mountain landscape','an unrelated generic circular orbit diagram']+list(avoid or [])
   inputs=self.processor(text=[subject]+unrelated,images=image,return_tensors='pt',padding=True,truncation=True)
   with torch.no_grad():scores=self.model(**inputs).logits_per_image[0].tolist()
   return scores[0]>max(scores[1:]),{'subject':subject,'target_score':scores[0],'unrelated_scores':scores[1:]}

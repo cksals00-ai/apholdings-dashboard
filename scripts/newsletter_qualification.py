@@ -14,15 +14,20 @@ def evaluate(run,current_worker,tested_worker,expected,run_id):
  if runtime_pin(current_worker)!=expected or runtime_pin(tested_worker)!=expected:raise ValueError('Current producer runtime differs from qualified runtime')
  return True
 def api(path):return json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/'+path],text=True))
-def worker_at(revision):
+def evaluate_rehearsal(current,tested):
+ if current!=tested:raise ValueError("Rehearsal workflow differs from qualified checks")
+ return True
+def file_at(path,revision):
  if not re.fullmatch('[a-f0-9]{40}',revision):raise ValueError('Immutable workflow revision required')
- data=api('contents/'+WORKER+'?ref='+revision)
+ data=api('contents/'+path+'?ref='+revision)
  if data.get('encoding')!='base64':raise ValueError('Cannot verify producer workflow contents')
  return base64.b64decode(data['content']).decode()
+def worker_at(revision):return file_at(WORKER,revision)
 def qualify(run_id,revision,expected):
  if not re.fullmatch('[a-f0-9]{40}',expected):raise ValueError('Immutable expected runtime required')
  run=api('actions/runs/'+str(run_id))
  evaluate(run,worker_at(revision),worker_at(run['head_sha']),expected,run_id)
+ evaluate_rehearsal(file_at(REHEARSAL,revision),file_at(REHEARSAL,run['head_sha']))
  print(json.dumps({'qualified':True,'runtime':expected,'rehearsal_url':f'https://github.com/{REPO}/actions/runs/{run_id}','automatic_recovery_attempt':run['run_attempt']}))
  if os.environ.get('GITHUB_OUTPUT'):
   with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('qualified=true\n')

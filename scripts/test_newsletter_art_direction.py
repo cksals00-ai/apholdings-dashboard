@@ -66,7 +66,7 @@ class ArtDirectionTests(unittest.TestCase):
   def ask(*args,**kwargs):
    nonlocal counter
    counter+=1;props=kwargs['schema']['properties'];views=props['viewpoint']['enum'];media=props['medium']['enum']
-   return {'viewpoint':'cutaway' if 'cutaway' in views else views[0],'medium':'watercolor' if 'watercolor' in media else media[0],'subject':'metal pieces beside ceramic object '+str(counter),'scene':'A metal object and a ceramic plate arranged with gentle shadows.'}
+   return {'viewpoint':'cutaway' if 'cutaway' in views else views[0],'medium':'watercolor' if 'watercolor' in media else media[0],'subject':['a brass key and a lock','a book and a pencil','a cargo crate and conveyor','a teacher and child','a curtain and stage','a microphone and ribbon'][counter-1],'scene':'A metal object and a ceramic plate arranged with gentle shadows.'}
   model.ask.side_effect=ask
   result=plan_art(model,[{'title':'기사','summary':'요약','fact':'사실'}]*5,0)
   validate_plans(result,0)

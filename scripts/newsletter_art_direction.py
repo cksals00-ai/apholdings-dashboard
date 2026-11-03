@@ -15,6 +15,33 @@ def validate_scene(subject,scene):
  if re.search(r'\b(?:text|logos?|screens?|interfaces?|screenshots?|code|flowcharts?|certificates?|patients?|diagnos\w*|treatments?|cityscapes?|holograph\w*)\b|(?:computer|digital) displays?',clean,re.I):raise ValueError('Use physical objects/metaphors; remove software screens, code, certificates, patient care, holograms and cityscapes')
  return True
 
+def primary_motif(subject):
+ words=set(re.findall('[a-z]+',subject.lower()))
+ if words & {'window','windows','storefront','storefronts'}:return 'window'
+ if words & {'orbit','orbits','orbital'}:return 'orbit'
+ if words & {'miniature','miniatures'} and words & {'architecture','buildings','building','bridges','city'}:return 'miniature_architecture'
+ return None
+
+def subject_tokens(subject):
+ stop=set('a an the at on in of with and or to their one two several small large open closed reading examining studying showing standing sitting beside'.split())
+ aliases={'children':'student','child':'student','pupil':'student','learner':'student','tutor':'teacher','instructor':'teacher','books':'book','workbook':'book','notebook':'book'}
+ return {aliases.get(w,w) for w in re.findall('[a-z]+',subject.lower()) if w not in stop}
+
+def validate_plan_novelty(plan,recent=None,others=None):
+ for old in list(recent or [])+list(others or []):
+  motif=primary_motif(plan['subject'])
+  if motif and motif==primary_motif(old.get('subject','')):raise ValueError('Repeated primary visual motif: '+motif)
+  a=subject_tokens(plan['subject']);b=subject_tokens(old.get('subject',''))
+  if a and b and plan.get('viewpoint')==old.get('viewpoint') and len(a&b)/len(a|b)>=0.65:raise ValueError('Repeated subject and viewpoint motif; change physical framing')
+ return True
+
+def visual_avoid_descriptions(recent):
+ motifs={primary_motif(p.get('subject','')) for p in recent}
+ result=[]
+ if 'window' in motifs:result.append('a generic shop window or storefront with shelves')
+ if 'miniature_architecture' in motifs:result.append('a generic miniature architectural scene of buildings and bridges')
+ return result
+
 def scene_schema(views,media):return obj({'viewpoint':{'type':'string','enum':views},'medium':{'type':'string','enum':media},'subject':string(120),'scene':string(450)})
 def choices(plans,index,lead):
  seen_views={p['viewpoint'] for p in plans};seen_media={p['medium'] for p in plans};remaining=6-index
@@ -57,6 +84,7 @@ def plan_art(model,stories,lead,previous_plans=None,on_progress=None,recent_dire
   try:
    if index>=6:raise ValueError('Too many partial plans')
    views,media=choices(plans,index,lead)
+   validate_plan_novelty(p,recent_directions,saved[:index])
    if p.get('story_index')!=index or p.get('viewpoint') not in views or p.get('medium') not in media or complete_plan(p,index)!=p or subject_key(p['subject']) in {subject_key(prior['subject']) for prior in plans}:raise ValueError('Invalid saved partial art plan')
   except (ValueError,KeyError,TypeError):
    if on_progress:on_progress(list(plans))
@@ -73,6 +101,7 @@ def plan_art(model,stories,lead,previous_plans=None,on_progress=None,recent_dire
    try:
     if raw.get('viewpoint') not in views or raw.get('medium') not in media:raise ValueError('Choose permitted camera/medium options')
     plan=complete_plan(raw,index)
+    validate_plan_novelty(plan,recent_directions,plans)
     if subject_key(plan['subject']) in {subject_key(p['subject']) for p in plans}:raise ValueError('Choose a distinct concrete subject/action, especially for the cover')
     break
    except ValueError as exc:

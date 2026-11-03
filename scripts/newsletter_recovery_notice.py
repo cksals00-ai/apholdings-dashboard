@@ -10,7 +10,8 @@ def notify_pending(root,day,mode,now=None):
  state=json.loads(draft.read_text());receipt_path=folder/'notification-receipts.json'
  receipts=json.loads(receipt_path.read_text()) if receipt_path.exists() else {};now=time.time() if now is None else now
  for event in state.get('recovery_events',[]):
-  if not isinstance(event,dict) or not all(isinstance(event.get(k),str) and event[k] for k in ('id','stage','reason')):continue
+  if not isinstance(event,dict) or event.get('notify') is False:continue
+  if not all(isinstance(event.get(k),str) and event[k] for k in ('id','stage','reason')):continue
   ident=event['id']
   scope=event.get('source_url') or event.get('url') or ('art-'+str(event['story_index']) if 'story_index' in event else ident)
   digest=hashlib.sha256((event['stage']+'\n'+str(scope)+'\n'+str(event.get('code','repair'))).encode()).hexdigest()[:24]

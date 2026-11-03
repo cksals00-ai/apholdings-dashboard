@@ -8,7 +8,7 @@ import newsletter_handoff as h
 class OwnedPathsTests(unittest.TestCase):
  def test_completed_publication_updates_only_news_owned_paths(self):
   original=b.ROOT
-  issue=json.loads((b.ISSUES/'2026-10-30.json').read_text())
+  issue=max((json.loads(p.read_text()) for p in b.ISSUES.glob('*.json') if json.loads(p.read_text()).get('status')=='published' and json.loads(p.read_text()).get('verified') is True),key=lambda i:i['date'])
   with tempfile.TemporaryDirectory() as folder:
    root=Path(folder)
    for name in ('site-source','img'):(root/name).symlink_to(original/name,target_is_directory=True)

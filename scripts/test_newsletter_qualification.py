@@ -12,4 +12,7 @@ class QualificationTests(unittest.TestCase):
  def test_runtime_change_or_unpinned_worker_cannot_reuse_old_proof(self):
   for current,tested in [(WORKER.replace(PIN,'b'*40),WORKER),(WORKER,WORKER.replace(PIN,'c'*40)),('ref: main\npath: .production-runtime',WORKER),(WORKER+WORKER,WORKER),(WORKER+'# additional untested step\n',WORKER)]:
    with self.assertRaises(ValueError):q.evaluate(proof(),current,tested,PIN,40999503801)
+ def test_rehearsal_definition_cannot_drop_repair_or_delivery_checks(self):
+  self.assertTrue(q.evaluate_rehearsal('full workflow with repair checks','full workflow with repair checks'))
+  with self.assertRaises(ValueError):q.evaluate_rehearsal('workflow without mail','full workflow with repair checks')
 if __name__=='__main__':unittest.main()

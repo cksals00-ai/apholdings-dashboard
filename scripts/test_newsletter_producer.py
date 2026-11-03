@@ -26,28 +26,28 @@ class ProducerTests(unittest.TestCase):
  def test_art_only_recovery_does_not_restart_copy_model(self):
   day=datetime.now(p.server.KST).date().isoformat();body='source evidence';digest=hashlib.sha256(body.encode()).hexdigest()
   with tempfile.TemporaryDirectory() as temp:
-   root=Path(temp);state={'date':day,'mode':'test','stories':[{'url':f'https://blog.google/a{i}','review':{},'source_hash':digest} for i in range(5)],'candidates':[{'url':f'https://blog.google/a{i}','parser_revision':p.PARSER_REVISION,'text':body,'body_sha256':digest} for i in range(24)],'editorial':{'lead_index':0}}
+   root=Path(temp);state={'date':day,'mode':'test','stories':[{'url':f'https://blog.google/a{i}','review':{},'source_hash':digest} for i in range(5)],'candidates':[{'url':f'https://blog.google/a{i}','parser_revision':p.PARSER_REVISION,'published':day,'source':'Google','text':body,'body_sha256':digest} for i in range(24)],'editorial':{'lead_index':0}}
    (root/'draft.json').write_text(json.dumps(state))
    def start(*args,**kwargs):
     self.assertEqual(kwargs.get('profile'),'art');raise RuntimeError('art profile selected')
-   with patch.dict(os.environ,AP_NEWS_SITE_ROOT=temp),patch.object(p.b,'ROOT',root),patch.object(p,'previous_issues',return_value=[]),patch.object(p,'validate_grounding',return_value=True),patch.object(p,'TextModel',side_effect=start):
+   with patch.dict(os.environ,AP_NEWS_SITE_ROOT=temp),patch.object(p.b,'ROOT',root),patch.object(p,'previous_issues',return_value=[]),patch.object(p,'validate_grounding',return_value=True),patch.object(p,'ensure_copy'),patch.object(p,'TextModel',side_effect=start):
     with self.assertRaisesRegex(RuntimeError,'art profile selected'):p.produce(day,root,root,True)
  def test_recovery_reuses_validated_bundle_even_after_local_published_json(self):
   day=datetime.now(p.server.KST).date().isoformat()
   with tempfile.TemporaryDirectory() as temp:
    folder=Path(temp);bundle=folder/f'AP-News-{day}-ready.zip';bundle.write_bytes(b'checkpoint')
-   state={'date':day,'mode':'production','input_published_today':False,'stage':'validated','quality':{'revision':p.QA_REVISION},'stories':[{'url':f'https://blog.google/a{i}','review':{},'source_hash':hashlib.sha256(b'evidence').hexdigest()} for i in range(5)],'candidates':[{'url':f'https://blog.google/a{i}','parser_revision':p.PARSER_REVISION,'text':'evidence','body_sha256':hashlib.sha256(b'evidence').hexdigest()} for i in range(5)]}
+   state={'date':day,'mode':'production','input_published_today':False,'stage':'validated','quality':{'revision':p.QA_REVISION},'stories':[{'url':f'https://blog.google/a{i}','review':{},'source_hash':hashlib.sha256(b'evidence').hexdigest()} for i in range(5)],'candidates':[{'url':f'https://blog.google/a{i}','parser_revision':p.PARSER_REVISION,'published':day,'source':'Google','text':'evidence','body_sha256':hashlib.sha256(b'evidence').hexdigest()} for i in range(5)]}
    (folder/'draft.json').write_text(json.dumps(state))
-   with patch.dict(os.environ,AP_NEWS_SITE_ROOT=temp),patch.object(p.b,'ROOT',folder),patch.object(p,'previous_issues',return_value=[{'date':day,'status':'published','number':23}]),patch.object(p.handoff,'download_bundle',return_value=None),patch.object(p.handoff,'validate_bundle',return_value=({},{})) as validate,patch.object(p.handoff,'upload_bundle') as upload,patch.object(p,'TextModel') as model,patch.object(p,'validate_grounding',return_value=True):
+   with patch.dict(os.environ,AP_NEWS_SITE_ROOT=temp),patch.object(p.b,'ROOT',folder),patch.object(p,'previous_issues',return_value=[{'date':day,'status':'published','number':23}]),patch.object(p.handoff,'download_bundle',return_value=None),patch.object(p.handoff,'validate_bundle',return_value=({},{})) as validate,patch.object(p.handoff,'upload_bundle') as upload,patch.object(p,'TextModel') as model,patch.object(p,'validate_grounding',return_value=True),patch.object(p,'ensure_copy'):
     p.produce(day,folder,folder)
    validate.assert_called_once_with(bundle,day);upload.assert_called_once_with(bundle,day);model.assert_not_called()
  def test_old_qa_receipt_cannot_bypass_new_pdf_image_gate(self):
   day=datetime.now(p.server.KST).date().isoformat()
   with tempfile.TemporaryDirectory() as temp:
    folder=Path(temp);bundle=folder/f'AP-News-{day}-ready.zip';bundle.write_bytes(b'checkpoint')
-   state={'date':day,'mode':'production','input_published_today':False,'stage':'validated','stories':[],'candidates':[{'parser_revision':p.PARSER_REVISION,'url':f'https://blog.google/a{i}'} for i in range(24)]}
+   state={'date':day,'mode':'production','input_published_today':False,'stage':'validated','stories':[],'candidates':[{'parser_revision':p.PARSER_REVISION,'published':day,'source':'Google','url':f'https://blog.google/a{i}'} for i in range(24)]}
    (folder/'draft.json').write_text(json.dumps(state))
-   with patch.dict(os.environ,AP_NEWS_SITE_ROOT=temp),patch.object(p.b,'ROOT',folder),patch.object(p,'previous_issues',return_value=[]),patch.object(p.handoff,'download_bundle',return_value=None),patch.object(p.handoff,'validate_bundle',return_value=({},{})),patch.object(p,'check_all',side_effect=ValueError('PDF editorial image missing')),patch.object(p.handoff,'upload_bundle') as upload,patch.object(p,'TextModel') as model:
+   with patch.dict(os.environ,AP_NEWS_SITE_ROOT=temp),patch.object(p.b,'ROOT',folder),patch.object(p,'previous_issues',return_value=[]),patch.object(p.handoff,'download_bundle',return_value=None),patch.object(p.handoff,'validate_bundle',return_value=({},{})),patch.object(p,'ensure_copy'),patch.object(p,'check_all',side_effect=ValueError('PDF editorial image missing')),patch.object(p.handoff,'upload_bundle') as upload,patch.object(p,'TextModel') as model:
     with self.assertRaisesRegex(ValueError,'PDF editorial image'):p.produce(day,folder,folder)
    self.assertEqual(json.loads((folder/'draft.json').read_text())['stage'],'needs_qa');upload.assert_not_called();model.assert_not_called()
  def test_dry_run_cannot_write_runtime_checkout(self):
@@ -57,7 +57,7 @@ class ProducerTests(unittest.TestCase):
   day=datetime.now(p.server.KST).date().isoformat()
   with tempfile.TemporaryDirectory() as temp:
    folder=Path(temp)
-   with patch.dict(os.environ,AP_NEWS_SITE_ROOT=temp),patch.object(p.b,'ROOT',folder),patch.object(p,'previous_issues',return_value=[{'date':day,'status':'published'}]),patch.object(p.handoff,'download_bundle') as download,patch.object(p,'TextModel') as model,patch.object(p,'validate_grounding',return_value=True):
+   with patch.dict(os.environ,AP_NEWS_SITE_ROOT=temp),patch.object(p.b,'ROOT',folder),patch.object(p,'previous_issues',return_value=[{'date':day,'status':'published'}]),patch.object(p.handoff,'download_bundle') as download,patch.object(p,'TextModel') as model,patch.object(p,'validate_grounding',return_value=True),patch.object(p,'ensure_copy'):
     p.produce(day,folder,folder)
    download.assert_not_called();model.assert_not_called()
 if __name__=='__main__':unittest.main()

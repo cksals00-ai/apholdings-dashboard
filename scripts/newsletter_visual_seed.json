@@ -1,0 +1,116 @@
+{
+  "2026-11-03": {
+    "/img/newsletter/2026-11-03-hero.png": {
+      "subject": "A teacher and child reading a book",
+      "scene": "A teacher and a child fill most of the frame as they read one large open book together at a simple table. Their hands point to the same page. Plain ivory background, navy and sage clothing, restrained brass pencil.",
+      "viewpoint": "eye_level",
+      "medium": "watercolor"
+    },
+    "/img/newsletter/2026-11-03-story-1.png": {
+      "subject": "A clinician sorting papers at a desk",
+      "scene": "A clinician seated side-on at a quiet desk sorts a small stack of unmarked papers beside a closed folder and pencil. Soft sage wall, ivory clothing, navy desk edge, restrained brass lamp. No clinical care is depicted.",
+      "viewpoint": "profile",
+      "medium": "ink"
+    },
+    "/img/newsletter/2026-11-03-story-2.png": {
+      "subject": "A student workbook and a guiding hand",
+      "scene": "A student hand and an adult guiding hand rest beside an open unmarked workbook, colored wooden counters and a pencil on an ivory school desk. The figures are cropped to their hands. Loose sage and navy brushwork, asymmetrical arrangement.",
+      "viewpoint": "overhead",
+      "medium": "gouache"
+    },
+    "/img/newsletter/2026-11-03-story-3.png": {
+      "subject": "A cargo crate opening beside a rolling conveyor",
+      "scene": "A cutaway cargo crate opens at one end onto a rolling conveyor, with only the first few brass blocks moving outward while more blocks remain inside. The crate sits to the left, leaving open ivory space to the right; navy and sage geometry.",
+      "viewpoint": "cutaway",
+      "medium": "diagram"
+    },
+    "/img/newsletter/2026-11-03-story-4.png": {
+      "subject": "A brass key beside several distinct locks",
+      "scene": "Close-up of a brass key beside three differently shaped navy and sage padlocks on an ivory workbench. One matching lock is open while the others remain closed. Uneven diagonal arrangement, tactile metal and matte paint, no markings.",
+      "viewpoint": "macro",
+      "medium": "still_life"
+    },
+    "/img/newsletter/2026-11-03-story-5.png": {
+      "subject": "A small rehearsal stage and a curtain",
+      "scene": "A small empty rehearsal stage stands to the left of a spacious room, its sage curtain pulled halfway aside by a brass rope. Simple unmarked wooden props await a rehearsal. Navy carved shadows and ivory floorboards, asymmetric panoramic framing.",
+      "viewpoint": "wide",
+      "medium": "linocut"
+    }
+  },
+  "2026-11-02": {
+    "/img/newsletter/2026-11-02-hero.png": {
+      "viewpoint": "macro",
+      "medium": "still_life",
+      "subject": "Two brass microphones joined by a green ribbon",
+      "scene": "Close-up microphones and a loop of ribbon on an ivory surface."
+    },
+    "/img/newsletter/2026-11-02-story-1.png": {
+      "viewpoint": "eye_level",
+      "medium": "gouache",
+      "subject": "Headphones and a tape recorder",
+      "scene": "A tape recorder beside a pair of headphones on a quiet desk."
+    },
+    "/img/newsletter/2026-11-02-story-2.png": {
+      "viewpoint": "overhead",
+      "medium": "gouache",
+      "subject": "An open book and a pencil",
+      "scene": "Geometric overhead book pages and a pencil on a green surface."
+    },
+    "/img/newsletter/2026-11-02-story-3.png": {
+      "viewpoint": "macro",
+      "medium": "watercolor",
+      "subject": "A colorful spiral seashell",
+      "scene": "A single curled nautilus shell in close detail."
+    },
+    "/img/newsletter/2026-11-02-story-4.png": {
+      "viewpoint": "wide",
+      "medium": "linocut",
+      "subject": "A shop window with shelves",
+      "scene": "A wide storefront window with shelves and jars in navy frames."
+    },
+    "/img/newsletter/2026-11-02-story-5.png": {
+      "viewpoint": "wide",
+      "medium": "gouache",
+      "subject": "A radio telescope under a night sky",
+      "scene": "A dish telescope in a dark landscape under stars."
+    }
+  },
+  "2026-10-30": {
+    "/img/newsletter/2026-10-30-hero.png": {
+      "viewpoint": "eye_level",
+      "medium": "watercolor",
+      "subject": "A woman working with papers at a desk",
+      "scene": "A woman studies documents and floating abstract charts."
+    },
+    "/img/newsletter/2026-10-30-documents.png": {
+      "viewpoint": "macro",
+      "medium": "still_life",
+      "subject": "Papers and a fountain pen",
+      "scene": "A close detail of a pen and papers with abstract marks."
+    },
+    "/img/newsletter/2026-10-30-health.png": {
+      "viewpoint": "profile",
+      "medium": "watercolor",
+      "subject": "Two adults talking outdoors",
+      "scene": "Two seated adults discuss ideas beside foliage."
+    },
+    "/img/newsletter/2026-10-30-carbon.png": {
+      "viewpoint": "wide",
+      "medium": "diagram",
+      "subject": "An abstract network of lines",
+      "scene": "Light lines cross a dark field."
+    },
+    "/img/newsletter/2026-10-30-harness.png": {
+      "viewpoint": "eye_level",
+      "medium": "diagram",
+      "subject": "Hands and small tools on a workbench",
+      "scene": "Hands arrange mechanical tools on a workshop table."
+    },
+    "/img/newsletter/2026-10-30-governance.png": {
+      "viewpoint": "wide",
+      "medium": "diagram",
+      "subject": "Hands moving blocks between lanes",
+      "scene": "Hands move small wooden objects across horizontal lanes."
+    }
+  }
+}

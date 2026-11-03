@@ -3,7 +3,7 @@ import argparse,hashlib,json,os,subprocess,time
 from pathlib import Path
 import newsletter_checkpoint as checkpoints
 from newsletter_recovery_notice import notify_pending
-SAFE_ENV=('PATH','HOME','LANG','LC_ALL','TMPDIR','CI','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_WORKSPACE','RUNNER_TEMP','RUNNER_TRACKING_ID','AP_NEWS_SITE_ROOT','HF_HUB_DISABLE_TELEMETRY','HF_HUB_DISABLE_IMPLICIT_TOKEN','DO_NOT_TRACK','AP_NEWS_ISOLATED_SOURCE_REUSE')
+SAFE_ENV=('PATH','HOME','LANG','LC_ALL','TMPDIR','CI','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_WORKSPACE','RUNNER_TEMP','RUNNER_TRACKING_ID','AP_NEWS_SITE_ROOT','HF_HUB_DISABLE_TELEMETRY','HF_HUB_DISABLE_IMPLICIT_TOKEN','DO_NOT_TRACK','AP_NEWS_ISOLATED_SOURCE_REUSE','AP_NEWS_REPAIR_REHEARSAL')
 def child_environment():return {key:os.environ[key] for key in SAFE_ENV if key in os.environ}
 def milestone(root,day):
  path=root/'.production-state/draft.json'
