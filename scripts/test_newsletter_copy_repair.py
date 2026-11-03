@@ -63,7 +63,10 @@ class CopyRepairTests(unittest.TestCase):
    def ask(self,system,question,**kw):
     self.calls.append((system,question,kw))
     if len(self.calls)==1:return {'is_news':True,'is_duplicate':False,'novel_quote':source['text'],'reason':'new feature'}
-    return {'findings':[{'field':'fact','assertion':'학습 효과가 향상됐어요','factual_premise':'학습 효과가 향상됐다','source_mismatch':'Feature availability does not demonstrate improved learning efficacy','correction':'Remove unsupported learning efficacy conclusion'}]}
+    import json
+    if len(self.calls)==7:return {'consistent':True,'complete':True,'reason':'All efficacy premises rejected.'}
+    request=json.loads(question)
+    return {'field':request['field'],'text':request['text'],'verdict':'unsupported','premises':[{'claim':request['text'],'status':'unsupported','source_ids':[],'reason':'Feature availability does not demonstrate improved learning efficacy.'}]}
   model=Model();item={k:'학습 효과가 향상됐어요' for k in ('title','summary','fact','insight','action')};item.update(evidence=[source['text']],image_prompt='study book',image_subject='book',visual_approach='ink')
   with self.assertRaisesRegex(ValueError,'Independent source review'):verify(model,item,source,[])
   self.assertNotIn('학습 효과',model.calls[0][1])
@@ -86,3 +89,17 @@ class CopyRepairTests(unittest.TestCase):
   self.assertEqual(state['copy_attempts']['4'],2)
   self.assertIn({'4':1},saved)
 if __name__=='__main__':unittest.main()
+
+class PendingRepairTests(unittest.TestCase):
+ def test_interrupted_targeted_repair_resumes_verification_without_redraft(self):
+  from newsletter_copy_repair import finish_pending_copy,identity
+  story={'url':'u','fact':'오류 사실','title':'보존 제목','image':{'hash':'keep'}}
+  source={'text':'The official source describes a concrete feature announcement.','body_sha256':'hash'}
+  review={'fields':[{'field':'fact','text':'오류 사실','verdict':'unsupported','premises':[]}]}
+  state={'pending_copy_repairs':{'u':{'phase':'correct','input_hash':identity(story,source,[],[]),'review':review}}}
+  with patch('newsletter_atomic_review.targeted_repair',return_value={**story,'fact':'원문 사실'}) as repair,patch('newsletter_copy_repair.verify') as verify:
+   with self.assertRaises(RuntimeError):finish_pending_copy(None,state,story,source,[],[],lambda:(_ for _ in ()).throw(RuntimeError('interrupted')))
+   self.assertEqual(state['pending_copy_repairs']['u']['phase'],'verify')
+   finish_pending_copy(None,state,story,source,[],[],lambda:None)
+   self.assertEqual(repair.call_count,1);self.assertEqual(verify.call_count,1)
+  self.assertNotIn('u',state['pending_copy_repairs']);self.assertEqual(story['image'],{'hash':'keep'})

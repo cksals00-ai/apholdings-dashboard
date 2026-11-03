@@ -60,9 +60,10 @@ class TextModel:
   with urllib.request.urlopen(request,timeout=REQUEST_TIMEOUTS[self.profile]) as response:result=json.load(response)
   import hashlib
   output=self.folder/'model-outputs';output.mkdir(exist_ok=True)
-  result['_ap_runtime']={'profile':self.profile,'prompt_cache_revision':PROMPT_CACHE_REVISION,'repository':TEXT_PROFILES[self.profile][0],'revision':TEXT_PROFILES[self.profile][1]}
-  (output/(hashlib.sha256((self.profile+'\n'+prompt).encode()).hexdigest()[:16]+'.json')).write_text(json.dumps(result,ensure_ascii=False,indent=2))
-  if result.get('stopped_limit'):raise ValueError('Model generation reached token limit')
+  prompt_hash=hashlib.sha256((self.profile+'\n'+prompt).encode()).hexdigest()
+  result['_ap_runtime']={'prompt_sha256':prompt_hash,'profile':self.profile,'prompt_cache_revision':PROMPT_CACHE_REVISION,'repository':TEXT_PROFILES[self.profile][0],'revision':TEXT_PROFILES[self.profile][1]}
+  (output/(prompt_hash[:16]+'-'+str(time.time_ns())+'.json')).write_text(json.dumps(result,ensure_ascii=False,indent=2))
+  if result.get('stopped_limit') or result.get('stop_type')=='limit':raise ValueError('Model generation reached token limit')
   return parse_json(result['content'])
 
 class ImageModel:

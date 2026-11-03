@@ -26,32 +26,20 @@ def seed(root,day,run,dry_run=True,resume_run=""):
    state=resume_state(state,day,run,resume_run)
    (folder/'draft.json').write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
   return state
- with tempfile.TemporaryDirectory() as tmp:
-  if not checkpoint.restore(Path(tmp),day,'production',run,required=True):raise ValueError('Missing published checkpoint')
-  old=json.loads((Path(tmp)/'.production-state/draft.json').read_text())
- if old.get('mode')!='production' or old.get('date')!=day or len(old.get('stories',[]))!=5:raise ValueError('Invalid accepted production checkpoint')
- candidates={c['url']:c for c in old['candidates']};fresh=[];stories=[]
- for saved in old['stories']:
-  prior=candidates[saved['url']];sources.publisher.official_url(saved['url'])
-  if prior['published']!=saved['published'] or hashlib.sha256(prior['text'].encode()).hexdigest()!=prior['body_sha256'] or saved['source_hash']!=prior['body_sha256']:raise ValueError('Saved source identity mismatch')
-  source=sources.parse_article(sources.fetch(saved['url']),saved['url'],prior['source'],prior['published'])
-  if prior.get('published_at'):source['published_at']=prior['published_at']
-  fresh.append(source)
-  if all(isinstance(q,str) and q in source['text'] for q in saved.get('evidence',[])) and saved.get('evidence'):
-   story=copy.deepcopy(saved);story['source_hash']=source['body_sha256'];story.pop('strong_review',None);stories.append(story)
- if len(stories)!=5:raise ValueError('Saved copy evidence changed; cannot seed fixed five-source rehearsal')
- target=next((s for s in stories if re.search('교육|학습|연구',s['title'])),None)
- if target is None:raise ValueError('No education/research story for controlled copy fault')
- target['title']='AI 교육이 학습 효과를 높였다는 연구 결과'
- target['summary']='이번 발표는 AI 활용 교육이 학습자의 이해도와 학습 성과를 개선했음을 입증했습니다.'
- target['fact']='이 교육 및 연구는 AI 활용이 학습 효과를 높인다는 인과관계를 입증했습니다.'
- advice=next((s for s in stories if s is not target and '연구' in s['title']),None)
- if advice is None:raise ValueError('No second study story for controlled advice-premise fault')
- advice['action']='AI 교육 효과가 모든 학생에게 입증됐으므로 AP 교육에 전면 적용한다.'
- target['review']={'supported':True,'unsupported_claims':[],'method':'rehearsal simulated weak verifier acceptance'}
- state={'date':day,'mode':'test','asset_day':f'{day}-test-{run}','input_published_today':True,'issue_number':old['issue_number'],'stories':stories,'candidates':fresh,'errors':[],'art_plans':copy.deepcopy(old['art_plans']),'editorial':copy.deepcopy(old['editorial']),'rehearsal_faults':{'copy_injected':True,'copy_url':target['url'],'advice_premise_injected':True,'advice_url':advice['url']},'stage':'rehearsal_seeded'}
- validate_plans(state['art_plans'],state['editorial']['lead_index'])
+ state={'date':day,'mode':'test','asset_day':f'{day}-test-{run}','input_published_today':False,'stories':[],'errors':[],'rehearsal_version':2,'rehearsal_faults':{},'stage':'rehearsal_fresh_seed'}
  folder.mkdir(parents=True,exist_ok=True);(folder/'draft.json').write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n');return state
+
+def inject_copy_fault(state):
+ if state.get('rehearsal_version')!=2:return False
+ identity(state)
+ faults=state.setdefault('rehearsal_faults',{})
+ if faults.get('copy_injected') or len(state.get('stories',[]))!=5:return False
+ target,advice=state['stories'][:2]
+ target['fact']='이번 발표는 AI가 모든 학습자의 학습 효과를 높인다는 인과관계를 입증했습니다.'
+ advice['action']='AI 교육 효과가 모든 학생에게 입증됐으므로 AP 교육에 전면 적용한다.'
+ for story in (target,advice):story.pop('strong_review',None)
+ faults.update(copy_injected=True,copy_url=target['url'],advice_premise_injected=True,advice_url=advice['url'])
+ return True
 
 def inject_art_fault(state,dry_run,enabled):
  if not enabled:return False
@@ -118,10 +106,13 @@ def verify_receipts(folder):
  def require(ok,message):
   if not ok:raise ValueError(message)
  require(faults.get('copy_injected') and faults.get('art_injected'),'Both real rehearsal faults required')
- require(state.get('input_published_today') is True,'Published production input must remain acknowledged')
+ require(state.get('rehearsal_version')==2 or state.get('input_published_today') is True,'Recognized immutable rehearsal input required')
  require(not any(k in state for k in ('recipients','mail_recipients','ordinary_delivery','production_delivery')),'Ordinary delivery data forbidden')
  candidates={s['url']:s for s in state['candidates']};prior=state.get('copy_review_prior',[])
- if state.get('resume_history'):require(cache_challenge_receipts_valid(state,state['candidates'],prior),'Resumed cache must reject both archived factual faults under current prompt layout')
+ if state.get('rehearsal_version')==2:
+  from newsletter_frozen_controls import controls_valid
+  require(controls_valid(state),'Five immutable historical editorial controls required')
+ elif state.get('resume_history'):require(cache_challenge_receipts_valid(state,state['candidates'],prior),'Resumed cache must reject both archived factual faults under current prompt layout')
  require(len(state['stories'])==5 and all(receipt_valid(s,candidates[s['url']],prior,state['stories'][:i]) for i,s in enumerate(state['stories'])),'Five current independent strong review receipts required')
  require(any(h.get('draft',{}).get('url')==faults['copy_url'] for h in state.get('copy_history',[]) if h.get('draft')),'Injected copy rejection required')
  require(faults.get('advice_premise_injected') and advice_fault_rejected(state.get('copy_history',[]),faults),'Unsupported factual premise in advice must be rejected')
@@ -138,7 +129,7 @@ def verify_receipts(folder):
  receipts=json.loads((folder/'notification-receipts.json').read_text())
  for stage in ('copy','art'):
   require(any(receipts.get(e['id'],{}).get('accepted') is True for e in state.get('recovery_events',[]) if e.get('stage')==stage),'Parent accepted '+stage+' notice required')
- proof={'date':day,'mode':'test','run':run,'asset_run':asset_run,'resume_history':state.get('resume_history',[]),'copy_rejected':True,'recommendation_premise_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_notices_accepted':['copy','art'],'resumed_cache_faults_rechecked':bool(state.get('resume_history')),'editorial_controls':state.get('editorial_control_receipts',{})}
+ proof={'date':day,'mode':'test','run':run,'asset_run':asset_run,'resume_history':state.get('resume_history',[]),'copy_rejected':True,'recommendation_premise_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_notices_accepted':['copy','art'],'resumed_cache_faults_rechecked':bool(state.get('resume_history')),'editorial_controls':state.get('frozen_control_receipts',{}) if state.get('rehearsal_version')==2 else state.get('editorial_control_receipts',{})}
  (folder/'recovery-proof.json').write_text(json.dumps(proof,indent=2)+'\n');return proof
 
 if __name__=='__main__':

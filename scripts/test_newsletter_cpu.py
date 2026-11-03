@@ -1,8 +1,25 @@
-import unittest,tempfile,types,sys,os
+import unittest,tempfile,types,sys,os,io,json
 from pathlib import Path
 from unittest.mock import Mock,patch
 from newsletter_cpu import completion_prompt,TextModel,sampling_options
 class PromptTests(unittest.TestCase):
+ def test_actual_llama_stop_type_limit_keeps_raw_receipt_and_reports_limit(self):
+  with tempfile.TemporaryDirectory() as temp:
+   root=Path(temp);model=TextModel(root,root,profile='review')
+   raw={'content':'{"findings":[','stop_type':'limit','tokens_predicted':1500}
+   with patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps(raw).encode())):
+    with self.assertRaisesRegex(ValueError,'token limit'):model.ask('Verify','Draft',tokens=1500)
+   receipts=list((root/'model-outputs').glob('*.json'))
+   self.assertEqual(len(receipts),1)
+   self.assertEqual(json.loads(receipts[0].read_text())['content'],raw['content'])
+
+ def test_repeated_prompt_keeps_every_raw_model_receipt(self):
+  with tempfile.TemporaryDirectory() as temp:
+   root=Path(temp);model=TextModel(root,root,profile='review')
+   for content in ('{"value":1}','{"value":2}'):
+    with patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps({'content':content}).encode())):model.ask('Role','Same input')
+   receipts=list((root/'model-outputs').glob('*.json'))
+   self.assertEqual(len(receipts),2)
  def test_art_profile_is_pinned_public_14b_and_cpu_only_without_credentials(self):
   with tempfile.TemporaryDirectory() as temp:
    root=Path(temp);(root/'llama-server').touch();download=Mock(return_value='/tmp/public-model.gguf');process=Mock();process.wait.return_value=0
