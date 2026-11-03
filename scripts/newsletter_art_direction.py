@@ -50,7 +50,7 @@ def validate_plans(plans,lead):
  if lookup[5]['viewpoint']==lookup[lead]['viewpoint']:raise ValueError('Cover viewpoint must differ from lead article')
  return True
 
-def plan_art(model,stories,lead,previous_plans=None,on_progress=None):
+def plan_art(model,stories,lead,previous_plans=None,on_progress=None,recent_directions=None):
  facts=[{k:s[k] for k in ('title','summary','fact')} for s in stories]
  saved=list(previous_plans or []);plans=[]
  for index,p in enumerate(saved):
@@ -64,7 +64,7 @@ def plan_art(model,stories,lead,previous_plans=None,on_progress=None):
   plans.append(p)
  for index in range(len(plans),6):
   views,media=choices(plans,index,lead);error=None;previous=None
-  context={'kind':'lead-news cover' if index==5 else 'article illustration','article':facts[lead if index==5 else index],'previous_subjects':[p['subject'] for p in plans]}
+  context={'kind':'lead-news cover' if index==5 else 'article illustration','article':facts[lead if index==5 else index],'previous_subjects':[p['subject'] for p in plans],'last_three_issue_directions':recent_directions or []}
   if index==5:context['lead_article_plan']=plans[lead]
   for attempt in range(2):
    question='Choose from the schema options by the article meaning. Describe one physical scene, not interfaces or abstract titles. For a cover, use different objects/framing from its article. Data:\n'+json.dumps(context,ensure_ascii=False)
