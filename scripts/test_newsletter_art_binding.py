@@ -26,11 +26,46 @@ class BindingTests(unittest.TestCase):
    self.assertEqual([p['story_index'] for p in state['art_plans']],list(range(6)))
    if changed is not None:self.assertIn(changed,[p['story_index'] for p in [state['pending_art_repair']]+state.get('art_repair_queue',[])])
    before=copy.deepcopy(state);reconcile_art_bindings(root,folder,'day',state,old,{'lead_index':0});self.assertEqual(state,before)
+ def test_budgets_follow_unchanged_facts_and_reset_for_replacement(self):
+  with tempfile.TemporaryDirectory() as d:
+   old=[{'url':str(i),'summary':'s','fact':'f','title':'news'} for i in range(5)]
+   stories=[old[1],dict(old[0],fact='replacement')]+old[2:]
+   state={'stories':stories,'editorial':{'lead_index':0},'art_plans':fixtures.ArtDirectionTests().plans(),'art_repair_counts':{'0':3,'1':2,'5':3},'image_attempts':{'day-story-1.png':9,'day-story-2.png':6,'day-hero-original.png':9},'art_plan_repair_attempts':{'0:3':4,'1:2':2}}
+   reconcile_art_bindings(d,d,'day',state,old,{'lead_index':0})
+   self.assertEqual(state['art_repair_counts']['0'],2)
+   self.assertEqual(state['art_repair_counts']['1'],1)
+   self.assertEqual(state['art_repair_counts']['5'],1)
+   self.assertEqual(state['image_attempts']['day-story-1.png'],6)
+   self.assertNotIn('day-story-2.png',state['image_attempts'])
+   self.assertEqual(state['art_plan_repair_attempts'],{'0:2':2})
+ def test_pending_failure_moves_with_identity_without_spending_extra_budget(self):
+  from newsletter_art_repair import record_failure
+  with tempfile.TemporaryDirectory() as d:
+   old=[{'url':str(i),'summary':'s','fact':'f','title':'news'} for i in range(5)]
+   state={'stories':[old[1],old[0]]+old[2:],'editorial':{'lead_index':1},'art_plans':fixtures.ArtDirectionTests().plans()}
+   record_failure(state,0,'day-story-1.png','subject',{'positive':.01})
+   reconcile_art_bindings(d,d,'day',state,old,{'lead_index':0})
+   self.assertEqual(state['pending_art_repair']['story_index'],1)
+   self.assertEqual(state['pending_art_repair']['scores'],{'positive':.01})
+   self.assertEqual(state['art_repair_counts'],{'1':1})
+ def test_new_lead_matching_old_hero_view_repairs_only_hero(self):
+  from unittest.mock import Mock
+  from newsletter_art_repair import repair_pending
+  with tempfile.TemporaryDirectory() as d:
+   old=[{'url':str(i),'summary':'s','fact':'f','title':'news'} for i in range(5)]
+   plans=fixtures.ArtDirectionTests().plans();plans[1]=dict(plans[1],viewpoint='wide',prompt=plans[1]['prompt'].replace('overhead','wide'))
+   state={'stories':old,'editorial':{'lead_index':1},'art_plans':plans}
+   reconcile_art_bindings(d,d,'day',state,old,{'lead_index':0})
+   accepted=copy.deepcopy(state['art_plans'][:5]);model=Mock()
+   model.ask.return_value={'viewpoint':'overhead','medium':'watercolor','subject':'teacher and child reading book','scene':'A teacher and child read a book at a table.'}
+   repair_pending(model,state)
+   self.assertEqual(state['art_plans'][:5],accepted)
+   self.assertNotIn('pending_art_repair',state)
  def test_partial_destination_move_recovers_without_losing_bytes(self):
   from unittest.mock import patch
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);images=root/'img/newsletter';images.mkdir(parents=True)
-   old=[{'url':str(i),'summary':'s','fact':'f'} for i in range(5)]
+   old=[{'url':str(i),'summary':'s','fact':'f','title':'news'} for i in range(5)]
    state={'stories':[old[1],old[0]]+old[2:],'editorial':{'lead_index':1},'art_plans':fixtures.ArtDirectionTests().plans()}
    for i in range(5):(images/f'day-story-{i+1}.png').write_bytes(str(i).encode())
    original=Path.replace;applied=0
@@ -44,7 +79,7 @@ class BindingTests(unittest.TestCase):
    reconcile_art_bindings(root,root/'state','day',state,old,{'lead_index':0})
    self.assertEqual([(images/f'day-story-{i+1}.png').read_bytes() for i in range(5)],[b'1',b'0',b'2',b'3',b'4'])
  def test_headline_only_change_preserves_assets_and_plan(self):
-  old=[{'url':str(i),'summary':'s','fact':'f'} for i in range(5)]
+  old=[{'url':str(i),'summary':'s','fact':'f','title':'news'} for i in range(5)]
   state={'stories':[dict(s,title='new') for s in old],'editorial':{'lead_index':0},'art_plans':fixtures.ArtDirectionTests().plans()}
   with tempfile.TemporaryDirectory() as d:
    reconcile_art_bindings(d,d,'day',state,old,{'lead_index':0})

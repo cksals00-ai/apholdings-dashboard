@@ -35,13 +35,28 @@ def reconcile_art_bindings(root,folder,asset_day,state,before_stories,before_edi
   if hero_changed:
    moves.extend({'source':f'{asset_day}-hero{suffix}','destination':None} for suffix in ('-original.png','.png','.gif'))
   # Remap already-pending failures to their unchanged semantic story, if present.
-  existing=[state.get('pending_art_repair')]+state.get('art_repair_queue',[])
+  existing=[state.get('pending_art_repair')]+state.get('art_repair_queue',[]);preserved_failures=[]
   for failure in existing:
    if not failure:continue
    oldindex=failure['story_index']
    newindex=5 if oldindex==5 else next((j for j,k in mapping.items() if k==oldindex and j not in changed),None)
-   if newindex is not None and newindex not in queued:queued.append(newindex)
-  transaction={'phase':'stage','plans':updated,'queued':queued,'moves':moves};_save(journal,transaction)
+   if newindex is not None and newindex not in queued:
+    kept=copy.deepcopy(failure);kept['story_index']=newindex;kept['failed_plan']['story_index']=newindex
+    kept['name']=f'{asset_day}-hero-original.png' if newindex==5 else f'{asset_day}-story-{newindex+1}.png'
+    preserved_failures.append(kept)
+  semantic_mapping={i:j for i,j in mapping.items() if i not in changed}
+  if not hero_changed:semantic_mapping[5]=5
+  oldcounters={k:copy.deepcopy(state.get(k,{})) for k in ('art_repair_counts','image_attempts','art_plan_repair_attempts','image_subject_scores')}
+  counters={k:{} for k in oldcounters}
+  for newindex,oldindex in semantic_mapping.items():
+   if str(oldindex) in oldcounters['art_repair_counts']:counters['art_repair_counts'][str(newindex)]=oldcounters['art_repair_counts'][str(oldindex)]
+   for key,value in oldcounters['art_plan_repair_attempts'].items():
+    if key.split(':')[0]==str(oldindex):counters['art_plan_repair_attempts'][str(newindex)+':'+key.split(':',1)[1]]=value
+   oldname=f'{asset_day}-hero-original.png' if oldindex==5 else f'{asset_day}-story-{oldindex+1}.png'
+   newname=f'{asset_day}-hero-original.png' if newindex==5 else f'{asset_day}-story-{newindex+1}.png'
+   for key in ('image_attempts','image_subject_scores'):
+    if oldname in oldcounters[key]:counters[key][newname]=oldcounters[key][oldname]
+  transaction={'phase':'stage','plans':updated,'queued':queued,'moves':moves,'counters':counters,'prior_counters':oldcounters,'preserved_failures':preserved_failures};_save(journal,transaction)
  work.mkdir(parents=True,exist_ok=True)
  if transaction['phase']=='stage':
   for move in transaction['moves']:
@@ -52,10 +67,13 @@ def reconcile_art_bindings(root,folder,asset_day,state,before_stories,before_edi
   staged=work/move['source']
   if move['destination'] and staged.exists():staged.replace(images/move['destination'])
  state['art_plans']=transaction['plans'];queue=[]
+ for key,value in transaction.get('counters',{}).items():state[key]=copy.deepcopy(value)
+ state.pop('pending_art_repair',None);state.pop('art_repair_queue',None)
  for index in transaction['queued']:
   name=f'{asset_day}-hero-original.png' if index==5 else f'{asset_day}-story-{index+1}.png'
   record_failure(state,index,name,'source facts or lead binding changed',{})
   queue.append(state.pop('pending_art_repair'))
+ queue.extend(transaction.get('preserved_failures',[]))
  if queue:state['pending_art_repair']=queue[0];state['art_repair_queue']=queue[1:]
  state.setdefault('art_binding_receipts',[]).append(token)
  return True
