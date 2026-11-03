@@ -19,6 +19,14 @@ class CopyRepairTests(unittest.TestCase):
   self.assertEqual(len(state['recovery_events']),2)
  def test_old_receipt_not_trusted(self):
   self.assertFalse(receipt_valid({'review':{'supported':True}}, {'body_sha256':'abc'}, []))
+ def test_same_issue_duplicate_rejected_by_independent_peer_gate(self):
+  from unittest.mock import Mock
+  source={'title':'New case','text':'A company reports a concrete new implementation result for its customers today.','body_sha256':'abc'}
+  model=Mock();model.ask.return_value={'is_news':True,'is_duplicate':True,'novel_quote':source['text'],'reason':'same peer event'}
+  peer={'title':'기존 사건','summary':'같은 도입 사례','fact':'같은 결과'}
+  with self.assertRaisesRegex(ValueError,'novelty rejection'):verify(model,{},source,[],[peer])
+  self.assertIn('같은 도입 사례',model.ask.call_args.args[1])
+  self.assertEqual(model.ask.call_count,1)
  def test_server_qa_receipts_require_prior_and_ordered_peer_context(self):
   from newsletter_production_qa import check_copy_receipts
   text='An official publisher reports a concrete new implementation result today.'
