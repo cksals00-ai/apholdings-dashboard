@@ -6,7 +6,8 @@ on:
     workflows: ['AP News server production rehearsal']
     types: [completed]
   schedule:
-    # KST03:05/03:35 and04:05–07:05 recovery. Production is gated on full server proof.
+    # KST02:45 prewarm; later runs recover only missing same-day work.
+    - cron: '45 17 * * *'
     - cron: '5,35 18 * * *'
     - cron: '5 19-22 * * *'
 concurrency:

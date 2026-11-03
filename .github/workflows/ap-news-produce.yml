@@ -120,6 +120,9 @@ jobs:
         run: |
           python -m unittest discover -s scripts -p 'test_newsletter*.py'
           node --test supabase/functions/ap-news/core.test.mjs
+      - name: Wait for Korean 03:05 actual source work window
+        if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run != true }}
+        run: python .production-runtime/scripts/newsletter_start_window.py
       - name: Supervise credential-free source, copy, art and document production
         if: ${{ steps.gate.outputs.produce == 'true' }}
         env:

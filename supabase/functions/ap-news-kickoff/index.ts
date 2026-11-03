@@ -26,12 +26,22 @@ Deno.serve(async req=>{
   const now=new Date(),day=new Date(+now+9*3600000).toISOString().slice(0,10),body=await req.json();
   if(body.probe===true){await github('actions/workflows/ap-news-startup-probe.yml/dispatches','POST',{ref:'main'});return Response.json({probe_requested:true,production_started:false,execution_confirmed:false});}
   const minute=new Date(+now+9*3600000).getUTCHours()*60+new Date(+now+9*3600000).getUTCMinutes();
-  if(!body.observe&&(minute<185||minute>420))return Response.json({status:'outside_window',day});
-  const runs=await github('actions/workflows/'+WORKFLOW+'/runs?per_page=30');
+  if(!body.observe&&(minute<165||minute>420))return Response.json({status:'outside_window',day});
+  const since=new Date(day+'T00:00:00+09:00').toISOString();
+  const runs=await github('actions/workflows/'+WORKFLOW+'/runs?per_page=100&created='+encodeURIComponent('>='+since));
+  if(!Array.isArray(runs.workflow_runs)||runs.total_count!==runs.workflow_runs.length)throw Error('unknown_workflow_runs');
+  // Explicit attempt endpoint prevents an earlier successful attempt proving current work.
+  for(const run of runs.workflow_runs){
+   if(run.head_branch!=='main'||!['schedule','workflow_dispatch'].includes(run.event)||new Date(+new Date(run.created_at)+9*3600000).toISOString().slice(0,10)!==day)continue;
+   if(!Number.isInteger(run.id)||!Number.isInteger(run.run_attempt))throw Error('unknown_run_attempt');
+   const result=await github(`actions/runs/${run.id}/attempts/${run.run_attempt}/jobs?per_page=100`);
+   if(!Array.isArray(result.jobs)||result.total_count!==result.jobs.length)throw Error('unknown_jobs_page');
+   run.jobs=result.jobs;
+  }
   const prior=(await db('ap_news_startup_receipts?issue_date=eq.'+day+'&select=attempts,updated_at'))?.[0];
   const decision=decide(now.toISOString(),runs.workflow_runs,prior);
   if(body.observe)return Response.json({day,status:decision.kind,read_only:true,today_runs:runs.workflow_runs.filter((r:{created_at:string})=>new Date(+new Date(r.created_at)+9*3600000).toISOString().slice(0,10)===day).map((r:{html_url:string,status:string,conclusion:string})=>({url:r.html_url,status:r.status,conclusion:r.conclusion}))});
-  if(['queued','waiting'].includes(decision.kind)&&minute>=190)await alert(day,'03:05 제작 요청 이후 아직 실제 제작 실행을 확인하지 못했습니다. 기존 요청을 중복 생성하지 않고 서버에서 추적 중입니다.',KEY,'pending');
+  if(['queued','waiting','preparing','start'].includes(decision.kind)&&minute>=190)await alert(day,'03:10까지 실제 원문 수집·제작 단계 시작을 확인하지 못했습니다. 기존 요청을 중복 생성하지 않고 서버에서 추적 중입니다.',KEY,'pending');
   if(['failure','exhausted'].includes(decision.kind))await alert(day,'서버 제작 시작 또는 복구 실패를 감지했습니다. 기존 GitHub 실행을 확인하며 중복 제작은 시작하지 않습니다.',KEY);
   if(decision.kind!=='start')return Response.json({day,status:decision.kind});
   const claimed=await db('rpc/ap_news_startup_claim','POST',{p_day:day});
