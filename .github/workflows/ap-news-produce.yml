@@ -20,7 +20,7 @@ permissions:
 jobs:
   produce:
     runs-on: ubuntu-24.04
-    timeout-minutes: 200
+    timeout-minutes: 360
     env:
       HF_HUB_DISABLE_TELEMETRY: '1'
       HF_HUB_DISABLE_IMPLICIT_TOKEN: '1'
@@ -35,7 +35,7 @@ jobs:
       - name: Checkout reviewed producer runtime
         uses: actions/checkout@v7
         with:
-          ref: aecfe25f385c8ce4afc205682113f4f12ed5aacb
+          ref: 1d8c0c6bac7aaf6eb87164b7be724dbcefbb606a
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -127,7 +127,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           EDITION_DAY: ${{ steps.gate.outputs.day }}
           AP_NEWS_REPAIR_REHEARSAL: '1'
-        run: python .production-runtime/scripts/newsletter_repair_rehearsal.py seed --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --run "$GITHUB_RUN_ID" --dry-run
+          RESUME_RUN: ${{ inputs.resume_run }}
+        run: python .production-runtime/scripts/newsletter_repair_rehearsal.py seed --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --run "$GITHUB_RUN_ID" --dry-run --resume-run "$RESUME_RUN"
       - name: Wait for Korean 03:05 actual source work window
         if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run != true }}
         run: python .production-runtime/scripts/newsletter_start_window.py
