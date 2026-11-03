@@ -25,7 +25,7 @@ class CopyRepairTests(unittest.TestCase):
   model=Mock();model.ask.return_value={'is_news':True,'is_duplicate':True,'novel_quote':source['text'],'reason':'same peer event'}
   peer={'title':'기존 사건','summary':'같은 도입 사례','fact':'같은 결과'}
   with self.assertRaisesRegex(ValueError,'novelty rejection'):verify(model,{},source,[],[peer])
-  self.assertIn('같은 도입 사례',model.ask.call_args.args[1])
+  self.assertEqual(model.ask.call_args.kwargs['comparison_context']['peers'][0]['summary'],'같은 도입 사례')
   self.assertEqual(model.ask.call_count,1)
  def test_server_qa_receipts_require_prior_and_ordered_peer_context(self):
   from newsletter_production_qa import check_copy_receipts

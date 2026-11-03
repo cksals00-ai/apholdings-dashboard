@@ -37,6 +37,18 @@ class RehearsalTests(unittest.TestCase):
    self.assertEqual(state['issue_number'],old['issue_number']);self.assertNotIn('bundle',state)
    self.assertEqual(state['stories'][0]['review']['supported'],True)
    self.assertEqual(r.seed(tmp,r.today(),'123'),state);self.assertEqual(download.call_count,1)
+ def test_seed_resume_preserves_existing_accepted_image_bytes(self):
+  state=self.state()
+  with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,{'AP_NEWS_REPAIR_REHEARSAL':'1'}):
+   folder=Path(tmp,'.production-state');folder.mkdir();(folder/'draft.json').write_text(json.dumps(state))
+   image=Path(tmp,'img/newsletter',state['asset_day']+'-story-1.png');image.parent.mkdir(parents=True);image.write_bytes(b'accepted-art')
+   def resume(saved,day,run,origin):
+    self.assertEqual(origin,'123');saved['rehearsal_execution_run']=run;return saved
+   with patch('newsletter_rehearsal_resume.resume_state',side_effect=resume) as call:
+    result=r.seed(tmp,r.today(),'456',resume_run='123')
+   self.assertEqual(result['asset_day'],state['asset_day']);self.assertEqual(result['rehearsal_execution_run'],'456');call.assert_called_once()
+   self.assertEqual(image.read_bytes(),b'accepted-art')
+   self.assertEqual(json.loads((folder/'draft.json').read_text())['rehearsal_execution_run'],'456')
  def test_verify_writes_only_safe_summary_after_real_receipts(self):
   from newsletter_copy_repair import identity,REVISION
   from newsletter_cpu import ART_REV
@@ -63,6 +75,25 @@ class RehearsalTests(unittest.TestCase):
   self.assertFalse(r.advice_fault_rejected([{'draft':draft,'reason':'Independent novelty rejection: old source'}],fault))
   self.assertFalse(r.advice_fault_rejected([{'draft':draft,'reason':'Independent source review rejected draft: unclear recommendation'}],fault))
   self.assertTrue(r.advice_fault_rejected([{'draft':draft,'reason':'Independent source review rejected draft: AI 교육 효과가 모든 학생에게 입증됐다는 근거 없음'}],fault))
+ def cache_fixture(self):
+  state=self.state();state['resume_history']=[{'from':'123','to':'456'}];state['rehearsal_faults'].update(copy_url='copy-url',advice_url='advice-url')
+  state['copy_history']=[{'draft':None},{'draft':{'url':'copy-url','fact':'학습 효과가 입증됐다는 과장'}},{'draft':{'url':'advice-url','action':'AI 교육 효과가 모든 학생에게 입증됐으므로 전면 적용한다.'}}]
+  sources=[{'url':url,'body_sha256':url} for url in ('copy-url','advice-url')]
+  return state,sources
+ def test_resumed_cache_rechecks_old_faults_without_redrafting_verified_work(self):
+  state,sources=self.cache_fixture();saved=[]
+  failures=[ValueError('Independent source review rejected draft: 학습 효과 입증 근거 없음'),ValueError('Independent source review rejected draft: 모든 학생에게 학습 효과가 입증됐다는 근거 없음')]
+  with patch.dict(os.environ,{'AP_NEWS_REPAIR_REHEARSAL':'1'}),patch('newsletter_copy_repair.verify',side_effect=failures) as verify:
+   r.verify_resumed_cache_challenges(object(),state,sources,[],lambda:saved.append(True))
+   self.assertEqual(verify.call_count,2);self.assertEqual(len(saved),2)
+   r.verify_resumed_cache_challenges(object(),state,sources,[],lambda:None);self.assertEqual(verify.call_count,2)
+  self.assertTrue(r.cache_challenge_receipts_valid(state,sources,[]))
+ def test_resumed_cache_cannot_accept_fault_or_count_novelty_rejection(self):
+  for answer in (None,ValueError('Independent novelty rejection: duplicate'),ValueError('Independent source review rejected draft: unrelated AP suggestion')):
+   state,sources=self.cache_fixture()
+   with patch.dict(os.environ,{'AP_NEWS_REPAIR_REHEARSAL':'1'}),patch('newsletter_copy_repair.verify',side_effect=answer):
+    with self.assertRaises(ValueError):r.verify_resumed_cache_challenges(object(),state,sources,[],lambda:None)
+   self.assertFalse(r.cache_challenge_receipts_valid(state,sources,[]))
  def test_verify_rejects_missing_real_receipts(self):
   with tempfile.TemporaryDirectory() as tmp:
    Path(tmp,'draft.json').write_text(json.dumps(self.state()))
