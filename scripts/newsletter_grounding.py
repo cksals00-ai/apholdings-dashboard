@@ -66,7 +66,22 @@ def validate_korean_copy(text):
  if re.search(r'[\u0400-\u052f\u0600-\u06ff]',text):raise ValueError('Unexpected foreign text in Korean copy')
  return True
 
-def validate_grounding(story,source,review):
+PRODUCT_NAMES=('Gemini','Notebook','Copilot','Claude','ChatGPT','AgentCore','Nemotron','Bedrock')
+def required_product_names(source):
+ return [name for name in PRODUCT_NAMES if re.search(r'\b'+re.escape(name)+r'\b',source.get('title',''),re.I)]
+
+def retain_source_product_names(story,source):
+ # A source-bound name label is formatting, never a factual approval.
+ from copy import deepcopy
+ result=deepcopy(story);copy=' '.join(str(story.get(k,'')) for k in ('title','summary','fact'))
+ missing=[name for name in required_product_names(source) if name.lower() not in copy.lower()]
+ if missing:
+  title=' / '.join(missing)+' · '+story['title']
+  if len(title)>90:raise ValueError('Original product label exceeds title layout limit')
+  result['title']=title;result.pop('strong_review',None)
+ return result
+
+def validate_source_copy(story,source):
  for key in ('title','summary','fact','insight','action','image_prompt','image_subject','visual_approach'):
   value=story.get(key)
   if not isinstance(value,str) or not value.strip() or len(value)>1800:raise ValueError('Invalid editorial field: '+key)
@@ -81,14 +96,18 @@ def validate_grounding(story,source,review):
  for quote in quotes:
   if not isinstance(quote,str) or len(quote)<30 or len(quote)>900 or normalized(quote) not in text:raise ValueError('Evidence quote is not in official source; copy literal English without translating or adding particles: '+str(quote)[:140])
  copy=' '.join(story[k] for k in ('title','summary','fact'))
- for name in ('Gemini','Notebook','Copilot','Claude','ChatGPT','AgentCore','Nemotron','Bedrock'):
-  if re.search(r'\b'+re.escape(name)+r'\b',source.get('title',''),re.I) and name.lower() not in copy.lower():raise ValueError('Keep original product name in Latin spelling: '+name)
+ for name in required_product_names(source):
+  if name.lower() not in copy.lower():raise ValueError('Keep original product name in Latin spelling: '+name)
  # Only verbatim evidence can authorize new factual figures; source date is displayed separately.
  evidence=' '.join(quotes)
  if re.search(r'협력|제휴|파트너십|공동(?:개발|발표|출시|연구|제작|구축)',copy) and not re.search(r'collaborat|partner|co[- ](?:develop|engineer|author)|work(?:ed|ing)? with|together|joined forces|jointly|agreement with|협력|제휴|공동',evidence,re.I):raise ValueError('No partnership/co-development evidence. Hosting or deployment is not collaboration; remove the unsupported relationship and describe actual availability/deployment.')
  for key in ('title','summary','fact'):
   missing=numbers(story[key])-numbers(evidence)
   if missing:raise ValueError('Unsupported numeric claim in '+key+': '+', '.join(sorted(missing))+'; remove the claim or quote exact supporting source text')
- if review.get('supported') is not True or review.get('unsupported_claims')!=[]:raise ValueError('Independent source review rejected draft: '+str(review.get('unsupported_claims',[])))
  if any(term in story['fact'] for term in ('사람이 검수','전문가 검수','수동 검수')):raise ValueError('False human-review claim')
+ return True
+
+def validate_grounding(story,source,review):
+ validate_source_copy(story,source)
+ if review.get('supported') is not True or review.get('unsupported_claims')!=[]:raise ValueError('Independent source review rejected draft: '+str(review.get('unsupported_claims',[])))
  return True

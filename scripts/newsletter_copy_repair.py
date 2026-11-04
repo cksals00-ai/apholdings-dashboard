@@ -1,9 +1,9 @@
 """Durable, bounded copy repair with a separately loaded public verifier."""
 import hashlib,json,os
-from newsletter_grounding import resolve_novelty,indexed_source,normalized,require_news_topic,validate_grounding
+from newsletter_grounding import validate_source_copy,resolve_novelty,indexed_source,normalized,require_news_topic,validate_grounding
 from newsletter_cpu import ART_REV
 import newsletter_schemas as shapes
-REVISION='independent-copy-14b-v6-evidence-id'
+REVISION='independent-copy-14b-v7-source-names'
 MAX_ATTEMPTS=2
 
 def peer_facts(peers):return [{k:story.get(k,'') for k in ('title','summary','fact')} for story in (peers or [])]
@@ -47,6 +47,9 @@ def verify(model,story,source,prior,peers=None):
  except ValueError as exc:
   exc.review=review
   raise
+ story['review']=review
+ story['novelty']=novelty
+ story['is_news']=True
  story['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(story,source,prior,peers),'supported':True,'novelty':novelty,'review':review}
  return story
 
@@ -81,7 +84,7 @@ def ensure_copy(state,sources,prior,model_factory,draft,save):
    source=evidence.get(story['url'])
    try:
     if source is None:raise ValueError('Missing immutable source snapshot')
-    validate_grounding(story,source,story.get('review',{}))
+    validate_source_copy(story,source)
     if story.get('source_hash')!=source['body_sha256']:raise ValueError('Source body changed')
    except ValueError as exc:
     record_failure(state,story['url'],exc,story,source);state['stories'].remove(story);save()
@@ -96,7 +99,7 @@ def ensure_copy(state,sources,prior,model_factory,draft,save):
       try:
        story=draft(model,source,prior+peer_facts(state['stories']),state.get('copy_feedback',{}).get(url))
        state['stories'].append(story);save()
-      except ValueError as exc:record_failure(state,url,exc,None,source,notify=not str(exc).startswith('No distinct new announcement/result'));save()
+      except ValueError as exc:record_failure(state,url,exc,getattr(exc,'draft',None),source,notify=not str(exc).startswith('No distinct new announcement/result'));save()
   if state.get('mode')=='test' and os.environ.get('AP_NEWS_REPAIR_REHEARSAL')=='1':
    from newsletter_repair_rehearsal import inject_copy_fault
    if inject_copy_fault(state):save()
@@ -127,8 +130,9 @@ def ensure_copy(state,sources,prior,model_factory,draft,save):
      except ValueError as exc:
       source=evidence[story['url']]
       record_failure(state,story['url'],exc,story,source)
+      failures=state.setdefault('strong_copy_attempts',{});failures[story['url']]=failures.get(story['url'],0)+1
       review=getattr(exc,'review',{})
-      if review.get('fields') and state['copy_attempts'][story['url']]<MAX_ATTEMPTS:
+      if review.get('fields') and failures[story['url']]<MAX_ATTEMPTS:
        state.setdefault('pending_copy_repairs',{})[story['url']]={'phase':'correct','input_hash':identity(story,source,prior,accepted),'review':review}
        save()
        try:

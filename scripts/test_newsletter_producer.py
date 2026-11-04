@@ -10,7 +10,7 @@ class ProducerTests(unittest.TestCase):
   model=Mock()
   with self.assertRaisesRegex(ValueError,'Evergreen'):p.draft_story(model,{'title':'How to use Gemini to update your resume'})
   model.ask.assert_not_called()
- def test_corrective_pass_keeps_korean_and_specific_reviewer_feedback(self):
+ def test_initial_semantic_rejection_is_preserved_for_independent_review(self):
   from unittest.mock import Mock
   from test_newsletter_grounding import GroundingTests
   story=GroundingTests().story();source=GroundingTests().source();source.update(source='Google',body_sha256='hash')
@@ -18,11 +18,11 @@ class ProducerTests(unittest.TestCase):
   review={'supported':False,'unsupported_claims':['Remove unsupported availability']}
   wire={**{k:v for k,v in story.items() if k!='evidence'},'evidence_ids':[0]}
   model=Mock();model.ask.side_effect=[novelty,wire,review,wire,{'supported':True,'unsupported_claims':[]}]
-  p.draft_story(model,source)
-  correction=model.ask.call_args_list[3].args[1]
-  self.assertIn('in Korean',correction)
-  self.assertIn('Remove unsupported availability',correction)
-  self.assertIn('Select evidence_ids',correction)
+  result=p.draft_story(model,source)
+  self.assertEqual(model.ask.call_count,3)
+  self.assertEqual(result['review'],review)
+  self.assertNotIn('strong_review',result)
+  self.assertEqual(result['fact'],story['fact'])
  def test_art_only_recovery_does_not_restart_copy_model(self):
   day=datetime.now(p.server.KST).date().isoformat();body='source evidence';digest=hashlib.sha256(body.encode()).hexdigest()
   with tempfile.TemporaryDirectory() as temp:

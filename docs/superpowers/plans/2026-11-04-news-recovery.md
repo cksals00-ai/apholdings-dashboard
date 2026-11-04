@@ -12,3 +12,11 @@ Global constraints: no paid AI API; no ordinary resend; no date/quality/source/d
 - [ ] Rehearsal: tests prove fresh current-day seed without published issue and old-date guard remains; add labelled immutable controls, genuine copy/image faults and automatic retry proof.
 - [ ] Validate newsletter suite/workflow lint; review diff; deploy immutable pin; dispatch one exact full test.
 - [ ] Monitor raw checkpoints/alerts; report failures immediately; inspect all outputs and qualification; restore existing automation schedule after actual activation.
+
+
+### Bedrock initial-copy recovery (2026-11-04)
+Actual trial41752184420 repeatedly transliterated the required Bedrock name in the8B draft. Whole-draft retries discarded usable output before independent review. Cancelled attempt1; no preview or delivery job executed.
+
+Bind only missing source-headline product labels before review; archive structural failures with their draft; recover same-source, hash-bound raw draft receipts without changing existing stories/assets. Initial8B semantic verdict remains advisory; current independent14B novelty, five field judgements, consistency audit, and server QA remain mandatory. Accepted independent novelty is persisted for recovered drafts. Strong repair budgets count actual strong failures separately from initial formatting failures.
+
+Validation:216 Python tests (one optional legacy fixture skipped),29 newsletter/mail/health/startup JavaScript tests. Isolated replay of final checkpoint preserves all four existing stories exactly and recovers one source-bound Bedrock draft with no semantic approval. Independent review caught and resolved missing novelty persistence; recovery-to-server-QA integration rejects unverified and unsupported drafts. New actual full trial and qualification remain required.

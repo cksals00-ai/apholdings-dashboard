@@ -82,7 +82,7 @@ class CopyRepairTests(unittest.TestCase):
    if item['url']=='4':raise ValueError('Unsupported learning efficacy')
    item['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(item,source,prior,peers),'supported':True}
   def draft(model,source,prior,feedback):return story(int(source['url']))
-  with patch('newsletter_copy_repair.validate_grounding'),patch('newsletter_copy_repair.verify',side_effect=check):
+  with patch('newsletter_copy_repair.validate_source_copy'),patch('newsletter_copy_repair.verify',side_effect=check):
    ensure_copy(state,sources,[],lambda profile:nullcontext(object()),draft,lambda:saved.append(dict(state.get('copy_attempts',{}))))
   self.assertEqual([s['url'] for s in state['stories']],['0','1','2','3','5'])
   self.assertIs(state['stories'][0],good[0])
