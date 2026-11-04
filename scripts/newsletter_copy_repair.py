@@ -3,7 +3,7 @@ import hashlib,json,os
 from newsletter_grounding import validate_source_copy,resolve_novelty,indexed_source,normalized,require_news_topic,validate_grounding
 from newsletter_cpu import ART_REV
 import newsletter_schemas as shapes
-REVISION='independent-copy-14b-v8-required-premises'
+REVISION='independent-copy-14b-v9-literal-sentences'
 MAX_ATTEMPTS=2
 
 def peer_facts(peers):return [{k:story.get(k,'') for k in ('title','summary','fact')} for story in (peers or [])]

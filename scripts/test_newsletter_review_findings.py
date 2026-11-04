@@ -12,12 +12,16 @@ class StrongFindingsTests(unittest.TestCase):
  def model(self,source,findings):
   def answer(system,question,**kw):
    if 'is_news' in kw['schema'].get('properties',{}):return {'is_news':True,'is_duplicate':False,'novel_segment_id':0,'reason':'new implementation'}
-   if 'consistent' in kw['schema'].get('properties',{}):return {'consistent':True,'complete':True,'reason':'All factual premises checked.'}
+   if 'consistent' in kw['schema'].get('properties',{}):return {'consistent':True,'complete':True,'reason':'All factual premises checked.','issues':[]}
    request=json.loads(question);field=request['field'];text=request['text']
    if set(findings)!={'findings'} or any(not isinstance(f,dict) or set(f)!={'field','assertion','factual_premise','source_mismatch','correction'} for f in findings.get('findings',[])):return findings
    rejected=[f for f in findings['findings'] if f['field']==field]
-   if rejected:return {'field':field,'text':text,'verdict':'unsupported','premises':[{'claim':f['assertion'],'status':'unsupported','source_ids':[],'reason':f['source_mismatch']} for f in rejected]}
-   return {'field':field,'text':text,'verdict':'editorial' if field in ('insight','action') else 'supported','premises':[] if field in ('insight','action') else [{'claim':text,'status':'supported','source_ids':[0],'reason':'Implementation result supported by source.'}]}
+   if rejected:
+    if any(f['assertion'] not in text for f in rejected):return {'input_hash':'invalid','sentences':[]}
+    result={'field':field,'text':text,'verdict':'unsupported','premises':[{'claim':f['assertion'],'status':'unsupported','source_ids':[],'reason':f['source_mismatch']} for f in rejected]}
+   else:result={'field':field,'text':text,'verdict':'editorial' if field in ('insight','action') else 'supported','premises':[] if field in ('insight','action') else [{'claim':text,'status':'supported','source_ids':[0],'reason':'Implementation result supported by source.'}]}
+   from test_newsletter_review_spans import wire_for
+   return wire_for(result,request)
   m=Mock();m.ask.side_effect=answer;return m
  def test_empty_explicit_findings_accept_conditional_proposal(self):
   source,story=self.fixture();m=self.model(source,{'findings':[]});verify(m,story,source,[])

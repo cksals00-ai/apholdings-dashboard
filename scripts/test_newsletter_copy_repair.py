@@ -64,9 +64,9 @@ class CopyRepairTests(unittest.TestCase):
     self.calls.append((system,question,kw))
     if len(self.calls)==1:return {'is_news':True,'is_duplicate':False,'novel_segment_id':0,'reason':'new feature'}
     import json
-    if len(self.calls)==7:return {'consistent':True,'complete':True,'reason':'All efficacy premises rejected.'}
+    if len(self.calls)==7:return {'consistent':True,'complete':True,'reason':'All efficacy premises rejected.','issues':[]}
     request=json.loads(question)
-    return {'field':request['field'],'text':request['text'],'verdict':'unsupported','premises':[{'claim':request['text'],'status':'unsupported','source_ids':[],'reason':'Feature availability does not demonstrate improved learning efficacy.'}]}
+    return {'input_hash':request['input_hash'],'sentences':[{'id':x['id'],'status':'unsupported','source_ids':[],'reason':'Feature availability does not demonstrate improved learning efficacy.'} for x in request['spans']]}
   model=Model();item={k:'학습 효과가 향상됐어요' for k in ('title','summary','fact','insight','action')};item.update(evidence=[source['text']],image_prompt='study book',image_subject='book',visual_approach='ink')
   with self.assertRaisesRegex(ValueError,'Independent source review'):verify(model,item,source,[])
   self.assertNotIn('학습 효과',model.calls[0][1])
