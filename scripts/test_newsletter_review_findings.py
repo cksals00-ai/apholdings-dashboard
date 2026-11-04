@@ -11,7 +11,7 @@ class StrongFindingsTests(unittest.TestCase):
   return source,story
  def model(self,source,findings):
   def answer(system,question,**kw):
-   if 'is_news' in kw['schema'].get('properties',{}):return {'is_news':True,'is_duplicate':False,'novel_quote':source['text'],'reason':'new implementation'}
+   if 'is_news' in kw['schema'].get('properties',{}):return {'is_news':True,'is_duplicate':False,'novel_segment_id':0,'reason':'new implementation'}
    if 'consistent' in kw['schema'].get('properties',{}):return {'consistent':True,'complete':True,'reason':'All factual premises checked.'}
    request=json.loads(question);field=request['field'];text=request['text']
    if set(findings)!={'findings'} or any(not isinstance(f,dict) or set(f)!={'field','assertion','factual_premise','source_mismatch','correction'} for f in findings.get('findings',[])):return findings

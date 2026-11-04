@@ -42,6 +42,13 @@ def indexed_source(source):
  result['source_segments']=[{'id':index,'text':part} for index,part in enumerate(parts)]
  return result
 
+def resolve_novelty(result,context):
+ if not isinstance(result,dict) or set(result)!={'is_news','is_duplicate','novel_segment_id','reason'}:raise ValueError('Malformed source novelty decision')
+ if type(result['is_news']) is not bool or type(result['is_duplicate']) is not bool or not isinstance(result['reason'],str):raise ValueError('Invalid source novelty verdict')
+ value=result['novel_segment_id'];segments=context['source_segments']
+ if type(value) is not int or not -1<=value<len(segments):raise ValueError('Invalid source novelty evidence ID')
+ return {**result,'novel_quote':'' if value==-1 else segments[value]['text']}
+
 def resolve_evidence(draft,context):
  ids=draft.get('evidence_ids');segments=context['source_segments']
  if not isinstance(ids,list) or not 1<=len(ids)<=4 or any(type(i) is not int or not 0<=i<len(segments) for i in ids) or len(ids)!=len(set(ids)) or 'evidence' in draft:raise ValueError('Choose1-4 distinct valid source evidence_ids')

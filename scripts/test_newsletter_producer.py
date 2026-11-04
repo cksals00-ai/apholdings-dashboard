@@ -14,7 +14,7 @@ class ProducerTests(unittest.TestCase):
   from unittest.mock import Mock
   from test_newsletter_grounding import GroundingTests
   story=GroundingTests().story();source=GroundingTests().source();source.update(source='Google',body_sha256='hash')
-  novelty={'is_news':True,'is_duplicate':False,'novel_quote':source['text'][:70]}
+  novelty={'is_news':True,'is_duplicate':False,'novel_segment_id':0,'reason':'new result'}
   review={'supported':False,'unsupported_claims':['Remove unsupported availability']}
   wire={**{k:v for k,v in story.items() if k!='evidence'},'evidence_ids':[0]}
   model=Mock();model.ask.side_effect=[novelty,wire,review,wire,{'supported':True,'unsupported_claims':[]}]

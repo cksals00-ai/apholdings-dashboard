@@ -22,7 +22,7 @@ class CopyRepairTests(unittest.TestCase):
  def test_same_issue_duplicate_rejected_by_independent_peer_gate(self):
   from unittest.mock import Mock
   source={'title':'New case','text':'A company reports a concrete new implementation result for its customers today.','body_sha256':'abc'}
-  model=Mock();model.ask.return_value={'is_news':True,'is_duplicate':True,'novel_quote':source['text'],'reason':'same peer event'}
+  model=Mock();model.ask.return_value={'is_news':True,'is_duplicate':True,'novel_segment_id':0,'reason':'same peer event'}
   peer={'title':'기존 사건','summary':'같은 도입 사례','fact':'같은 결과'}
   with self.assertRaisesRegex(ValueError,'novelty rejection'):verify(model,{},source,[],[peer])
   self.assertEqual(model.ask.call_args.kwargs['comparison_context']['peers'][0]['summary'],'같은 도입 사례')
@@ -62,7 +62,7 @@ class CopyRepairTests(unittest.TestCase):
    def __init__(self):self.calls=[]
    def ask(self,system,question,**kw):
     self.calls.append((system,question,kw))
-    if len(self.calls)==1:return {'is_news':True,'is_duplicate':False,'novel_quote':source['text'],'reason':'new feature'}
+    if len(self.calls)==1:return {'is_news':True,'is_duplicate':False,'novel_segment_id':0,'reason':'new feature'}
     import json
     if len(self.calls)==7:return {'consistent':True,'complete':True,'reason':'All efficacy premises rejected.'}
     request=json.loads(question)

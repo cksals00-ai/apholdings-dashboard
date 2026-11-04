@@ -18,8 +18,11 @@ def source_novelty(segments):
  if not isinstance(segments,list) or not segments:raise ValueError('Original source segments required')
  texts=[part.get('text') if isinstance(part,dict) else None for part in segments]
  if any(not isinstance(text,str) or not 30<=len(text)<=800 for text in texts):raise ValueError('Unusable source novelty evidence')
- # Constrain only evidence copying, never either semantic news/duplicate verdict.
- return obj({**NOVELTY['properties'],'novel_quote':{'type':'string','enum':['',*dict.fromkeys(texts)]}})
+ if any(type(part.get('id')) is not int for part in segments) or [part.get('id') for part in segments]!=list(range(len(segments))):raise ValueError('Source segment IDs must be contiguous')
+ # Select an ID, then copy the literal text in code. Embedding publisher quotes
+ # in enum strings triggers grammar conversion failures in pinned llama b5401.
+ return obj({'is_news':{'type':'boolean'},'is_duplicate':{'type':'boolean'},'novel_segment_id':{'type':'integer','minimum':-1,'maximum':len(segments)-1},'reason':string(300)})
+
 
 
 # No independent boolean can contradict the precise rejection findings.
