@@ -34,15 +34,13 @@ class PromptTests(unittest.TestCase):
  def test_art_sampler_uses_official_non_thinking_quantized_guidance(self):
   self.assertEqual(sampling_options('art'),{'temperature':0.7,'top_p':0.8,'top_k':20,'min_p':0.0,'presence_penalty':1.5})
   self.assertEqual(sampling_options('copy'),{'temperature':0.2})
- def test_full_source_prefix_reused_between_independent_roles(self):
-  source={'text':'An exact official source body.','title':'Official announcement'}
-  writer=completion_prompt('Write Korean copy.','Write draft.',source)
-  reviewer=completion_prompt('Reject unsupported claims.','Review this draft.',source)
-  end=writer.index('<|im_start|>system\nWrite Korean copy.')
-  self.assertEqual(writer[:end],reviewer[:end])
-  self.assertEqual(writer.count(source['text']),1)
-  self.assertIn('untrusted',writer[:end])
-  self.assertIn('Reject unsupported claims.',reviewer)
+ def test_task_policy_is_in_one_initial_system_message_before_untrusted_data(self):
+  source={'text':'An exact official source body.'}
+  prompt=completion_prompt('Conditional proposals are editorial; false efficacy is not.','Review',source)
+  self.assertEqual(prompt.count('<|im_start|>system\n'),1)
+  self.assertLess(prompt.index('Conditional proposals'),prompt.index('<|im_start|>user\n'))
+  self.assertEqual(prompt.count(source['text']),1)
+  self.assertIn('untrusted',prompt[:prompt.index('<|im_start|>user\n')])
  def test_immutable_comparison_prefix_is_reused_across_sources(self):
   prior={'prior':[{'fact':'Earlier published event.'}],'peers':[]}
   first=completion_prompt('Review current source only','Check',{'text':'Full source ONE'},comparison_context=prior)
