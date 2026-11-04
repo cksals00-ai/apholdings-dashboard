@@ -4,6 +4,10 @@ from newsletter_copy_repair import verify
 import newsletter_schemas as shapes
 
 class StrongFindingsTests(unittest.TestCase):
+ def setUp(self):
+  from unittest.mock import patch
+  from test_newsletter_speech_acts import fixture_inventory
+  self.enterContext(patch('newsletter_speech_acts.classify',side_effect=fixture_inventory))
  def fixture(self):
   source={'title':'New AgentCore result','text':'AgentCore now provides role-scoped tools in a newly reported customer implementation.','body_sha256':'abc'}
   story={k:'AgentCore 구현 사례를 확인합니다.' for k in ('title','summary','fact')}
@@ -13,7 +17,7 @@ class StrongFindingsTests(unittest.TestCase):
   def answer(system,question,**kw):
    if 'is_news' in kw['schema'].get('properties',{}):return {'is_news':True,'is_duplicate':False,'novel_segment_id':0,'reason':'new implementation'}
    if 'consistent' in kw['schema'].get('properties',{}):return {'consistent':True,'complete':True,'reason':'All factual premises checked.','issues':[]}
-   request=json.loads(question);field=request['field'];text=request['text']
+   request=json.loads(question);field=request['field'];text=' '.join(x['text'] for x in request['spans'])
    if set(findings)!={'findings'} or any(not isinstance(f,dict) or set(f)!={'field','assertion','factual_premise','source_mismatch','correction'} for f in findings.get('findings',[])):return findings
    rejected=[f for f in findings['findings'] if f['field']==field]
    if rejected:
@@ -35,7 +39,7 @@ class StrongFindingsTests(unittest.TestCase):
   self.assertNotIn('strong_review',story)
  def test_missing_or_misbound_findings_fail_closed(self):
   for response in ({'supported':True,'unsupported_claims':['제안']},{'findings':[{}]},{'findings':[{'field':'action','assertion':'다른 문장','factual_premise':'거짓 사실 전제','source_mismatch':'원문 불일치 근거','correction':'수정 필요 내용'}]}):
-   source,story=self.fixture()
+   source,story=self.fixture();story['action']='실제 성과를 얻었습니다.'
    with self.assertRaises(ValueError):verify(self.model(source,response),story,source,[])
  def test_no_automatic_advice_exemption_or_preset_approval(self):
   schema=shapes.STRONG_REVIEW

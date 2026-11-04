@@ -14,7 +14,10 @@ def run(runtime,folder):
  state={'date':day,'mode':'test','asset_day':f'{day}-test-{run_id}','historical_controls_only':True}
  def save():(folder/'controls.json').write_text(json.dumps(state,ensure_ascii=False,indent=2))
  save()
- with TextModel(runtime,folder,profile='review') as model:verify_controls(model,state,save)
+ with TextModel(runtime,folder,profile='review') as model:
+  from newsletter_scope_controls import check
+  check(model,folder)
+  verify_controls(model,state,save)
  if not controls_valid(state):raise ValueError('Actual frozen control probe incomplete')
  print('Five historical controls verified on pinned local CPU model; no issue/art/publication/mail generated.')
 if __name__=='__main__':

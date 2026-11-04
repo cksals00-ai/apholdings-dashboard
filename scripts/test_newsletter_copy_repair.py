@@ -7,6 +7,10 @@ from newsletter_cpu import ART_REV
 from newsletter_grounding import require_news_topic,validate_korean_copy
 from newsletter_copy_repair import record_failure,receipt_valid
 class CopyRepairTests(unittest.TestCase):
+ def setUp(self):
+  from unittest.mock import patch
+  from test_newsletter_speech_acts import fixture_inventory
+  self.enterContext(patch('newsletter_speech_acts.classify',side_effect=fixture_inventory))
  def test_monthly_roundup(self):
   for title in ('Google AI updates from October','The latest AI news we announced in October','October AI roundup'):
    with self.assertRaises(ValueError):require_news_topic({'title':title,'text':'Here is a recap of this month’s announcements.'})

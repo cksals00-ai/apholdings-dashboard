@@ -38,6 +38,10 @@ class AtomicReviewTests(unittest.TestCase):
 if __name__=='__main__':unittest.main()
 
 class AuditTests(unittest.TestCase):
+ def setUp(self):
+  from unittest.mock import patch
+  from test_newsletter_speech_acts import fixture_inventory
+  self.enterContext(patch('newsletter_speech_acts.classify',side_effect=fixture_inventory))
  def test_independent_audit_rejects_supported_rationale_contradiction(self):
   from unittest.mock import Mock
   from newsletter_atomic_review import review_fields,FIELDS
@@ -60,6 +64,10 @@ class AuditTests(unittest.TestCase):
   self.assertEqual(set(model.ask.call_args.kwargs['schema']['properties']),{'fact'})
 
 class DecisionRepairTests(unittest.TestCase):
+ def setUp(self):
+  from unittest.mock import patch
+  from test_newsletter_speech_acts import fixture_inventory
+  self.enterContext(patch('newsletter_speech_acts.classify',side_effect=fixture_inventory))
  def run_review(self,second_audit_clean=True):
   import json,copy
   from unittest.mock import Mock
@@ -70,9 +78,9 @@ class DecisionRepairTests(unittest.TestCase):
    if 'consistent' in kw['schema']['properties']:
     audits.append(q)
     if len(audits)>1 and second_audit_clean:return {'consistent':True,'complete':True,'reason':'Every factual premise and editorial distinction verified.','issues':[]}
-    return {'consistent':False,'complete':True,'reason':'Conditional proposal mistaken for asserted AP adoption.','issues':[{'field':'insight','span_id':0,'reason':'This is hypothetical advice, not an asserted AP outcome.'}]}
+    return {'consistent':False,'complete':True,'reason':'Conditional proposal mistaken for asserted AP adoption.','issues':[{'field':'fact','span_id':0,'reason':'This is hypothetical advice, not an asserted AP outcome.'}]}
    f=q['field'];counts[f]=counts.get(f,0)+1
-   status='unsupported' if f=='insight' and counts[f]==1 else 'editorial' if f=='insight' else 'supported'
+   status='unsupported' if f=='fact' and counts[f]==1 else 'editorial' if False else 'supported'
    return {'input_hash':q['input_hash'],'sentences':[{'id':x['id'],'status':status,'source_ids':[0] if status=='supported' else [],'reason':'Source lacks AP adoption evidence.' if status=='unsupported' else 'Conditional proposal only.' if status=='editorial' else 'Official source supports the factual statement.'} for x in q['spans']]}
   model=Mock();model.ask.side_effect=answer
   if second_audit_clean:
@@ -80,6 +88,6 @@ class DecisionRepairTests(unittest.TestCase):
    self.assertTrue(out['supported']);self.assertEqual(len(out['decision_history']),2)
   else:
    with self.assertRaisesRegex(ValueError,'consistency'):review_fields(model,story,{'source_segments':[{'id':0,'text':'Official feature announcement.'}]})
-  self.assertEqual(counts,{f:2 if f=='insight' else 1 for f in FIELDS});self.assertEqual(len(audits),2);self.assertEqual(story,before)
+  self.assertEqual(counts,{f:2 if f=='fact' else 1 for f in FIELDS if f!='insight'});self.assertEqual(len(audits),2);self.assertEqual(story,before)
  def test_only_audit_flagged_decision_rechecked_then_full_fresh_audit(self):self.run_review()
  def test_remaining_audit_error_never_passes_or_retries_forever(self):self.run_review(False)
