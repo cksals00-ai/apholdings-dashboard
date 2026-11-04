@@ -35,7 +35,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/checkout@v7
         with:
-          ref: 86ea0fc0a2a75f2d517be572f7606a1fc4295d87
+          ref: 5fe7b0794b15d76dcc587010ea1dc65e2b86cf91
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -96,7 +96,7 @@ jobs:
           ref: main
       - uses: actions/checkout@v7
         with:
-          ref: 86ea0fc0a2a75f2d517be572f7606a1fc4295d87
+          ref: 5fe7b0794b15d76dcc587010ea1dc65e2b86cf91
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
