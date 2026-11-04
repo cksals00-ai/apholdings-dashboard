@@ -3,6 +3,14 @@ from newsletter_atomic_review import normalize_field, repair_fields
 class AtomicReviewTests(unittest.TestCase):
  def decision(self,kind='supported'):
   return {'field':'fact','text':'공식 기능을 발표했다.','verdict':kind,'premises':[{'claim':'공식 기능을 발표했다.','status':'supported','source_ids':[0],'reason':'The source announces this feature.'}]}
+ def test_factual_generation_schema_forbids_observed_empty_rejection(self):
+  from newsletter_atomic_review import field_schema
+  for field in ('title','summary','fact'):
+   schema=field_schema(field)
+   self.assertEqual(schema['properties']['field']['enum'],[field])
+   self.assertEqual(schema['properties']['premises']['minItems'],1)
+   self.assertNotIn('editorial',schema['properties']['verdict']['enum'])
+  self.assertEqual(field_schema('action')['properties']['premises'].get('minItems',0),0)
  def test_supported_claim_requires_exact_source_ids(self):
   self.assertEqual(normalize_field(self.decision(),'fact','공식 기능을 발표했다.',1)['verdict'],'supported')
   x=self.decision();x['premises'][0]['source_ids']=[]
