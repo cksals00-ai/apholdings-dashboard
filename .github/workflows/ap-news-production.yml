@@ -30,7 +30,7 @@ jobs:
       - name: Checkout immutable rollout verifier without homepage assets
         uses: actions/checkout@v7
         with:
-          ref: 3084f95d0affd2f4bd34c65824f716dfdfb45929
+          ref: 86ea0fc0a2a75f2d517be572f7606a1fc4295d87
           sparse-checkout: scripts
           path: .qualification-runtime
       - name: Test fail-closed rollout conditions
@@ -40,7 +40,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           CALLER_REVISION: ${{ github.sha }}
-        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 41763613111 --revision "$CALLER_REVISION" --runtime 3084f95d0affd2f4bd34c65824f716dfdfb45929
+        run: python3 .qualification-runtime/scripts/newsletter_qualification.py --run 41763613111 --revision "$CALLER_REVISION" --runtime 86ea0fc0a2a75f2d517be572f7606a1fc4295d87
   produce:
     needs: qualification
     if: ${{ needs.qualification.outputs.qualified == 'true' && github.event_name != 'workflow_run' }}

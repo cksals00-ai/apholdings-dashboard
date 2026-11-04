@@ -1,0 +1,40 @@
+name: AP News isolated editorial control probe
+on:
+  workflow_dispatch:
+concurrency:
+  group: ap-news-editorial-control-probe
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  controls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HUB_DISABLE_IMPLICIT_TOKEN: '1'
+      DO_NOT_TRACK: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: 86ea0fc0a2a75f2d517be572f7606a1fc4295d87
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Prepare credential-free local CPU verifier
+        run: |
+          sudo rm -rf /usr/local/lib/android
+          pip install -r requirements-newsletter-server.txt beautifulsoup4==4.13.3 huggingface-hub==0.28.1
+          mkdir -p .cpu-runtime .control-probe
+          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b5401/llama-b5401-bin-ubuntu-x64.zip -o "$RUNNER_TEMP/llama.zip"
+          unzip -q "$RUNNER_TEMP/llama.zip" -d .cpu-runtime
+      - name: Replay five historical controls on pinned public14B
+        run: python scripts/newsletter_control_probe.py --runtime .cpu-runtime --folder .control-probe
+      - name: Preserve private decisions and model receipts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ap-news-editorial-controls-${{ github.run_id }}
+          path: .control-probe/
+          include-hidden-files: true
+          retention-days: 3
