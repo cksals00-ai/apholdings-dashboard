@@ -9,7 +9,8 @@ labels={'ko':'Google Play에서 설치','en':'Get it on Google Play','ja':'Googl
 for loc,label in labels.items():
  p=ROOT/loc/'products/safe/index.html'
  if not p.exists(): continue
- s=p.read_text()
+ s=p.read_text().replace('Android · 추후','Android · Google Play 출시').replace('Android · later','Android · available on Google Play')
+ p.write_text(s)
  if SAFE not in s:
   pattern=r'(<div class="actions hero-actions"><a[^>]+href="https://apps.apple.com/kr/app/id6805684034"[^>]*>.*?</a>)(</div>)'
   s,n=re.subn(pattern,lambda m:m[1]+f'<a class="button" href="{SAFE}" target="_blank" rel="noopener noreferrer">{label} ↗</a>'+m[2],s,count=1)
