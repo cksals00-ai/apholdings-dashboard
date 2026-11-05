@@ -303,3 +303,6 @@ _cubs25_apply()
 
 from apply_b2b_apps import apply as _b2b_apps_apply
 _b2b_apps_apply()
+
+# Preserve verified Android release links after page generation.
+import apply_google_release_links
