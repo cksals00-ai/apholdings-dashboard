@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-06",
+  "number": 27,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "AI가 만드는 속도, 사람이 정하는 기준",
+  "intro": "영상 제작과 개발 도구가 가까워지는 한편, 평가·승인·데이터 품질을 설계하는 방법도 구체화되고 있습니다. 기능의 변화와 적용 조건을 함께 살펴봅니다.",
+  "takeaway": "생성 속도가 빨라질수록 확인 기준도 구체적이어야 합니다. AP가 새 도구를 검토한다면 작은 표본으로 결과를 비교하고, 근거와 승인 조건을 남겨 교육·콘텐츠·서비스의 적용 범위를 판단할 수 있습니다.",
+  "edition_note": "최근 72시간으로 선정 범위 확대 · 공식 원문 5건 · 발표일 2026-11-04~05 · AI 작성 및 원문 확인 · 사람 검수 아님",
+  "source_checked_at": "2026-11-06T04:04:38.602711+09:00",
+  "hero": {
+    "path": "/img/newsletter/2026-11-06-hero.gif",
+    "poster": "/img/newsletter/2026-11-06-hero.png",
+    "alt": "영상의 장면을 고르고 다듬는 창작 과정을 표현한 편집 일러스트",
+    "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+      "published": "2026-11-05",
+      "source": "Google",
+      "title": "영상 AI, 길이와 수정 방식이 달라지다",
+      "summary": "Gemini Omni 1.2 Flash가 15초 영상과 대화형 수정을 지원합니다.",
+      "fact": "Google은 11월 5일 Gemini Omni 1.2 Flash의 일반 제공을 Gemini API와 Gemini for business에서 시작한다고 발표했다. 최대 15초 영상 생성, 여러 차례 대화를 통한 수정, 참조 이미지 반영 개선을 소개했다. 720p 영상 가격은 초당 0.07달러로, Omni 1.1보다 30% 낮췄다고 밝혔다. 일관성 개선은 제공사의 설명이며 개별 제작물의 품질을 보장하는 수치는 아니다.",
+      "insight": "AP가 교육 안내나 Lia Select 상품 소개 영상을 검토한다면, 새 모델의 길이보다 수정 전후의 상품 형태·문구·인물 일관성을 먼저 비교하는 소규모 평가를 설계할 수 있다.",
+      "action": "이용 가능 계정과 실제 비용, 상품 표현의 정확성을 확인한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-06-story-1.png",
+        "alt": "영상 AI, 길이와 수정 방식이 달라지다의 핵심을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/use-decision-models-with-amazon-bedrock-agentcore-evaluations/",
+      "published": "2026-11-04",
+      "source": "AWS",
+      "title": "AI 평가에도 검증된 질문이 필요하다",
+      "summary": "AgentCore 평가에 좁은 판단용 모델을 연결하는 방법을 소개했습니다.",
+      "fact": "AWS는 Bedrock AgentCore Evaluations의 코드 기반 평가기에 Jev와 Strands Decider 2B를 연결하는 구현 가이드를 공개했다. 결정 모델은 정해진 선택지와 확률을 반환하며, 기존의 폭넓은 LLM 평가를 보완하는 용도로 설명된다. 배포 차단 기준으로 쓰기 전에는 자체 트래픽의 라벨 표본으로 일치도와 확률 보정, 불일치 사례를 검증하도록 안내한다.",
+      "insight": "AP가 뉴스레터 사실 확인을 자동화한다면, 점수 하나로 발행 여부를 정하기 전에 질문 유형별 오류와 근거 누락을 보존된 원문에 대조하는 평가표를 만들 수 있다.",
+      "action": "자체 사례의 정답 기준과 불일치 검토 절차를 확인한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-06-story-2.png",
+        "alt": "AI 평가에도 검증된 질문이 필요하다의 핵심을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/smart-approvals-in-amazon-quick-human-oversight-where-it-matters/",
+      "published": "2026-11-04",
+      "source": "AWS",
+      "title": "자동 승인에도 사람의 경계를 남기다",
+      "summary": "Amazon Quick은 기존 권한 안에서 승인 대상 행동을 검토합니다.",
+      "fact": "AWS는 Amazon Quick의 Smart Approvals가 사용자 요청과 대화 맥락을 바탕으로 적격 행동을 자동 승인하거나 사용자 검토로 돌려보내는 방식을 설명했다. 기존 정책의 거절과 필수 사람 승인은 유지된다. 자동 승인은 검토된 행동과 매개변수에만 한 번 적용되며, 시간 초과나 검토 실패는 자동 승인으로 이어지지 않는다.",
+      "insight": "AP가 고객 자료 전달이나 콘텐츠 발행 흐름을 설계한다면, 되돌리기 어려운 변경과 외부 전달의 승인 조건을 먼저 정하고 결과 기록을 별도로 확인하는 구조를 검토할 수 있다.",
+      "action": "권한 판단·승인 판단·실제 실행 결과를 각각 기록하는지 확인한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-06-story-3.png",
+        "alt": "자동 승인에도 사람의 경계를 남기다의 핵심을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-04-github-copilot-is-now-available-in-xcodes-coding-assistant/",
+      "published": "2026-11-04",
+      "source": "GitHub",
+      "title": "Xcode 내장 도우미에 Copilot 연결",
+      "summary": "Xcode 27.3 베타부터 공개 미리보기로 제공됩니다.",
+      "fact": "GitHub는 Xcode 내장 코딩 도우미에서 Copilot을 사용할 수 있는 통합을 공개 미리보기로 발표했다. Xcode 27.3 베타와 macOS Tahoe 26.6 이상이 필요하며, 모든 Copilot 요금제를 지원한다고 밝혔다. 기존 GitHub Copilot for Xcode 확장은 별도 선택지로 유지된다. 정식 Xcode 전체에 일괄 제공된다는 발표는 아니다.",
+      "insight": "AP가 iOS 서비스 개발 교육에 이를 활용한다면, 베타 개발 도구를 기존 작업과 분리하고 생성 코드의 검토·실행·회귀 확인을 실습에 포함하는 방식을 고려할 수 있다.",
+      "action": "운영 개발 환경과 베타 실습 환경을 구분한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-06-story-4.png",
+        "alt": "Xcode 내장 도우미에 Copilot 연결의 핵심을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-indegene-is-modernizing-and-scaling-enterprise-data-quality-in-life-sciences/",
+      "published": "2026-11-04",
+      "source": "AWS",
+      "title": "데이터 품질 규칙을 AI와 함께 설계하다",
+      "summary": "Indegene 사례는 사람 검토 아래 규칙과 코드를 생성합니다.",
+      "fact": "AWS와 Indegene은 NEXT Unified Data Platform의 LLM 기반 Data Quality Agent 구현 사례를 소개했다. 에이전트는 업무 맥락에 맞는 데이터 품질 규칙을 제안하고 검증하며 SQL과 Python 코드를 생성한다. 내부 업무 지식과 외부 참조 지식을 함께 활용하고 중앙 관리 및 사람의 검토를 포함한다. 특정 기업의 구축 사례이며 범용 서비스의 성과 보장은 아니다.",
+      "insight": "AP가 Lia Select 상품 데이터나 고객 운영 자료를 점검한다면, 빈 값·중복 같은 기술 규칙과 옵션·가격·분류가 업무상 맞는지 보는 규칙을 나눠 승인된 기준으로 관리할 수 있다.",
+      "action": "생성된 규칙의 근거와 담당자 확인 단계를 남긴다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-06-story-5.png",
+        "alt": "데이터 품질 규칙을 AI와 함께 설계하다의 핵심을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}
