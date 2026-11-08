@@ -18,7 +18,30 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+      - name: Checkout recovery classification only
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          path: .recovery-policy
+          sparse-checkout: scripts/newsletter_recovery_policy.py
+          sparse-checkout-cone-mode: false
+      - name: Classify closed qualification gate
+        id: gate
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FAILED_RUN_ID: ${{ github.event.workflow_run.id }}
+          FAILED_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
+          FAILED_NAME: ${{ github.event.workflow_run.name }}
+        run: |
+          gh api "repos/cksals00-ai/apholdings-dashboard/actions/runs/$FAILED_RUN_ID/attempts/$FAILED_ATTEMPT/jobs?per_page=100" > /tmp/ap-news-recovery-jobs.json
+          gh run view "$FAILED_RUN_ID" --attempt "$FAILED_ATTEMPT" --log-failed --repo cksals00-ai/apholdings-dashboard > /tmp/ap-news-recovery-failure.log
+          python .recovery-policy/scripts/newsletter_recovery_policy.py "$FAILED_NAME" /tmp/ap-news-recovery-failure.log < /tmp/ap-news-recovery-jobs.json >> "$GITHUB_OUTPUT"
+      - name: Record known inactive rollout gate without retrying
+        if: ${{ steps.gate.outputs.blocked == 'true' }}
+        run: echo '::notice::Known cancelled qualification trial; production remains inactive. No repeated recovery alert or automatic retry.'
       - name: Notify owner before automatic recovery
+        if: ${{ steps.gate.outputs.blocked != 'true' }}
         continue-on-error: true
         env:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
@@ -27,7 +50,7 @@ jobs:
           FAILED_NAME: ${{ github.event.workflow_run.name }}
         run: python scripts/newsletter_ops.py alert
       - name: Automatically retry failed jobs (at most three attempts)
-        if: ${{ github.event.workflow_run.run_attempt < 3 }}
+        if: ${{ steps.gate.outputs.blocked != 'true' && github.event.workflow_run.run_attempt < 3 }}
         env:
           GH_TOKEN: ${{ github.token }}
           FAILED_RUN_ID: ${{ github.event.workflow_run.id }}
