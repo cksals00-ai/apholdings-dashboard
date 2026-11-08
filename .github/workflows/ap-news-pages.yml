@@ -1,6 +1,7 @@
 # Newsletter delivery must not invoke mutable homepage builders/checkers.
 name: AP News isolated site delivery
 on:
+  workflow_dispatch:
   workflow_call:
     inputs:
       test_homepage_failure:
