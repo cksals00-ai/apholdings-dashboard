@@ -2,8 +2,8 @@ import unittest
 from datetime import datetime,timedelta
 import newsletter_server as s
 class ReservationTests(unittest.TestCase):
- def test_waits_until_eight_without_crossing_early(self):
-  now=[datetime.fromisoformat('2026-10-29T07:58:40+09:00')]; sleeps=[]
+ def test_waits_until_prepublication_window_without_crossing_early(self):
+  now=[datetime.fromisoformat('2026-10-29T07:38:40+09:00')]; sleeps=[]
   def sleep(n):sleeps.append(n);now[0]+=timedelta(seconds=n)
   s.wait_for_publication('2026-10-29',now=lambda:now[0],sleep=sleep)
   self.assertEqual(sum(sleeps),80);self.assertTrue(all(n<=60 for n in sleeps))

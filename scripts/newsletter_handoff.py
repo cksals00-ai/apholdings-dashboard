@@ -191,7 +191,7 @@ def reserve_publication(day):
     date.fromisoformat(day)
     subprocess.run(['gh','workflow','run','ap-news-daily.yml','--repo',REPO,
                     '-f','reserve_publication=true','-f',f'edition_date={day}'],check=True)
-    print('Server publication reservation requested; waits until08:00 KST before publishing')
+    print('Server publication reservation requested; prepares delivery from07:40 KST for08:00 acceptance target')
 
 
 def report_handoff(day):

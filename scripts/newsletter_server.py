@@ -122,9 +122,9 @@ def check_verdict(issue, rows):
 
 def wait_for_publication(day, now=lambda: datetime.now(KST), sleep=time.sleep):
     current=now().astimezone(KST)
-    target=datetime.combine(date.fromisoformat(day),datetime.min.time(),tzinfo=KST).replace(hour=8)
-    if current.date()!=target.date() or (target-current).total_seconds()>5*3600:
-        raise ValueError('Reservation must be for today and within five hours of08:00 KST')
+    target=datetime.combine(date.fromisoformat(day),datetime.min.time(),tzinfo=KST).replace(hour=7,minute=40)
+    if current.date()!=target.date() or current.hour<3 or (target-current).total_seconds()>5*3600:
+        raise ValueError('Reservation must be for today and within five hours of07:40 KST')
     while current<target:
         sleep(min(60,(target-current).total_seconds()))
         current=now().astimezone(KST)
@@ -133,7 +133,8 @@ def wait_for_publication(day, now=lambda: datetime.now(KST), sleep=time.sleep):
 
 
 def publication_due(now=None):
-    return (now or datetime.now(KST)).astimezone(KST).hour >= 8
+    current=(now or datetime.now(KST)).astimezone(KST)
+    return (current.hour,current.minute)>=(7,40)
 
 
 def verify_documents(issue):
@@ -217,7 +218,7 @@ def register(issue):
         'web_url': builder.ORIGIN + builder.page_path(issue),
         'pdf_url': builder.ORIGIN + builder.pdf_path(issue),
         'email_html': (ROOT / f'newsletters/email/{issue["date"]}.html').read_text(),
-        'publish_at': issue['date'] + 'T08:00:00+09:00'}
+        'publish_at': issue['date'] + 'T07:58:00+09:00'}
     database('POST', 'ap_news_issues?on_conflict=issue_date', record)
     # Read after ambiguous/duplicate-safe POST; never overwrite a conflicting row.
     saved = database('GET', route)
@@ -242,16 +243,21 @@ def mail_status(issue):
 
 def wait_mail(day, attempts=None):
     """Read-only queue completion gate; existing scheduler owns all sends."""
-    limit = attempts or 120
-    for attempt in range(limit):
-        state = database('POST', 'rpc/ap_news_delivery_health', {'p_day': day})
-        pending = sum(state.get(k, 0) for k in ('pending','processing','retry','failed','uncertain','unconfirmed','eligible_missing'))
-        if state.get('accepted',0) >= state['active'] and not pending:
+    blockers=('pending','processing','retry','failed','uncertain','unconfirmed','eligible_missing')
+    current=datetime.now(KST)
+    target=datetime.combine(date.fromisoformat(day),datetime.min.time(),tzinfo=KST).replace(hour=7,minute=58)
+    lead=max(0,int((target-current).total_seconds()/30)+1) if current.date()==target.date() else 0
+    limit=attempts or min(120,lead+20)
+    for attempt in range(attempts or 120):
+        state=database('POST','rpc/ap_news_delivery_health',{'p_day':day})
+        if not isinstance(state,dict) or any(type(state.get(k)) is not int or state[k]<0 for k in ('active','accepted',*blockers)):
+            raise ValueError('Mail health incomplete or unknown; missing fields are not zero')
+        if state['accepted']==state['active'] and all(state[k]==0 for k in blockers):
             print('All eligible mail accepted by provider: '+json.dumps(state))
             return state
         if attempts is None:
-            limit = min(120, max(20, ((state['active'] + 9) // 10) * 10 + 10))
-        if attempt + 1 >= limit: break
+            limit=min(120,lead+max(20,((state['active']+9)//10)*10+10))
+        if attempt+1>=limit:break
         time.sleep(30)
     raise ValueError('Mail provider acceptance incomplete: '+json.dumps(state))
 
