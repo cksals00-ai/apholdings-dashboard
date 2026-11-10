@@ -3,7 +3,7 @@ import hashlib,json,re
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-verbatim-v4'
+REVISION='source-blind-verbatim-v5'
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
@@ -11,7 +11,7 @@ INTERNAL_KINDS={v:k for k,v in WIRE_KINDS.items()}
 REASON_LIMIT=200
 RULES="""Inventory factual premises ANYWHERE in each Korean sentence. Do NOT classify only the main speech act. Output factual_premise_present if ANY assertion or presupposition needs factual support, even inside a proposal, question or conditional. Output no_factual_premise when there is NO asserted/presupposed fact: this category includes pure proposals, hypotheticals, questions and checking instructions. These are not uncertain just because they are not assertions. Use uncertain only when you cannot determine factual scope; uncertainty blocks approval.
 A whether-question does not assert its answer; a hypothetical antecedent does not assert that its event happened. However, a definite noun phrase, factual relative clause or existing report can presuppose facts even when the main verb is a checking instruction or the main clause is conditional. '국내에서 인정되는 과정인지 확인' asks whether recognition holds; '국내에서 인정되는 이 과정을 확인' presupposes recognition. '기회를 얻었다면 검토' does not assert acquisition; '얻은 기회를 활용' presupposes acquisition. '효능이 입증됐으므로 검토' asserts efficacy; '도입한다면 모든 학생에게 입증된 기능' presupposes universal efficacy. Reports assert the report's existence and attributed content, not necessarily the truth of that content. Preserve negation, attribution and conditional scope.
-Select maximal self-contained factual constituents, including their subject/domain, quantifiers, qualifications, negation and report attribution/content. Never return a bare predicate that drops these parts, or a bare checking verb/report noun that omits reported content. Exclude outside proposed main actions, but retain original full-sentence context. Quote each factual constituent verbatim from the original sentence as text. Copy whole whitespace-delimited words, including original particles and punctuation. Never calculate numeric offsets, translate, paraphrase, omit interior words, or change whitespace. The program maps unique literal quotations to exact WORD IDs; ambiguous quotations block approval. Cover each sentence exactly once. title/summary/fact cannot have no_factual_premise. First give one concise scope reason under200 characters, without repeating/translating the sentence; then choose kind and literal quotations. No source material or preferred answers are supplied."""
+Select maximal self-contained factual constituents, including their subject/domain, quantifiers, qualifications, negation and report attribution/content. Never return a bare predicate that drops these parts, or a bare checking verb/report noun that omits reported content. Exclude outside proposed main actions, but retain original full-sentence context. Quote each factual constituent verbatim from the original sentence as text. Copy the complete factual phrase including its subject/domain and qualifiers. Preserve original particles and punctuation where present. A uniquely located noun phrase that ends before a Korean grammatical case particle is conservatively extended to the original whole word; lexical or negative endings are never guessed. Never calculate numeric offsets, translate, paraphrase, omit interior words, or change whitespace. The program maps unique literal quotations to exact WORD IDs; ambiguous quotations block approval. Cover each sentence exactly once. title/summary/fact cannot have no_factual_premise. First give one concise scope reason under200 characters, without repeating/translating the sentence; then choose kind and literal quotations. No source material or preferred answers are supplied."""
 def classify(model,story):
  rows=[];offsets={}
  for field in FIELDS:
@@ -48,7 +48,14 @@ def classify(model,story):
     begin=positions[0];end=begin+len(quote)
     matches=offsets[key]
     starts={m.start():i for i,m in enumerate(matches)};ends={m.end():i for i,m in enumerate(matches)}
-    if begin not in starts or end not in ends:raise ValueError('Factual quotation cuts a word')
+    if begin not in starts:raise ValueError('Factual quotation cuts a word')
+    if end not in ends:
+     # Only a grammatical noun-case suffix may be restored. Never complete a
+     # lexical/negative predicate or guess a missing factual constituent.
+     ending=next((m for m in matches if m.start()<end<m.end()),None)
+     suffix=sentence[end:ending.end()] if ending else ''
+     if not re.fullmatch(r'(?:(?:을|를|이|가|은|는|도|만|에|에서|에게|으로|로|와|과|의|까지|부터|처럼|보다|조차|마저|께|께서)[.!?,;:]?|[.!?,;:])',suffix):raise ValueError('Factual quotation cuts a word')
+     end=ending.end()
     pair=(starts[begin],ends[end])
     if pair in ranges:raise ValueError('Duplicate factual range')
     ranges.append(pair)

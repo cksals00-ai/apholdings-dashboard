@@ -150,7 +150,7 @@ class VerbatimMappingTests(unittest.TestCase):
   model.ask.side_effect=answer;part=classify(model,story)['facts']['action'][0]
   self.assertEqual((part['word_start'],part['word_end']),(1,5));self.assertEqual(part['text'],'모든 학생에게 효과가 입증된 기능을')
  def test_nonliteral_ambiguous_and_partial_word_quotes_fail_closed(self):
-  for quote in ('공식 기능 발명','식 기능','공식  기능 발표'):
+  for quote in ('공식 기능 발명','식 기능','공식  기능 발표','공식 기'):
    with self.subTest(quote=quote):
     model,_=SpeechActTests().setup_model();base=model.ask.side_effect
     def answer(role,question,**kw):
@@ -163,3 +163,36 @@ class VerbatimMappingTests(unittest.TestCase):
    raw=base(role,question,**kw);raw['sentences'][0]['premises']=[{'text':'공식 기능'}];return raw
   model.ask.side_effect=answer
   with self.assertRaisesRegex(ValueError,'ambiguous'):classify(model,story)
+
+class KoreanParticleAlignmentTests(unittest.TestCase):
+ def test_omitted_noun_particle_is_restored_from_the_original_word(self):
+  story=SpeechActTests().story();story['action']='학습 효과가 입증되지 않았다는 보고를 확인한다.'
+  model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+  def answer(role,question,**kw):
+   raw=base(role,question,**kw)
+   if 'sentences' in raw:
+    row=next(x for x in raw['sentences'] if x['field']=='action');row.update(kind='factual_premise_present',premises=[{'text':'학습 효과가 입증되지 않았다는 보고'}])
+   else:
+    q=json.loads(question);part=next(x for x in q['inventory'] if x['field']=='action')['premises'][0]
+    self.assertEqual(part['text'],'학습 효과가 입증되지 않았다는 보고를')
+   return raw
+  model.ask.side_effect=answer;part=classify(model,story)['facts']['action'][0]
+  self.assertEqual((part['word_start'],part['word_end']),(0,4));self.assertIn('입증되지 않았다는',part['text'])
+ def test_expansion_retains_original_negative_suffix_instead_of_truncating_it(self):
+  story=SpeechActTests().story();story['fact']='기능을 제공하지 않는다.'
+  model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+  def answer(role,question,**kw):
+   raw=base(role,question,**kw)
+   if 'sentences' in raw:next(x for x in raw['sentences'] if x['field']=='fact')['premises']=[{'text':'기능을 제공'}]
+   return raw
+  model.ask.side_effect=answer
+  with self.assertRaisesRegex(ValueError,'cuts a word'):classify(model,story)
+
+class TerminalPunctuationAlignmentTests(unittest.TestCase):
+ def test_terminal_period_is_restored_from_original_not_invented(self):
+  story=SpeechActTests().story();model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+  def answer(role,question,**kw):
+   raw=base(role,question,**kw)
+   if 'sentences' in raw:next(x for x in raw['sentences'] if x['field']=='fact')['premises']=[{'text':'공식 기능을 제공한다'}]
+   return raw
+  model.ask.side_effect=answer;self.assertEqual(classify(model,story)['facts']['fact'][0]['text'],'공식 기능을 제공한다.')
