@@ -10,8 +10,8 @@ REVIEW_REPO='bartowski/Qwen_Qwen3.5-9B-GGUF'
 REVIEW_REV='182be2fd6c7bc44887d88a91cb03ff009cc9f549'
 ART_SHA256='327c6e0826bee8f19172e96c94bb7bba385f7a39d08314803652df9942401c4f'
 REVIEW_SHA256='073a9275e65d9c8cd2819cf5f77b99fbaa6e87ba591da6bbaa86ec073a64bfef'
-TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'review':(REVIEW_REPO,REVIEW_REV,'Qwen_Qwen3.5-9B-Q6_K.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_M.gguf',8192)}
-PROMPT_CACHE_REVISION=11
+TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'review':(REVIEW_REPO,REVIEW_REV,'Qwen_Qwen3.5-9B-Q6_K.gguf',32768),'art':(ART_REPO,ART_REV,'Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_M.gguf',8192)}
+PROMPT_CACHE_REVISION=12
 THINKING_BUDGET=8192
 REQUEST_TIMEOUTS={'copy':1500,'art':1500,'review':3600}
 IMAGE_REPO='segmind/SSD-1B'
@@ -81,6 +81,12 @@ class TextModel:
   return result
  def ask(self,system,question,tokens=1400,schema=None,source_context=None,comparison_context=None):
   thinking=self.profile=='review'
+  if thinking:
+   # Native reasoning previously guessed the absent output layout and looped
+   # over row counts. Supply the same real contract used by the answer stage;
+   # it contains format/allowed values, never expected semantic verdicts.
+   system+='\nThe JSON response contract specifies the output layout and required cardinality. Analyze the task; do not invent another layout or repeatedly recount its rows. Empty arrays mean no items; do not invent null placeholders.'
+   question='JSON response contract (format only, not expected answers):\n'+json.dumps(schema or {'type':'object'},separators=(',',':'),ensure_ascii=False)+'\nOriginal task input:\n'+question
   prompt=completion_prompt(system,question,source_context,comparison_context,instruct_only=self.profile=='art',thinking=thinking)
   if thinking:
    # Let the native reasoning model finish its own thought before applying

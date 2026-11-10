@@ -3,7 +3,7 @@ import hashlib,json,re
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-thinking-inventory-v10'
+REVISION='source-blind-thinking-inventory-v11'
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}

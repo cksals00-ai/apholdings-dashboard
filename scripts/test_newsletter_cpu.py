@@ -132,6 +132,18 @@ class DenseVerifierCandidateTests(unittest.TestCase):
   repo,rev,file,ctx=c.TEXT_PROFILES['review']
   self.assertEqual(repo,'bartowski/Qwen_Qwen3.5-9B-GGUF')
   self.assertEqual(rev,'182be2fd6c7bc44887d88a91cb03ff009cc9f549')
-  self.assertEqual(file,'Qwen_Qwen3.5-9B-Q6_K.gguf')
+  self.assertEqual(file,'Qwen_Qwen3.5-9B-Q6_K.gguf');self.assertEqual(ctx,32768)
   self.assertEqual(c.REVIEW_SHA256,'073a9275e65d9c8cd2819cf5f77b99fbaa6e87ba591da6bbaa86ec073a64bfef')
   self.assertEqual(c.sampling_options('review')['temperature'],1.0)
+
+class ReasoningOutputContractTests(unittest.TestCase):
+ def test_reasoning_receives_the_actual_shape_and_cardinality_without_answer_grammar(self):
+  schema={'type':'object','properties':{'sentences':{'type':'array','minItems':15,'maxItems':15,'items':{'type':'object'}}}}
+  trace={'content':'Completed semantic analysis of each input sentence.','stop_type':'word','stopping_word':'</think>'}
+  final={'content':'{"sentences":[]}'}
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in (trace,final)]) as call:
+   TextModel('.',folder,profile='review').ask('Verify','Original payload',schema=schema)
+   first=json.loads(call.call_args_list[0].args[0].data)
+   self.assertIn('JSON response contract',first['prompt'])
+   self.assertIn(json.dumps(schema,separators=(',',':'),ensure_ascii=False),first['prompt'])
+   self.assertNotIn('json_schema',first)
