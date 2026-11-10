@@ -82,7 +82,7 @@ class NativeThinkingVerifierTests(unittest.TestCase):
     value=TextModel('.',folder,profile='review').ask('Check','Original input',schema={'type':'object'})
    self.assertEqual(value,{'supported':True});self.assertEqual(call.call_count,2)
    one,two=[json.loads(x.args[0].data) for x in call.call_args_list]
-   self.assertNotIn('json_schema',one);self.assertEqual(one['stop'],['</think>']);self.assertTrue(one['prompt'].endswith('<|im_start|>assistant\n<think>\n'));self.assertNotIn('/no_think',one['prompt'])
+   self.assertNotIn('json_schema',one);self.assertEqual(one['n_predict'],8192);self.assertEqual(one['presence_penalty'],1.0);self.assertEqual(two.get('presence_penalty',0),0);self.assertEqual(one['stop'],['</think>']);self.assertTrue(one['prompt'].endswith('<|im_start|>assistant\n<think>\n'));self.assertNotIn('/no_think',one['prompt'])
    self.assertEqual(two['json_schema'],{'type':'object'});self.assertEqual(two['prompt'],one['prompt']+first['content']+'</think>\n\n')
    receipts=[json.loads(p.read_text()) for p in (Path(folder)/'model-outputs').glob('*.json')]
    self.assertEqual({r['_ap_runtime']['phase'] for r in receipts},{'reasoning','answer'})

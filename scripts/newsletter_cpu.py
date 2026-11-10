@@ -11,8 +11,8 @@ REVIEW_REV='6a509d3e0aef5b70ffdcaa478e23de77482e6165'
 ART_SHA256='327c6e0826bee8f19172e96c94bb7bba385f7a39d08314803652df9942401c4f'
 REVIEW_SHA256='7d5d7579c90596cd0e27bf94b002b52280c3031cdc699e4f64d8e94b1bbfdd6d'
 TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'review':(REVIEW_REPO,REVIEW_REV,'Qwen_Qwen3-30B-A3B-Thinking-2507-Q3_K_M.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_M.gguf',8192)}
-PROMPT_CACHE_REVISION=9
-THINKING_BUDGET=4096
+PROMPT_CACHE_REVISION=10
+THINKING_BUDGET=8192
 REQUEST_TIMEOUTS={'copy':1500,'art':1500,'review':3600}
 IMAGE_REPO='segmind/SSD-1B'
 IMAGE_REV='60987f37e94cd59c36b1cba832b9f97b57395a10'
@@ -67,6 +67,7 @@ class TextModel:
   self.log.close()
  def _complete(self,prompt,tokens,schema=None,stop=None,phase='answer'):
   payload={'prompt':prompt,'n_predict':tokens,**sampling_options(self.profile),'stop':stop or ['<|im_end|>'],'cache_prompt':True}
+  if self.profile=='review' and phase=='reasoning':payload['presence_penalty']=1.0
   if schema is not None:payload['json_schema']=schema
   request=urllib.request.Request('http://127.0.0.1:8080/completion',data=json.dumps(payload).encode(),headers={'Content-Type':'application/json'})
   with urllib.request.urlopen(request,timeout=REQUEST_TIMEOUTS[self.profile]) as response:result=json.load(response)
