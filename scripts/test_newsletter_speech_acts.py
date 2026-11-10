@@ -124,7 +124,7 @@ class WordIdProtocolTests(unittest.TestCase):
     for row in q['sentences']:
      self.assertTrue(all(set(w)=={'id','text'} for w in row['words']))
     branches=kw['schema']['properties']['sentences']['items']['anyOf']
-    target=branches[0]
+    target=branches[0]['oneOf'][0]
     self.assertEqual(set(target['properties']['premises']['items']['properties']),{'first_word_id','last_word_id'})
    return base(role,question,**kw)
   model.ask.side_effect=answer
@@ -297,3 +297,22 @@ class ExactWordCoverageTests(unittest.TestCase):
     return raw
    model.ask.side_effect=answer
    with self.subTest(parts=parts),self.assertRaisesRegex(ValueError,error):classify(model,SpeechActTests().story())
+
+class DecisionContractTests(unittest.TestCase):
+ def test_decision_precedes_bounded_reason_and_schema_prevents_contradictory_exemption(self):
+  model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+  def answer(role,question,**kw):
+   if 'complete' not in kw['schema']['properties']:
+    target=kw['schema']['properties']['sentences']['items']['anyOf'][0]
+    branches=target['oneOf']
+    for branch in branches:
+     self.assertEqual(list(branch['properties'])[-1],'reason')
+     kind=branch['properties']['kind']['enum'][0]
+     premises=branch['properties']['premises']
+     if kind=='no_factual_premise':self.assertEqual(premises['maxItems'],0)
+     if kind=='factual_premise_present':self.assertEqual(premises['minItems'],1)
+    q=json.loads(question)
+    if q['sentences'][0]['field'] in ('title','summary','fact'):
+     self.assertNotIn('no_factual_premise',[b['properties']['kind']['enum'][0] for b in branches])
+   return base(role,question,**kw)
+  model.ask.side_effect=answer;classify(model,SpeechActTests().story())

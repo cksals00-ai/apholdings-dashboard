@@ -9,7 +9,7 @@ class WordAnchorProtocolTests(unittest.TestCase):
    data=json.loads(question);calls.append(data)
    if 'complete' in kw['schema']['properties']:return {'input_hash':data['input_hash'],'complete':True,'issues':[]}
    self.assertEqual(data['context'],story);self.assertNotIn('input_hash',data['context']);self.assertEqual(len(data['sentences']),1)
-   row=data['sentences'][0];shape=kw['schema']['properties']['sentences']['items']['anyOf'][0]['properties']['premises']['items']
+   row=data['sentences'][0];shape=kw['schema']['properties']['sentences']['items']['anyOf'][0]['oneOf'][0]['properties']['premises']['items']
    self.assertEqual(set(shape['properties']),{'first_word_id','last_word_id'})
    self.assertEqual(shape['properties']['last_word_id']['enum'],list(range(len(row['words']))))
    pure=row['field'] in ('insight','action')
