@@ -24,7 +24,7 @@ class VerifiedControlHandoffTests(unittest.TestCase):
   draft={'title':'새 도구를 발표했다.','summary':'새 도구를 발표했다.','fact':'새 도구를 발표했다.','insight':'필요하다면 적용을 검토할 수 있다.','action':' '.join(CASES)}
   digest=h.scope_hash(draft)
   state={'date':'2026-11-10','mode':'test','asset_day':'2026-11-10-test-123','historical_controls_only':True,'scope_only':True,'historical_only':False}
-  proof={'synthetic_regression_only':True,'draft':draft,'receipt':{'revision':REVISION,'reasoning_effort':'medium','input_hash':digest,'coverage_audit':{'complete':True,'issues':[]},'independent_decisions':[{'input_hash':digest},{'input_hash':digest}]}}
+  proof={'synthetic_regression_only':True,'draft':draft,'receipt':{'revision':REVISION,'reasoning_effort':'instruct-only','input_hash':digest,'coverage_audit':{'complete':True,'issues':[]},'independent_decisions':[{'input_hash':digest},{'input_hash':digest}]}}
   payload=h.scope_payload(draft)
   requests=[{'field':row['field'],'id':row['id'],'input_hash':h.focused_request(payload,row)['input_hash']} for row in payload['sentences']]
   for vote in proof['receipt']['independent_decisions']:vote['requests']=copy.deepcopy(requests)

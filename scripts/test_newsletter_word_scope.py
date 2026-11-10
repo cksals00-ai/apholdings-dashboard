@@ -25,7 +25,7 @@ class ExhaustiveWordScopeTests(unittest.TestCase):
    props=kw['schema']['properties']['sentences']['items']['anyOf'][0]['properties'];scope=props['word_scope']
    expected={str(w['id']) for w in q['sentences'][0]['words']}
    self.assertEqual(set(scope['properties']),expected);self.assertEqual(set(scope['required']),expected);self.assertFalse(scope['additionalProperties']);self.assertNotIn('premises',props);self.assertNotIn('kind',props)
-   self.assertEqual(list(props)[-1],'reason');self.assertEqual(kw['reasoning_effort'],'medium');self.assertNotIn('source_context',kw);self.assertNotIn('comparison_context',kw)
+   self.assertEqual(list(props)[-1],'reason');self.assertEqual(kw['reasoning_effort'],'instruct-only');self.assertNotIn('source_context',kw);self.assertNotIn('comparison_context',kw)
   classify(self.model(check),self.story())
  def test_unknown_missing_uncertain_or_legacy_scope_blocks(self):
   def missing(r,*a):r['sentences'][0]['word_scope'].pop('0')

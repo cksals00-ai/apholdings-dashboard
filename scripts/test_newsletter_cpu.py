@@ -73,80 +73,51 @@ class InstructVerifierTests(unittest.TestCase):
    with self.assertRaises(ValueError):c.verify_weights(path,hashlib.sha256(b'known weights').hexdigest())
 
 
-from newsletter_harmony import FINAL_HEAD,FINAL_IDS,FORMAT_HEAD,FORMAT_IDS
-
-def harmony_trace():return {'content':'Resolve the original clause scope without inventing an event.<|end|>','stop_type':'word','stopping_word':FINAL_HEAD,'tokens':[123,200007,*FINAL_IDS]}
-def harmony_final():return {'content':'{"supported":true}','stop_type':'eos','tokens':[123,200002]}
-
-class HarmonyReviewTests(unittest.TestCase):
- def test_effort_is_per_request_and_never_leaks_into_the_next_request(self):
-  replies=[harmony_trace(),harmony_final(),harmony_trace(),harmony_final()]
-  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in replies]) as call:
-   model=TextModel('.',folder,profile='review');model.ask('Blind scope','Original',reasoning_effort='medium');model.ask('Source evidence','Original')
-   first,next_request=[json.loads(call.call_args_list[i].args[0].data) for i in (0,2)]
-   self.assertIn('Reasoning: medium',first['prompt']);self.assertIn('Reasoning: low',next_request['prompt'])
-   receipts=[json.loads(p.read_text())['_ap_runtime']['reasoning_effort'] for p in (Path(folder)/'model-outputs').glob('*.json')]
-   self.assertEqual(sorted(receipts),['low','low','medium','medium'])
- def test_declared_typed_final_header_stops_before_any_final_json_is_generated(self):
-  trace=harmony_trace();trace.update(stopping_word=FORMAT_HEAD,tokens=[123,200007,*FORMAT_IDS])
-  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in (trace,harmony_final())]) as call:
-   self.assertEqual(TextModel('.',folder,profile='review').ask('Verify','Original'),{'supported':True})
-   first,last=[json.loads(x.args[0].data) for x in call.call_args_list]
-   self.assertIn(FINAL_HEAD,first['stop']);self.assertIn(FORMAT_HEAD,first['stop'])
-   self.assertEqual(last['prompt'],first['prompt']+trace['content']+FORMAT_HEAD)
- def test_native_final_header_is_observed_before_json_grammar_is_applied(self):
-  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in (harmony_trace(),harmony_final())]) as call:
-   result=TextModel('.',folder,profile='review').ask('Verify','Original',schema={'type':'object'})
-   self.assertEqual(result,{'supported':True});one,two=[json.loads(x.args[0].data) for x in call.call_args_list]
-   self.assertNotIn('json_schema',one);self.assertEqual(two['json_schema'],{'type':'object'})
-   self.assertTrue(one['prompt'].endswith('<|start|>assistant<|channel|>analysis<|message|>'))
-   self.assertEqual(two['prompt'],one['prompt']+harmony_trace()['content']+FINAL_HEAD)
-   self.assertIn('Reasoning: low',one['prompt']);self.assertNotIn('<think>',one['prompt'])
-   self.assertEqual(one['n_predict'],4096);self.assertTrue(one['return_tokens']);self.assertTrue(two['return_tokens'])
-   self.assertNotIn('ignore_eos',one);self.assertNotIn('presence_penalty',one)
-   receipts=[json.loads(p.read_text()) for p in (Path(folder)/'model-outputs').glob('*.json')]
-   self.assertEqual({r['_ap_runtime']['phase'] for r in receipts},{'reasoning','answer'})
-   self.assertTrue(all(r['_ap_runtime']['native_reasoning'] is True and r['_ap_runtime']['protocol']=='harmony-v4-bounded-effort-json' for r in receipts))
- def test_message_end_tool_call_or_missing_tokens_cannot_be_forced_to_final(self):
-  for change in ({'stopping_word':'<|end|>'},{'stopping_word':'<|call|>'},{'stop_type':'limit'},{'tokens':[]}):
-   raw=harmony_trace();raw.update(change)
-   with self.subTest(change=change),tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps(raw).encode())) as call:
+class SparseInstructReviewTests(unittest.TestCase):
+ def response(self,**kw):return {'content':'{"supported":true}','stop_type':'eos','tokens':[42,151645],**kw}
+ def test_review_uses_native_instruct_format_one_bounded_request_and_receipt(self):
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps(self.response()).encode())) as call:
+   model=TextModel('.',folder,profile='review');self.assertEqual(model.ask('Verify','Original',schema={'type':'object'},reasoning_effort='instruct-only'),{'supported':True})
+   self.assertEqual(call.call_count,1);payload=json.loads(call.call_args.args[0].data)
+   self.assertTrue(payload['prompt'].endswith('<|im_start|>assistant\n'));self.assertNotIn('<think>',payload['prompt']);self.assertNotIn('/no_think',payload['prompt']);self.assertNotIn('Reasoning:',payload['prompt']);self.assertEqual(payload['json_schema'],{'type':'object'});self.assertTrue(payload['return_tokens'])
+   receipt=json.loads(next((Path(folder)/'model-outputs').glob('*.json')).read_text())['_ap_runtime'];self.assertFalse(receipt['native_reasoning']);self.assertEqual(receipt['reasoning_effort'],'instruct-only');self.assertEqual(receipt['server_slots'],1);self.assertEqual(receipt['protocol'],'qwen3-moe-instruct-v1');self.assertEqual(receipt['sampling'],sampling_options('review'))
+ def test_actual_eos_missing_token_or_tool_handoff_never_becomes_a_verdict(self):
+  for change in ({'tokens':[]},{'tokens':[42,151644]},{'stop_type':'word','stopping_word':'<|im_start|>'},{'content':'<tool_call>{"supported":true}'},{'content':'<think>analysis</think>{"supported":true}'}):
+   raw=self.response();raw.update(change)
+   with self.subTest(change=change),tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps(raw).encode())):
     with self.assertRaises(ValueError):TextModel('.',folder,profile='review').ask('Check','Original')
-    self.assertEqual(call.call_count,1);self.assertEqual(len(list((Path(folder)/'model-outputs').glob('*.json'))),1)
- def test_context_loss_in_either_phase_is_archived_and_rejected(self):
-  for phase in (0,1):
-   replies=[harmony_trace(),harmony_final()];replies[phase]['truncated']=True
-   with self.subTest(phase=phase),tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in replies]) as call:
-    with self.assertRaisesRegex(ValueError,'context'):TextModel('.',folder,profile='review').ask('Check','Original')
-    self.assertEqual(call.call_count,phase+1)
- def test_no_generated_analysis_is_shared_with_a_later_independent_request(self):
-  trace=harmony_trace();trace['content']='UNIQUE_PRIVATE_ANALYSIS<|end|>'
-  replies=[trace,harmony_final(),harmony_trace(),harmony_final()]
-  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in replies]) as call:
-   model=TextModel('.',folder,profile='review');model.ask('First analyst','Original');model.ask('Second analyst','Original')
-   self.assertNotIn('UNIQUE_PRIVATE_ANALYSIS',json.loads(call.call_args_list[2].args[0].data)['prompt'])
- def test_bounded_review_slots_use_complete_context_special_tokens_and_full_swa(self):
+    self.assertEqual(len(list((Path(folder)/'model-outputs').glob('*.json'))),1)
+ def test_context_loss_and_output_limit_are_preserved_and_rejected(self):
+  for change in ({'truncated':True},{'stop_type':'limit'},{'stopped_limit':True}):
+   raw=self.response();raw.update(change)
+   with self.subTest(change=change),tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps(raw).encode())):
+    with self.assertRaises(ValueError):TextModel('.',folder,profile='review').ask('Check','Original')
+    self.assertEqual(len(list((Path(folder)/'model-outputs').glob('*.json'))),1)
+ def test_whole_independent_requests_never_include_prior_answers(self):
+  raw=self.response(content='{"reason":"UNIQUE_PRIOR_DECISION"}')
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(raw).encode()),io.BytesIO(json.dumps(raw).encode())]) as call:
+   model=TextModel('.',folder,profile='review');model.ask('First','Original');model.ask('Second','Original')
+   self.assertNotIn('UNIQUE_PRIOR_DECISION',json.loads(call.call_args_list[1].args[0].data)['prompt'])
+ def test_single_slot_complete_context_cpu_without_credentials(self):
   import newsletter_cpu as c
   with tempfile.TemporaryDirectory() as folder:
    root=Path(folder);(root/'llama-server').touch();download=Mock(return_value='/tmp/public.gguf');process=Mock();process.wait.return_value=0
    with patch.dict(sys.modules,{'huggingface_hub':types.SimpleNamespace(hf_hub_download=download)}),patch.object(c,'verify_weights') as verify,patch.object(c.subprocess,'Popen',return_value=process) as launch,patch.object(c.urllib.request,'urlopen',return_value=types.SimpleNamespace(status=200)),patch.dict(os.environ,{'GH_TOKEN':'dummy','PRIVATE_TEST_CREDENTIAL':'dummy'}):
     with c.TextModel(root,root,profile='review'):pass
-   args=launch.call_args.args[0];self.assertEqual(args[args.index('--parallel')+1],'2');self.assertEqual(args[args.index('-c')+1],str(2*c.TEXT_PROFILES['review'][3]))
-   for flag in ('--no-context-shift','--special','--swa-full'):self.assertIn(flag,args)
-   self.assertEqual(args[args.index('--cache-ram')+1],'512');self.assertEqual(args[args.index('-ngl')+1],'0')
-   self.assertNotIn('GH_TOKEN',launch.call_args.kwargs['env']);self.assertNotIn('PRIVATE_TEST_CREDENTIAL',launch.call_args.kwargs['env'])
-   self.assertFalse(download.call_args.kwargs['token']);verify.assert_called_once_with('/tmp/public.gguf',c.REVIEW_SHA256)
- def test_public_original_mxfp4_file_and_revision_are_immutable(self):
+   args=launch.call_args.args[0];self.assertEqual(args[args.index('--parallel')+1],'1');self.assertEqual(args[args.index('-c')+1],'16384');self.assertEqual(args[args.index('--cache-ram')+1],'256');self.assertEqual(args[args.index('-ngl')+1],'0')
+   for flag in ('--no-context-shift','--special'):self.assertIn(flag,args)
+   self.assertNotIn('GH_TOKEN',launch.call_args.kwargs['env']);self.assertNotIn('PRIVATE_TEST_CREDENTIAL',launch.call_args.kwargs['env']);self.assertFalse(download.call_args.kwargs['token']);verify.assert_called_once_with('/tmp/public.gguf',c.REVIEW_SHA256)
+ def test_public_sparse_model_file_and_quantization_are_immutable(self):
   import newsletter_cpu as c
-  self.assertEqual(c.TEXT_PROFILES['review'],('ggml-org/gpt-oss-20b-GGUF','15dcfc7e7c608c6161507211ed43c5b590801b4b','gpt-oss-20b-MXFP4.gguf',16384))
-  self.assertEqual(c.REVIEW_SHA256,'27cd6c432c7672cb812a92f611cf3ba7bbc35928262bb1e1253ff4ee6ae35901')
- def test_protocol_handshake_is_real_and_does_not_claim_semantic_qualification(self):
-  final=harmony_final();final['content']='{"protocol_ok":true}'
-  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in (harmony_trace(),final,harmony_trace(),final)]):
-   model=TextModel('.',folder,profile='review');model.protocol_handshake()
-   proof=json.loads((Path(folder)/'protocol-handshake.json').read_text());self.assertIs(proof['natural_final_header'],True);self.assertIs(proof['semantic_qualification'],False);self.assertEqual(proof['efforts'],['low','medium'])
- def test_failed_handshake_creates_no_success_record(self):
-  raw=harmony_trace();raw['tokens']=[]
-  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps(raw).encode())):
+  self.assertEqual(c.TEXT_PROFILES['review'],('bartowski/Qwen_Qwen3-30B-A3B-Instruct-2507-GGUF','6c6e8692f43e4ca663f7ece8229a1361090d3a4c','Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_S.gguf',16384));self.assertEqual(c.REVIEW_SHA256,'13ae55e8eba134355c43e6d3b192b5b85b265efbda5542b48da11a868a5b86c3')
+ def test_handshake_checks_only_actual_wire_and_cannot_claim_semantic_success(self):
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps(self.response(content='{"protocol_ok":true}')).encode())):
+   TextModel('.',folder,profile='review').protocol_handshake();proof=json.loads((Path(folder)/'protocol-handshake.json').read_text());self.assertFalse(proof['semantic_qualification']);self.assertEqual(proof['protocol'],'qwen3-moe-instruct-v1');self.assertEqual(proof['actual_eos_id'],151645)
+ def test_failed_handshake_leaves_no_success_proof(self):
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps(self.response(tokens=[])).encode())):
    with self.assertRaises(ValueError):TextModel('.',folder,profile='review').protocol_handshake()
    self.assertFalse((Path(folder)/'protocol-handshake.json').exists())
+ def test_native_thinking_request_is_never_silently_ignored(self):
+  with self.assertRaises(ValueError):TextModel('.','.',profile='review',native_reasoning=True)
+  with tempfile.TemporaryDirectory() as folder:
+   with self.assertRaises(ValueError):TextModel('.',folder,profile='review').ask('Role','Original',reasoning_effort='medium')
