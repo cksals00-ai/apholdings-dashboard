@@ -2,6 +2,8 @@ import unittest,json,copy
 from unittest.mock import patch
 import newsletter_server as s
 import newsletter_preflight as p
+def health(**values):
+ return dict(active=3,accepted=0,pending=0,processing=0,retry=0,failed=0,uncertain=0,unconfirmed=0,eligible_missing=0,**{})|values
 class UnattendedTests(unittest.TestCase):
  def test_candidate_fault_does_not_require_code_change(self):
   candidates=[{'url':'https://unknown.invalid/news','published':'2026-10-28'}]+[{'url':f'https://blog.google/story-{n}','published':'2026-10-28'} for n in range(5)]
@@ -11,7 +13,7 @@ class UnattendedTests(unittest.TestCase):
   result=p.select_candidates([{'url':'https://blog.google.evil.test/a','published':'2026-10-28'},{'url':'https://blog.google/old','published':'2026-10-01'},{'url':'https://blog.google/repeated','published':'2026-10-28'}],'2026-10-29',['https://blog.google/repeated'])
   self.assertFalse(result['ready']);self.assertFalse(result['selected'])
  def test_mail_wait_retries_pending_until_all_accepted(self):
-  states=[{'active':3,'accepted':0,'pending':3},{'active':3,'accepted':3,'pending':0}]
+  states=[health(pending=3),health(accepted=3)]
   with patch.object(s,'database',side_effect=states),patch.object(s.time,'sleep') as sleep:
    result=s.wait_mail('2026-10-29',attempts=2)
   self.assertEqual(result['accepted'],3);sleep.assert_called_once_with(30)
@@ -19,9 +21,11 @@ class UnattendedTests(unittest.TestCase):
   for state in ({'active':3,'accepted':2},{'active':3,'accepted':3,'eligible_missing':1},{'active':3,'accepted':3,'uncertain':1},{'active':0,'accepted':0,'processing':1}):
    with patch.object(s,'database',return_value=state),self.assertRaises(ValueError):s.wait_mail('2026-10-29',attempts=1)
  def test_zero_active_is_valid_only_with_no_remaining_mail(self):
-  with patch.object(s,'database',return_value={'active':0,'accepted':0}):self.assertEqual(s.wait_mail('2026-10-29',attempts=1)['active'],0)
+  with patch.object(s,'database',return_value=health(active=0,accepted=0)):self.assertEqual(s.wait_mail('2026-10-29',attempts=1)['active'],0)
+ def test_missing_health_fields_are_not_zero(self):
+  with patch.object(s,'database',return_value={'active':0,'accepted':0}),self.assertRaises(ValueError):s.wait_mail('2026-10-29',attempts=1)
  def test_larger_queue_scales_completion_deadline(self):
-  with patch.object(s,'database',return_value={'active':30,'accepted':0,'pending':30}),patch.object(s.time,'sleep') as sleep:
+  with patch.object(s,'database',return_value=health(active=30,pending=30)),patch.object(s.time,'sleep') as sleep:
    with self.assertRaises(ValueError):s.wait_mail('2026-10-29')
   self.assertEqual(sleep.call_count,39)
 if __name__=='__main__':unittest.main()

@@ -147,10 +147,10 @@ class HandoffTests(unittest.TestCase):
             self.assertEqual(result['state'],'awaiting_ready')
             self.assertFalse(result['due'])
 
-    def test_before_08_finished_bundle_is_not_installed(self):
+    def test_before_delivery_window_finished_bundle_is_not_installed(self):
         import newsletter_server as s
         with patch.object(self.h,'download_bundle',side_effect=AssertionError('Too early')):
-            result=s.prepare('2026-10-28',now=datetime.fromisoformat('2026-10-28T07:59:59+09:00'))
+            result=s.prepare('2026-10-28',now=datetime.fromisoformat('2026-10-28T07:39:59+09:00'))
         self.assertEqual(result['state'],'not_due')
         self.assertFalse(result['due'])
 

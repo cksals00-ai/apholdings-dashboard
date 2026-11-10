@@ -1,0 +1,13 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {decideRecovery,notificationKey} from './recovery.mjs';
+const now='2026-11-10T07:45:00+09:00',day='2026-11-10';
+const ready={ready_verified_at:now};
+const run=(status,conclusion='failure')=>({head_branch:'main',event:'workflow_dispatch',created_at:now,display_title:'AP News 2026-11-10 reservation',status,conclusion});
+test('live reservation blocks duplicate requests',()=>assert.equal(decideRecovery(day,now,ready,[run('in_progress')],0,false).kind,'wait'));
+test('failed stale-event run requires fresh dispatch, never rerun',()=>assert.equal(decideRecovery(day,now,ready,[run('completed')],0,false).kind,'dispatch'));
+test('complete is quiet and never dispatches',()=>assert.equal(decideRecovery(day,now,ready,[],0,true).kind,'quiet'));
+test('terminal only after three bounded fresh recovery requests',()=>assert.equal(decideRecovery(day,now,ready,[run('completed')],3,false).kind,'terminal'));
+test('incomplete run inventory fails closed',()=>assert.throws(()=>decideRecovery(day,now,ready,null,0,false)));
+test('wrong-day, receipt and non-main runs cannot prove active publication',()=>{for(const patch of [{created_at:'2026-11-09T07:45:00+09:00'},{display_title:'AP News 2026-11-10 receipt'},{head_branch:'other'}])assert.equal(decideRecovery(day,now,ready,[{...run('in_progress'),...patch}],0,false).kind,'dispatch');});
+test('missing ready bundle gets one terminal failure at08 rather than creating old content',()=>{assert.equal(decideRecovery(day,now,{},[],0,false).kind,'wait');assert.equal(decideRecovery(day,'2026-11-10T08:00:00+09:00',{},[],0,false).kind,'terminal');});
+test('all failure causes share one daily key, progress and recovery success stay quiet',()=>{assert.equal(notificationKey(day,{terminal:true}),day+':terminal-failure');assert.equal(notificationKey(day,{terminal:false}),null);});

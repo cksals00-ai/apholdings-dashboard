@@ -94,7 +94,7 @@ class ServerTests(unittest.TestCase):
                 self.server.register(self.issue)
 
     def test_early_run_prepares_but_does_not_publish(self):
-        self.assertFalse(self.server.publication_due(datetime.fromisoformat('2026-10-27T07:59:59+09:00')))
+        self.assertFalse(self.server.publication_due(datetime.fromisoformat('2026-10-27T07:39:59+09:00')))
         self.assertTrue(self.server.publication_due(datetime.fromisoformat('2026-10-27T08:00:00+09:00')))
 
     def test_checkpoint_roundtrip_is_atomic_and_preserves_completed_stage(self):
