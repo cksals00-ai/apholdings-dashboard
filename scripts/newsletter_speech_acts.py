@@ -3,18 +3,23 @@ import hashlib,json,re
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-speech-v1'
-RULES="""Classify what the Korean draft ACTUALLY ASSERTS, without source material or truth checking. Pure proposals, hypotheticals, questions and checking instructions do not assert that their proposed outcome already happened. An asserted or presupposed fact inside advice still counts: '효능이 입증됐으므로 검토' asserts efficacy; '도입한다면 모든 학생에게 입증된 기능' presupposes universal efficacy. '국내에서 인정되는 과정인지 확인' asks a question, but '국내에서 인정되는 이 과정을 확인' presupposes recognition. '기회를 얻었다면 검토' is hypothetical; '얻은 기회를 활용' presupposes acquisition. Preserve negation, quotation attribution and conditional scope. Select exact word-index ranges for EVERY asserted factual premise, never paraphrase. Keep the whole original sentence in mind; do not extract a hypothetical antecedent as a completed fact. If uncertain choose uncertain. Cover every sentence exactly once; factual title/summary/fact cannot be pure proposals. Do not infer a preferred answer."""
+REVISION='source-blind-speech-v2'
+RULES="""Classify what the Korean draft ACTUALLY ASSERTS, without source material or truth checking. Pure proposals, hypotheticals, questions and checking instructions do not assert that their proposed outcome already happened. An asserted or presupposed fact inside advice still counts: '효능이 입증됐으므로 검토' asserts efficacy; '도입한다면 모든 학생에게 입증된 기능' presupposes universal efficacy. '국내에서 인정되는 과정인지 확인' asks a question, but '국내에서 인정되는 이 과정을 확인' presupposes recognition. '기회를 얻었다면 검토' is hypothetical; '얻은 기회를 활용' presupposes acquisition. Preserve negation, quotation attribution and conditional scope. Analyze whether the sentence affirms a proposition, asks whether it holds, makes a hypothetical, or reports that someone made a claim. A report can assert that the report exists while negating the reported outcome. In your reason, resolve these scopes before choosing kind. Select exact word-index ranges for EVERY asserted factual premise, never paraphrase. start/end are inclusive WORD IDs, never character offsets or text lengths. Keep the whole original sentence in mind; do not extract a hypothetical antecedent as a completed fact. If uncertain choose uncertain. Cover every sentence exactly once; factual title/summary/fact cannot be pure proposals. Do not infer a preferred answer."""
 def classify(model,story):
- rows=[]
+ rows=[];offsets={}
  for field in FIELDS:
   for span in request_for(field,story[field],'source-blind')['spans']:
-   words=[{'id':i,'text':m.group(),'start':m.start(),'end':m.end()} for i,m in enumerate(re.finditer(r'\S+',span['text']))]
+   matches=list(re.finditer(r'\S+',span['text']));offsets[(field,span['id'])]=matches
+   words=[{'id':i,'text':m.group()} for i,m in enumerate(matches)]
    rows.append({'field':field,'id':span['id'],'text':span['text'],'words':words})
  payload={'revision':REVISION,'sentences':rows}
  payload['input_hash']=hashlib.sha256(json.dumps(payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
- range_schema=s.obj({'start':{'type':'integer','minimum':0},'end':{'type':'integer','minimum':0}})
- item=s.obj({'field':{'type':'string','enum':list(FIELDS)},'id':{'type':'integer','minimum':0},'kind':{'type':'string','enum':['pure_proposal','asserted_or_mixed','uncertain']},'premises':{'type':'array','maxItems':8,'items':range_schema},'reason':s.string(350)})
+ branches=[]
+ for row in rows:
+  ids=list(range(len(row['words'])))
+  range_schema=s.obj({'start':{'type':'integer','enum':ids},'end':{'type':'integer','enum':ids}})
+  branches.append(s.obj({'reason':s.string(350),'field':{'type':'string','enum':[row['field']]},'id':{'type':'integer','enum':[row['id']]},'kind':{'type':'string','enum':['pure_proposal','asserted_or_mixed','uncertain']},'premises':{'type':'array','maxItems':8,'items':range_schema}}))
+ item={'anyOf':branches}
  schema=s.obj({'input_hash':{'type':'string','enum':[payload['input_hash']]},'sentences':{'type':'array','minItems':len(rows),'maxItems':len(rows),'items':item}})
  indexed={(r['field'],r['id']):r for r in rows}
  def normalize(raw):
@@ -45,7 +50,7 @@ def classify(model,story):
  for key,(kind,ranges) in votes[0].items():
   row=indexed[key];parts=[]
   for begin,end in ranges:
-   text=row['text'][row['words'][begin]['start']:row['words'][end]['end']]
+   text=row['text'][offsets[key][begin].start():offsets[key][end].end()]
    part={'sentence_id':row['id'],'text':text,'sentence_context':row['text'],'word_start':begin,'word_end':end};parts.append(part);facts[key[0]].append(part)
   inventory.append({'field':key[0],'id':key[1],'kind':kind,'premises':parts})
  issue=s.obj({'field':{'type':'string','enum':list(FIELDS)},'id':{'type':'integer','minimum':0},'reason':s.string(350)})

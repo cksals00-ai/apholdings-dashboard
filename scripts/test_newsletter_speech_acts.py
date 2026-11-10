@@ -112,3 +112,18 @@ class MixedFieldIsolationTests(unittest.TestCase):
   model.ask.side_effect=answer
   with patch('newsletter_speech_acts.classify',return_value=receipt):out=review_fields(model,story,{'source_segments':[{'id':0,'text':'Official feature'}]})
   self.assertTrue(out['supported']);self.assertEqual(out['fields'][3]['text'],story['insight'])
+
+class WordIdProtocolTests(unittest.TestCase):
+ def test_model_never_sees_character_offsets_and_each_sentence_has_its_own_word_bounds(self):
+  model,calls=SpeechActTests().setup_model();base=model.ask.side_effect
+  def answer(role,question,**kw):
+   q=json.loads(question)
+   if 'complete' not in kw['schema']['properties']:
+    for row in q['sentences']:
+     self.assertTrue(all(set(w)=={'id','text'} for w in row['words']))
+    branches=kw['schema']['properties']['sentences']['items']['anyOf']
+    title=next(b for b in branches if b['properties']['field']['enum']==['title'])
+    self.assertEqual(title['properties']['premises']['items']['properties']['end']['enum'],[0,1,2])
+   return base(role,question,**kw)
+  model.ask.side_effect=answer
+  classify(model,SpeechActTests().story())
