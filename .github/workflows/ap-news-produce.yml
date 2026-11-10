@@ -35,7 +35,7 @@ jobs:
       - name: Checkout reviewed producer runtime
         uses: actions/checkout@v7
         with:
-          ref: 647cb8c78fe30e59620b6410ecc7d8c86623a0a3
+          ref: 9b21df05380f1dff89560691acabf3e7328326c7
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -137,7 +137,7 @@ jobs:
           EDITION_DAY: ${{ steps.gate.outputs.day }}
           PYTHONPATH: ${{ github.workspace }}/.production-runtime/scripts
         run: |
-          python .production-runtime/scripts/newsletter_control_handoff.py --source-run 42842217976 --expected-head e6097d20fea0bfb931c7171c758fbed66a9ffcfc --expected-runtime 647cb8c78fe30e59620b6410ecc7d8c86623a0a3 --definition-sha 74f1591b4ae3a69f57da7f37507efc8e614b37f959c252c7653e18a9ea6db41c --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --folder "$RUNNER_TEMP/qualified-controls"
+          python .production-runtime/scripts/newsletter_control_handoff.py --source-run 42842217976 --expected-head e6097d20fea0bfb931c7171c758fbed66a9ffcfc --expected-runtime 9b21df05380f1dff89560691acabf3e7328326c7 --definition-sha 74f1591b4ae3a69f57da7f37507efc8e614b37f959c252c7653e18a9ea6db41c --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --folder "$RUNNER_TEMP/qualified-controls"
           python - <<'PY_SCOPE'
           import json, os
           from pathlib import Path
