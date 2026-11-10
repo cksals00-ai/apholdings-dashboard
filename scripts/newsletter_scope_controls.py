@@ -11,6 +11,9 @@ CASES=[
  '도입한다면 모든 학생에게 효과가 입증된 기능을 사용하자.',
  '학습 효과가 입증됐는지 확인한다.',
  '학습 효과가 입증되지 않았다는 보고를 확인한다.',
+ '학생만 참여한 시험 결과를 확인한다.',
+ '기존 제품보다 빠른 이 기능을 확인한다.',
+ '학생도 이용할 수 있는 이 기능을 확인한다.',
 ]
 def check(model,folder):
  story={'title':'새 도구를 발표했다.','summary':'새 도구를 발표했다.','fact':'새 도구를 발표했다.','insight':'필요하다면 적용을 검토할 수 있다.','action':' '.join(CASES)}
@@ -21,4 +24,7 @@ def check(model,folder):
  if actual!=expected:raise ValueError('Speech-act scope regression failed')
  negative=[p['text'] for p in receipt['facts']['action'] if p['sentence_id']==7]
  if len(negative)!=1 or '학습 효과가 입증되지 않았다는 보고를' not in negative[0]:raise ValueError('Negation or report attribution scope lost in asserted inventory')
+ for ident,required in ((8,'학생만'),(9,'기존 제품보다'),(10,'학생도')):
+  parts=[p['text'] for p in receipt['facts']['action'] if p['sentence_id']==ident]
+  if len(parts)!=1 or required not in parts[0]:raise ValueError('Scope-bearing particle or comparison domain lost in asserted inventory')
  return receipt

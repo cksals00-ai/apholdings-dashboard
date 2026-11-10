@@ -246,3 +246,16 @@ class FocusedIndependentInventoryTests(unittest.TestCase):
   model.ask.side_effect=answer;receipt=classify(model,story)
   self.assertEqual(calls[:5],calls[5:10]);self.assertEqual(len(receipt['independent_decisions']),2)
   self.assertTrue(all(len(v)==5 for v in receipt['independent_decisions']))
+
+class ScopeParticleOmissionTests(unittest.TestCase):
+ def test_scope_comparison_and_range_particles_are_not_silently_restored(self):
+  for suffix in ('만','도','까지','부터','조차','마저','보다','처럼'):
+   with self.subTest(suffix=suffix):
+    story=SpeechActTests().story();story['title']='학생'+suffix+' 참여한다.'
+    model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+    def answer(role,question,**kw):
+     raw=base(role,question,**kw)
+     if 'sentences' in raw and raw['sentences'][0]['field']=='title':raw['sentences'][0]['premises']=[{'text':'학생'}]
+     return raw
+    model.ask.side_effect=answer
+    with self.assertRaisesRegex(ValueError,'cuts a word'):classify(model,story)

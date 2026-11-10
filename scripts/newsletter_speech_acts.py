@@ -3,7 +3,7 @@ import hashlib,json,re
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-focused-verbatim-v6'
+REVISION='source-blind-focused-verbatim-v7'
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
@@ -52,7 +52,7 @@ def classify(model,story):
      # lexical/negative predicate or guess a missing factual constituent.
      ending=next((m for m in matches if m.start()<end<m.end()),None)
      suffix=sentence[end:ending.end()] if ending else ''
-     if not re.fullmatch(r'(?:(?:을|를|이|가|은|는|도|만|에|에서|에게|으로|로|와|과|의|까지|부터|처럼|보다|조차|마저|께|께서)[.!?,;:]?|[.!?,;:])',suffix):raise ValueError('Factual quotation cuts a word')
+     if not re.fullmatch(r'(?:(?:을|를|이|가|은|는|에|에서|에게|으로|로|와|과|의|께|께서)[.!?,;:]?|[.!?,;:])',suffix):raise ValueError('Factual quotation cuts a word')
      end=ending.end()
     pair=(starts[begin],ends[end])
     if pair in ranges:raise ValueError('Duplicate factual range')
