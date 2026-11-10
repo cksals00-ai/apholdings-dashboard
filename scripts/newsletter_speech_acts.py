@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-native-focused-pairs-v12'
+REVISION='source-blind-native-word-anchors-v13'
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
@@ -12,9 +12,11 @@ INTERNAL_KINDS={v:k for k,v in WIRE_KINDS.items()}
 REASON_LIMIT=200
 RULES="""Inventory factual premises ANYWHERE in each Korean sentence. Do NOT classify only the main speech act. Output factual_premise_present if ANY assertion or presupposition needs factual support, even inside a proposal, question or conditional. Output no_factual_premise when there is NO asserted/presupposed fact: this category includes pure proposals, hypotheticals, questions and checking instructions. These are not uncertain just because they are not assertions. Use uncertain only when you cannot determine factual scope; uncertainty blocks approval.
 A whether-question does not assert its answer; a hypothetical antecedent does not assert that its event happened. However, a definite noun phrase, factual relative clause or existing report can presuppose facts even when the main verb is a checking instruction or the main clause is conditional. Reports assert the report's existence and attributed content, not necessarily the truth of that content. Preserve negation, attribution and conditional scope.
-Select maximal self-contained factual constituents, including their subject/domain, quantifiers, qualifications, negation and report attribution/content. Never return a bare predicate that drops these parts, or a bare checking verb/report noun that omits reported content. Exclude outside proposed main actions, but retain original full-sentence context. Quote each factual constituent verbatim from the original sentence as text. Copy the complete factual phrase including its subject/domain and qualifiers. Preserve original particles and punctuation where present. A uniquely located noun phrase that ends before a Korean grammatical case particle is conservatively extended to the original whole word; lexical or negative endings are never guessed. Never calculate numeric offsets, translate, paraphrase, omit interior words, or change whitespace. The program maps unique literal quotations to exact WORD IDs; ambiguous quotations block approval. Cover each sentence exactly once. title/summary/fact cannot have no_factual_premise. First give one concise scope reason under200 characters, without repeating/translating the sentence; then choose kind and literal quotations. No source material or preferred answers are supplied."""
+Select maximal self-contained factual constituents including subject/domain, quantifiers, qualifications, negation and report attribution/content; exclude outside proposed main actions. For each premise select first_word_id and last_word_id directly from the displayed words list. These are provided word IDs, NOT character offsets or counts. Never generate or retype a quotation: the program copies the entire original words and intervening whitespace. Do not omit a domain, qualification, attribution or negation. For title/summary/fact identify the underlying factual headline/report content even when phrased as a noun phrase or infinitive; these fields cannot be exempted as nonfactual. Cover only the requested target once. Give one concise scope reason under200 characters without restating the format or hash; then kind and provided word anchors. No source material or preferred answers are supplied. Uncertainty blocks approval."""
 def focused_request(payload,row):
- request={'revision':REVISION,'context':payload,'sentences':[row]}
+ # Plain original context has no competing row lists or nested request hashes.
+ # Both target and full original draft participate in the one root hash.
+ request={'revision':REVISION,'sentences':[row],'context':payload['draft']}
  request['input_hash']=hashlib.sha256(json.dumps(request,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
  return request
 def classify(model,story):
@@ -24,11 +26,12 @@ def classify(model,story):
    matches=list(re.finditer(r'\S+',span['text']));offsets[(field,span['id'])]=matches
    words=[{'id':i,'text':m.group()} for i,m in enumerate(matches)]
    rows.append({'field':field,'id':span['id'],'text':span['text'],'words':words})
- payload={'revision':REVISION,'sentences':rows}
+ payload={'revision':REVISION,'draft':{field:story[field] for field in FIELDS},'sentences':rows}
  payload['input_hash']=hashlib.sha256(json.dumps(payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
  branches=[]
  for row in rows:
-  range_schema=s.obj({'text':s.string(2000)})
+  ids=list(range(len(row['words'])))
+  range_schema=s.obj({'first_word_id':{'type':'integer','enum':ids},'last_word_id':{'type':'integer','enum':ids}})
   branches.append(s.obj({'reason':s.string(REASON_LIMIT),'field':{'type':'string','enum':[row['field']]},'id':{'type':'integer','enum':[row['id']]},'kind':{'type':'string','enum':list(WIRE_KINDS)},'premises':{'type':'array','maxItems':8,'items':range_schema}}))
  indexed={(r['field'],r['id']):r for r in rows}
  def normalize(raw,expected,request_hash):
@@ -44,22 +47,10 @@ def classify(model,story):
    if kind=='asserted_or_mixed' and not row['premises']:raise ValueError('Asserted premise inventory missing')
    ranges=[]
    for part in row['premises']:
-    if not isinstance(part,dict) or set(part)!={'text'} or not isinstance(part['text'],str) or not part['text']:raise ValueError('Invalid factual quotation')
-    sentence=indexed[key]['text'];quote=part['text']
-    positions=[m.start() for m in re.finditer('(?='+re.escape(quote)+')',sentence)]
-    if len(positions)!=1:raise ValueError('Factual quotation missing or ambiguous')
-    begin=positions[0];end=begin+len(quote)
-    matches=offsets[key]
-    starts={m.start():i for i,m in enumerate(matches)};ends={m.end():i for i,m in enumerate(matches)}
-    if begin not in starts:raise ValueError('Factual quotation cuts a word')
-    if end not in ends:
-     # Only a grammatical noun-case suffix may be restored. Never complete a
-     # lexical/negative predicate or guess a missing factual constituent.
-     ending=next((m for m in matches if m.start()<end<m.end()),None)
-     suffix=sentence[end:ending.end()] if ending else ''
-     if not re.fullmatch(r'(?:(?:을|를|이|가|은|는|에|에서|에게|으로|로|와|과|의|께|께서)[.!?,;:]?|[.!?,;:])',suffix):raise ValueError('Factual quotation cuts a word')
-     end=ending.end()
-    pair=(starts[begin],ends[end])
+    if not isinstance(part,dict) or set(part)!={'first_word_id','last_word_id'}:raise ValueError('Invalid factual word anchors')
+    begin,end=part['first_word_id'],part['last_word_id']
+    if type(begin)is not int or type(end)is not int or not 0<=begin<=end<len(offsets[key]):raise ValueError('Invalid factual word anchors')
+    pair=(begin,end)
     if pair in ranges:raise ValueError('Duplicate factual range')
     ranges.append(pair)
    out[key]=(kind,tuple(sorted(ranges)))
@@ -93,7 +84,7 @@ def classify(model,story):
    part={'sentence_id':row['id'],'text':text,'sentence_context':row['text'],'word_start':begin,'word_end':end};parts.append(part);facts[key[0]].append(part)
   inventory.append({'field':key[0],'id':key[1],'kind':kind,'premises':parts})
  issue=s.obj({'field':{'type':'string','enum':list(FIELDS)},'id':{'type':'integer','minimum':0},'reason':s.string(350)})
- audit_payload={'draft':payload,'inventory':[{**r,'kind':INTERNAL_KINDS[r['kind']]} for r in inventory]}
+ audit_payload={'draft':{k:v for k,v in payload.items() if k!='input_hash'},'inventory':[{**r,'kind':INTERNAL_KINDS[r['kind']]} for r in inventory]}
  audit_hash=hashlib.sha256(json.dumps(audit_payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest();audit_payload['input_hash']=audit_hash
  audit_schema=s.obj({'input_hash':{'type':'string','enum':[audit_hash]},'complete':{'type':'boolean'},'issues':{'type':'array','maxItems':10,'items':issue}})
  audit=model.ask('Independent source-blind assertion coverage auditor. '+RULES+' Check the proposed inventory against original full sentences, without trusting the two analysts. Reject any omitted factual premise or presupposition, lost negation/conditional scope, or pure proposal misclassified as an assertion. Report exact field and sentence ID for each issue. No source data is supplied; do not ask whether a publisher mentions the company.',json.dumps(audit_payload,ensure_ascii=False),tokens=1600,schema=audit_schema)

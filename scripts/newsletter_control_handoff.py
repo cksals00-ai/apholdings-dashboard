@@ -24,7 +24,7 @@ def scope_payload(draft):
  for field in FIELDS:
   for span in request_for(field,draft[field],'source-blind')['spans']:
    rows.append({'field':field,'id':span['id'],'text':span['text'],'words':[{'id':i,'text':m.group()} for i,m in enumerate(re.finditer(r'\S+',span['text']))]})
- payload={'revision':REVISION,'sentences':rows}
+ payload={'revision':REVISION,'draft':{field:draft[field] for field in FIELDS},'sentences':rows}
  payload['input_hash']=hashlib.sha256(json.dumps(payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
  return payload
 def scope_hash(draft):return scope_payload(draft)['input_hash']
