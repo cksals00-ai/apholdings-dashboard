@@ -16,6 +16,7 @@ def run(runtime,folder,scope_only=False,historical_only=False):
  def save():(folder/'controls.json').write_text(json.dumps(state,ensure_ascii=False,indent=2))
  save()
  with TextModel(runtime,folder,profile='review') as model:
+  model.protocol_handshake()
   from newsletter_scope_controls import check
   if not historical_only:check(model,folder)
   if not scope_only:verify_controls(model,state,save)
