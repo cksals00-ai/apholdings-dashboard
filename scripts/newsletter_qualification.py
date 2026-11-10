@@ -1,5 +1,6 @@
 """Fail-closed server rollout: current runtime needs a real recovered full rehearsal."""
 import argparse,base64,json,os,re,subprocess
+from datetime import datetime
 REPO='cksals00-ai/apholdings-dashboard'
 WORKER='.github/workflows/ap-news-produce.yml'
 REHEARSAL='.github/workflows/ap-news-production-rehearsal.yml'
@@ -10,6 +11,13 @@ def runtime_pin(text):
 def evaluate(run,current_worker,tested_worker,expected,run_id):
  if (run.get('id')!=run_id or run.get('status')!='completed' or run.get('conclusion')!='success' or run.get('head_branch')!='main' or run.get('event')!='workflow_dispatch' or run.get('path','').split('@')[0]!=REHEARSAL or run.get('run_attempt',0)<2 or run.get('triggering_actor',{}).get('login')!='github-actions[bot]'):
   raise ValueError('Full server qualification is not yet successful with automatic recovery: '+str(run.get('status'))+'/'+str(run.get('conclusion')))
+ try:
+  start=datetime.fromisoformat(run['created_at'].replace('Z','+00:00'))
+  end=datetime.fromisoformat(run['updated_at'].replace('Z','+00:00'))
+  if start.tzinfo is None or end.tzinfo is None:raise ValueError('Unzoned qualification time')
+  elapsed=(end-start).total_seconds()
+ except (KeyError,TypeError,AttributeError,ValueError) as exc:raise ValueError('Qualification elapsed time is unknown') from exc
+ if not 0<elapsed<=4*3600+10*60:raise ValueError('Full rehearsal exceeds the4h10m wall-clock production budget; morning deadline is not qualified')
  if current_worker!=tested_worker:raise ValueError('Producer workflow differs from the rehearsed workflow')
  if runtime_pin(current_worker)!=expected or runtime_pin(tested_worker)!=expected:raise ValueError('Current producer runtime differs from qualified runtime')
  return True
