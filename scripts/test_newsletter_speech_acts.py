@@ -12,7 +12,7 @@ class SpeechActTests(unittest.TestCase):
    for row in q['sentences']:
     pure=row['field'] in ('insight','action')
     if disagree and len(calls)==2 and row['field']=='action':pure=False
-    rows.append({'field':row['field'],'id':row['id'],'kind':'no_factual_premise' if pure else 'factual_premise_present','premises':[] if pure else [{'start':0,'end':len(row['words'])-1}],'reason':'Pure hypothetical proposal with no asserted outcome.' if pure else 'Sentence asserts a factual announcement.'})
+    rows.append({'field':row['field'],'id':row['id'],'kind':'no_factual_premise' if pure else 'factual_premise_present','premises':[] if pure else [{'text':row['text']}],'reason':'Pure hypothetical proposal with no asserted outcome.' if pure else 'Sentence asserts a factual announcement.'})
    return {'input_hash':q['input_hash'],'sentences':rows}
   model=Mock();model.ask.side_effect=ask;return model,calls
  def story(self):return {'title':'공식 기능 발표','summary':'새 기능을 발표했다.','fact':'공식 기능을 제공한다.','insight':'AP가 설계한다면 권한을 나누자.','action':'제공 지역을 확인한다.'}
@@ -49,10 +49,10 @@ class InvalidInventoryTests(unittest.TestCase):
   def boolean_id(x):x['sentences'][0]['id']=True
   def uncertain(x):x['sentences'][0]['kind']='uncertain'
   def pure_fact(x):x['sentences'][0].update(kind='no_factual_premise',premises=[])
-  def pure_with_fact(x):x['sentences'][-1]['premises']=[{'start':0,'end':0}]
+  def pure_with_fact(x):x['sentences'][-1]['premises']=[{'text':'공식'}]
   def missing_fact(x):x['sentences'][0]['premises']=[]
-  def bool_range(x):x['sentences'][0]['premises'][0]['end']=True
-  def reversed_range(x):x['sentences'][0]['premises']=[{'start':1,'end':0}]
+  def bool_range(x):x['sentences'][0]['premises'][0]['text']=True
+  def reversed_range(x):x['sentences'][0]['premises']=[{'text':'발표 기능 공식'}]
   def stale(x):x['input_hash']='stale'
   for mutate in (missing,duplicate,boolean_id,uncertain,pure_fact,pure_with_fact,missing_fact,bool_range,reversed_range,stale):
    with self.subTest(mutation=mutate.__name__):
@@ -67,7 +67,7 @@ class InvalidInventoryTests(unittest.TestCase):
   def changed(role,question,**kw):
    raw=answer(role,question,**kw)
    if 'sentences' in raw:
-    row=next(x for x in raw['sentences'] if x['field']=='action');row.update(kind='factual_premise_present',premises=[{'start':1,'end':4}])
+    row=next(x for x in raw['sentences'] if x['field']=='action');row.update(kind='factual_premise_present',premises=[{'text':'모든 학생에게 효과가 입증된'}])
    return raw
   model.ask.side_effect=changed;out=classify(model,story);part=out['facts']['action'][0]
   self.assertEqual(part['text'],'모든 학생에게 효과가 입증된');self.assertEqual(part['sentence_context'],story['action'])
@@ -123,7 +123,7 @@ class WordIdProtocolTests(unittest.TestCase):
      self.assertTrue(all(set(w)=={'id','text'} for w in row['words']))
     branches=kw['schema']['properties']['sentences']['items']['anyOf']
     title=next(b for b in branches if b['properties']['field']['enum']==['title'])
-    self.assertEqual(title['properties']['premises']['items']['properties']['end']['enum'],[0,1,2])
+    self.assertEqual(set(title['properties']['premises']['items']['properties']),{'text'})
    return base(role,question,**kw)
   model.ask.side_effect=answer
   classify(model,SpeechActTests().story())
@@ -137,3 +137,29 @@ class UncertaintyPolicyTests(unittest.TestCase):
    return raw
   model.ask.side_effect=changed
   with self.assertRaisesRegex(ValueError,'Uncertain'):classify(model,SpeechActTests().story())
+
+class VerbatimMappingTests(unittest.TestCase):
+ def test_quotes_map_to_exact_word_ids_without_counting_by_the_model(self):
+  story=SpeechActTests().story();story['action']='도입한다면 모든 학생에게 효과가 입증된 기능을 쓰자.'
+  model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+  def answer(role,question,**kw):
+   raw=base(role,question,**kw)
+   if 'sentences' in raw:
+    row=next(x for x in raw['sentences'] if x['field']=='action');row.update(kind='factual_premise_present',premises=[{'text':'모든 학생에게 효과가 입증된 기능을'}])
+   return raw
+  model.ask.side_effect=answer;part=classify(model,story)['facts']['action'][0]
+  self.assertEqual((part['word_start'],part['word_end']),(1,5));self.assertEqual(part['text'],'모든 학생에게 효과가 입증된 기능을')
+ def test_nonliteral_ambiguous_and_partial_word_quotes_fail_closed(self):
+  for quote in ('공식 기능 발명','식 기능','공식  기능 발표'):
+   with self.subTest(quote=quote):
+    model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+    def answer(role,question,**kw):
+     raw=base(role,question,**kw);raw['sentences'][0]['premises']=[{'text':quote}];return raw
+    model.ask.side_effect=answer
+    with self.assertRaises(ValueError):classify(model,SpeechActTests().story())
+  story=SpeechActTests().story();story['title']='공식 기능 공식 기능'
+  model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+  def answer(role,question,**kw):
+   raw=base(role,question,**kw);raw['sentences'][0]['premises']=[{'text':'공식 기능'}];return raw
+  model.ask.side_effect=answer
+  with self.assertRaisesRegex(ValueError,'ambiguous'):classify(model,story)

@@ -4,7 +4,7 @@ from pathlib import Path
 import newsletter as b
 import newsletter_server as publisher
 
-QA_REVISION=6
+QA_REVISION=7
 
 def compact(value):return re.sub(r'\s+','',value)
 def check_pdf(issue,folder):
