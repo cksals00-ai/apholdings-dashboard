@@ -11,7 +11,7 @@ REVIEW_REV=ART_REV
 ART_SHA256='327c6e0826bee8f19172e96c94bb7bba385f7a39d08314803652df9942401c4f'
 REVIEW_SHA256='13ae55e8eba134355c43e6d3b192b5b85b265efbda5542b48da11a868a5b86c3'
 TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'review':(REVIEW_REPO,REVIEW_REV,'Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_S.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_M.gguf',8192)}
-PROMPT_CACHE_REVISION=26
+PROMPT_CACHE_REVISION=27
 REQUEST_TIMEOUTS={'copy':1500,'art':1500,'review':3600}
 IMAGE_REPO='segmind/SSD-1B'
 IMAGE_REV='60987f37e94cd59c36b1cba832b9f97b57395a10'
@@ -82,7 +82,7 @@ class TextModel:
   output=self.folder/'model-outputs';output.mkdir(exist_ok=True)
   prompt_hash=hashlib.sha256((self.profile+'\n'+phase+'\n'+prompt).encode()).hexdigest()
   weights=REVIEW_SHA256 if self.profile=='review' else ART_SHA256 if self.profile=='art' else None
-  result['_ap_runtime']={'prompt_sha256':prompt_hash,'profile':self.profile,'phase':phase,'prompt_cache_revision':PROMPT_CACHE_REVISION,'repository':TEXT_PROFILES[self.profile][0],'revision':TEXT_PROFILES[self.profile][1],'weights_sha256':weights,'server_slots':1,'context_per_slot':TEXT_PROFILES[self.profile][3],'native_reasoning':self.native_reasoning,'protocol':'qwen3-moe-instruct-v1' if self.profile=='review' else 'qwen-chatml','reasoning_effort':effort if self.profile=='review' else None,'sampling':sampling_options(self.profile,self.native_reasoning)}
+  result['_ap_runtime']={'prompt_sha256':prompt_hash,'profile':self.profile,'phase':phase,'prompt_cache_revision':PROMPT_CACHE_REVISION,'repository':TEXT_PROFILES[self.profile][0],'revision':TEXT_PROFILES[self.profile][1],'weights_sha256':weights,'server_slots':1,'context_per_slot':TEXT_PROFILES[self.profile][3],'native_reasoning':self.native_reasoning,'protocol':'qwen3-moe-instruct-v2-schema' if self.profile=='review' else 'qwen-chatml','reasoning_effort':effort if self.profile=='review' else None,'sampling':sampling_options(self.profile,self.native_reasoning)}
   (output/(prompt_hash[:16]+'-'+str(time.time_ns())+'.json')).write_text(json.dumps(result,ensure_ascii=False,indent=2))
   if result.get('truncated') is True:raise ValueError('Model context was truncated; complete evidence required')
   if result.get('stopped_limit') or result.get('stop_type')=='limit':raise ValueError('Model generation reached token limit')
@@ -90,6 +90,9 @@ class TextModel:
  def ask(self,system,question,tokens=1400,schema=None,source_context=None,comparison_context=None,reasoning_effort='low'):
   if self.profile=='review' and reasoning_effort not in ('low','instruct-only'):raise ValueError('Pinned reviewer is native instruct-only')
   if self.profile!='review' and reasoning_effort!='low':raise ValueError('Review effort is review-only')
+  if self.profile=='review':
+   declared=json.dumps(schema or {'type':'object'},ensure_ascii=False,separators=(',',':')).replace('<|','<\u200b|').replace('<think>','<\u200bthink>').replace('</think>','</\u200bthink>').replace('<tool_call>','<\u200btool_call>').replace('</tool_call>','</\u200btool_call>')
+   system+='\nNo tools are available. Return exactly one JSON instance satisfying the Response schema below, never the schema itself. Decide scope from the original target and complete context before emitting the instance.\nResponse schema:\n'+declared
   original=completion_prompt(system,question,source_context,comparison_context,instruct_only=self.profile in ('art','review'))
   stops=['<|im_end|>','<|im_start|>','<tool_call>','<think>'] if self.profile=='review' else None
   answer=self._complete(original,tokens,schema=schema or {'type':'object'},stop=stops,phase='answer',effort='instruct-only')
@@ -103,7 +106,7 @@ class TextModel:
   schema={'type':'object','properties':{'protocol_ok':{'type':'boolean','enum':[True]}},'required':['protocol_ok'],'additionalProperties':False}
   result=self.ask('Verify only native response completion. This is not a semantic or source-quality control.','Return the protocol_ok field in the declared response format.',tokens=80,schema=schema,reasoning_effort='instruct-only')
   if result!={'protocol_ok':True}:raise ValueError('Native protocol handshake failed')
-  proof={'protocol':'qwen3-moe-instruct-v1','model_revision':REVIEW_REV,'weights_sha256':REVIEW_SHA256,'reasoning_effort':'instruct-only','actual_eos_id':151645,'semantic_qualification':False}
+  proof={'protocol':'qwen3-moe-instruct-v2-schema','model_revision':REVIEW_REV,'weights_sha256':REVIEW_SHA256,'reasoning_effort':'instruct-only','actual_eos_id':151645,'semantic_qualification':False}
   (self.folder/'protocol-handshake.json').write_text(json.dumps(proof,indent=2)+'\n')
 
 class ImageModel:

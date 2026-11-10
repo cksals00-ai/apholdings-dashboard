@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-moe-word-scope-v21'
+REVISION='source-blind-schema-aware-word-scope-v22'
 REASONING_EFFORT='instruct-only'
 ROLES=('Independent complete factual-content reviewer A. ','Independent complete factual-content reviewer B. ')
 # The legacy internal label denotes ALL certified nonfactual editorial content.
