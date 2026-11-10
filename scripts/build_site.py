@@ -306,3 +306,7 @@ _b2b_apps_apply()
 
 # Preserve verified Android release links after page generation.
 import apply_google_release_links
+
+# Preserve verified free-app installation links.
+from apply_free_app_promo import apply as _free_app_promo_apply
+_free_app_promo_apply()
