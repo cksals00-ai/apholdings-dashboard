@@ -45,3 +45,11 @@ class VerifiedControlHandoffTests(unittest.TestCase):
    draft['mode']='production';state.write_text(json.dumps(draft));before=state.read_bytes()
    with self.assertRaises(ValueError):h.install(root,'2026-11-10','999',{},{} )
    self.assertEqual(state.read_bytes(),before)
+
+ def test_raw_control_evidence_is_preserved_with_the_private_test_checkpoint(self):
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder)/'test';state=root/'.production-state/draft.json';state.parent.mkdir(parents=True)
+   state.write_text(json.dumps({'date':'2026-11-10','mode':'test','asset_day':'2026-11-10-test-999'}))
+   evidence=Path(folder)/'evidence';raw=evidence/'scope/model-outputs/raw.json';raw.parent.mkdir(parents=True);raw.write_bytes(b'actual native receipt')
+   h.install(root,'2026-11-10','999',{}, {'source_run':123},evidence=evidence)
+   self.assertEqual((root/'.production-state/qualified-control-evidence/scope/model-outputs/raw.json').read_bytes(),raw.read_bytes())
