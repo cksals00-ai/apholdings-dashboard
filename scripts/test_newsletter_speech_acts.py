@@ -10,21 +10,22 @@ class SpeechActTests(unittest.TestCase):
    if 'complete' in kw['schema']['properties']:return {'input_hash':q['input_hash'],'complete':not omission,'issues':[] if not omission else [{'field':'action','id':0,'reason':'Recognition presupposition omitted from the inventory.'}]}
    rows=[]
    for row in q['sentences']:
+    if q.get('target') and (row['field'],row['id'])!=(q['target']['field'],q['target']['id']):continue
     pure=row['field'] in ('insight','action')
-    if disagree and len(calls)==2 and row['field']=='action':pure=False
+    if disagree and len(calls)>len(q['sentences']) and row['field']=='action':pure=False
     rows.append({'field':row['field'],'id':row['id'],'kind':'no_factual_premise' if pure else 'factual_premise_present','premises':[] if pure else [{'text':row['text']}],'reason':'Pure hypothetical proposal with no asserted outcome.' if pure else 'Sentence asserts a factual announcement.'})
    return {'input_hash':q['input_hash'],'sentences':rows}
   model=Mock();model.ask.side_effect=ask;return model,calls
  def story(self):return {'title':'공식 기능 발표','summary':'새 기능을 발표했다.','fact':'공식 기능을 제공한다.','insight':'AP가 설계한다면 권한을 나누자.','action':'제공 지역을 확인한다.'}
  def test_source_blind_independent_passes_and_coverage_keep_draft(self):
   model,calls=self.setup_model();story=self.story();before=copy.deepcopy(story);out=classify(model,story)
-  self.assertEqual(story,before);self.assertEqual(model.ask.call_count,3)
-  self.assertEqual(calls[0],calls[1]);self.assertNotIn('inventory',calls[1])
+  self.assertEqual(story,before);self.assertEqual(model.ask.call_count,11)
+  self.assertEqual(calls[:5],calls[5:10]);self.assertTrue(all('inventory' not in x for x in calls[:10]))
   self.assertEqual(out['facts']['title'][0]['text'],'공식 기능 발표');self.assertEqual(out['facts']['action'],[])
  def test_disagreement_cannot_exempt_a_sentence(self):
   model,_=self.setup_model(disagree=True)
   with self.assertRaisesRegex(ValueError,'disagreement'):classify(model,self.story())
-  self.assertEqual(model.ask.call_count,2)
+  self.assertEqual(model.ask.call_count,10)
  def test_coverage_omission_blocks_even_when_both_classifiers_agree(self):
   model,_=self.setup_model(omission=True)
   with self.assertRaisesRegex(ValueError,'coverage'):classify(model,self.story())
@@ -49,7 +50,7 @@ class InvalidInventoryTests(unittest.TestCase):
   def boolean_id(x):x['sentences'][0]['id']=True
   def uncertain(x):x['sentences'][0]['kind']='uncertain'
   def pure_fact(x):x['sentences'][0].update(kind='no_factual_premise',premises=[])
-  def pure_with_fact(x):x['sentences'][-1]['premises']=[{'text':'공식'}]
+  def pure_with_fact(x):x['sentences'][-1].update(kind='no_factual_premise',premises=[{'text':'공식'}])
   def missing_fact(x):x['sentences'][0]['premises']=[]
   def bool_range(x):x['sentences'][0]['premises'][0]['text']=True
   def reversed_range(x):x['sentences'][0]['premises']=[{'text':'발표 기능 공식'}]
@@ -67,7 +68,8 @@ class InvalidInventoryTests(unittest.TestCase):
   def changed(role,question,**kw):
    raw=answer(role,question,**kw)
    if 'sentences' in raw:
-    row=next(x for x in raw['sentences'] if x['field']=='action');row.update(kind='factual_premise_present',premises=[{'text':'모든 학생에게 효과가 입증된'}])
+    row=next((x for x in raw['sentences'] if x['field']=='action'),None)
+    if row is not None:row.update(kind='factual_premise_present',premises=[{'text':'모든 학생에게 효과가 입증된'}])
    return raw
   model.ask.side_effect=changed;out=classify(model,story);part=out['facts']['action'][0]
   self.assertEqual(part['text'],'모든 학생에게 효과가 입증된');self.assertEqual(part['sentence_context'],story['action'])
@@ -122,8 +124,8 @@ class WordIdProtocolTests(unittest.TestCase):
     for row in q['sentences']:
      self.assertTrue(all(set(w)=={'id','text'} for w in row['words']))
     branches=kw['schema']['properties']['sentences']['items']['anyOf']
-    title=next(b for b in branches if b['properties']['field']['enum']==['title'])
-    self.assertEqual(set(title['properties']['premises']['items']['properties']),{'text'})
+    target=branches[0]
+    self.assertEqual(set(target['properties']['premises']['items']['properties']),{'text'})
    return base(role,question,**kw)
   model.ask.side_effect=answer
   classify(model,SpeechActTests().story())
@@ -145,7 +147,8 @@ class VerbatimMappingTests(unittest.TestCase):
   def answer(role,question,**kw):
    raw=base(role,question,**kw)
    if 'sentences' in raw:
-    row=next(x for x in raw['sentences'] if x['field']=='action');row.update(kind='factual_premise_present',premises=[{'text':'모든 학생에게 효과가 입증된 기능을'}])
+    row=next((x for x in raw['sentences'] if x['field']=='action'),None)
+    if row is not None:row.update(kind='factual_premise_present',premises=[{'text':'모든 학생에게 효과가 입증된 기능을'}])
    return raw
   model.ask.side_effect=answer;part=classify(model,story)['facts']['action'][0]
   self.assertEqual((part['word_start'],part['word_end']),(1,5));self.assertEqual(part['text'],'모든 학생에게 효과가 입증된 기능을')
@@ -171,7 +174,8 @@ class KoreanParticleAlignmentTests(unittest.TestCase):
   def answer(role,question,**kw):
    raw=base(role,question,**kw)
    if 'sentences' in raw:
-    row=next(x for x in raw['sentences'] if x['field']=='action');row.update(kind='factual_premise_present',premises=[{'text':'학습 효과가 입증되지 않았다는 보고'}])
+    row=next((x for x in raw['sentences'] if x['field']=='action'),None)
+    if row is not None:row.update(kind='factual_premise_present',premises=[{'text':'학습 효과가 입증되지 않았다는 보고'}])
    else:
     q=json.loads(question);part=next(x for x in q['inventory'] if x['field']=='action')['premises'][0]
     self.assertEqual(part['text'],'학습 효과가 입증되지 않았다는 보고를')
@@ -183,7 +187,7 @@ class KoreanParticleAlignmentTests(unittest.TestCase):
   model,_=SpeechActTests().setup_model();base=model.ask.side_effect
   def answer(role,question,**kw):
    raw=base(role,question,**kw)
-   if 'sentences' in raw:next(x for x in raw['sentences'] if x['field']=='fact')['premises']=[{'text':'기능을 제공'}]
+   if 'sentences' in raw and raw['sentences'][0]['field']=='fact':raw['sentences'][0]['premises']=[{'text':'기능을 제공'}]
    return raw
   model.ask.side_effect=answer
   with self.assertRaisesRegex(ValueError,'cuts a word'):classify(model,story)
@@ -193,7 +197,7 @@ class TerminalPunctuationAlignmentTests(unittest.TestCase):
   story=SpeechActTests().story();model,_=SpeechActTests().setup_model();base=model.ask.side_effect
   def answer(role,question,**kw):
    raw=base(role,question,**kw)
-   if 'sentences' in raw:next(x for x in raw['sentences'] if x['field']=='fact')['premises']=[{'text':'공식 기능을 제공한다'}]
+   if 'sentences' in raw and raw['sentences'][0]['field']=='fact':raw['sentences'][0]['premises']=[{'text':'공식 기능을 제공한다'}]
    return raw
   model.ask.side_effect=answer;self.assertEqual(classify(model,story)['facts']['fact'][0]['text'],'공식 기능을 제공한다.')
 
@@ -204,22 +208,41 @@ class QuantifierScopeAgreementTests(unittest.TestCase):
   def answer(role,question,**kw):
    nonlocal count
    raw=base(role,question,**kw)
-   if 'sentences' in raw:
-    count+=1;row=next(x for x in raw['sentences'] if x['field']=='action')
+   if 'sentences' in raw and raw['sentences'][0]['field']=='action':
+    count+=1;row=raw['sentences'][0]
     row.update(kind='factual_premise_present',premises=[{'text':'학생에게 효과가 입증된 기능' if count==1 else '모든 학생에게 효과가 입증된 기능을'}])
    return raw
   model.ask.side_effect=answer
   with self.assertRaisesRegex(ValueError,'disagreement'):classify(model,story)
-  self.assertEqual(model.ask.call_count,2)
+  self.assertEqual(model.ask.call_count,10)
  def test_case_particle_variants_agree_only_on_the_exact_original_whole_words(self):
   story=SpeechActTests().story();story['action']='AP가 얻은 기회를 활용한다.'
   model,_=SpeechActTests().setup_model();base=model.ask.side_effect;count=0
   def answer(role,question,**kw):
    nonlocal count
    raw=base(role,question,**kw)
-   if 'sentences' in raw:
-    count+=1;row=next(x for x in raw['sentences'] if x['field']=='action')
+   if 'sentences' in raw and raw['sentences'][0]['field']=='action':
+    count+=1;row=raw['sentences'][0]
     row.update(kind='factual_premise_present',premises=[{'text':'AP가 얻은 기회' if count==1 else 'AP가 얻은 기회를'}])
    return raw
   model.ask.side_effect=answer;part=classify(model,story)['facts']['action'][0]
-  self.assertEqual(part['text'],'AP가 얻은 기회를');self.assertEqual((part['word_start'],part['word_end']),(0,2));self.assertEqual(model.ask.call_count,3)
+  self.assertEqual(part['text'],'AP가 얻은 기회를');self.assertEqual((part['word_start'],part['word_end']),(0,2));self.assertEqual(model.ask.call_count,11)
+
+class FocusedIndependentInventoryTests(unittest.TestCase):
+ def test_each_sentence_gets_two_focused_blind_decisions_before_global_audit(self):
+  story=SpeechActTests().story();calls=[];model=Mock()
+  def answer(role,question,**kw):
+   q=json.loads(question);calls.append(q)
+   self.assertNotIn('source_context',kw);self.assertNotIn('comparison_context',kw)
+   if 'complete' in kw['schema']['properties']:
+    self.assertEqual(len(calls),11)
+    return {'input_hash':q['input_hash'],'complete':True,'issues':[]}
+   target=q['target'];row=next(x for x in q['sentences'] if (x['field'],x['id'])==(target['field'],target['id']))
+   self.assertNotIn('inventory',q);self.assertNotIn('decisions',q)
+   self.assertEqual(len(q['sentences']),5)
+   self.assertEqual(kw['schema']['properties']['sentences']['minItems'],1)
+   pure=row['field'] in ('insight','action')
+   return {'input_hash':q['input_hash'],'sentences':[{'field':row['field'],'id':row['id'],'kind':'no_factual_premise' if pure else 'factual_premise_present','premises':[] if pure else [{'text':row['text']}],'reason':'No factual premise in this checking instruction.' if pure else 'This is an asserted factual announcement.'}]}
+  model.ask.side_effect=answer;receipt=classify(model,story)
+  self.assertEqual(calls[:5],calls[5:10]);self.assertEqual(len(receipt['independent_decisions']),2)
+  self.assertTrue(all(len(v)==5 for v in receipt['independent_decisions']))

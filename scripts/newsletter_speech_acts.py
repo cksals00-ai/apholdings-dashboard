@@ -3,7 +3,7 @@ import hashlib,json,re
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-verbatim-v5'
+REVISION='source-blind-focused-verbatim-v6'
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
@@ -25,11 +25,9 @@ def classify(model,story):
  for row in rows:
   range_schema=s.obj({'text':s.string(2000)})
   branches.append(s.obj({'reason':s.string(REASON_LIMIT),'field':{'type':'string','enum':[row['field']]},'id':{'type':'integer','enum':[row['id']]},'kind':{'type':'string','enum':list(WIRE_KINDS)},'premises':{'type':'array','maxItems':8,'items':range_schema}}))
- item={'anyOf':branches}
- schema=s.obj({'input_hash':{'type':'string','enum':[payload['input_hash']]},'sentences':{'type':'array','minItems':len(rows),'maxItems':len(rows),'items':item}})
  indexed={(r['field'],r['id']):r for r in rows}
- def normalize(raw):
-  if not isinstance(raw,dict) or set(raw)!={'input_hash','sentences'} or raw['input_hash']!=payload['input_hash'] or not isinstance(raw['sentences'],list):raise ValueError('Stale speech-act inventory')
+ def normalize(raw,expected,request_hash):
+  if not isinstance(raw,dict) or set(raw)!={'input_hash','sentences'} or raw['input_hash']!=request_hash or not isinstance(raw['sentences'],list):raise ValueError('Stale speech-act inventory')
   out={}
   for row in raw['sentences']:
    if not isinstance(row,dict) or set(row)!={'field','id','kind','premises','reason'} or not isinstance(row['field'],str) or type(row['id'])is not int:raise ValueError('Malformed speech-act inventory')
@@ -39,7 +37,7 @@ def classify(model,story):
    if kind=='uncertain':raise ValueError('Uncertain speech act')
    if kind=='pure_proposal' and (row['field'] in ('title','summary','fact') or row['premises']):raise ValueError('Invalid pure-proposal exemption')
    if kind=='asserted_or_mixed' and not row['premises']:raise ValueError('Asserted premise inventory missing')
-   ranges=[];words=indexed[key]['words']
+   ranges=[]
    for part in row['premises']:
     if not isinstance(part,dict) or set(part)!={'text'} or not isinstance(part['text'],str) or not part['text']:raise ValueError('Invalid factual quotation')
     sentence=indexed[key]['text'];quote=part['text']
@@ -60,12 +58,20 @@ def classify(model,story):
     if pair in ranges:raise ValueError('Duplicate factual range')
     ranges.append(pair)
    out[key]=(kind,tuple(sorted(ranges)))
-  if set(out)!=set(indexed):raise ValueError('Speech-act coverage incomplete')
+  if set(out)!=expected:raise ValueError('Speech-act coverage incomplete')
   return out
  raw=[];votes=[]
  for role in ('Independent speech-act analyst. ','Independent presupposition and scope analyst. '):
-  answer=model.ask(role+RULES,json.dumps(payload,ensure_ascii=False),tokens=2600,schema=schema)
-  raw.append(answer);votes.append(normalize(answer))
+  pass_raw=[];pass_votes={}
+  for row,branch in zip(rows,branches):
+   key=(row['field'],row['id'])
+   focused={**payload,'draft_hash':payload['input_hash'],'target':{'field':key[0],'id':key[1]}}
+   focused.pop('input_hash')
+   focused['input_hash']=hashlib.sha256(json.dumps(focused,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+   schema=s.obj({'input_hash':{'type':'string','enum':[focused['input_hash']]},'sentences':{'type':'array','minItems':1,'maxItems':1,'items':{'anyOf':[branch]}}})
+   answer=model.ask(role+RULES+' Assess ONLY the target sentence. Other original sentences supply linguistic context, never another reviewer answer. Return exactly one decision for target, including ALL of its factual qualifiers and factual constituents.',json.dumps(focused,ensure_ascii=False),tokens=700,schema=schema)
+   pass_raw.append(answer);pass_votes.update(normalize(answer,{key},focused['input_hash']))
+  raw.append(pass_raw);votes.append(pass_votes)
  if votes[0]!=votes[1]:raise ValueError('Independent speech-act disagreement')
  inventory=[];facts={f:[] for f in FIELDS}
  for key,(kind,ranges) in votes[0].items():
