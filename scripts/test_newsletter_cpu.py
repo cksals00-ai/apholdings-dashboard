@@ -111,7 +111,7 @@ class ThinkingWeightsIdentityTests(unittest.TestCase):
    root=Path(folder);(root/'llama-server').touch();download=Mock(return_value='/tmp/thinking.gguf');process=Mock();process.wait.return_value=0
    with patch.dict(sys.modules,{'huggingface_hub':types.SimpleNamespace(hf_hub_download=download)}),patch.object(c,'verify_weights') as verify,patch.object(c.subprocess,'Popen',return_value=process),patch.object(c.urllib.request,'urlopen',return_value=types.SimpleNamespace(status=200)):
     with c.TextModel(root,root,profile='review'):pass
-   self.assertIn('Qwen3.5-9B',download.call_args.args[0]);self.assertIn('Qwen3.5-9B-Q6_K',download.call_args.args[1]);self.assertFalse(download.call_args.kwargs['token'])
+   self.assertIn('Qwen3.5-27B',download.call_args.args[0]);self.assertIn('Qwen3.5-27B-Q3_K_S',download.call_args.args[1]);self.assertFalse(download.call_args.kwargs['token'])
    self.assertTrue(str(download.call_args.kwargs['cache_dir']).endswith('/ap-news-text/review'));verify.assert_called_once_with('/tmp/thinking.gguf',c.REVIEW_SHA256)
    self.assertNotEqual(c.REVIEW_SHA256,c.ART_SHA256)
 
@@ -127,13 +127,13 @@ class ContextLossTests(unittest.TestCase):
     self.assertEqual(len(list((Path(folder)/'model-outputs').glob('*.json'))),call.call_count)
 
 class DenseVerifierCandidateTests(unittest.TestCase):
- def test_review_uses_higher_precision_dense_candidate_with_immutable_identity(self):
+ def test_review_pins_larger_dense_candidate_and_bounded_complete_context(self):
   import newsletter_cpu as c
   repo,rev,file,ctx=c.TEXT_PROFILES['review']
-  self.assertEqual(repo,'bartowski/Qwen_Qwen3.5-9B-GGUF')
-  self.assertEqual(rev,'182be2fd6c7bc44887d88a91cb03ff009cc9f549')
-  self.assertEqual(file,'Qwen_Qwen3.5-9B-Q6_K.gguf');self.assertEqual(ctx,32768)
-  self.assertEqual(c.REVIEW_SHA256,'073a9275e65d9c8cd2819cf5f77b99fbaa6e87ba591da6bbaa86ec073a64bfef')
+  self.assertEqual(repo,'bartowski/Qwen_Qwen3.5-27B-GGUF')
+  self.assertEqual(rev,'d7b113c40283f4d99f4eb0ec20d126ad653cc736')
+  self.assertEqual(file,'Qwen_Qwen3.5-27B-Q3_K_S.gguf');self.assertEqual(ctx,16384)
+  self.assertEqual(c.REVIEW_SHA256,'7780eb402494b01986570fb576be478141c0cc554f6f9df1bb456704bfc3c36a')
   self.assertEqual(c.sampling_options('review')['temperature'],0.7);self.assertEqual(c.sampling_options('review',native_reasoning=True)['temperature'],1.0)
 
 class ReasoningOutputContractTests(unittest.TestCase):
