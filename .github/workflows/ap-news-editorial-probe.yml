@@ -35,8 +35,9 @@ jobs:
           sudo rm -rf /usr/local/lib/android /usr/share/dotnet
           pip install -r requirements-newsletter-server.txt beautifulsoup4==4.13.3 huggingface-hub==0.28.1
           mkdir -p .cpu-runtime .control-probe
-          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b5401/llama-b5401-bin-ubuntu-x64.zip -o "$RUNNER_TEMP/llama.zip"
-          unzip -q "$RUNNER_TEMP/llama.zip" -d .cpu-runtime
+          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b12244/llama-b12244-bin-ubuntu-x64.tar.gz -o "$RUNNER_TEMP/llama.tar.gz"
+          echo "c1d7e7f31b5c43f3e5d44f667b4d57104217be3e5f2060320cd3735651238849  $RUNNER_TEMP/llama.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/llama.tar.gz" -C .cpu-runtime
       - name: Verify ${{ matrix.mode }} controls on native-thinking CPU verifier
         run: python scripts/newsletter_control_probe.py --runtime .cpu-runtime --folder .control-probe ${{ matrix.flag }}
       - name: Preserve private decisions and model receipts

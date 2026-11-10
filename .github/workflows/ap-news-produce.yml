@@ -111,8 +111,9 @@ jobs:
           pip install -r .production-runtime/requirements-newsletter-producer.txt
           python -m playwright install --with-deps chromium
           mkdir -p .cpu-runtime
-          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b5401/llama-b5401-bin-ubuntu-x64.zip -o "$RUNNER_TEMP/llama.zip"
-          unzip -q "$RUNNER_TEMP/llama.zip" -d .cpu-runtime
+          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b12244/llama-b12244-bin-ubuntu-x64.tar.gz -o "$RUNNER_TEMP/llama.tar.gz"
+          echo "c1d7e7f31b5c43f3e5d44f667b4d57104217be3e5f2060320cd3735651238849  $RUNNER_TEMP/llama.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/llama.tar.gz" -C .cpu-runtime
       - name: Test reviewed producer and publisher gates
         if: ${{ steps.gate.outputs.produce == 'true' }}
         working-directory: .production-runtime

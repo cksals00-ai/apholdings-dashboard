@@ -30,7 +30,7 @@ class PromptTests(unittest.TestCase):
    self.assertEqual(len(download.call_args.kwargs['revision']),40)
    self.assertTrue(str(download.call_args.kwargs['cache_dir']).endswith('/ap-news-text/art'))
    command=launch.call_args.args[0];self.assertEqual(command[command.index('-c')+1],'8192');self.assertEqual(command[command.index('-ngl')+1],'0')
-   self.assertNotIn('GH_TOKEN',launch.call_args.kwargs['env']);self.assertNotIn('PRIVATE_TEST_CREDENTIAL',launch.call_args.kwargs['env'])
+   self.assertEqual(command[command.index('--parallel')+1],'1');self.assertNotIn('GH_TOKEN',launch.call_args.kwargs['env']);self.assertNotIn('PRIVATE_TEST_CREDENTIAL',launch.call_args.kwargs['env'])
  def test_art_sampler_uses_official_non_thinking_quantized_guidance(self):
   self.assertEqual(sampling_options('art'),{'temperature':0.7,'top_p':0.8,'top_k':20,'min_p':0.0,'presence_penalty':1.5})
   self.assertEqual(sampling_options('copy'),{'temperature':0.2})
@@ -82,7 +82,7 @@ class NativeThinkingVerifierTests(unittest.TestCase):
     value=TextModel('.',folder,profile='review').ask('Check','Original input',schema={'type':'object'})
    self.assertEqual(value,{'supported':True});self.assertEqual(call.call_count,2)
    one,two=[json.loads(x.args[0].data) for x in call.call_args_list]
-   self.assertNotIn('json_schema',one);self.assertEqual(one['n_predict'],8192);self.assertEqual(one['presence_penalty'],1.0);self.assertEqual(two.get('presence_penalty',0),0);self.assertEqual(one['stop'],['</think>']);self.assertTrue(one['prompt'].endswith('<|im_start|>assistant\n<think>\n'));self.assertNotIn('/no_think',one['prompt'])
+   self.assertNotIn('json_schema',one);self.assertEqual(one['n_predict'],8192);self.assertEqual(one['presence_penalty'],1.5);self.assertEqual(two.get('presence_penalty',0),0);self.assertEqual(one['stop'],['</think>']);self.assertTrue(one['prompt'].endswith('<|im_start|>assistant\n<think>\n'));self.assertNotIn('/no_think',one['prompt'])
    self.assertEqual(two['json_schema'],{'type':'object'});self.assertEqual(two['prompt'],one['prompt']+first['content']+'</think>\n\n')
    receipts=[json.loads(p.read_text()) for p in (Path(folder)/'model-outputs').glob('*.json')]
    self.assertEqual({r['_ap_runtime']['phase'] for r in receipts},{'reasoning','answer'})
@@ -111,7 +111,7 @@ class ThinkingWeightsIdentityTests(unittest.TestCase):
    root=Path(folder);(root/'llama-server').touch();download=Mock(return_value='/tmp/thinking.gguf');process=Mock();process.wait.return_value=0
    with patch.dict(sys.modules,{'huggingface_hub':types.SimpleNamespace(hf_hub_download=download)}),patch.object(c,'verify_weights') as verify,patch.object(c.subprocess,'Popen',return_value=process),patch.object(c.urllib.request,'urlopen',return_value=types.SimpleNamespace(status=200)):
     with c.TextModel(root,root,profile='review'):pass
-   self.assertIn('Thinking-2507',download.call_args.args[0]);self.assertIn('Thinking-2507',download.call_args.args[1]);self.assertFalse(download.call_args.kwargs['token'])
+   self.assertIn('Qwen3.5-9B',download.call_args.args[0]);self.assertIn('Qwen3.5-9B-Q6_K',download.call_args.args[1]);self.assertFalse(download.call_args.kwargs['token'])
    self.assertTrue(str(download.call_args.kwargs['cache_dir']).endswith('/ap-news-text/review'));verify.assert_called_once_with('/tmp/thinking.gguf',c.REVIEW_SHA256)
    self.assertNotEqual(c.REVIEW_SHA256,c.ART_SHA256)
 
@@ -125,3 +125,13 @@ class ContextLossTests(unittest.TestCase):
     with self.assertRaisesRegex(ValueError,'context'):TextModel('.',folder,profile='review').ask('Verify','Original')
     self.assertEqual(call.call_count,1 if phase=='reasoning' else 2)
     self.assertEqual(len(list((Path(folder)/'model-outputs').glob('*.json'))),call.call_count)
+
+class DenseVerifierCandidateTests(unittest.TestCase):
+ def test_review_uses_higher_precision_dense_candidate_with_immutable_identity(self):
+  import newsletter_cpu as c
+  repo,rev,file,ctx=c.TEXT_PROFILES['review']
+  self.assertEqual(repo,'bartowski/Qwen_Qwen3.5-9B-GGUF')
+  self.assertEqual(rev,'182be2fd6c7bc44887d88a91cb03ff009cc9f549')
+  self.assertEqual(file,'Qwen_Qwen3.5-9B-Q6_K.gguf')
+  self.assertEqual(c.REVIEW_SHA256,'073a9275e65d9c8cd2819cf5f77b99fbaa6e87ba591da6bbaa86ec073a64bfef')
+  self.assertEqual(c.sampling_options('review')['temperature'],1.0)

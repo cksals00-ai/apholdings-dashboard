@@ -6,18 +6,18 @@ TEXT_REPO='Qwen/Qwen3-8B-GGUF'
 TEXT_REV='7c41481f57cb95916b40956ab2f0b139b296d974'
 ART_REPO='bartowski/Qwen_Qwen3-30B-A3B-Instruct-2507-GGUF'
 ART_REV='6c6e8692f43e4ca663f7ece8229a1361090d3a4c'
-REVIEW_REPO='bartowski/Qwen_Qwen3-30B-A3B-Thinking-2507-GGUF'
-REVIEW_REV='6a509d3e0aef5b70ffdcaa478e23de77482e6165'
+REVIEW_REPO='bartowski/Qwen_Qwen3.5-9B-GGUF'
+REVIEW_REV='182be2fd6c7bc44887d88a91cb03ff009cc9f549'
 ART_SHA256='327c6e0826bee8f19172e96c94bb7bba385f7a39d08314803652df9942401c4f'
-REVIEW_SHA256='7d5d7579c90596cd0e27bf94b002b52280c3031cdc699e4f64d8e94b1bbfdd6d'
-TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'review':(REVIEW_REPO,REVIEW_REV,'Qwen_Qwen3-30B-A3B-Thinking-2507-Q3_K_M.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_M.gguf',8192)}
-PROMPT_CACHE_REVISION=10
+REVIEW_SHA256='073a9275e65d9c8cd2819cf5f77b99fbaa6e87ba591da6bbaa86ec073a64bfef'
+TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'review':(REVIEW_REPO,REVIEW_REV,'Qwen_Qwen3.5-9B-Q6_K.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_M.gguf',8192)}
+PROMPT_CACHE_REVISION=11
 THINKING_BUDGET=8192
 REQUEST_TIMEOUTS={'copy':1500,'art':1500,'review':3600}
 IMAGE_REPO='segmind/SSD-1B'
 IMAGE_REV='60987f37e94cd59c36b1cba832b9f97b57395a10'
 def sampling_options(profile):
- if profile=='review':return {'temperature':0.6,'top_p':0.95,'top_k':20,'min_p':0.0}
+ if profile=='review':return {'temperature':1.0,'top_p':0.95,'top_k':20,'min_p':0.0}
  return {'temperature':0.7,'top_p':0.8,'top_k':20,'min_p':0.0,'presence_penalty':1.5} if profile=='art' else {'temperature':0.2}
 
 def completion_prompt(system,question,source_context=None,comparison_context=None,instruct_only=False,thinking=False):
@@ -49,8 +49,8 @@ class TextModel:
   env={k:os.environ[k] for k in ('PATH','HOME','LANG','LC_ALL','TMPDIR') if k in os.environ}
   env['LD_LIBRARY_PATH']=':'.join(sorted({str(p.parent.resolve()) for p in self.runtime.rglob('*.so*')}))
   self.log=(self.folder/'text-runtime.log').open('a')
-  kv=['-fa','-ctk','q8_0','-ctv','q8_0'] if self.profile in ('review','art') else []
-  self.proc=subprocess.Popen([str(executable.resolve()),'-m',model,'-c',str(context),'-t','4','-ngl','0','--host','127.0.0.1','--port','8080','--no-context-shift',*kv],stdout=self.log,stderr=self.log,env=env)
+  kv=['-fa','on','-ctk','q8_0','-ctv','q8_0'] if self.profile in ('review','art') else []
+  self.proc=subprocess.Popen([str(executable.resolve()),'-m',model,'-c',str(context),'-t','4','-ngl','0','--host','127.0.0.1','--port','8080','--parallel','1','--no-context-shift',*kv],stdout=self.log,stderr=self.log,env=env)
   try:
    for _ in range(180):
     try:
@@ -67,7 +67,7 @@ class TextModel:
   self.log.close()
  def _complete(self,prompt,tokens,schema=None,stop=None,phase='answer'):
   payload={'prompt':prompt,'n_predict':tokens,**sampling_options(self.profile),'stop':stop or ['<|im_end|>'],'cache_prompt':True}
-  if self.profile=='review' and phase=='reasoning':payload['presence_penalty']=1.0
+  if self.profile=='review' and phase=='reasoning':payload['presence_penalty']=1.5
   if schema is not None:payload['json_schema']=schema
   request=urllib.request.Request('http://127.0.0.1:8080/completion',data=json.dumps(payload).encode(),headers={'Content-Type':'application/json'})
   with urllib.request.urlopen(request,timeout=REQUEST_TIMEOUTS[self.profile]) as response:result=json.load(response)
