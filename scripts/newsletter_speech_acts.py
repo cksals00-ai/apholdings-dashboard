@@ -3,14 +3,14 @@ import hashlib,json,re
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-focused-verbatim-v7'
+REVISION='source-blind-single-sentence-v8'
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
 INTERNAL_KINDS={v:k for k,v in WIRE_KINDS.items()}
 REASON_LIMIT=200
 RULES="""Inventory factual premises ANYWHERE in each Korean sentence. Do NOT classify only the main speech act. Output factual_premise_present if ANY assertion or presupposition needs factual support, even inside a proposal, question or conditional. Output no_factual_premise when there is NO asserted/presupposed fact: this category includes pure proposals, hypotheticals, questions and checking instructions. These are not uncertain just because they are not assertions. Use uncertain only when you cannot determine factual scope; uncertainty blocks approval.
-A whether-question does not assert its answer; a hypothetical antecedent does not assert that its event happened. However, a definite noun phrase, factual relative clause or existing report can presuppose facts even when the main verb is a checking instruction or the main clause is conditional. '국내에서 인정되는 과정인지 확인' asks whether recognition holds; '국내에서 인정되는 이 과정을 확인' presupposes recognition. '기회를 얻었다면 검토' does not assert acquisition; '얻은 기회를 활용' presupposes acquisition. '효능이 입증됐으므로 검토' asserts efficacy; '도입한다면 모든 학생에게 입증된 기능' presupposes universal efficacy. Reports assert the report's existence and attributed content, not necessarily the truth of that content. Preserve negation, attribution and conditional scope.
+A whether-question does not assert its answer; a hypothetical antecedent does not assert that its event happened. However, a definite noun phrase, factual relative clause or existing report can presuppose facts even when the main verb is a checking instruction or the main clause is conditional. Reports assert the report's existence and attributed content, not necessarily the truth of that content. Preserve negation, attribution and conditional scope.
 Select maximal self-contained factual constituents, including their subject/domain, quantifiers, qualifications, negation and report attribution/content. Never return a bare predicate that drops these parts, or a bare checking verb/report noun that omits reported content. Exclude outside proposed main actions, but retain original full-sentence context. Quote each factual constituent verbatim from the original sentence as text. Copy the complete factual phrase including its subject/domain and qualifiers. Preserve original particles and punctuation where present. A uniquely located noun phrase that ends before a Korean grammatical case particle is conservatively extended to the original whole word; lexical or negative endings are never guessed. Never calculate numeric offsets, translate, paraphrase, omit interior words, or change whitespace. The program maps unique literal quotations to exact WORD IDs; ambiguous quotations block approval. Cover each sentence exactly once. title/summary/fact cannot have no_factual_premise. First give one concise scope reason under200 characters, without repeating/translating the sentence; then choose kind and literal quotations. No source material or preferred answers are supplied."""
 def classify(model,story):
  rows=[];offsets={}
@@ -65,11 +65,11 @@ def classify(model,story):
   pass_raw=[];pass_votes={}
   for row,branch in zip(rows,branches):
    key=(row['field'],row['id'])
-   focused={**payload,'draft_hash':payload['input_hash'],'target':{'field':key[0],'id':key[1]}}
+   focused={**payload,'sentences':[row],'draft_hash':payload['input_hash'],'target':{'field':key[0],'id':key[1]}}
    focused.pop('input_hash')
    focused['input_hash']=hashlib.sha256(json.dumps(focused,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
    schema=s.obj({'input_hash':{'type':'string','enum':[focused['input_hash']]},'sentences':{'type':'array','minItems':1,'maxItems':1,'items':{'anyOf':[branch]}}})
-   answer=model.ask(role+RULES+' Assess ONLY the target sentence. Other original sentences supply linguistic context, never another reviewer answer. Return exactly one decision for target, including ALL of its factual qualifiers and factual constituents.',json.dumps(focused,ensure_ascii=False),tokens=700,schema=schema)
+   answer=model.ask(role+RULES+' Assess ONLY the target sentence. Only this complete original sentence is supplied. Do not infer facts from another sentence or from the examples in the rules. No source data or other reviewer answer is supplied. A separate global auditor checks context-dependent omissions later. Return exactly one decision for target, including ALL of its factual qualifiers and factual constituents.',json.dumps(focused,ensure_ascii=False),tokens=700,schema=schema)
    pass_raw.append(answer);pass_votes.update(normalize(answer,{key},focused['input_hash']))
   raw.append(pass_raw);votes.append(pass_votes)
  if votes[0]!=votes[1]:raise ValueError('Independent speech-act disagreement')

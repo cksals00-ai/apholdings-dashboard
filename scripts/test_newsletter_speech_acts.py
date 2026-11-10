@@ -12,7 +12,7 @@ class SpeechActTests(unittest.TestCase):
    for row in q['sentences']:
     if q.get('target') and (row['field'],row['id'])!=(q['target']['field'],q['target']['id']):continue
     pure=row['field'] in ('insight','action')
-    if disagree and len(calls)>len(q['sentences']) and row['field']=='action':pure=False
+    if disagree and role.startswith('Independent presupposition') and row['field']=='action':pure=False
     rows.append({'field':row['field'],'id':row['id'],'kind':'no_factual_premise' if pure else 'factual_premise_present','premises':[] if pure else [{'text':row['text']}],'reason':'Pure hypothetical proposal with no asserted outcome.' if pure else 'Sentence asserts a factual announcement.'})
    return {'input_hash':q['input_hash'],'sentences':rows}
   model=Mock();model.ask.side_effect=ask;return model,calls
@@ -236,10 +236,11 @@ class FocusedIndependentInventoryTests(unittest.TestCase):
    self.assertNotIn('source_context',kw);self.assertNotIn('comparison_context',kw)
    if 'complete' in kw['schema']['properties']:
     self.assertEqual(len(calls),11)
+    self.assertEqual(len(q['draft']['sentences']),5)
     return {'input_hash':q['input_hash'],'complete':True,'issues':[]}
    target=q['target'];row=next(x for x in q['sentences'] if (x['field'],x['id'])==(target['field'],target['id']))
    self.assertNotIn('inventory',q);self.assertNotIn('decisions',q)
-   self.assertEqual(len(q['sentences']),5)
+   self.assertEqual(len(q['sentences']),1)
    self.assertEqual(kw['schema']['properties']['sentences']['minItems'],1)
    pure=row['field'] in ('insight','action')
    return {'input_hash':q['input_hash'],'sentences':[{'field':row['field'],'id':row['id'],'kind':'no_factual_premise' if pure else 'factual_premise_present','premises':[] if pure else [{'text':row['text']}],'reason':'No factual premise in this checking instruction.' if pure else 'This is an asserted factual announcement.'}]}
