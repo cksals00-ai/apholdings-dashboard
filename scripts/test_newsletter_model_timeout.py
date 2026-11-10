@@ -1,4 +1,4 @@
-import json,tempfile,unittest
+import io,json,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch,MagicMock
 from newsletter_cpu import TextModel
@@ -7,10 +7,10 @@ class TimeoutBudgetTests(unittest.TestCase):
  def test_review_has_bounded_cpu_headroom_without_changing_other_profiles(self):
   for profile,expected in [('copy',1500),('art',1500),('review',3600)]:
    with self.subTest(profile=profile),tempfile.TemporaryDirectory() as folder:
-    response=MagicMock();response.__enter__.return_value.read.return_value=json.dumps({'content':'{"supported":true,"unsupported_claims":[]}'}).encode()
-    with patch('newsletter_cpu.urllib.request.urlopen',return_value=response) as call:
+    replies=([{'content':'Reason through the original factual scope.','stop_type':'word','stopping_word':'</think>'}] if profile=='review' else [])+[{'content':'{"supported":true,"unsupported_claims":[]}'}]
+    with patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in replies]) as call:
      value=TextModel('.',folder,profile=profile).ask('source verifier','check',tokens=20)
-    self.assertTrue(value['supported']);self.assertEqual(call.call_args.kwargs['timeout'],expected)
+    self.assertTrue(value['supported']);self.assertTrue(all(x.kwargs['timeout']==expected for x in call.call_args_list))
     self.assertEqual(call.call_args.args[0].full_url,'http://127.0.0.1:8080/completion')
  def test_timeout_does_not_create_success_receipt(self):
   with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=TimeoutError):

@@ -3,7 +3,7 @@ import hashlib,json,re
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-single-sentence-v8'
+REVISION='source-blind-thinking-inventory-v9'
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
@@ -61,17 +61,10 @@ def classify(model,story):
   if set(out)!=expected:raise ValueError('Speech-act coverage incomplete')
   return out
  raw=[];votes=[]
+ schema=s.obj({'input_hash':{'type':'string','enum':[payload['input_hash']]},'sentences':{'type':'array','minItems':len(rows),'maxItems':len(rows),'items':{'anyOf':branches}}})
  for role in ('Independent speech-act analyst. ','Independent presupposition and scope analyst. '):
-  pass_raw=[];pass_votes={}
-  for row,branch in zip(rows,branches):
-   key=(row['field'],row['id'])
-   focused={**payload,'sentences':[row],'draft_hash':payload['input_hash'],'target':{'field':key[0],'id':key[1]}}
-   focused.pop('input_hash')
-   focused['input_hash']=hashlib.sha256(json.dumps(focused,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
-   schema=s.obj({'input_hash':{'type':'string','enum':[focused['input_hash']]},'sentences':{'type':'array','minItems':1,'maxItems':1,'items':{'anyOf':[branch]}}})
-   answer=model.ask(role+RULES+' Assess ONLY the target sentence. Only this complete original sentence is supplied. Do not infer facts from another sentence or from the examples in the rules. No source data or other reviewer answer is supplied. A separate global auditor checks context-dependent omissions later. Return exactly one decision for target, including ALL of its factual qualifiers and factual constituents.',json.dumps(focused,ensure_ascii=False),tokens=700,schema=schema)
-   pass_raw.append(answer);pass_votes.update(normalize(answer,{key},focused['input_hash']))
-  raw.append(pass_raw);votes.append(pass_votes)
+  answer=model.ask(role+RULES,json.dumps(payload,ensure_ascii=False),tokens=2600,schema=schema)
+  raw.append(answer);votes.append(normalize(answer,set(indexed),payload['input_hash']))
  if votes[0]!=votes[1]:raise ValueError('Independent speech-act disagreement')
  inventory=[];facts={f:[] for f in FIELDS}
  for key,(kind,ranges) in votes[0].items():

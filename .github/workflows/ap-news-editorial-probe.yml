@@ -8,6 +8,14 @@ permissions:
   contents: read
 jobs:
   controls:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - mode: scope
+            flag: --scope-only
+          - mode: historical
+            flag: --historical-only
     runs-on: ubuntu-24.04
     timeout-minutes: 240
     env:
@@ -29,13 +37,13 @@ jobs:
           mkdir -p .cpu-runtime .control-probe
           curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b5401/llama-b5401-bin-ubuntu-x64.zip -o "$RUNNER_TEMP/llama.zip"
           unzip -q "$RUNNER_TEMP/llama.zip" -d .cpu-runtime
-      - name: Replay unchanged scope and historical controls on pinned public CPU verifier
-        run: python scripts/newsletter_control_probe.py --runtime .cpu-runtime --folder .control-probe
+      - name: Verify ${{ matrix.mode }} controls on native-thinking CPU verifier
+        run: python scripts/newsletter_control_probe.py --runtime .cpu-runtime --folder .control-probe ${{ matrix.flag }}
       - name: Preserve private decisions and model receipts
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: ap-news-editorial-controls-${{ github.run_id }}
+          name: ap-news-editorial-controls-${{ github.run_id }}-${{ matrix.mode }}
           path: .control-probe/
           include-hidden-files: true
           retention-days: 3
