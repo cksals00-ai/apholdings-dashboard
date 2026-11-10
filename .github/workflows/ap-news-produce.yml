@@ -20,7 +20,7 @@ permissions:
 jobs:
   produce:
     runs-on: ubuntu-24.04
-    timeout-minutes: 360
+    timeout-minutes: 270
     env:
       HF_HUB_DISABLE_TELEMETRY: '1'
       HF_HUB_DISABLE_IMPLICIT_TOKEN: '1'
@@ -35,7 +35,7 @@ jobs:
       - name: Checkout reviewed producer runtime
         uses: actions/checkout@v7
         with:
-          ref: d0d0aac2969cba0aa6344247be68720951aa0480
+          ref: b96bd9cb8bb59184996396df94f03be5eebe5f81
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -90,7 +90,7 @@ jobs:
         run: pip install -r .production-runtime/requirements-newsletter-server.txt
       - name: Free disposable runner SDK before model caches
         if: ${{ steps.gate.outputs.produce == 'true' }}
-        run: sudo rm -rf /usr/local/lib/android
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /usr/local/.ghcup /opt/ghc
       - uses: actions/cache@v5
         if: ${{ steps.gate.outputs.produce == 'true' }}
         with:
@@ -121,6 +121,17 @@ jobs:
         run: |
           python -m unittest discover -s scripts -p 'test_newsletter*.py'
           node --test supabase/functions/ap-news/core.test.mjs
+      - name: Replay current-runtime source-blind scope controls
+        if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run == true && github.run_attempt == 1 }}
+        run: python .production-runtime/scripts/newsletter_control_probe.py --runtime .cpu-runtime --folder "$RUNNER_TEMP/scope-controls" --scope-only
+      - name: Preserve exact-runtime scope decisions
+        if: ${{ always() && inputs.dry_run == true && github.run_attempt == 1 }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: ap-news-scope-controls-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/scope-controls/
+          include-hidden-files: true
+          retention-days: 7
       - name: Seed isolated real repair rehearsal from verified current-day sources
         if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run == true && inputs.inject_failure == true }}
         env:
@@ -147,7 +158,7 @@ jobs:
           if [ "$DRY_RUN" = true ]; then args+=(--dry-run); mode=test; fi
           python .production-runtime/scripts/newsletter_supervisor.py --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --mode "$mode" -- python .production-runtime/scripts/newsletter_producer.py --date "$EDITION_DAY" --folder "$AP_NEWS_SITE_ROOT/.production-state" --runtime .cpu-runtime --produce-only "${args[@]}"
       - name: Notify generation failure before preserving/recovering the draft
-        if: failure()
+        if: ${{ failure() && inputs.dry_run != true }}
         env:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           FAILED_RUN_ID: ${{ github.run_id }}
@@ -188,7 +199,7 @@ jobs:
             python .production-runtime/scripts/newsletter_handoff.py reserve --date "$EDITION_DAY"
           fi
       - name: Notify failure before waiting for automatic recovery
-        if: failure()
+        if: ${{ failure() && inputs.dry_run != true }}
         env:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           FAILED_RUN_ID: ${{ github.run_id }}
