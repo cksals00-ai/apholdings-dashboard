@@ -36,7 +36,9 @@ jobs:
           echo 'Homepage failures confirmed; publication packages tracked bytes without executing homepage tools.'
       - uses: actions/configure-pages@v6
       - name: Package latest tracked site bytes (no homepage tools)
+        id: source
         run: |
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           mkdir .pages-site
           git archive HEAD | tar -x -C .pages-site
       - uses: actions/upload-pages-artifact@v5
@@ -46,6 +48,8 @@ jobs:
           include-hidden-files: true
       - name: Deploy existing domain
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/github-script@v8
         with:
-          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+          script: |
+            const {deploy} = require(process.env.GITHUB_WORKSPACE + '/scripts/newsletter_pages.cjs');
+            await deploy({github, core, context, sha: '${{ steps.source.outputs.sha }}', artifactName: 'github-pages-${{ github.run_id }}-${{ github.run_attempt }}'});
