@@ -34,6 +34,8 @@ def worker_at(revision):return file_at(WORKER,revision)
 def qualify(run_id,revision,expected):
  if not re.fullmatch('[a-f0-9]{40}',expected):raise ValueError('Immutable expected runtime required')
  run=api('actions/runs/'+str(run_id))
+ from newsletter_recovery_policy import planned_rehearsal_failure
+ if not planned_rehearsal_failure(api(f'actions/runs/{run_id}/attempts/1/jobs?per_page=100')):raise ValueError('First attempt did not prove controlled failure after saving the completed private bundle')
  evaluate(run,worker_at(revision),worker_at(run['head_sha']),expected,run_id)
  evaluate_rehearsal(file_at(REHEARSAL,revision),file_at(REHEARSAL,run['head_sha']))
  print(json.dumps({'qualified':True,'runtime':expected,'rehearsal_url':f'https://github.com/{REPO}/actions/runs/{run_id}','automatic_recovery_attempt':run['run_attempt']}))

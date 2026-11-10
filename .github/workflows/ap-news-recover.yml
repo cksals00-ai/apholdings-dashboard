@@ -50,7 +50,7 @@ jobs:
           FAILED_NAME: ${{ github.event.workflow_run.name }}
         run: python scripts/newsletter_ops.py alert
       - name: Automatically retry failed jobs (at most three attempts)
-        if: ${{ steps.gate.outputs.blocked != 'true' && github.event.workflow_run.run_attempt < 3 }}
+        if: ${{ steps.gate.outputs.blocked != 'true' && github.event.workflow_run.run_attempt < 3 && (github.event.workflow_run.name != 'AP News server production rehearsal' || steps.gate.outputs.rehearsal_retry_allowed == 'true') }}
         env:
           GH_TOKEN: ${{ github.token }}
           FAILED_RUN_ID: ${{ github.event.workflow_run.id }}

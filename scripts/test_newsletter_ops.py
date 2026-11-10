@@ -21,6 +21,14 @@ class OpsTests(unittest.TestCase):
    with patch.object(ops,'ROOT',root),patch.dict(os.environ,{'GITHUB_RUN_ID':'123'}),patch.object(ops,'urlopen',return_value=Reply()),patch.object(ops,'emit',side_effect=emit),patch.object(ops.time,'sleep') as sleep:
     ops.finish();sleep.assert_called_once_with(20)
    self.assertEqual(calls,[('test-123:newsletter','test_newsletter'),('test-123:newsletter','test_newsletter'),('test-123:recovery','test_recovery')])
+ def test_silent_operational_event_does_not_retry_for_a_missing_mail_receipt(self):
+  import io
+  with patch.dict(os.environ,{'SUPABASE_SERVICE_KEY':'synthetic'}),patch.object(ops,'urlopen',return_value=io.BytesIO(b'{"accepted":true,"suppressed":true}')):
+   self.assertTrue(ops.emit('2026-11-10:repair-test','ops_alert',{})['suppressed'])
+ def test_actual_test_mail_requires_a_provider_receipt(self):
+  import io
+  with patch.dict(os.environ,{'SUPABASE_SERVICE_KEY':'synthetic'}),patch.object(ops,'urlopen',return_value=io.BytesIO(b'{"accepted":true,"suppressed":true}')),self.assertRaises(ValueError):
+   ops.emit('test-123:newsletter','test_newsletter',{})
  def test_run_id_rejects_path_injection(self):
   with patch.dict(os.environ,{'GITHUB_RUN_ID':'../unsafe'}):
    with self.assertRaises(ValueError):ops.ident()
