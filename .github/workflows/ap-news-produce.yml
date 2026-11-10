@@ -137,7 +137,7 @@ jobs:
           EDITION_DAY: ${{ steps.gate.outputs.day }}
           PYTHONPATH: ${{ github.workspace }}/.production-runtime/scripts
         run: |
-          python .production-runtime/scripts/newsletter_control_handoff.py --source-run 42846223153 --expected-head 6f7f95200358be3f5824051f80a298bf5785057c --expected-runtime 01765187731942dcb3936c80baf7128c1e5f5949 --definition-sha 2693d20df239735e67e5e475764179bfbc90e6b658d9ca62ef27fcf93eb332a4 --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --folder "$RUNNER_TEMP/qualified-controls"
+          python .production-runtime/scripts/newsletter_control_handoff.py --source-run 42852777028 --expected-head e9a9f6037a7f16ba926212023c49d44e9b41f311 --expected-runtime 01765187731942dcb3936c80baf7128c1e5f5949 --definition-sha 6c85f04b1d647ffded9ad413daaf329e70797246b8d865392680d21d31e1f0af --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --folder "$RUNNER_TEMP/qualified-controls"
           python - <<'PY_SCOPE'
           import json, os
           from pathlib import Path
