@@ -157,7 +157,7 @@ class NativePairServingTests(unittest.TestCase):
     with c.TextModel(root,root,profile='review'):pass
    args=launch.call_args.args[0]
    self.assertEqual(args[args.index('--parallel')+1],'2')
-   self.assertEqual(args[args.index('-c')+1],'65536')
+   self.assertEqual(args[args.index('-c')+1],str(2*c.TEXT_PROFILES['review'][3]))
    self.assertIn('--no-context-shift',args)
 
 class DirectReviewModeTests(unittest.TestCase):
