@@ -114,3 +114,14 @@ class ThinkingWeightsIdentityTests(unittest.TestCase):
    self.assertIn('Thinking-2507',download.call_args.args[0]);self.assertIn('Thinking-2507',download.call_args.args[1]);self.assertFalse(download.call_args.kwargs['token'])
    self.assertTrue(str(download.call_args.kwargs['cache_dir']).endswith('/ap-news-text/review'));verify.assert_called_once_with('/tmp/thinking.gguf',c.REVIEW_SHA256)
    self.assertNotEqual(c.REVIEW_SHA256,c.ART_SHA256)
+
+class ContextLossTests(unittest.TestCase):
+ def test_context_loss_in_either_thinking_or_answer_is_not_approved(self):
+  thought={'content':'Complete analysis of the supplied original evidence.','stop_type':'word','stopping_word':'</think>','truncated':False}
+  final={'content':'{"supported":true}','truncated':False}
+  for phase in ('reasoning','answer'):
+   replies=[dict(thought),dict(final)];replies[0 if phase=='reasoning' else 1]['truncated']=True
+   with self.subTest(phase=phase),tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in replies]) as call:
+    with self.assertRaisesRegex(ValueError,'context'):TextModel('.',folder,profile='review').ask('Verify','Original')
+    self.assertEqual(call.call_count,1 if phase=='reasoning' else 2)
+    self.assertEqual(len(list((Path(folder)/'model-outputs').glob('*.json'))),call.call_count)

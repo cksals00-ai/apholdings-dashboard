@@ -3,7 +3,7 @@ import hashlib,json,os
 from newsletter_grounding import validate_source_copy,resolve_novelty,indexed_source,normalized,require_news_topic,validate_grounding
 from newsletter_cpu import REVIEW_REV
 import newsletter_schemas as shapes
-REVISION='independent-copy-moe-v20-native-thinking-inventory'
+REVISION='independent-copy-moe-v21-native-complete-context'
 MAX_ATTEMPTS=2
 
 def peer_facts(peers):return [{k:story.get(k,'') for k in ('title','summary','fact')} for story in (peers or [])]
