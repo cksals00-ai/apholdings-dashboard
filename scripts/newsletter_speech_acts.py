@@ -3,8 +3,15 @@ import hashlib,json,re
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-speech-v2'
-RULES="""Classify what the Korean draft ACTUALLY ASSERTS, without source material or truth checking. Pure proposals, hypotheticals, questions and checking instructions do not assert that their proposed outcome already happened. An asserted or presupposed fact inside advice still counts: '효능이 입증됐으므로 검토' asserts efficacy; '도입한다면 모든 학생에게 입증된 기능' presupposes universal efficacy. '국내에서 인정되는 과정인지 확인' asks a question, but '국내에서 인정되는 이 과정을 확인' presupposes recognition. '기회를 얻었다면 검토' is hypothetical; '얻은 기회를 활용' presupposes acquisition. Preserve negation, quotation attribution and conditional scope. Analyze whether the sentence affirms a proposition, asks whether it holds, makes a hypothetical, or reports that someone made a claim. A report can assert that the report exists while negating the reported outcome. In your reason, resolve these scopes before choosing kind. Select exact word-index ranges for EVERY asserted factual premise, never paraphrase. start/end are inclusive WORD IDs, never character offsets or text lengths. Keep the whole original sentence in mind; do not extract a hypothetical antecedent as a completed fact. If uncertain choose uncertain. Cover every sentence exactly once; factual title/summary/fact cannot be pure proposals. Do not infer a preferred answer."""
+REVISION='source-blind-premises-v3'
+# The legacy internal label denotes ALL certified nonfactual editorial content.
+# Only explicit model wire labels map here; uncertainty is never inferred away.
+WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
+INTERNAL_KINDS={v:k for k,v in WIRE_KINDS.items()}
+REASON_LIMIT=200
+RULES="""Inventory factual premises ANYWHERE in each Korean sentence. Do NOT classify only the main speech act. Output factual_premise_present if ANY assertion or presupposition needs factual support, even inside a proposal, question or conditional. Output no_factual_premise when there is NO asserted/presupposed fact: this category includes pure proposals, hypotheticals, questions and checking instructions. These are not uncertain just because they are not assertions. Use uncertain only when you cannot determine factual scope; uncertainty blocks approval.
+A whether-question does not assert its answer; a hypothetical antecedent does not assert that its event happened. However, a definite noun phrase, factual relative clause or existing report can presuppose facts even when the main verb is a checking instruction or the main clause is conditional. '국내에서 인정되는 과정인지 확인' asks whether recognition holds; '국내에서 인정되는 이 과정을 확인' presupposes recognition. '기회를 얻었다면 검토' does not assert acquisition; '얻은 기회를 활용' presupposes acquisition. '효능이 입증됐으므로 검토' asserts efficacy; '도입한다면 모든 학생에게 입증된 기능' presupposes universal efficacy. Reports assert the report's existence and attributed content, not necessarily the truth of that content. Preserve negation, attribution and conditional scope.
+Select maximal self-contained factual constituents, including their subject/domain, quantifiers, qualifications, negation and report attribution/content. Never return a bare predicate that drops these parts, or a bare checking verb/report noun that omits reported content. Exclude outside proposed main actions, but retain original full-sentence context. Use inclusive WORD IDs for start/end, never character offsets, lengths or paraphrases. Cover each sentence exactly once. title/summary/fact cannot have no_factual_premise. First give one concise scope reason under200 characters, without repeating/translating the sentence; then choose kind and ranges. No source material or preferred answers are supplied."""
 def classify(model,story):
  rows=[];offsets={}
  for field in FIELDS:
@@ -18,7 +25,7 @@ def classify(model,story):
  for row in rows:
   ids=list(range(len(row['words'])))
   range_schema=s.obj({'start':{'type':'integer','enum':ids},'end':{'type':'integer','enum':ids}})
-  branches.append(s.obj({'reason':s.string(350),'field':{'type':'string','enum':[row['field']]},'id':{'type':'integer','enum':[row['id']]},'kind':{'type':'string','enum':['pure_proposal','asserted_or_mixed','uncertain']},'premises':{'type':'array','maxItems':8,'items':range_schema}}))
+  branches.append(s.obj({'reason':s.string(REASON_LIMIT),'field':{'type':'string','enum':[row['field']]},'id':{'type':'integer','enum':[row['id']]},'kind':{'type':'string','enum':list(WIRE_KINDS)},'premises':{'type':'array','maxItems':8,'items':range_schema}}))
  item={'anyOf':branches}
  schema=s.obj({'input_hash':{'type':'string','enum':[payload['input_hash']]},'sentences':{'type':'array','minItems':len(rows),'maxItems':len(rows),'items':item}})
  indexed={(r['field'],r['id']):r for r in rows}
@@ -28,17 +35,18 @@ def classify(model,story):
   for row in raw['sentences']:
    if not isinstance(row,dict) or set(row)!={'field','id','kind','premises','reason'} or not isinstance(row['field'],str) or type(row['id'])is not int:raise ValueError('Malformed speech-act inventory')
    key=(row['field'],row['id'])
-   if key not in indexed or key in out or row['kind'] not in ('pure_proposal','asserted_or_mixed','uncertain') or not isinstance(row['reason'],str) or len(row['reason'].strip())<10 or not isinstance(row['premises'],list) or len(row['premises'])>8:raise ValueError('Invalid speech-act coverage')
-   if row['kind']=='uncertain':raise ValueError('Uncertain speech act')
-   if row['kind']=='pure_proposal' and (row['field'] in ('title','summary','fact') or row['premises']):raise ValueError('Invalid pure-proposal exemption')
-   if row['kind']=='asserted_or_mixed' and not row['premises']:raise ValueError('Asserted premise inventory missing')
+   if key not in indexed or key in out or not isinstance(row['kind'],str) or row['kind'] not in WIRE_KINDS or not isinstance(row['reason'],str) or len(row['reason'].strip())<10 or len(row['reason'])>REASON_LIMIT or not isinstance(row['premises'],list) or len(row['premises'])>8:raise ValueError('Invalid speech-act coverage')
+   kind=WIRE_KINDS[row['kind']]
+   if kind=='uncertain':raise ValueError('Uncertain speech act')
+   if kind=='pure_proposal' and (row['field'] in ('title','summary','fact') or row['premises']):raise ValueError('Invalid pure-proposal exemption')
+   if kind=='asserted_or_mixed' and not row['premises']:raise ValueError('Asserted premise inventory missing')
    ranges=[];words=indexed[key]['words']
    for part in row['premises']:
     if not isinstance(part,dict) or set(part)!={'start','end'} or any(type(part[k])is not int for k in part) or not 0<=part['start']<=part['end']<len(words):raise ValueError('Invalid factual word range')
     pair=(part['start'],part['end'])
     if pair in ranges:raise ValueError('Duplicate factual range')
     ranges.append(pair)
-   out[key]=(row['kind'],tuple(sorted(ranges)))
+   out[key]=(kind,tuple(sorted(ranges)))
   if set(out)!=set(indexed):raise ValueError('Speech-act coverage incomplete')
   return out
  raw=[];votes=[]
@@ -54,7 +62,7 @@ def classify(model,story):
    part={'sentence_id':row['id'],'text':text,'sentence_context':row['text'],'word_start':begin,'word_end':end};parts.append(part);facts[key[0]].append(part)
   inventory.append({'field':key[0],'id':key[1],'kind':kind,'premises':parts})
  issue=s.obj({'field':{'type':'string','enum':list(FIELDS)},'id':{'type':'integer','minimum':0},'reason':s.string(350)})
- audit_payload={'draft':payload,'inventory':inventory}
+ audit_payload={'draft':payload,'inventory':[{**r,'kind':INTERNAL_KINDS[r['kind']]} for r in inventory]}
  audit_hash=hashlib.sha256(json.dumps(audit_payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest();audit_payload['input_hash']=audit_hash
  audit_schema=s.obj({'input_hash':{'type':'string','enum':[audit_hash]},'complete':{'type':'boolean'},'issues':{'type':'array','maxItems':10,'items':issue}})
  audit=model.ask('Independent source-blind assertion coverage auditor. '+RULES+' Check the proposed inventory against original full sentences, without trusting the two analysts. Reject any omitted factual premise or presupposition, lost negation/conditional scope, or pure proposal misclassified as an assertion. Report exact field and sentence ID for each issue. No source data is supplied; do not ask whether a publisher mentions the company.',json.dumps(audit_payload,ensure_ascii=False),tokens=1600,schema=audit_schema)
