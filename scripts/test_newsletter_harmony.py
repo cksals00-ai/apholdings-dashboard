@@ -10,10 +10,13 @@ class HarmonyBoundaryTests(unittest.TestCase):
   raw=self.analysis();raw['content']='First scope check.<|end|>'+ANALYSIS_HEAD+'Second independent clause check.<|end|>'
   self.assertEqual(finished_analysis(raw),raw['content']+FINAL_HEAD)
  def test_observed_declared_response_format_header_is_a_real_final_transition(self):
-  header='<|start|>assistant<|channel|>final <|constrain|>review<|message|>'
-  raw=self.analysis();raw.update(stopping_word=header,tokens=[123,200007,200006,173781,200005,17196,220,200003,37404,200008])
+  header='<|start|>assistant<|channel|>final <|constrain|>json<|message|>'
+  raw=self.analysis();raw.update(stopping_word=header,tokens=[123,200007,200006,173781,200005,17196,220,200003,4108,200008])
   self.assertEqual(finished_analysis(raw),raw['content']+header)
-  raw['stopping_word']=header.replace('review','other')
+  for name in ('review','other'):
+   raw['stopping_word']=header.replace('json',name)
+   with self.subTest(name=name),self.assertRaises(ValueError):finished_analysis(raw)
+  raw['stopping_word']=header;raw['tokens']=[123,200007,200006,173781,200005,17196,220,200003,37404,200008]
   with self.assertRaises(ValueError):finished_analysis(raw)
  def test_message_end_alone_does_not_manufacture_final_header(self):
   for change in ({'stopping_word':'<|end|>'},{'stop_type':'limit'},{'stopping_word':'<|call|>'},{'stopping_word':'<|return|>'},{'tokens':[]},{'tokens':[123,200007,200008]},{'truncated':True}):

@@ -98,7 +98,7 @@ class HarmonyReviewTests(unittest.TestCase):
    self.assertNotIn('ignore_eos',one);self.assertNotIn('presence_penalty',one)
    receipts=[json.loads(p.read_text()) for p in (Path(folder)/'model-outputs').glob('*.json')]
    self.assertEqual({r['_ap_runtime']['phase'] for r in receipts},{'reasoning','answer'})
-   self.assertTrue(all(r['_ap_runtime']['native_reasoning'] is True and r['_ap_runtime']['protocol']=='harmony-low-v2-typed-final' for r in receipts))
+   self.assertTrue(all(r['_ap_runtime']['native_reasoning'] is True and r['_ap_runtime']['protocol']=='harmony-low-v3-json-final' for r in receipts))
  def test_message_end_tool_call_or_missing_tokens_cannot_be_forced_to_final(self):
   for change in ({'stopping_word':'<|end|>'},{'stopping_word':'<|call|>'},{'stop_type':'limit'},{'tokens':[]}):
    raw=harmony_trace();raw.update(change)

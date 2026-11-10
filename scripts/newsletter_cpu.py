@@ -11,7 +11,7 @@ REVIEW_REV='15dcfc7e7c608c6161507211ed43c5b590801b4b'
 ART_SHA256='327c6e0826bee8f19172e96c94bb7bba385f7a39d08314803652df9942401c4f'
 REVIEW_SHA256='27cd6c432c7672cb812a92f611cf3ba7bbc35928262bb1e1253ff4ee6ae35901'
 TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'review':(REVIEW_REPO,REVIEW_REV,'gpt-oss-20b-MXFP4.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_M.gguf',8192)}
-PROMPT_CACHE_REVISION=22
+PROMPT_CACHE_REVISION=23
 THINKING_BUDGET=4096
 REQUEST_TIMEOUTS={'copy':1500,'art':1500,'review':3600}
 IMAGE_REPO='segmind/SSD-1B'
@@ -82,7 +82,7 @@ class TextModel:
   output=self.folder/'model-outputs';output.mkdir(exist_ok=True)
   prompt_hash=hashlib.sha256((self.profile+'\n'+phase+'\n'+prompt).encode()).hexdigest()
   weights=REVIEW_SHA256 if self.profile=='review' else ART_SHA256 if self.profile=='art' else None
-  result['_ap_runtime']={'prompt_sha256':prompt_hash,'profile':self.profile,'phase':phase,'prompt_cache_revision':PROMPT_CACHE_REVISION,'repository':TEXT_PROFILES[self.profile][0],'revision':TEXT_PROFILES[self.profile][1],'weights_sha256':weights,'server_slots':2 if self.profile=='review' else 1,'context_per_slot':TEXT_PROFILES[self.profile][3],'native_reasoning':self.native_reasoning,'protocol':'harmony-low-v2-typed-final' if self.profile=='review' else 'qwen-chatml'}
+  result['_ap_runtime']={'prompt_sha256':prompt_hash,'profile':self.profile,'phase':phase,'prompt_cache_revision':PROMPT_CACHE_REVISION,'repository':TEXT_PROFILES[self.profile][0],'revision':TEXT_PROFILES[self.profile][1],'weights_sha256':weights,'server_slots':2 if self.profile=='review' else 1,'context_per_slot':TEXT_PROFILES[self.profile][3],'native_reasoning':self.native_reasoning,'protocol':'harmony-low-v3-json-final' if self.profile=='review' else 'qwen-chatml'}
   (output/(prompt_hash[:16]+'-'+str(time.time_ns())+'.json')).write_text(json.dumps(result,ensure_ascii=False,indent=2))
   if result.get('truncated') is True:raise ValueError('Model context was truncated; complete evidence required')
   if result.get('stopped_limit') or result.get('stop_type')=='limit':raise ValueError('Model generation reached token limit')
@@ -105,7 +105,7 @@ class TextModel:
   schema={'type':'object','properties':{'protocol_ok':{'type':'boolean','enum':[True]}},'required':['protocol_ok'],'additionalProperties':False}
   result=self.ask('Verify only the native response-channel protocol. This is not a semantic or source-quality control.','Return the protocol_ok field in the declared final response format.',tokens=80,schema=schema)
   if result!={'protocol_ok':True}:raise ValueError('Native protocol handshake failed')
-  proof={'protocol':'harmony-low-v2-typed-final','model_revision':REVIEW_REV,'weights_sha256':REVIEW_SHA256,'natural_final_header':True,'semantic_qualification':False}
+  proof={'protocol':'harmony-low-v3-json-final','model_revision':REVIEW_REV,'weights_sha256':REVIEW_SHA256,'natural_final_header':True,'semantic_qualification':False}
   (self.folder/'protocol-handshake.json').write_text(json.dumps(proof,indent=2)+'\n')
 
 class ImageModel:
