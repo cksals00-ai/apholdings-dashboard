@@ -11,13 +11,13 @@ class StaticScopeGroundTruthTests(unittest.TestCase):
   rows=[]
   for field in ('title','summary','fact','insight'):
    rows.append({'field':field,'id':0,'kind':'pure_proposal' if field=='insight' else 'asserted_or_mixed','premises':[] if field=='insight' else [{'sentence_id':0,'word_start':0,'word_end':2}]})
-  ranges=[[],[(0,3)],[],[(0,2)],[(0,2)],[(1,5)],[],[(0,4)],[(0,3)],[(0,4)],[(0,5)],[(0,4)],[]]
+  ranges=[[],[(0,3)],[],[(0,2)],[(0,2)],[(1,5)],[],[(0,4)],[(0,3)],[(0,4)],[(0,5)],[(0,4)],[],[(0,2)],[(0,2)]]
   for i,parts in enumerate(ranges):rows.append({'field':'action','id':i,'kind':'asserted_or_mixed' if parts else 'pure_proposal','premises':[{'sentence_id':i,'word_start':a,'word_end':b} for a,b in parts]})
   return {'inventory':rows,'facts':{f:[p for row in rows if row['field']==f for p in row['premises']] for f in ('title','summary','fact','insight','action')}}
  def test_exact_known_linguistic_scopes_pass(self):self.assertTrue(self.checker()(self.receipt()))
  def test_two_identical_omissions_or_extra_advice_words_cannot_pass_a_true_audit_flag(self):
   check=self.checker()
-  for ident,start,end in ((1,1,3),(3,1,2),(4,1,2),(5,3,5),(5,0,6),(7,2,4),(8,1,3),(9,2,4),(10,1,5),(11,0,3)):
+  for ident,start,end in ((1,1,3),(3,1,2),(4,1,2),(5,3,5),(5,0,6),(7,2,4),(8,1,3),(9,2,4),(10,1,5),(11,0,3),(13,1,2),(14,1,2)):
    receipt=self.receipt();part=next(r for r in receipt['inventory'] if r['field']=='action' and r['id']==ident)['premises'][0];part.update(word_start=start,word_end=end)
    with self.subTest(ident=ident,start=start,end=end),self.assertRaises(ValueError):check(receipt)
  def test_missing_duplicate_or_inconsistent_inventory_never_passes(self):

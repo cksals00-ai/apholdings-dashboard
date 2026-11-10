@@ -144,7 +144,7 @@ jobs:
           # SCOPE_GROUND_TRUTH_BEGIN
           def assert_scope_ground_truth(receipt):
               expected = {(field, 0): ('pure_proposal', []) if field == 'insight' else ('asserted_or_mixed', [(0, 2)]) for field in ('title', 'summary', 'fact', 'insight')}
-              ranges = [[], [(0, 3)], [], [(0, 2)], [(0, 2)], [(1, 5)], [], [(0, 4)], [(0, 3)], [(0, 4)], [(0, 5)], [(0, 4)], []]
+              ranges = [[], [(0, 3)], [], [(0, 2)], [(0, 2)], [(1, 5)], [], [(0, 4)], [(0, 3)], [(0, 4)], [(0, 5)], [(0, 4)], [], [(0, 2)], [(0, 2)]]
               expected.update({('action', i): ('asserted_or_mixed' if parts else 'pure_proposal', parts) for i, parts in enumerate(ranges)})
               seen = set()
               flattened = {field: [] for field in ('title', 'summary', 'fact', 'insight', 'action')}

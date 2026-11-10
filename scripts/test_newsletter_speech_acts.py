@@ -277,3 +277,23 @@ class AnchorBoundsSafetyTests(unittest.TestCase):
    story=SpeechActTests().story();story['fact']='학생'+suffix+' 기능을 제공하지 않는다.'
    model,_=SpeechActTests().setup_model();receipt=classify(model,story)
    self.assertEqual(receipt['facts']['fact'][0]['text'],story['fact'])
+
+class ExactWordCoverageTests(unittest.TestCase):
+ def test_adjacent_partitions_agree_only_when_the_original_factual_word_set_is_identical(self):
+  model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+  def answer(role,question,**kw):
+   raw=base(role,question,**kw)
+   if role.startswith('Independent presupposition') and raw.get('sentences',[{}])[0].get('field')=='title':
+    raw['sentences'][0]['premises']=[{'first_word_id':0,'last_word_id':0},{'first_word_id':1,'last_word_id':2}]
+   return raw
+  model.ask.side_effect=answer;receipt=classify(model,SpeechActTests().story())
+  self.assertEqual(len(receipt['facts']['title']),1);self.assertEqual(receipt['facts']['title'][0]['text'],'공식 기능 발표')
+ def test_a_gap_or_overlap_cannot_be_filled_or_silently_normalized(self):
+  for parts,error in (([{'first_word_id':0,'last_word_id':0},{'first_word_id':2,'last_word_id':2}],'disagreement'),([{'first_word_id':0,'last_word_id':1},{'first_word_id':1,'last_word_id':2}],'Overlapping')):
+   model,_=SpeechActTests().setup_model();base=model.ask.side_effect
+   def answer(role,question,**kw):
+    raw=base(role,question,**kw)
+    if role.startswith('Independent presupposition') and raw.get('sentences',[{}])[0].get('field')=='title':raw['sentences'][0]['premises']=parts
+    return raw
+   model.ask.side_effect=answer
+   with self.subTest(parts=parts),self.assertRaisesRegex(ValueError,error):classify(model,SpeechActTests().story())

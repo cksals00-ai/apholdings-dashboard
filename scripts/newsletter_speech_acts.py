@@ -4,13 +4,13 @@ from concurrent.futures import ThreadPoolExecutor
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-direct-report-anchors-v15'
+REVISION='source-blind-direct-premise-coverage-v16'
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
 INTERNAL_KINDS={v:k for k,v in WIRE_KINDS.items()}
 REASON_LIMIT=200
-RULES="""Inventory factual premises ANYWHERE in each Korean sentence. Do NOT classify only the main speech act. Output factual_premise_present if ANY assertion or presupposition needs factual support, even inside a proposal, question or conditional. Output no_factual_premise when there is NO asserted/presupposed fact: this category includes pure proposals, hypotheticals, questions and checking instructions. These are not uncertain just because they are not assertions. Use uncertain only when you cannot determine factual scope; uncertainty blocks approval.
+RULES="""Inventory asserted OR presupposed factual content at ANY depth of the Korean sentence. Resolve embedded clause/description scope first; NEVER decide from the main speech act or a checking/recommendation verb alone. A factually modified definite object retains its presupposed existence/properties outside whether/hypothetical scope even when the main action is proposed, investigated or checked. Output factual_premise_present whenever any such factual premise requires support. Output no_factual_premise only when no asserted/presupposed factual content remains after scope resolution, such as a genuinely nonfactual proposal or open inquiry. Use uncertain only if factual scope cannot be determined; uncertainty blocks approval. 진위를 묻는 절과 사실 수식어가 붙은 특정 대상을 구분한다. 확인·검토 주절만 보고 판정하지 않으며, 의문·가정의 범위 밖에 있는 특정 대상의 수식절과 전제는 사실 근거를 요구한다.
 A whether-question does not assert its answer; a hypothetical antecedent does not assert that its event happened. However, a definite noun phrase, factual relative clause or existing report can presuppose facts even when the main verb is a checking instruction or the main clause is conditional. Reports assert the report's existence and attributed content, not necessarily the truth of that content. Preserve negation, attribution and conditional scope. When a report/explanation is presented as an actual event outside a hypothetical or whether-question, its speaker/source, entire reported proposition AND completed reporting predicate form the factual premise together. The asserted reporting act is not metadata or an excluded proposed action. Exclude only genuinely nonfactual recommended/checking main actions. If the reporting act itself is under a whether-question or hypothetical, do not assert that it occurred. 실제로 있었다고 서술한 설명·발표·보고는 귀속·내용뿐 아니라 그 보고 행위까지 사실 전제로 보존한다. 이를 제안된 행동이나 메타데이터로 제외하지 않는다.
 Select maximal self-contained factual constituents including subject/domain, quantifiers, qualifications, negation and report attribution/content; exclude outside proposed main actions. For each premise select first_word_id and last_word_id directly from the displayed words list. These are provided word IDs, NOT character offsets or counts. Never generate or retype a quotation: the program copies the entire original words and intervening whitespace. Do not omit a domain, qualification, attribution or negation. For title/summary/fact identify the underlying factual headline/report content even when phrased as a noun phrase or infinitive; these fields cannot be exempted as nonfactual. Cover only the requested target once. Give one concise scope reason under200 characters without restating the format or hash; then kind and provided word anchors. No source material or preferred answers are supplied. Uncertainty blocks approval."""
 def focused_request(payload,row):
@@ -53,11 +53,16 @@ def classify(model,story):
     pair=(begin,end)
     if pair in ranges:raise ValueError('Duplicate factual range')
     ranges.append(pair)
-   out[key]=(kind,tuple(sorted(ranges)))
+   canonical=[]
+   for begin,end in sorted(ranges):
+    if canonical and begin<=canonical[-1][1]:raise ValueError('Overlapping factual word ranges')
+    if canonical and begin==canonical[-1][1]+1:canonical[-1]=(canonical[-1][0],end)
+    else:canonical.append((begin,end))
+   out[key]=(kind,tuple(canonical))
   if set(out)!=expected:raise ValueError('Speech-act coverage incomplete')
   return out
  raw=[{'input_hash':payload['input_hash'],'sentences':[],'requests':[]} for _ in range(2)];votes=[{},{}]
- roles=('Independent speech-act analyst. ','Independent presupposition and scope analyst. ')
+ roles=('Independent embedded factual-premise inventory analyst. ','Independent presupposition and scope analyst. ')
  # Each native reasoning call has one complete target, never a large output
  # inventory to repeatedly recount. Both analysts see identical full context
  # and no other analyst's answer. Separate server slots batch their decoding.
