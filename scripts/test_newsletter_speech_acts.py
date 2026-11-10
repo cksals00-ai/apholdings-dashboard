@@ -1,6 +1,6 @@
 import copy,json,unittest
 from unittest.mock import Mock
-from newsletter_speech_acts import classify
+from newsletter_speech_acts import classify,ROLES
 class SpeechActTests(unittest.TestCase):
  def setup_model(self,disagree=False,omission=False):
   calls=[]
@@ -12,7 +12,7 @@ class SpeechActTests(unittest.TestCase):
    for row in q['sentences']:
     if q.get('target') and (row['field'],row['id'])!=(q['target']['field'],q['target']['id']):continue
     pure=row['field'] in ('insight','action')
-    if disagree and role.startswith('Independent presupposition') and row['field']=='action':pure=False
+    if disagree and role.startswith(ROLES[1]) and row['field']=='action':pure=False
     rows.append({'field':row['field'],'id':row['id'],'kind':'no_factual_premise' if pure else 'factual_premise_present','premises':[] if pure else [{'first_word_id':0,'last_word_id':len(row['words'])-1}],'reason':'Pure hypothetical proposal with no asserted outcome.' if pure else 'Sentence asserts a factual announcement.'})
    return {'input_hash':q['input_hash'],'sentences':rows}
   model=Mock();model.ask.side_effect=ask;return model,calls
@@ -283,7 +283,7 @@ class ExactWordCoverageTests(unittest.TestCase):
   model,_=SpeechActTests().setup_model();base=model.ask.side_effect
   def answer(role,question,**kw):
    raw=base(role,question,**kw)
-   if role.startswith('Independent presupposition') and raw.get('sentences',[{}])[0].get('field')=='title':
+   if role.startswith(ROLES[1]) and raw.get('sentences',[{}])[0].get('field')=='title':
     raw['sentences'][0]['premises']=[{'first_word_id':0,'last_word_id':0},{'first_word_id':1,'last_word_id':2}]
    return raw
   model.ask.side_effect=answer;receipt=classify(model,SpeechActTests().story())
@@ -293,7 +293,7 @@ class ExactWordCoverageTests(unittest.TestCase):
    model,_=SpeechActTests().setup_model();base=model.ask.side_effect
    def answer(role,question,**kw):
     raw=base(role,question,**kw)
-    if role.startswith('Independent presupposition') and raw.get('sentences',[{}])[0].get('field')=='title':raw['sentences'][0]['premises']=parts
+    if role.startswith(ROLES[1]) and raw.get('sentences',[{}])[0].get('field')=='title':raw['sentences'][0]['premises']=parts
     return raw
    model.ask.side_effect=answer
    with self.subTest(parts=parts),self.assertRaisesRegex(ValueError,error):classify(model,SpeechActTests().story())
