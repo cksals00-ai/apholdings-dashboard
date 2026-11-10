@@ -136,7 +136,7 @@ jobs:
           EDITION_DAY: ${{ steps.gate.outputs.day }}
           PYTHONPATH: ${{ github.workspace }}/.production-runtime/scripts
         run: |
-          python .production-runtime/scripts/newsletter_control_handoff.py --source-run 42758262848 --expected-head a90a310204ecbb91aeb0c2f0405180a407210f57 --expected-runtime 4c1e623c400c20981f01f7ec00fc2e37d768e585 --definition-sha c7142ebb8ff90fdb36c35c93b64f559bc4f31fed206320ab4bef397b10a0daf3 --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --folder "$RUNNER_TEMP/qualified-controls"
+          python .production-runtime/scripts/newsletter_control_handoff.py --source-run 42762262293 --expected-head d599a5082a6e9967ec67d7ca6d3ecd7375b4d9db --expected-runtime 4c1e623c400c20981f01f7ec00fc2e37d768e585 --definition-sha 1b0eef8e7d673efbc9f09b9b2f248aa221f3ca61314d0abb3e90de1477ca6757 --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --folder "$RUNNER_TEMP/qualified-controls"
       - name: Wait for Korean 03:05 actual source work window
         if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run != true }}
         run: python .production-runtime/scripts/newsletter_start_window.py
