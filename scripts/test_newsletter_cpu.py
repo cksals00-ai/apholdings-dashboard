@@ -20,13 +20,13 @@ class PromptTests(unittest.TestCase):
     with patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps({'content':content}).encode())):model.ask('Role','Same input')
    receipts=list((root/'model-outputs').glob('*.json'))
    self.assertEqual(len(receipts),2)
- def test_art_profile_is_pinned_public_14b_and_cpu_only_without_credentials(self):
+ def test_art_profile_is_pinned_public_moe_and_cpu_only_without_credentials(self):
   with tempfile.TemporaryDirectory() as temp:
    root=Path(temp);(root/'llama-server').touch();download=Mock(return_value='/tmp/public-model.gguf');process=Mock();process.wait.return_value=0
-   with patch.dict(sys.modules,{'huggingface_hub':types.SimpleNamespace(hf_hub_download=download)}),patch('newsletter_cpu.subprocess.Popen',return_value=process) as launch,patch('newsletter_cpu.urllib.request.urlopen',return_value=types.SimpleNamespace(status=200)),patch.dict(os.environ,{'GH_TOKEN':'dummy','PRIVATE_TEST_CREDENTIAL':'dummy'}):
+   with patch.dict(sys.modules,{'huggingface_hub':types.SimpleNamespace(hf_hub_download=download)}),patch('newsletter_cpu.verify_weights') as verify,patch('newsletter_cpu.subprocess.Popen',return_value=process) as launch,patch('newsletter_cpu.urllib.request.urlopen',return_value=types.SimpleNamespace(status=200)),patch.dict(os.environ,{'GH_TOKEN':'dummy','PRIVATE_TEST_CREDENTIAL':'dummy'}):
     with TextModel(root,root,profile='art'):pass
-   self.assertEqual(download.call_args.args[0],'Qwen/Qwen3-14B-GGUF')
-   self.assertFalse(download.call_args.kwargs['token'])
+   self.assertEqual(download.call_args.args[0],'bartowski/Qwen_Qwen3-30B-A3B-Instruct-2507-GGUF')
+   self.assertFalse(download.call_args.kwargs['token']);verify.assert_called_once()
    self.assertEqual(len(download.call_args.kwargs['revision']),40)
    self.assertTrue(str(download.call_args.kwargs['cache_dir']).endswith('/ap-news-text/art'))
    command=launch.call_args.args[0];self.assertEqual(command[command.index('-c')+1],'8192');self.assertEqual(command[command.index('-ngl')+1],'0')
@@ -55,3 +55,19 @@ class PromptTests(unittest.TestCase):
  def test_no_source_calls_keep_separate_system_and_user(self):
   self.assertIn('<|im_start|>system\nRole<|im_end|>',completion_prompt('Role','Task'))
 if __name__=='__main__':unittest.main()
+
+class InstructVerifierTests(unittest.TestCase):
+ def test_instruct_only_review_uses_native_chat_prefix_without_thinking_tokens(self):
+  import newsletter_cpu as c
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(b'{"content":"{\\"supported\\":true}"}')) as request:
+   c.TextModel('.',folder,profile='review').ask('Check','Draft')
+   prompt=json.loads(request.call_args.args[0].data)['prompt']
+   self.assertNotIn('/no_think',prompt);self.assertNotIn('<think>',prompt)
+   self.assertTrue(prompt.endswith('<|im_start|>assistant\n'))
+ def test_review_file_is_bound_to_an_exact_digest(self):
+  import hashlib,newsletter_cpu as c
+  with tempfile.TemporaryDirectory() as folder:
+   path=Path(folder)/'weights';path.write_bytes(b'known weights')
+   c.verify_weights(path,hashlib.sha256(b'known weights').hexdigest())
+   path.write_bytes(b'changed weights')
+   with self.assertRaises(ValueError):c.verify_weights(path,hashlib.sha256(b'known weights').hexdigest())

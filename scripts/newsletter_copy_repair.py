@@ -1,9 +1,9 @@
 """Durable, bounded copy repair with a separately loaded public verifier."""
 import hashlib,json,os
 from newsletter_grounding import validate_source_copy,resolve_novelty,indexed_source,normalized,require_news_topic,validate_grounding
-from newsletter_cpu import ART_REV
+from newsletter_cpu import REVIEW_REV
 import newsletter_schemas as shapes
-REVISION='independent-copy-14b-v12-word-id-inventory'
+REVISION='independent-copy-moe-v13-word-id-inventory'
 MAX_ATTEMPTS=2
 
 def peer_facts(peers):return [{k:story.get(k,'') for k in ('title','summary','fact')} for story in (peers or [])]
@@ -12,7 +12,7 @@ def identity(story,source,prior,peers=None):
  return hashlib.sha256(json.dumps({'copy':{k:story.get(k) for k in ('title','summary','fact','insight','action','evidence')},'source':source['body_sha256'],'prior':prior,'peers':peer_facts(peers)},sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 def receipt_valid(story,source,prior,peers=None):
  receipt=story.get('strong_review',{})
- return receipt.get('revision')==REVISION and receipt.get('model_revision')==ART_REV and receipt.get('input_hash')==identity(story,source,prior,peers) and receipt.get('supported') is True
+ return receipt.get('revision')==REVISION and receipt.get('model_revision')==REVIEW_REV and receipt.get('input_hash')==identity(story,source,prior,peers) and receipt.get('supported') is True
 
 def record_failure(state,url,reason,story=None,source=None,notify=True):
  attempts=state.setdefault('copy_attempts',{});attempts[url]=attempts.get(url,0)+1
@@ -50,7 +50,7 @@ def verify(model,story,source,prior,peers=None):
  story['review']=review
  story['novelty']=novelty
  story['is_news']=True
- story['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(story,source,prior,peers),'supported':True,'novelty':novelty,'review':review}
+ story['strong_review']={'revision':REVISION,'model_revision':REVIEW_REV,'input_hash':identity(story,source,prior,peers),'supported':True,'novelty':novelty,'review':review}
  return story
 
 def finish_pending_copy(model,state,story,source,prior,peers,save):
