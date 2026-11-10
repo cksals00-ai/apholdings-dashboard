@@ -128,8 +128,8 @@ def verify_receipts(folder):
  require(hero['subject']!=faults['art_failed_plan']['subject'] and hero['scene']!=faults['art_failed_plan']['scene'],'Hero fault must be replaced')
  receipts=json.loads((folder/'notification-receipts.json').read_text())
  for stage in ('copy','art'):
-  require(any(receipts.get(e['id'],{}).get('accepted') is True for e in state.get('recovery_events',[]) if e.get('stage')==stage),'Parent accepted '+stage+' notice required')
- proof={'date':day,'mode':'test','run':run,'asset_run':asset_run,'resume_history':state.get('resume_history',[]),'copy_rejected':True,'recommendation_premise_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_notices_accepted':['copy','art'],'resumed_cache_faults_rechecked':bool(state.get('resume_history')),'editorial_controls':state.get('frozen_control_receipts',{}) if state.get('rehearsal_version')==2 else state.get('editorial_control_receipts',{})}
+  require(any(receipts.get(e['id'],{}).get('recorded') is True and receipts[e['id']].get('suppressed') is True and receipts[e['id']].get('accepted') is False and receipts[e['id']].get('policy')=='terminal-only-v1' for e in state.get('recovery_events',[]) if e.get('stage')==stage),'Silent parent '+stage+' repair record required')
+ proof={'date':day,'mode':'test','run':run,'asset_run':asset_run,'resume_history':state.get('resume_history',[]),'copy_rejected':True,'recommendation_premise_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_repair_records':['copy','art'],'recoverable_mail_sent':0,'resumed_cache_faults_rechecked':bool(state.get('resume_history')),'editorial_controls':state.get('frozen_control_receipts',{}) if state.get('rehearsal_version')==2 else state.get('editorial_control_receipts',{})}
  (folder/'recovery-proof.json').write_text(json.dumps(proof,indent=2)+'\n');return proof
 
 if __name__=='__main__':

@@ -67,7 +67,7 @@ class RehearsalTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,{'AP_NEWS_REPAIR_REHEARSAL':'1'}):
    folder=Path(tmp,'.production-state');folder.mkdir();images=Path(tmp,'img/newsletter');images.mkdir(parents=True)
    for i in range(1,6):(images/f"{state['asset_day']}-story-{i}.png").write_bytes(b'preserved')
-   (folder/'draft.json').write_text(json.dumps(state));(folder/'notification-receipts.json').write_text(json.dumps({k:{'accepted':True} for k in ['copy-notice','art-notice']}))
+   (folder/'draft.json').write_text(json.dumps(state));(folder/'notification-receipts.json').write_text(json.dumps({k:{'accepted':False,'recorded':True,'suppressed':True,'policy':'terminal-only-v1'} for k in ['copy-notice','art-notice']}))
    result=r.verify_receipts(folder);self.assertEqual(result['strong_review_count'],5)
    self.assertNotIn('https://',(folder/'recovery-proof.json').read_text())
  def test_advice_proof_requires_specific_factual_rejection(self):

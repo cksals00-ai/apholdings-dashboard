@@ -35,13 +35,17 @@ jobs:
           FAILED_NAME: ${{ github.event.workflow_run.name }}
         run: |
           gh api "repos/cksals00-ai/apholdings-dashboard/actions/runs/$FAILED_RUN_ID/attempts/$FAILED_ATTEMPT/jobs?per_page=100" > /tmp/ap-news-recovery-jobs.json
-          gh run view "$FAILED_RUN_ID" --attempt "$FAILED_ATTEMPT" --log-failed --repo cksals00-ai/apholdings-dashboard > /tmp/ap-news-recovery-failure.log
+          if [ "$FAILED_NAME" = 'AP News server production rehearsal' ]; then
+            : > /tmp/ap-news-recovery-failure.log
+          else
+            gh run view "$FAILED_RUN_ID" --attempt "$FAILED_ATTEMPT" --log-failed --repo cksals00-ai/apholdings-dashboard > /tmp/ap-news-recovery-failure.log
+          fi
           python .recovery-policy/scripts/newsletter_recovery_policy.py "$FAILED_NAME" /tmp/ap-news-recovery-failure.log < /tmp/ap-news-recovery-jobs.json >> "$GITHUB_OUTPUT"
       - name: Record known inactive rollout gate without retrying
         if: ${{ steps.gate.outputs.blocked == 'true' }}
         run: echo '::notice::Known cancelled qualification trial; production remains inactive. No repeated recovery alert or automatic retry.'
       - name: Notify owner before automatic recovery
-        if: ${{ steps.gate.outputs.blocked != 'true' }}
+        if: ${{ steps.gate.outputs.blocked != 'true' && github.event.workflow_run.name != 'AP News server production rehearsal' }}
         continue-on-error: true
         env:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
