@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: 31eb9769775822a4e670ae6fc8526d9bc371b8f5
+          ref: 9dfa45c1ab35de12b66d7b7d06fd8c71d9261014
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
