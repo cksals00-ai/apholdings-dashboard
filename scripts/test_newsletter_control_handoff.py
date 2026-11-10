@@ -25,6 +25,9 @@ class VerifiedControlHandoffTests(unittest.TestCase):
   digest=h.scope_hash(draft)
   state={'date':'2026-11-10','mode':'test','asset_day':'2026-11-10-test-123','historical_controls_only':True,'scope_only':True,'historical_only':False}
   proof={'synthetic_regression_only':True,'draft':draft,'receipt':{'revision':REVISION,'input_hash':digest,'coverage_audit':{'complete':True,'issues':[]},'independent_decisions':[{'input_hash':digest},{'input_hash':digest}]}}
+  payload=h.scope_payload(draft)
+  requests=[{'field':row['field'],'id':row['id'],'input_hash':h.focused_request(payload,row)['input_hash']} for row in payload['sentences']]
+  for vote in proof['receipt']['independent_decisions']:vote['requests']=copy.deepcopy(requests)
   history={**state,'scope_only':False,'historical_only':True,'frozen_control_receipts':{'a':'receipt'}}
   return state,proof,history
  def test_stale_scope_or_unverified_history_cannot_be_imported(self):
@@ -33,6 +36,8 @@ class VerifiedControlHandoffTests(unittest.TestCase):
   bad=copy.deepcopy(proof);bad['receipt']['input_hash']='stale'
   with patch.object(h,'controls_valid',return_value=True),self.assertRaises(ValueError):h.verify_artifacts(scope,bad,history,123,'2026-11-10')
   with patch.object(h,'controls_valid',return_value=False),self.assertRaises(ValueError):h.verify_artifacts(scope,proof,history,123,'2026-11-10')
+  bad=copy.deepcopy(proof);bad['receipt']['independent_decisions'][1]['requests'][0]['input_hash']='another target or context'
+  with patch.object(h,'controls_valid',return_value=True),self.assertRaises(ValueError):h.verify_artifacts(scope,bad,history,123,'2026-11-10')
   bad=copy.deepcopy(proof);bad['receipt']['coverage_audit']['issues']=[{'reason':'missing quantifier'}]
   with patch.object(h,'controls_valid',return_value=True),self.assertRaises(ValueError):h.verify_artifacts(scope,bad,history,123,'2026-11-10')
  def test_install_preserves_news_and_images_and_never_targets_regular_production(self):

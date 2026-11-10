@@ -147,3 +147,15 @@ class ReasoningOutputContractTests(unittest.TestCase):
    self.assertIn('JSON response contract',first['prompt'])
    self.assertIn(json.dumps(schema,separators=(',',':'),ensure_ascii=False),first['prompt'])
    self.assertNotIn('json_schema',first)
+
+class NativePairServingTests(unittest.TestCase):
+ def test_only_review_batches_two_isolated_slots_with_full_context_per_slot(self):
+  import newsletter_cpu as c
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);(root/'llama-server').touch();download=Mock(return_value='/tmp/public.gguf');process=Mock();process.wait.return_value=0
+   with patch.dict(sys.modules,{'huggingface_hub':types.SimpleNamespace(hf_hub_download=download)}),patch.object(c,'verify_weights'),patch.object(c.subprocess,'Popen',return_value=process) as launch,patch.object(c.urllib.request,'urlopen',return_value=types.SimpleNamespace(status=200)):
+    with c.TextModel(root,root,profile='review'):pass
+   args=launch.call_args.args[0]
+   self.assertEqual(args[args.index('--parallel')+1],'2')
+   self.assertEqual(args[args.index('-c')+1],'65536')
+   self.assertIn('--no-context-shift',args)

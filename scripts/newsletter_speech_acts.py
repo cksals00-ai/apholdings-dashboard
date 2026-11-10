@@ -1,9 +1,10 @@
 """Source-blind assertion inventory; disagreement/omission never grants approval."""
 import hashlib,json,re
+from concurrent.futures import ThreadPoolExecutor
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-thinking-inventory-v11'
+REVISION='source-blind-native-focused-pairs-v12'
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
@@ -12,6 +13,10 @@ REASON_LIMIT=200
 RULES="""Inventory factual premises ANYWHERE in each Korean sentence. Do NOT classify only the main speech act. Output factual_premise_present if ANY assertion or presupposition needs factual support, even inside a proposal, question or conditional. Output no_factual_premise when there is NO asserted/presupposed fact: this category includes pure proposals, hypotheticals, questions and checking instructions. These are not uncertain just because they are not assertions. Use uncertain only when you cannot determine factual scope; uncertainty blocks approval.
 A whether-question does not assert its answer; a hypothetical antecedent does not assert that its event happened. However, a definite noun phrase, factual relative clause or existing report can presuppose facts even when the main verb is a checking instruction or the main clause is conditional. Reports assert the report's existence and attributed content, not necessarily the truth of that content. Preserve negation, attribution and conditional scope.
 Select maximal self-contained factual constituents, including their subject/domain, quantifiers, qualifications, negation and report attribution/content. Never return a bare predicate that drops these parts, or a bare checking verb/report noun that omits reported content. Exclude outside proposed main actions, but retain original full-sentence context. Quote each factual constituent verbatim from the original sentence as text. Copy the complete factual phrase including its subject/domain and qualifiers. Preserve original particles and punctuation where present. A uniquely located noun phrase that ends before a Korean grammatical case particle is conservatively extended to the original whole word; lexical or negative endings are never guessed. Never calculate numeric offsets, translate, paraphrase, omit interior words, or change whitespace. The program maps unique literal quotations to exact WORD IDs; ambiguous quotations block approval. Cover each sentence exactly once. title/summary/fact cannot have no_factual_premise. First give one concise scope reason under200 characters, without repeating/translating the sentence; then choose kind and literal quotations. No source material or preferred answers are supplied."""
+def focused_request(payload,row):
+ request={'revision':REVISION,'context':payload,'sentences':[row]}
+ request['input_hash']=hashlib.sha256(json.dumps(request,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+ return request
 def classify(model,story):
  rows=[];offsets={}
  for field in FIELDS:
@@ -60,12 +65,26 @@ def classify(model,story):
    out[key]=(kind,tuple(sorted(ranges)))
   if set(out)!=expected:raise ValueError('Speech-act coverage incomplete')
   return out
- raw=[];votes=[]
- schema=s.obj({'input_hash':{'type':'string','enum':[payload['input_hash']]},'sentences':{'type':'array','minItems':len(rows),'maxItems':len(rows),'items':{'anyOf':branches}}})
- for role in ('Independent speech-act analyst. ','Independent presupposition and scope analyst. '):
-  answer=model.ask(role+RULES,json.dumps(payload,ensure_ascii=False),tokens=2600,schema=schema)
-  raw.append(answer);votes.append(normalize(answer,set(indexed),payload['input_hash']))
- if votes[0]!=votes[1]:raise ValueError('Independent speech-act disagreement')
+ raw=[{'input_hash':payload['input_hash'],'sentences':[],'requests':[]} for _ in range(2)];votes=[{},{}]
+ roles=('Independent speech-act analyst. ','Independent presupposition and scope analyst. ')
+ # Each native reasoning call has one complete target, never a large output
+ # inventory to repeatedly recount. Both analysts see identical full context
+ # and no other analyst's answer. Separate server slots batch their decoding.
+ with ThreadPoolExecutor(max_workers=2) as pool:
+  for row,branch in zip(rows,branches):
+   key=(row['field'],row['id'])
+   focused=focused_request(payload,row)
+   schema=s.obj({'input_hash':{'type':'string','enum':[focused['input_hash']]},'sentences':{'type':'array','minItems':1,'maxItems':1,'items':{'anyOf':[branch]}}})
+   instruction=RULES+' Return exactly the single target in sentences; context is the complete original draft for interpretation only, not additional output rows. Do not classify another context sentence or count its rows.'
+   question=json.dumps(focused,ensure_ascii=False)
+   futures=[pool.submit(model.ask,role+instruction,question,tokens=900,schema=schema) for role in roles]
+   decisions=[]
+   for i,future in enumerate(futures):
+    answer=future.result();decision=normalize(answer,{key},focused['input_hash']);decisions.append(decision)
+    votes[i].update(decision);raw[i]['sentences'].extend(answer['sentences'])
+    raw[i]['requests'].append({'field':key[0],'id':key[1],'input_hash':focused['input_hash']})
+   if decisions[0]!=decisions[1]:raise ValueError('Independent speech-act disagreement')
+ if votes[0]!=votes[1] or set(votes[0])!=set(indexed):raise ValueError('Independent speech-act coverage incomplete')
  inventory=[];facts={f:[] for f in FIELDS}
  for key,(kind,ranges) in votes[0].items():
   row=indexed[key];parts=[]

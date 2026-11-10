@@ -19,13 +19,13 @@ class SpeechActTests(unittest.TestCase):
  def story(self):return {'title':'공식 기능 발표','summary':'새 기능을 발표했다.','fact':'공식 기능을 제공한다.','insight':'AP가 설계한다면 권한을 나누자.','action':'제공 지역을 확인한다.'}
  def test_source_blind_independent_passes_and_coverage_keep_draft(self):
   model,calls=self.setup_model();story=self.story();before=copy.deepcopy(story);out=classify(model,story)
-  self.assertEqual(story,before);self.assertEqual(model.ask.call_count,3)
+  self.assertEqual(story,before);self.assertEqual(model.ask.call_count,11)
   self.assertEqual(calls[0],calls[1]);self.assertTrue(all('inventory' not in x for x in calls[:2]))
   self.assertEqual(out['facts']['title'][0]['text'],'공식 기능 발표');self.assertEqual(out['facts']['action'],[])
  def test_disagreement_cannot_exempt_a_sentence(self):
   model,_=self.setup_model(disagree=True)
   with self.assertRaisesRegex(ValueError,'disagreement'):classify(model,self.story())
-  self.assertEqual(model.ask.call_count,2)
+  self.assertEqual(model.ask.call_count,10)
  def test_coverage_omission_blocks_even_when_both_classifiers_agree(self):
   model,_=self.setup_model(omission=True)
   with self.assertRaisesRegex(ValueError,'coverage'):classify(model,self.story())
@@ -187,7 +187,7 @@ class KoreanParticleAlignmentTests(unittest.TestCase):
   model,_=SpeechActTests().setup_model();base=model.ask.side_effect
   def answer(role,question,**kw):
    raw=base(role,question,**kw)
-   if 'sentences' in raw:next(x for x in raw['sentences'] if x['field']=='fact')['premises']=[{'text':'기능을 제공'}]
+   if 'sentences' in raw and raw['sentences'][0]['field']=='fact':next(x for x in raw['sentences'] if x['field']=='fact')['premises']=[{'text':'기능을 제공'}]
    return raw
   model.ask.side_effect=answer
   with self.assertRaisesRegex(ValueError,'cuts a word'):classify(model,story)
@@ -197,7 +197,7 @@ class TerminalPunctuationAlignmentTests(unittest.TestCase):
   story=SpeechActTests().story();model,_=SpeechActTests().setup_model();base=model.ask.side_effect
   def answer(role,question,**kw):
    raw=base(role,question,**kw)
-   if 'sentences' in raw:next(x for x in raw['sentences'] if x['field']=='fact')['premises']=[{'text':'공식 기능을 제공한다'}]
+   if 'sentences' in raw and raw['sentences'][0]['field']=='fact':next(x for x in raw['sentences'] if x['field']=='fact')['premises']=[{'text':'공식 기능을 제공한다'}]
    return raw
   model.ask.side_effect=answer;self.assertEqual(classify(model,story)['facts']['fact'][0]['text'],'공식 기능을 제공한다.')
 
@@ -208,33 +208,33 @@ class QuantifierScopeAgreementTests(unittest.TestCase):
   def answer(role,question,**kw):
    nonlocal count
    raw=base(role,question,**kw)
-   if 'sentences' in raw:
+   if 'sentences' in raw and raw['sentences'][0]['field']=='action':
     count+=1;row=next(x for x in raw['sentences'] if x['field']=='action')
     row.update(kind='factual_premise_present',premises=[{'text':'학생에게 효과가 입증된 기능' if count==1 else '모든 학생에게 효과가 입증된 기능을'}])
    return raw
   model.ask.side_effect=answer
   with self.assertRaisesRegex(ValueError,'disagreement'):classify(model,story)
-  self.assertEqual(model.ask.call_count,2)
+  self.assertEqual(model.ask.call_count,10)
  def test_case_particle_variants_agree_only_on_the_exact_original_whole_words(self):
   story=SpeechActTests().story();story['action']='AP가 얻은 기회를 활용한다.'
   model,_=SpeechActTests().setup_model();base=model.ask.side_effect;count=0
   def answer(role,question,**kw):
    nonlocal count
    raw=base(role,question,**kw)
-   if 'sentences' in raw:
+   if 'sentences' in raw and raw['sentences'][0]['field']=='action':
     count+=1;row=next(x for x in raw['sentences'] if x['field']=='action')
     row.update(kind='factual_premise_present',premises=[{'text':'AP가 얻은 기회' if count==1 else 'AP가 얻은 기회를'}])
    return raw
   model.ask.side_effect=answer;part=classify(model,story)['facts']['action'][0]
-  self.assertEqual(part['text'],'AP가 얻은 기회를');self.assertEqual((part['word_start'],part['word_end']),(0,2));self.assertEqual(model.ask.call_count,3)
+  self.assertEqual(part['text'],'AP가 얻은 기회를');self.assertEqual((part['word_start'],part['word_end']),(0,2));self.assertEqual(model.ask.call_count,11)
 
 class IndependentWholeInventoryTests(unittest.TestCase):
  def test_two_whole_draft_blind_passes_share_no_answers_and_global_audit_follows(self):
   model,calls=SpeechActTests().setup_model();receipt=classify(model,SpeechActTests().story())
-  self.assertEqual(len(calls),3);self.assertEqual(calls[0],calls[1])
-  for q in calls[:2]:
-   self.assertEqual(len(q['sentences']),5);self.assertNotIn('inventory',q);self.assertNotIn('decisions',q)
-  self.assertEqual(len(calls[2]['draft']['sentences']),5)
+  self.assertEqual(len(calls),11);self.assertEqual(calls[0],calls[1])
+  for q in calls[:-1]:
+   self.assertEqual(len(q['sentences']),1);self.assertEqual(len(q['context']['sentences']),5);self.assertNotIn('inventory',q);self.assertNotIn('decisions',q)
+  self.assertEqual(len(calls[-1]['draft']['sentences']),5)
   self.assertTrue(all(len(v['sentences'])==5 for v in receipt['independent_decisions']))
 
 class ScopeParticleOmissionTests(unittest.TestCase):
@@ -249,3 +249,16 @@ class ScopeParticleOmissionTests(unittest.TestCase):
      return raw
     model.ask.side_effect=answer
     with self.assertRaisesRegex(ValueError,'cuts a word'):classify(model,story)
+
+class FocusedNativePairTests(unittest.TestCase):
+ def test_one_complete_target_per_pair_retains_global_context_and_final_audit(self):
+  model,calls=SpeechActTests().setup_model();receipt=classify(model,SpeechActTests().story())
+  self.assertEqual(len(calls),11)
+  for i in range(0,10,2):
+   self.assertEqual(calls[i],calls[i+1]);self.assertEqual(len(calls[i]['sentences']),1)
+   self.assertEqual(len(calls[i]['context']['sentences']),5)
+   self.assertNotIn('inventory',calls[i]);self.assertNotIn('decisions',calls[i])
+  self.assertEqual(len(calls[-1]['draft']['sentences']),5)
+  self.assertEqual(len(receipt['independent_decisions']),2)
+  for vote in receipt['independent_decisions']:
+   self.assertEqual(len(vote['sentences']),5);self.assertEqual(len(vote['requests']),5)

@@ -2,7 +2,7 @@
 import argparse,base64,hashlib,json,os,re,shutil,subprocess
 from pathlib import Path
 from newsletter_frozen_controls import controls_valid
-from newsletter_speech_acts import FIELDS,REVISION
+from newsletter_speech_acts import FIELDS,REVISION,focused_request
 from newsletter_scope_controls import CASES
 from newsletter_review_spans import request_for
 REPO='cksals00-ai/apholdings-dashboard'
@@ -17,12 +17,15 @@ def verify_execution(run,jobs,workflow,head,runtime,digest,source_run):
  for job in rows:
   step='Verify '+expected[job['name']]+' controls on native-thinking CPU verifier'
   if job.get('status')!='completed' or job.get('conclusion')!='success' or not any(x.get('name')==step and x.get('conclusion')=='success' for x in job.get('steps',[])):raise ValueError('Both actual control executions must succeed')
-def scope_hash(draft):
+def scope_payload(draft):
  rows=[]
  for field in FIELDS:
   for span in request_for(field,draft[field],'source-blind')['spans']:
    rows.append({'field':field,'id':span['id'],'text':span['text'],'words':[{'id':i,'text':m.group()} for i,m in enumerate(re.finditer(r'\S+',span['text']))]})
- return hashlib.sha256(json.dumps({'revision':REVISION,'sentences':rows},sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+ payload={'revision':REVISION,'sentences':rows}
+ payload['input_hash']=hashlib.sha256(json.dumps(payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+ return payload
+def scope_hash(draft):return scope_payload(draft)['input_hash']
 def verify_artifacts(scope,proof,history,source_run,day):
  for state,mode in ((scope,'scope'),(history,'historical')):
   if any(state.get(k)!=v for k,v in {'date':day,'mode':'test','asset_day':f'{day}-test-{source_run}','historical_controls_only':True,'scope_only':mode=='scope','historical_only':mode=='historical'}.items()):raise ValueError('Control artifact identity mismatch')
@@ -31,6 +34,9 @@ def verify_artifacts(scope,proof,history,source_run,day):
  if receipt.get('revision')!=REVISION or receipt.get('input_hash')!=digest or receipt.get('coverage_audit',{}).get('complete') is not True or receipt.get('coverage_audit',{}).get('issues')!=[]:raise ValueError('Complete current source-blind scope audit required')
  raw=receipt.get('independent_decisions',[])
  if len(raw)!=2 or any(r.get('input_hash')!=digest for r in raw):raise ValueError('Two actual same-input independent controls required')
+ payload=scope_payload(proof['draft'])
+ expected=[{'field':row['field'],'id':row['id'],'input_hash':focused_request(payload,row)['input_hash']} for row in payload['sentences']]
+ if any(r.get('requests')!=expected for r in raw):raise ValueError('Every native target request must bind the same complete original draft')
  if not controls_valid(history):raise ValueError('Five current historical controls required')
  return history['frozen_control_receipts'],digest
 def install(root,day,execution_run,receipts,provenance,evidence=None):
