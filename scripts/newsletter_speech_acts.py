@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-bounded-deliberation-v19'
+REVISION='source-blind-exhaustive-word-scope-v20'
 REASONING_EFFORT='medium'
 ROLES=('Independent complete factual-content reviewer A. ','Independent complete factual-content reviewer B. ')
 # The legacy internal label denotes ALL certified nonfactual editorial content.
@@ -12,9 +12,9 @@ ROLES=('Independent complete factual-content reviewer A. ','Independent complete
 WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
 INTERNAL_KINDS={v:k for k,v in WIRE_KINDS.items()}
 REASON_LIMIT=200
-RULES="""Determine whether/hypothetical, negation and reporting scopes before selecting content. Exhaustively inventory BOTH outer asserted facts AND embedded asserted/presupposed facts at EVERY depth of the Korean sentence. Neither layer may replace or exclude the other. NEVER decide from the main speech act or a checking/recommendation verb alone. A factually modified definite object retains its presupposed existence/properties outside whether/hypothetical scope even when the main action is proposed, investigated or checked. Output factual_premise_present whenever any such factual premise requires support. Output no_factual_premise only when no asserted/presupposed factual content remains after scope resolution, such as a genuinely nonfactual proposal or open inquiry. Use uncertain only if factual scope cannot be determined; uncertainty blocks approval. 진위를 묻는 절과 사실 수식어가 붙은 특정 대상을 구분한다. 확인·검토 주절만 보고 판정하지 않으며, 의문·가정의 범위 밖에 있는 특정 대상의 수식절과 전제는 사실 근거를 요구한다.
+RULES="""Determine whether/hypothetical, negation and reporting scopes before selecting content. Exhaustively inventory BOTH outer asserted facts AND embedded asserted/presupposed facts at EVERY depth of the Korean sentence. Neither layer may replace or exclude the other. NEVER decide from the main speech act or a checking/recommendation verb alone. A factually modified definite object retains its presupposed existence/properties outside whether/hypothetical scope even when the main action is proposed, investigated or checked. Factual support is required whenever any such factual premise remains. A sentence is entirely nonfactual only when no asserted/presupposed factual content remains after scope resolution, such as a genuinely nonfactual proposal or open inquiry. Use uncertain only if factual scope cannot be determined; uncertainty blocks approval. 진위를 묻는 절과 사실 수식어가 붙은 특정 대상을 구분한다. 확인·검토 주절만 보고 판정하지 않으며, 의문·가정의 범위 밖에 있는 특정 대상의 수식절과 전제는 사실 근거를 요구한다.
 A whether-question does not assert its answer; a hypothetical antecedent does not assert that its event happened. However, a definite noun phrase, factual relative clause or existing report can presuppose facts even when the main verb is a checking instruction or the main clause is conditional. Reports assert the report's existence and attributed content, not necessarily the truth of that content. Preserve negation, attribution and conditional scope. When a report/explanation is presented as an actual event outside a hypothetical or whether-question, its speaker/source, entire reported proposition AND completed reporting predicate form the factual premise together. The asserted reporting act is not metadata or an excluded proposed action. Exclude only genuinely nonfactual recommended/checking main actions. If the reporting act itself is under a whether-question or hypothetical, do not assert that it occurred. 실제로 있었다고 서술한 설명·발표·보고는 귀속·내용뿐 아니라 그 보고 행위까지 사실 전제로 보존한다. 이를 제안된 행동이나 메타데이터로 제외하지 않는다.
-Select maximal self-contained factual constituents including subject/domain, quantifiers, qualifications, negation and report attribution/content; exclude outside proposed main actions. For each premise select first_word_id and last_word_id directly from the displayed words list. These are provided word IDs, NOT character offsets or counts. Never generate or retype a quotation: the program copies the entire original words and intervening whitespace. Do not omit a domain, qualification, attribution or negation. For title/summary/fact identify the underlying factual headline/report content even when phrased as a noun phrase or infinitive; these fields cannot be exempted as nonfactual. Cover only the requested target once. First select kind and exact provided word anchors consistently. Only after that give one concise scope reason under200 characters without restating the format or hash. The reason is a short justification after the decision, not an interrupted analysis before it. No source material or preferred answers are supplied. Uncertainty blocks approval."""
+Select maximal self-contained factual constituents including subject/domain, quantifiers, qualifications, negation and report attribution/content; exclude outside proposed main actions. Assign EVERY displayed word ID exactly one word_scope label: factual when that whole original word belongs to any asserted/presupposed factual constituent, nonfactual when outside all such constituents, uncertain only when its scope cannot be determined. Nested factual layers label the same word factual once; do not list overlapping ranges or retype quotations. The program derives contiguous factual runs from your exhaustive word map and copies exact original words. Do not omit a domain, qualification, attribution or negation. For title/summary/fact identify the underlying factual headline/report content even when phrased as a noun phrase or infinitive; these fields cannot be entirely nonfactual. Cover only the requested target once. Give all word labels before one concise scope reason under200 characters. The reason is a short justification after the decision, not an interrupted analysis before it. No source material or preferred answers are supplied. Uncertainty blocks approval."""
 def focused_request(payload,row):
  # Plain original context has no competing row lists or nested request hashes.
  # Both target and full original draft participate in the one root hash.
@@ -32,44 +32,26 @@ def classify(model,story):
  payload['input_hash']=hashlib.sha256(json.dumps(payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
  branches=[]
  for row in rows:
-  ids=list(range(len(row['words'])))
-  range_schema=s.obj({'first_word_id':{'type':'integer','enum':ids},'last_word_id':{'type':'integer','enum':ids}})
-  choices=[]
-  # Encode the same invariants independently enforced by normalize below.
-  # Decide before the length-constrained justification: grammar must never
-  # terminate a partial analysis before choosing a label and factual range.
-  for kind in WIRE_KINDS:
-   if kind=='no_factual_premise' and row['field'] in ('title','summary','fact'):continue
-   premises={'type':'array','maxItems':0 if kind=='no_factual_premise' else 8,'items':range_schema}
-   if kind=='factual_premise_present':premises['minItems']=1
-   choices.append(s.obj({'field':{'type':'string','enum':[row['field']]},'id':{'type':'integer','enum':[row['id']]},'kind':{'type':'string','enum':[kind]},'premises':premises,'reason':s.string(REASON_LIMIT)}))
-  branches.append({'oneOf':choices})
+  scope=s.obj({str(w['id']):{'type':'string','enum':['factual','nonfactual','uncertain']} for w in row['words']})
+  branches.append(s.obj({'field':{'type':'string','enum':[row['field']]},'id':{'type':'integer','enum':[row['id']]},'word_scope':scope,'reason':s.string(REASON_LIMIT)}))
  indexed={(r['field'],r['id']):r for r in rows}
  def normalize(raw,expected,request_hash):
   if not isinstance(raw,dict) or set(raw)!={'input_hash','sentences'} or raw['input_hash']!=request_hash or not isinstance(raw['sentences'],list):raise ValueError('Stale speech-act inventory')
   out={}
   for row in raw['sentences']:
-   if not isinstance(row,dict) or set(row)!={'field','id','kind','premises','reason'} or not isinstance(row['field'],str) or type(row['id'])is not int:raise ValueError('Malformed speech-act inventory')
+   if not isinstance(row,dict) or set(row)!={'field','id','word_scope','reason'} or not isinstance(row['field'],str) or type(row['id'])is not int:raise ValueError('Malformed speech-act inventory')
    key=(row['field'],row['id'])
-   if key not in indexed or key in out or not isinstance(row['kind'],str) or row['kind'] not in WIRE_KINDS or not isinstance(row['reason'],str) or len(row['reason'].strip())<10 or len(row['reason'])>REASON_LIMIT or not isinstance(row['premises'],list) or len(row['premises'])>8:raise ValueError('Invalid speech-act coverage')
-   kind=WIRE_KINDS[row['kind']]
-   if kind=='uncertain':raise ValueError('Uncertain speech act')
-   if kind=='pure_proposal' and (row['field'] in ('title','summary','fact') or row['premises']):raise ValueError('Invalid pure-proposal exemption')
-   if kind=='asserted_or_mixed' and not row['premises']:raise ValueError('Asserted premise inventory missing')
+   if key not in indexed or key in out or not isinstance(row['reason'],str) or len(row['reason'].strip())<10 or len(row['reason'])>REASON_LIMIT:raise ValueError('Invalid speech-act coverage')
+   scope=row['word_scope'];ids={str(w['id']) for w in indexed[key]['words']}
+   if not isinstance(scope,dict) or set(scope)!=ids or any(type(v)is not str or v not in ('factual','nonfactual','uncertain') for v in scope.values()):raise ValueError('Every original word ID needs exactly one valid scope label')
+   if 'uncertain' in scope.values():raise ValueError('Uncertain speech act')
+   factual=[i for i in range(len(ids)) if scope[str(i)]=='factual']
+   if not factual and row['field'] in ('title','summary','fact'):raise ValueError('Invalid pure-proposal exemption')
    ranges=[]
-   for part in row['premises']:
-    if not isinstance(part,dict) or set(part)!={'first_word_id','last_word_id'}:raise ValueError('Invalid factual word anchors')
-    begin,end=part['first_word_id'],part['last_word_id']
-    if type(begin)is not int or type(end)is not int or not 0<=begin<=end<len(offsets[key]):raise ValueError('Invalid factual word anchors')
-    pair=(begin,end)
-    if pair in ranges:raise ValueError('Duplicate factual range')
-    ranges.append(pair)
-   canonical=[]
-   for begin,end in sorted(ranges):
-    if canonical and begin<=canonical[-1][1]:raise ValueError('Overlapping factual word ranges')
-    if canonical and begin==canonical[-1][1]+1:canonical[-1]=(canonical[-1][0],end)
-    else:canonical.append((begin,end))
-   out[key]=(kind,tuple(canonical))
+   for i in factual:
+    if ranges and i==ranges[-1][1]+1:ranges[-1]=(ranges[-1][0],i)
+    else:ranges.append((i,i))
+   out[key]=('asserted_or_mixed' if factual else 'pure_proposal',tuple(ranges))
   if set(out)!=expected:raise ValueError('Speech-act coverage incomplete')
   return out
  raw=[{'input_hash':payload['input_hash'],'sentences':[],'requests':[]} for _ in range(2)];votes=[{},{}]
