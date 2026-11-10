@@ -9,6 +9,12 @@ class HarmonyBoundaryTests(unittest.TestCase):
  def test_multiple_naturally_completed_analysis_messages_are_preserved(self):
   raw=self.analysis();raw['content']='First scope check.<|end|>'+ANALYSIS_HEAD+'Second independent clause check.<|end|>'
   self.assertEqual(finished_analysis(raw),raw['content']+FINAL_HEAD)
+ def test_observed_declared_response_format_header_is_a_real_final_transition(self):
+  header='<|start|>assistant<|channel|>final <|constrain|>review<|message|>'
+  raw=self.analysis();raw.update(stopping_word=header,tokens=[123,200007,200006,173781,200005,17196,220,200003,37404,200008])
+  self.assertEqual(finished_analysis(raw),raw['content']+header)
+  raw['stopping_word']=header.replace('review','other')
+  with self.assertRaises(ValueError):finished_analysis(raw)
  def test_message_end_alone_does_not_manufacture_final_header(self):
   for change in ({'stopping_word':'<|end|>'},{'stop_type':'limit'},{'stopping_word':'<|call|>'},{'stopping_word':'<|return|>'},{'tokens':[]},{'tokens':[123,200007,200008]},{'truncated':True}):
    raw=self.analysis();raw.update(change)

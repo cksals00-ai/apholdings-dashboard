@@ -8,7 +8,10 @@ ANALYSIS_HEAD='<|start|>assistant<|channel|>analysis<|message|>'
 FINAL_HEAD='<|start|>assistant<|channel|>final<|message|>'
 # IDs inspected in the SHA-pinned GGUF vocabulary, not inferred from output.
 FINAL_IDS=(200006,173781,200005,17196,200008)
-PROTOCOL='harmony-low-v1'
+FORMAT_HEAD='<|start|>assistant<|channel|>final <|constrain|>review<|message|>'
+FORMAT_IDS=(200006,173781,200005,17196,220,200003,37404,200008)
+FINAL_HEADERS={FINAL_HEAD:FINAL_IDS,FORMAT_HEAD:FORMAT_IDS}
+PROTOCOL='harmony-low-v2-typed-final'
 
 def data(value):return value.replace('<|','<\u200b|')
 
@@ -37,7 +40,8 @@ def intact(raw):
 def finished_analysis(raw):
  intact(raw)
  ids=tokens(raw)
- if raw.get('stop_type')!='word' or raw.get('stopping_word')!=FINAL_HEAD or ids[-len(FINAL_IDS)-1:]!=[200007,*FINAL_IDS]:raise ValueError('Natural complete assistant-final transition required')
+ header=raw.get('stopping_word');expected=FINAL_HEADERS.get(header)
+ if raw.get('stop_type')!='word' or expected is None or ids[-len(expected)-1:]!=[200007,*expected]:raise ValueError('Natural complete assistant-final transition required')
  text=raw.get('content')
  if not isinstance(text,str):raise ValueError('Missing native analysis')
  # The caller already supplied the first analysis header. Further analysis
@@ -53,7 +57,7 @@ def finished_analysis(raw):
   if not remaining.startswith(ANALYSIS_HEAD):raise ValueError('Unexpected native role/channel or tool recipient')
   remaining=remaining[len(ANALYSIS_HEAD):]
  if not nonempty:raise ValueError('Missing native analysis')
- return text+FINAL_HEAD
+ return text+header
 
 def finished_answer(raw):
  intact(raw)

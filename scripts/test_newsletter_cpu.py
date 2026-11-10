@@ -73,12 +73,19 @@ class InstructVerifierTests(unittest.TestCase):
    with self.assertRaises(ValueError):c.verify_weights(path,hashlib.sha256(b'known weights').hexdigest())
 
 
-from newsletter_harmony import FINAL_HEAD,FINAL_IDS
+from newsletter_harmony import FINAL_HEAD,FINAL_IDS,FORMAT_HEAD,FORMAT_IDS
 
 def harmony_trace():return {'content':'Resolve the original clause scope without inventing an event.<|end|>','stop_type':'word','stopping_word':FINAL_HEAD,'tokens':[123,200007,*FINAL_IDS]}
 def harmony_final():return {'content':'{"supported":true}','stop_type':'eos','tokens':[123,200002]}
 
 class HarmonyReviewTests(unittest.TestCase):
+ def test_declared_typed_final_header_stops_before_any_final_json_is_generated(self):
+  trace=harmony_trace();trace.update(stopping_word=FORMAT_HEAD,tokens=[123,200007,*FORMAT_IDS])
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in (trace,harmony_final())]) as call:
+   self.assertEqual(TextModel('.',folder,profile='review').ask('Verify','Original'),{'supported':True})
+   first,last=[json.loads(x.args[0].data) for x in call.call_args_list]
+   self.assertIn(FINAL_HEAD,first['stop']);self.assertIn(FORMAT_HEAD,first['stop'])
+   self.assertEqual(last['prompt'],first['prompt']+trace['content']+FORMAT_HEAD)
  def test_native_final_header_is_observed_before_json_grammar_is_applied(self):
   with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in (harmony_trace(),harmony_final())]) as call:
    result=TextModel('.',folder,profile='review').ask('Verify','Original',schema={'type':'object'})
@@ -91,7 +98,7 @@ class HarmonyReviewTests(unittest.TestCase):
    self.assertNotIn('ignore_eos',one);self.assertNotIn('presence_penalty',one)
    receipts=[json.loads(p.read_text()) for p in (Path(folder)/'model-outputs').glob('*.json')]
    self.assertEqual({r['_ap_runtime']['phase'] for r in receipts},{'reasoning','answer'})
-   self.assertTrue(all(r['_ap_runtime']['native_reasoning'] is True and r['_ap_runtime']['protocol']=='harmony-low-v1' for r in receipts))
+   self.assertTrue(all(r['_ap_runtime']['native_reasoning'] is True and r['_ap_runtime']['protocol']=='harmony-low-v2-typed-final' for r in receipts))
  def test_message_end_tool_call_or_missing_tokens_cannot_be_forced_to_final(self):
   for change in ({'stopping_word':'<|end|>'},{'stopping_word':'<|call|>'},{'stop_type':'limit'},{'tokens':[]}):
    raw=harmony_trace();raw.update(change)
