@@ -1,6 +1,8 @@
 """Reuse successful immutable control evidence, never source/copy/art from a prior issue."""
 import argparse,base64,hashlib,json,os,re,shutil,subprocess
 from pathlib import Path
+from datetime import date,datetime
+from zoneinfo import ZoneInfo
 from newsletter_frozen_controls import controls_valid
 from newsletter_speech_acts import FIELDS,REVISION,focused_request
 from newsletter_scope_controls import CASES
@@ -26,9 +28,26 @@ def scope_payload(draft):
  payload['input_hash']=hashlib.sha256(json.dumps(payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
  return payload
 def scope_hash(draft):return scope_payload(draft)['input_hash']
-def verify_artifacts(scope,proof,history,source_run,day):
+def execution_days(jobs,edition_day):
+ expected={f'controls ({mode}, --{mode}-only)':mode for mode in ('scope','historical')};days={}
+ for job in jobs.get('jobs',[]):
+  mode=expected.get(job.get('name'))
+  if mode is None or mode in days:raise ValueError('Ambiguous actual control execution calendar')
+  steps=[step for step in job.get('steps',[]) if step.get('name')=='Verify '+mode+' controls on native-thinking CPU verifier']
+  if len(steps)!=1:raise ValueError('Missing actual control start time')
+  try:
+   instant=datetime.fromisoformat(steps[0]['started_at'].replace('Z','+00:00'))
+   if instant.tzinfo is None:raise ValueError('Unzoned control start')
+   actual=instant.astimezone(ZoneInfo('Asia/Seoul')).date()
+   if actual>date.fromisoformat(edition_day):raise ValueError('Future control execution')
+  except (KeyError,AttributeError,TypeError,ValueError) as exc:raise ValueError('Actual control execution day is unknown or future') from exc
+  days[mode]=actual.isoformat()
+ if set(days)!={'scope','historical'}:raise ValueError('Both actual control execution days required')
+ return days
+def verify_artifacts(scope,proof,history,source_run,day,control_days=None):
  for state,mode in ((scope,'scope'),(history,'historical')):
-  if any(state.get(k)!=v for k,v in {'date':day,'mode':'test','asset_day':f'{day}-test-{source_run}','historical_controls_only':True,'scope_only':mode=='scope','historical_only':mode=='historical'}.items()):raise ValueError('Control artifact identity mismatch')
+  actual_day=control_days[mode] if control_days is not None else day
+  if any(state.get(k)!=v for k,v in {'date':actual_day,'mode':'test','asset_day':f'{actual_day}-test-{source_run}','historical_controls_only':True,'scope_only':mode=='scope','historical_only':mode=='historical'}.items()):raise ValueError('Control artifact identity mismatch')
  if proof.get('synthetic_regression_only') is not True or proof.get('draft',{}).get('action')!=' '.join(CASES):raise ValueError('Actual current scope dataset required')
  receipt=proof.get('receipt',{});digest=scope_hash(proof['draft'])
  if receipt.get('revision')!=REVISION or receipt.get('input_hash')!=digest or receipt.get('coverage_audit',{}).get('complete') is not True or receipt.get('coverage_audit',{}).get('issues')!=[]:raise ValueError('Complete current source-blind scope audit required')
@@ -56,8 +75,9 @@ def restore(source_run,head,runtime,digest,root,day,folder):
   target=folder/mode;target.mkdir(parents=True,exist_ok=True)
   subprocess.run(['gh','run','download',str(source_run),'--repo',REPO,'--name',f'ap-news-editorial-controls-{source_run}-{mode}','--dir',str(target)],check=True)
  read=lambda p:json.loads(p.read_text())
- receipts,scope_digest=verify_artifacts(read(folder/'scope/controls.json'),read(folder/'scope/scope-controls.json'),read(folder/'historical/controls.json'),source_run,day)
- provenance={'source_run':source_run,'url':f'https://github.com/{REPO}/actions/runs/{source_run}','runtime':runtime,'head_sha':head,'definition_sha256':digest,'scope_input_hash':scope_digest}
+ control_days=execution_days(jobs,day)
+ receipts,scope_digest=verify_artifacts(read(folder/'scope/controls.json'),read(folder/'scope/scope-controls.json'),read(folder/'historical/controls.json'),source_run,day,control_days=control_days)
+ provenance={'source_run':source_run,'url':f'https://github.com/{REPO}/actions/runs/{source_run}','runtime':runtime,'head_sha':head,'definition_sha256':digest,'scope_input_hash':scope_digest,'actual_control_days':control_days,'rehearsal_day':day}
  install(root,day,os.environ['GITHUB_RUN_ID'],receipts,provenance,evidence=folder)
  print('Reused successful exact-runtime scope and historical evidence; fresh news/source/art generation remains required')
 if __name__=='__main__':

@@ -58,3 +58,17 @@ class VerifiedControlHandoffTests(unittest.TestCase):
    evidence=Path(folder)/'evidence';raw=evidence/'scope/model-outputs/raw.json';raw.parent.mkdir(parents=True);raw.write_bytes(b'actual native receipt')
    h.install(root,'2026-11-10','999',{}, {'source_run':123},evidence=evidence)
    self.assertEqual((root/'.production-state/qualified-control-evidence/scope/model-outputs/raw.json').read_bytes(),raw.read_bytes())
+
+class ControlExecutionCalendarTests(unittest.TestCase):
+ def jobs(self):
+  return {'jobs':[{'name':f'controls ({mode}, --{mode}-only)','steps':[{'name':f'Verify {mode} controls on native-thinking CPU verifier','started_at':'2026-11-10T14:00:00Z'}]} for mode in ('scope','historical')]}
+ def test_synthetic_proof_keeps_actual_execution_day_when_rehearsal_is_next_day(self):
+  self.assertEqual(h.execution_days(self.jobs(),'2026-11-11'),{'scope':'2026-11-10','historical':'2026-11-10'})
+ def test_unknown_unzoned_or_future_execution_day_is_not_guessed(self):
+  for value in (None,'2026-11-10T14:00:00','2026-11-12T14:00:00Z','bad'):
+   jobs=self.jobs();jobs['jobs'][0]['steps'][0]['started_at']=value
+   with self.subTest(value=value),self.assertRaises(ValueError):h.execution_days(jobs,'2026-11-11')
+ def test_proof_day_must_match_real_job_even_when_install_day_differs(self):
+  helper=VerifiedControlHandoffTests();scope,proof,history=helper.proof()
+  with patch.object(h,'controls_valid',return_value=True):h.verify_artifacts(scope,proof,history,123,'2026-11-11',control_days={'scope':'2026-11-10','historical':'2026-11-10'})
+  with patch.object(h,'controls_valid',return_value=True),self.assertRaises(ValueError):h.verify_artifacts(scope,proof,history,123,'2026-11-11',control_days={'scope':'2026-11-11','historical':'2026-11-10'})
