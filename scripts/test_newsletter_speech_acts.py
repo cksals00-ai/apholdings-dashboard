@@ -22,6 +22,7 @@ class SpeechActTests(unittest.TestCase):
   self.assertEqual(story,before);self.assertEqual(model.ask.call_count,11)
   self.assertEqual(calls[0],calls[1]);self.assertTrue(all('inventory' not in x for x in calls[:2]))
   self.assertEqual(out['facts']['title'][0]['text'],'공식 기능 발표');self.assertEqual(out['facts']['action'],[])
+  self.assertTrue(all(call.kwargs.get('reasoning_effort')=='medium' for call in model.ask.call_args_list))
  def test_disagreement_cannot_exempt_a_sentence(self):
   model,_=self.setup_model(disagree=True)
   with self.assertRaisesRegex(ValueError,'disagreement'):classify(model,self.story())

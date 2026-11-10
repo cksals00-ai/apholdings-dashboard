@@ -79,6 +79,14 @@ def harmony_trace():return {'content':'Resolve the original clause scope without
 def harmony_final():return {'content':'{"supported":true}','stop_type':'eos','tokens':[123,200002]}
 
 class HarmonyReviewTests(unittest.TestCase):
+ def test_effort_is_per_request_and_never_leaks_into_the_next_request(self):
+  replies=[harmony_trace(),harmony_final(),harmony_trace(),harmony_final()]
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in replies]) as call:
+   model=TextModel('.',folder,profile='review');model.ask('Blind scope','Original',reasoning_effort='medium');model.ask('Source evidence','Original')
+   first,next_request=[json.loads(call.call_args_list[i].args[0].data) for i in (0,2)]
+   self.assertIn('Reasoning: medium',first['prompt']);self.assertIn('Reasoning: low',next_request['prompt'])
+   receipts=[json.loads(p.read_text())['_ap_runtime']['reasoning_effort'] for p in (Path(folder)/'model-outputs').glob('*.json')]
+   self.assertEqual(sorted(receipts),['low','low','medium','medium'])
  def test_declared_typed_final_header_stops_before_any_final_json_is_generated(self):
   trace=harmony_trace();trace.update(stopping_word=FORMAT_HEAD,tokens=[123,200007,*FORMAT_IDS])
   with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in (trace,harmony_final())]) as call:
@@ -98,7 +106,7 @@ class HarmonyReviewTests(unittest.TestCase):
    self.assertNotIn('ignore_eos',one);self.assertNotIn('presence_penalty',one)
    receipts=[json.loads(p.read_text()) for p in (Path(folder)/'model-outputs').glob('*.json')]
    self.assertEqual({r['_ap_runtime']['phase'] for r in receipts},{'reasoning','answer'})
-   self.assertTrue(all(r['_ap_runtime']['native_reasoning'] is True and r['_ap_runtime']['protocol']=='harmony-low-v3-json-final' for r in receipts))
+   self.assertTrue(all(r['_ap_runtime']['native_reasoning'] is True and r['_ap_runtime']['protocol']=='harmony-v4-bounded-effort-json' for r in receipts))
  def test_message_end_tool_call_or_missing_tokens_cannot_be_forced_to_final(self):
   for change in ({'stopping_word':'<|end|>'},{'stopping_word':'<|call|>'},{'stop_type':'limit'},{'tokens':[]}):
    raw=harmony_trace();raw.update(change)
@@ -134,9 +142,9 @@ class HarmonyReviewTests(unittest.TestCase):
   self.assertEqual(c.REVIEW_SHA256,'27cd6c432c7672cb812a92f611cf3ba7bbc35928262bb1e1253ff4ee6ae35901')
  def test_protocol_handshake_is_real_and_does_not_claim_semantic_qualification(self):
   final=harmony_final();final['content']='{"protocol_ok":true}'
-  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in (harmony_trace(),final)]):
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in (harmony_trace(),final,harmony_trace(),final)]):
    model=TextModel('.',folder,profile='review');model.protocol_handshake()
-   proof=json.loads((Path(folder)/'protocol-handshake.json').read_text());self.assertIs(proof['natural_final_header'],True);self.assertIs(proof['semantic_qualification'],False)
+   proof=json.loads((Path(folder)/'protocol-handshake.json').read_text());self.assertIs(proof['natural_final_header'],True);self.assertIs(proof['semantic_qualification'],False);self.assertEqual(proof['efforts'],['low','medium'])
  def test_failed_handshake_creates_no_success_record(self):
   raw=harmony_trace();raw['tokens']=[]
   with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',return_value=io.BytesIO(json.dumps(raw).encode())):

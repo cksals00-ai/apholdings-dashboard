@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import date,datetime
 from zoneinfo import ZoneInfo
 from newsletter_frozen_controls import controls_valid
-from newsletter_speech_acts import FIELDS,REVISION,focused_request
+from newsletter_speech_acts import FIELDS,REVISION,REASONING_EFFORT,focused_request
 from newsletter_scope_controls import CASES
 from newsletter_review_spans import request_for
 REPO='cksals00-ai/apholdings-dashboard'
@@ -50,7 +50,7 @@ def verify_artifacts(scope,proof,history,source_run,day,control_days=None):
   if any(state.get(k)!=v for k,v in {'date':actual_day,'mode':'test','asset_day':f'{actual_day}-test-{source_run}','historical_controls_only':True,'scope_only':mode=='scope','historical_only':mode=='historical'}.items()):raise ValueError('Control artifact identity mismatch')
  if proof.get('synthetic_regression_only') is not True or proof.get('draft',{}).get('action')!=' '.join(CASES):raise ValueError('Actual current scope dataset required')
  receipt=proof.get('receipt',{});digest=scope_hash(proof['draft'])
- if receipt.get('revision')!=REVISION or receipt.get('input_hash')!=digest or receipt.get('coverage_audit',{}).get('complete') is not True or receipt.get('coverage_audit',{}).get('issues')!=[]:raise ValueError('Complete current source-blind scope audit required')
+ if receipt.get('revision')!=REVISION or receipt.get('reasoning_effort')!=REASONING_EFFORT or receipt.get('input_hash')!=digest or receipt.get('coverage_audit',{}).get('complete') is not True or receipt.get('coverage_audit',{}).get('issues')!=[]:raise ValueError('Complete current source-blind scope audit required')
  raw=receipt.get('independent_decisions',[])
  if len(raw)!=2 or any(r.get('input_hash')!=digest for r in raw):raise ValueError('Two actual same-input independent controls required')
  payload=scope_payload(proof['draft'])

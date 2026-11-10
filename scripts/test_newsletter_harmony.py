@@ -32,6 +32,11 @@ class HarmonyBoundaryTests(unittest.TestCase):
   self.assertNotIn('<|call|>',value);self.assertNotIn('<|return|>',value)
   self.assertIn('Reasoning: low',value);self.assertIn('# Response Formats',value)
   self.assertTrue(value.endswith(ANALYSIS_HEAD));self.assertLess(value.index('Trusted policy'),value.index('<|start|>user'))
+ def test_bounded_effort_is_explicit_and_untrusted_text_cannot_change_it(self):
+  self.assertIn('Reasoning: medium',prompt('Policy','Task',{},effort='medium'))
+  self.assertIn('Reasoning: low',prompt('Policy','Task',{}))
+  for effort in ('high','none',True):
+   with self.subTest(effort=effort),self.assertRaises(ValueError):prompt('Policy','Task',{},effort=effort)
  def test_final_requires_actual_return_token_not_tool_handoff_or_guessed_eos(self):
   raw={'content':'{"supported":true}','stop_type':'eos','tokens':[123,200002]}
   self.assertEqual(finished_answer(raw),{'supported':True})
