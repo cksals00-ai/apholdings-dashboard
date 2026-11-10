@@ -2,7 +2,7 @@
 
 The content assistant runs once at04:00 KST to prepare and review the completed bundle, aiming for07:15 handoff. It does not poll delivery. Content preparation still requires the computer and app; no paid AI API or new CPU production path is enabled.
 
-The verified reservation releases at07:40. Public file verification and duplicate-safe registration finish ahead of the08:00 target. New editions have a07:58 mail eligibility time, and the existing mail scheduler runs every minute. Provider acceptance is not inbox delivery. External outages can still miss the target.
+The verified reservation releases at07:40. Public file verification and duplicate-safe registration finish ahead of the08:00 target. New editions have a07:58 mail eligibility time, with additional existing-queue ticks at07:58 and07:59; the ordinary five-minute queue schedule is retained. Provider acceptance is not inbox delivery. External outages can still miss the target.
 
 Pages identifies the deployment with the exact commit archived into its artifact, not the event commit from hours earlier. Artifact names are specific to each run and attempt. A Pages success is followed by actual public byte verification before registration.
 
