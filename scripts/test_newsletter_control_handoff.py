@@ -6,7 +6,7 @@ class VerifiedControlHandoffTests(unittest.TestCase):
  def execution(self):
   runtime='a'*40;head='b'*40;workflow=('ref: '+runtime+'\n').encode();digest=hashlib.sha256(workflow).hexdigest()
   run={'id':123,'status':'completed','conclusion':'success','run_attempt':1,'event':'workflow_dispatch','path':h.WORKFLOW,'head_sha':head,'head_repository':{'full_name':h.REPO}}
-  jobs={'total_count':2,'jobs':[{'name':f'controls ({mode}, --{mode}-only)','status':'completed','conclusion':'success','steps':[{'name':f'Verify {mode} controls on native-thinking CPU verifier','conclusion':'success'}]} for mode in ('scope','historical')]}
+  jobs={'total_count':2,'jobs':[{'name':f'controls ({mode}, --{mode}-only)','status':'completed','conclusion':'success','steps':[{'name':f'Verify {mode} controls on fixed public CPU verifier','conclusion':'success'}]} for mode in ('scope','historical')]}
   return run,jobs,workflow,head,runtime,digest
  def test_both_actual_jobs_and_exact_definition_runtime_are_required(self):
   args=self.execution();h.verify_execution(*args,source_run=123)
@@ -61,7 +61,7 @@ class VerifiedControlHandoffTests(unittest.TestCase):
 
 class ControlExecutionCalendarTests(unittest.TestCase):
  def jobs(self):
-  return {'jobs':[{'name':f'controls ({mode}, --{mode}-only)','steps':[{'name':f'Verify {mode} controls on native-thinking CPU verifier','started_at':'2026-11-10T14:00:00Z'}]} for mode in ('scope','historical')]}
+  return {'jobs':[{'name':f'controls ({mode}, --{mode}-only)','steps':[{'name':f'Verify {mode} controls on fixed public CPU verifier','started_at':'2026-11-10T14:00:00Z'}]} for mode in ('scope','historical')]}
  def test_synthetic_proof_keeps_actual_execution_day_when_rehearsal_is_next_day(self):
   self.assertEqual(h.execution_days(self.jobs(),'2026-11-11'),{'scope':'2026-11-10','historical':'2026-11-10'})
  def test_unknown_unzoned_or_future_execution_day_is_not_guessed(self):

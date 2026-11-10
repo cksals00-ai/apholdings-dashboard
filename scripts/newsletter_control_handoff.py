@@ -17,7 +17,7 @@ def verify_execution(run,jobs,workflow,head,runtime,digest,source_run):
  rows=jobs.get('jobs',[])
  if jobs.get('total_count')!=2 or len(rows)!=2 or {j.get('name') for j in rows}!=set(expected):raise ValueError('Both complete control job inventories required')
  for job in rows:
-  step='Verify '+expected[job['name']]+' controls on native-thinking CPU verifier'
+  step='Verify '+expected[job['name']]+' controls on fixed public CPU verifier'
   if job.get('status')!='completed' or job.get('conclusion')!='success' or not any(x.get('name')==step and x.get('conclusion')=='success' for x in job.get('steps',[])):raise ValueError('Both actual control executions must succeed')
 def scope_payload(draft):
  rows=[]
@@ -33,7 +33,7 @@ def execution_days(jobs,edition_day):
  for job in jobs.get('jobs',[]):
   mode=expected.get(job.get('name'))
   if mode is None or mode in days:raise ValueError('Ambiguous actual control execution calendar')
-  steps=[step for step in job.get('steps',[]) if step.get('name')=='Verify '+mode+' controls on native-thinking CPU verifier']
+  steps=[step for step in job.get('steps',[]) if step.get('name')=='Verify '+mode+' controls on fixed public CPU verifier']
   if len(steps)!=1:raise ValueError('Missing actual control start time')
   try:
    instant=datetime.fromisoformat(steps[0]['started_at'].replace('Z','+00:00'))

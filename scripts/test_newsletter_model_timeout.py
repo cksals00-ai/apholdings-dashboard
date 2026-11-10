@@ -5,11 +5,11 @@ from newsletter_cpu import TextModel
 
 class TimeoutBudgetTests(unittest.TestCase):
  def test_review_has_bounded_cpu_headroom_without_changing_other_profiles(self):
-  for profile,expected in [('copy',1500),('art',1500),('review',3600)]:
-   with self.subTest(profile=profile),tempfile.TemporaryDirectory() as folder:
-    replies=([{'content':'Reason through the original factual scope.','stop_type':'word','stopping_word':'</think>'}] if profile=='review' else [])+[{'content':'{"supported":true,"unsupported_claims":[]}'}]
+  for profile,expected,native in [('copy',1500,False),('art',1500,False),('review',3600,False),('review',3600,True)]:
+   with self.subTest(profile=profile,native=native),tempfile.TemporaryDirectory() as folder:
+    replies=([{'content':'Reason through the original factual scope.','stop_type':'word','stopping_word':'</think>'}] if native else [])+[{'content':'{"supported":true,"unsupported_claims":[]}'}]
     with patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in replies]) as call:
-     value=TextModel('.',folder,profile=profile).ask('source verifier','check',tokens=20)
+     value=TextModel('.',folder,profile=profile,native_reasoning=native).ask('source verifier','check',tokens=20)
     self.assertTrue(value['supported']);self.assertTrue(all(x.kwargs['timeout']==expected for x in call.call_args_list))
     self.assertEqual(call.call_args.args[0].full_url,'http://127.0.0.1:8080/completion')
  def test_timeout_does_not_create_success_receipt(self):

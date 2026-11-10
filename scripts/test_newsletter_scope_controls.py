@@ -3,7 +3,7 @@ from unittest.mock import patch
 from newsletter_scope_controls import check,CASES
 class ScopeProbeTests(unittest.TestCase):
  def receipt(self,negative):
-  return {'inventory':[{'field':'action','id':i,'kind':'pure_proposal' if i in (0,2,6) else 'asserted_or_mixed'} for i in range(len(CASES))],'facts':{'action':[{'sentence_id':7,'text':text} for text in negative]+[{'sentence_id':i,'text':CASES[i]} for i in (8,9,10)]}}
+  return {'inventory':[{'field':'action','id':i,'kind':'pure_proposal' if i in (0,2,6,12) else 'asserted_or_mixed'} for i in range(len(CASES))],'facts':{'action':[{'sentence_id':7,'text':text} for text in negative]+[{'sentence_id':i,'text':CASES[i]} for i in (8,9,10,11)]}}
  def test_correct_negated_attributed_proposition_passes(self):
   with tempfile.TemporaryDirectory() as folder,patch('newsletter_scope_controls.classify',return_value=self.receipt(['학습 효과가 입증되지 않았다는 보고를'])):check(None,folder)
  def test_lost_negation_attribution_or_extra_affirmative_fragment_fails(self):
@@ -17,3 +17,9 @@ class ScopeProbeTests(unittest.TestCase):
    next(x for x in receipt['facts']['action'] if x['sentence_id']==ident)['text']=replacement
    with self.subTest(ident=ident),tempfile.TemporaryDirectory() as folder,patch('newsletter_scope_controls.classify',return_value=receipt):
     with self.assertRaisesRegex(ValueError,'Scope-bearing'):check(None,folder)
+
+ def test_completed_reporting_predicate_cannot_be_discarded_as_metadata(self):
+  receipt=self.receipt(['학습 효과가 입증되지 않았다는 보고를'])
+  next(x for x in receipt['facts']['action'] if x['sentence_id']==11)['text']='업체는 이용 자격을 제한한다고'
+  with tempfile.TemporaryDirectory() as folder,patch('newsletter_scope_controls.classify',return_value=receipt):
+   with self.assertRaisesRegex(ValueError,'Reporting predicate'):check(None,folder)
