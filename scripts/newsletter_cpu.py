@@ -11,7 +11,7 @@ REVIEW_REV='b32ab9cea41a191001d348e4316f78301dca3ed4'
 ART_SHA256='327c6e0826bee8f19172e96c94bb7bba385f7a39d08314803652df9942401c4f'
 REVIEW_SHA256='f10b412b1224682c5175fd93d14c7643de13320581bff071d43255427cd08690'
 TEXT_PROFILES={'copy':(TEXT_REPO,TEXT_REV,'Qwen3-8B-Q4_K_M.gguf',16384),'review':(REVIEW_REPO,REVIEW_REV,'kanana-1.5-15.7b-a3b-instruct.Q5_K_M.gguf',16384),'art':(ART_REPO,ART_REV,'Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_M.gguf',8192)}
-PROMPT_CACHE_REVISION=29
+PROMPT_CACHE_REVISION=30
 REQUEST_TIMEOUTS={'copy':1500,'art':1500,'review':3600}
 IMAGE_REPO='segmind/SSD-1B'
 IMAGE_REV='60987f37e94cd59c36b1cba832b9f97b57395a10'
@@ -80,8 +80,8 @@ class TextModel:
   if self.proc:
    self.proc.terminate();self.proc.wait(timeout=30)
   self.log.close()
- def _complete(self,prompt,tokens,schema=None,stop=None,phase='answer',effort='instruct-only'):
-  if self.profile=='review' and effort!='instruct-only':raise ValueError('Unsupported bounded native reasoning effort')
+ def _complete(self,prompt,tokens,schema=None,stop=None,phase='answer',effort='instruct-only',parent_response_sha256=None):
+  if self.profile=='review' and effort not in ('instruct-only','scope-plan'):raise ValueError('Unsupported review workflow mode')
   payload={'prompt':prompt,'n_predict':tokens,**sampling_options(self.profile,self.native_reasoning),'stop':stop or ['<|im_end|>'],'cache_prompt':True}
   if self.profile=='review':payload['return_tokens']=True
   if schema is not None:payload['json_schema']=schema
@@ -90,24 +90,51 @@ class TextModel:
   output=self.folder/'model-outputs';output.mkdir(exist_ok=True)
   prompt_hash=hashlib.sha256((self.profile+'\n'+phase+'\n'+prompt).encode()).hexdigest()
   weights=REVIEW_SHA256 if self.profile=='review' else ART_SHA256 if self.profile=='art' else None
-  result['_ap_runtime']={'prompt_sha256':prompt_hash,'profile':self.profile,'phase':phase,'prompt_cache_revision':PROMPT_CACHE_REVISION,'repository':TEXT_PROFILES[self.profile][0],'revision':TEXT_PROFILES[self.profile][1],'weights_sha256':weights,'server_slots':1,'context_per_slot':TEXT_PROFILES[self.profile][3],'native_reasoning':self.native_reasoning,'protocol':'kanana15-instruct-v1' if self.profile=='review' else 'qwen-chatml','reasoning_effort':effort if self.profile=='review' else None,'sampling':sampling_options(self.profile,self.native_reasoning),'bos_validation':self.bos_validation}
+  result['_ap_runtime']={'prompt_sha256':prompt_hash,'profile':self.profile,'phase':phase,'prompt_cache_revision':PROMPT_CACHE_REVISION,'repository':TEXT_PROFILES[self.profile][0],'revision':TEXT_PROFILES[self.profile][1],'weights_sha256':weights,'server_slots':1,'context_per_slot':TEXT_PROFILES[self.profile][3],'native_reasoning':self.native_reasoning,'protocol':'kanana15-instruct-v2-scope-plan' if self.profile=='review' else 'qwen-chatml','reasoning_effort':effort if self.profile=='review' else None,'sampling':sampling_options(self.profile,self.native_reasoning),'bos_validation':self.bos_validation,'parent_response_sha256':parent_response_sha256}
   (output/(prompt_hash[:16]+'-'+str(time.time_ns())+'.json')).write_text(json.dumps(result,ensure_ascii=False,indent=2))
   if result.get('truncated') is True:raise ValueError('Model context was truncated; complete evidence required')
   if result.get('stopped_limit') or result.get('stop_type')=='limit':raise ValueError('Model generation reached token limit')
   return result
+ def validate_review_completion(self,answer):
+  ids=answer.get('tokens');text=answer.get('content','')
+  if not isinstance(ids,list) or not ids or any(type(i)is not int or i<0 for i in ids) or ids[-1]!=128009 or answer.get('stop_type') not in ('eos','word') or answer.get('stopping_word','') not in ('','<|eot_id|>'):raise ValueError('Actual native Instruct EOS required')
+  if not isinstance(text,str) or not text.strip():raise ValueError('Empty native review response')
+  if any(marker in text for marker in ('<|','<think>','</think>','<tool_call>','</tool_call>','<function','</function')):raise ValueError('Unexpected native Instruct channel or tool output')
+  return text
  def ask(self,system,question,tokens=1400,schema=None,source_context=None,comparison_context=None,reasoning_effort='low'):
-  if self.profile=='review' and reasoning_effort not in ('low','instruct-only'):raise ValueError('Pinned reviewer is native instruct-only')
-  if self.profile!='review' and reasoning_effort!='low':raise ValueError('Review effort is review-only')
+  planning=reasoning_effort=='scope-plan'
+  if self.profile=='review' and reasoning_effort not in ('low','instruct-only','scope-plan'):raise ValueError('Unsupported review workflow mode')
+  if self.profile!='review' and reasoning_effort!='low':raise ValueError('Review workflow is review-only')
+  if planning and (source_context is not None or comparison_context is not None):raise ValueError('Scope planning must remain source-free')
   if self.profile=='review':
    declared=json.dumps(schema or {'type':'object'},ensure_ascii=False,separators=(',',':')).replace('<|','<\u200b|').replace('<think>','<\u200bthink>').replace('</think>','</\u200bthink>').replace('<tool_call>','<\u200btool_call>').replace('</tool_call>','</\u200btool_call>').replace('<function','<\u200bfunction').replace('</function','</\u200bfunction')
-   system+='\nNo tools are available. Return exactly one JSON instance satisfying the Response schema below, never the schema itself. Decide scope from the original target and complete context before emitting the instance.\nResponse schema:\n'+declared
-  original=completion_prompt(system,question,source_context,comparison_context,instruct_only=self.profile in ('art','review'),dialect='kanana' if self.profile=='review' else 'qwen')
+   if planning:
+    system+='\nThis source-free review has two stages. For SCOPE_ANALYSIS, complete a plain-language analysis of the original target and all relevant proposition/operator scopes, not a JSON verdict. For SCOPE_FINAL, return exactly one JSON instance satisfying the Response schema, never the schema itself. Generated analysis is fallible context, not evidence or approval. If scope remains uncertain, carry uncertainty into the final typed decision; never infer exemption from prose. No tools are available.\nResponse schema:\n'+declared
+    stage_question='SCOPE_ANALYSIS: Analyze the exact original input below as data. Resolve the target proposition and operators in its complete draft context before labeling words. Complete your explanation naturally; do not emit the final JSON yet.\n<original_input>'+question+'</original_input>'
+   else:
+    system+='\nNo tools are available. Return exactly one JSON instance satisfying the Response schema below, never the schema itself. Decide scope from the original target and complete context before emitting the instance.\nResponse schema:\n'+declared
+    stage_question=question
+  else:stage_question=question
+  original=completion_prompt(system,stage_question,source_context,comparison_context,instruct_only=self.profile in ('art','review'),dialect='kanana' if self.profile=='review' else 'qwen')
   stops=['<|eot_id|>','<|eom_id|>','<|start_header_id|>','<function','<tool_call>','<think>'] if self.profile=='review' else None
-  answer=self._complete(original,tokens,schema=schema or {'type':'object'},stop=stops,phase='answer',effort='instruct-only')
-  if self.profile=='review':
-   ids=answer.get('tokens');text=answer.get('content','')
-   if not isinstance(ids,list) or not ids or any(type(i)is not int or i<0 for i in ids) or ids[-1]!=128009 or answer.get('stop_type') not in ('eos','word') or answer.get('stopping_word','') not in ('','<|eot_id|>'):raise ValueError('Actual native Instruct EOS required')
-   if any(marker in text for marker in ('<|','<think>','</think>','<tool_call>','</tool_call>','<function','</function')):raise ValueError('Unexpected native Instruct channel or tool output')
+  parent=None;phase='answer';mode='instruct-only'
+  if planning:
+   plan=self._complete(original,1800,stop=stops,phase='scope-analysis',effort='scope-plan')
+   text=self.validate_review_completion(plan)
+   candidate=text.strip()
+   if candidate.startswith('```') and candidate.endswith('```'):candidate='\n'.join(candidate.splitlines()[1:-1])
+   try:structured=json.loads(candidate)
+   except (ValueError,TypeError):structured=None
+   if isinstance(structured,(dict,list)):raise ValueError('Scope analysis must be completed plain prose, not a premature structured verdict')
+   parent=hashlib.sha256(json.dumps(plan,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+   # Exact original data remains in the native conversation; only this
+   # request's own completed analysis precedes its final instance.
+   final_request='SCOPE_FINAL: Treat your completed analysis as fallible context. Recheck against this exact original input and return only the final JSON instance in the declared schema. Uncertainty blocks approval.\n<original_input>'+question+'</original_input>'
+   final_request=final_request.replace('<|','<\u200b|').replace('<think>','<\u200bthink>').replace('</think>','</\u200bthink>').replace('<function','<\u200bfunction').replace('</function','</\u200bfunction').replace('<tool_call>','<\u200btool_call>')
+   original+=text+'<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n'+final_request+'<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+   phase='scope-answer';mode='scope-plan'
+  answer=self._complete(original,tokens,schema=schema or {'type':'object'},stop=stops,phase=phase,effort=mode,parent_response_sha256=parent)
+  if self.profile=='review':self.validate_review_completion(answer)
   return parse_json(answer['content'])
  def verify_bos(self):
   prompt=completion_prompt('Protocol','Probe',instruct_only=True,dialect='kanana')
@@ -119,9 +146,10 @@ class TextModel:
   if self.profile!='review':raise ValueError('Review handshake is review-only')
   self.bos_validation=self.bos_validation or self.verify_bos()
   schema={'type':'object','properties':{'protocol_ok':{'type':'boolean','enum':[True]}},'required':['protocol_ok'],'additionalProperties':False}
-  result=self.ask('Verify only native response completion. This is not a semantic or source-quality control.','Return the protocol_ok field in the declared response format.',tokens=80,schema=schema,reasoning_effort='instruct-only')
-  if result!={'protocol_ok':True}:raise ValueError('Native protocol handshake failed')
-  proof={'protocol':'kanana15-instruct-v1','model_revision':REVIEW_REV,'weights_sha256':REVIEW_SHA256,'reasoning_effort':'instruct-only','actual_eos_id':128009,'bos_validation':self.bos_validation,'semantic_qualification':False}
+  for mode in ('instruct-only','scope-plan'):
+   result=self.ask('Verify only native response completion. This is not a semantic or source-quality control.','Return the protocol_ok field in the declared response format.',tokens=80,schema=schema,reasoning_effort=mode)
+   if result!={'protocol_ok':True}:raise ValueError('Native protocol handshake failed')
+  proof={'protocol':'kanana15-instruct-v2-scope-plan','model_revision':REVIEW_REV,'weights_sha256':REVIEW_SHA256,'modes':['instruct-only','scope-plan'],'actual_eos_id':128009,'bos_validation':self.bos_validation,'semantic_qualification':False}
   (self.folder/'protocol-handshake.json').write_text(json.dumps(proof,indent=2)+'\n')
 
 class ImageModel:

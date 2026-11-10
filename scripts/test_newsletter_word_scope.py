@@ -10,7 +10,7 @@ class ExhaustiveWordScopeTests(unittest.TestCase):
    if 'complete' in kw['schema']['properties']:return {'input_hash':q['input_hash'],'complete':not omit,'issues':[] if not omit else [{'field':'action','id':0,'reason':'Missing asserted qualification.'}]}
    row=q['sentences'][0];n=len(row['words']);field=row['field']
    scope={str(i):'factual' if field in ('title','summary','fact') or field=='action' and 1<=i<=4 else 'nonfactual' for i in range(n)}
-   raw={'input_hash':q['input_hash'],'sentences':[{'field':field,'id':row['id'],'word_scope':scope,'reason':'Original scope includes every factual qualification and excludes proposed action.'}]}
+   raw={'input_hash':q['input_hash'],'sentences':[{'field':field,'id':row['id'],'kind':'factual_premise_present' if 'factual' in scope.values() else 'no_factual_premise','word_scope':scope,'reason':'Original scope includes every factual qualification and excludes proposed action.'}]}
    if mutation:mutation(raw,q,role,kw)
    return raw
   model.ask.side_effect=ask;return model
@@ -22,10 +22,16 @@ class ExhaustiveWordScopeTests(unittest.TestCase):
    self.assertEqual(len(vote['sentences']),5);self.assertTrue(all('word_scope' in x for x in vote['sentences']))
  def test_schema_requires_every_provided_id_without_range_or_kind_guess(self):
   def check(raw,q,role,kw):
-   props=kw['schema']['properties']['sentences']['items']['anyOf'][0]['properties'];scope=props['word_scope']
-   expected={str(w['id']) for w in q['sentences'][0]['words']}
-   self.assertEqual(set(scope['properties']),expected);self.assertEqual(set(scope['required']),expected);self.assertFalse(scope['additionalProperties']);self.assertNotIn('premises',props);self.assertNotIn('kind',props)
-   self.assertEqual(list(props)[-1],'reason');self.assertEqual(kw['reasoning_effort'],'instruct-only');self.assertNotIn('source_context',kw);self.assertNotIn('comparison_context',kw)
+   target=kw['schema']['properties']['sentences']['items']['anyOf'][0]
+   kinds=[]
+   for branch in target['oneOf']:
+    props=branch['properties'];scope=props['word_scope'];kind=props['kind']['enum'][0];kinds.append(kind)
+    expected={str(w['id']) for w in q['sentences'][0]['words']}
+    self.assertEqual(set(scope['properties']),expected);self.assertEqual(set(scope['required']),expected);self.assertFalse(scope['additionalProperties']);self.assertNotIn('premises',props)
+    self.assertLess(list(props).index('kind'),list(props).index('word_scope'));self.assertEqual(list(props)[-1],'reason')
+    if kind=='no_factual_premise':self.assertTrue(all(x['enum']==['nonfactual'] for x in scope['properties'].values()))
+   if q['sentences'][0]['field'] in ('title','summary','fact'):self.assertNotIn('no_factual_premise',kinds)
+   self.assertEqual(kw['reasoning_effort'],'scope-plan');self.assertNotIn('source_context',kw);self.assertNotIn('comparison_context',kw)
   classify(self.model(check),self.story())
  def test_unknown_missing_uncertain_or_legacy_scope_blocks(self):
   def missing(r,*a):r['sentences'][0]['word_scope'].pop('0')
@@ -64,3 +70,11 @@ class ExhaustiveWordScopeTests(unittest.TestCase):
   for bad in ('00','-1','1.0','True'):
    def mutate(raw,*args):raw['sentences'][0]['word_scope'][bad]=raw['sentences'][0]['word_scope'].pop('0')
    with self.subTest(key=bad),self.assertRaises(ValueError):classify(self.model(mutate),self.story())
+
+ def test_global_kind_cannot_contradict_mask_or_exempt_uncertainty(self):
+  def nofact_with_fact(raw,*args):raw['sentences'][0]['kind']='no_factual_premise'
+  def fact_without_fact(raw,*args):raw['sentences'][0]['word_scope']={k:'nonfactual' for k in raw['sentences'][0]['word_scope']}
+  def uncertain(raw,*args):raw['sentences'][0]['kind']='uncertain'
+  def unknown(raw,*args):raw['sentences'][0]['kind']='proposal'
+  for mutation in (nofact_with_fact,fact_without_fact,uncertain,unknown):
+   with self.subTest(mutation=mutation.__name__),self.assertRaises(ValueError):classify(self.model(mutation),self.story())

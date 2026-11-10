@@ -80,7 +80,7 @@ class SparseInstructReviewTests(unittest.TestCase):
    model=TextModel('.',folder,profile='review');self.assertEqual(model.ask('Verify','Original',schema={'type':'object'},reasoning_effort='instruct-only'),{'supported':True})
    self.assertEqual(call.call_count,1);payload=json.loads(call.call_args.args[0].data)
    self.assertTrue(payload['prompt'].endswith('<|start_header_id|>assistant<|end_header_id|>\n\n'));self.assertNotIn('<think>',payload['prompt']);self.assertNotIn('/no_think',payload['prompt']);self.assertNotIn('Reasoning:',payload['prompt']);self.assertEqual(payload['json_schema'],{'type':'object'});self.assertTrue(payload['return_tokens']);self.assertIn('Response schema',payload['prompt']);self.assertIn('{"type":"object"}',payload['prompt'])
-   receipt=json.loads(next((Path(folder)/'model-outputs').glob('*.json')).read_text())['_ap_runtime'];self.assertFalse(receipt['native_reasoning']);self.assertEqual(receipt['reasoning_effort'],'instruct-only');self.assertEqual(receipt['server_slots'],1);self.assertEqual(receipt['protocol'],'kanana15-instruct-v1');self.assertEqual(receipt['sampling'],sampling_options('review'))
+   receipt=json.loads(next((Path(folder)/'model-outputs').glob('*.json')).read_text())['_ap_runtime'];self.assertFalse(receipt['native_reasoning']);self.assertEqual(receipt['reasoning_effort'],'instruct-only');self.assertEqual(receipt['server_slots'],1);self.assertEqual(receipt['protocol'],'kanana15-instruct-v2-scope-plan');self.assertEqual(receipt['sampling'],sampling_options('review'))
  def test_actual_eos_missing_token_or_tool_handoff_never_becomes_a_verdict(self):
   for change in ({'tokens':[]},{'tokens':[42,128256]},{'stop_type':'word','stopping_word':'<|im_start|>'},{'content':'<tool_call>{"supported":true}'},{'content':'<function=run>{"supported":true}</function>'},{'content':'<think>analysis</think>{"supported":true}'}):
    raw=self.response();raw.update(change)
@@ -111,9 +111,9 @@ class SparseInstructReviewTests(unittest.TestCase):
   import newsletter_cpu as c
   self.assertEqual(c.TEXT_PROFILES['review'],('mradermacher/kanana-1.5-15.7b-a3b-instruct-GGUF','b32ab9cea41a191001d348e4316f78301dca3ed4','kanana-1.5-15.7b-a3b-instruct.Q5_K_M.gguf',16384));self.assertEqual(c.REVIEW_SHA256,'f10b412b1224682c5175fd93d14c7643de13320581bff071d43255427cd08690')
  def test_handshake_checks_actual_single_bos_and_final_eot_without_semantic_claim(self):
-  replies=[{'tokens':[128000,128006,9125,128007,271,128009]},self.response(content='{"protocol_ok":true}')]
+  replies=[{'tokens':[128000,128006,9125,128007,271,128009]},self.response(content='{"protocol_ok":true}'),self.response(content='Only native completion is being tested; this is not semantic qualification.'),self.response(content='{"protocol_ok":true}')]
   with tempfile.TemporaryDirectory() as folder,patch('newsletter_cpu.urllib.request.urlopen',side_effect=[io.BytesIO(json.dumps(x).encode()) for x in replies]) as call:
-   TextModel('.',folder,profile='review').protocol_handshake();proof=json.loads((Path(folder)/'protocol-handshake.json').read_text());self.assertFalse(proof['semantic_qualification']);self.assertEqual(proof['protocol'],'kanana15-instruct-v1');self.assertEqual(proof['actual_eos_id'],128009);self.assertEqual(proof['bos_validation']['bos_count'],1)
+   TextModel('.',folder,profile='review').protocol_handshake();proof=json.loads((Path(folder)/'protocol-handshake.json').read_text());self.assertFalse(proof['semantic_qualification']);self.assertEqual(proof['protocol'],'kanana15-instruct-v2-scope-plan');self.assertEqual(proof['actual_eos_id'],128009);self.assertEqual(proof['bos_validation']['bos_count'],1)
    self.assertTrue(call.call_args_list[0].args[0].full_url.endswith('/tokenize'));args=json.loads(call.call_args_list[0].args[0].data);self.assertTrue(args['add_special']);self.assertTrue(args['parse_special']);self.assertFalse(args['content'].startswith('<|begin_of_text|>'))
  def test_bad_or_duplicate_bos_blocks_before_any_model_call(self):
   for tokens in ([128000,42,128000],[42,128000],[],[True,128000]):
