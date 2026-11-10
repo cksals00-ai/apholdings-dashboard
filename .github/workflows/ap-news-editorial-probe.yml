@@ -18,18 +18,18 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: c438238d541c6b6a87f433c9fb4877e4cbc2a540
+          ref: a3035dcba504e19c233b505c4a767e1de4170e6a
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Prepare credential-free local CPU verifier
         run: |
-          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
           pip install -r requirements-newsletter-server.txt beautifulsoup4==4.13.3 huggingface-hub==0.28.1
           mkdir -p .cpu-runtime .control-probe
           curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b5401/llama-b5401-bin-ubuntu-x64.zip -o "$RUNNER_TEMP/llama.zip"
           unzip -q "$RUNNER_TEMP/llama.zip" -d .cpu-runtime
-      - name: Replay five historical controls on pinned public14B
+      - name: Replay unchanged scope and historical controls on pinned public CPU verifier
         run: python scripts/newsletter_control_probe.py --runtime .cpu-runtime --folder .control-probe
       - name: Preserve private decisions and model receipts
         if: always()
