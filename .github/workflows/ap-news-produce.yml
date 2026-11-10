@@ -121,17 +121,16 @@ jobs:
         run: |
           python -m unittest discover -s scripts -p 'test_newsletter*.py'
           node --test supabase/functions/ap-news/core.test.mjs
-      - name: Replay current-runtime source-blind scope controls
-        if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run == true && github.run_attempt == 1 }}
-        run: python .production-runtime/scripts/newsletter_control_probe.py --runtime .cpu-runtime --folder "$RUNNER_TEMP/scope-controls" --scope-only
-      - name: Preserve exact-runtime scope decisions
-        if: ${{ always() && inputs.dry_run == true && github.run_attempt == 1 }}
-        uses: actions/upload-artifact@v7
+      - name: Checkout immutable control-evidence validator
+        if: ${{ inputs.dry_run == true && inputs.inject_failure == true && github.run_attempt == 1 }}
+        uses: actions/checkout@v7
         with:
-          name: ap-news-scope-controls-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/scope-controls/
-          include-hidden-files: true
-          retention-days: 7
+          ref: 2b742b7eb7a96f55c96a89d38f3d3fec7134cdb6
+          path: .control-validator
+          sparse-checkout: |
+            scripts/newsletter_control_handoff.py
+            scripts/test_newsletter_control_handoff.py
+          sparse-checkout-cone-mode: false
       - name: Seed isolated real repair rehearsal from verified current-day sources
         if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run == true && inputs.inject_failure == true }}
         env:
@@ -140,6 +139,15 @@ jobs:
           AP_NEWS_REPAIR_REHEARSAL: '1'
           RESUME_RUN: ${{ inputs.resume_run }}
         run: python .production-runtime/scripts/newsletter_repair_rehearsal.py seed --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --run "$GITHUB_RUN_ID" --dry-run --resume-run "$RESUME_RUN"
+      - name: Require actual exact-runtime controls without repeating passed inference
+        if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run == true && inputs.inject_failure == true && github.run_attempt == 1 }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITION_DAY: ${{ steps.gate.outputs.day }}
+          PYTHONPATH: ${{ github.workspace }}/.production-runtime/scripts
+        run: |
+          python -m unittest discover -s .control-validator/scripts -p 'test_newsletter_control_handoff.py'
+          python .control-validator/scripts/newsletter_control_handoff.py --source-run 42758262848 --expected-head a90a310204ecbb91aeb0c2f0405180a407210f57 --expected-runtime 9dfa45c1ab35de12b66d7b7d06fd8c71d9261014 --definition-sha c7142ebb8ff90fdb36c35c93b64f559bc4f31fed206320ab4bef397b10a0daf3 --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --folder "$RUNNER_TEMP/qualified-controls"
       - name: Wait for Korean 03:05 actual source work window
         if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run != true }}
         run: python .production-runtime/scripts/newsletter_start_window.py
