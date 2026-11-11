@@ -4,22 +4,22 @@ from concurrent.futures import ThreadPoolExecutor
 import newsletter_schemas as s
 from newsletter_review_spans import request_for
 FIELDS=('title','summary','fact','insight','action')
-REVISION='source-blind-focused-scope-plan-v26'
+REVISION='source-blind-world-commitment-v27'
 REASONING_EFFORT='scope-plan'
 AUDIT_MODE='instruct-only'
-ROLES=('Independent complete factual-content reviewer A. ','Independent complete factual-content reviewer B. ')
+ROLES=('Independent author-commitment reviewer A. ','Independent author-commitment reviewer B. ')
 # The legacy internal label denotes ALL certified nonfactual editorial content.
 # Only explicit model wire labels map here; uncertainty is never inferred away.
-WIRE_KINDS={'no_factual_premise':'pure_proposal','factual_premise_present':'asserted_or_mixed','uncertain':'uncertain'}
+WIRE_KINDS={'no_actual_world_claim':'pure_proposal','actual_world_claim_present':'asserted_or_mixed','uncertain':'uncertain'}
 INTERNAL_KINDS={v:k for k,v in WIRE_KINDS.items()}
 REASON_LIMIT=200
-SEMANTIC_RULES="""Interpret propositions before labeling words. First identify each asserted or projected factual proposition, including an implicit proposition expressed by a headline, nominal report or definite description. Determine its actual question, conditional, modal, negation and attribution scope, then mark the original words expressing that proposition. Mere mention of an entity, generic category or contemplated activity is not itself an assertion that an event, property or specific instance exists in reality. Never label an isolated noun factual merely because it names something. This does not exempt presuppositions inside questions or conditions: a factual definite description can project through an operator; resolve whether each proposition projects rather than treating all nesting as either factual or exempt. Preserve the complete factual proposition's attribution, arguments, qualifications and negation together. 명사·개념·예정된 활동의 언급 자체와 실제 사실 명제를 구분한다. 명시되거나 함축된 주장·전제 명제와 그 적용 범위를 먼저 판단한 뒤 원문의 단어를 표시한다. 의문·가정 내부의 전제도 자동 제외하지 않고 실제로 투사되는 명제인지 판정한다.
-The editorial field meanings provide pragmatic context: title/summary/fact report news; insight presents AP's interpretation and action proposes practical next steps. Those meanings never exempt embedded or direct factual assertions in insight/action. Present-tense grammar alone proves neither completed execution nor a recommendation; distinguish the actual proposition and its editorial use from the full original context.
-Determine whether/hypothetical, negation and reporting scopes before selecting content. Exhaustively inventory BOTH outer asserted propositions AND embedded asserted/presupposed propositions at EVERY depth of the Korean sentence. Neither layer may replace or exclude the other. NEVER decide from the main speech act or a checking/recommendation verb alone. A factually modified definite object retains its presupposed existence/properties outside whether/hypothetical scope even when the main action is proposed, investigated or checked. Factual support is required whenever any such factual premise remains. A sentence is entirely nonfactual only when no asserted/presupposed factual content remains after scope resolution, such as a genuinely nonfactual proposal or open inquiry. Use uncertain only if factual scope cannot be determined; uncertainty blocks approval. 진위를 묻는 절과 사실 수식어가 붙은 특정 대상을 구분한다. 확인·검토 주절만 보고 판정하지 않으며, 의문·가정의 범위 밖에 있는 특정 대상의 수식절과 전제는 사실 근거를 요구한다.
-A whether-question does not assert its answer; a hypothetical antecedent does not assert that its event happened. However, a definite noun phrase, factual relative clause or existing report can presuppose facts even when the main verb is a checking instruction or the main clause is conditional. Reports assert the report's existence and attributed content, not necessarily the truth of that content. Preserve negation, attribution and conditional scope. When a report/explanation is presented as an actual event outside a hypothetical or whether-question, its speaker/source, entire reported proposition AND completed reporting predicate form the factual premise together. The asserted reporting act is not metadata or an excluded proposed action. Exclude only genuinely nonfactual recommended/checking main actions. If the reporting act itself is under a whether-question or hypothetical, do not assert that it occurred. 실제로 있었다고 서술한 설명·발표·보고는 귀속·내용뿐 아니라 그 보고 행위까지 사실 전제로 보존한다. 이를 제안된 행동이나 메타데이터로 제외하지 않는다.
-Select maximal self-contained factual constituents including subject/domain, quantifiers, qualifications, negation and report attribution/content; exclude outside proposed main actions. For title/summary/fact identify the underlying factual headline/report content even when phrased as a noun phrase or infinitive; these fields cannot be entirely nonfactual.
+SEMANTIC_RULES="""Identify propositions the author commits to as true about the actual world, including assertions and projected presuppositions. Commitments can concern past, present, future, capabilities, general relations, quantities or attributed statements. Headlines and nominal descriptions can express implicit propositions; an overt predicate is not required.
+Resolve each proposition's operator scope. A proposition merely entertained in a question, hypothesis, imagined scenario or recommendation is not thereby asserted as actual. Generic entities, concepts and contemplated activities are not claims merely because they are mentioned. A logical assumption inside a hypothetical is not the same as an actual-world commitment.
+Presuppositions may project through questions or conditions: retain them only when the author commits to the actual property or event. Conversely, conditional wording can assert a real causal, efficacy or general relationship; it is not an automatic exemption. An attributed report commits to the reporting occurrence and what was attributed without automatically endorsing the reported proposition as true.
+Preserve every original word expressing the actual commitment, including arguments, attribution, qualifications, quantifiers and negation. Exclude words belonging solely to uncommitted propositions or proposed actions. Field purpose supplies context, never automatic exemption: title/summary/fact report news; insight/action present AP interpretations or practical next steps, which may themselves contain claims. If commitment or scope cannot be determined, mark uncertainty; uncertainty blocks approval. The news-report fields cannot be entirely uncommitted.
+판단 대상은 필자가 실제 세계에서 참이라고 주장하거나 전제하는 명제다. 질문·가정 속에서 임시로 상정한 내용이나 대상·개념의 단순 언급을 실제 사실 주장과 혼동하지 않는다. 의문·조건을 통과해 실제로 유지되는 전제는 보존하고, 조건부 문장이라도 실제 인과·효능·일반 관계를 주장하면 검증 대상으로 남긴다. 제안이라는 필드 이름만으로 사실 주장을 면제하지 않는다.
 """
-WORD_OUTPUT_RULES="""Assign EVERY displayed word ID exactly one word_scope label: factual when that whole original word belongs to any asserted/presupposed factual constituent, nonfactual when outside all such constituents, uncertain only when its scope cannot be determined. Nested factual layers label the same word factual once; do not list overlapping ranges or retype quotations. The program derives contiguous factual runs from your exhaustive word map and copies exact original words. Do not omit a domain, qualification, attribution or negation. Cover only the requested target once. After completing the separate scope analysis, choose the global factual/nonfactual/uncertain kind first, then give a compatible complete word map before one concise scope reason under200 characters. The reason is a short justification after the decision, not an interrupted analysis before it. No source material or preferred answers are supplied. Uncertainty blocks approval."""
+WORD_OUTPUT_RULES="""Mark EVERY displayed word ID exactly once: claim when the whole original word expresses an actual-world commitment identified above, not_claim when it belongs only to uncommitted material, uncertain when its status cannot be determined. First complete your separate analysis of the sole target, then choose global kind actual_world_claim_present, no_actual_world_claim or uncertain. Global no_actual_world_claim requires every word not_claim; actual_world_claim_present requires actual claim words. Return the global kind before the full compatible map and one concise justification under200 characters. Do not retype quotations: the program copies original words and whitespace. No source data or preferred answers are supplied. Uncertainty blocks approval."""
 RULES=SEMANTIC_RULES+WORD_OUTPUT_RULES
 def focused_request(payload,row):
  # Plain original context has no competing row lists or nested request hashes.
@@ -40,8 +40,8 @@ def classify(model,story):
  for row in rows:
   choices=[]
   for kind in WIRE_KINDS:
-   if kind=='no_factual_premise' and row['field'] in ('title','summary','fact'):continue
-   labels=['nonfactual'] if kind=='no_factual_premise' else ['factual','nonfactual','uncertain']
+   if kind=='no_actual_world_claim' and row['field'] in ('title','summary','fact'):continue
+   labels=['not_claim'] if kind=='no_actual_world_claim' else ['claim','not_claim','uncertain']
    scope=s.obj({str(w['id']):{'type':'string','enum':labels} for w in row['words']})
    choices.append(s.obj({'field':{'type':'string','enum':[row['field']]},'id':{'type':'integer','enum':[row['id']]},'kind':{'type':'string','enum':[kind]},'word_scope':scope,'reason':s.string(REASON_LIMIT)}))
   branches.append({'oneOf':choices})
@@ -57,9 +57,9 @@ def classify(model,story):
    kind=WIRE_KINDS[row['kind']]
    if kind=='uncertain':raise ValueError('Uncertain speech act')
    scope=row['word_scope'];ids={str(w['id']) for w in indexed[key]['words']}
-   if not isinstance(scope,dict) or set(scope)!=ids or any(type(v)is not str or v not in ('factual','nonfactual','uncertain') for v in scope.values()):raise ValueError('Every original word ID needs exactly one valid scope label')
+   if not isinstance(scope,dict) or set(scope)!=ids or any(type(v)is not str or v not in ('claim','not_claim','uncertain') for v in scope.values()):raise ValueError('Every original word ID needs exactly one valid scope label')
    if 'uncertain' in scope.values():raise ValueError('Uncertain speech act')
-   factual=[i for i in range(len(ids)) if scope[str(i)]=='factual']
+   factual=[i for i in range(len(ids)) if scope[str(i)]=='claim']
    if (kind=='pure_proposal' and factual) or (kind=='asserted_or_mixed' and not factual):raise ValueError('Global speech act contradicts complete word mask')
    if not factual and row['field'] in ('title','summary','fact'):raise ValueError('Invalid pure-proposal exemption')
    ranges=[]
@@ -73,7 +73,7 @@ def classify(model,story):
  roles=ROLES
  # Each native reasoning call has one complete target, never a large output
  # inventory to repeatedly recount. Both analysts see identical full context
- # and no other analyst's answer. Separate server slots batch their decoding.
+ # and no other analyst's answer. The fixed runtime schedules full requests.
  with ThreadPoolExecutor(max_workers=2) as pool:
   for row,branch in zip(rows,branches):
    key=(row['field'],row['id'])
@@ -100,6 +100,6 @@ def classify(model,story):
  audit_payload={'draft':{k:v for k,v in payload.items() if k!='input_hash'},'inventory':[{**r,'kind':INTERNAL_KINDS[r['kind']]} for r in inventory]}
  audit_hash=hashlib.sha256(json.dumps(audit_payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest();audit_payload['input_hash']=audit_hash
  audit_schema=s.obj({'input_hash':{'type':'string','enum':[audit_hash]},'complete':{'type':'boolean'},'issues':{'type':'array','maxItems':10,'items':issue}})
- audit=model.ask('Independent source-blind assertion coverage auditor. '+SEMANTIC_RULES+' Check the proposed inventory against original full sentences, without trusting the two analysts. Reject any omitted factual premise or presupposition, lost negation/conditional scope, or pure proposal misclassified as an assertion. Report exact field and sentence ID for each issue. No source data is supplied; do not ask whether a publisher mentions the company.',json.dumps(audit_payload,ensure_ascii=False),tokens=1600,schema=audit_schema,reasoning_effort=AUDIT_MODE)
+ audit=model.ask('Independent source-blind assertion coverage auditor. '+SEMANTIC_RULES+' Check the proposed inventory against original full sentences, without trusting the two analysts. Reject any omitted actual-world commitment or projected presupposition, lost negation/conditional scope, or uncommitted proposal misclassified as an actual-world claim. Report exact field and sentence ID for each issue. No source data is supplied; do not ask whether a publisher mentions the company.',json.dumps(audit_payload,ensure_ascii=False),tokens=1600,schema=audit_schema,reasoning_effort=AUDIT_MODE)
  if not isinstance(audit,dict) or set(audit)!={'input_hash','complete','issues'} or audit['input_hash']!=audit_hash or audit['complete'] is not True or audit['issues']!=[]:raise ValueError('Source-blind assertion coverage failed: '+str(audit))
  return {'revision':REVISION,'reasoning_effort':REASONING_EFFORT,'input_hash':payload['input_hash'],'facts':facts,'inventory':inventory,'independent_decisions':raw,'coverage_audit_mode':AUDIT_MODE,'coverage_audit':audit}
