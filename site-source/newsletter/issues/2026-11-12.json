@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-12",
+  "number": 32,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "AI 운영의 완성은, 보이는 근거",
+  "intro": "더 빠른 모델, 자동 검색, 자동 테스트가 함께 늘어납니다. 실제로 일을 끝냈는지 판단하려면 출처·실행 결과·사용량을 각각 확인해야 합니다. 오늘은 운영의 근거를 남기는 다섯 가지 소식을 읽습니다.",
+  "edition_note": "2026년 11월 11일 공식 발표를 우선 조사하고 최근 72시간 범위로 확장했습니다. 허용 출처·이전 호 중복 검사를 통과한 11월 10일 AWS 공식 게시물 5건을 선정했습니다. 신제품 발표·기술 가이드·고객 구축 사례를 구분합니다. AI 작성 및 원문 확인.",
+  "takeaway": "자동화의 가치는 만들어 낸 결과보다 확인 가능한 완료에 있습니다. 검색은 출처와 중복 기록을, 테스트는 실제 실행 증거를, 비용 관리는 호출 단위 기록을 요구합니다. AP의 교육·콘텐츠·뉴스레터·웹 서비스에 참고한다면, 자동 생성과 완료 확인을 분리하고 작은 업무에서 실패를 재현하는 실험을 제안합니다. 새로운 도구를 도입했다는 사실만으로 운영이 안정됐다고 판단하지 않는 것이 출발점입니다.",
+  "source_checked_at": "2026-11-12T04:02:48.815158+09:00",
+  "hero": {
+    "path": "/img/newsletter/2026-11-12-hero.gif",
+    "poster": "/img/newsletter/2026-11-12-hero.png",
+    "alt": "실 한 가닥의 매듭까지 보이는 직조 장치로 AI 호출별 근거와 사용량을 나타낸 편집 일러스트",
+    "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "source": "AWS Machine Learning Blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/introducing-kimi-k3-1-pro-on-amazon-bedrock/",
+      "published": "2026-11-10",
+      "title": "빠른 추론도, 업무별 조건부터",
+      "summary": "AWS가 Kimi K3.1 Pro Highspeed의 Bedrock 제공과 추론·캐시 설정을 소개했습니다.",
+      "fact": "AWS는 11월 10일 Moonshot AI의 Kimi K3.1 Pro Highspeed를 Amazon Bedrock에서 제공한다고 발표했습니다. 도구 호출·이미지 입력·구조화 출력과 추론 강도 조절을 지원합니다. 기존 Pro 대비 2~3배 속도는 Moonshot AI의 발표 수치입니다. 글로벌·미국·인도 교차 리전 프로필을 구분하며, 프로필마다 처리 지역 조건을 확인해야 합니다. Flex는 Standard의 절반 가격을 제시하지만 응답이 더 늦어질 수 있습니다.",
+      "insight": "AP의 웹 서비스에 모델을 검토한다면, 최고 속도보다 같은 과제의 정확도·지연·처리 지역을 함께 비교하는 실험을 제안합니다. 배경 작업과 즉시 답변 업무를 나눠 평가할 수 있습니다.",
+      "action": "공개 과제로 추론 강도별 품질과 지연을 비교합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-12-story-1.png",
+        "alt": "긴 두루마리 위를 가로지르는 물총새로 긴 문맥과 빠른 추론을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "AWS Machine Learning Blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/build-a-daily-dependency-watcher-with-langgraph-and-amazon-bedrock-agentcore-web-search/",
+      "published": "2026-11-10",
+      "title": "매일 찾되, 같은 발견은 반복하지 않기",
+      "summary": "AWS의 의존성 감시 예제는 검색 규칙과 중복 방지를 모델 밖의 코드에 둡니다.",
+      "fact": "AWS는 11월 10일 AgentCore Web Search와 LangGraph로 일일 의존성 감시를 만드는 예제를 공개했습니다. 날짜 범위·출처 차단·검색 예산은 코드가 강제하고, 결과를 인용 원문과 대조한 뒤 이미 보고한 발견을 저장해 제외합니다. 예제는 npm·PyPI·컨테이너 이미지를 병렬 조사합니다. 지속적인 일일 운영에는 임시 세션 메모리가 아닌 내구성 있는 저장소와 실행 일정이 필요하며, 검색과 모델 호출은 사용량에 따라 과금됩니다.",
+      "insight": "AP의 뉴스·서비스 운영에 참고한다면, 조사 규칙과 이미 알린 사건의 기록을 생성 모델의 답변과 분리하는 방식을 제안합니다. 같은 사건의 반복 알림을 줄이는지 실제 기록으로 확인할 수 있습니다.",
+      "action": "변경된 사건만 추리는 저장 키와 확인 기간을 정합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-12-story-2.png",
+        "alt": "세 갈래 선로와 경계문을 관리하는 야간 역지기의 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "AWS Machine Learning Blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/the-agent-evaluation-playbook-built-in-deepeval-and-autoeval-on-agentcore/",
+      "published": "2026-11-10",
+      "title": "정답률 하나로 자동화를 평가하지 않기",
+      "summary": "AgentCore 평가 가이드는 완료·도구 사용·안전 기준을 따로 측정하도록 설명합니다.",
+      "fact": "AWS는 11월 10일 AgentCore Evaluations의 내장·DeepEval·AutoEval 평가자를 조합하는 가이드를 게시했습니다. 업무 성공을 관찰 가능한 행동으로 나눈 뒤, 개별 호출과 전체 대화에 맞는 평가를 고르는 방법입니다. 다차원 평가자는 같은 근거에서 여러 기준을 각각 점수화합니다. 정답이나 예상 실행 경로가 필요한 평가와 실시간 트래픽 평가의 조건도 구분합니다. 이는 평가 설계 안내이며 어떤 에이전트의 실제 품질 통과를 인증한 발표는 아닙니다.",
+      "insight": "AP의 고객 응대나 교육 도구를 평가한다면, 요청 완료·근거 정확성·개인정보 보호를 별도로 확인하는 방식을 제안합니다. 평균 점수가 높더라도 필수 기준 하나가 실패하면 배포를 보류하는 실험 기준을 세울 수 있습니다.",
+      "action": "실제 과제별 필수 통과 조건과 평가 근거를 정합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-12-story-3.png",
+        "alt": "서로 다른 세 소리굽쇠의 음을 듣는 지휘자의 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "AWS Machine Learning Blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-tcs-built-an-agentic-test-orchestrator-with-amazon-bedrock-agentcore/",
+      "published": "2026-11-10",
+      "title": "테스트 생성에서, 실행 근거까지 잇기",
+      "summary": "TCS 사례는 요구사항·코드 생성·실행·검증을 분리하고 고객별 자료를 격리합니다.",
+      "fact": "AWS는 11월 10일 TCS의 AgentCore 기반 테스트 오케스트레이터 구축 사례를 공개했습니다. 프로젝트 요구사항을 바탕으로 시나리오·Gherkin·Java 또는 Python 테스트를 만들고, ECS에서 실행해 결과와 근거를 저장합니다. 생성·검증·실행은 역할을 나누고 고객별 신원·저장소·키를 분리합니다. 목적은 품질 엔지니어를 대체하는 것이 아니라 반복 작업을 줄여 위험 분석과 출시 판단에 집중하도록 하는 것입니다. 특정 구축 사례이므로 다른 조직의 동일한 성과를 보장하지 않습니다.",
+      "insight": "AP의 웹 서비스 점검에 참고한다면, 요구사항이 바뀔 때 관련 테스트와 실행 증거가 함께 갱신되는지 작은 기능부터 검증할 수 있습니다. 코드가 만들어졌다는 사실과 실제 통과 결과를 분리하는 것이 제안의 기준입니다.",
+      "action": "한 기능의 요구사항 변경과 테스트·실행 결과를 연결합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-12-story-4.png",
+        "alt": "투명 패턴 틀을 통과하는 원단과 확인된 바느질로 단계별 테스트를 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "AWS Machine Learning Blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-tokenomics-data-lake/",
+      "published": "2026-11-10",
+      "title": "AI 사용량, 총액에서 호출 한 건으로",
+      "summary": "Bedrock 로그 데이터 레이크 예제는 계정별 프롬프트·토큰·모델 정보를 한곳에 모읍니다.",
+      "fact": "AWS는 11월 10일 Bedrock 호출 로그를 중앙 데이터 레이크로 모으는 구성을 소개했습니다. CloudWatch 로그를 Lambda가 정리하고 Firehose가 Parquet으로 S3에 저장하며 Athena로 조회합니다. 계정별 호출 로깅은 별도로 켜야 하며, 비용은 원가 데이터와 연결해 분석합니다. 전체 프롬프트와 응답이 모이므로 개인정보가 포함될 수 있고, 암호화와 접근 권한 관리가 필요합니다. 데이터 수집만으로 절감 효과가 자동 발생하는 것은 아닙니다.",
+      "insight": "AP의 운영에 참고한다면, 반복 호출·응답 잘림·업무별 사용량을 먼저 측정하는 방식을 제안합니다. 민감한 내용을 불필요하게 모으지 않도록 수집 범위와 보관 기간을 정한 뒤, 실제로 줄일 수 있는 반복 작업을 찾을 수 있습니다.",
+      "action": "민감정보 없는 예제 기록으로 호출 단위 사용량을 비교합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-12-story-5.png",
+        "alt": "각기 다른 금빛 씨앗이 흐르는 유리 수로로 호출별 사용량을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}
