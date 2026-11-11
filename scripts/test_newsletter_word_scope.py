@@ -17,7 +17,7 @@ class ExhaustiveWordScopeTests(unittest.TestCase):
  def test_full_mask_copies_original_qualification_and_context(self):
   story=self.story();before=copy.deepcopy(story);model=self.model();out=classify(model,story)
   self.assertEqual(story,before);self.assertEqual(out['facts']['action'][0]['text'],'모든 학생에게 효과가 입증된');self.assertEqual(out['facts']['action'][0]['sentence_context'],story['action'])
-  self.assertEqual(out['facts']['insight'],[]);self.assertEqual(model.ask.call_count,11)
+  self.assertEqual(out['facts']['insight'],[]);self.assertEqual(model.ask.call_count,11);self.assertEqual(out['coverage_audit_mode'],'instruct-only');self.assertEqual(model.ask.call_args_list[-1].kwargs['reasoning_effort'],'instruct-only')
   for vote in out['independent_decisions']:
    self.assertEqual(len(vote['sentences']),5);self.assertTrue(all('word_scope' in x for x in vote['sentences']))
  def test_schema_requires_every_provided_id_without_range_or_kind_guess(self):
@@ -78,3 +78,6 @@ class ExhaustiveWordScopeTests(unittest.TestCase):
   def unknown(raw,*args):raw['sentences'][0]['kind']='proposal'
   for mutation in (nofact_with_fact,fact_without_fact,uncertain,unknown):
    with self.subTest(mutation=mutation.__name__),self.assertRaises(ValueError):classify(self.model(mutation),self.story())
+ def test_audit_retains_headline_fact_requirement_without_word_output_instructions(self):
+  model=self.model();classify(model,self.story());policy=model.ask.call_args_list[-1].args[0]
+  self.assertIn('these fields cannot be entirely nonfactual',policy);self.assertNotIn('Assign EVERY displayed word ID',policy);self.assertIn('quantifiers',policy);self.assertIn('negation',policy)

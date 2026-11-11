@@ -6,7 +6,7 @@ from copy import deepcopy
 import hashlib,json
 import newsletter_schemas as shapes
 FIELDS=('title','summary','fact','insight','action')
-REVISION='atomic-factual-v32-completed-scope-plan'
+REVISION='atomic-factual-v33-focused-scope-plan'
 def normalize_field(result,field,text,segment_count):
  if not isinstance(result,dict) or set(result)!={'field','text','verdict','premises'}:raise ValueError('Malformed field decision')
  if result['field']!=field or result['text']!=text:raise ValueError('Stale or unbound field decision')

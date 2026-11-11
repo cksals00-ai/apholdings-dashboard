@@ -24,7 +24,7 @@ class VerifiedControlHandoffTests(unittest.TestCase):
   draft={'title':'새 도구를 발표했다.','summary':'새 도구를 발표했다.','fact':'새 도구를 발표했다.','insight':'필요하다면 적용을 검토할 수 있다.','action':' '.join(CASES)}
   digest=h.scope_hash(draft)
   state={'date':'2026-11-10','mode':'test','asset_day':'2026-11-10-test-123','historical_controls_only':True,'scope_only':True,'historical_only':False}
-  proof={'synthetic_regression_only':True,'draft':draft,'receipt':{'revision':REVISION,'reasoning_effort':'scope-plan','input_hash':digest,'coverage_audit':{'complete':True,'issues':[]},'independent_decisions':[{'input_hash':digest},{'input_hash':digest}]}}
+  proof={'synthetic_regression_only':True,'draft':draft,'receipt':{'revision':REVISION,'reasoning_effort':'scope-plan','input_hash':digest,'coverage_audit_mode':'instruct-only','coverage_audit':{'complete':True,'issues':[]},'independent_decisions':[{'input_hash':digest},{'input_hash':digest}]}}
   payload=h.scope_payload(draft)
   requests=[{'field':row['field'],'id':row['id'],'input_hash':h.focused_request(payload,row)['input_hash']} for row in payload['sentences']]
   for vote in proof['receipt']['independent_decisions']:vote['requests']=copy.deepcopy(requests)
@@ -39,6 +39,8 @@ class VerifiedControlHandoffTests(unittest.TestCase):
   bad=copy.deepcopy(proof);bad['receipt']['independent_decisions'][1]['requests'][0]['input_hash']='another target or context'
   with patch.object(h,'controls_valid',return_value=True),self.assertRaises(ValueError):h.verify_artifacts(scope,bad,history,123,'2026-11-10')
   bad=copy.deepcopy(proof);bad['receipt']['coverage_audit']['issues']=[{'reason':'missing quantifier'}]
+  with patch.object(h,'controls_valid',return_value=True),self.assertRaises(ValueError):h.verify_artifacts(scope,bad,history,123,'2026-11-10')
+  bad=copy.deepcopy(proof);bad['receipt']['coverage_audit_mode']='scope-plan'
   with patch.object(h,'controls_valid',return_value=True),self.assertRaises(ValueError):h.verify_artifacts(scope,bad,history,123,'2026-11-10')
   bad=copy.deepcopy(proof);bad['receipt']['reasoning_effort']='low'
   with patch.object(h,'controls_valid',return_value=True),self.assertRaises(ValueError):h.verify_artifacts(scope,bad,history,123,'2026-11-10')
