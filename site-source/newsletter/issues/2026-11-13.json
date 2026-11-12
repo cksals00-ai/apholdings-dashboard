@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-13",
+  "number": 33,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "빠른 AI, 믿고 맡길 경계",
+  "intro": "AI는 더 빠르게 실행하고, 안경과 연구실을 넘어 다른 에이전트와도 연결됩니다. 오늘은 속도만큼 중요한 데이터·권한·검증의 경계를 살펴봅니다. 새 기능의 발표와 실제 현장 성과를 구분해 읽습니다.",
+  "edition_note": "전날인 2026년 11월 12일 공식 발표·게시물 5건을 선정했습니다. 허용 출처·발표일·이전 호의 원문 URL과 주제 중복을 확인했습니다. 제품 발표·개인정보 설계·연구 진행·기술 예제를 구분합니다. AI 작성 및 원문 확인.",
+  "takeaway": "AI에 더 많은 실행을 맡길수록 무엇을 볼 수 있고, 누구를 대신하며, 어디까지 검증됐는지를 분명히 해야 합니다. 모델의 실행 속도와 기기의 새 기능은 실제 사용 조건을 확인한 뒤 판단할 문제입니다. AP의 교육·콘텐츠·웹 서비스와 Lia Select의 자료 연동에 참고한다면, 공개·가상 자료로 입력 범위와 권한·성공 기준을 먼저 정하는 실험을 제안합니다. 빠른 시연을 운영 완료로 읽지 않는 것이 신뢰의 출발점입니다.",
+  "source_checked_at": "2026-11-13T04:02:33.516670+09:00",
+  "hero": {
+    "path": "/img/newsletter/2026-11-13-hero.gif",
+    "poster": "/img/newsletter/2026-11-13-hero.png",
+    "alt": "계획을 세우는 안내자와 빠르게 실행하는 전달자가 바통을 나누는 AI 역할 분담 편집 일러스트",
+    "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "source": "Google Blog",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+      "published": "2026-11-12",
+      "title": "Gemini Hydrogen, 일상 실행의 속도를 겨냥하다",
+      "summary": "Google이 Gemini 4 Hydrogen을 공개하고 작업별 추론 깊이와 모델 분담을 제시했습니다.",
+      "fact": "Google은 11월 12일 Gemini 4 Hydrogen을 발표했습니다. 일상 코딩과 에이전트 실행을 겨냥하며 low·medium·high·xhigh의 네 추론 수준을 제공합니다. Antigravity의 Orchestrator는 같은 세션에서 Carbon과 Hydrogen 같은 모델을 바꿔 쓰도록 설계됐습니다. Hydrogen은 Gemini 앱·Search·개발자·기업 제품으로 전 세계 출시를 시작하며, Antigravity 접근에는 유료 Google AI Pro 또는 Ultra 구독 조건이 붙습니다. 속도·성능 개선 수치는 Google의 자체 발표이며 AP 업무 성과를 보장하지 않습니다.",
+      "insight": "AP의 교육·웹 서비스 업무에 참고한다면, 계획·실행·검증을 같은 모델에 모두 맡기는 방식과 역할을 나누는 방식을 공개 과제로 비교할 수 있습니다. 먼저 정답 기준을 고정하고 속도와 수정 품질을 함께 확인하는 실험을 제안합니다.",
+      "action": "공개 예제에서 추론 수준별 실행 시간과 오류 수정을 비교합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-13-story-1.png",
+        "alt": "네 단계 조절점과 추가 있는 메트로놈으로 추론 깊이와 속도 선택을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "Google Blog",
+      "url": "https://blog.google/innovation-and-ai/technology/safety-security/intelligent-eyewear-privacy-protections/",
+      "published": "2026-11-12",
+      "title": "AI 안경, 렌즈 앞사람의 권리도 설계하기",
+      "summary": "Google이 촬영 표시등·카메라 권한·주변 얼굴 가림 등 안경의 개인정보 보호 설계를 설명했습니다.",
+      "fact": "Google은 11월 12일 지능형 안경의 개인정보 보호 기능을 소개했습니다. 사진·영상 촬영 시 바깥쪽 LED가 켜지고, 표시등을 가리거나 조작하면 센서가 촬영을 막도록 설계됐습니다. Gemini로 보내는 화면에서는 주변 사람의 얼굴을 자동 가림 처리하도록 설계했습니다. 카메라 화면은 Gemini 기록에 저장하거나 AI 학습·광고 타기팅에 사용하지 않는다고 설명하지만, 대화 텍스트 기록과 활용 설정은 별도입니다. Private AI Compute의 안경 적용은 향후 계획입니다.",
+      "insight": "AP의 현장 교육·콘텐츠 제작에 착용형 기기를 검토한다면, 사용자 동의뿐 아니라 주변 사람에게 기록 여부가 보이는지 확인하는 실험을 제안합니다. 시각 데이터와 대화 텍스트의 보관 조건을 따로 읽는 것이 출발점입니다.",
+      "action": "촬영 표시·권한 철회·대화 기록 설정을 각각 점검합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-13-story-2.png",
+        "alt": "트램 정류장에서 촬영 표시와 주변 사람의 인식을 함께 표현한 가상의 안경 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "Google Blog",
+      "url": "https://blog.google/company-news/outreach-and-initiatives/sustainability/saving-giant-kelp-australia/",
+      "published": "2026-11-12",
+      "title": "다시마 숲 복원, AI는 유전적 단서를 찾는 단계",
+      "summary": "Google과 CSIRO의 연구는 태즈메이니아 다시마의 유전 정보와 내열성 연구를 연결합니다.",
+      "fact": "Google은 11월 12일 호주 CSIRO와 진행한 거대 다시마 연구를 소개했습니다. 연구진은 호주 다시마의 고품질 참조 유전체 두 개를 공개하고, DeepVariant를 조정해 태즈메이니아 해안 40개 지점에서 모은 야생 표본 600개의 DNA 분석에 활용했습니다. 유전 분석과 실험실 교배 연구는 유전적으로 다양하고 열에 강한 다시마를 다시 심기 위한 기반입니다. 원문은 바다 숲 복원이 이미 완료됐다는 성과 발표가 아닙니다.",
+      "insight": "AP의 AI 교육 콘텐츠에 이 사례를 다룬다면, 데이터 분석·실험실 검증·현장 복원이라는 단계를 구분해 설명할 수 있습니다. AI가 연구를 도왔다는 사실과 환경 문제가 해결됐다는 주장을 분리하는 수업 구성을 제안합니다.",
+      "action": "연구의 입력 자료와 아직 검증해야 할 현장 단계를 표시합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-13-story-3.png",
+        "alt": "수중 다시마 숲과 유전 정보를 상징하는 빛의 나선을 연결한 과학 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "AWS Machine Learning Blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/fine-grained-access-control-for-amazon-bedrock-managed-knowledge-base-tools/",
+      "published": "2026-11-12",
+      "title": "검색하는 AI가 사용자 신원을 정하지 않도록",
+      "summary": "AWS의 접근 제어 예제는 검증된 신원을 코드가 주입하고 별도 정책으로 다시 검사합니다.",
+      "fact": "AWS는 11월 12일 Bedrock Managed Knowledge Base를 MCP 도구로 제공할 때 사용자별 접근을 지키는 예제를 공개했습니다. Gateway의 요청 인터셉터가 검증된 토큰에서 신원을 읽어 userContext를 덮어쓰고, 별도 정책이 토큰과의 일치를 확인합니다. 지식베이스의 문서 권한 필터와 직접 검색 경로를 제한하는 정책도 구분합니다. ACL 필터 자체는 사용자 인증 기능이 아니며, S3 권한 변경은 다음 동기화 이후 반영됩니다.",
+      "insight": "AP 고객 지원·교육 자료 검색에 참고한다면, 사용자가 볼 수 있는 자료의 범위를 모델의 도구 인수와 분리하는 방식을 제안합니다. 다른 고객의 자료가 섞이지 않는지, 권한 변경 후 언제 반영되는지도 실제 예제로 검증할 수 있습니다.",
+      "action": "가상 사용자 두 명으로 자료 격리와 권한 변경 반영을 확인합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-13-story-4.png",
+        "alt": "서로 다른 신원 토큰에 맞는 부채 잎만 펼쳐지는 접근 제어 개념 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "AWS Machine Learning Blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/build-composable-interoperable-multi-agent-systems-with-a2a-on-aws/",
+      "published": "2026-11-12",
+      "title": "서로 다른 AI 에이전트, 공통 약속으로 연결하기",
+      "summary": "AWS의 A2A 참조 구조는 서로 다른 프레임워크와 계정을 양방향 인증으로 연결합니다.",
+      "fact": "AWS는 11월 12일 A2A 프로토콜로 LangChain 기반 기업 에이전트와 Strands 기반 SaaS 에이전트를 연결하는 참조 구조를 공개했습니다. 두 AWS 계정은 각자의 신원 제공자를 사용하며 OAuth로 양방향 요청을 인증합니다. 외부에는 Agent Card의 기능을 알리고 내부 도구와 구현은 감춥니다. 예제의 규정 준수 검사 결과는 합성 데이터이며 실제 고객 계정을 검사한 운영 성과는 아닙니다. 실제 배포에는 리전별 모델 접근과 인프라 비용 검토가 필요합니다.",
+      "insight": "AP의 웹 서비스와 외부 파트너 기능을 연결한다면, 내부 구현을 공유하지 않고 기능·권한·되돌아오는 요청 주소를 명확히 정하는 실험을 제안합니다. Lia Select 싱가포르 커머스의 상품 자료 연동에도 먼저 가상 데이터로 경계를 검증할 수 있습니다.",
+      "action": "가상 연동에서 허용 기능·호출 주소·인증 실패 처리를 확인합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-13-story-5.png",
+        "alt": "서로 다른 두 기계를 공통 연결 장치와 반환선으로 잇는 장인들의 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}
