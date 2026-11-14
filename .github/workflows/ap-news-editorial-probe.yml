@@ -8,6 +8,14 @@ permissions:
   contents: read
 jobs:
   controls:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - mode: scope
+            flag: --scope-only
+          - mode: historical
+            flag: --historical-only
     runs-on: ubuntu-24.04
     timeout-minutes: 240
     env:
@@ -18,24 +26,25 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: d0d0aac2969cba0aa6344247be68720951aa0480
+          ref: bc90ef1c07fbc9e147d262a76e4d2db99c4a83d5
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Prepare credential-free local CPU verifier
         run: |
-          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
           pip install -r requirements-newsletter-server.txt beautifulsoup4==4.13.3 huggingface-hub==0.28.1
           mkdir -p .cpu-runtime .control-probe
-          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b5401/llama-b5401-bin-ubuntu-x64.zip -o "$RUNNER_TEMP/llama.zip"
-          unzip -q "$RUNNER_TEMP/llama.zip" -d .cpu-runtime
-      - name: Replay five historical controls on pinned public14B
-        run: python scripts/newsletter_control_probe.py --runtime .cpu-runtime --folder .control-probe
+          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b12244/llama-b12244-bin-ubuntu-x64.tar.gz -o "$RUNNER_TEMP/llama.tar.gz"
+          echo "c1d7e7f31b5c43f3e5d44f667b4d57104217be3e5f2060320cd3735651238849  $RUNNER_TEMP/llama.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/llama.tar.gz" -C .cpu-runtime
+      - name: Verify ${{ matrix.mode }} controls on fixed public CPU verifier
+        run: python scripts/newsletter_control_probe.py --runtime .cpu-runtime --folder .control-probe ${{ matrix.flag }}
       - name: Preserve private decisions and model receipts
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: ap-news-editorial-controls-${{ github.run_id }}
+          name: ap-news-editorial-controls-${{ github.run_id }}-${{ matrix.mode }}
           path: .control-probe/
           include-hidden-files: true
           retention-days: 3

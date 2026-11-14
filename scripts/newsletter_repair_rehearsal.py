@@ -77,28 +77,28 @@ def cache_rejection_matches(label,draft,reason,faults):
  return any(term in compact for term in ('학습효과','인과','learningefficacy','learningoutcome')) and any(term in compact for term in ('입증','높였','improv','causal','prove'))
 
 def cache_challenge_receipts_valid(state,sources,prior):
- from newsletter_cpu import PROMPT_CACHE_REVISION,ART_REV
+ from newsletter_cpu import PROMPT_CACHE_REVISION,REVIEW_REV
  try:specs=cache_challenge_inputs(state,sources,prior)
  except ValueError:return False
  from newsletter_review_controls import valid
  if not valid(state,sources,prior):return False
  receipts=state.get('resumed_cache_checks',{})
- return all(receipts.get(label,{}).get('input_hash')==digest and receipts[label].get('cache_revision')==PROMPT_CACHE_REVISION and receipts[label].get('model_revision')==ART_REV and receipts[label].get('rejected') is True and cache_rejection_matches(label,draft,str(receipts[label].get('reason','')),state['rehearsal_faults']) for label,draft,source,digest in specs)
+ return all(receipts.get(label,{}).get('input_hash')==digest and receipts[label].get('cache_revision')==PROMPT_CACHE_REVISION and receipts[label].get('model_revision')==REVIEW_REV and receipts[label].get('rejected') is True and cache_rejection_matches(label,draft,str(receipts[label].get('reason','')),state['rehearsal_faults']) for label,draft,source,digest in specs)
 
 def verify_resumed_cache_challenges(model,state,sources,prior,save):
  from newsletter_copy_repair import verify
- from newsletter_cpu import PROMPT_CACHE_REVISION,ART_REV
+ from newsletter_cpu import PROMPT_CACHE_REVISION,REVIEW_REV
  identity(state)
  from newsletter_review_controls import verify_controls
  verify_controls(model,state,sources,prior,save)
  for label,draft,source,digest in cache_challenge_inputs(state,sources,prior):
   receipt=state.get('resumed_cache_checks',{}).get(label,{})
-  if receipt.get('input_hash')==digest and receipt.get('cache_revision')==PROMPT_CACHE_REVISION and receipt.get('model_revision')==ART_REV and receipt.get('rejected') is True and cache_rejection_matches(label,draft,str(receipt.get('reason','')),state['rehearsal_faults']):continue
+  if receipt.get('input_hash')==digest and receipt.get('cache_revision')==PROMPT_CACHE_REVISION and receipt.get('model_revision')==REVIEW_REV and receipt.get('rejected') is True and cache_rejection_matches(label,draft,str(receipt.get('reason','')),state['rehearsal_faults']):continue
   try:verify(model,copy.deepcopy(draft),source,prior,[])
   except ValueError as exc:
    reason=str(exc)
    if not cache_rejection_matches(label,draft,reason,state['rehearsal_faults']):raise ValueError('Controlled factual premise was not specifically rejected: '+reason)
-   state.setdefault('resumed_cache_checks',{})[label]={'input_hash':digest,'cache_revision':PROMPT_CACHE_REVISION,'model_revision':ART_REV,'rejected':True,'reason':reason,'checked_at':datetime.now(ZoneInfo('Asia/Seoul')).isoformat()};save()
+   state.setdefault('resumed_cache_checks',{})[label]={'input_hash':digest,'cache_revision':PROMPT_CACHE_REVISION,'model_revision':REVIEW_REV,'rejected':True,'reason':reason,'checked_at':datetime.now(ZoneInfo('Asia/Seoul')).isoformat()};save()
   else:raise ValueError('Controlled faulty copy passed after prompt cache change')
 
 def verify_receipts(folder):
@@ -128,8 +128,8 @@ def verify_receipts(folder):
  require(hero['subject']!=faults['art_failed_plan']['subject'] and hero['scene']!=faults['art_failed_plan']['scene'],'Hero fault must be replaced')
  receipts=json.loads((folder/'notification-receipts.json').read_text())
  for stage in ('copy','art'):
-  require(any(receipts.get(e['id'],{}).get('accepted') is True for e in state.get('recovery_events',[]) if e.get('stage')==stage),'Parent accepted '+stage+' notice required')
- proof={'date':day,'mode':'test','run':run,'asset_run':asset_run,'resume_history':state.get('resume_history',[]),'copy_rejected':True,'recommendation_premise_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_notices_accepted':['copy','art'],'resumed_cache_faults_rechecked':bool(state.get('resume_history')),'editorial_controls':state.get('frozen_control_receipts',{}) if state.get('rehearsal_version')==2 else state.get('editorial_control_receipts',{})}
+  require(any(receipts.get(e['id'],{}).get('recorded') is True and receipts[e['id']].get('suppressed') is True and receipts[e['id']].get('accepted') is False and receipts[e['id']].get('policy')=='terminal-only-v1' for e in state.get('recovery_events',[]) if e.get('stage')==stage),'Silent parent '+stage+' repair record required')
+ proof={'date':day,'mode':'test','run':run,'asset_run':asset_run,'resume_history':state.get('resume_history',[]),'copy_rejected':True,'recommendation_premise_rejected':True,'strong_review_count':5,'hero_repaired':True,'parent_repair_records':['copy','art'],'recoverable_mail_sent':0,'resumed_cache_faults_rechecked':bool(state.get('resume_history')),'editorial_controls':state.get('frozen_control_receipts',{}) if state.get('rehearsal_version')==2 else state.get('editorial_control_receipts',{})}
  (folder/'recovery-proof.json').write_text(json.dumps(proof,indent=2)+'\n');return proof
 
 if __name__=='__main__':

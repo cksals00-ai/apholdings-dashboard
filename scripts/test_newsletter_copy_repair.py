@@ -3,7 +3,7 @@ import hashlib
 from unittest.mock import patch
 from contextlib import nullcontext
 from newsletter_copy_repair import ensure_copy,identity,REVISION,verify
-from newsletter_cpu import ART_REV
+from newsletter_cpu import REVIEW_REV
 from newsletter_grounding import require_news_topic,validate_korean_copy
 from newsletter_copy_repair import record_failure,receipt_valid
 class CopyRepairTests(unittest.TestCase):
@@ -38,7 +38,7 @@ class CopyRepairTests(unittest.TestCase):
   stories=[]
   for i in range(2):
    item={'url':str(i),'title':'제목','source_hash':source['body_sha256'],'review':{'supported':True},'novelty':{'is_news':True,'is_duplicate':False,'novel_quote':text}}
-   item['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(item,source,[],stories),'supported':True}
+   item['strong_review']={'revision':REVISION,'model_revision':REVIEW_REV,'input_hash':identity(item,source,[],stories),'supported':True}
    stories.append(item)
   checks=[(item,source) for item in stories]
   issue={'stories':list(reversed(stories))}
@@ -80,11 +80,11 @@ class CopyRepairTests(unittest.TestCase):
   sources=[{'url':str(i),'title':'New result','text':'A concrete implementation result has been reported today.','body_sha256':str(i)} for i in range(6)]
   def story(i):return {'url':str(i),'title':'제목','source_hash':str(i),'review':{'supported':True}}
   good=[story(i) for i in range(4)]
-  for index,item in enumerate(good):item['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(item,sources[int(item['url'])],[],good[:index]),'supported':True}
+  for index,item in enumerate(good):item['strong_review']={'revision':REVISION,'model_revision':REVIEW_REV,'input_hash':identity(item,sources[int(item['url'])],[],good[:index]),'supported':True}
   state={'stories':good+[story(4)]};saved=[]
   def check(model,item,source,prior,peers=None):
    if item['url']=='4':raise ValueError('Unsupported learning efficacy')
-   item['strong_review']={'revision':REVISION,'model_revision':ART_REV,'input_hash':identity(item,source,prior,peers),'supported':True}
+   item['strong_review']={'revision':REVISION,'model_revision':REVIEW_REV,'input_hash':identity(item,source,prior,peers),'supported':True}
   def draft(model,source,prior,feedback):return story(int(source['url']))
   with patch('newsletter_copy_repair.validate_source_copy'),patch('newsletter_copy_repair.verify',side_effect=check):
    ensure_copy(state,sources,[],lambda profile:nullcontext(object()),draft,lambda:saved.append(dict(state.get('copy_attempts',{}))))

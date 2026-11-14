@@ -35,7 +35,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/checkout@v7
         with:
-          ref: d0d0aac2969cba0aa6344247be68720951aa0480
+          ref: bc90ef1c07fbc9e147d262a76e4d2db99c4a83d5
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -96,7 +96,7 @@ jobs:
           ref: main
       - uses: actions/checkout@v7
         with:
-          ref: d0d0aac2969cba0aa6344247be68720951aa0480
+          ref: bc90ef1c07fbc9e147d262a76e4d2db99c4a83d5
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -110,3 +110,11 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           RUN_URL: https://github.com/cksals00-ai/apholdings-dashboard/actions/runs/${{ github.run_id }}
         run: python .production-runtime/scripts/newsletter_production_preview.py finish
+      - name: Preserve actual public and owner mail receipt proof
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ap-server-mail-proof-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .ap-news-state/server-rehearsal/mail-proof.json
+          include-hidden-files: true
+          if-no-files-found: warn

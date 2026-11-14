@@ -2,10 +2,17 @@
 import json,re,unicodedata
 from decimal import Decimal
 
+def unique_keys(pairs):
+ result={}
+ for key,value in pairs:
+  if key in result:raise ValueError('Duplicate model JSON key')
+  result[key]=value
+ return result
+
 def parse_json(text):
  text=re.sub(r'^```(?:json)?\s*|\s*```$','',text.strip())
  try:
-  result=json.loads(text)
+  result=json.loads(text,object_pairs_hook=unique_keys)
   if not isinstance(result,dict):raise ValueError('Expected a JSON object')
   return result
  except (ValueError,TypeError) as exc:raise ValueError('Model did not return a JSON object') from exc

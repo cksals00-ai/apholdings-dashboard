@@ -13,9 +13,9 @@ class FrozenControlTests(unittest.TestCase):
    self.assertTrue(f.specific_rejection(label,review))
  def test_partial_valid_receipt_is_reused(self):
   from newsletter_copy_repair import REVISION
-  from newsletter_cpu import ART_REV,PROMPT_CACHE_REVISION
+  from newsletter_cpu import REVIEW_REV,PROMPT_CACHE_REVISION
   rows=f.inputs();row=rows[0];review={'supported':True,'findings':[]}
-  state={'frozen_control_receipts':{row['label']:{'input_hash':row['input_hash'],'source_hash':row['source']['body_sha256'],'model_revision':ART_REV,'cache_revision':PROMPT_CACHE_REVISION,'review_revision':REVISION,'atomic_revision':f.ATOMIC_REVISION,'expected_supported':True,'historical_only':True,'review':review}}}
+  state={'frozen_control_receipts':{row['label']:{'input_hash':row['input_hash'],'source_hash':row['source']['body_sha256'],'model_revision':REVIEW_REV,'cache_revision':PROMPT_CACHE_REVISION,'review_revision':REVISION,'atomic_revision':f.ATOMIC_REVISION,'expected_supported':True,'historical_only':True,'review':review}}}
   with patch('newsletter_repair_rehearsal.identity'),patch('newsletter_copy_repair.verify',side_effect=ValueError('stop')) as verify:
    with self.assertRaises(ValueError):f.verify_controls(object(),state,lambda:None)
   self.assertEqual(verify.call_args.args[1]['url'],rows[1]['draft']['url'])

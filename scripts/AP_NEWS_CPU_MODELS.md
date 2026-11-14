@@ -1,0 +1,30 @@
+# Credential-free CPU production candidate — not yet qualified
+
+Source collection, copy, art and document checks run on server CPU. Public model files download with `token=False`; inference accepts requests only on127.0.0.1. No hosted AI endpoint, AI API credential or payment is used. Model-provider scores never qualify publication: actual15 synthetic scope controls,5 historical controls and the full production/recovery/public/mail rehearsal must pass before activation.
+
+## Fixed models
+
+- Writer: `Qwen/Qwen3-8B-GGUF`, revision `7c41481f57cb95916b40956ab2f0b139b296d974`, file `Qwen3-8B-Q4_K_M.gguf`.
+- Verifier: publisher/Apache-2.0 https://huggingface.co/Qwen/Qwen3.5-9B ; distribution `bartowski/Qwen_Qwen3.5-9B-GGUF`, revision `182be2fd6c7bc44887d88a91cb03ff009cc9f549`, file `Qwen_Qwen3.5-9B-Q6_K.gguf` (7,958,818,848 bytes), SHA256 `073a9275e65d9c8cd2819cf5f77b99fbaa6e87ba591da6bbaa86ec073a64bfef`.
+- Art planner: `bartowski/Qwen_Qwen3-30B-A3B-Instruct-2507-GGUF`, revision `6c6e8692f43e4ca663f7ece8229a1361090d3a4c`, file `Qwen_Qwen3-30B-A3B-Instruct-2507-Q3_K_M.gguf`, SHA256 `327c6e0826bee8f19172e96c94bb7bba385f7a39d08314803652df9942401c4f`.
+- Illustration: public SSD-1B and LCM adapter, with CLIP subject checks; exact revisions remain in `newsletter_cpu.py`. Their separate licenses apply; they are not all Apache-2.0.
+
+Verifier/art weights are digest-checked. The llama.cpp archive is pinned to b12244 (`d5bbcd1f31dba754f716a26c3a4784502a6b9ede`), SHA256 `c1d7e7f31b5c43f3e5d44f667b4d57104217be3e5f2060320cd3735651238849`. Verifier decoding has two independent server slots with32768 context tokens each (65536 total), sharing weights only; writer/art use one slot. All profiles use CPU only.
+
+## Verification protocol
+
+The verifier now selects the publisher's official non-thinking mode **before any inference**, using its exact closed-thinking assistant prefix (`enable_thinking=False`). It performs direct schema-constrained factual review; it does not start a thought and then force a verdict from partial reasoning. This tests whether the same higher-precision model can satisfy the unchanged factual controls without repeated long planning. Direct review uses0.7/0.8/20/0 sampling and no presence penalty on word IDs. Context truncation, exhausted output or timeout still fails and preserves the raw receipt. Two isolated server slots retain32768 context tokens each. No automatic fallback to native thinking is enabled.
+
+An explicit native-reasoning adapter remains tested separately: it must finish naturally before8192 tokens, with no JSON grammar during thought, before a schema answer is requested. Unfinished/truncated reasoning never yields a verdict. Its tests do not qualify the operational direct-mode candidate.
+
+Each independent pair sees exactly one complete target plus the entire original draft as plain field strings. There is only one root request hash; no competing nested hashes, word-row lists or reviewer answers. The model selects first/last IDs from the explicitly supplied original word list, with schema enums restricted to that target's valid IDs. Code copies the original whole words, intervening whitespace, particles and punctuation. It never retypes, paraphrases, space-normalizes or guesses a missing quotation. Booleans, character offsets, reversed/out-of-bounds IDs, legacy quote replies, disagreement and uncertainty fail. A separate full-context audit checks the complete resulting inventory for omitted premises, negation, attribution and scope. Both analysts' per-target hashes and the global draft hash are preserved.
+
+Factual ranges alone enter source entailment; certified pure proposals are excluded. All15 exact synthetic word ranges and all5 historical true/false cases remain unchanged. A successful control proof may be reused only with the exact tested model/runtime, full workflow definition, current fixture hashes and actual successful jobs. Synthetic proof dates bind to authenticated job start times; fresh news retains its own current-day guard and isolated run namespace. Raw evidence is preserved with the private checkpoint.
+
+Earlier candidates failed actual semantic controls, repeated inventory planning or Korean quote spacing. These failures remain failures, not qualification. The word-anchor protocol addresses those formatting/planning failures; actual semantic and full deadline qualification are still required. Production remains disabled until they pass.
+
+Actual42825676289 historical control stopped on report-attribution disagreement: one analyst retained the completed reporting predicate, the other explicitly called it metadata and omitted the last word. The policy now distinguishes an asserted reporting act (speaker + content + reporting predicate all factual) from a genuinely proposed/checking main action or a whether/hypothetical report. The original11 scope cases and ranges are unchanged; two additional actual-report/whether-report cases strengthen the oracle. No expected labels enter model inputs.
+
+The direct-mode candidate must pass the same two independent word-anchor inventories, separate full-context audit, all15 exact synthetic cases and all5 historical controls, then the full actual recovery/public/mail trial and deadline bound. No expected labels enter model input; the reporting/whether distinction and all original11 cases remain intact. Earlier native failures remain failed, not qualification.
+
+Actual direct-mode42842217976 exposed two distinct issues. Adjacent factual partitions (0..7+8..12) covered exactly the same original words as0..12; canonicalization now coalesces ONLY adjacent ranges, never gaps, and rejects overlaps/duplicates. Exact kind and factual WORD coverage still must match. The speech-act role label primed a main-checking-verb shortcut on a definite object; the first role now explicitly inventories embedded premises and the policy resolves clause/description scope before main speech act. The original13 cases/ranges remain unchanged; two additional where/why inquiries with factual presuppositions strengthen the oracle. No model receives expected labels.
