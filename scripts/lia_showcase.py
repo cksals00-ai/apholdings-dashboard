@@ -24,7 +24,9 @@ def app_install_links(locale):
  ]
  cards = []
  for name, app_id, note in apps:
-  apple = f'https://apps.apple.com/app/id{app_id}'
+  apple = f'https://apps.apple.com/{"kr/" if app_id in ("6805684034", "6821352092") else ""}app/id{app_id}'
+  if app_id in ('6805684034', '6821352092'):
+   note += ' · 한국 App Store' if ko else ' · Korean App Store; regional availability applies'
   buttons = f'<a class="button primary" href="{apple}" target="_blank" rel="noopener noreferrer">App Store ↗</a>'
   if app_id == '6803749436':
    buttons += '<a class="button" href="https://play.google.com/store/apps/details?id=com.aplocalift.hangeulcubs" target="_blank" rel="noopener noreferrer">Google Play ↗</a>'
