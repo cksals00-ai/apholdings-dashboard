@@ -11,6 +11,18 @@ COPY = {
 }
 
 
+
+def trip_install_links(locale):
+ ko = locale == 'ko'
+ title = '리아의 한국 여행 키트' if ko else 'Lia’s Korea trip kit'
+ intro = '배우기 · 퀴즈 대결 · 공연 당일 준비. 세 개의 별도 앱입니다.' if ko else 'Learn Korean. Play a quiz. Plan your show day. Three separate apps.'
+ apps = [('Hangeul Cubs','6803749436','hc','무료 71레슨 · 받침팩 별도 구매' if ko else '71 free lessons · optional paid Batchim pack'),('K-Ranker','6819796522','kr','무료 · 영어 퀴즈 · 상대가 있어야 실시간 대결 가능' if ko else 'Free English trivia · live duels need another player'),('K-Concert Trip','6803810106','kct','유료 · 공연장·체크리스트 · 티켓·아티스트 일정 제공 안 함' if ko else 'Paid app · venue guide and checklist · no ticket sales or artist schedules')]
+ cards=[]
+ for name,aid,ct,note in apps:
+  url=f'https://apps.apple.com/app/apple-store/id{aid}?pt=129327962&ct=lia_bio_{ct}&mt=8'
+  cards.append(f'<article class="card"><h3>{e(name)}</h3><p>{e(note)}</p><div class="actions"><a class="button primary" href="{e(url,quote=True)}" target="_blank" rel="noopener noreferrer">App Store</a></div></article>')
+ return '<section class="section anchor" id="korea-trip-kit"><div class="wrap"><div class="section-head"><span class="eyebrow">LIA / KOREA TRIP KIT</span><h2>'+title+'</h2><p>'+intro+'</p></div><div class="grid-3">'+''.join(cards)+'</div></div></section>'
+
 def app_install_links(locale):
  ko = locale == 'ko'
  apps = [
@@ -41,10 +53,11 @@ def render(locale, product, sections, mail):
  return f'''<link rel="stylesheet" href="/assets/v2/lia-interactive.css?v=3"><script defer src="/assets/v2/lia-interactive.js?v=1"></script>
  <section class="lia-hero" data-lia-hero><div class="wrap lia-hero-grid">
  <div class="lia-intro"><span class="eyebrow">AP ENTERTAINMENT / LIA</span><h1>{t[0]}</h1><p class="lia-lead">{t[1]}</p>
- <div class="lia-actions"><a class="button primary" href="#apps">{("영상 속 앱 설치" if locale == "ko" else "Get the apps")} ↘</a><a class="button" href="#lia-content" data-lia-greet>{e(t[4])} ↘</a><a class="button" href="{e(mail('LIA collaboration'),quote=True)}" data-lia-greet>{e(t[5])} ↗</a></div>
+ <div class="lia-actions"><a class="button primary" href="#korea-trip-kit">{("한국 여행 키트 앱 3종" if locale == "ko" else "Korea trip kit · 3 apps")} ↘</a><a class="button primary" href="#apps">{("영상 속 앱 설치" if locale == "ko" else "Get the apps")} ↘</a><a class="button" href="#lia-content" data-lia-greet>{e(t[4])} ↘</a><a class="button" href="{e(mail('LIA collaboration'),quote=True)}" data-lia-greet>{e(t[5])} ↗</a></div>
  <div class="lia-social"><a href="https://www.instagram.com/lia_park55/" {external} data-lia-greet>Instagram ↗</a><a href="https://www.tiktok.com/@lia_park55" {external} data-lia-greet>TikTok ↗</a><a href="https://www.youtube.com/@APHoldings" {external} data-lia-greet>YouTube / AP Holdings ↗</a></div><p class="lia-disclosure">{e(t[6])}</p></div>
  <div class="lia-portrait"><button type="button" class="lia-stage" data-lia-stage data-pose="neutral" aria-label="{e(t[3],quote=True)}" aria-pressed="false"><span class="lia-sprite" aria-hidden="true"><img src="/media/lia/lia-interactive-atlas-v3.png" width="1536" height="1024" alt="" fetchpriority="high"></span><span class="lia-stage-label">LIA <span>●</span></span></button>
  <div class="lia-controls"><p>{e(t[2])}</p><button type="button" data-lia-toggle aria-pressed="true" data-on="{e(t[12],quote=True)}" data-off="{e(t[11],quote=True)}">{e(t[12])}</button></div></div>
  </div></section>
+ {trip_install_links(locale)}
  {app_install_links(locale)}
  <section class="section lia-content anchor" id="lia-content"><div class="wrap"><div class="section-head"><span class="eyebrow">WATCH / LIA</span><h2>{e(t[7])}</h2></div><div class="lia-video-grid">''' + ''.join(f'<figure><video controls playsinline preload="none" poster="/media/lia/review_ep{i}_{slug}_poster.jpg" src="/media/lia/review_ep{i}_{slug}.mp4" aria-label="LIA · {e(label,quote=True)}"></video><figcaption><span>0{i}</span> {e(label)}</figcaption></figure>' for i,slug,label in [(1,'suncream',t[8]),(2,'mask',t[9]),(3,'tint',t[10])]) + '</div></div></section>' + sections(product.get('sections',[]))
