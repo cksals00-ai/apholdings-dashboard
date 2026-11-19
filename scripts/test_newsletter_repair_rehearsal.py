@@ -51,11 +51,11 @@ class RehearsalTests(unittest.TestCase):
    self.assertEqual(json.loads((folder/'draft.json').read_text())['rehearsal_execution_run'],'456')
  def test_verify_writes_only_safe_summary_after_real_receipts(self):
   from newsletter_copy_repair import identity,REVISION
-  from newsletter_cpu import ART_REV
+  from newsletter_cpu import REVIEW_REV
   state=self.state();state['input_published_today']=True
   state['stories']=[{'url':'https://blog.google/'+str(i),'title':'accepted '+str(i)} for i in range(5)]
   state['candidates']=[{'url':s['url'],'body_sha256':'body'+str(i)} for i,s in enumerate(state['stories'])]
-  for i,story in enumerate(state['stories']):story['strong_review']={'revision':REVISION,'model_revision':ART_REV,'supported':True,'input_hash':identity(story,state['candidates'][i],[],state['stories'][:i])}
+  for i,story in enumerate(state['stories']):story['strong_review']={'revision':REVISION,'model_revision':REVIEW_REV,'supported':True,'input_hash':identity(story,state['candidates'][i],[],state['stories'][:i])}
   failed={'subject':'A red sports car','scene':'Yellow flowers'}
   state['rehearsal_faults'].update(art_injected=True,copy_url=state['stories'][0]['url'],art_failed_plan=failed)
   state['rehearsal_faults'].update(advice_premise_injected=True,advice_url=state['stories'][1]['url'])
@@ -67,7 +67,7 @@ class RehearsalTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,{'AP_NEWS_REPAIR_REHEARSAL':'1'}):
    folder=Path(tmp,'.production-state');folder.mkdir();images=Path(tmp,'img/newsletter');images.mkdir(parents=True)
    for i in range(1,6):(images/f"{state['asset_day']}-story-{i}.png").write_bytes(b'preserved')
-   (folder/'draft.json').write_text(json.dumps(state));(folder/'notification-receipts.json').write_text(json.dumps({k:{'accepted':True} for k in ['copy-notice','art-notice']}))
+   (folder/'draft.json').write_text(json.dumps(state));(folder/'notification-receipts.json').write_text(json.dumps({k:{'accepted':False,'recorded':True,'suppressed':True,'policy':'terminal-only-v1'} for k in ['copy-notice','art-notice']}))
    result=r.verify_receipts(folder);self.assertEqual(result['strong_review_count'],5)
    self.assertNotIn('https://',(folder/'recovery-proof.json').read_text())
  def test_advice_proof_requires_specific_factual_rejection(self):

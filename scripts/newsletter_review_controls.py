@@ -14,13 +14,13 @@ def inputs(state,sources,prior):
 
 def valid(state,sources,prior):
  from newsletter_copy_repair import REVISION
- from newsletter_cpu import PROMPT_CACHE_REVISION,ART_REV
+ from newsletter_cpu import PROMPT_CACHE_REVISION,REVIEW_REV
  try:specs=inputs(state,sources,prior)
  except ValueError:return False
  receipts=state.get('editorial_control_receipts',{})
  for label,draft,source,digest,expected in specs:
   r=receipts.get(label,{})
-  if not (r.get('input_hash')==digest and r.get('source_hash')==source['body_sha256'] and r.get('review_revision')==REVISION and r.get('cache_revision')==PROMPT_CACHE_REVISION and r.get('model_revision')==ART_REV and r.get('expected_supported') is expected):return False
+  if not (r.get('input_hash')==digest and r.get('source_hash')==source['body_sha256'] and r.get('review_revision')==REVISION and r.get('cache_revision')==PROMPT_CACHE_REVISION and r.get('model_revision')==REVIEW_REV and r.get('expected_supported') is expected):return False
   findings=r.get('findings')
   if expected and findings!=[]:return False
   if not expected and not opportunity_rejected(findings,draft):return False
@@ -31,7 +31,7 @@ def opportunity_rejected(findings,draft):
 
 def verify_controls(model,state,sources,prior,save):
  from newsletter_copy_repair import verify,REVISION
- from newsletter_cpu import PROMPT_CACHE_REVISION,ART_REV
+ from newsletter_cpu import PROMPT_CACHE_REVISION,REVIEW_REV
  # This is called only through the explicitly enabled isolated rehearsal gate.
  from newsletter_repair_rehearsal import identity
  identity(state)
@@ -41,7 +41,7 @@ def verify_controls(model,state,sources,prior,save):
    # All three valid receipts short-circuit below; partial receipts still avoid
    # rerunning a matching individual control after an interrupted job.
    r=previous
-   same=r.get('input_hash')==digest and r.get('source_hash')==source['body_sha256'] and r.get('review_revision')==REVISION and r.get('cache_revision')==PROMPT_CACHE_REVISION and r.get('model_revision')==ART_REV and r.get('expected_supported') is expected
+   same=r.get('input_hash')==digest and r.get('source_hash')==source['body_sha256'] and r.get('review_revision')==REVISION and r.get('cache_revision')==PROMPT_CACHE_REVISION and r.get('model_revision')==REVIEW_REV and r.get('expected_supported') is expected
    if same and ((expected and r.get('findings')==[]) or (not expected and opportunity_rejected(r.get('findings'),draft))):continue
   candidate=copy.deepcopy(draft)
   try:
@@ -52,4 +52,4 @@ def verify_controls(model,state,sources,prior,save):
    if expected:raise ValueError('Editorial control rejected a clean conditional recommendation: '+label+' | '+str(exc)) from exc
    findings=getattr(exc,'review',{}).get('findings')
    if not opportunity_rejected(findings,draft):raise ValueError('Editorial control did not reject the specific obtained-opportunity premise') from exc
-  state.setdefault('editorial_control_receipts',{})[label]={'input_hash':digest,'source_hash':source['body_sha256'],'review_revision':REVISION,'cache_revision':PROMPT_CACHE_REVISION,'model_revision':ART_REV,'expected_supported':expected,'findings':findings,'checked_at':datetime.now(timezone.utc).isoformat()};save()
+  state.setdefault('editorial_control_receipts',{})[label]={'input_hash':digest,'source_hash':source['body_sha256'],'review_revision':REVISION,'cache_revision':PROMPT_CACHE_REVISION,'model_revision':REVIEW_REV,'expected_supported':expected,'findings':findings,'checked_at':datetime.now(timezone.utc).isoformat()};save()

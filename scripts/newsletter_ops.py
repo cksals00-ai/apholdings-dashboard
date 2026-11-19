@@ -14,7 +14,10 @@ def emit(key,event,detail,html=None,inject=False):
  data={'key':key,'event':event,'detail':detail,'html':html,'inject_failure':inject}
  request=Request(API,data=json.dumps(data).encode(),headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'})
  with urlopen(request,timeout=30) as r:result=json.load(r)
- if not result.get('accepted'):raise ValueError('Operational mail not accepted')
+ if result.get('accepted') is not True:raise ValueError('Operational mail not accepted')
+ if event.startswith('ops_') and result.get('suppressed') is True:
+  print(json.dumps({'event':event,'suppressed':True}),flush=True);return result
+ if not isinstance(result.get('id'),str) or not result['id']:raise ValueError('Mail provider receipt missing')
  print(json.dumps({'event':event,'accepted':True,'id':result['id']}),flush=True);return result
 
 def ident():

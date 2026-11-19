@@ -32,3 +32,17 @@ class RecoveryPolicyTests(unittest.TestCase):
 
 
 if __name__ == '__main__': unittest.main()
+
+class RehearsalRecoveryProofTests(unittest.TestCase):
+ def proof(self):
+  return {'total_count':1,'jobs':[{'name':'produce / produce','status':'completed','conclusion':'failure','steps':[{'name':'Preserve source evidence and unfinished work in a private company draft release','conclusion':'success'},{'name':'Inject first-attempt failure after saving validated test bundle','conclusion':'failure'}]}]}
+ def test_only_deliberate_failure_after_private_checkpoint_allows_rehearsal_retry(self):
+  from newsletter_recovery_policy import planned_rehearsal_failure
+  p=self.proof();self.assertTrue(planned_rehearsal_failure(p))
+  for changed in ('missing_checkpoint','semantic_failure','unknown_jobs'):
+   import copy
+   p=copy.deepcopy(self.proof())
+   if changed=='missing_checkpoint':p['jobs'][0]['steps'][0]['conclusion']='failure'
+   if changed=='semantic_failure':p['jobs'][0]['steps'][1]['name']='Supervise credential-free source, copy, art and document production'
+   if changed=='unknown_jobs':p['total_count']=2
+   with self.subTest(changed=changed):self.assertFalse(planned_rehearsal_failure(p))

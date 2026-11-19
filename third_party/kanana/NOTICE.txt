@@ -1,0 +1,13 @@
+Kanana is licensed in accordance with the Kanana License Agreement. Copyright © KAKAO Corp. All Rights Reserved.
+Powered by Kanana
+
+Original model: kakaocorp/kanana-1.5-15.7b-a3b-instruct
+Original revision: df9d415c38e198149a65957cb4dec6cf2a7ba162
+License source: https://huggingface.co/kakaocorp/kanana-1.5-15.7b-a3b-instruct/blob/df9d415c38e198149a65957cb4dec6cf2a7ba162/LICENSE
+Responsible use policy incorporated by that license: https://www.kakaocorp.com/page/responsible/detail/guidelinesForResponsibleAI
+
+Public GGUF conversion: mradermacher/kanana-1.5-15.7b-a3b-instruct-GGUF
+Conversion revision: b32ab9cea41a191001d348e4316f78301dca3ed4
+File: kanana-1.5-15.7b-a3b-instruct.Q5_K_M.gguf
+SHA256: f10b412b1224682c5175fd93d14c7643de13320581bff071d43255427cd08690
+The model and converted weights are not modified or distributed in this repository.

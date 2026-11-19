@@ -20,7 +20,7 @@ permissions:
 jobs:
   produce:
     runs-on: ubuntu-24.04
-    timeout-minutes: 360
+    timeout-minutes: 270
     env:
       HF_HUB_DISABLE_TELEMETRY: '1'
       HF_HUB_DISABLE_IMPLICIT_TOKEN: '1'
@@ -35,7 +35,7 @@ jobs:
       - name: Checkout reviewed producer runtime
         uses: actions/checkout@v7
         with:
-          ref: d0d0aac2969cba0aa6344247be68720951aa0480
+          ref: bc90ef1c07fbc9e147d262a76e4d2db99c4a83d5
           path: .production-runtime
       - uses: actions/setup-python@v7
         with:
@@ -90,7 +90,7 @@ jobs:
         run: pip install -r .production-runtime/requirements-newsletter-server.txt
       - name: Free disposable runner SDK before model caches
         if: ${{ steps.gate.outputs.produce == 'true' }}
-        run: sudo rm -rf /usr/local/lib/android
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /usr/local/.ghcup /opt/ghc
       - uses: actions/cache@v5
         if: ${{ steps.gate.outputs.produce == 'true' }}
         with:
@@ -111,8 +111,9 @@ jobs:
           pip install -r .production-runtime/requirements-newsletter-producer.txt
           python -m playwright install --with-deps chromium
           mkdir -p .cpu-runtime
-          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b5401/llama-b5401-bin-ubuntu-x64.zip -o "$RUNNER_TEMP/llama.zip"
-          unzip -q "$RUNNER_TEMP/llama.zip" -d .cpu-runtime
+          curl --fail --location --retry 2 https://github.com/ggml-org/llama.cpp/releases/download/b12244/llama-b12244-bin-ubuntu-x64.tar.gz -o "$RUNNER_TEMP/llama.tar.gz"
+          echo "c1d7e7f31b5c43f3e5d44f667b4d57104217be3e5f2060320cd3735651238849  $RUNNER_TEMP/llama.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/llama.tar.gz" -C .cpu-runtime
       - name: Test reviewed producer and publisher gates
         if: ${{ steps.gate.outputs.produce == 'true' }}
         working-directory: .production-runtime
@@ -129,6 +130,50 @@ jobs:
           AP_NEWS_REPAIR_REHEARSAL: '1'
           RESUME_RUN: ${{ inputs.resume_run }}
         run: python .production-runtime/scripts/newsletter_repair_rehearsal.py seed --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --run "$GITHUB_RUN_ID" --dry-run --resume-run "$RESUME_RUN"
+      - name: Require actual exact-runtime controls without repeating passed inference
+        if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run == true && inputs.inject_failure == true && github.run_attempt == 1 }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITION_DAY: ${{ steps.gate.outputs.day }}
+          PYTHONPATH: ${{ github.workspace }}/.production-runtime/scripts
+        run: |
+          python .production-runtime/scripts/newsletter_control_handoff.py --source-run 42885393201 --expected-head a5cb11716fb6e6740df5cdcf35148980aa806bca --expected-runtime bc90ef1c07fbc9e147d262a76e4d2db99c4a83d5 --definition-sha c6f844100c33024a4c44d88eb2d292779ef42fb5f30ef9429c601fc11fe3aa6c --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --folder "$RUNNER_TEMP/qualified-controls"
+          python - <<'PY_SCOPE'
+          import json, os
+          from pathlib import Path
+          # SCOPE_GROUND_TRUTH_BEGIN
+          def assert_scope_ground_truth(receipt):
+              expected = {(field, 0): ('pure_proposal', []) if field == 'insight' else ('asserted_or_mixed', [(0, 2)]) for field in ('title', 'summary', 'fact', 'insight')}
+              ranges = [[], [(0, 3)], [], [(0, 2)], [(0, 2)], [(1, 5)], [], [(0, 4)], [(0, 3)], [(0, 4)], [(0, 5)], [(0, 4)], [], [(0, 2)], [(0, 2)]]
+              expected.update({('action', i): ('asserted_or_mixed' if parts else 'pure_proposal', parts) for i, parts in enumerate(ranges)})
+              seen = set()
+              flattened = {field: [] for field in ('title', 'summary', 'fact', 'insight', 'action')}
+              if not isinstance(receipt, dict) or not isinstance(receipt.get('inventory'), list):
+                  raise ValueError('Missing synthetic scope inventory')
+              for row in receipt['inventory']:
+                  if not isinstance(row, dict) or type(row.get('id')) is not int:
+                      raise ValueError('Invalid synthetic sentence ID')
+                  key = (row.get('field'), row['id'])
+                  if key not in expected or key in seen:
+                      raise ValueError('Unknown or duplicate synthetic sentence')
+                  seen.add(key)
+                  parts = row.get('premises')
+                  if not isinstance(parts, list):
+                      raise ValueError('Missing synthetic factual ranges')
+                  for part in parts:
+                      if not isinstance(part, dict) or any(type(part.get(k)) is not int for k in ('sentence_id', 'word_start', 'word_end')) or part['sentence_id'] != row['id']:
+                          raise ValueError('Invalid synthetic factual range')
+                  actual = (row.get('kind'), [(part['word_start'], part['word_end']) for part in parts])
+                  if actual != expected[key]:
+                      raise ValueError('Synthetic factual scope differs from independent ground truth: ' + str(key))
+                  flattened[key[0]].extend(parts)
+              if seen != set(expected) or receipt.get('facts') != flattened:
+                  raise ValueError('Missing or inconsistent synthetic factual inventory')
+              return True
+          # SCOPE_GROUND_TRUTH_END
+          scope = Path(os.environ['AP_NEWS_SITE_ROOT']) / '.production-state/qualified-control-evidence/scope/scope-controls.json'
+          assert_scope_ground_truth(json.loads(scope.read_text())['receipt'])
+          PY_SCOPE
       - name: Wait for Korean 03:05 actual source work window
         if: ${{ steps.gate.outputs.produce == 'true' && inputs.dry_run != true }}
         run: python .production-runtime/scripts/newsletter_start_window.py
@@ -147,7 +192,7 @@ jobs:
           if [ "$DRY_RUN" = true ]; then args+=(--dry-run); mode=test; fi
           python .production-runtime/scripts/newsletter_supervisor.py --root "$AP_NEWS_SITE_ROOT" --date "$EDITION_DAY" --mode "$mode" -- python .production-runtime/scripts/newsletter_producer.py --date "$EDITION_DAY" --folder "$AP_NEWS_SITE_ROOT/.production-state" --runtime .cpu-runtime --produce-only "${args[@]}"
       - name: Notify generation failure before preserving/recovering the draft
-        if: failure()
+        if: ${{ failure() && inputs.dry_run != true }}
         env:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           FAILED_RUN_ID: ${{ github.run_id }}
@@ -188,7 +233,7 @@ jobs:
             python .production-runtime/scripts/newsletter_handoff.py reserve --date "$EDITION_DAY"
           fi
       - name: Notify failure before waiting for automatic recovery
-        if: failure()
+        if: ${{ failure() && inputs.dry_run != true }}
         env:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           FAILED_RUN_ID: ${{ github.run_id }}
