@@ -562,9 +562,11 @@
     {
      "name": "K-Ranker",
      "tag": "외국인을 위한 한국 문화 퀴즈",
-     "desc": "K-pop·K-food·한국 문화를 퀴즈로 학습하는 앱입니다. 현재 앱스토어 심사 중입니다.",
-     "status": "심사 중",
-     "group": "외국인을 위한 한국어·문화 학습"
+     "desc": "K-pop·K-food·한국 문화를 퀴즈로 학습하는 앱입니다. App Store에서 이용할 수 있습니다.",
+     "status": "운영 중",
+     "group": "외국인을 위한 한국어·문화 학습",
+     "url": "https://apps.apple.com/app/id6819796522",
+     "cta": "App Store"
     },
     {
      "name": "Hangeul Cubs",
@@ -627,9 +629,11 @@
     {
      "name": "K-Ranker",
      "tag": "The Korea quiz app for international fans",
-     "desc": "Learn K-pop, K-food and Korean culture by competing in quizzes. Now in App Store review.",
-     "status": "In review",
-     "group": "For the world · Hallyu"
+     "desc": "Learn K-pop, K-food and Korean culture through quizzes. Available on the App Store.",
+     "status": "Live",
+     "group": "For the world · Hallyu",
+     "url": "https://apps.apple.com/app/id6819796522",
+     "cta": "App Store"
     },
     {
      "name": "Hangeul Cubs",
@@ -689,9 +693,11 @@
     {
      "name": "K-Ranker",
      "tag": "Ứng dụng đố vui Hàn Quốc cho fan quốc tế",
-     "desc": "Học K-pop, K-food và văn hóa Hàn Quốc bằng cách thi đố vui. Đang xét duyệt trên App Store.",
-     "status": "Đang xét duyệt",
-     "group": "For the world · Hallyu"
+     "desc": "Học K-pop, K-food và văn hóa Hàn Quốc qua các câu đố. Hiện có trên App Store.",
+     "status": "Đang hoạt động",
+     "group": "For the world · Hallyu",
+     "url": "https://apps.apple.com/app/id6819796522",
+     "cta": "App Store"
     },
     {
      "name": "Hangeul Cubs",
@@ -751,9 +757,11 @@
     {
      "name": "K-Ranker",
      "tag": "海外ファンのための韓国クイズアプリ",
-     "desc": "K-pop · K-food · 韓国文化をクイズで競いながら学びます。App Store 審査中。",
-     "status": "審査中",
-     "group": "For the world · Hallyu"
+     "desc": "K-pop・K-food・韓国文化をクイズで学べます。App Storeで公開中。",
+     "status": "運営中",
+     "group": "For the world · Hallyu",
+     "url": "https://apps.apple.com/app/id6819796522",
+     "cta": "App Store"
     },
     {
      "name": "Hangeul Cubs",
@@ -813,9 +821,11 @@
     {
      "name": "K-Ranker",
      "tag": "面向海外粉丝的韩国答题应用",
-     "desc": "通过答题比拼学习 K-pop、K-food 和韩国文化。App Store 审核中。",
-     "status": "审核中",
-     "group": "For the world · Hallyu"
+     "desc": "通过答题学习 K-pop、K-food 和韩国文化。现已在 App Store 上架。",
+     "status": "运营中",
+     "group": "For the world · Hallyu",
+     "url": "https://apps.apple.com/app/id6819796522",
+     "cta": "App Store"
     },
     {
      "name": "Hangeul Cubs",
@@ -875,9 +885,11 @@
     {
      "name": "K-Ranker",
      "tag": "L’application de quiz sur la Corée pour les fans du monde entier",
-     "desc": "Apprenez la K-pop, la K-food et la culture coréenne en vous affrontant au quiz. En cours d’examen sur l’App Store.",
-     "status": "En cours d’examen",
-     "group": "For the world · Hallyu"
+     "desc": "Apprenez la K-pop, la K-food et la culture coréenne avec des quiz. Disponible sur l’App Store.",
+     "status": "En service",
+     "group": "For the world · Hallyu",
+     "url": "https://apps.apple.com/app/id6819796522",
+     "cta": "App Store"
     },
     {
      "name": "Hangeul Cubs",
