@@ -1,9 +1,9 @@
-import { downloadSummary } from './app-downloads.mjs?v=20261103-1';
+import { downloadSummary, googleReleaseLabel } from './app-downloads.mjs?v=20261120';
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const isoDay = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0,10);
 const money = (v) => v === null ? '미수집' : `${v.toLocaleString('ko-KR')} KRW`;
 export function financeRows({apps=[],metrics=[],today=isoDay(),days=30,platform='apple',metricsError=false,runtime=[]}={}) {
-  const googleStatus=new Map(downloadSummary({androidApps:apps,runtime}).googleRows.map(a=>[a.id,({production:'정식 공개',in_review:'심사 중',internal:'내부 테스트',not_created:'미생성 · 주간 한도'}[a.releaseStatus] || '출시 상태 미연결')]));
+  const googleStatus=new Map(downloadSummary({androidApps:apps,runtime}).googleRows.map(a=>[a.id,googleReleaseLabel(a.releaseStatus) || '출시 상태 미연결']));
   const n=[7,30,90].includes(Number(days)) ? Number(days) : 30;
   const start=new Date(`${today}T00:00:00Z`); start.setUTCDate(start.getUTCDate()-n+1);
   const since=start.toISOString().slice(0,10);

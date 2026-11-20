@@ -88,7 +88,7 @@ export const androidApps = [
   {
     "id": "SeunggyuAndMe",
     "name": "아빠랑 나랑",
-    "package_id": "com.apholdings.seunggyuandme",
+    "package_id": "com.apholdings.dadandme",
     "status": "preparing"
   },
   {
