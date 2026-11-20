@@ -12,7 +12,12 @@ data/lia_daily_queue.json 의 순서대로, 아직 안 올라간 첫 편을 인�
 import os, sys, json, time, datetime, urllib.request, urllib.parse, urllib.error
 
 TOK = os.environ["IG_TOKEN"]
-G = "https://graph.instagram.com/v23.0/"
+# 2026-11-20 비번 변경 후 재발급 토큰은 Facebook 시스템 사용자 토큰(EA…) → graph.facebook.com + IG 계정 ID 경로
+IG_ID = "17841441979512301"
+if TOK.startswith("EA"):
+    G, ME = "https://graph.facebook.com/v23.0/", IG_ID
+else:
+    G, ME = "https://graph.instagram.com/v23.0/", "me"
 QUEUE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "lia_daily_queue.json")
 
 
@@ -33,7 +38,7 @@ def first_line(s):
 
 
 def all_media(max_items=500):
-    out, r = [], call("me/media", fields="timestamp,caption", limit=100)
+    out, r = [], call(ME + "/media", fields="timestamp,caption", limit=100)
     while True:
         out += r.get("data", [])
         nxt = r.get("paging", {}).get("next")
@@ -74,14 +79,14 @@ def main():
     if not it:
         print("큐 소진 — 올릴 편 없음. 새 편 제작 필요"); return 1
     print("게시:", it["id"], "·", it.get("ko", ""))
-    c = call("me/media", data={"media_type": "REELS", "video_url": it["video_url"],
+    c = call(ME + "/media", data={"media_type": "REELS", "video_url": it["video_url"],
                                 "caption": it["caption"], "share_to_feed": "true"})
     for _ in range(50):
         s = call(c["id"], fields="status_code")["status_code"]
         if s == "FINISHED": break
         if s == "ERROR": sys.exit("컨테이너 처리 오류")
         time.sleep(6)
-    p = call("me/media_publish", data={"creation_id": c["id"]})
+    p = call(ME + "/media_publish", data={"creation_id": c["id"]})
     print("완료:", call(p["id"], fields="permalink")["permalink"])
     left = len([x for x in queue if not already_posted(x, captions, lines)]) - 1
     print(f"남은 재고: {left}편")
