@@ -1,4 +1,4 @@
-import { downloadSummary, googleReleaseLabel } from './app-downloads.mjs?v=20261120';
+import { downloadSummary, googleReleaseLabel } from './app-downloads.mjs?v=20261120-1';
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const isoDay = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0,10);
 const money = (v) => v === null ? '미수집' : `${v.toLocaleString('ko-KR')} KRW`;

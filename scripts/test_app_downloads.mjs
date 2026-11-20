@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import {beforeEach,test} from 'node:test';
 import {downloadSummary,renderDownloads} from '../admin/app-downloads.mjs';
 import {androidApps as registry} from '../admin/android-app-registry.mjs';
 const apps=[{id:'one',name:'One',status:'live'}],androidApps=[{id:'one',name:'One',package_id:'com.one'}];
@@ -28,6 +28,8 @@ console.log('download aggregation and missingness assertions passed');
 assert.ok(!renderDownloads({...opts,androidApps:[{...androidApps[0],name:'<script>alert(1)</script>'}]}).includes('<script>'));
 
 const observedAt='2026-11-20T05:05:06.712Z';
+const readAt=Date.parse('2026-11-22T00:00:00Z');
+beforeEach(({mock})=>mock.method(Date,'now',()=>readAt));
 const observation={schemaVersion:1,kind:'release_status_observation',platform:'google',observedAt,apps:[
   {packageId:'com.one',status:'draft'},
 ]};
@@ -126,6 +128,25 @@ test('an automatically collected install timestamp does not refresh copied relea
   assert.equal(summary.google,0);
   assert.equal(summary.samePeriod,true);
   assert.equal(summary.googleRows[0].complete,true);
+});
+
+test('a release observation after the reading clock uses the raw status and leaves installs pending',()=>{
+  const atReadTime=new Date(readAt).toISOString();
+  const latest=withRelease({...observation,observedAt:atReadTime});
+  assert.equal(downloadSummary(latest).releaseStatusObservedAt,atReadTime);
+
+  const future={...withRelease({...observation,observedAt:new Date(readAt+1).toISOString(),apps:[
+    {...observation.apps[0],installs:500,metric:'installed_users',complete:true},
+  ]}),today:'2026-11-23'};
+  const summary=downloadSummary(future);
+  assert.equal(summary.googleRows[0].releaseStatus,'production');
+  assert.equal(summary.releaseStatusObservedAt,null);
+  assert.equal(summary.googleRows[0].value,null);
+  assert.equal(summary.google,null);
+  assert.equal(summary.total,null);
+  const html=renderDownloads(future);
+  assert.match(html,/<td>정식 공개<\/td><td>집계 대기<\/td>/);
+  assert.doesNotMatch(html,/Google Play 출시 상태 확인/);
 });
 
 test('ambiguous, malformed, older, and inexact release observations retain the raw release fallback',()=>{

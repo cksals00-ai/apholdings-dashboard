@@ -1,6 +1,6 @@
 import { createB2BSupport } from './b2b-support.mjs?v=20261027';
-import { renderFinance, metricSummary } from './app-finance.mjs?v=20261120';
-import { renderDownloads } from './app-downloads.mjs?v=20261120';
+import { renderFinance, metricSummary } from './app-finance.mjs?v=20261120-1';
+import { renderDownloads } from './app-downloads.mjs?v=20261120-1';
 import { androidApps } from './android-app-registry.mjs?v=20261120';
 import { refreshRankerActivity, stopRankerActivity } from './ranker-activity.js?v=20261009-1';
 import { createNewsletter } from './newsletter.js?v=20261027-pipeline';

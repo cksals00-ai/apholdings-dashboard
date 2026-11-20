@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {test} from 'node:test';
 import { financeRows, renderFinance } from '../admin/app-finance.mjs';
 const apps=[{id:'one',name:'<script>bad</script>',status:'live'}];
 assert.equal(financeRows({apps,metrics:[]})[0].revenue,null);
@@ -50,9 +51,13 @@ assert.ok(waiting.includes('미수집'));
 assert.ok(!waiting.includes('0 KRW'));
 assert.ok(!waiting.includes('결제 프로필 설정 필요'));
 
-const googleApp={...apps[0],package_id:'com.one'};
-const googleRelease=renderFinance({apps:[googleApp],platform:'google',runtime:[
-  {id:'google_downloads',detail:JSON.stringify({schemaVersion:1,platform:'google',observedAt:'2026-11-03T02:00:00Z',apps:[{packageId:'com.one',status:'production'}]})},
-  {id:'google_release_status',detail:JSON.stringify({schemaVersion:1,kind:'release_status_observation',platform:'google',observedAt:'2026-11-20T05:05:06.712Z',apps:[{packageId:'com.one',status:'draft',proceeds_krw:0}]})},
-]});
-assert.match(googleRelease,/<td>초안<\/td><td>미수집<\/td>/);
+test('Google finance uses the current release status while future observations fall back and revenue stays missing',({mock})=>{
+  mock.method(Date,'now',()=>Date.parse('2026-11-22T00:00:00Z'));
+  const googleApp={...apps[0],package_id:'com.one'};
+  const googleRelease=observedAt=>renderFinance({apps:[googleApp],platform:'google',today:'2099-11-21',runtime:[
+    {id:'google_downloads',detail:JSON.stringify({schemaVersion:1,platform:'google',observedAt:'2026-11-03T02:00:00Z',apps:[{packageId:'com.one',status:'production'}]})},
+    {id:'google_release_status',detail:JSON.stringify({schemaVersion:1,kind:'release_status_observation',platform:'google',observedAt,apps:[{packageId:'com.one',status:'draft',proceeds_krw:0}]})},
+  ]});
+  assert.match(googleRelease('2026-11-20T05:05:06.712Z'),/<td>초안<\/td><td>미수집<\/td>/);
+  assert.match(googleRelease('2099-11-20T05:00:00Z'),/<td>정식 공개<\/td><td>미수집<\/td>/);
+});

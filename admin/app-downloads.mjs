@@ -24,7 +24,7 @@ function readReleaseObservation(runtime,snapshot) {
   if(typeof observedAt!=='string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(observedAt)) return null;
   const time=Date.parse(observedAt);
   const date=observedAt.slice(0,10);
-  if(!Number.isFinite(time) || new Date(`${date}T00:00:00Z`).toISOString().slice(0,10)!==date) return null;
+  if(!Number.isFinite(time) || time>Date.now() || new Date(`${date}T00:00:00Z`).toISOString().slice(0,10)!==date) return null;
 
   // Automatic collection refreshes the install timestamp and copies the old release statuses.
   const snapshotTime=snapshot?.collectionMode!=='automatic_official' && typeof snapshot?.observedAt==='string'
