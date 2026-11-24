@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-25",
+  "number": 45,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "AI 적용의 다음 단계, 조건과 결과를 분리하기",
+  "intro": "기업 데이터 통제부터 3D 제작·영화·스포츠 협력까지 AI 적용 사례가 넓어지고 있습니다. 시연과 제휴, 접근 승인과 비용 발생은 서로 다른 확인 항목입니다. 오늘은 실제 제공 단계와 근거가 남는 적용 조건을 살펴봅니다.",
+  "edition_note": "전날인 2026년 11월 24일 Google 공식 발표·사례 3건을 우선 선정했습니다. 11월 23일 AWS 발표 1건과 적용 비용의 통제를 보여주는 19일 설명 글 1건을 더해 선정 범위를 7일로 넓혔습니다. Google 3건·AWS 2건이며 원문 표기일과 피드 등록일을 구분했습니다. 이전 호 원문·같은 이슈 제외. AI 작성 및 원문 확인.",
+  "takeaway": "AI 적용 소식은 무엇을 만들 수 있는지와 어떤 조건으로 실제 운영하는지를 함께 읽어야 합니다. 보관 통제가 무보관을 뜻하지 않고, 시연의 완성도가 운영 검증이나 성과 증명을 대신하지 않습니다. AP의 교육·콘텐츠·웹 서비스와 Lia Select 업무에 참고한다면, 가상 과제마다 제공 단계·데이터 경계·출력 검증·비용 승인·완료 근거를 나눠 기록하는 실험을 제안합니다. 서로 다른 역할과 조건이 명확할 때 창작의 가능성과 실무의 책임을 함께 설명할 수 있습니다.",
+  "source_checked_at": "2026-11-25T04:07:43.734804+09:00",
+  "hero": {
+    "path": "/img/newsletter/2026-11-25-hero.gif",
+    "poster": "/img/newsletter/2026-11-25-hero.png",
+    "alt": "두 보관 경로와 검토 지점을 잇는 추상 직조 장면으로 AI 적용 조건을 나타낸 편집 일러스트",
+    "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/introducing-the-amazon-bedrock-trusted-access-api-with-anthropics-enterprise-frontier-safeguards-and-enterprise-data-controls/",
+      "source": "AWS Blog",
+      "published": "2026-11-23",
+      "title": "Bedrock Trusted Access, 접근 승인과 보관 조건 함께 읽기",
+      "summary": "AWS는 프로그램 조회·가입 API를 일반 제공하고 Anthropic EFS·EDC는 공개 미리보기로 소개했습니다.",
+      "fact": "AWS의 11월 23일 발표는 Trusted Access 프로그램 API의 일반 제공과 EFS·EDC의 공개 미리보기를 구분합니다. 자격 승인과 약관에 동의하는 가입도 별도 단계입니다. EFS는 고객 S3·KMS로, EDC는 Amazon 관리 저장소·키로 입력·출력 보관을 구성하며 안전 모니터링은 유지됩니다. EFS의 보관 기간은 최소 30일이고 가입하면 해당 계정의 기존 무보관 예외가 꺼집니다. 리전별 설정이 필요하며 설정하지 않은 리전은 관리 저장소를 사용합니다. EDC는 미리보기 동안 검토 사례가 전달되지 않는다고 명시했습니다. 보관이 사라지거나 모든 고객에게 자동 승인되는 기능은 아닙니다.",
+      "insight": "AP의 기업 AI 교육·웹 서비스 설계에 참고한다면, 가상 자료로 접근 자격·가입·보관 위치·검토 주체를 나눈 점검표를 제안합니다. 개인정보 처리 선택을 단순한 기능 켜기로 설명하지 않고, 기존 보관 정책이 바뀌는 조건과 실제 지원 리전을 확인하는 기준을 세울 수 있습니다.",
+      "action": "승인·가입·보관 기간·리전 설정·미리보기 제약을 확인합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-25-story-1.png",
+        "alt": "두 보관 경로를 비교하고 사람이 검토하는 장면으로 AI 데이터 통제를 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-neon-builders/",
+      "source": "Google Blog",
+      "published": "2026-11-24",
+      "title": "Gemini 4 Neon 제작 사례, 시연과 검증된 완성본 구분",
+      "summary": "Google은 3D 지구·나비·셰이더·진자 파동 등 다섯 제작 사례를 공개했습니다.",
+      "fact": "Google은 11월 24일 Gemini 4 Neon을 활용한 개발자 제작 사례 다섯 가지를 소개했습니다. Antigravity에서 만든 3D 지구·Three.js 나비·육각형 불꽃 셰이더·상호작용형 블랙홀·진자 파동이 대상입니다. 일부 사례는 높은 추론 설정을 사용했으며 소개된 제작 시간은 해당 시연의 결과입니다. 개발자는 Gemini API 유료 계층에서 사용할 수 있고 Pro·Ultra 구독자 및 기업의 제공 경로도 안내합니다. 이는 새 모델 출시 발표나 모든 코드의 보안·물리적 정확성·성능을 보장하는 시험 결과는 아닙니다.",
+      "insight": "AP의 AI 교육·웹 구현에 참고한다면, 공개된 작은 3D 예제에서 동작·수식·모바일 성능·접근성을 각각 확인하는 과제를 제안합니다. 시각적으로 멋진 결과와 실제 학습에 쓸 수 있는 완성본을 나누고, 수정 후에도 같은 조건으로 재검증할 수 있습니다.",
+      "action": "모델·추론 설정·이용 조건과 코드·수식·화면 동작을 확인합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-25-story-2.png",
+        "alt": "진자와 궤적을 조정하는 학습자로 생성된 3D 시연의 검증을 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/google-labs/women-in-film-india-google-flow/",
+      "source": "Google Blog",
+      "published": "2026-11-24",
+      "title": "인도 Flow Filmathon, AI 도구보다 이야기와 연출 보기",
+      "summary": "Google은 Women in Film India와 진행한 행사에서 나온 다섯 단편을 소개했습니다.",
+      "fact": "Google은 11월 24일 WIF India와 협력한 Google Flow Filmathon의 결선 단편 다섯 편을 공개했습니다. 참가자들은 Flow로 자신의 창작 구상을 영상 세계로 구현했으며 결선작은 고아의 인도국제영화제에서 상영됐다고 설명합니다. 1위는 Promita Banerjee의 Sikkal, 2위는 Syam Manohar의 Kuli, 3위는 Nikhil Shinde의 Pedals of Joy입니다. 이 글은 특정 창작 행사와 작품의 사례이며 모든 영상의 자동 완성이나 제작비 절감을 입증한 대조 실험은 아닙니다.",
+      "insight": "AP의 콘텐츠·AI 영상 교육에 참고한다면, 권한이 있는 가상 이야기의 장면 의도·인물 연속성·시각 언어를 먼저 정하는 수업안을 제안합니다. 도구 사용 여부보다 어떤 이야기를 왜 그 표현으로 전하는지 검토하고, AI 제작 표시와 최종 편집 판단을 함께 남길 수 있습니다.",
+      "action": "창작 의도·장면 연속성·소재 권리·AI 제작 표시를 확인합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-25-story-3.png",
+        "alt": "도시 위에 상상의 장면을 구상하는 인도 영화 창작자로 인간 중심 AI 연출을 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://blog.google/products-and-platforms/products/gemini/gemini-golden-state/",
+      "source": "Google Blog",
+      "published": "2026-11-24",
+      "title": "Gemini·Golden State 협력, 팬 경험과 운영 적용은 나눠 보기",
+      "summary": "Google은 Warriors·Valkyries·Chase Center와의 AI 협력 확대를 발표했습니다.",
+      "fact": "Google은 11월 24일 Golden State와의 파트너십을 확대한다고 밝혔습니다. Gemini는 Warriors·Valkyries·Chase Center의 공식 AI 비서 및 생성형 AI·기업 LLM 파트너로 소개됐습니다. 경기장 안의 상호작용형 비디오보드와 온라인 팬 채널을 통한 경험을 계획하고, 조직 내부에서는 Gemini for business로 맞춤형 AI 에이전트를 구축해 사업·농구 운영을 지원한다고 설명합니다. 구체적인 승률·매출·관람 만족도의 개선 수치를 입증한 발표는 아니며, 팬용 기능과 내부 운영의 적용 범위는 구분해야 합니다.",
+      "insight": "AP의 스포츠·교육 콘텐츠나 서비스 기획에 참고한다면, 가상 경기 안내와 내부 운영 자료 정리의 요구를 따로 쓰는 실험을 제안합니다. 팬에게 보여 주는 정보의 정확성과 운영 자료의 접근 권한을 각각 검토하고, 제휴 발표만으로 성과를 단정하지 않는 기준을 세울 수 있습니다.",
+      "action": "팬용 기능·내부 업무·실제 제공 범위와 성과 근거를 구분합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-25-story-4.png",
+        "alt": "가상의 농구장과 뒤편 업무 공간을 연결한 장면으로 AI 스포츠 협력의 두 범위를 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/enable-ai-agents-to-pay-for-aws-marketplace-x402-products-with-amazon-bedrock-agentcore-payments/",
+      "source": "AWS Blog",
+      "published": "2026-11-19",
+      "title": "AgentCore 결제 확장, 견적·예산·실제 청구의 경계",
+      "summary": "AWS는 x402 지원 Marketplace 상품의 요청 단위 구매를 AWS 청구서에 연결하는 방법을 설명했습니다.",
+      "fact": "AWS는 11월 19일 AgentCore payments에 AWS Billing 선택지를 추가해 x402 지원 Marketplace 상품을 달러로 구매하는 흐름을 소개했습니다. 판매자의 서명된 고정 가격 견적을 받고 세션 예산을 검사한 뒤 결제 토큰으로 다시 요청합니다. 최초 구매는 판매자와 계정 간 계약을 만들고 후속 사용료는 AWS 청구서에 집계됩니다. 예제는 예산을 만드는 역할과 결제하는 역할을 분리해 에이전트가 자신의 한도를 올리지 못하게 합니다. Private Marketplace를 쓰는 조직은 허용 상품으로 제한되며, 모든 API가 무료이거나 결제가 단순 조회라는 뜻은 아닙니다.",
+      "insight": "AP의 AI·커머스 교육에 참고한다면, 실제 결제 없이 가상 견적·한도·판매자 허용 목록·결과 영수증을 비교하는 수업안을 제안합니다. Lia Select 흐름에서도 정보 탐색과 비용이 발생하는 행동을 구분하고, 요청 성공과 최종 청구·납품 근거를 따로 확인할 수 있습니다.",
+      "action": "견적 서명·고정 가격·세션 한도·역할 분리·최종 청구를 확인합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-25-story-5.png",
+        "alt": "봉인된 예산 토큰과 별도 승인 슬롯으로 에이전트 구매의 한도를 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}
