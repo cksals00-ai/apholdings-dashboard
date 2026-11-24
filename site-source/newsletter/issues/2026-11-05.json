@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-05",
+  "number": 26,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "AI의 실력, 운영의 기준으로 읽다",
+  "intro": "건강 AI의 평가부터 맥락 관리와 사용량 집계, 데이터 연결과 지침 갱신까지. 오늘은 AI를 실제 업무에 쓰기 전에 정해야 할 기준을 살펴봅니다.",
+  "takeaway": "AP의 시선: AI의 적용 범위가 넓어질수록 결과를 만드는 과정도 관리 대상이 됩니다. 평가 항목, 전달할 정보, 데이터 접근 권한, 사용량과 지침 버전을 구분해 남기면 변경 전후를 비교하기 쉬워집니다. 기능 소개와 실제 성과를 구분하고, 작게 검증한 뒤 적용 범위를 정하는 방식이 교육·콘텐츠·서비스 운영의 공통 출발점입니다.",
+  "edition_note": "최근 72시간으로 선정 범위 확대 · 공식 원문 5건 · 발표일 2026-11-03~04 · AI 작성 및 원문 확인 · 사람 검수 아님",
+  "source_checked_at": "2026-11-05T04:36:14.462613+09:00",
+  "hero": {
+    "path": "/img/newsletter/2026-11-05-hero.gif",
+    "poster": "/img/newsletter/2026-11-05-hero.png",
+    "alt": "사람이 세 개의 렌즈로 AI 결과의 정확성과 안전성, 유용성을 살피는 편집 일러스트",
+    "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "source": "Google",
+      "url": "https://blog.google/innovation-and-ai/technology/health/evaluating-health-ai-at-scale/",
+      "published": "2026-11-04",
+      "title": "Google, 건강 AI 평가의 세 축 공개",
+      "summary": "정확성·안전성·유용성을 함께 살피는 평가 방법을 공유했습니다.",
+      "fact": "Google은 건강 분야 AI를 평가하는 백서를 공개했다고 밝혔다. 정확성·안전성·유용성을 평가하며, 정답이 정해진 질문의 벤치마크와 자동 평가, 전문가 검토를 결합한다. 흔한 건강 질문과 위험도가 높은 상황을 함께 다루는 방법론으로, 특정 제품의 임상 효능이나 국내 사용 승인을 뜻하지 않는다.",
+      "insight": "AP가 전문 분야 AI 교육을 설계한다면 정답률 외에 위험한 답변과 실제 과제 수행 여부를 별도 항목으로 정하고, 전문가 확인이 필요한 경계를 수업 자료에 표시할 수 있다.",
+      "action": "평가 대상과 위험 수준, 전문가 검토 범위를 나누어 확인한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-05-story-1.png",
+        "alt": "Google, 건강 AI 평가의 세 축 공개의 핵심을 표현한 독창적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "AWS",
+      "url": "https://aws.amazon.com/blogs/machine-learning/four-layers-of-context-engineering-for-production-ai-agents-how-deep-insight-applies-them-in-working-code/",
+      "published": "2026-11-04",
+      "title": "AWS, 에이전트 맥락 관리를 네 층으로 설명",
+      "summary": "긴 대화 하나에 모든 정보를 쌓지 않는 구현 가이드입니다.",
+      "fact": "AWS는 Strands Agents SDK와 Bedrock AgentCore 기반의 오픈소스 Deep Insight 구현을 통해 맥락 관리 방법을 소개했다. 역할별 맥락 분리, 응답량 제어, 파일로 정보 외부화, 독립 검증과 보호 장치의 네 층을 설명한다. 원문의 절감 수치는 해당 참조 구현의 결과로, 모든 서비스의 비용이나 정확도를 보장하지 않는다.",
+      "insight": "AP가 뉴스레터나 보고서 제작 흐름을 설계한다면 원문 자료와 계산 결과는 파일에 보존하고, 단계 사이에는 필요한 요약과 위치만 넘기는 방식을 검토할 수 있다.",
+      "action": "요약에서 빠진 근거를 원본 파일과 다시 대조할 수 있는지 확인한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-05-story-2.png",
+        "alt": "AWS, 에이전트 맥락 관리를 네 층으로 설명의 핵심을 표현한 독창적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "GitHub",
+      "url": "https://github.blog/changelog/2026-11-03-byok-and-enterprise-custom-models-in-the-copilot-usage-api/",
+      "published": "2026-11-03",
+      "title": "GitHub, Copilot 사용량에서 자체 모델 구분",
+      "summary": "로컬 모델과 기업 맞춤 모델 사용량을 별도로 볼 수 있게 됐습니다.",
+      "fact": "GitHub는 Copilot 사용량 지표 API에 자체 키·로컬 모델 이용과 기업 맞춤 모델 이용을 구분하는 정보를 추가했다. 로컬 BYOK는 개발자 클라이언트에서 설정하며, 기업 맞춤 모델은 관리자가 설정하고 요청이 GitHub를 거친다. 두 유형은 기업·조직의 사용자별 및 집계 보고서에 나타난다.",
+      "insight": "AP가 개발 도구의 사용 현황을 검토한다면 구독에 포함된 요청과 별도 제공사 또는 로컬 실행을 구분해 기록하는 기준을 만들 수 있다.",
+      "action": "집계 항목의 정의와 로컬·호스팅 요청의 구분을 문서로 확인한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-05-story-3.png",
+        "alt": "GitHub, Copilot 사용량에서 자체 모델 구분의 핵심을 표현한 독창적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "AWS",
+      "url": "https://aws.amazon.com/blogs/machine-learning/bring-structured-and-unstructured-data-together-with-amazon-quick/",
+      "published": "2026-11-03",
+      "title": "AWS, 문서와 매출 표를 하나의 대화로 연결",
+      "summary": "Amazon Quick의 데이터 결합 방법을 소개한 실습입니다.",
+      "fact": "AWS는 Amazon Quick에서 S3 문서 지식 베이스와 구조화 데이터셋을 Space에 연결하고 대화형 에이전트로 함께 조회하는 방법을 안내했다. 실습에는 Enterprise 구독과 데이터 접근 권한 등이 필요하다. 원문은 공유 대상의 Space·지식 베이스·데이터셋 권한을 각각 확인하고 필요한 자료만 연결하도록 설명한다.",
+      "insight": "Lia Select의 상품·매출 표와 운영 문서를 함께 분석하는 구상을 검토한다면, 먼저 열의 의미와 통화·기간 기준을 맞추고 담당자별 문서 접근 범위를 정할 수 있다.",
+      "action": "표의 데이터형과 집계 기준, 공유 대상별 접근 권한을 점검한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-05-story-4.png",
+        "alt": "AWS, 문서와 매출 표를 하나의 대화로 연결의 핵심을 표현한 독창적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "source": "GitHub",
+      "url": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager/",
+      "published": "2026-11-03",
+      "title": "GitHub, 에이전트 지침 패키지의 버전 갱신 지원",
+      "summary": "Dependabot이 Agent Package Manager 의존성 업데이트를 지원합니다.",
+      "fact": "GitHub는 Dependabot이 apm.yml에 선언된 지원 Git 의존성을 갱신하는 변경 요청을 만들고, apm.lock.yaml이 있으면 다시 생성한다고 발표했다. 대상에는 AI 에이전트의 스킬·프롬프트·지침이 포함된다. 이는 버전 업데이트 지원이며 보안 업데이트 지원과는 다르다. github.com의 모든 요금제에서 일반 제공된다.",
+      "insight": "AP가 재사용 교육·개발 지침을 패키지로 관리한다면 변경된 지침을 기존 평가 과제와 비교한 뒤 채택하는 검토 절차를 구성할 수 있다. 최신 버전이라는 이유만으로 결과 품질을 가정해서는 안 된다.",
+      "action": "버전 차이와 잠금 파일, 기존 작업에 미치는 영향을 확인한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-05-story-5.png",
+        "alt": "GitHub, 에이전트 지침 패키지의 버전 갱신 지원의 핵심을 표현한 독창적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}

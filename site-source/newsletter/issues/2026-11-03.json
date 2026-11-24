@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-03",
+  "number": 24,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "AI 교육과 에이전트 운영, 성과를 읽는 조건",
+  "intro": "교육 과정과 교실 연구, 클라우드 실행 지원을 살펴봅니다. 도입 사례와 구현 가이드는 신규 출시와 구분하고, 성과 수치보다 적용 조건을 함께 확인합니다.",
+  "takeaway": "AP의 시선: AI 도입은 기능 목록보다 검증 범위를 먼저 정할 때 실무 판단에 도움이 됩니다. 교육은 평가와 감독 조건을, 서비스는 권한·준비 시간·미리보기와 공개의 경계를 함께 점검한다면 과장된 기대를 줄이는 운영 기준을 만들 수 있습니다.",
+  "edition_note": "최근7일 발표로 선정 · 실제 발표 2026-10-27~2026-10-30 · 원문 조회 2026-11-03T08:15:33.735951+09:00 · 지면 검증 2026-11-03T09:08:37.202779+09:00 · 서버 AI 작성 및 원문 근거 자동 대조 · 사람 검수 아님",
+  "source_checked_at": "2026-11-03T08:15:33.735951+09:00",
+  "hero": {
+    "path": "/img/newsletter/2026-11-03-hero.gif",
+    "poster": "/img/newsletter/2026-11-03-hero.png",
+    "alt": "AI 교육과 에이전트 운영, 성과를 읽는 조건의 핵심 변화를 표현한 편집 일러스트",
+    "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "title": "Gemini 교육 연구, 성과와 검증 조건을 함께 읽기",
+      "summary": "Google이 영국·이탈리아 교실 연구 결과를 공개하며 AI 교육의 가능성과 한계를 함께 제시했습니다.",
+      "fact": "영국 연구에서는 Gemini를 활용한 AI 튜터의 모든 응답을 학생에게 전달하기 전에 전문가가 실시간으로 확인했다. 플랫폼 과제와 중간 퀴즈에서는 인간 튜터와 유사한 성과가 나타났지만, 같은 기간 STAR 표준화 시험 점수에서는 향상이 확인되지 않았다. 이탈리아 연구에는 교사·학생의 자기보고가 포함돼, 모든 교육 환경에서의 인과 효과로 일반화하면 안 된다.",
+      "insight": "AP가 AI 교육 효과를 평가한다면 만족도와 수업 과제만 보지 않고 별도 평가 결과, 감독 방식, 학습 범위를 함께 기록하는 기준을 적용할 수 있다.",
+      "action": "도입 검토표에 평가 도구·감독 조건·연구 기간을 넣고, 수업 내 성과와 표준화 시험 결과를 구분한다.",
+      "source": "Google",
+      "url": "https://blog.google/products-and-platforms/products/education/impact-studies-uk-italy/",
+      "published": "2026-10-29",
+      "image": {
+        "path": "/img/newsletter/2026-11-03-story-2.png",
+        "alt": "Gemini 교육 연구, 성과와 검증 조건을 함께 읽기를 설명하는 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "title": "의료 현장의 AI 교육, 진료보다 행정 업무부터",
+      "summary": "Google이 비임상 행정 업무를 중심으로 한 의료 종사자용 AI 교육 과정을 발표했습니다.",
+      "fact": "Google AI for Healthcare Professionals Certificate는 안전·개인정보 보호를 고려하며 일상 행정 업무에 AI를 활용하도록 설계한 자율 학습 과정이다. 원문은 5시간 미만 학습과 최대 5.0 AMA PRA Category 1 Credits를 안내한다. 진단·치료를 대신하는 자격이나 국내 보수교육 인정으로 확대해 해석해서는 안 된다.",
+      "insight": "AP가 의료기관 AI 교육을 구성한다면 진료 판단과 문서·일정·소통 업무를 나눠, 비임상 실습과 개인정보 보호 확인부터 설계할 수 있다.",
+      "action": "국내 교육 인정 여부와 수강 조건을 별도로 확인하고, 환자정보가 없는 실습 자료를 준비한다.",
+      "source": "Google",
+      "url": "https://blog.google/innovation-and-ai/technology/health/google-ai-for-healthcare-professionals-certificate/",
+      "published": "2026-10-29",
+      "image": {
+        "path": "/img/newsletter/2026-11-03-story-1.png",
+        "alt": "의료 현장의 AI 교육, 진료보다 행정 업무부터를 설명하는 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "title": "SageMaker AI, 컨테이너 다운로드 대기를 줄이는 SOCI 지원",
+      "summary": "AWS가 SageMaker AI 학습·처리 작업에 컨테이너 이미지를 지연 로딩하는 SOCI 인덱싱을 발표했습니다.",
+      "fact": "SOCI 인덱싱은 실행에 필요한 파일을 먼저 가져오고 나머지는 백그라운드에서 불러오는 방식이다. AWS는 이미지 가져오기 구간의 GPU 유휴 시간 감소를 보고했지만, 이를 전체 학습 시간이나 비용의 동일 비율 절감으로 읽어서는 안 된다. Amazon ECR 비공개 저장소의 이미지가 대상이며, 첫 학습 구간에는 추가 파일 로딩 비용이 발생할 수 있다.",
+      "insight": "AP가 반복 실행하는 AI 서비스의 비용을 점검한다면 모델 연산 시간과 환경 준비 시간을 분리해 측정하고, 짧은 작업에서 준비 단계의 비중부터 비교할 수 있다.",
+      "action": "이미지 저장소·초기 로딩 패턴·전체 작업 시간을 확인한 뒤 같은 조건에서 전후 성능을 비교한다.",
+      "source": "AWS",
+      "url": "https://aws.amazon.com/blogs/machine-learning/announcing-soci-indexed-images-for-faster-sagemaker-ai-jobs/",
+      "published": "2026-10-27",
+      "image": {
+        "path": "/img/newsletter/2026-11-03-story-3.png",
+        "alt": "SageMaker AI, 컨테이너 다운로드 대기를 줄이는 SOCI 지원를 설명하는 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "title": "MoEngage 사례, 에이전트 도구 연결과 권한을 분리하다",
+      "summary": "AWS가 AgentCore Gateway로 내부 API를 에이전트 도구에 연결한 MoEngage 운영 사례를 공개했습니다.",
+      "fact": "MoEngage는 AgentCore Gateway에서 IAM 역할과 Cedar 정책을 기준으로 에이전트가 볼 수 있고 호출할 수 있는 도구를 제한한다고 설명했다. 도구 설명을 검색해 필요한 후보만 모델에 전달하는 방식이며, 이미 운영 중인 고객 사례다. 새로운 Gateway 출시나 모든 지역에서 동일한 기능을 제공한다는 발표가 아니며, 기능 제공 지역은 별도 확인이 필요하다.",
+      "insight": "AP의 웹·서비스나 Lia Select 운영 자동화를 설계한다면 상품 조회·콘텐츠 수정·고객 관련 작업의 도구 권한을 나누고, 모델에 전달하는 도구 수를 줄이는 구성을 검토할 수 있다.",
+      "action": "조회와 변경 도구를 나누고, 역할별 호출 권한·감사 기록·제공 지역을 확인한다.",
+      "source": "AWS",
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-moengage-turned-over-400-apis-into-agent-tools-with-agentcore-gateway/",
+      "published": "2026-10-29",
+      "image": {
+        "path": "/img/newsletter/2026-11-03-story-4.png",
+        "alt": "MoEngage 사례, 에이전트 도구 연결과 권한을 분리하다를 설명하는 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "title": "AgentCore 구현 가이드, 코딩 결과를 세션 안에서 미리보기",
+      "summary": "AWS가 코딩 에이전트의 웹 작업을 인증된 세션 URL로 확인하는 구현 가이드를 공개했습니다.",
+      "fact": "가이드는 Amazon Bedrock AgentCore runtime의 격리된 microVM 세션 안에서 실행하는 웹 앱을 브라우저로 확인하는 예제를 설명한다. Session endpoint 요청에는 인증이 필요하고 URL은 세션이 끝나면 사용할 수 없다. 실제 이용자에게 서비스를 제공하려면 별도 호스팅 배포가 필요하므로, 영구 웹 호스팅 출시로 해석해서는 안 된다.",
+      "insight": "AP가 고객 웹·서비스 시안을 검토한다면 편집 중인 화면을 확인하는 단계와 이용자에게 공개하는 단계를 구분하고, 미리보기 접근 권한과 보존 범위를 먼저 정할 수 있다.",
+      "action": "미리보기의 인증·세션 종료·파일 보존 조건을 확인하고, 정식 배포는 별도 절차로 설계한다.",
+      "source": "AWS",
+      "url": "https://aws.amazon.com/blogs/machine-learning/preview-web-apps-live-as-your-coding-agent-builds-them-with-amazon-bedrock-agentcore-runtime/",
+      "published": "2026-10-30",
+      "image": {
+        "path": "/img/newsletter/2026-11-03-story-5.png",
+        "alt": "AgentCore 구현 가이드, 코딩 결과를 세션 안에서 미리보기를 설명하는 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}

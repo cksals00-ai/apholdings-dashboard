@@ -1,0 +1,7 @@
+nav.gnav{display:block;overflow:visible;position:sticky;top:0;z-index:100;height:48px;background:rgba(0,0,0,.9);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,.08);font-family:-apple-system,BlinkMacSystemFont,"SF Pro KR","Apple SD Gothic Neo","Pretendard","Helvetica Neue",Helvetica,Arial,sans-serif}
+nav.gnav .in{width:100%;max-width:980px;margin:0 auto;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:12px}
+.gnav .logo{display:flex;align-items:center;gap:8px;color:#f5f5f7;font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap}
+.gnav .logo img{height:20px;width:auto;opacity:.95}
+.gnav ul{list-style:none;margin:0;padding:0;display:flex;gap:26px}
+.gnav a{color:rgba(245,245,247,.82);text-decoration:none} .gnav a:hover{color:#fff;text-decoration:none} .gnav a.on{color:#fff;font-weight:600}
+@media (max-width:760px){.gnav ul{gap:14px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch} .gnav ul::-webkit-scrollbar{display:none}}

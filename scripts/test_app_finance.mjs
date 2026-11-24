@@ -1,0 +1,63 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import { financeRows, renderFinance } from '../admin/app-finance.mjs';
+const apps=[{id:'one',name:'<script>bad</script>',status:'live'}];
+assert.equal(financeRows({apps,metrics:[]})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:0}],today:'2026-10-26'})[0].revenue,0);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:null}],today:'2026-10-26'})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:200,environment:'Sandbox'}],today:'2026-10-26'})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',platform:'google',day:'2026-10-26',proceeds_krw:200}],today:'2026-10-26'})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:200}],today:'2026-10-26',platform:'google'})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-01',proceeds_krw:250}],today:'2026-10-26',days:7})[0].revenue,null);
+assert.equal(financeRows({apps,metrics:[{app_id:'one',day:'2026-10-26',proceeds_krw:250}],today:'2026-10-26',metricsError:true})[0].revenue,null);
+const html=renderFinance({apps,metrics:[],today:'2026-10-26'});
+assert.ok(!html.includes('<script>bad'));
+assert.ok(html.includes('확인 필요'));
+assert.ok(html.includes('계정 단위'));
+console.log('app finance: all assertions passed');
+const { metricSummary } = await import('../admin/app-finance.mjs');
+assert.equal(metricSummary([]).downloads,null);
+assert.equal(metricSummary([{downloads:null,proceeds_krw:null}]).revenue,null);
+assert.equal(metricSummary([{downloads:0,proceeds_krw:0,units:0,iap_units:0}]).downloads,0);
+assert.equal(metricSummary([{downloads:2,proceeds_krw:0,units:0,iap_units:0}]).revenue,0);
+assert.equal(metricSummary([{downloads:2},{downloads:null}]).downloads,2);
+const evidence={schemaVersion:1,platform:'apple',period:'2026-09',currency:'KRW',gross:4750,adjustment:-75,expectedProceeds:4675,expectedPaymentDate:'2026-10-29',paymentStatus:'expected',bankStatus:'unverified',source:'Apple 지불 및 재무 보고서',sourceUpdatedAt:'2026-10-14',observedAt:'2026-10-28T03:30:00Z',collectionMode:'manual_official'};
+const f=renderFinance({apps,runtime:[{id:'asc_finance',detail:JSON.stringify(evidence),status:'ready'}]});
+assert.ok(f.includes('4,675'));
+assert.ok(f.includes('2026-09'));
+assert.ok(f.includes('지급 예정'));
+assert.ok(f.includes('은행 입금 미확인'));
+assert.ok(f.includes('공식 화면 직접 확인'));
+assert.ok(!renderFinance({apps,platform:'google',runtime:[{id:'asc_finance',detail:JSON.stringify(evidence)}]}).includes('4,675'));
+assert.ok(renderFinance({apps,runtime:[{id:'asc_finance',detail:'bad json'}]}).includes('미연결'));
+console.log('finance evidence and missingness checks passed');
+
+assert.ok(renderFinance({apps,runtime:[{id:'asc_finance',status:'ready',detail:'null'}]}).includes('검증 필요'));
+
+const blocked=[{id:'google_sales',status:'blocked',detail:'Google Payments 판매자 계정 설정 필요',checked_at:'2026-10-28T04:00:00Z'},{id:'google_finance',status:'blocked',detail:'재무 보고서 접근 불가 · 결제 프로필 설정 필요',checked_at:'2026-10-28T04:00:00Z'}];
+const googleBlocked=renderFinance({apps,platform:'google',runtime:blocked});
+assert.ok(googleBlocked.includes('Google Payments 판매자 계정 설정 필요'));
+assert.ok(googleBlocked.includes('재무 보고서 접근 불가'));
+assert.ok(googleBlocked.includes('판매·정산 연결 대기'));
+assert.ok(googleBlocked.includes('연결 상태 확인:'));
+assert.ok(!googleBlocked.includes('계정 인증 및 앱 등록 후 연결'));
+assert.ok(googleBlocked.includes('미수집'));
+assert.ok(!googleBlocked.includes('0 KRW'));
+
+const waiting=renderFinance({apps,platform:'google',runtime:[{id:'google_sales',status:'waiting_report',detail:'판매자 프로필 제출 반영 · 예상 판매실적 보고서 없음',checked_at:'2026-10-28T04:30:00Z'},{id:'google_finance',status:'waiting_report',detail:'수익 보고서 없음 · 지급 계좌 확인 대기 중',checked_at:'2026-10-28T04:30:00Z'}]});
+assert.ok(waiting.includes('수익 보고서 없음 · 지급 계좌 확인 대기 중'));
+assert.ok(waiting.includes('Google 재무 보고서 확인'));
+assert.ok(waiting.includes('미수집'));
+assert.ok(!waiting.includes('0 KRW'));
+assert.ok(!waiting.includes('결제 프로필 설정 필요'));
+
+test('Google finance uses the current release status while future observations fall back and revenue stays missing',({mock})=>{
+  mock.method(Date,'now',()=>Date.parse('2026-11-22T00:00:00Z'));
+  const googleApp={...apps[0],package_id:'com.one'};
+  const googleRelease=observedAt=>renderFinance({apps:[googleApp],platform:'google',today:'2099-11-21',runtime:[
+    {id:'google_downloads',detail:JSON.stringify({schemaVersion:1,platform:'google',observedAt:'2026-11-03T02:00:00Z',apps:[{packageId:'com.one',status:'production'}]})},
+    {id:'google_release_status',detail:JSON.stringify({schemaVersion:1,kind:'release_status_observation',platform:'google',observedAt,apps:[{packageId:'com.one',status:'draft',proceeds_krw:0}]})},
+  ]});
+  assert.match(googleRelease('2026-11-20T05:05:06.712Z'),/<td>초안<\/td><td>미수집<\/td>/);
+  assert.match(googleRelease('2099-11-20T05:00:00Z'),/<td>정식 공개<\/td><td>미수집<\/td>/);
+});

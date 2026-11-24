@@ -1,0 +1,31 @@
+name: 리아 지표 동기화
+
+# 매일 KST 23:20 (UTC 14:20) — 그날 게시가 끝난 뒤 한 번.
+# 수동 실행도 가능하게 열어 둔다.
+on:
+  schedule:
+    - cron: "20 14 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: lia-metrics
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 인스타그램 지표 → Supabase
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SUPABASE_URL: https://cgijpcimixaregbpvqbf.supabase.co
+          IG_CHANNEL_ID: 23ff8bd5-67ab-4c8d-9ef1-b164ef0f3795
+        run: python scripts/sync_lia_metrics.py

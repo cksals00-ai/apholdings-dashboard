@@ -1,0 +1,4 @@
+# AP News editorial motion
+Approved in chat: preserve AP branding; use reference's whitespace, restrained masthead, editorial hierarchy and moving cover from 2026-10-28. Existing editions remain unchanged.
+
+Use opt-in layout editorial-v2, with a locally generated abstract AP signal animation (navy/sage/brass) and matching static poster. This is a brand graphic, not a product screenshot. Web uses GIF with pause and reduced-motion poster; email uses GIF (first frame meaningful); PDF uses poster. No paid API, no copied CBRE assets. Keep story summary/fact/insight/source; omit repetitive action in all v2 channels and end with AP의 시선 using takeaway. Keep legacy rendering for previous issues. Package and verify both cover assets across server handoff and public checks. Keep mail unsubscribe/confirmed subscribers and scheduler unchanged.

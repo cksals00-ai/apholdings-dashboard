@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-07",
+  "number": 28,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "AI의 답과 지표, 근거까지 읽는 법",
+  "intro": "검색이 답변으로 이어지고, 평가가 실제 대응과 관측 조건까지 넓어지고 있습니다. 결과를 활용하기 전에 근거와 집계의 의미를 함께 살펴봅니다.",
+  "takeaway": "AI가 정리한 결과를 업무에 쓰려면 출처, 관측 누락, 실제 처리 여부를 함께 확인해야 합니다. AP가 도구를 검토한다면 작은 표본부터 비교하고, 고객과 서비스에 영향을 주는 변경에는 확인 단계를 둘 수 있습니다.",
+  "edition_note": "최근 72시간으로 선정 범위 확대 · 공식 원문 5건 · 발표일 2026-11-04~05 · AI 작성 및 원문 확인 · 사람 검수 아님",
+  "source_checked_at": "2026-11-07T04:06:31.057604+09:00",
+  "hero": {
+    "path": "/img/newsletter/2026-11-07-hero.gif",
+    "poster": "/img/newsletter/2026-11-07-hero.png",
+    "alt": "여러 원문 카드를 연결해 답변의 근거를 추적하는 편집 일러스트",
+    "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/getting-started-with-web-answer-on-amazon-bedrock-agentcore/",
+      "published": "2026-11-05",
+      "source": "AWS",
+      "title": "출처를 붙인 답변까지, 웹 검색의 다음 단계",
+      "summary": "Web Answer는 질문 하나에 웹 근거와 인용을 묶어 돌려줍니다.",
+      "fact": "AWS는 11월 5일 AgentCore Web Answer의 일반 제공을 발표했다. 현재 웹 자료를 검색하고 종합해 출처가 연결된 답변을 반환하는 Gateway 도구다. 원시 검색 결과를 돌려주는 Web Search와 역할이 다르다. 출시 리전은 미국 동부 버지니아 북부이며 Gateway 접근 권한이 필요하다.",
+      "insight": "AP가 뉴스 조사 도구를 평가한다면, 인용 표시 유무와 별개로 각 주장을 실제 원문과 대조하는 기준을 유지할 수 있다.",
+      "action": "인용된 원문과 주장 일치 여부를 표본으로 확인한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-07-story-1.png",
+        "alt": "출처를 붙인 답변까지, 웹 검색의 다음 단계의 개념을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-amazon-marketplace-evaluates-content-quality-with-amazon-sagemaker-ai/",
+      "published": "2026-11-05",
+      "source": "AWS",
+      "title": "상품 페이지 품질, 전체 화면으로 살피다",
+      "summary": "Amazon 사례는 시각적 맥락과 글자 가독성을 함께 평가합니다.",
+      "fact": "AWS는 Amazon Marketplace의 A+ Content 평가 방식을 소개했다. 상품 페이지 전체를 한 장으로 렌더링하고 비전 언어 모델의 의미 점수와 OCR 가독성 신호를 CatBoost 분류기에 결합한다. SHAP으로 판단 근거를 설명하고 개선 권고를 만드는 구축 사례다. 모든 판매자에게 동일한 성과를 보장하는 발표는 아니다.",
+      "insight": "Lia Select가 상품 소개를 점검한다면, 사진과 문구를 따로 보는 점검에 더해 모바일 전체 화면에서 옵션 설명과 이미지가 맞는지 확인할 수 있다.",
+      "action": "상품 페이지 전체 화면을 기준으로 가독성과 정보 일치를 점검한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-07-story-2.png",
+        "alt": "상품 페이지 품질, 전체 화면으로 살피다의 개념을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-05-usage-metrics-api-adds-code-review-details-and-addressed-rate/",
+      "published": "2026-11-05",
+      "source": "GitHub",
+      "title": "AI 코드 리뷰, 제안 이후의 반응을 측정하다",
+      "summary": "Copilot 사용 지표에 리뷰 의견 대응률이 추가됐습니다.",
+      "fact": "GitHub는 저장소별 일일 Copilot 지표에 코드 리뷰 의견의 평가 수와 대응 수를 추가했다. 대응 수를 평가 수로 나눠 대응률을 구한다. 코드 수정뿐 아니라 다음 PR에서 처리하겠다는 답글도 대응에 포함하며, PR이 병합된 날에 집계한다. 지표 정책 활성화와 조회 권한이 필요하다.",
+      "insight": "AP가 개발 교육이나 서비스 구현의 AI 리뷰를 평가한다면, 의견 대응률과 실제 결함 해결률을 구분해 기록하는 방식을 고려할 수 있다.",
+      "action": "대응으로 분류된 항목의 실제 처리 결과를 별도로 확인한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-07-story-3.png",
+        "alt": "AI 코드 리뷰, 제안 이후의 반응을 측정하다의 개념을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-05-usage-metrics-api-flags-telemetry-and-version-gaps/",
+      "published": "2026-11-05",
+      "source": "GitHub",
+      "title": "사용량의 빈칸을 사용 없음으로 읽지 않기",
+      "summary": "Copilot 지표가 텔레메트리 누락과 버전 조건을 구분합니다.",
+      "fact": "GitHub는 사용자별 클라이언트 텔레메트리 수신 여부와 IDE·확장 버전의 지표 수집 최소 조건 상태를 추가했다. 텔레메트리가 없어도 활성 사용자에 포함될 수 있다. 두 누락 집계는 겹칠 수 있어 합산하면 안 되며, null이나 생략된 값은 0이 아니라 데이터 확인 불가를 뜻한다. 조회 권한과 지표 정책 활성화가 필요하다.",
+      "insight": "AP의 AI 교육 참여나 도구 활용을 분석한다면, 관측 누락과 실제 미사용을 분리해 교육 효과를 과대·과소 해석하지 않는 기준을 세울 수 있다.",
+      "action": "누락 상태를 먼저 확인하고 중복 집계를 합산하지 않는다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-07-story-4.png",
+        "alt": "사용량의 빈칸을 사용 없음으로 읽지 않기의 개념을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-u-mobile-built-agentic-telco-operations-with-amazon-bedrock-agentcore/",
+      "published": "2026-11-04",
+      "source": "AWS",
+      "title": "운영 AI, 조사와 실제 변경 사이에 사람을 두다",
+      "summary": "U Mobile 사례는 여러 시스템 조사 후 변경을 사람이 확인합니다.",
+      "fact": "AWS는 말레이시아 U Mobile의 AiDaH 구축 사례를 공개했다. 여러 운영 시스템을 조사하고 조치 계획을 만든 뒤 담당자가 검토·확인하면 실행하는 흐름을 설명한다. 싱가포르 리전의 AgentCore를 기반으로 운영하며, 실제 가입자 계정 변경 시 사람의 결정 단계를 유지한다. 특정 기업의 사례로 AP의 도입 성과를 뜻하지 않는다.",
+      "insight": "AP가 고객 지원이나 웹 서비스 운영 보조를 설계한다면, 조회와 변경 권한을 나누고 실제 변경 전에 담당자가 계획을 확인하는 절차를 검토할 수 있다.",
+      "action": "조회 권한과 변경 승인 조건을 구분해 문서화한다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-07-story-5.png",
+        "alt": "운영 AI, 조사와 실제 변경 사이에 사람을 두다의 개념을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}

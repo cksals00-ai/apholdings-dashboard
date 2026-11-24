@@ -1,0 +1,92 @@
+---
+no: 37
+slug: one-robots-line-against-ai-training
+date: 2026-11-03
+category: 实践
+tags: robots.txt · 拒绝AI训练 · IETF AI偏好 · 谷歌 · 微软必应 · OpenAI · Anthropic · 网站运营
+title: robots.txt 里一行字说「别用来训练AI」—— 谷歌、微软、OpenAI、Anthropic 接受同一个令牌，必应把「训练」和「回答中引用」分开了。我们的网站本周要定的三件事
+summary: 10月30日，四家公司在同一天做出了同样的承诺。网站运营者只要在 robots.txt 里写上一行共同的名字「__usage_ai-training」，谷歌、微软、OpenAI 和 Anthropic 就会把它读作「不要用这个网站的内容训练生成式AI」。此前必须按各家不同的爬虫名逐个拦截。同一天，微软必应更进一步，把「用于训练」和「生成AI回答时引用」分开，可以各自选择，并从2027年2月1日起生效。不过这一行是声明而不是锁，也还不是标准。我们打开自家主页的 robots.txt 一看，这些偏好一项都没有表达。我们写下了运营网站的小团队本周要决定的三件事。文末简短附上同一天发布的 Anthropic 上市文件修订版。
+---
+> 本文由 AI（Claude）协助撰写，并经编辑审核。第一则消息中标准草案的作者任职于制造 Claude 的 Anthropic，而 Anthropic 是做出承诺的四家公司之一。文末「简述」涉及 Anthropic 的上市文件。我们公司是 Anthropic 和 OpenAI 的付费客户。公司文件中的表述以「公司文件所写」转述，只有一处来源的内容一并注明来源。本文不是对任何企业的投资意见，也不是投资判断的依据。
+
+过去三年里，运营网站的团队要逐家去查「想让我们的文章不被用于AI训练，该在哪里写什么」。谷歌是 Google-Extended，OpenAI 是 GPTBot，Anthropic 是 ClaudeBot，苹果是 Applebot-Extended。名字不同，拦截范围也不同。NO.28 我们写过商业搜索中88%出现AI摘要的调查，NO.25 写过网页份额数字没有统计到的东西。本周的消息在另一侧：**「我的文章可以被AI怎样使用」由网站一方来表达的方法，第一次汇成了一行字。**不过一行字出现，和这一行字被遵守，是两回事，所以我们把事实和局限分开写。
+
+## 1. 四家公司接受同一个令牌 —— IETF 草案「__usage_ai-training」（事实）
+
+10月30日，Anthropic 标准事务技术负责人凯文·凯利向 IETF 提交了**《机器可读的训练偏好信号（Machine-Readable Training Preference Signal）》**草案。文件编号为 draft-kelley-aipref-training-preference-signal-00，是一份**个人草案**，2027年5月3日到期。文件开头写明「未经 IETF 认可，没有正式地位」。草案只定义一件事：写在 robots.txt 的 User-Agent 组名位置的**策略令牌 `__usage_ai-training`**。在这个组下写 Disallow，表示「请不要把该路径的内容用于AI训练」的偏好；写 Allow，表示「可以使用」的偏好。「训练」的含义遵循 IETF AI 偏好工作组的术语草案：**「使用某项资产来修改生成式AI模型的已学习参数」**。
+
+同一天，四家公司表示将遵守这个令牌。我们直接确认了三处。**微软**在必应博客上写道「与业界同行一起宣布 robots.txt 中共同的AI训练偏好」，并从**2027年2月1日**起生效。**谷歌**在 Search Central 博客上写道「计划自愿采用」IETF 正在审议的提案，这「将帮助网站一步表达面向多家AI提供商的训练偏好」（正文在我们的 fetch 中只显示目录，故通过 Search Engine Roundtable 和 PPC Land 转述的句子确认），并在爬虫文档的 Google-Extended 条目加了注释：预计**「2027年初」**支持。**Anthropic** 方面，草案作者在 IETF 邮件列表上告知公司「已经开始实现支持」，但没有写明哪些爬虫、何时适用，并附上保留说明：「需要一些时间」「是对现有爬虫控制的补充而非替代」「解释方式可能变化」。**OpenAI** 的官方文章被我们的 fetch 拦截无法打开；Engadget 报道 OpenAI 承诺「未来几个月内」实现，PPC Land 则写「未给出时间」。
+
+草案里还有几条运营者该知道的规则。第一，**这个令牌不是爬取指令。**文中写明「内容使用偏好与爬虫通行规则相互独立」。第二，**`User-Agent: *` 通配符不适用于这个令牌。**只有直接写出令牌名的组才被读作偏好。第三，具体表述优先于一般表述，并且「私下协议可以覆盖通过此机制表达的偏好」。第四，偏好以「获取资产时生效的 robots.txt」为准。Engadget 把这一点解读为「无法撤回已经收集的内容」，并写道「并不阻止爬取本身，也不阻止内容在谷歌搜索中出现」。
+
+谷歌的解释由谷歌搜索倡导者约翰·穆勒说明（Search Engine Roundtable、PPC Land）。如果网站没有单独写 Google-Extended，**只拦截共同令牌，谷歌会「视同拦截了 Google-Extended」**。根据谷歌爬虫文档，Google-Extended 不是独立爬虫，而是只起「控制作用」的令牌，同时控制 **Gemini 模型的训练**和 **Gemini 应用与 Vertex AI 的 grounding**（回答时把搜索索引中的内容提供给模型），且**不影响网站是否被谷歌搜索收录或排名**。谷歌一方的反驳也出现在同一批报道中。谷歌的加里·伊利耶斯说 robots.txt「是建议，不是安全控制」，「任何人大约30秒就能伪装成 Googlebot」（PPC Land 转述的播客发言）；IETF 参与者内特·黑克说「在 IETF 层面其实还没完成，重大争议仍在」，并指草案「基本上把用户所做的任何行为排除在偏好之外」（Search Engine Roundtable）。
+
+## 2. 必应把「训练」和「回答中引用」分开 —— 三项设置与四个日期（事实）
+
+同在10月30日，微软必应在支持共同令牌之外推出了自家设置（克里希纳·马达万，必应博客）。核心是**区分两种用途**。按公司文件的定义，**「训练（training）」是用内容修改生成式AI模型的已学习参数**，**「grounding」是AI生成回答时把内容作为参考输入**。文件写明传统的索引和排名不属于 grounding。
+
+设置如下。**训练**有 Allow/Disallow 两个值：整站通过 robots.txt 的 `__usage_ai-training` 组，页面级通过 `<meta name="Bingbot" content="ai-training:disallow">` 或同样内容的 X-Robots-Tag 头。页面级优先于 robots.txt。**Grounding** 有 Allow / DisallowExtended / Disallow 三个值，**只能在页面级**（meta 或头）设置，没有整站的 robots.txt 设置。DisallowExtended 只允许在微软自营的体验（AI 模式、AI 概览、Copilot、Microsoft 365）中引用，拒绝用于向第三方出售的 grounding 服务。**什么都不写，两项默认都是 Allow。**公司文件写道这些偏好「不改变传统必应搜索结果的资格」，同时又写把 grounding 设为 Disallow 或 DisallowExtended 会「显著降低」在AI生成体验中的曝光。文中还有一句：无论选哪种，都不保证收录、流量或报酬。
+
+日期有四个。**2026年12月15日**，必应站长工具开放临时 grounding 设置（仅限当天仍在使用 NoArchive、NoCache 的网站）。**2027年2月1日**，新偏好随爬取逐步生效。**2027年3月1日**之后，2023年起沿用的 NoArchive、NoCache 不再被读作训练或 grounding 偏好。**2027年9月30日**，临时 grounding 设置结束。文件补充说可以用 IndexNow 请求重新爬取，但不保证日期。
+
+## 简述 —— Anthropic 上市文件修订版（事实）
+
+11月2日，Anthropic 在 S-1 修订版中加入了第三季度数字。这次 EDGAR 原文被我们的 fetch 拦截无法打开，所以我们转述**四家媒体（Fortune、Business Insider、SiliconANGLE、Investing.com）引用文件的数字**。第三季度（7至9月）营收约 **170亿美元**（第二季度116亿，去年同期14亿 —— Fortune），营业费用175亿，**营业亏损5.67亿美元**（第二季度为营业利润9.74亿；仅 SiliconANGLE 写作5.36亿，媒体之间有出入），净亏损233亿美元大部分是可转换票据公允价值变动带来的会计费用。文件给出的营业亏损主因是**「短期承诺购买的算力50亿美元」**（Business Insider、SiliconANGLE）和员工捐赠配捐计划的非现金费用20亿美元。第二季度到第三季度之间**降价使营收减少约6亿美元**这句话只有 Fortune 一家报道。算力与基础设施的采购和租赁承诺合计 **8954亿美元**（四家一致）；其中到2030年4475亿、12个月内698亿的分布只是 Investing.com 一家的整理。NO.30 我们写过「用的价格减半，造的成本每月数十亿」，这份文件显示两者在同一季度、同一家公司里相遇了（解读）。本文不是投资判断依据，我们不写发行规模、价格和时间。读过原文后，我们会作为「价格与成本」的续篇再谈。
+
+## 把两则消息放在一起读（解读）
+
+第一，**一行字是声明，不是锁。**草案自己写明「不是爬取行为的指令」，谷歌员工说「30秒就能伪装」。这一行字能做的，是让四家公司以同样的方式读到「请不要用我们的文章训练」。遵不遵守取决于各家的承诺，而网站一方目前没有办法确认是否被遵守。即便如此，过去三年那种逐家找名字的活会减少。尤其对小团队来说，实质变化是**「每出现一家新AI公司就改一次 robots.txt」变成「确认那家公司是否接受这一个令牌」**（解读）。
+
+第二，**训练和引用是两个不同的问题。**只有必应把二者分开，共同令牌只处理训练。谷歌把令牌解释为拦截 Google-Extended，而按谷歌文档，Google-Extended 不只控制训练，也一并控制 Gemini 应用和 Vertex 的 grounding。那么用一个共同令牌向谷歌表达「拒绝训练，允许在 Gemini 回答中引用」该怎么写，就是一个空白。我们在谷歌文档里没找到这一点，把它留作谷歌2027年开始支持时要回答的问题。必应写下「拦截引用会显著降低AI体验中的曝光」是一句坦率的话，与 NO.28 看到的「商业搜索88%出现AI摘要」方向一致。**拒绝训练和拒绝引用，对网站是两种不同的成本**（解读）。
+
+第三，**「人要求的行为」在外面。**正如黑克所指，草案实际上把用户直接请求的获取排除在外，凯利的邮件也写「解释方式可能变化」。我们的文章在AI聊天回答某人提问时被读到，这件事与这个令牌无关，会继续下去。要不要拦截那个是另一项决定，而我们站在不拦截的一边。AP News 是写来被阅读的（解读）。
+
+## 换作我们 —— 本周要定的三件事（实践）
+
+1. **把内容分成三组，填好「训练／引用」两栏。**我们直接打开自家主页的 robots.txt，只有一个 `User-agent: *` 组，里面是 Allow 和按文件夹的 Disallow（源码、脚本、备份、文档，以及待审校的四个语种），没有任何AI令牌。按草案规则 `*` 不适用于令牌，所以**我们现在什么偏好都没有表达**，按必应的标准两项都是 Allow。所以先做一张决定表。①AP News、产品介绍、公司介绍：「允许训练、允许引用」—— 因为是写来被阅读的。②源码、脚本、备份、内部文档文件夹已经禁止爬取，但那是通行规则，不是训练偏好，所以在令牌组里也把同样的路径写成 Disallow。③混有用户内容的页面（评价、留言板、咨询）：写「拒绝训练」，引用在必应设为 DisallowExtended。这张表放在 NO.29 的权限表旁边，每季度复查。
+2. **写的时候单独添加令牌组，各家的名字也原样保留。**草案、谷歌、Anthropic 都说「现有控制继续有效」，所以我们**新增** `__usage_ai-training` 组，不删除 Google-Extended、GPTBot、ClaudeBot 等现有组。不指望写在 `*` 下的内容会适用于令牌。必应的 grounding 偏好不在 robots.txt 里，只有页面级 meta 或头，所以只放进第③组页面的模板。日历上记下**2027年2月1日**（必应生效）和**3月1日**（NoArchive、NoCache 不再被读作偏好），并在2月第一周重新打开各家文档，确认谷歌和 OpenAI 是否真的开始支持。打不开官方文档，就用两家媒体交叉确认。
+3. **把「写了」和「被遵守了」放在不同的栏里。**网站一方无法知道这个令牌是否被遵守。所以只做能做的事。在服务器日志里**每月一次**统计AI爬虫名（GPTBot、ClaudeBot、Bingbot 等）的访问，并在表里注明 Google-Extended 没有自己的爬虫名、不会出现在日志里。关于谷歌 Search Console 的AI效果报告可能不包含点击数据的说法（伊利耶斯的发言，Search Engine Roundtable 11月2日综述，一处来源）只加注释作参考。三个月后再核对各家文档中「训练」的定义是否变了。不把「写了偏好」报告成「AI不用我们的文章」。
+
+## 这次没有选的
+
+Reddit 首席执行官确认谷歌搜索流量下降的报道（11月2日，Search Engine Roundtable），因无法打开发言原文和财报电话会材料，推到下次。SemiAnalysis 11月2日发布的智能体基准 GDPx（11个领域，最强模型也只有12%，金融、法律在二元评分中全为0），Anthropic 模型排第一，对我们利益关联大，其他媒体的交叉报道也还少，将作为 NO.33、34「计分板量的是什么」的续篇另行处理。Alphabet 的60亿欧元债券、甲骨文的200亿美元融资（TNW 引用路透）与「简述」中的承诺数字同属一类，但可能被读作投资判断材料，放到「价格与成本」续篇一起看。OpenAI 想把数据中心称为「算力园区」的报道（Axios、Business Insider）我们没有打开正文。以泄露或传闻形式流传的模型消息，以及内核漏洞利用的消息，因无官方确认或属攻击性描述，不写。
+
+## 这则消息中未能确认的
+
+- OpenAI 的官方文章（「Helping websites express AI training preferences」）被 fetch 拦截无法打开。「未来几个月内」只是 Engadget 一家转述，PPC Land 写未给出时间。GPTBot 等哪些爬虫会读取令牌也未能确认。
+- 谷歌 Search Central 博客正文在我们的 fetch 中只显示目录，通过两家媒体转述的句子确认。只拦截共同令牌是否也会拦掉 Gemini 应用的 grounding，我们在谷歌文档中没有找到。
+- Anthropic 的「已开始实现」是作者的一封邮件，没有适用爬虫和时间。是否已反映到 Anthropic 官方文档（爬虫说明）中，我们没有核实。
+- 必应文件的日期和设置已直接确认，但「不改变传统搜索的资格」是公司的说法，没有独立验证。
+- 「简述」中的数字全部是媒体引用文件。营业亏损（5.67亿与5.36亿）媒体之间有出入，降价6亿、到2030年4475亿、12个月698亿、算力费用99亿各自只有一处来源。EDGAR 原文能打开时再核对。
+
+## 一同阅读的文章
+
+我们直接打开并确认了性质不同的来源。分为标准文件、公司官方文件与表态、媒体报道。
+
+标准文件：
+
+- [Machine-Readable Training Preference Signal, draft-kelley-aipref-training-preference-signal-00（IETF Datatracker）](https://datatracker.ietf.org/doc/draft-kelley-aipref-training-preference-signal/) —— 英文，令牌定义、「不是爬取指令」、通配符规则、私下协议条款
+
+公司官方文件与表态：
+
+- [Your content, your choice: clearer preferences for training and grounding（微软必应博客）](https://blogs.bing.com/search/2026/10/your-content-your-choice-clearer-preferences-for-training-and-grounding/) —— 英文，训练与 grounding 的定义、三项设置、语法、四个日期
+- [Supporting a shared AI training control for websites（谷歌 Search Central 博客）](https://developers.google.com/search/blog/2026/10/ai-training-control) —— 英文，谷歌的采用声明（正文经媒体转述确认）
+- [谷歌通用爬虫文档 —— Google-Extended 条目（谷歌开发者文档）](https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers#google-extended) —— 英文，Google-Extended 的范围（训练与 grounding）、与搜索排名无关、「2027年初」支持的注释
+- [凯文·凯利的 IETF ai-control 邮件 —— Anthropic 开始实现支持（IETF Mail Archive）](https://mailarchive.ietf.org/arch/msg/ai-control/mddjatOxSR0h6GmLRBWlc839c7w/) —— 英文，「已开始」「需要时间」「补充」「解释可能变化」
+
+媒体报道：
+
+- [Google joins OpenAI and Anthropic in promising new scraping controls（Engadget）](https://www.engadget.com/2303225/google-openai-anthropic-ai-crawling-controls/) —— 英文，四家公司的承诺与时间、「无法撤回过去的收集」
+- [Google and Bing back one robots.txt rule to opt out of AI training（PPC Land）](https://ppc.land/google-and-bing-back-one-robots-txt-rule-to-opt-out-of-ai-training/) —— 英文，穆勒、伊利耶斯、黑克的发言，各家现有爬虫名
+- [Google Also Adopts New AI Training Control（Search Engine Roundtable）](https://www.seroundtable.com/google-ai-training-control-42430.html) —— 英文，谷歌原句引用、穆勒对 Google-Extended 的解释、黑克「用户行为例外」的指摘
+- [Anthropic's growth slowed and costs jumped in the third quarter, updated IPO filing shows（Fortune）](https://fortune.com/2026/11/02/anthropics-growth-slowed-and-costs-jumped-in-the-third-quarter-updated-ipo-filing-shows/) —— 英文，「简述」中的营收、营业亏损、流动性、降价数字（一处来源）
+- [Anthropic's amended IPO paperwork reveals soaring Q3 revenue and a stunning compute bill（Business Insider，雅虎财经转载）](https://uk.finance.yahoo.com/news/anthropics-amended-ipo-paperwork-reveals-153730799.html) —— 英文，文件所写「短期承诺算力50亿美元」、算力费用99亿（一处来源）
+- [Anthropic's quarterly revenue jumps to $17B, losses grow ahead of IPO（SiliconANGLE）](https://siliconangle.com/2026/11/02/anthropics-quarterly-revenue-jumps-to-17b-losses-grow-ahead-of-ipo/) —— 英文，营业亏损的不同表述（5.36亿）、短期算力50亿
+- [Anthropic posts $17B third-quarter revenue as landmark AI debut nears（Investing.com）](https://www.investing.com/news/stock-market-news/anthropic-posts-17b-thirdquarter-revenue-as-landmark-ai-debut-nears-4992371) —— 英文，营业费用175亿、承诺按年度分布（一处来源）
+
+我们之前的文章：
+
+- [AI 开始替你改写广告文案 —— 商业搜索的88%出现AI摘要（AP News NO.28）](https://www.apholdings.kr/ko/news/ai-rewrites-your-ads-what-to-check/)
+- [ChatGPT 网页份额再度上升 —— 这个数字没有统计到的东西（AP News NO.25）](https://www.apholdings.kr/ko/news/chatgpt-share-rebound-what-web-misses/)
+- [智能体是「不可信的内部人」—— 「从零权限开始」的提案（AP News NO.29）](https://www.apholdings.kr/ko/news/agents-are-insiders-permission-checks/)
+- [用的价格减半，造的成本每月数十亿美元 —— Anthropic 把算力成本写进了 S-1（AP News NO.30）](https://www.apholdings.kr/ko/news/half-price-terra-and-the-s1-compute-bill/)

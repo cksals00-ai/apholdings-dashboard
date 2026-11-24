@@ -1,0 +1,16 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import { reportRequest, summarize, ownerAllowed } from './core.mjs';
+test('only verified owner can access the report',()=>{assert.equal(ownerAllowed({email:'cksals00@gmail.com',email_confirmed_at:'2026'}),true);assert.equal(ownerAllowed({email:'other@example.com',email_confirmed_at:'2026'}),false);assert.equal(ownerAllowed({email:'cksals00@gmail.com'}),false)});
+test('Google report is bounded and does not ask for people or personal dimensions',()=>{const r=reportRequest();assert.equal(r.dateRanges[0].startDate,'28daysAgo');assert.equal(r.metrics[0].name,'eventCount');assert.ok(!JSON.stringify(r).includes('userId'));});
+test('empty result stays pending; actual counts remain distinct from people',()=>{const r=summarize({});assert.equal(r.sites.find(x=>x.host==='sports.apholdings.kr').views,null);assert.equal(r.blogArrivals,null);const a=summarize({rows:[{dimensionValues:[{value:'sports.apholdings.kr'},{value:'page_view'},{value:'20261029'}],metricValues:[{value:'4'}]},{dimensionValues:[{value:'sports.apholdings.kr'},{value:'courtmate_blog_arrival'},{value:'20261029'}],metricValues:[{value:'2'}]}]});assert.equal(a.blogArrivals,2);assert.equal(a.sites.find(x=>x.host==='sports.apholdings.kr').views,4);assert.equal(a.sites.find(x=>x.host==='edu.apholdings.kr').views,null)});
+
+import {parseServiceAccount} from './core.mjs';
+test('server accepts raw JSON and quoted JSON without exposing credential contents',()=>{const sa={type:'service_account',client_email:'reader@example.test',private_key:'fake-key'};assert.equal(parseServiceAccount(JSON.stringify(sa)).client_email,sa.client_email);assert.equal(parseServiceAccount(JSON.stringify(JSON.stringify(sa))).client_email,sa.client_email);assert.throws(()=>parseServiceAccount('invalid'),/credential_format/);});
+test('머니 머지 이벤트를 요청에 포함하고 도착 경로·게임 단계를 null 기본으로 합산한다',()=>{const r=reportRequest();const names=r.dimensionFilter.andGroup.expressions[1].filter.inListFilter.values;assert.ok(names.includes('money_merge_arrival_instagram'));assert.ok(names.includes('mm_rank_submit'));
+ const row=(host,event,count)=>({dimensionValues:[{value:host},{value:event},{value:'20261029'}],metricValues:[{value:String(count)}]});
+ const s=summarize({rows:[row('www.apholdings.kr','money_merge_arrival_instagram',7),row('apholdings.kr','money_merge_arrival_instagram',1),row('www.apholdings.kr','mm_start',20),row('www.apholdings.kr','mm_rank_submit',3),row('sports.apholdings.kr','mm_start',99)]});
+ assert.equal(s.moneyMerge.arrivals.instagram,8);assert.equal(s.moneyMerge.arrivals.tiktok,null);assert.equal(s.moneyMerge.starts,20);assert.equal(s.moneyMerge.submits,3);assert.equal(s.moneyMerge.shares,null);
+ assert.equal(summarize({}).moneyMerge.arrivals.share,null);});
+
+import {aggregateSummary} from './core.mjs';
+test('own aggregate excludes install tests and stays separate from Google data',()=>{const a=aggregateSummary([{day:'2026-10-29',host:'sports.apholdings.kr',event:'ap_install_test',count:4},{day:'2026-10-29',host:'sports.apholdings.kr',event:'page_view',count:2}]);assert.equal(a.source,'AP 일별 익명 집계');assert.equal(a.sites.find(s=>s.host==='sports.apholdings.kr').views,2);assert.equal(a.blogArrivals,0);assert.equal(a.sites.find(s=>s.host==='edu.apholdings.kr').views,null);});

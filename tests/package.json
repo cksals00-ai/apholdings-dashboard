@@ -1,0 +1,1 @@
+{"name":"ap-b2b-support-tests","private":true,"type":"module","scripts":{"test":"node --test hajeung-*.test.mjs"},"devDependencies":{"@electric-sql/pglite":"0.3.14"}}

@@ -1,0 +1,68 @@
+/* V9 (2026-10-09): 브랜드 그래픽 적용 — 히어로 비주얼 · 허브 배경 · 창업자 띠 */
+.hero-visual{margin:0}
+.hero-visual img{width:100%;height:auto;border-radius:20px;box-shadow:0 30px 70px #00000059;animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hv6-copy h1{font-size:clamp(2.6rem,5.4vw,4.6rem);max-width:15ch;line-height:1.06}
+/* 허브 배경 그래픽 — 어두운 무대 */
+.hub-hero{background:linear-gradient(90deg,#0d1211f5 38%,#0d121166 62%,#0d12110f),var(--hub-img) right center/cover no-repeat;color:#fff;border-bottom:0}
+.hub-hero[data-div]{--hub-img:none}
+.hub-hero .eyebrow{color:#7fd1b0}
+.hub-hero h1{color:#fff}
+.hub-hero .lead{color:#cbd8d2}
+.hub-hero .hub-who{color:#a9b8b2;border-left-color:#7fd1b0}
+.hub-hero .hub-who b{color:#7fd1b0}
+.hub-hero .button{border-color:#ffffff59;color:#fff;background:transparent}
+.hub-hero .button.primary{background:#fff;color:var(--night);border-color:#fff}
+.hub-hero .button:hover{background:#7fd1b0;border-color:#7fd1b0;color:var(--night)}
+.hub-hero::after{display:none}
+.hub-hero .status{color:#7fd1b0}
+.hub-hero[data-div="Intelligence"]{--hub-img:url(/media/ap/hub-intelligence.jpg)}
+.hub-hero[data-div="Games"]{--hub-img:url(/media/ap/hub-games.jpg)}
+.hub-hero[data-div="Edu"]{--hub-img:url(/media/ap/hub-edu.jpg)}
+.hub-hero[data-div="Entertainment"]{--hub-img:url(/media/ap/hub-entertainment.jpg)}
+.hub-hero[data-div="Shop"]{--hub-img:url(/media/ap/hub-shop.jpg)}
+.hub-hero[data-div="Sports"]{--hub-img:url(/media/ap/hub-sports.jpg)}
+/* 창업자 띠 배경 */
+.story-band{background:linear-gradient(#0d1211b8,#0d1211b8),url(/media/ap/about_wide.jpg) center/cover no-repeat;color:#fff}
+.story-band p{color:#fff}.story-band .text-link{color:#8fd0b5}
+@media(max-width:800px){.hub-hero::before{opacity:.5;background-position:center}.hero-visual img{box-shadow:0 18px 40px #00000040}}
+@media(prefers-reduced-motion:reduce){.hero-visual img{animation:none}}
+/* /V9 */
+/* V9.1 (2026-10-10): 히어로 — 육각 그래픽 대신 다섯 사업 궤도(제품 사진 노드) */
+.hv9-orbit{max-width:620px}
+.hv9-orbit .ob-halo{fill:var(--glow);fill-opacity:.12;transition:fill-opacity .2s}
+.hv9-orbit .ob-rim{fill:none;stroke:#ffffffcc;stroke-width:2;transition:stroke .2s}
+.hv9-orbit .ob-n text{font-size:20px;font-weight:700}
+.hv9-orbit .ob-n:hover .ob-halo,.hv9-orbit .ob-n:focus .ob-halo{fill-opacity:.35}
+.hv9-orbit .ob-n:hover .ob-rim{stroke:var(--glow)}
+.hv9-orbit image{transition:transform .25s;transform-box:fill-box;transform-origin:center}
+.hv9-orbit .ob-n:hover image{transform:scale(1.06)}
+@media(max-width:800px){.hv9-orbit .ob-n text{font-size:24px}}
+/* V9.2 (2026-10-10): AI Cast 띠 — 리아·호랑이 네 남매 같은 크기, 등장·둥실 애니메이션 */
+.cast-band .wrap{display:flex;flex-direction:column;gap:var(--s4);align-items:flex-start}
+.cast-band .cb-copy{max-width:720px}
+.cast-band .eyebrow{color:#7fd1b0}
+.cast-band .cb-copy h2{margin-bottom:10px}
+.cast-band .cb-copy p{color:#b8c7c1;font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6}
+.cast-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;width:100%}
+.cast{margin:0;position:relative;opacity:0;transform:translateY(28px) scale(.96);animation:cast-in .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(.15s + var(--i)*.12s)}
+.cast img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;background:#13211c;box-shadow:0 18px 40px #00000066;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.cast figcaption{position:absolute;left:12px;bottom:12px;padding:6px 12px;border-radius:999px;background:#0d1211cc;color:#fff;font-size:13px;font-weight:700;letter-spacing:.04em;backdrop-filter:blur(6px)}
+.cast::after{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;animation:cast-float 6s ease-in-out infinite;animation-delay:calc(var(--i)*-.9s)}
+.cast img{animation:cast-float 6s ease-in-out infinite;animation-delay:calc(var(--i)*-.9s)}
+.cast:hover img{transform:translateY(-8px) scale(1.03);box-shadow:0 28px 56px #00000080}
+@keyframes cast-in{to{opacity:1;transform:none}}
+@keyframes cast-float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@media(max-width:1000px){.cast-row{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.cast figcaption{font-size:11px;padding:4px 9px;left:8px;bottom:8px}}
+@media(max-width:640px){.cast-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.cast:first-child{grid-column:span 1}}
+@media(prefers-reduced-motion:reduce){.cast,.cast img,.cast::after{animation:none!important;opacity:1;transform:none}}
+/* V9.4 hub cards: stack inside each card (v7's 3-column card grid collided with the 3-column .hub-grid) */
+.hub-grid .hub-card{grid-template-columns:1fr!important;grid-template-areas:none!important;row-gap:8px;align-content:start;margin-bottom:0}
+.hub-grid .hub-card>*{grid-area:auto!important}
+.hub-grid .hub-card .status{justify-self:start;margin-bottom:4px}
+.hub-grid .hub-card h3{font-size:22px;margin:0}
+.hub-grid .hub-card .tag{font-size:15px}
+.hub-grid .hub-card .desc{font-size:15px;max-width:none}
+.hub-grid .hub-card .text-link{justify-self:start;align-self:end;margin-top:10px;white-space:normal}
+@media(max-width:1100px){.hub-grid{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:800px){.hub-grid{grid-template-columns:1fr!important}}

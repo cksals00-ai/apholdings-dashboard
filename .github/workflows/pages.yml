@@ -1,0 +1,62 @@
+name: Publish existing AP Holdings site
+
+on:
+  schedule:
+    # Apply homepage-only changes deferred during AP News publication. KST08:25.
+    - cron: '25 23 * * *'
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publication_window:
+    runs-on: ubuntu-latest
+    outputs:
+      homepage_allowed: ${{ steps.window.outputs.homepage_allowed }}
+    steps:
+      - id: window
+        name: Give reserved newsletter delivery priority around08:00 KST
+        run: |
+          python3 - <<'PYTHON'
+          import datetime,os,zoneinfo
+          now=datetime.datetime.now(zoneinfo.ZoneInfo('Asia/Seoul'))
+          minute=now.hour*60+now.minute
+          allowed=not (7*60+40 <= minute < 8*60+25)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              out.write('homepage_allowed='+str(allowed).lower()+'\n')
+          print('Homepage delivery allowed:',allowed,'; reserved news window 07:40–08:25 KST')
+          PYTHON
+  deploy:
+    needs: publication_window
+    if: ${{ needs.publication_window.outputs.homepage_allowed == 'true' }}
+    concurrency:
+      group: ap-holdings-pages
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/configure-pages@v6
+      - name: Package tracked existing site (no other generators)
+        run: |
+          mkdir .pages-site
+          git archive HEAD | tar -x -C .pages-site
+          python3 .pages-site/analytics/install.py
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .pages-site
+          include-hidden-files: true
+      - name: Deploy existing domain
+        id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-19",
+  "number": 11,
+  "status": "published",
+  "verified": true,
+  "title": "AI 성과를 읽는 기준, 연구·평가·운영",
+  "intro": "질병 연구에서 추론 실험과 자연어 조회, 계약 권한과 GPU 실행 환경까지. AI 성과를 판단할 때 확인해야 할 근거와 운영 조건을 살펴봅니다.",
+  "edition_note": "2026년 10월 19일 편집 · 전날 신규 발표가 적어 최근 7일로 확인 범위 확대 · 10월 12~13일 공식 자료 중 미발행 5건 선정 · 연구 현황·합성 실험·고객 사례·운영 예제 구분 · AI 작성 및 원문 확인",
+  "takeaway": "AI의 성과는 사용 목적과 검증 조건 안에서 읽어야 합니다. 연구 결과·시험 수치·계약 상태·실제 운영을 구분하고 자신의 업무에서 확인할 기준을 남기십시오.",
+  "source_checked_at": "2026-10-19T06:59:37+09:00",
+  "stories": [
+    {
+      "category": "AI FOR SCIENCE",
+      "title": "애리조나대, AI 신약 재창출 연구 사례 소개",
+      "source": "AWS 공식 Public Sector 블로그",
+      "published": "2026-10-12",
+      "url": "https://aws.amazon.com/blogs/publicsector/university-of-arizona-researchers-accelerate-rare-pediatric-disease-drug-repurposing-with-aws/",
+      "summary": "유전체 분석과 문헌 조사를 연결해 추가 연구할 약물 후보를 좁히는 사례입니다.",
+      "fact": "AWS와 University of Arizona 연구진은 희귀 소아 신경발달 질환을 대상으로 기존 약물의 재활용 가능성을 탐색하는 연구 흐름을 소개했습니다. HealthOmics·SageMaker AI·Bedrock·Quick Research를 연결해 분석과 문헌 정리를 지원합니다. 연구자가 후보를 판단하는 연구 사례이며 치료 효과 확정이나 새 치료제 승인, 한국 의료 현장 제공을 발표한 내용은 아닙니다.",
+      "insight": "AP의 AI 교육·정보 서비스에서는 전문 자료를 검색하고 정리하는 보조 역할과 전문가 판단을 구분해 설명할 수 있습니다. 연구 사례의 작업 시간 단축을 소개할 때도 대상 업무와 검증 범위가 함께 제시되어야 합니다.",
+      "action": "전문 자료를 요약하는 작업 한 건에서 AI가 정리할 내용과 담당자가 원문으로 판단할 항목을 나누십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-19-health-research.jpg",
+        "alt": "과학 자료집과 분자·신경 구조를 살펴보는 연구용 확대경",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AGENT EVALUATION",
+      "title": "AWS, Grok 추론 강도 비교 실험 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-13",
+      "url": "https://aws.amazon.com/blogs/machine-learning/build-long-horizon-agents-with-grok-4-7-on-amazon-bedrock/",
+      "summary": "추론 강도를 높일 때 얻는 정확성과 늘어나는 시간·토큰을 함께 측정했습니다.",
+      "fact": "AWS는 Bedrock의 Grok 4.7로 도구 호출 에이전트를 구성하고 세 가지 합성 과제를 네 추론 강도에서 반복한 72회 실험을 소개했습니다. 높은 강도에서 더 많은 정답을 얻었지만 소규모 합성 환경의 결과이며 실제 장시간 업무 성능을 보장하지 않습니다. 10월 13일은 구현·평가 글의 게시일이며 모델 최초 출시일이 아닙니다.",
+      "insight": "AP의 뉴스 편집·콘텐츠 제작에서는 모든 단계를 같은 강도로 처리하기보다 사실 대조와 복잡한 판단에 자원을 배분하는 방식이 참고가 됩니다. 품질뿐 아니라 응답 시간과 토큰 사용량을 함께 평가해야 합니다.",
+      "action": "반복 작업 한 가지에서 쉬운 단계와 검증이 필요한 단계를 나누고, 두 설정의 결과·시간·사용량을 비교하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-19-reasoning-effort.jpg",
+        "alt": "추론 강도와 자원 소비의 균형을 나타내는 분기 경로·기어·시계",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "NATURAL LANGUAGE AI",
+      "title": "Orca, 자연어 보안 조회 구현 사례 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-13",
+      "url": "https://aws.amazon.com/blogs/machine-learning/natural-language-security-queries-at-orca-security-using-amazon-bedrock/",
+      "summary": "질문을 구조화된 조회로 바꾸는 과정에서 필요한 문맥과 검증을 나눕니다.",
+      "fact": "AWS와 Orca Security는 Bedrock 기반 Discovery AI가 자연어 질문을 Sonar 조회 조건으로 변환하는 구조를 소개했습니다. 규칙 기반 빠른 경로, 관련 예제 검색, 단계별 모델 선택과 검증을 조합합니다. 비용·지연 개선은 초기 기준선과 비교한 해당 고객 사례이며 다른 시스템에서도 같은 결과가 난다는 보장은 아닙니다.",
+      "insight": "AP의 커머스·구독 운영 자료를 자연어로 조회하려면 질문을 정확한 항목과 조건으로 바꾸는 설계가 필요합니다. 내부 데이터의 접근 권한과 조회 결과 검증은 자연스러운 답변과 별개로 관리해야 합니다.",
+      "action": "업무 질문 세 개를 고르고 각각 조회할 항목·필터·권한 범위와 예상 결과를 명확히 적어보십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-19-security-query.jpg",
+        "alt": "질문 말풍선이 색인과 검증 카드를 거쳐 구조화된 조회로 바뀌는 흐름",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI OPERATIONS",
+      "title": "AWS, AI 모델 계약 권한 관리 예제 공개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-13",
+      "url": "https://aws.amazon.com/blogs/machine-learning/manage-private-pricing-offers-for-amazon-bedrock-with-managed-entitlements/",
+      "summary": "모델 접근권과 협상 요금의 적용 상태를 여러 계정에서 확인하는 운영 방법입니다.",
+      "fact": "AWS는 Bedrock 제3자 모델의 Marketplace 개별 가격 제안에 대해 License Manager 권한을 활성화하는 두 구현 경로를 소개했습니다. 일회성 스크립트와 판매자 허용 목록을 확인하는 이벤트 자동화 방식입니다. 계약 수락 후에도 권한 활성화가 필요할 수 있으며 모든 SaaS 계약에 적용되는 예제가 아닙니다. 조직 관리 계정과 관련 권한이 필요합니다.",
+      "insight": "AP의 AI 도구 운영에서도 계약·사용자 접근·실제 청구가 같은 상태라고 가정하면 안 됩니다. 도구가 늘어날수록 담당자와 갱신일, 적용 계정, 비용 확인 경로를 함께 관리하는 것이 중요합니다.",
+      "action": "사용 중인 AI 도구 한 건의 계약 주체·사용 계정·갱신일·요금 적용 상태를 같은 목록에서 대조하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-19-model-licenses.jpg",
+        "alt": "중앙 계약 문서가 여러 컴퓨팅 계정에 제한된 접근권을 전달하는 구조",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "category": "AI INFRASTRUCTURE",
+      "title": "AWS, MoE 추론 최적화 사례 소개",
+      "source": "AWS 공식 AI 블로그",
+      "published": "2026-10-13",
+      "url": "https://aws.amazon.com/blogs/machine-learning/mixture-of-experts-kernel-engineering-on-amazon-sagemaker-ai/",
+      "summary": "모델을 바꾸지 않아도 실행 환경의 세부 구현이 응답 성능에 영향을 줍니다.",
+      "fact": "AWS는 MoE 모델의 GPU 연산을 묶어 처리하는 커널 최적화와 불필요한 재컴파일을 줄이는 개선을 설명했습니다. vLLM 커뮤니티와의 협업 결과를 SageMaker AI의 LMI 컨테이너에 적용했다고 밝혔습니다. 제시된 성능 개선은 특정 하드웨어·시험 조건의 결과이며 모든 모델·서비스에서 같은 속도 향상을 보장하지 않습니다.",
+      "insight": "AP의 홈페이지·AI 서비스 운영에서는 느린 응답의 원인을 모델 크기만으로 판단하지 말고 실행 환경과 요청 패턴도 살펴봐야 합니다. 인프라 튜닝은 실제 병목이 확인된 경우에 검토하고 개선 전후를 같은 조건에서 비교해야 합니다.",
+      "action": "응답이 느린 기능 하나의 대기 시간과 처리 시간을 나눠 기록하고, 변경 전후의 품질·지연·비용을 비교하십시오.",
+      "image": {
+        "path": "/img/newsletter/2026-10-19-gpu-efficiency.jpg",
+        "alt": "GPU 연산 모듈과 병렬 경로를 살펴보는 정밀 확대경",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}

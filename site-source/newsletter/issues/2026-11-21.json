@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-21",
+  "number": 41,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "AI가 일을 잇는 곳, 확인이 필요한 경계",
+  "intro": "검색에서 장보기로, 무전에서 사건 확인으로 AI의 연결 범위가 넓어지고 있습니다. 연결의 편의와 실제 완료는 각각 확인해야 합니다. 오늘은 생활 서비스·현장 기록·인프라 관측·인증·에이전트 운영의 경계를 살펴봅니다.",
+  "edition_note": "전날인 2026년 11월 20일 공식 발표 3건을 우선 선정하고, 연결과 운영 조건을 함께 살피기 위해 11월 19일 발표 2건을 더했습니다. 최근 72시간 범위의 Google 2건·AWS 3건이며 이전 호 원문과 같은 이슈를 제외했습니다. 원문 표기일을 기준으로 하며 AI 작성 및 원문 확인.",
+  "takeaway": "AI 기능을 잇는 일에는 지역·계정·권한·운영 기준이 함께 따라옵니다. 빠르게 신호를 찾거나 도구에 연결한 것과 업무의 최종 완료를 구분해야 합니다. AP의 교육·콘텐츠·웹 서비스와 Lia Select 운영에 참고한다면, 가상 과제 하나에서 탐지·검증·실행·완료의 근거를 나눠 기록하는 실험을 제안합니다. 실패한 단계와 복구 결과를 구체적으로 남기면 같은 상태를 반복 알리는 대신 사람이 판단해야 할 지점을 더 분명히 정할 수 있습니다.",
+  "source_checked_at": "2026-11-21T04:01:49.542143+09:00",
+  "hero": {
+    "path": "/img/newsletter/2026-11-21-hero.gif",
+    "poster": "/img/newsletter/2026-11-21-hero.png",
+    "alt": "시장 통로와 장바구니 사이의 연결로 생활 업무와 확인 조건을 나타낸 편집 일러스트",
+    "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "url": "https://blog.google/products-and-platforms/products/search/connected-apps-holiday-errands/",
+      "source": "Google Blog",
+      "published": "2026-11-20",
+      "title": "Google Connected Apps, 장보기에서 생활 업무까지",
+      "summary": "Google은 미국에서 Search·Gemini의 장보기 연결 앱을 늘리고 생활 서비스 연결도 예고했습니다.",
+      "fact": "Google은 11월 20일 미국의 Search와 Gemini 앱에서 Albertsons, Safeway, Shaw’s, Target 등 장보기 Connected Apps를 순차 제공한다고 밝혔습니다. Universal Commerce Protocol을 기반으로 주문 구성과 결제를 돕는 방식입니다. Gemini에서 제공하던 Experian은 Search로도 확대해 미국 이용자의 신용등급 확인·개인 대출 탐색을 지원하며, H&R Block을 통한 세금·환급액 추정도 소개했습니다. Angi·Thumbtack 계정 연결은 앞으로 몇 주 안에 제공할 예정입니다. 한국·싱가포르에서 같은 기능이 제공된다는 발표는 아닙니다.",
+      "insight": "Lia Select의 싱가포르 커머스나 AP의 서비스 구현에 참고한다면, 상품 탐색·장바구니·최종 구매 조건을 나눈 가상 흐름을 제안합니다. 미국의 연결 사례를 국내 이용 가능 기능으로 소개하지 않고, 지역·판매처·계정별 지원과 최종 확인 단계를 따로 살펴볼 수 있습니다.",
+      "action": "지역·판매처 지원과 현재 제공·예정 기능을 나눠 확인합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-21-story-1.png",
+        "alt": "장바구니와 별도 결제 관문으로 연결형 쇼핑의 조건을 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://blog.google/company-news/outreach-and-initiatives/google-org/watch-duty-gemini-tool/",
+      "source": "Google Blog",
+      "published": "2026-11-20",
+      "title": "Watch Duty, 잡음 속 무전을 AI로 읽고 사람이 확인",
+      "summary": "Google은 Gemini 기반 무전 전사 도구가 Watch Duty의 산불 확인 업무를 돕는 사례를 공개했습니다.",
+      "fact": "Google은 11월 20일 Google.org Fellowship 팀이 Watch Duty와 6개월 동안 협력한 결과를 소개했습니다. 과거 무전 녹음 2만 시간 이상을 활용해 잡음과 소방 용어가 섞인 음성을 검색 가능한 글로 바꾸는 도구를 만들었습니다. 발표는 열화된 VHF 음성의 단어 오류율이 38%에서 22.34%로 줄었다고 보고합니다. 약 400개 활성 채널에서 하루 200시간 이상의 음성을 전사하며, 새 신고 신호를 30초 이내에 담당자에게 알리는 사례를 설명합니다. 사건 확인과 주민 경보는 Watch Duty 담당자가 수행하며, 이 수치는 해당 협력 사례의 결과입니다.",
+      "insight": "AP의 AI 교육·콘텐츠에 참고한다면, 공개된 비긴급 녹음에서 전사 오류와 전문 용어를 사람이 확인하는 과제를 제안합니다. 빠른 신호 탐지와 사실 확인·최종 알림을 구분하고 오류가 남은 구간을 표시하는 방식을 설명할 수 있습니다.",
+      "action": "탐지·전사·사람의 검증·최종 알림을 구분합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-21-story-2.png",
+        "alt": "무전 신호를 읽는 담당자와 별도로 현장을 확인하는 사람을 표현한 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/introducing-enhanced-observability-in-amazon-sagemaker-hyperpod-to-diagnose-gpu-training-issues/",
+      "source": "AWS Blog",
+      "published": "2026-11-20",
+      "title": "HyperPod 관측, 느려진 GPU의 위치와 원인 찾기",
+      "summary": "AWS는 분산 학습의 GPU·네트워크·작업 지표를 묶어 보는 HyperPod 관측 기능을 발표했습니다.",
+      "fact": "AWS는 11월 20일 SageMaker HyperPod의 향상된 관측 기능을 발표했습니다. EKS와 Slurm 기반 학습 작업에서 GPU 사용률·메모리·온도·전력·클록을 동료 장치와 비교해 이상치를 찾고, 하드웨어 오류·네트워크 저하·과열 등의 규칙 기반 진단을 제공합니다. 기본 지표는 30초마다 수집하며 심층 장치·네트워크 지표는 선택 사항입니다. CloudWatch가 기본 저장소로 추가되고 Prometheus도 선택할 수 있습니다. HyperPod가 제공되는 모든 AWS 리전이 대상이지만, 고급 지표는 수집량과 비용을 늘리므로 필요에 맞게 설정해야 합니다.",
+      "insight": "AP의 웹 서비스 운영 교육에 참고한다면, 작은 모의 작업에서 전체 지연과 개별 단계의 지연을 나눠 기록하는 실험을 제안합니다. 상태가 느리다는 알림만 반복하기보다 영향을 받은 단계와 원인 근거를 확인하고 필요한 지표만 남기는 기준을 정할 수 있습니다.",
+      "action": "기본·고급 지표의 필요성과 수집 비용을 함께 확인합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-21-story-3.png",
+        "alt": "한 노의 다른 물결을 찾아내는 조정 보트로 분산 작업의 이상치 관측을 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/use-kimi-code-cli-with-models-on-amazon-bedrock/",
+      "source": "AWS Blog",
+      "published": "2026-11-19",
+      "title": "Kimi Code CLI, 기존 AWS 인증으로 Bedrock 연결",
+      "summary": "Kimi Code CLI 2.7.0은 별도 수동 API 키 대신 AWS 자격 증명 체인을 쓰는 연결 방식을 추가했습니다.",
+      "fact": "AWS는 11월 19일 Kimi Code CLI의 네이티브 bedrock 제공자를 소개했습니다. 2.7.0 이상에서 이름 있는 프로필과 SSO 등 표준 AWS 인증을 사용해 단기 토큰을 만들고 갱신할 수 있습니다. 별도로 지정한 API 키가 있으면 그 설정이 우선합니다. 토큰은 최대 12시간 또는 AWS 세션의 남은 기간 중 짧은 쪽까지 유효합니다. 모델 접근 권한·지원 리전·IAM 권한이 필요하고 추론은 토큰 단위로 과금됩니다. 연결됨 표시만으로 실제 인증·권한·모델 요청이 성공했다는 뜻은 아니라고 안내합니다.",
+      "insight": "AP의 AI 활용 교육에 참고한다면, 서비스 연결 설정·인증 성공·실제 작업 성공을 구분하는 설명 자료를 제안합니다. 단기 인증으로 바뀌어도 사용료가 없어지는 것은 아니며, 실제 유료 호출 없이 공개 구성 예시에서 권한·만료·비용 항목을 검토할 수 있습니다.",
+      "action": "수동 키 감소와 비용·권한·실제 성공 여부를 구분합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-21-story-4.png",
+        "alt": "만료되는 방문증과 기존 열쇠로 단기 인증을 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-the-bmw-group-governs-hundreds-of-agents-across-thousands-of-developers/",
+      "source": "AWS Blog",
+      "published": "2026-11-19",
+      "title": "BMW의 에이전트 운영, 자율성은 단계별로 정하기",
+      "summary": "BMW·AWS 사례는 에이전트 전체가 아닌 각 작업 단계의 위험에 맞춰 권한과 검증을 설계합니다.",
+      "fact": "AWS는 11월 19일 BMW Group의 에이전트 구축·운영 관행을 소개했습니다. 인증·권한·속도 제한 같은 규칙을 개별 모델 지시 바깥의 통합 계층에서 적용하고, 작업 단계마다 사람 승인·사후 검토·정해진 경계 안의 자율 실행을 구분합니다. 배포 전 구성 요소 시험과 상호작용 시험을 먼저 통과한 뒤 기준 자료에 대한 평가를 수행합니다. 중앙 등록부는 승인 상태와 중복 기능을 확인하며, 운영 감사 에이전트의 권고는 사람이 확인한 뒤 반영합니다. 이 글은 고객의 구축 경험이며 모든 조직에 같은 효과를 보장하는 시험 결과는 아닙니다.",
+      "insight": "AP의 콘텐츠·웹 서비스 흐름에 참고한다면, 초안 생성과 공개 반영의 위험·권한을 따로 정하는 설계를 제안합니다. 승인 기준을 모델의 문장에만 맡기지 않고 단계별 입력·출력·실패 시 중단 조건을 확인하면 반복 알림보다 실제 복구 여부를 판단할 근거를 남길 수 있습니다.",
+      "action": "단계별 자율성·외부 권한 검사·시험과 평가 순서를 확인합니다.",
+      "image": {
+        "path": "/img/newsletter/2026-11-21-story-5.png",
+        "alt": "분기별 관문과 공통 저수지로 단계별 자율성과 공통 규칙을 나타낸 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}

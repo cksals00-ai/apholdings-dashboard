@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-04",
+  "number": 25,
+  "status": "published",
+  "verified": true,
+  "layout": "editorial-v2",
+  "title": "AI의 다음 단계, 실행과 검증 사이",
+  "intro": "교실과 개발 도구, 음성 서비스, 반도체 공정과 화학 연구까지. AI가 맡는 일이 넓어질수록 적용 조건과 검증 책임을 함께 읽어야 합니다.",
+  "takeaway": "AP의 시선: AI 도입의 단위는 모델 하나보다 업무 흐름입니다. 사람이 방향과 검증 기준을 정하고, 모델·계산 도구·실행 환경의 역할을 분리한다면 결과를 설명하고 실패를 복구하기 쉬워집니다. 기능 발표와 실제 이용 조건, 개별 사례와 일반적 성과를 구분하는 태도가 실무 적용의 출발점입니다.",
+  "edition_note": "전날 공식 발표 5건 · 발표일 2026-11-03 · 원문 확인 2026-11-04T08:29:44.483768+09:00 · AI 작성 및 원문 확인 · 사람 검수 아님 · 08시 목표 지연 후 제작",
+  "source_checked_at": "2026-11-04T08:29:44.483768+09:00",
+  "hero": {
+    "path": "/img/newsletter/2026-11-04-hero.gif",
+    "poster": "/img/newsletter/2026-11-04-hero.png",
+    "alt": "사람이 방향을 정하고 AI의 학습·개발·연구 작업을 검증하는 흐름을 표현한 편집 일러스트",
+    "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+  },
+  "stories": [
+    {
+      "title": "Google, Classroom과 검색에 Guided Learning 확대",
+      "summary": "Google이 교육용 AI 기능과 학생 계정 관리 방식을 함께 업데이트한다고 발표했습니다.",
+      "fact": "Google은 Guided Learning의 Google Classroom 전 세계 출시와 Google Search로의 기능 확장을 발표했다. Gemini·Gemini Notebook·Gemini in Classroom·검색의 K-12 학생 계정 관리 접근도 변경한다고 안내했다. 기능 발표와 실제 학교별 이용 가능 여부는 구분해야 한다.",
+      "insight": "AP가 교육 콘텐츠를 설계한다면 정답 생성보다 질문·설명·교사 개입 흐름을 먼저 점검하고, 학교 계정의 적용 조건을 수업 준비표에 함께 기록할 수 있다.",
+      "action": "학교별 출시 일정과 관리자 설정을 확인한 뒤 수업 시나리오를 검토한다.",
+      "source": "Google",
+      "url": "https://blog.google/products-and-platforms/products/education/ai-learning-era-2026/",
+      "published": "2026-11-03",
+      "image": {
+        "path": "/img/newsletter/2026-11-04-story-1.png",
+        "alt": "Google, Classroom과 검색에 Guided Learning 확대의 핵심을 표현한 개념적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "title": "GitHub Copilot, JetBrains Air에서 로컬·클라우드 작업 지원",
+      "summary": "기존 Copilot 구독을 연결해 코딩 작업을 맡기고 결과를 검토하는 경로가 추가됐습니다.",
+      "fact": "GitHub는 ACP 기반의 JetBrains Air 연동을 발표했다. 로컬 IDE와 클라우드 작업을 지원하며, 클라우드는 Air Teams 사용이 설정된 기업 조직의 JetBrains 계정, Copilot 구독, 관리자 활성화가 필요하다. 클라우드 작업은 새 가상 머신의 Docker 컨테이너에서 실행되고 작업 간 상태를 유지하지 않는다.",
+      "insight": "AP가 웹 서비스 개발에 적용한다면 작업별 저장소·브랜치·검증 기준을 명시하고, 클라우드 실행 전 구독 조건과 관리자 통제를 확인하는 방식으로 검토할 수 있다.",
+      "action": "작업 시작 시 구독 확인과 실패 표시, 변경사항 검토 경로를 확인한다.",
+      "source": "GitHub",
+      "url": "https://github.blog/changelog/2026-11-03-github-copilot-is-now-available-in-jetbrains-air/",
+      "published": "2026-11-03",
+      "image": {
+        "path": "/img/newsletter/2026-11-04-story-2.png",
+        "alt": "GitHub Copilot, JetBrains Air에서 로컬·클라우드 작업 지원의 핵심을 표현한 개념적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "title": "AWS, 음성 AI의 관리형·자체 운영 배포 경로 비교",
+      "summary": "Cartesia Sonic 음성 모델의 배포 방법을 소개한 구현 가이드입니다. 신규 모델 출시와는 구분됩니다.",
+      "fact": "AWS는 Cartesia Sonic을 SageMaker AI의 Marketplace 모델 패키지로 배포하거나 EC2 GPU에서 자체 운영하는 방법을 안내했다. 관리형 경로는 구독·실행 역할·지원 인스턴스 확인이 필요하며, 자체 운영은 확장·패치·모니터링을 직접 맡는다. 원문의 모델 응답 지연 설명은 네트워크와 전체 대화 처리 시간을 보장하는 수치가 아니다.",
+      "insight": "AP가 음성 안내 서비스를 검토한다면 첫 음성 응답과 전체 대화 완료 시간을 나누고, 인프라 운영 부담과 데이터 이동 경로를 함께 비교할 수 있다.",
+      "action": "실제 사용자 환경에서 지연·동시 접속·오류 복구를 별도로 측정한다.",
+      "source": "AWS",
+      "url": "https://aws.amazon.com/blogs/machine-learning/building-ultra-low-latency-voice-ai-applications-on-aws/",
+      "published": "2026-11-03",
+      "image": {
+        "path": "/img/newsletter/2026-11-04-story-3.png",
+        "alt": "AWS, 음성 AI의 관리형·자체 운영 배포 경로 비교의 핵심을 표현한 개념적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "title": "NVIDIA, 반도체 공정에 시뮬레이션·에이전트 활용 사례 소개",
+      "summary": "제조 현장의 개별 분석과 작업 선택을 돕는 사례를 공개했습니다.",
+      "fact": "NVIDIA는 물리 기반 AI와 디지털 트윈을 반도체 공정에 적용하는 사례를 소개했다. Lam Research의 PhysicsNeMo 기반 플라스마 예측과 Advantest의 NeMo Switchyard 기반 모델 선택 자동화를 설명했다. 이는 소개된 업무의 사례이며, 공장 전체 생산성이나 모든 장비의 성능 향상을 입증한 것으로 확대할 수 없다.",
+      "insight": "AP가 기업 AI 교육 사례를 다룬다면 전체 생산 성과와 개별 공정 예측·모델 선택의 결과를 분리하고, 현장 도입 전 검증 범위를 명확히 제시할 수 있다.",
+      "action": "측정 대상·비교 조건·가상 검증과 실제 공정 적용의 차이를 확인한다.",
+      "source": "NVIDIA",
+      "url": "https://blogs.nvidia.com/blog/ai-semiconductor-fabs/",
+      "published": "2026-11-03",
+      "image": {
+        "path": "/img/newsletter/2026-11-04-story-4.png",
+        "alt": "NVIDIA, 반도체 공정에 시뮬레이션·에이전트 활용 사례 소개의 핵심을 표현한 개념적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    },
+    {
+      "title": "DeepMind, 화학 연구를 돕는 Antigravity Skills 공개",
+      "summary": "문헌 탐색·분자 분석·후보 설계를 연결하되, 계산 결과는 실험 검증 전 가설로 다룹니다.",
+      "fact": "Google DeepMind는 Antigravity의 Cheminformatics Skills를 활용한 연구 흐름을 소개했다. 언어 모델이 탐색과 작업 조정을 맡고 RDKit 같은 결정론적 도구가 분자 계산을 수행한다. 원문은 데이터 부족과 실험실 간 측정 차이 등이 예측 정밀도를 제한하며 제안한 설계는 합성과 실험 검증이 필요하다고 명시한다.",
+      "insight": "AP가 전문 분야의 AI 활용 교육을 구성한다면 제안 생성·계산·근거 확인·실험 검증의 역할을 분리해 결과의 한계를 설명하는 자료로 활용할 수 있다.",
+      "action": "후보 제안과 검증된 성과를 구분하고 원문 데이터와 검증 절차를 남긴다.",
+      "source": "Google DeepMind",
+      "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+      "published": "2026-11-03",
+      "image": {
+        "path": "/img/newsletter/2026-11-04-story-5.png",
+        "alt": "DeepMind, 화학 연구를 돕는 Antigravity Skills 공개의 핵심을 표현한 개념적 편집 일러스트",
+        "caption": "AI 제작 · 편집 일러스트 · 실제 제품 화면 아님"
+      }
+    }
+  ]
+}

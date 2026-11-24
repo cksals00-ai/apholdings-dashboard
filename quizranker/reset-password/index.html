@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://cxwdrlrqhxpnpepzrths.supabase.co; base-uri 'none'; form-action 'none'">
+  <title>비밀번호 재설정 | QuizRanker</title>
+  <link rel="stylesheet" href="/assets/v2/quizranker-reset.css">
+  <script src="/assets/v2/quizranker-reset.js" defer></script>
+</head>
+<body>
+  <main class="reset-card">
+    <p class="brand">QuizRanker</p>
+    <h1>비밀번호 재설정</h1>
+    <p class="intro">새 비밀번호를 입력해 주세요. 저장 후 앱으로 돌아가 이메일로 로그인할 수 있습니다.</p>
+    <form id="reset-form" novalidate>
+      <label for="new-password">새 비밀번호</label>
+      <input id="new-password" type="password" autocomplete="new-password" minlength="8" maxlength="128" required disabled>
+      <p class="hint" id="password-hint">8자 이상 입력해 주세요.</p>
+      <label for="confirm-password">새 비밀번호 확인</label>
+      <input id="confirm-password" type="password" autocomplete="new-password" minlength="8" maxlength="128" required disabled>
+      <button id="reset-submit" type="submit" disabled>새 비밀번호 저장</button>
+    </form>
+    <p id="reset-status" role="status" aria-live="polite">재설정 링크를 확인하고 있습니다.</p>
+    <p class="hint">링크가 만료되었거나 사용할 수 없다면 앱의 로그인 화면에서 비밀번호 찾기를 다시 요청해 주세요.</p>
+    <a class="home-link" href="/">AP Holdings 홈페이지</a>
+  </main>
+</body>
+</html>

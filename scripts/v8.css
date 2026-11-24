@@ -1,0 +1,59 @@
+/* V8 (2026-10-09): 시각 우선 — 이미지·도표·색면. 선 최소. */
+.section{border-top:0}
+.hv6{min-height:calc(100svh - 84px)}
+.hv7-sub{color:#cfe0d9;max-width:40ch}
+/* 숫자 띠 */
+.stat-band{background:var(--night);color:#fff;padding:0 0 34px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#ffffff1a;border-radius:14px;overflow:hidden}
+.stats>div{background:var(--night);padding:26px 24px;display:flex;flex-direction:column;gap:4px}
+.stats b{font-size:clamp(2.4rem,5vw,4rem);font-weight:800;letter-spacing:-.05em;color:#fff;line-height:1}
+.stats span{color:#8fa39b;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+/* 서비스 이미지 카드 */
+.svc{padding:var(--s6) 0}
+.svc-h{font-size:clamp(2rem,4vw,3.4rem);font-weight:700;letter-spacing:-.04em;margin-bottom:var(--s4)}
+.svc-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.svc-card{opacity:0;animation:card-in .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i)*.08s);display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:var(--tint);text-decoration:none;color:inherit;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.svc-card:hover{transform:translateY(-5px);box-shadow:0 22px 45px #0d12111f}
+.sc-img{display:block;aspect-ratio:16/10;overflow:hidden;background:#fff}
+.sc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.svc-card:hover .sc-img img{transform:scale(1.05)}
+.sc-body{display:flex;flex-direction:column;gap:4px;padding:18px 20px 22px}
+.sc-body b{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.sc-body span{color:#3f4a45;font-size:14.5px}
+/* 캐릭터 띠 */
+.char-band{background:var(--night2);color:#fff;padding:var(--s6) 0;margin:var(--s6) 0}
+.cb-in{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--s5);align-items:center}
+.cb-img{display:flex;align-items:flex-end;gap:6px}
+.cb-img img:first-child{width:44%;border-radius:14px}
+.cb-img img:not(:first-child){width:12%;border-radius:8px;background:#fff0}
+.cb-copy h2{color:#fff;font-size:clamp(1.8rem,3.4vw,3rem);font-weight:700;letter-spacing:-.04em;margin-bottom:var(--s3)}
+.button.ghost-dark{background:transparent;color:#fff;border-color:#ffffff59}.button.ghost-dark:hover{background:#fff;color:var(--night);border-color:#fff}
+/* 뉴스 이미지 카드 */
+.news-sec{padding:0 0 var(--s6)}
+.hn-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--s4)}
+.hn-head h2{font-size:clamp(1.8rem,3.4vw,3rem);font-weight:700;letter-spacing:-.04em}
+.news-cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.news-cards a{display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.news-cards .nc-img{--cv-bg:#eef3f0;--cv-a:#245548;--cv-b:#8fd0b5;--cv-c:#e8c39a;display:block;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--soft);margin-bottom:14px}
+.news-cards .nc-img img{width:100%;height:100%;object-fit:cover}
+.news-cards .nc-ph{display:block;width:100%;height:100%;background:linear-gradient(135deg,#eaf1ed,#dbe7e0)}
+.news-cards h3{font-size:18px;font-weight:600;line-height:1.4;letter-spacing:-.02em}
+.news-cards a:hover h3{color:var(--accent)}
+/* 창업자 한 줄 띠 */
+.story-band{background:var(--soft);padding:var(--s6) 0;text-align:center}
+.story-band p{max-width:760px;margin:0 auto var(--s4);font-size:clamp(1.3rem,2.6vw,2.1rem);line-height:1.5;font-weight:600;letter-spacing:-.03em}
+/* 전 페이지: 선 줄이기 · 이미지 라운드 */
+.hub-card,.use-list li,.svc-tile,.lab-card,.biz-list a{border-bottom:0!important}
+.hflow,.use-list,.hn-list,.svc-grid,.biz-list,.lab-cards,.footer-map-v4{border-top:0!important}
+.fl-col+.fl-col,.use-list li+li,.biz-list a+.biz-list a{border-left:0!important}
+.hub-card{background:var(--soft);border-radius:16px;padding:26px!important;margin-bottom:14px}
+.hub-grid{border-top:0!important;display:grid!important;gap:14px}
+.hub-card .desc{max-width:none}
+.product-media video,.product-media img,.pic img,.nc-img img{border-radius:16px!important}
+.section.soft{background:var(--soft)}
+@media(max-width:1000px){.svc-cards,.news-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.cb-in{grid-template-columns:1fr;gap:var(--s3)}}
+@media(max-width:800px){.svc-cards,.news-cards,.stats{grid-template-columns:1fr}.stat-band{padding-bottom:20px}}
+@keyframes card-in{to{opacity:1}}
+.news-cards .nc-img svg{width:100%;height:100%;display:block}
+@media(prefers-reduced-motion:reduce){.svc-card{animation:none;opacity:1}}
+/* /V8 */
