@@ -149,41 +149,49 @@
  },
  "intelligence": {
   "ko": {
-   "eyebrow": "INTELLIGENCE · 식품 정보·AI 연결 서비스",
-   "title": "식품의 성분과 열량을 확인합니다.",
-   "lead": "AP Safe와 AP Light는 공개 식품 데이터를 바탕으로 원재료와 영양 정보를 조회하는 앱 및 AI 연결 서비스를 제공합니다. 상담·체험형 매장 AP SELECT는 기획 단계입니다.",
-   "for": "식품 성분·영양 정보를 확인하는 개인과 데이터 연동을 검토하는 파트너",
-   "items": [
-    {
-     "name": "AP Safe",
-     "tag": "식품 원재료·회피 성분 확인",
-     "desc": "공개 식품 자료와 사용자가 설정한 회피 성분을 대조합니다. 앱의 성분 조회와 AI 연결 서비스를 제공하며, 조회 결과는 섭취 안전성을 보장하지 않습니다.",
-     "url": "/{l}/products/safe/",
-     "status": "운영 중"
-    },
-    {
-     "name": "AP Light",
-     "tag": "식품 열량 조회·비교",
-     "desc": "100g당 열량과 실제 포장 단위의 열량을 조회하고 비교합니다. 앱과 AI 연결 서비스를 제공합니다.",
-     "url": "/{l}/products/light/",
-     "status": "운영 중"
-    },
-    {
-     "name": "AP SELECT",
-     "tag": "상담·체험형 매장 모델",
-     "desc": "매장에서 상품 상담과 체험을 제공하고 온라인 주문으로 연결하는 매장 모델을 기획합니다. 가맹 모집은 검증 이후 진행할 계획입니다.",
-     "url": "/{l}/products/select/",
-     "status": "기획 중"
-    },
-    {
-     "name": "AI 커넥터",
-     "tag": "AI 비서에서 식품 정보 조회",
-     "desc": "AP Safe와 AP Light를 Claude에 연결해 대화로 식품 성분과 열량을 조회할 수 있습니다.",
-     "url": "/business/safelist-connect.html",
-     "cta": "연결 안내 보기",
-     "status": "운영 중"
-    }
-   ]
+    "eyebrow": "INTELLIGENCE · 식품 정보와 AI 작업",
+    "title": "정보 조회와 AI 작업을 잇습니다.",
+    "lead": "AP Safe와 AP Light로 식품 성분·열량을 확인하고, 이음으로 프로젝트의 기억과 작업을 필요한 AI에서 이어갑니다. 각 서비스가 처리하는 자료와 이용 범위는 제품별로 안내합니다.",
+    "for": "식품 정보를 확인하는 개인, AI로 프로젝트를 이어가는 사용자와 데이터 연동 파트너",
+    "items": [
+      {
+        "name": "AP Safe",
+        "tag": "식품 원재료·회피 성분 확인",
+        "desc": "공개 식품 자료와 사용자가 설정한 회피 성분을 대조합니다. 앱의 성분 조회와 AI 연결 서비스를 제공하며, 조회 결과는 섭취 안전성을 보장하지 않습니다.",
+        "url": "/{l}/products/safe/",
+        "status": "운영 중"
+      },
+      {
+        "name": "AP Light",
+        "tag": "식품 열량 조회·비교",
+        "desc": "100g당 열량과 실제 포장 단위의 열량을 조회하고 비교합니다. 앱과 AI 연결 서비스를 제공합니다.",
+        "url": "/{l}/products/light/",
+        "status": "운영 중"
+      },
+      {
+        "name": "이음 (IEUM)",
+        "tag": "AI가 바뀌어도, 하던 일은 이어지도록.",
+        "desc": "프로젝트의 목표와 작업 중 필요한 맥락만 골라 ChatGPT·Claude에서 이어 쓰세요. 확인한 결과를 같은 프로젝트에 남길 수 있습니다. iPhone·Android 앱은 준비 중입니다.",
+        "url": "/{l}/products/ieum/",
+        "cta": "이음 소개와 웹 베타 안내",
+        "status": "PC 웹 베타 안내"
+      },
+      {
+        "name": "AP SELECT",
+        "tag": "상담·체험형 매장 모델",
+        "desc": "매장에서 상품 상담과 체험을 제공하고 온라인 주문으로 연결하는 매장 모델을 기획합니다. 가맹 모집은 검증 이후 진행할 계획입니다.",
+        "url": "/{l}/products/select/",
+        "status": "기획 중"
+      },
+      {
+        "name": "AI 커넥터",
+        "tag": "AI 비서에서 식품 정보 조회",
+        "desc": "AP Safe와 AP Light를 Claude에 연결해 대화로 식품 성분과 열량을 조회할 수 있습니다.",
+        "url": "/business/safelist-connect.html",
+        "cta": "연결 안내 보기",
+        "status": "운영 중"
+      }
+    ]
   },
   "en": {
    "eyebrow": "INTELLIGENCE · Data for decisions, and the stores built on it",
