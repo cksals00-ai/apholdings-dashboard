@@ -32,7 +32,7 @@ class InitialRecoveryTests(unittest.TestCase):
     with self.assertRaises(ValueError):verify(model,story,source,[])
    self.assertNotIn('strong_review',story)
    with patch('newsletter_atomic_review.review_fields',return_value={'supported':True,'unsupported_claims':[]}):verify(model,story,source,[])
-   self.assertTrue(check_copy_receipts({'stories':[story]},[(story,source)],[])['independent_public_14b'])
+   self.assertTrue(check_copy_receipts({'stories':[story]},[(story,source)],[])['independent_public_verifier'])
  def test_raw_prompt_or_source_identity_mismatch_is_never_reused(self):
   for changed in ('prompt','source'):
    with tempfile.TemporaryDirectory() as temp:

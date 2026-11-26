@@ -2,7 +2,7 @@
 import copy,hashlib,json
 from pathlib import Path
 from datetime import datetime,timezone
-from newsletter_cpu import ART_REV,PROMPT_CACHE_REVISION
+from newsletter_cpu import REVIEW_REV,PROMPT_CACHE_REVISION
 from newsletter_atomic_review import REVISION as ATOMIC_REVISION
 FIXTURE=Path(__file__).with_name('fixtures')/'news-editorial-controls-20261103.json'
 
@@ -24,7 +24,7 @@ def specific_rejection(label,review):
 
 def receipt_valid(row,r):
  from newsletter_copy_repair import REVISION
- if any(r.get(k)!=v for k,v in {'input_hash':row['input_hash'],'source_hash':row['source']['body_sha256'],'model_revision':ART_REV,'cache_revision':PROMPT_CACHE_REVISION,'review_revision':REVISION,'atomic_revision':ATOMIC_REVISION,'expected_supported':row['expected_supported']}.items()):return False
+ if any(r.get(k)!=v for k,v in {'input_hash':row['input_hash'],'source_hash':row['source']['body_sha256'],'model_revision':REVIEW_REV,'cache_revision':PROMPT_CACHE_REVISION,'review_revision':REVISION,'atomic_revision':ATOMIC_REVISION,'expected_supported':row['expected_supported']}.items()):return False
  review=r.get('review',{})
  return (review.get('supported') is True and review.get('findings')==[]) if row['expected_supported'] else specific_rejection(row['label'],review)
 
@@ -46,4 +46,4 @@ def verify_controls(model,state,save):
   except ValueError as exc:
    review=getattr(exc,'review',{})
    if row['expected_supported'] or not specific_rejection(row['label'],review):raise ValueError('Frozen control failed: '+row['label']+' | '+str(exc)) from exc
-  state.setdefault('frozen_control_receipts',{})[row['label']]={'input_hash':row['input_hash'],'source_hash':row['source']['body_sha256'],'model_revision':ART_REV,'cache_revision':PROMPT_CACHE_REVISION,'review_revision':REVISION,'atomic_revision':ATOMIC_REVISION,'expected_supported':row['expected_supported'],'historical_only':True,'review':review,'checked_at':datetime.now(timezone.utc).isoformat()};save()
+  state.setdefault('frozen_control_receipts',{})[row['label']]={'input_hash':row['input_hash'],'source_hash':row['source']['body_sha256'],'model_revision':REVIEW_REV,'cache_revision':PROMPT_CACHE_REVISION,'review_revision':REVISION,'atomic_revision':ATOMIC_REVISION,'expected_supported':row['expected_supported'],'historical_only':True,'review':review,'checked_at':datetime.now(timezone.utc).isoformat()};save()

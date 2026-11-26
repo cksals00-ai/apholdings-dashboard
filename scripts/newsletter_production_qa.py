@@ -4,7 +4,7 @@ from pathlib import Path
 import newsletter as b
 import newsletter_server as publisher
 
-QA_REVISION=4
+QA_REVISION=35
 
 def compact(value):return re.sub(r'\s+','',value)
 def check_pdf(issue,folder):
@@ -93,13 +93,13 @@ def check_copy_receipts(issue,source_checks,copy_prior=None):
  peers=[]
  for story,source in source_checks:
   if any(public[story['url']].get(key)!=story.get(key) for key in ('title','summary','fact','insight','action','source','published')):raise ValueError('Public issue copy differs from independently reviewed draft')
-  if not receipt_valid(story,source,copy_prior,peers):raise ValueError('Independent14B copy receipt missing or stale')
+  if not receipt_valid(story,source,copy_prior,peers):raise ValueError('Independent public CPU copy receipt missing or stale')
   peers.append(story)
   validate_grounding(story,source,story['review'])
   novelty=story.get('novelty',{})
   if novelty.get('is_news') is not True or novelty.get('is_duplicate') is not False or len(novelty.get('novel_quote',''))<30 or normalized(novelty['novel_quote']) not in normalized(source['text']):raise ValueError('Original novelty receipt missing')
   if hashlib.sha256(source['text'].encode()).hexdigest()!=story['source_hash']:raise ValueError('Source evidence changed after review')
- return {'revision':REVISION,'independent_public_14b':True,'prior_issue_context_verified':True,'ordered_peer_events_verified':True}
+ return {'revision':REVISION,'independent_public_verifier':True,'prior_issue_context_verified':True,'ordered_peer_events_verified':True}
 
 def check_all(issue,folder,source_checks,copy_prior=None):
  from PIL import Image
