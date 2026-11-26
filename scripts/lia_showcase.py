@@ -1,6 +1,8 @@
 """LIA's interactive portfolio; retain locale content and existing destinations."""
 from html import escape as e
 
+HANGEUL_APP_STORE_URL = 'https://apps.apple.com/app/apple-store/id6803749436?pt=129327962&ct=lia_bio_hc&mt=8'
+
 COPY = {
  'ko': ['안녕하세요,<br>리아예요.', '한국의 이야기, 새로운 발견.<br>리아와 함께 만나보세요.', '커서를 움직여 보세요. 모바일에서는 리아를 눌러 보세요.', '리아에게 인사하기', '콘텐츠 보기', '브랜드 협업', 'AI 생성 캐릭터 · LIA', '리아의 콘텐츠', '선케어', '마스크', '립 틴트', '반응 켜기', '반응 끄기'],
  'en': ['Hi, I’m<br>LIA.', 'Stories from Korea. Something new to discover.<br>Come explore with LIA.', 'Move your cursor. On mobile, tap LIA to say hello.', 'Say hello to LIA', 'Watch content', 'Brand collaboration', 'AI-generated character · LIA', 'LIA’s content', 'Sun care', 'Mask', 'Lip tint', 'Enable reactions', 'Pause reactions'],
@@ -36,10 +38,10 @@ def app_install_links(locale):
  ]
  cards = []
  for name, app_id, note in apps:
-  apple = f'https://apps.apple.com/{"kr/" if app_id in ("6805684034", "6821352092") else ""}app/id{app_id}'
+  apple = HANGEUL_APP_STORE_URL if app_id == '6803749436' else f'https://apps.apple.com/{"kr/" if app_id in ("6805684034", "6821352092") else ""}app/id{app_id}'
   if app_id in ('6805684034', '6821352092'):
    note += ' · 한국 App Store' if ko else ' · Korean App Store; regional availability applies'
-  buttons = f'<a class="button primary" href="{apple}" target="_blank" rel="noopener noreferrer">App Store ↗</a>'
+  buttons = f'<a class="button primary" href="{e(apple,quote=True)}" target="_blank" rel="noopener noreferrer">App Store ↗</a>'
   if app_id == '6803749436':
    buttons += '<a class="button" href="https://play.google.com/store/apps/details?id=com.aplocalift.hangeulcubs" target="_blank" rel="noopener noreferrer">Google Play ↗</a>'
   cards.append(f'<article class="card"><h3>{e(name)}</h3><p>{e(note)}</p><div class="actions">{buttons}</div></article>')
@@ -50,10 +52,13 @@ def app_install_links(locale):
 def render(locale, product, sections, mail):
  t=COPY[locale]
  external='target="_blank" rel="noopener noreferrer"'
+ app_pitch = '무료 71레슨으로 한국어 읽기를 시작하세요. 18개 레슨의 받침 마스터 팩은 별도 구매입니다.' if locale == 'ko' else '71 free lessons to start reading Korean. Optional 18-lesson Batchim Master Pack sold separately.'
+ app_cta = '한글컵스 · App Store' if locale == 'ko' else 'Hangeul Cubs · App Store'
  return f'''<link rel="stylesheet" href="/assets/v2/lia-interactive.css?v=3"><script defer src="/assets/v2/lia-interactive.js?v=1"></script>
  <section class="lia-hero" data-lia-hero><div class="wrap lia-hero-grid">
  <div class="lia-intro"><span class="eyebrow">AP ENTERTAINMENT / LIA</span><h1>{t[0]}</h1><p class="lia-lead">{t[1]}</p>
- <div class="lia-actions"><a class="button primary" href="#korea-trip-kit">{("한국 여행 키트 앱 3종" if locale == "ko" else "Korea trip kit · 3 apps")} ↘</a><a class="button primary" href="#apps">{("영상 속 앱 설치" if locale == "ko" else "Get the apps")} ↘</a><a class="button" href="#lia-content" data-lia-greet>{e(t[4])} ↘</a><a class="button" href="{e(mail('LIA collaboration'),quote=True)}" data-lia-greet>{e(t[5])} ↗</a></div>
+ <p class="lia-lead"><strong>Hangeul Cubs</strong> · {e(app_pitch)}</p>
+ <div class="lia-actions"><a class="button primary" href="{e(HANGEUL_APP_STORE_URL,quote=True)}" {external}>{e(app_cta)} ↗</a><a class="button" href="#korea-trip-kit">{("한국 여행 키트 앱 3종" if locale == "ko" else "Korea trip kit · 3 apps")} ↘</a><a class="button" href="#apps">{("영상 속 앱 설치" if locale == "ko" else "Get the apps")} ↘</a><a class="button" href="#lia-content" data-lia-greet>{e(t[4])} ↘</a><a class="button" href="{e(mail('LIA collaboration'),quote=True)}" data-lia-greet>{e(t[5])} ↗</a></div>
  <div class="lia-social"><a href="https://www.instagram.com/lia_park55/" {external} data-lia-greet>Instagram ↗</a><a href="https://www.tiktok.com/@lia_park55" {external} data-lia-greet>TikTok ↗</a><a href="https://www.youtube.com/@APHoldings" {external} data-lia-greet>YouTube / AP Holdings ↗</a></div><p class="lia-disclosure">{e(t[6])}</p></div>
  <div class="lia-portrait"><button type="button" class="lia-stage" data-lia-stage data-pose="neutral" aria-label="{e(t[3],quote=True)}" aria-pressed="false"><span class="lia-sprite" aria-hidden="true"><img src="/media/lia/lia-interactive-atlas-v3.png" width="1536" height="1024" alt="" fetchpriority="high"></span><span class="lia-stage-label">LIA <span>●</span></span></button>
  <div class="lia-controls"><p>{e(t[2])}</p><button type="button" data-lia-toggle aria-pressed="true" data-on="{e(t[12],quote=True)}" data-off="{e(t[11],quote=True)}">{e(t[12])}</button></div></div>
@@ -61,3 +66,4 @@ def render(locale, product, sections, mail):
  {trip_install_links(locale)}
  {app_install_links(locale)}
  <section class="section lia-content anchor" id="lia-content"><div class="wrap"><div class="section-head"><span class="eyebrow">WATCH / LIA</span><h2>{e(t[7])}</h2></div><div class="lia-video-grid">''' + ''.join(f'<figure><video controls playsinline preload="none" poster="/media/lia/review_ep{i}_{slug}_poster.jpg" src="/media/lia/review_ep{i}_{slug}.mp4" aria-label="LIA · {e(label,quote=True)}"></video><figcaption><span>0{i}</span> {e(label)}</figcaption></figure>' for i,slug,label in [(1,'suncream',t[8]),(2,'mask',t[9]),(3,'tint',t[10])]) + '</div></div></section>' + sections(product.get('sections',[]))
+
